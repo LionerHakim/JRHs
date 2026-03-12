@@ -8,11 +8,12 @@ export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
 
   useEffect(() => {
-  if (audioRef.current) {
-    audioRef.current.volume = 0.65;
-    setIsPlaying(false);
-  }
-}, []);
+    const handleScroll = () => {
+      setScrolled(window.scrollY > 50);
+    };
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
 
   const navLinks = [
     { name: 'Beranda', href: '#' },
@@ -34,7 +35,13 @@ export default function Navbar() {
       }`}
     >
       <div className={`max-w-7xl mx-auto px-4 sm:px-6 transition-all duration-700 ${scrolled ? 'md:px-8' : ''}`}>
-        <div className={`flex items-center justify-between transition-all duration-700 ${scrolled ? 'glass-panel rounded-full px-6 py-3 shadow-[0_8px_32px_rgba(0,0,0,0.3)] border border-white/10' : ''}`}>
+        <div
+          className={`flex items-center justify-between transition-all duration-700 ${
+            scrolled
+              ? 'glass-panel rounded-full px-6 py-3 shadow-[0_8px_32px_rgba(0,0,0,0.3)] border border-white/10'
+              : ''
+          }`}
+        >
           <a href="#" className="text-2xl font-bold tracking-widest uppercase shrink-0 font-heading relative group z-50">
             <span className="text-transparent bg-clip-text bg-gradient-to-r from-white to-gray-400 group-hover:from-accent-blue group-hover:to-accent-purple transition-all duration-500">
               JRH
@@ -43,7 +50,6 @@ export default function Navbar() {
           </a>
 
           <div className="flex items-center gap-4 sm:gap-6 z-50">
-            {/* Desktop Menu */}
             <div className="hidden lg:flex items-center gap-4 xl:gap-6">
               {navLinks.map((link) => (
                 <a
@@ -64,7 +70,6 @@ export default function Navbar() {
             >
               <MusicPlayer />
 
-              {/* Mobile Menu Toggle */}
               <button
                 type="button"
                 className="lg:hidden relative w-10 h-10 flex items-center justify-center rounded-full bg-white/5 border border-white/10 text-white hover:bg-white/10 hover:border-white/20 hover:text-accent-blue transition-all duration-300 focus:outline-none"
@@ -78,7 +83,6 @@ export default function Navbar() {
         </div>
       </div>
 
-      {/* Mobile Menu */}
       <AnimatePresence>
         {isOpen && (
           <motion.div
@@ -87,8 +91,7 @@ export default function Navbar() {
             exit={{ opacity: 0, x: '100%' }}
             transition={{ duration: 0.5, ease: [0.25, 1, 0.5, 1] }}
             className="lg:hidden fixed inset-0 w-full h-screen min-h-[100dvh] bg-black/95 backdrop-blur-3xl z-65 flex flex-col pt-24 px-8 pb-8 overflow-y-auto"
-            >
-            {/* Close Button */}
+          >
             <motion.button
               type="button"
               initial={{ opacity: 0, scale: 0.8 }}
