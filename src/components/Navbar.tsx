@@ -8,12 +8,11 @@ export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
 
   useEffect(() => {
-    const handleScroll = () => {
-      setScrolled(window.scrollY > 50);
-    };
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
+  if (audioRef.current) {
+    audioRef.current.volume = 0.65;
+    setIsPlaying(false);
+  }
+}, []);
 
   const navLinks = [
     { name: 'Beranda', href: '#' },
