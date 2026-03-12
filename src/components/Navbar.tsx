@@ -11,6 +11,7 @@ export default function Navbar() {
     const handleScroll = () => {
       setScrolled(window.scrollY > 50);
     };
+
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
@@ -57,7 +58,6 @@ export default function Navbar() {
           </a>
 
           <div className="flex items-center gap-4 sm:gap-6 z-50">
-            {/* Desktop Menu */}
             <div className="hidden lg:flex items-center gap-4 xl:gap-6">
               {navLinks.map((link) => (
                 <a
@@ -74,7 +74,6 @@ export default function Navbar() {
             <div className="flex items-center gap-4 border-l border-white/10 pl-4 sm:pl-6 ml-2 sm:ml-4">
               <MusicPlayer />
 
-              {/* Mobile Menu Toggle */}
               <button
                 type="button"
                 className="lg:hidden relative w-10 h-10 flex items-center justify-center rounded-full bg-white/5 border border-white/10 text-white hover:bg-white/10 hover:border-white/20 hover:text-accent-blue transition-all duration-300 focus:outline-none"
@@ -88,7 +87,6 @@ export default function Navbar() {
         </div>
       </div>
 
-      {/* Mobile Menu */}
       <AnimatePresence>
         {isOpen && (
           <motion.div
@@ -98,7 +96,6 @@ export default function Navbar() {
             transition={{ duration: 0.5, ease: [0.25, 1, 0.5, 1] }}
             className="lg:hidden fixed inset-0 w-full h-screen bg-black/95 backdrop-blur-3xl z-40 flex flex-col px-6 pt-24 pb-8 overflow-y-auto"
           >
-            {/* Close Button */}
             <motion.button
               type="button"
               initial={{ opacity: 0, y: -6 }}
