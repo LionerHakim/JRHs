@@ -45,23 +45,15 @@ export default function Hero() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1, delay: 0.6, ease: [0.25, 1, 0.5, 1] }}
         >
-          <div className="flex flex-col sm:flex-row items-center justify-center gap-2 sm:gap-4 mb-8">
-            <div className="flex items-center gap-2 sm:gap-4">
-              <Sparkles className="text-accent-yellow w-4 h-4 sm:w-5 sm:h-5 animate-pulse" />
-              <p className="text-lg sm:text-xl md:text-3xl text-transparent bg-clip-text bg-gradient-to-r from-accent-blue via-accent-purple to-accent-pink font-semibold tracking-wide text-center text-glow-accent">
-                Economic Thinker
-              </p>
-            </div>
+          <div className="w-full flex items-center justify-center gap-3 mb-8">
+  <Sparkles className="text-accent-yellow w-4 h-4 sm:w-5 sm:h-5 animate-pulse" />
 
-            <span className="hidden sm:inline text-white/30 mx-1 sm:mx-3 font-light">|</span>
+  <p className="text-lg sm:text-xl md:text-3xl font-semibold tracking-wide text-transparent bg-clip-text bg-gradient-to-r from-accent-blue via-accent-purple to-accent-pink text-center">
+    Trader & Investor
+  </p>
 
-            <div className="flex items-center gap-2 sm:gap-4">
-              <p className="text-lg sm:text-xl md:text-3xl text-transparent bg-clip-text bg-gradient-to-r from-accent-blue via-accent-purple to-accent-pink font-semibold tracking-wide text-center text-glow-accent">
-                Trader & Investor
-              </p>
-              <Sparkles className="text-accent-yellow w-4 h-4 sm:w-5 sm:h-5 animate-pulse" />
-            </div>
-          </div>
+  <Sparkles className="text-accent-yellow w-4 h-4 sm:w-5 sm:h-5 animate-pulse" />
+</div>
 
           <p className="text-base sm:text-lg md:text-2xl text-gray-300/90 leading-relaxed mb-10 sm:mb-14 font-light max-w-3xl text-center mx-auto">
             Memahami ekonomi, pasar keuangan, teknologi, dan perilaku manusia untuk melihat arah perkembangan dunia.
