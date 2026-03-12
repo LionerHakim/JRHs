@@ -15,11 +15,21 @@
   --color-card-bg: #050505;
 }
 
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  -webkit-text-size-adjust: 100%;
+}
+
 body {
   background-color: var(--color-bg-black);
   color: white;
   font-family: var(--font-sans);
   -webkit-tap-highlight-color: transparent;
+  -webkit-overflow-scrolling: touch;
   overflow-x: hidden;
 }
 
@@ -29,10 +39,6 @@ h1, h2, h3, h4, h5, h6 {
 
 p {
   font-family: var(--font-sans);
-}
-
-html {
-  scroll-behavior: smooth;
 }
 
 /* Custom Scrollbar */
@@ -55,15 +61,16 @@ html {
 }
 
 @layer utilities {
+
   .glass-panel {
     @apply bg-white/[0.02] backdrop-blur-3xl border border-white/[0.08] shadow-[0_8px_32px_rgba(0,0,0,0.2)];
     transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
   }
-  
+
   .glass-panel-hover {
     @apply cursor-pointer;
   }
-  
+
   .glass-panel-hover:hover {
     @apply -translate-y-3 bg-white/[0.08] border-white/[0.2] shadow-[0_25px_70px_rgba(10,132,255,0.2),0_0_40px_rgba(191,90,242,0.15)];
   }
@@ -75,11 +82,11 @@ html {
   .text-gradient {
     @apply bg-clip-text text-transparent bg-gradient-to-r;
   }
-  
+
   .text-glow {
     text-shadow: 0 0 30px rgba(255, 255, 255, 0.5), 0 0 60px rgba(255, 255, 255, 0.2);
   }
-  
+
   .text-glow-accent {
     text-shadow: 0 0 30px rgba(10, 132, 255, 0.5), 0 0 60px rgba(191, 90, 242, 0.3);
   }
@@ -87,6 +94,7 @@ html {
   .hide-scrollbar::-webkit-scrollbar {
     display: none;
   }
+
   .hide-scrollbar {
     -ms-overflow-style: none;
     scrollbar-width: none;
@@ -95,13 +103,16 @@ html {
   .custom-scrollbar::-webkit-scrollbar {
     width: 4px;
   }
+
   .custom-scrollbar::-webkit-scrollbar-track {
     background: transparent;
   }
+
   .custom-scrollbar::-webkit-scrollbar-thumb {
     background: rgba(255, 255, 255, 0.1);
     border-radius: 10px;
   }
+
   .custom-scrollbar::-webkit-scrollbar-thumb:hover {
     background: rgba(255, 255, 255, 0.2);
   }
