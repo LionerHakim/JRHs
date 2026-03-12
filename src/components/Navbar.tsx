@@ -123,7 +123,7 @@ export default function Navbar() {
                   key={link.name}
                   href={link.href}
                   onClick={() => setIsOpen(false)}
-                  className="text-right text-4xl font-bold text-gray-500 hover:text-white active:text-accent-blue transition-all duration-300 border-b border-white/5 pb-4 group"
+                  className="text-right text-4xl font-bold text-red-500 hover:text-white active:text-accent-blue transition-all duration-300 border-b border-white/5 pb-4 group"
                 >
                   <span className="group-hover:translate-x-[-15px] inline-block transition-transform duration-300">
                     {link.name}
