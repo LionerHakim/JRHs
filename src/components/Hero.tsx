@@ -47,8 +47,6 @@ export default function Hero() {
           transition={{ duration: 1, delay: 0.45 }}
           className="flex items-center gap-2 mb-6"
         >
-          <Sparkles className="text-accent-yellow w-4 h-4" />
-
           <p className="text-xl md:text-2xl font-semibold text-transparent bg-clip-text bg-gradient-to-r from-accent-blue via-accent-purple to-accent-pink">
             Trader & Investor
           </p>
