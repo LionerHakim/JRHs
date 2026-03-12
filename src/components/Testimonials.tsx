@@ -4,22 +4,22 @@ import { useRef, useState, useEffect } from 'react';
 
 const testimonials = [
   {
-    name: 'Budi Santoso',
+    name: 'Pak Jokowi',
     role: 'Pengusaha',
     text: 'Insight dari Mas Jefri sangat membantu saya memahami arah pasar dengan lebih jernih. Sangat direkomendasikan untuk diskusi mendalam!',
   },
   {
-    name: 'Andi Pratama',
+    name: 'Pak Ganjar',
     role: 'Investor Pemula',
     text: 'Advice yang diberikan selalu objektif dan berdasarkan data. Terima kasih atas pandangannya yang luar biasa dan mudah dipahami.',
   },
   {
-    name: 'Siti Maharani',
+    name: 'Bu Mega',
     role: 'Profesional',
     text: 'Sangat menginspirasi! Cara pandangnya terhadap ekonomi makro mengubah cara saya mengelola keuangan dan berinvestasi.',
   },
   {
-    name: 'Reza Pahlevi',
+    name: 'Pak Prabowo',
     role: 'Mahasiswa Ekonomi',
     text: 'Diskusi yang sangat berbobot. Banyak insight baru yang saya dapatkan tentang psikologi pasar dan perilaku manusia.',
   }
