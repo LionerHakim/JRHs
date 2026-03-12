@@ -87,8 +87,8 @@ export default function Navbar() {
             animate={{ opacity: 1, x: 0 }}
             exit={{ opacity: 0, x: '100%' }}
             transition={{ duration: 0.5, ease: [0.25, 1, 0.5, 1] }}
-            className="lg:hidden fixed inset-0 w-full h-screen bg-black/95 backdrop-blur-3xl z-65 flex flex-col pt-24 px-8 pb-8 overflow-y-auto"
-          >
+            className="lg:hidden fixed inset-0 w-full h-screen min-h-[100dvh] bg-black/95 backdrop-blur-3xl z-65 flex flex-col pt-24 px-8 pb-8 overflow-y-auto"
+            >
             {/* Close Button */}
             <motion.button
               type="button"
