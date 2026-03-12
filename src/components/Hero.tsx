@@ -21,11 +21,10 @@ export default function Hero() {
         >
           <div className="absolute inset-0 bg-gradient-to-tr from-accent-blue/20 to-accent-purple/20 mix-blend-overlay z-10 group-hover:opacity-0 transition-opacity duration-700"></div>
           <img
-            src="https://picsum.photos/seed/jefri/400/400"
-            alt="Jefri Rahman Hakim"
-            className="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-110"
-            referrerPolicy="no-referrer"
-          />
+  src="/data/foto/s.jpg"
+  alt="Foto Profil"
+  className="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-110"
+/>
         </motion.div>
 
         <div className="overflow-hidden mb-6">
