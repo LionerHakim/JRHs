@@ -4,12 +4,12 @@ import { Play, Pause, SkipForward, SkipBack, Volume2, VolumeX, ChevronDown, Musi
 
 // Using reliable public domain / creative commons audio links for demonstration
 const playlist = [
-  { title: 'Budi Doremi', artist: 'Budi Doremi', src: '/data/musik/Budi-Doremi.mp3' },
-  { title: 'Digeleng Broo', artist: 'Unknown', src: '/data/musik/Digeleng-Broo.mp3' },
-  { title: 'Rahasia Hati', artist: 'Unknown', src: '/data/musik/Rahasia-Hati.mp3' },
-  { title: 'Tak Ada Ujungnya', artist: 'Unknown', src: '/data/musik/Tak-AdaUjungnya.mp3' },
-  { title: 'Tourner Dans Le Vide', artist: 'Unknown', src: '/data/musik/Tourner-DansLeVide.mp3' },
-  { title: 'Who Knows', artist: 'Unknown', src: '/data/musik/Who-Knows.mp3' },
+  { title: 'Budi Doremi', artist: '', src: '/data/musik/Budi-Doremi.mp3' },
+  { title: 'Digeleng Broo', artist: '', src: '/data/musik/Digeleng-Broo.mp3' },
+  { title: 'Rahasia Hati', artist: '', src: '/data/musik/Rahasia-Hati.mp3' },
+  { title: 'Tak Ada Ujungnya', artist: '', src: '/data/musik/Tak-AdaUjungnya.mp3' },
+  { title: 'Tourner Dans Le Vide', artist: '', src: '/data/musik/Tourner-DansLeVide.mp3' },
+  { title: 'Who Knows', artist: '', src: '/data/musik/Who-Knows.mp3' },
 ];
 
 export default function MusicPlayer() {
