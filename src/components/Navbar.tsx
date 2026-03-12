@@ -11,7 +11,6 @@ export default function Navbar() {
     const handleScroll = () => {
       setScrolled(window.scrollY > 50);
     };
-
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
@@ -31,56 +30,56 @@ export default function Navbar() {
 
   return (
     <nav
-      className={`fixed top-0 z-50 w-full transition-all duration-700 ${
+      className={`fixed top-0 w-full z-50 transition-all duration-700 ${
         scrolled ? 'py-4' : 'py-8'
       }`}
     >
       <div
-        className={`mx-auto max-w-7xl px-4 transition-all duration-700 sm:px-6 ${
+        className={`max-w-7xl mx-auto px-4 sm:px-6 transition-all duration-700 ${
           scrolled ? 'md:px-8' : ''
         }`}
       >
         <div
           className={`flex items-center justify-between transition-all duration-700 ${
             scrolled
-              ? 'glass-panel rounded-full border border-white/10 px-6 py-3 shadow-[0_8px_32px_rgba(0,0,0,0.3)]'
+              ? 'glass-panel rounded-full px-6 py-3 shadow-[0_8px_32px_rgba(0,0,0,0.3)] border border-white/10'
               : ''
           }`}
         >
           <a
             href="#"
-            className="group relative z-50 shrink-0 font-heading text-2xl font-bold uppercase tracking-widest"
+            className="text-2xl font-bold tracking-widest uppercase shrink-0 font-heading relative group z-50"
           >
-            <span className="bg-gradient-to-r from-white to-gray-400 bg-clip-text text-transparent transition-all duration-500 group-hover:from-accent-blue group-hover:to-accent-purple">
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-white to-gray-400 group-hover:from-accent-blue group-hover:to-accent-purple transition-all duration-500">
               JRH
             </span>
-            <span className="absolute -bottom-1 left-0 h-[2px] w-0 bg-gradient-to-r from-accent-blue to-accent-purple transition-all duration-500 group-hover:w-full" />
+            <span className="absolute -bottom-1 left-0 w-0 h-[2px] bg-gradient-to-r from-accent-blue to-accent-purple transition-all duration-500 group-hover:w-full"></span>
           </a>
 
-          <div className="z-50 flex items-center gap-4 sm:gap-6">
+          <div className="flex items-center gap-4 sm:gap-6 z-50">
             {/* Desktop Menu */}
-            <div className="hidden items-center gap-4 lg:flex xl:gap-6">
+            <div className="hidden lg:flex items-center gap-4 xl:gap-6">
               {navLinks.map((link) => (
                 <a
                   key={link.name}
                   href={link.href}
-                  className="group relative py-2 text-xs font-medium text-gray-400 transition-all duration-300 hover:text-white xl:text-sm"
+                  className="text-xs xl:text-sm font-medium text-gray-400 hover:text-white transition-all duration-300 relative group py-2"
                 >
                   {link.name}
-                  <span className="absolute bottom-0 left-1/2 h-[2px] w-0 -translate-x-1/2 rounded-full bg-gradient-to-r from-accent-blue to-accent-purple opacity-0 transition-all duration-300 group-hover:w-full group-hover:opacity-100" />
+                  <span className="absolute bottom-0 left-1/2 -translate-x-1/2 w-0 h-[2px] bg-gradient-to-r from-accent-blue to-accent-purple transition-all duration-300 group-hover:w-full opacity-0 group-hover:opacity-100 rounded-full shadow-[0_0_8px_rgba(10,132,255,0.5)]"></span>
                 </a>
               ))}
             </div>
 
-            <div className="ml-2 flex items-center gap-4 border-l border-white/10 pl-4 sm:ml-4 sm:pl-6">
+            <div className="flex items-center gap-4 border-l border-white/10 pl-4 sm:pl-6 ml-2 sm:ml-4">
               {/* Music player hilang saat mobile menu dibuka */}
               {!isOpen && <MusicPlayer />}
 
-              {/* Mobile Toggle */}
+              {/* Mobile Menu Toggle */}
               <button
                 type="button"
-                className="relative flex h-10 w-10 items-center justify-center rounded-full border border-white/10 bg-white/5 text-white transition-all duration-300 hover:border-white/20 hover:bg-white/10 hover:text-accent-blue focus:outline-none lg:hidden"
-                onClick={() => setIsOpen((prev) => !prev)}
+                className="lg:hidden relative w-10 h-10 flex items-center justify-center rounded-full bg-white/5 border border-white/10 text-white hover:bg-white/10 hover:border-white/20 hover:text-accent-blue transition-all duration-300 focus:outline-none"
+                onClick={() => setIsOpen(!isOpen)}
                 aria-label={isOpen ? 'Close menu' : 'Open menu'}
               >
                 <AnimatePresence mode="wait">
@@ -119,33 +118,34 @@ export default function Navbar() {
             initial={{ opacity: 0, x: '100%' }}
             animate={{ opacity: 1, x: 0 }}
             exit={{ opacity: 0, x: '100%' }}
-            transition={{ duration: 0.35, ease: [0.25, 1, 0.5, 1] }}
-            className="fixed inset-0 z-40 flex h-screen w-full flex-col overflow-y-auto bg-black px-6 pt-24 pb-10 lg:hidden"
+            transition={{ duration: 0.4, ease: [0.25, 1, 0.5, 1] }}
+            className="lg:hidden fixed inset-0 w-full h-screen bg-black/95 backdrop-blur-3xl z-40 flex flex-col pt-24 px-6 pb-8 overflow-y-auto"
           >
+            {/* Close */}
             <motion.button
               type="button"
               initial={{ opacity: 0, y: -6 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.1 }}
               onClick={() => setIsOpen(false)}
-              className="absolute right-6 top-7 text-sm font-semibold text-[#ff2a2a] transition-colors duration-300 hover:text-white focus:outline-none"
+              className="absolute top-8 right-6 text-sm font-semibold text-[#ff2a2a] hover:text-white transition-colors duration-300 focus:outline-none z-50"
             >
               Close
             </motion.button>
 
-            <div className="mt-8 flex flex-1 flex-col items-end justify-start gap-4 sm:gap-5">
+            <div className="flex flex-col gap-4 mt-10 items-end">
               {navLinks.map((link, index) => (
                 <motion.a
-                  key={link.name}
-                  initial={{ opacity: 0, x: 24 }}
+                  initial={{ opacity: 0, x: 28 }}
                   animate={{ opacity: 1, x: 0 }}
                   transition={{
-                    delay: index * 0.05 + 0.1,
+                    delay: index * 0.06 + 0.1,
                     ease: [0.25, 1, 0.5, 1],
                   }}
+                  key={link.name}
                   href={link.href}
                   onClick={() => setIsOpen(false)}
-                  className="text-right text-2xl font-semibold text-white transition-all duration-300 hover:-translate-x-1 hover:text-white/80 sm:text-3xl"
+                  className="text-right text-2xl sm:text-3xl font-semibold text-white hover:text-white/80 transition-all duration-300"
                 >
                   {link.name}
                 </motion.a>
