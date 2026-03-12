@@ -59,8 +59,7 @@ export default function Hero() {
           transition={{ duration: 1, delay: 0.6 }}
           className="max-w-xl text-base sm:text-lg md:text-xl text-gray-300 leading-relaxed mb-10"
         >
-          Memahami ekonomi, pasar keuangan, teknologi, dan perilaku manusia
-          untuk melihat arah perkembangan dunia.
+          Understanding how someone thinks and operates is far more important than simply knowing what they did. 
         </motion.p>
 
         {/* BUTTON */}
