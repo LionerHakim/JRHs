@@ -4,9 +4,9 @@ import { Sparkles, User, MessageCircle } from "lucide-react";
 export default function Hero() {
   return (
     <section
-      id="hero"
-      className="relative flex min-h-screen items-center justify-center overflow-hidden px-6 pt-24 text-center"
-    >
+  id="hero"
+  className="relative flex min-h-screen min-h-[100svh] items-center justify-center overflow-hidden px-6 pt-24 text-center"
+>
       {/* Background Glow */}
       <div className="absolute top-1/3 left-1/2 -translate-x-1/2 w-[700px] h-[700px] bg-accent-blue/10 blur-[160px] rounded-full"></div>
 
