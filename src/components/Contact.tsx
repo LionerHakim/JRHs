@@ -30,13 +30,13 @@ export default function Contact() {
             
             <div className={`max-w-2xl mx-auto space-y-6 text-lg md:text-xl lg:text-2xl leading-relaxed font-light mb-16 transition-colors duration-500 ${isActive ? 'text-gray-100' : 'text-gray-400'}`}>
               <p>
-                Terbuka untuk percakapan yang bermakna, diskusi ide inovatif, maupun peluang kolaborasi strategis.
+                Saya terbuka untuk percakapan yang bermakna, diskusi ide inovatif, maupun peluang kolaborasi strategis.
               </p>
             </div>
 
             <div className="flex flex-col sm:flex-row items-center justify-center gap-6">
               <motion.a
-                href="https://instagram.com/jefri_rh_random"
+                href="https://instagram.com/jefrirh_"
                 target="_blank"
                 rel="noopener noreferrer"
                 whileHover={{ y: -4, scale: 1.05 }}
@@ -51,7 +51,7 @@ export default function Contact() {
               </motion.a>
               
               <motion.a
-                href="https://wa.me/6281234567890?text=Halo%20Jefri,%20saya%20mengunjungi%20website%20CV%20Anda%20dan%20tertarik%20untuk%20berdiskusi%20lebih%20lanjut%20mengenai%20peluang%20kolaborasi."
+                href="https://wa.me/6289649168305?text=Halo%20Jefri,%20saya%20mengunjungi%20website%20CV%20Anda%20dan%20tertarik%20untuk%20berdiskusi%20lebih%20lanjut%20mengenai%20peluang%20kolaborasi."
                 target="_blank"
                 rel="noopener noreferrer"
                 whileHover={{ y: -4, scale: 1.05 }}
