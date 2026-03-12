@@ -21,7 +21,7 @@ export default function Hero() {
         >
           <div className="absolute inset-0 bg-gradient-to-tr from-accent-blue/20 to-accent-purple/20 mix-blend-overlay z-10 group-hover:opacity-0 transition-opacity duration-700"></div>
           <img
-  src="/data/foto/s.jpg"
+  src="publik/data/foto/s.jpg"
   alt="Foto Profil"
   className="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-110"
 />
