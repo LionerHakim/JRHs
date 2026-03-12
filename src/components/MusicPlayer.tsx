@@ -4,11 +4,12 @@ import { Play, Pause, SkipForward, SkipBack, Volume2, VolumeX, ChevronDown, Musi
 
 // Using reliable public domain / creative commons audio links for demonstration
 const playlist = [
-  { title: 'Focus & Flow', artist: 'Ambient Chill', src: 'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3' },
-  { title: 'Deep Work', artist: 'Lo-Fi Beats', src: 'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-2.mp3' },
-  { title: 'Creative Minds', artist: 'Electronic', src: 'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-3.mp3' },
-  { title: 'Night Drive', artist: 'Synthwave', src: 'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-4.mp3' },
-  { title: 'Morning Coffee', artist: 'Acoustic', src: 'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-5.mp3' },
+  { title: 'Budi Doremi', artist: 'Budi Doremi', src: '/data/musik/Budi-Doremi.mp3' },
+  { title: 'Digeleng Broo', artist: 'Unknown', src: '/data/musik/Digeleng-Broo.mp3' },
+  { title: 'Rahasia Hati', artist: 'Unknown', src: '/data/musik/Rahasia-Hati.mp3' },
+  { title: 'Tak Ada Ujungnya', artist: 'Unknown', src: '/data/musik/Tak-AdaUjungnya.mp3' },
+  { title: 'Tourner Dans Le Vide', artist: 'Unknown', src: '/data/musik/Tourner-DansLeVide.mp3' },
+  { title: 'Who Knows', artist: 'Unknown', src: '/data/musik/Who-Knows.mp3' },
 ];
 
 export default function MusicPlayer() {
