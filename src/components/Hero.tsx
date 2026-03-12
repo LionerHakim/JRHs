@@ -30,14 +30,14 @@ export default function Hero() {
         </motion.div>
 
         <div className="overflow-hidden mb-6">
-          <motion.h1
+          <motion.h2
             initial={{ y: "100%" }}
             animate={{ y: 0 }}
             transition={{ duration: 1, ease: [0.25, 1, 0.5, 1], delay: 0.3 }}
             className="text-4xl sm:text-5xl md:text-7xl lg:text-[7rem] font-bold tracking-tighter text-white uppercase font-heading leading-none text-glow"
           >
             JEFRI RAHMAN HAKIM
-          </motion.h1>
+          </motion.h2>
         </div>
 
         <motion.div
