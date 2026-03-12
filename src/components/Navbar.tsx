@@ -58,39 +58,21 @@ export default function Navbar() {
               ))}
             </div>
 
-            <div className="flex items-center gap-4 border-l border-white/10 pl-4 sm:pl-6 ml-2 sm:ml-4">
+            <div
+              className={`flex items-center gap-4 border-l border-white/10 pl-4 sm:pl-6 ml-2 sm:ml-4 transition-opacity duration-300 ${
+                isOpen ? 'opacity-0 pointer-events-none' : 'opacity-100'
+              }`}
+            >
               <MusicPlayer />
 
               {/* Mobile Menu Toggle */}
               <button
                 type="button"
                 className="lg:hidden relative w-10 h-10 flex items-center justify-center rounded-full bg-white/5 border border-white/10 text-white hover:bg-white/10 hover:border-white/20 hover:text-accent-blue transition-all duration-300 focus:outline-none"
-                onClick={() => setIsOpen(!isOpen)}
-                aria-label={isOpen ? 'Close menu' : 'Open menu'}
+                onClick={() => setIsOpen(true)}
+                aria-label="Open menu"
               >
-                <AnimatePresence mode="wait">
-                  {isOpen ? (
-                    <motion.div
-                      key="close"
-                      initial={{ opacity: 0, rotate: -90 }}
-                      animate={{ opacity: 1, rotate: 0 }}
-                      exit={{ opacity: 0, rotate: 90 }}
-                      transition={{ duration: 0.2 }}
-                    >
-                      <X size={20} />
-                    </motion.div>
-                  ) : (
-                    <motion.div
-                      key="menu"
-                      initial={{ opacity: 0, rotate: 90 }}
-                      animate={{ opacity: 1, rotate: 0 }}
-                      exit={{ opacity: 0, rotate: -90 }}
-                      transition={{ duration: 0.2 }}
-                    >
-                      <Menu size={20} />
-                    </motion.div>
-                  )}
-                </AnimatePresence>
+                <Menu size={20} />
               </button>
             </div>
           </div>
@@ -107,7 +89,7 @@ export default function Navbar() {
             transition={{ duration: 0.5, ease: [0.25, 1, 0.5, 1] }}
             className="lg:hidden fixed inset-0 w-full h-screen bg-black/95 backdrop-blur-3xl z-40 flex flex-col pt-24 px-8 pb-8 overflow-y-auto"
           >
-            {/* Dedicated Close Button inside Mobile Menu */}
+            {/* Close Button */}
             <motion.button
               type="button"
               initial={{ opacity: 0, scale: 0.8 }}
@@ -119,7 +101,7 @@ export default function Navbar() {
               <X size={24} />
             </motion.button>
 
-            <div className="flex flex-col gap-5 mt-12">
+            <div className="flex flex-col gap-4 mt-12">
               {navLinks.map((link, index) => (
                 <motion.a
                   key={link.name}
@@ -128,9 +110,9 @@ export default function Navbar() {
                   transition={{ delay: index * 0.08 + 0.1, ease: [0.25, 1, 0.5, 1] }}
                   href={link.href}
                   onClick={() => setIsOpen(false)}
-                  className="text-right text-3xl sm:text-[2rem] font-semibold text-white/90 hover:text-white active:text-accent-blue transition-all duration-300 border-b border-white/10 pb-4 group"
+                  className="text-right text-2xl sm:text-[1.75rem] font-semibold text-white hover:text-white active:text-accent-blue transition-all duration-300 border-b border-white/10 pb-4 group"
                 >
-                  <span className="group-hover:translate-x-[-10px] inline-block transition-transform duration-300">
+                  <span className="group-hover:translate-x-[-8px] inline-block transition-transform duration-300">
                     {link.name}
                   </span>
                 </motion.a>
