@@ -13,7 +13,16 @@ export default function Hero() {
         transition={{ duration: 0.9, ease: [0.25, 1, 0.5, 1] }}
         className="flex flex-col items-center max-w-4xl w-full"
       >
-        {/* NAME */}
+        {/* FOTO PROFIL */}
+        <div className="relative w-36 h-36 md:w-44 md:h-44 rounded-full overflow-hidden mb-10 border border-white/20">
+          <img
+            src="/data/foto/s.jpg"
+            alt="Foto Profil"
+            className="w-full h-full object-cover"
+          />
+        </div>
+
+        {/* NAMA */}
         <motion.h1
           initial={{ y: "100%" }}
           animate={{ y: 0 }}
@@ -35,6 +44,41 @@ export default function Hero() {
           <p className="text-xl sm:text-2xl md:text-3xl font-semibold tracking-wide text-transparent bg-clip-text bg-gradient-to-r from-accent-blue via-accent-purple to-accent-pink">
             Trader & Investor
           </p>
+
+          <Sparkles className="text-accent-yellow w-5 h-5" />
+        </motion.div>
+
+        {/* BUTTON */}
+        <motion.div
+          initial={{ opacity: 0, y: 15 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.9, delay: 0.6 }}
+          className="flex flex-col sm:flex-row gap-4"
+        >
+          <motion.a
+            href="#about"
+            whileHover={{ y: -3, scale: 1.03 }}
+            whileTap={{ scale: 0.97 }}
+            className="flex items-center gap-2 px-8 py-3 rounded-full bg-white text-black font-semibold hover:shadow-[0_0_30px_rgba(255,255,255,0.35)] transition-all duration-300"
+          >
+            <User size={18} />
+            Jelajahi Profil
+          </motion.a>
+
+          <motion.a
+            href="#contact"
+            whileHover={{ y: -3, scale: 1.03 }}
+            whileTap={{ scale: 0.97 }}
+            className="flex items-center gap-2 px-8 py-3 rounded-full border border-white/20 text-white backdrop-blur-md hover:bg-white/10 transition-all duration-300"
+          >
+            <MessageCircle size={18} />
+            Hubungi Saya
+          </motion.a>
+        </motion.div>
+      </motion.div>
+    </section>
+  );
+}          </p>
 
           <Sparkles className="text-accent-yellow w-5 h-5" />
         </motion.div>
