@@ -51,7 +51,7 @@ export default function Contact() {
               </motion.a>
               
               <motion.a
-                href="https://wa.me/628964916830588?text=Halo%20Jefri,%20saya%20mengunjungi%20website%20CV%20Anda%20dan%20tertarik%20untuk%20berdiskusi%20lebih%20lanjut%20mengenai%20peluang%20kolaborasi."
+                href="https://wa.me/6284916088?text=Halo%20Jefri,%20saya%20mengunjungi%20website%20CV%20Anda%20dan%20tertarik%20untuk%20berdiskusi%20lebih%20lanjut%20mengenai%20peluang%20kolaborasi."
                 target="_blank"
                 rel="noopener noreferrer"
                 whileHover={{ y: -4, scale: 1.05 }}
