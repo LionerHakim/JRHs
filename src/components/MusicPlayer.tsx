@@ -23,7 +23,7 @@ export default function MusicPlayer() {
 
   useEffect(() => {
     if (audioRef.current) {
-      audioRef.current.volume = 0.3; // Default volume
+      audioRef.current.volume = 0.65; // Default volume
     }
   }, []);
 
