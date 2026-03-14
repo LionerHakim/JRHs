@@ -47,16 +47,13 @@ export default function Hero() {
           transition={{ duration: 1, delay: 0.45 }}
           className="flex items-center gap-2 mb-6"
         >
-          <p className="text-xl md:text-2xl font-semibold text-transparent bg-clip-text bg-gradient-to-r from-accent-blue via-accent-purple to-accent-pink">
-            Trader & Investor
-          </p>
-        </motion.div>
+          
 
         {/* DESKRIPSI */}
         <motion.p
           initial={{ opacity: 0, y: 15 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 1, delay: 0.6 }}
+          transition={{ duraton: 1, delay: 0.6 }}
           className="max-w-xl text-base sm:text-lg md:text-xl text-gray-300 leading-relaxed mb-10"
         >
           Understanding how someone thinks and operates is far more important than simply knowing what they did. 
