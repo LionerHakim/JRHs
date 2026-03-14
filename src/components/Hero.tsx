@@ -50,7 +50,7 @@ export default function Hero() {
          <p className="text-xl md:text-2xl font-semibold text-transparent bg-clip-text bg-gradient-to-r from-accent-blue via-accent-purple to-accent-pink">
             Trader & Investor
           </p>
-        </motion.div>
+        </motion.div
         {/* DESKRIPSI */}
         <motion.p
           initial={{ opacity: 0, y: 15 }}
