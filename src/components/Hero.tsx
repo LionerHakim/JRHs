@@ -39,18 +39,7 @@ export default function Hero() {
         >
           Jefri Rahman Hakim
         </motion.h1>
-
-        {/* ROLE */}
-        <motion.div
-          initial={{ opacity: 0, y: 15 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 1, delay: 0.45 }}
-          className="flex items-center gap-2 mb-6"
-        <      
-         <p className="text-xl md:text-2xl font-semibold text-transparent bg-clip-text bg-gradient-to-r from-accent-blue via-accent-purple to-accent-pink">
-            Trader & Investor
-          </p>
-        </motion.div
+        </motion.div>
         {/* DESKRIPSI */}
         <motion.p
           initial={{ opacity: 0, y: 15 }}
