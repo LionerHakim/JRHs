@@ -1,12 +1,12 @@
 import { motion } from "motion/react";
-import { Sparkles, User, MessageCircle } from "lucide-react";
+import { User, MessageCircle } from "lucide-react";
 
 export default function Hero() {
   return (
     <section
-  id="hero"
-  className="relative flex min-h-screen min-h-[100svh] items-center justify-center overflow-hidden px-6 pt-24 text-center"
->
+      id="hero"
+      className="relative flex min-h-screen min-h-[100svh] items-center justify-center overflow-hidden px-6 pt-24 text-center"
+    >
       {/* Background Glow */}
       <div className="absolute top-1/3 left-1/2 -translate-x-1/2 w-[700px] h-[700px] bg-accent-blue/10 blur-[160px] rounded-full"></div>
 
@@ -39,15 +39,16 @@ export default function Hero() {
         >
           Jefri Rahman Hakim
         </motion.h1>
-        </motion.div>
+
         {/* DESKRIPSI */}
         <motion.p
           initial={{ opacity: 0, y: 15 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duraton: 1, delay: 0.6 }}
+          transition={{ duration: 1, delay: 0.6 }}
           className="max-w-xl text-base sm:text-lg md:text-xl text-gray-300 leading-relaxed mb-10"
         >
-          Understanding how someone thinks and operates is far more important than simply knowing what they did. 
+          Understanding how someone thinks and operates is far more important
+          than simply knowing what they did.
         </motion.p>
 
         {/* BUTTON */}
