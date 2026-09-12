@@ -13,7 +13,7 @@ export default function RekamJejak() {
     <section id="rekam-jejak" className="section-shell">
       <div className="mx-auto max-w-6xl">
         <div className="section-heading">
-          <p className="eyebrow">02 / Rekam Jejak</p>
+          <p className="eyebrow">03 / Experience</p>
           <h2 className="display-title">Perjalanan.</h2>
         </div>
         <div className="timeline">
@@ -25,11 +25,11 @@ export default function RekamJejak() {
                   <h3>{item.institution}</h3>
                   {item.degree && <p className="timeline-degree">{item.degree}</p>}
                 </div>
-                <span className="timeline-date"><Calendar size={13} />{item.year}</span>
+                <span className="timeline-date"><Calendar size={13} aria-hidden="true" />{item.year}</span>
               </div>
               {item.activities.length > 0 && (
                 <div className="timeline-activity">
-                  <span><Award size={13} />Aktivitas</span>
+                  <span><Award size={13} aria-hidden="true" />Aktivitas</span>
                   {item.activities.map((activity) => <p key={activity}>{activity}</p>)}
                 </div>
               )}
