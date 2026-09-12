@@ -31,7 +31,9 @@ export default function Navbar() {
 
   useEffect(() => {
     if (!open) return;
-    const onKey = (event: KeyboardEvent) => event.key === 'Escape' && setOpen(false);
+    const onKey = (event: KeyboardEvent) => {
+      if (event.key === 'Escape') setOpen(false);
+    };
     document.addEventListener('keydown', onKey);
     document.body.style.overflow = 'hidden';
     closeRef.current?.focus();
@@ -43,31 +45,44 @@ export default function Navbar() {
 
   return (
     <>
-      <header className="fixed inset-x-0 top-0 z-50 px-4 pt-4 md:px-6">
-        <nav className="mx-auto flex max-w-6xl items-center justify-between rounded-[22px] border border-black/5 bg-white px-3 py-2 shadow-[0_0_0_5px_#f7f7f7] md:px-4" aria-label="Primary">
-          <a href="#hero" className="flex min-h-11 items-center gap-2 px-2 text-[18px] font-semibold tracking-tight text-black" aria-label="JRHs home">
+      <header className="fixed inset-x-0 top-0 z-50 px-4 pt-4 md:px-6" style={{ paddingTop: 'max(1rem, env(safe-area-inset-top))' }}>
+        <nav className="mx-auto flex max-w-6xl items-center justify-between rounded-[20px] border border-[#1D1D1D] bg-[#0A0A0A]/95 px-3 py-2 shadow-[0_10px_32px_rgba(0,0,0,.28)] backdrop-blur-sm md:px-4" aria-label="Primary">
+          <a href="#hero" className="flex min-h-11 items-center gap-2 px-2 text-[18px] font-semibold tracking-tight text-[#F5F5F5]" aria-label="JRHs home">
             <span>JRHs</span><span className="h-1.5 w-1.5 rounded-full bg-[#007AFF]" aria-hidden="true" />
           </a>
           <div className="hidden items-center gap-0.5 lg:flex">
             {navLinks.map((link) => {
               const isActive = active === link.href.slice(1);
-              return <a key={link.href} href={link.href} className={`min-h-11 rounded-full px-3 py-2.5 text-sm font-medium transition-colors ${isActive ? 'text-black' : 'text-[#636363] hover:text-black'}`} aria-current={isActive ? 'page' : undefined}>{link.name}</a>;
+              return (
+                <a key={link.href} href={link.href} className={`min-h-11 rounded-full px-3 py-2.5 text-sm font-medium transition-colors ${isActive ? 'text-[#F5F5F5]' : 'text-[#A0A0A0] hover:text-[#F5F5F5]'}`} aria-current={isActive ? 'location' : undefined}>
+                  {link.name}
+                </a>
+              );
             })}
           </div>
           <div className="flex items-center gap-1.5">
             <MusicPlayer />
-            <button type="button" onClick={() => setOpen(true)} className="inline-flex min-h-11 min-w-11 items-center justify-center rounded-full border border-[#E5E5E5] bg-white text-black lg:hidden" aria-label="Open menu" aria-expanded={open}><Menu size={18} /></button>
+            <button type="button" onClick={() => setOpen(true)} className="inline-flex min-h-11 min-w-11 items-center justify-center rounded-full border border-[#1D1D1D] bg-[#101010] text-[#F5F5F5] transition active:scale-[.97] hover:border-[#333] lg:hidden" aria-label="Open menu" aria-expanded={open}>
+              <Menu size={18} />
+            </button>
           </div>
         </nav>
       </header>
+
       {open && (
-        <div className="fixed inset-0 z-[60] bg-[#F7F7F7] p-5 lg:hidden" role="dialog" aria-modal="true" aria-label="Mobile navigation">
+        <div className="fixed inset-0 z-[60] bg-[#050505] px-5 pb-8 pt-5 lg:hidden" role="dialog" aria-modal="true" aria-label="Mobile navigation">
           <div className="mx-auto flex max-w-6xl items-center justify-between">
-            <a href="#hero" onClick={() => setOpen(false)} className="flex min-h-11 items-center text-[18px] font-semibold tracking-tight text-black">JRHs</a>
-            <button ref={closeRef} type="button" onClick={() => setOpen(false)} className="inline-flex min-h-11 min-w-11 items-center justify-center rounded-full border border-[#E5E5E5] bg-white text-black" aria-label="Close menu"><X size={18} /></button>
+            <a href="#hero" onClick={() => setOpen(false)} className="flex min-h-11 items-center text-[18px] font-semibold tracking-tight text-[#F5F5F5]">JRHs</a>
+            <button ref={closeRef} type="button" onClick={() => setOpen(false)} className="inline-flex min-h-11 min-w-11 items-center justify-center rounded-full border border-[#1D1D1D] bg-[#101010] text-[#F5F5F5] transition active:scale-[.97] hover:border-[#333]" aria-label="Close menu">
+              <X size={18} />
+            </button>
           </div>
-          <div className="mx-auto flex max-w-6xl flex-col pt-16">
-            {navLinks.map((link, index) => <a key={link.href} href={link.href} onClick={() => setOpen(false)} className="border-b border-[#E5E5E5] py-5 text-3xl font-normal text-black transition-opacity hover:opacity-60" style={{ transitionDelay: `${index * 20}ms` }}>{link.name}</a>)}
+          <div className="mx-auto flex max-w-6xl flex-col pt-14" role="navigation" aria-label="Mobile primary navigation">
+            {navLinks.map((link, index) => (
+              <a key={link.href} href={link.href} onClick={() => setOpen(false)} className="border-b border-[#1D1D1D] py-5 text-[clamp(1.7rem,8vw,2.35rem)] font-normal text-[#F5F5F5] transition-opacity hover:opacity-60" style={{ transitionDelay: `${index * 20}ms` }}>
+                {link.name}
+              </a>
+            ))}
           </div>
         </div>
       )}
