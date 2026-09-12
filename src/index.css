@@ -17,16 +17,18 @@ button, a { -webkit-tap-highlight-color: transparent; }
 button:focus-visible, a:focus-visible { outline: 2px solid #007AFF; outline-offset: 3px; }
 ::selection { background: rgba(0, 122, 255, .16); }
 
-.section-shell { padding: 5.5rem 1.25rem; background: #F7F7F7; }
+.section-shell { padding: 5.75rem 1.25rem; background: #F7F7F7; }
 .section-grid { width: 100%; max-width: 72rem; margin: 0 auto; display: grid; gap: 2.75rem; }
-@media (min-width: 768px) { .section-shell { padding: 7.5rem 2rem; } .section-grid { grid-template-columns: .58fr 1fr; gap: 5rem; } }
+@media (min-width: 768px) { .section-shell { padding: 8.5rem 2rem; } .section-grid { grid-template-columns: .58fr 1fr; gap: 5rem; } }
 @media (min-width: 1024px) { .section-shell { padding-left: 3rem; padding-right: 3rem; } }
 
+.portal-pill, .portal-link { display: inline-flex; align-items: center; justify-content: center; border-radius: 999px; }
+.portal-link { gap: .5rem; }
 .eyebrow { margin: 0; color: #636363; font-size: 12px; line-height: 1.2; font-weight: 500; letter-spacing: .16em; text-transform: uppercase; }
-.display-title { margin: .7rem 0 0; font-family: var(--font-heading); font-size: clamp(2.25rem, 5vw, 3rem); line-height: 1; font-weight: 400; letter-spacing: normal; color: #000; }
+.display-title { margin: .7rem 0 0; font-family: var(--font-heading); font-size: clamp(2.35rem, 5vw, 3.4rem); line-height: 1; font-weight: 400; letter-spacing: normal; color: #000; }
 .section-heading { margin-bottom: 2.75rem; }
 .prose-jrhs { max-width: 44rem; }
-.prose-jrhs p { margin: 0 0 1.3rem; color: #3E3E3E; font-size: 16px; line-height: 1.55; letter-spacing: -.02em; }
+.prose-jrhs p { margin: 0 0 1.3rem; color: #3E3E3E; font-size: 16px; line-height: 1.62; letter-spacing: -.02em; }
 .prose-jrhs .editorial-quote { border-left: 2px solid #007AFF; padding-left: 1.2rem; color: #000; }
 
 .timeline { position: relative; border-left: 1px solid #DCDCDC; margin-left: .35rem; }
@@ -41,11 +43,10 @@ button:focus-visible, a:focus-visible { outline: 2px solid #007AFF; outline-offs
 .timeline-activity > span { display: inline-flex; align-items: center; gap: .4rem; color: #636363; font-size: 12px; text-transform: uppercase; letter-spacing: .14em; }
 .timeline-activity p { margin: .45rem 0 0; color: #3E3E3E; font-size: 14px; line-height: 1.4; }
 
-.project-card { border: 1px solid #E5E5E5; background: #fff; border-radius: 18px; box-shadow: 0 0 0 4px rgba(255,255,255,.72); }
-.portal-link { min-height: 44px; display: inline-flex; align-items: center; justify-content: center; border-radius: 999px; }
+.project-card { border: 1px solid #E5E5E5; background: #fff; border-radius: 20px; box-shadow: 0 0 0 4px rgba(255,255,255,.74); }
 
 @media (hover: hover) and (pointer: fine) {
-  button, a { transition: opacity 160ms ease, transform 160ms ease, background-color 160ms ease, border-color 160ms ease, color 160ms ease; }
+  button, a { transition: opacity 160ms ease, transform 160ms ease, background-color 160ms ease, border-color 160ms ease, color 160ms ease, box-shadow 160ms ease; }
 }
 
 @media (prefers-reduced-motion: reduce) {
