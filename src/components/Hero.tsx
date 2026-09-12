@@ -1,6 +1,7 @@
 import { motion } from 'motion/react';
 
 export default function Hero() {
+  const photo = `${import.meta.env.BASE_URL}data/foto/s.jpg`;
   return <section id="hero" className="relative flex min-h-[100svh] items-center overflow-hidden px-5 pt-24 md:px-8 lg:px-12">
     <div className="mx-auto grid w-full max-w-6xl items-center gap-12 py-16 md:grid-cols-[1.05fr_.75fr] md:gap-16 lg:py-20">
       <motion.div initial={{ opacity: 0, y: 24 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: .55 }}>
@@ -14,7 +15,7 @@ export default function Hero() {
       </motion.div>
       <motion.div initial={{ opacity: 0, scale: .96 }} animate={{ opacity: 1, scale: 1 }} transition={{ duration: .7, delay: .1 }} className="justify-self-center md:justify-self-end">
         <div className="relative h-64 w-64 overflow-hidden rounded-[28px] border border-[#1D1D1D] bg-[#0A0A0A] sm:h-80 sm:w-80 lg:h-[380px] lg:w-[380px]">
-          <img src="/data/foto/s.jpg" alt="Jefri Rahman Hakim" className="h-full w-full object-cover" fetchPriority="high" />
+          <img src={photo} alt="Jefri Rahman Hakim" className="h-full w-full object-cover" fetchPriority="high" />
         </div>
       </motion.div>
     </div>
