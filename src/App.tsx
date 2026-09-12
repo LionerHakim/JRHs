@@ -8,7 +8,7 @@ import ScrollProgress from './components/ScrollProgress';
 
 export default function App() {
   return (
-    <div className="min-h-screen bg-[#050505] text-[#F5F5F5] font-sans selection:bg-[#007AFF]/30">
+    <div className="min-h-screen bg-[#F7F7F7] text-[#000] font-sans">
       <ScrollProgress />
       <Navbar />
       <main>
@@ -18,9 +18,9 @@ export default function App() {
         <Projects />
         <Contact />
       </main>
-      <footer className="border-t border-[#1D1D1D] px-5 py-8 md:px-8">
-        <div className="mx-auto flex max-w-6xl flex-col gap-3 text-xs text-[#666] sm:flex-row sm:items-center sm:justify-between">
-          <a href="#hero" className="font-serif text-sm text-[#A0A0A0] transition-colors hover:text-white focus:outline-none focus:ring-2 focus:ring-[#007AFF] focus:ring-offset-2 focus:ring-offset-[#050505]">JRHs</a>
+      <footer className="border-t border-[#E5E5E5] bg-[#F7F7F7] px-5 py-8 md:px-8">
+        <div className="mx-auto flex max-w-6xl flex-col gap-3 text-xs text-[#636363] sm:flex-row sm:items-center sm:justify-between">
+          <a href="#hero" className="font-serif text-sm text-[#000] transition-opacity hover:opacity-60">JRHs</a>
           <span>© 2026 JRHs. Hak cipta dilindungi.</span>
         </div>
       </footer>
