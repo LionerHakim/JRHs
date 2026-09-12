@@ -1,210 +1,73 @@
 # JRHs
 
-Personal digital space and editorial portfolio for JRHs.
+Ruang digital personal dan portofolio editorial JRHs.
 
-🌐 Live: https://jrhsee.my.id
+## Portofolio JRHs — Portal / Twilight Serif Editorial
 
-## JRHs Portfolio Overhaul — V99 Design Direction
+JRHs dirancang sebagai pengalaman portofolio personal yang berfokus pada proyek, konteks, dan perjalanan. Antarmukanya ringan, taktil, responsif, dan sengaja dibuat terasa seperti produk digital personal, bukan templat portofolio generik.
 
-JRHs is being transformed into a **production-grade, mobile-first, project-first editorial portfolio**. The goal is not to decorate the existing site, but to create a cohesive digital experience that feels deliberately designed, fast, tactile, memorable, and premium.
+### Struktur
 
-### Core Principles
+1. **Hero** — identitas, pernyataan utama, dan ajakan menuju proyek atau profil
+2. **About** — konteks personal dan pendekatan yang sudah tersedia di repositori
+3. **Projects / Megaprojects** — pusat utama portofolio dengan hierarki proyek unggulan dan proyek lainnya
+4. **Experience** — perjalanan pendidikan dan aktivitas yang tersedia
+5. **Contact** — kanal kontak dan media sosial yang tersedia
+6. **Footer** — identitas dan hak cipta
 
-- Less sections, more quality
-- Project-first storytelling
-- Editorial hierarchy
-- Tactile interaction
-- Mobile-first responsive design
-- Fast and lightweight experience
-- Accessible by default
-- Production-ready implementation
-- Existing facts and content preserved
-- No invented projects, statistics, testimonials, URLs, social accounts, or personal information
+Bagian lama berikut tidak digunakan dalam pengalaman akhir: Hobbies, Skills, Reflection, Vision, Knowledge, dan Motivation.
 
-### Final Information Architecture
+### Bahasa visual
 
-1. **Hero** — identity, positioning, short description, primary/secondary CTA
-2. **About** — concise editorial profile and context
-3. **Projects / MegaProjects** — primary proof of work and visual centerpiece
-4. **Experience** — clean editorial timeline/list
-5. **Contact** — simple closing CTA using real available contact/social data
-6. **Footer** — minimal identity, links, and copyright
+Arah visual: **Portal / Twilight Serif Editorial** dengan perpaduan majalah independen premium, estetika antarmuka iOS, dan portofolio produk modern.
 
-The following legacy sections are intentionally removed from the final experience:
+- Kanvas: `#F7F7F7`
+- Permukaan: `#FFFFFF`
+- Teks utama: `#000000`
+- Graphite: `#3E3E3E`
+- Smoke: `#636363`
+- Aksen fungsional: `#007AFF`
+- Serif untuk judul dan momen editorial
+- Inter untuk isi, navigasi, dan metadata
+- Tidak ada aksen warna kedua atau efek dekoratif berlebihan
 
-- Hobbies
-- Skills
-- Reflection
-- Vision
-- Knowledge
+### Proyek
 
-### Visual Language — Portal / Twilight Serif Editorial
+Proyek merupakan pusat perhatian utama. Proyek unggulan diberi bobot visual lebih kuat, sedangkan proyek lain tetap ringkas dan konsisten. Informasi tambahan tersedia melalui pembukaan detail tanpa memindahkan pengguna dari alur halaman.
 
-The visual direction combines:
+Tautan eksternal hanya ditampilkan ketika URL nyata tersedia di data proyek. Informasi yang belum tersedia tidak dibuat-buat.
 
-**premium indie magazine + native iOS aesthetic + modern product portfolio**
+### Pemutar musik VVIP+
 
-Canvas:
-`#F7F7F7`
+Pemutar musik mempertahankan daftar lagu yang sudah tersedia, tanpa putar otomatis. Mode ringkas tersedia di navigasi, sedangkan panel VVIP+ menyediakan lagu aktif, kemajuan pemutaran, pencarian posisi lagu, volume, bisu, lagu sebelumnya/berikutnya, serta daftar putar. Kesalahan audio ditangani tanpa merusak halaman utama.
 
-Paper:
-`#FFFFFF`
+### Aksesibilitas dan performa
 
-Primary:
-`#000000`
+- Navigasi ramah papan ketik dan fokus terlihat
+- Target sentuh minimal 44px
+- Dialog dan menu mendukung ESC serta pemulihan fokus
+- Mendukung `prefers-reduced-motion`
+- Tidak menggunakan pengguliran paksa
+- Tidak ada bilah gulir visual yang mengganggu
+- Media nonkritis dimuat secara hemat
+- Implementasi tetap ringan dan kompatibel dengan Vite/React/TypeScript
 
-Graphite:
-`#3E3E3E`
+### Integritas konten
 
-Smoke:
-`#636363`
+Repositori menjadi sumber kebenaran. Proyek, pendidikan, kontak, media, audio, dan tautan yang tersedia dipertahankan. Tidak ada statistik, klien, jabatan, teknologi, hasil, atau URL yang dibuat hanya demi kelengkapan visual.
 
-Functional accent:
-`#007AFF`
+### Pengembangan dan penerapan
 
-No second accent color, excessive shadows, heavy glassmorphism, neon effects, or generic SaaS/dashboard styling.
+Alur kerja utama:
 
-### Hero Art Direction
+`Audit → Implementasi → Build → Pengujian → Inspeksi → Perbaikan → Pengujian ulang → QA akhir`
 
-The hero is the primary atmospheric visual moment.
+Portofolio tetap menggunakan arsitektur Vite/React/TypeScript dan penerapan GitHub Pages yang sudah ada.
 
-Gradient:
+## Prinsip
 
-```css
-linear-gradient(
-  180deg,
-  #4A7FF2 0%,
-  #7B7ED8 30%,
-  #C98AB5 65%,
-  #E8A87C 100%
-)
-```
-
-Atmospheric dark landscape/tree silhouettes may occupy the lower 15–20% when suitable assets/visuals are available.
-
-The gradient is limited to the hero/atmospheric moment and is never used as the entire site background.
-
-### Typography
-
-Display:
-
-- Perfectly Nineties when available
-- Playfair Display / DM Serif Display / Recoleta as quality fallbacks
-
-Serif is reserved for H1, H2, and editorial display moments.
-
-UI/body:
-
-- Inter 400 / 500 / 600
-
-Approximate scale:
-
-- H1/H2: 36–48px, weight 400, ~1.0 line-height
-- Body: 14–16px
-- Metadata: 14px
-- Small UI: 12px
-
-### Navigation
-
-Floating navigation capsule with a clean, compact presentation.
-
-Desktop:
-
-`JRHs · About · Projects · Experience · Contact`
-
-Mobile remains compact and touch-friendly.
-
-Requirements:
-
-- sticky/floating
-- subtle active-section indication
-- smooth navigation
-- keyboard accessible
-- no scroll hijacking
-- minimum 44px touch targets
-
-### Projects
-
-Projects are the **center of gravity** of JRHs.
-
-The hierarchy is:
-
-`Flagship / MegaProject → Other Projects`
-
-The flagship project receives stronger visual weight while other projects remain compact and consistent.
-
-Project cards use a physical/product-object feeling:
-
-- white surface
-- subtle border
-- 16–30px radius
-- 20px internal padding
-- restrained depth
-- no heavy shadows
-
-Real existing project URLs must be preserved. `Visit Website ↗` opens the actual URL directly. No fake URLs or unnecessary intermediate pages.
-
-### Interaction
-
-Interaction states are designed consistently:
-
-`Idle → Hover → Focus → Pressed → Disabled → Loading → Success/Error`
-
-Pressed feedback may use approximately `scale(0.97)`.
-
-Motion should be fast, subtle, and purposeful:
-
-- micro: 120–180ms
-- UI: 180–240ms
-
-Respect `prefers-reduced-motion`.
-
-No excessive parallax, infinite decorative animation, particles, cursor trails, or scroll hijacking.
-
-### Responsive / Accessibility / Performance
-
-The experience is designed and reviewed for:
-
-`320px · 360px · 390px · 430px · tablet · desktop · large desktop`
-
-Requirements:
-
-- no horizontal overflow
-- mobile is first-class, not a shrunken desktop
-- semantic HTML
-- correct heading hierarchy
-- visible keyboard focus
-- accessible controls and links
-- descriptive image alt text
-- 44px+ touch targets
-- reduced-motion support
-- optimized and lazy-loaded non-critical media
-- minimal unnecessary JavaScript/dependencies
-- no avoidable memory leaks or expensive rendering
-- no console/runtime errors
-
-### Content Integrity
-
-Repository data is the source of truth.
-
-Existing content, media, project information, audio, contacts, social links, and valid URLs are preserved. Missing information is not fabricated merely to make the design look fuller.
-
-### Engineering / Deployment
-
-The overhaul must preserve the existing deployment architecture and remain compatible with the repository's current Vite/React/TypeScript setup and deployment assumptions.
-
-Before completion:
-
-`Audit → Implement → Build → Test → Inspect → Fix → Test Again → Final QA`
-
-The final result should be clean, maintainable, responsive, accessible, performant, and production-ready.
-
-## Brand Statement
-
-> **MAKE JRHs FEEL DESIGNED, NOT ASSEMBLED.**
+> **BUAT JRHs TERASA DIRANCANG, BUKAN DIRAKIT.**
 >
-> **MAKE THE PROJECTS THE REASON PEOPLE STAY.**
-
-## Copyright
+> **JADIKAN PROYEK ALASAN ORANG BERTAHAN.**
 
 © 2026 JRHs. Hak cipta dilindungi.
