@@ -67,7 +67,10 @@ export default function MusicPlayer() {
     if (!open) return;
     const onPointerDown = (event: PointerEvent) => {
       const target = event.target as Node;
-      if (!panelRef.current?.contains(target) && !triggerRef.current?.contains(target)) setOpen(false);
+      if (!panelRef.current?.contains(target) && !triggerRef.current?.contains(target)) {
+        setOpen(false);
+        triggerRef.current?.focus();
+      }
     };
     document.addEventListener('pointerdown', onPointerDown);
     return () => document.removeEventListener('pointerdown', onPointerDown);
@@ -89,12 +92,19 @@ export default function MusicPlayer() {
   };
 
   const selectTrack = (songIndex: number) => {
-    setIndex(songIndex);
+    const audio = audioRef.current;
     setProgress(0);
     setDuration(0);
-    setState('playing');
     setOpen(false);
     triggerRef.current?.focus();
+    if (songIndex === index && audio) {
+      setState('loading');
+      audio.currentTime = 0;
+      audio.play().then(() => setState('playing')).catch(() => setState('error'));
+      return;
+    }
+    setIndex(songIndex);
+    setState('playing');
   };
 
   const seek = (event: ChangeEvent<HTMLInputElement>) => {
@@ -126,9 +136,11 @@ export default function MusicPlayer() {
         <button ref={triggerRef} type="button" onClick={togglePlayback} className="inline-flex min-h-11 min-w-11 items-center justify-center rounded-full text-[var(--color-ink-black)] transition active:scale-[.97] hover:bg-[var(--color-ash-mist)] focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-signal-blue)]" aria-label={state === 'playing' ? 'Jeda musik' : state === 'loading' ? 'Memuat musik' : state === 'error' ? 'Coba putar musik lagi' : 'Putar musik'} disabled={state === 'loading'}>
           {state === 'playing' ? <Pause size={15} aria-hidden="true" /> : <Play size={15} aria-hidden="true" />}
         </button>
-        <button type="button" onClick={() => setOpen((value) => !value)} className="hidden min-h-11 max-w-36 items-center gap-2 px-1 text-left sm:flex" aria-label="Buka pemutar musik" aria-expanded={open} aria-controls="music-player-panel">
+        <button type="button" onClick={() => setOpen((value) => !value)} className="inline-flex min-h-11 max-w-[8rem] items-center gap-2 rounded-full px-1 text-left sm:max-w-36" aria-label="Buka pemutar musik" aria-expanded={open} aria-controls="music-player-panel">
           <Headphones size={13} className="shrink-0 text-[var(--color-signal-blue)]" aria-hidden="true" />
-          <span className="truncate text-xs font-medium text-[var(--color-graphite)]">{state === 'error' ? 'Audio tidak tersedia' : playlist[index].title}</span><ChevronDown size={13} className={`shrink-0 text-[var(--color-smoke)] transition-transform ${open ? 'rotate-180' : ''}`} aria-hidden="true" />
+          <span className="hidden truncate text-xs font-medium text-[var(--color-graphite)] sm:inline">{state === 'error' ? 'Audio tidak tersedia' : playlist[index].title}</span>
+          <span className="sr-only sm:hidden">{state === 'error' ? 'Audio tidak tersedia' : playlist[index].title}</span>
+          <ChevronDown size={13} className={`shrink-0 text-[var(--color-smoke)] transition-transform ${open ? 'rotate-180' : ''}`} aria-hidden="true" />
         </button>
         <button type="button" onClick={() => changeTrack(-1)} className="hidden min-h-11 min-w-10 items-center justify-center rounded-full text-[var(--color-smoke)] transition active:scale-[.97] hover:text-[var(--color-ink-black)] md:flex" aria-label="Lagu sebelumnya"><SkipBack size={14} aria-hidden="true" /></button>
         <button type="button" onClick={() => changeTrack(1)} className="inline-flex min-h-11 min-w-10 items-center justify-center rounded-full text-[var(--color-smoke)] transition active:scale-[.97] hover:text-[var(--color-ink-black)] focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-signal-blue)]" aria-label="Lagu berikutnya"><SkipForward size={14} aria-hidden="true" /></button>
@@ -142,7 +154,7 @@ export default function MusicPlayer() {
         <div className="mt-4"><label className="sr-only" htmlFor="music-progress">Posisi lagu</label><input id="music-progress" type="range" min="0" max="100" step="0.1" value={progress} onChange={seek} disabled={!duration} className="h-1.5 w-full accent-[var(--color-signal-blue)]" /><div className="mt-1 flex justify-between text-[11px] text-[var(--color-smoke)]"><span>{formatTime((progress / 100) * duration)}</span><span>{formatTime(duration)}</span></div></div>
         <div className="mt-3 flex items-center justify-center gap-1"><button type="button" onClick={() => changeTrack(-1)} className="inline-flex min-h-11 min-w-11 items-center justify-center rounded-full text-[var(--color-graphite)] hover:bg-[var(--color-ash-mist)] focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-signal-blue)]" aria-label="Lagu sebelumnya"><SkipBack size={17} /></button><button type="button" onClick={togglePlayback} className="inline-flex min-h-12 min-w-12 items-center justify-center rounded-full bg-[var(--color-ink-black)] text-[var(--color-paper-white)] active:scale-[.97] focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-signal-blue)]" aria-label={state === 'playing' ? 'Jeda musik' : 'Putar musik'} disabled={state === 'loading'}>{state === 'playing' ? <Pause size={17} /> : <Play size={17} />}</button><button type="button" onClick={() => changeTrack(1)} className="inline-flex min-h-11 min-w-11 items-center justify-center rounded-full text-[var(--color-graphite)] hover:bg-[var(--color-ash-mist)] focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-signal-blue)]" aria-label="Lagu berikutnya"><SkipForward size={17} /></button></div>
         <div className="mt-4 flex items-center gap-3 border-t border-[#E5E5E5] pt-4">{muted ? <VolumeX size={15} className="text-[var(--color-smoke)]" aria-hidden="true" /> : <Volume2 size={15} className="text-[var(--color-smoke)]" aria-hidden="true" />}<label className="sr-only" htmlFor="music-volume">Volume</label><input id="music-volume" type="range" min="0" max="1" step="0.01" value={muted ? 0 : volume} onChange={(event) => { setMuted(false); setVolume(Number(event.target.value)); }} className="h-1.5 flex-1 accent-[var(--color-signal-blue)]" /></div>
-        <div className="mt-4 space-y-1" role="list" aria-label="Daftar lagu">{playlist.map((song, songIndex) => <button type="button" key={song.src} onClick={() => selectTrack(songIndex)} className={`flex min-h-11 w-full items-center gap-3 rounded-xl px-3 text-left text-sm transition active:scale-[.99] focus:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-[var(--color-signal-blue)] ${songIndex === index ? 'bg-[var(--color-ash-mist)] text-[var(--color-ink-black)]' : 'text-[var(--color-smoke)] hover:bg-[var(--color-ash-mist)] hover:text-[var(--color-ink-black)]'}`}><span className="w-5 text-[11px] text-[var(--color-smoke)]">0{songIndex + 1}</span><span className="truncate">{song.title}</span>{songIndex === index && <span className="ml-auto text-[11px] font-semibold text-[var(--color-signal-blue)]">Diputar</span>}</button>)}</div>
+        <div className="mt-4 space-y-1" role="list" aria-label="Daftar lagu">{playlist.map((song, songIndex) => <div key={song.src} role="listitem"><button type="button" onClick={() => selectTrack(songIndex)} className={`flex min-h-11 w-full items-center gap-3 rounded-xl px-3 text-left text-sm transition active:scale-[.99] focus:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-[var(--color-signal-blue)] ${songIndex === index ? 'bg-[var(--color-ash-mist)] text-[var(--color-ink-black)]' : 'text-[var(--color-smoke)] hover:bg-[var(--color-ash-mist)] hover:text-[var(--color-ink-black)]'}`}><span className="w-5 text-[11px] text-[var(--color-smoke)]">0{songIndex + 1}</span><span className="truncate">{song.title}</span>{songIndex === index && <span className="ml-auto text-[11px] font-semibold text-[var(--color-signal-blue)]">Diputar</span>}</button></div>)}</div>
       </div>}
     </div>
   );
