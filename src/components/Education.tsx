@@ -10,11 +10,11 @@ const educationData = [
 
 export default function RekamJejak() {
   return (
-    <section id="rekam-jejak" className="section-shell">
+    <section id="rekam-jejak" className="section-shell" aria-labelledby="experience-title">
       <div className="mx-auto max-w-6xl">
         <div className="section-heading">
           <p className="eyebrow">03 / Experience</p>
-          <h2 className="display-title">Perjalanan.</h2>
+          <h2 id="experience-title" className="display-title">Perjalanan.</h2>
         </div>
         <div className="timeline">
           {educationData.map((item, index) => (
