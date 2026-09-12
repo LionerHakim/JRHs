@@ -1,5 +1,5 @@
-import { AnimatePresence, motion } from 'motion/react';
-import { ArrowUpRight, X } from 'lucide-react';
+import { AnimatePresence, motion, useReducedMotion } from 'motion/react';
+import { ArrowUpRight, Check, X } from 'lucide-react';
 import { useEffect, useRef, useState } from 'react';
 
 type Project = {
@@ -24,6 +24,7 @@ export default function Projects() {
   const triggerRefs = useRef<Array<HTMLButtonElement | null>>([]);
   const previousFocus = useRef<HTMLElement | null>(null);
   const scrollYRef = useRef(0);
+  const reduceMotion = useReducedMotion();
 
   useEffect(() => {
     if (selected === null) return;
@@ -58,10 +59,10 @@ export default function Projects() {
   }, [selected]);
 
   useEffect(() => {
-    if (selected !== null) return;
-    if (!isOpen) return;
+    if (selected !== null || !isOpen) return;
     const target = previousFocus.current;
-    window.setTimeout(() => target?.focus(), 0);
+    const timer = window.setTimeout(() => target?.focus(), 0);
+    return () => window.clearTimeout(timer);
   }, [selected, isOpen]);
 
   const openProject = (index: number) => {
@@ -73,23 +74,27 @@ export default function Projects() {
 
   return (
     <section id="projects" className="section-shell" aria-labelledby="projects-title">
-      <div className="mx-auto max-w-6xl">
-        <div className="section-heading flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
-          <div><p className="eyebrow">02 / Projects</p><h2 id="projects-title" className="display-title">Megaprojects.</h2></div>
+      <div className="mx-auto max-w-7xl">
+        <div className="section-heading flex flex-col gap-5 sm:flex-row sm:items-end sm:justify-between">
+          <div>
+            <p className="eyebrow">02 / Projects</p>
+            <h2 id="projects-title" className="display-title">Megaprojects.</h2>
+          </div>
           <p className="max-w-sm text-sm leading-6 text-[#636363]">Gagasan yang sedang dibangun, dikembangkan, dan dipersiapkan untuk jangka panjang.</p>
         </div>
-        <div className="grid gap-4 md:grid-cols-12 md:grid-rows-2">
+
+        <div className="grid gap-5 md:grid-cols-12 md:grid-rows-2">
           {projects.map((project, index) => (
             <motion.button
               key={project.title}
               ref={(element) => { triggerRefs.current[index] = element; }}
               type="button"
-              initial={{ opacity: 0, y: 10 }}
-              whileInView={{ opacity: 1, y: 0 }}
+              initial={reduceMotion ? false : { opacity: 0, y: 12 }}
+              whileInView={reduceMotion ? undefined : { opacity: 1, y: 0 }}
               viewport={{ once: true, margin: '-40px' }}
               transition={{ duration: .24, delay: index * .03 }}
               onClick={() => openProject(index)}
-              className={`project-card group relative flex w-full flex-col justify-between text-left outline-none transition duration-180 hover:-translate-y-0.5 hover:border-[#D8D8D8] focus-visible:ring-2 focus-visible:ring-[#007AFF] active:scale-[.97] ${index === 0 ? 'md:col-span-7 md:row-span-2 md:min-h-[28rem] md:p-8' : 'md:col-span-5 md:min-h-[13.5rem] md:p-6'} p-5`}
+              className={`project-card group relative flex min-h-[16rem] w-full flex-col justify-between text-left outline-none transition duration-180 hover:-translate-y-0.5 hover:border-[#D6D6D6] focus-visible:ring-2 focus-visible:ring-[#007AFF] active:scale-[.97] ${index === 0 ? 'md:col-span-7 md:row-span-2 md:min-h-[32rem] md:p-8' : 'md:col-span-5 md:p-7'} p-5`}
               aria-label={`Lihat detail ${project.title}`}
               aria-haspopup="dialog"
             >
@@ -98,16 +103,16 @@ export default function Projects() {
                   <span className="text-xs font-medium tracking-[.16em] text-[#636363]">0{index + 1}</span>
                   {index === 0 && <span className="rounded-full border border-[#E5E5E5] bg-[#F7F7F7] px-2.5 py-1 text-[11px] font-medium text-[#3E3E3E]">Unggulan</span>}
                 </div>
-                <h3 className={`mt-7 font-serif font-normal leading-[.98] text-black ${index === 0 ? 'text-[clamp(2.2rem,6vw,4.25rem)]' : 'text-[clamp(1.6rem,3.5vw,2.1rem)]'}`}>{project.title}</h3>
-                <p className="mt-3 max-w-xl text-sm leading-6 text-[#636363]">{project.description}</p>
+                <h3 className={`mt-8 font-serif font-normal leading-[.97] text-black ${index === 0 ? 'max-w-3xl text-[clamp(2.3rem,6vw,4.6rem)]' : 'text-[clamp(1.7rem,3.6vw,2.2rem)]'}`}>{project.title}</h3>
+                <p className="mt-4 max-w-xl text-sm leading-6 text-[#636363]">{project.description}</p>
               </div>
-              <div className="mt-8 border-t border-[#E5E5E5] pt-4">
+              <div className="mt-10 border-t border-[#E5E5E5] pt-4">
                 <div className="flex flex-wrap items-center justify-between gap-3">
                   <div className="flex flex-wrap items-center gap-x-3 gap-y-1 text-xs text-[#636363]">
                     <span>{project.type}</span>
                     {project.status && <><span aria-hidden="true">·</span><span>{project.status}</span></>}
                   </div>
-                  <span className="inline-flex min-h-11 items-center gap-2 text-sm font-medium text-black">Lihat Proyek <ArrowUpRight size={15} aria-hidden="true" /></span>
+                  <span className="inline-flex min-h-11 items-center gap-2 text-sm font-semibold text-black">Lihat Proyek <ArrowUpRight size={15} aria-hidden="true" /></span>
                 </div>
               </div>
             </motion.button>
@@ -117,21 +122,34 @@ export default function Projects() {
 
       <AnimatePresence>
         {selected !== null && (
-          <motion.div className="fixed inset-0 z-[80] bg-black/30" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} onMouseDown={(event) => { if (event.currentTarget === event.target) closeProject(); }}>
-            <motion.aside data-project-dialog initial={{ x: '100%' }} animate={{ x: 0 }} exit={{ x: '100%' }} transition={{ duration: .24, ease: 'easeOut' }} className="absolute right-0 top-0 flex h-full w-full max-w-xl flex-col overflow-y-auto border-l border-[#E5E5E5] bg-white p-6 sm:p-10" role="dialog" aria-modal="true" aria-labelledby="project-detail-title" onMouseDown={(event) => event.stopPropagation()}>
-              <button ref={closeRef} type="button" onClick={closeProject} className="mb-12 inline-flex min-h-11 min-w-11 self-end items-center justify-center rounded-full border border-[#E5E5E5] bg-[#F7F7F7] text-black transition active:scale-[.97] hover:bg-white focus:outline-none focus-visible:ring-2 focus-visible:ring-[#007AFF]" aria-label="Tutup detail proyek"><X size={18} /></button>
-              <p className="eyebrow">Proyek / 0{selected + 1}</p>
-              <h3 id="project-detail-title" className="mt-3 font-serif text-4xl font-normal leading-none text-black sm:text-5xl">{projects[selected].title}</h3>
+          <motion.div className="fixed inset-0 z-[80] bg-black/35" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} onMouseDown={(event) => { if (event.currentTarget === event.target) closeProject(); }}>
+            <motion.aside
+              data-project-dialog
+              initial={reduceMotion ? false : { x: '100%' }}
+              animate={{ x: 0 }}
+              exit={reduceMotion ? undefined : { x: '100%' }}
+              transition={{ duration: .24, ease: 'easeOut' }}
+              className="absolute right-0 top-0 flex h-full w-full max-w-xl flex-col overflow-y-auto border-l border-[#E5E5E5] bg-white p-6 sm:p-10"
+              role="dialog"
+              aria-modal="true"
+              aria-labelledby="project-detail-title"
+              onMouseDown={(event) => event.stopPropagation()}
+            >
+              <div className="flex items-center justify-between gap-4">
+                <p className="eyebrow">Proyek / 0{selected + 1}</p>
+                <button ref={closeRef} type="button" onClick={closeProject} className="inline-flex min-h-11 min-w-11 items-center justify-center rounded-full border border-[#E5E5E5] bg-[#F7F7F7] text-black transition active:scale-[.97] hover:bg-white focus:outline-none focus-visible:ring-2 focus-visible:ring-[#007AFF]" aria-label="Tutup detail proyek"><X size={18} /></button>
+              </div>
+              <h3 id="project-detail-title" className="mt-7 font-serif text-4xl font-normal leading-[.98] text-black sm:text-5xl">{projects[selected].title}</h3>
               <p className="mt-3 text-sm uppercase tracking-[.14em] text-[#636363]">{projects[selected].type}</p>
               <p className="mt-10 max-w-lg text-base leading-7 text-[#3E3E3E]">{projects[selected].description}</p>
               {projects[selected].status && (
                 <div className="mt-8 border-t border-[#E5E5E5] pt-5">
                   <p className="text-xs uppercase tracking-[.14em] text-[#636363]">Status</p>
-                  <p className="mt-2 text-sm font-medium text-black">{projects[selected].status}</p>
+                  <p className="mt-2 flex items-center gap-2 text-sm font-medium text-black"><Check size={14} className="text-[#007AFF]" aria-hidden="true" />{projects[selected].status}</p>
                 </div>
               )}
               {projects[selected].url ? (
-                <a href={projects[selected].url} target="_blank" rel="noopener noreferrer" className="portal-link mt-10 w-full bg-black px-5 text-sm font-semibold text-white transition hover:opacity-85 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#007AFF]">Kunjungi Situs <ArrowUpRight size={15} className="ml-2" /></a>
+                <a href={projects[selected].url} target="_blank" rel="noopener noreferrer" className="portal-link mt-10 w-full bg-black px-5 text-sm font-semibold text-white transition hover:opacity-85 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#007AFF]">Kunjungi Situs <ArrowUpRight size={15} className="ml-2" aria-hidden="true" /></a>
               ) : (
                 <span className="portal-link mt-10 w-full border border-[#E5E5E5] bg-[#F7F7F7] px-5 text-sm font-medium text-[#636363]">Situs belum tersedia</span>
               )}
