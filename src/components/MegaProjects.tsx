@@ -46,7 +46,6 @@ export default function Projects() {
     };
   }, [selected]);
 
-  const openProject = (index: number) => setSelected(index);
   const closeProject = () => {
     const index = selected;
     setSelected(null);
@@ -58,13 +57,17 @@ export default function Projects() {
       <div className="mx-auto max-w-6xl">
         <div className="section-heading flex items-end justify-between gap-6">
           <div><p className="eyebrow">03 / Projects</p><h2 className="display-title">Projects.</h2></div>
-          <p className="hidden max-w-xs text-right text-xs leading-5 text-[#666] sm:block">Work, ideas, and directions in development.</p>
+          <p className="hidden max-w-xs text-right text-xs leading-5 text-[#636363] sm:block">Work, ideas, and directions in development.</p>
         </div>
-        <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+        <div className="divide-y divide-[#E5E5E5] border-y border-[#E5E5E5]">
           {projects.map((project, index) => (
-            <motion.button key={project.title} ref={(element) => { triggerRefs.current[index] = element; }} type="button" initial={{ opacity: 0, y: 14 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, margin: '-50px' }} transition={{ duration: .3, delay: index * .04 }} onClick={() => openProject(index)} className="group flex min-h-44 flex-col rounded-[16px] border border-[#1D1D1D] bg-[#101010] p-5 text-left transition duration-200 hover:-translate-y-0.5 hover:border-[#333] hover:bg-[#141414] focus:outline-none focus:ring-2 focus:ring-[#007AFF] sm:min-h-48" aria-label={`Open details for ${project.title}`}>
-              <div className="mb-auto flex items-start justify-between gap-4"><span className="text-[11px] uppercase tracking-[.18em] text-[#666]">0{index + 1}</span><ArrowUpRight size={17} className="text-[#666] transition-colors group-hover:text-[#007AFF]" /></div>
-              <div><h3 className="font-serif text-xl font-semibold text-[#F5F5F5]">{project.title}</h3><p className="mt-2 text-xs text-[#666]">{project.type}</p></div>
+            <motion.button key={project.title} ref={(element) => { triggerRefs.current[index] = element; }} type="button" initial={{ opacity: 0, y: 10 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, margin: '-40px' }} transition={{ duration: .28, delay: index * .03 }} onClick={() => setSelected(index)} className="group flex min-h-28 w-full items-center gap-5 py-6 text-left transition-opacity hover:opacity-70 focus:outline-none" aria-label={`Open details for ${project.title}`}>
+              <span className="w-8 shrink-0 text-[12px] font-medium text-[#636363]">0{index + 1}</span>
+              <div className="min-w-0 flex-1">
+                <h3 className="font-serif text-[28px] font-normal leading-none text-black">{project.title}</h3>
+                <p className="mt-2 text-sm leading-5 text-[#636363]">{project.type}</p>
+              </div>
+              <ArrowUpRight size={18} className="shrink-0 text-[#636363] transition-transform duration-200 group-hover:-translate-y-0.5 group-hover:translate-x-0.5 group-hover:text-[#007AFF]" aria-hidden="true" />
             </motion.button>
           ))}
         </div>
@@ -72,13 +75,13 @@ export default function Projects() {
 
       <AnimatePresence>
         {selected !== null && (
-          <motion.div className="fixed inset-0 z-[80] bg-black/70" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} onMouseDown={(event) => { if (event.currentTarget === event.target) closeProject(); }}>
-            <motion.aside data-project-dialog initial={{ x: '100%' }} animate={{ x: 0 }} exit={{ x: '100%' }} transition={{ duration: .24 }} className="absolute right-0 top-0 flex h-full w-full max-w-xl flex-col overflow-y-auto border-l border-[#1D1D1D] bg-[#0A0A0A] p-6 shadow-2xl sm:p-8" role="dialog" aria-modal="true" aria-labelledby="project-detail-title" onMouseDown={(event) => event.stopPropagation()}>
-              <button ref={closeRef} type="button" onClick={closeProject} className="mb-12 inline-flex min-h-11 min-w-11 self-end items-center justify-center rounded-full border border-[#1D1D1D] text-[#A0A0A0] transition-colors hover:text-white focus:outline-none focus:ring-2 focus:ring-[#007AFF]" aria-label="Close project detail"><X size={18} /></button>
+          <motion.div className="fixed inset-0 z-[80] bg-black/35" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} onMouseDown={(event) => { if (event.currentTarget === event.target) closeProject(); }}>
+            <motion.aside data-project-dialog initial={{ x: '100%' }} animate={{ x: 0 }} exit={{ x: '100%' }} transition={{ duration: .24 }} className="absolute right-0 top-0 flex h-full w-full max-w-xl flex-col overflow-y-auto bg-[#FFFFFF] p-6 sm:p-10" role="dialog" aria-modal="true" aria-labelledby="project-detail-title" onMouseDown={(event) => event.stopPropagation()}>
+              <button ref={closeRef} type="button" onClick={closeProject} className="mb-12 inline-flex min-h-11 min-w-11 self-end items-center justify-center rounded-full border border-[#E5E5E5] bg-white text-black transition-opacity hover:opacity-60" aria-label="Close project detail"><X size={18} /></button>
               <p className="eyebrow">Project / 0{selected + 1}</p>
-              <h3 id="project-detail-title" className="mt-3 font-serif text-3xl font-semibold text-[#F5F5F5]">{projects[selected].title}</h3>
-              <p className="mt-3 text-xs uppercase tracking-[.15em] text-[#666]">{projects[selected].type}</p>
-              <p className="mt-10 max-w-lg text-sm leading-7 text-[#A0A0A0]">{projects[selected].description}</p>
+              <h3 id="project-detail-title" className="mt-3 font-serif text-4xl font-normal leading-none text-black sm:text-5xl">{projects[selected].title}</h3>
+              <p className="mt-3 text-xs uppercase tracking-[.14em] text-[#636363]">{projects[selected].type}</p>
+              <p className="mt-10 max-w-lg text-base leading-7 text-[#3E3E3E]">{projects[selected].description}</p>
             </motion.aside>
           </motion.div>
         )}
