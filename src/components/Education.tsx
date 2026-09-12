@@ -1,4 +1,4 @@
-import { motion } from 'motion/react';
+import { motion, useReducedMotion } from 'motion/react';
 import { Calendar, Award } from 'lucide-react';
 
 const educationData = [
@@ -9,6 +9,8 @@ const educationData = [
 ];
 
 export default function RekamJejak() {
+  const reduceMotion = useReducedMotion();
+
   return (
     <section id="rekam-jejak" className="section-shell" aria-labelledby="experience-title">
       <div className="mx-auto max-w-6xl">
@@ -18,7 +20,14 @@ export default function RekamJejak() {
         </div>
         <div className="timeline">
           {educationData.map((item, index) => (
-            <motion.article key={item.institution} initial={{ opacity: 0, y: 12 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, margin: '-60px' }} transition={{ duration: .32, delay: index * .04 }} className="timeline-item">
+            <motion.article
+              key={item.institution}
+              initial={reduceMotion ? false : { opacity: 0, y: 12 }}
+              whileInView={reduceMotion ? undefined : { opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: '-60px' }}
+              transition={{ duration: .32, delay: index * .04 }}
+              className="timeline-item"
+            >
               <span className="timeline-dot" aria-hidden="true" />
               <div className="timeline-main">
                 <div>
