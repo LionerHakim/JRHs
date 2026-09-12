@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef, useState, type ChangeEvent } from 'react';
 import { ChevronDown, Headphones, Pause, Play, SkipBack, SkipForward, Volume2, VolumeX, X } from 'lucide-react';
 
 const base = import.meta.env.BASE_URL;
@@ -69,7 +69,7 @@ export default function MusicPlayer() {
     triggerRef.current?.focus();
   };
 
-  const seek = (event: React.ChangeEvent<HTMLInputElement>) => {
+  const seek = (event: ChangeEvent<HTMLInputElement>) => {
     const audio = audioRef.current;
     if (!audio || !duration) return;
     const next = Number(event.target.value);
