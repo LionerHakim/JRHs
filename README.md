@@ -1,49 +1,22 @@
-# JRHSEE Website
+# JRHs
 
-Website personal portfolio milik **JRHSEE** yang berisi informasi tentang profil, skill, hobi, musik, dan kontak pribadi.
+Personal digital space and editorial portfolio for JRHs.
 
-🌐 Live Website  
-https://jrhsee.my.id
+🌐 Live: https://jrhsee.my.id
 
----
+## Structure
 
-## 📌 About
+- Hero
+- About
+- Rekam Jejak
+- Projects
+- Contact
+- Footer
 
-Website ini dibuat sebagai **personal bio / portfolio website** untuk menampilkan informasi pribadi seperti:
+## Experience principles
 
-- Profil pribadi
-- Foto
-- Musik favorit
-- Hobi
-- Skill
-- Kontak (WhatsApp / social media)
+JRHs is intentionally designed as a quiet, premium, dark editorial experience rather than a generic portfolio, CV template, or SaaS landing page. Existing real content, media, contacts, audio, and URLs are preserved; no invented facts or placeholder destinations are used.
 
-Website ini juga dapat digunakan sebagai **link bio** atau halaman personal di internet.
+## Tech
 
----
-
-## 🚀 Features
-
-- 👤 Personal profile
-- 🖼️ Profile photo
-- 🎵 Music player
-- 🎮 Hobbies section
-- 💻 Skills section
-- 📱 Contact button (WhatsApp)
-- 🌐 Responsive design (mobile friendly)
-
----
-
-## 🛠️ Tech Stack
-
-Website ini dibuat menggunakan teknologi:
-
-- HTML
-- CSS
-- JavaScript
-- React / Vite
-- Tailwind CSS (jika digunakan)
-
----
-
-## 📂 Project Structure
+React · Vite · TypeScript · Tailwind CSS · Motion
