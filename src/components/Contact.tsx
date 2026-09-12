@@ -13,13 +13,13 @@ export default function Contact() {
         <div className="grid gap-8 md:grid-cols-[.85fr_1.15fr] md:items-end md:gap-20">
           <div>
             <p className="eyebrow">04 / Contact</p>
-            <h2 id="contact-title" className="mt-3 max-w-3xl font-serif text-[clamp(2.6rem,7vw,5.5rem)] font-normal leading-[.92] text-black">Mari terhubung.</h2>
+            <h2 id="contact-title" className="mt-3 max-w-3xl font-[var(--font-perfectly-nineties-regular)] text-[clamp(2.6rem,7vw,5.5rem)] font-normal leading-[.92] text-[var(--color-ink-black)]">Mari terhubung.</h2>
           </div>
           <div className="max-w-xl">
-            <p className="text-base leading-7 text-[#3E3E3E]">Saya terbuka untuk percakapan yang bermakna, diskusi ide, maupun peluang kolaborasi.</p>
+            <p className="font-[var(--font-inter)] text-base leading-7 text-[var(--color-graphite)]">Saya terbuka untuk percakapan yang bermakna, diskusi ide, maupun peluang kolaborasi.</p>
             <div className="mt-8 flex flex-wrap gap-3">
               {contactLinks.map(({ label, href, icon: Icon, external }) => (
-                <a key={href} href={href} {...(external ? { target: '_blank', rel: 'noopener noreferrer' } : {})} className={`portal-link min-h-11 px-5 text-sm font-semibold transition active:scale-[.97] focus:outline-none focus-visible:ring-2 focus-visible:ring-[#007AFF] ${label === 'Instagram' ? 'bg-black text-white hover:opacity-85' : 'border border-[#DCDCDC] bg-white text-black hover:border-[#BEBEBE]'}`}>
+                <a key={href} href={href} {...(external ? { target: '_blank', rel: 'noopener noreferrer' } : {})} className={`portal-link min-h-11 px-5 font-[var(--font-inter)] text-sm font-semibold transition active:scale-[.97] focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-signal-blue)] ${label === 'Instagram' ? 'bg-[var(--color-ink-black)] text-[var(--color-paper-white)] hover:opacity-85' : 'border border-[#DCDCDC] bg-[var(--color-paper-white)] text-[var(--color-ink-black)] hover:border-[#BEBEBE]'}`}>
                   <Icon size={16} aria-hidden="true" />{label}<ArrowUpRight size={14} aria-hidden="true" />
                 </a>
               ))}
