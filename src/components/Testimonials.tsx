@@ -1,4 +1,4 @@
-import { Quote, Star } from 'lucide-react';
+import { ArrowLeftRight, Quote, Star } from 'lucide-react';
 import { useEffect, useRef, useState } from 'react';
 
 const testimonials = [
@@ -11,6 +11,8 @@ const testimonials = [
 export default function Testimonials() {
   const viewportRef = useRef<HTMLDivElement>(null);
   const interactingRef = useRef(false);
+  const pointerRef = useRef({ active: false, x: 0, scroll: 0 });
+  const resumeTimerRef = useRef<number | null>(null);
   const [interacting, setInteracting] = useState(false);
   const loop = [...testimonials, ...testimonials];
 
@@ -19,11 +21,12 @@ export default function Testimonials() {
     if (!viewport) return;
     let frame = 0;
     let last = performance.now();
+    const reduced = window.matchMedia('(prefers-reduced-motion: reduce)');
 
     const tick = (now: number) => {
       const delta = now - last;
       last = now;
-      if (!interactingRef.current && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      if (!interactingRef.current && !reduced.matches) {
         viewport.scrollLeft += delta * 0.018;
         const halfway = viewport.scrollWidth / 2;
         if (halfway > 0 && viewport.scrollLeft >= halfway) viewport.scrollLeft -= halfway;
@@ -32,12 +35,62 @@ export default function Testimonials() {
     };
 
     frame = requestAnimationFrame(tick);
-    return () => cancelAnimationFrame(frame);
+    return () => {
+      cancelAnimationFrame(frame);
+      if (resumeTimerRef.current) window.clearTimeout(resumeTimerRef.current);
+    };
   }, []);
 
   const setInteraction = (value: boolean) => {
     interactingRef.current = value;
     setInteracting(value);
+  };
+
+  const centerNearest = () => {
+    const viewport = viewportRef.current;
+    if (!viewport) return;
+    const cards = Array.from(viewport.querySelectorAll<HTMLElement>('.testimonial-card'));
+    const center = viewport.scrollLeft + viewport.clientWidth / 2;
+    const nearest = cards.reduce<HTMLElement | null>((best, card) => {
+      if (!best) return card;
+      const cardCenter = card.offsetLeft + card.offsetWidth / 2;
+      const bestCenter = best.offsetLeft + best.offsetWidth / 2;
+      return Math.abs(cardCenter - center) < Math.abs(bestCenter - center) ? card : best;
+    }, null);
+    if (nearest) viewport.scrollTo({ left: nearest.offsetLeft - (viewport.clientWidth - nearest.offsetWidth) / 2, behavior: 'smooth' });
+  };
+
+  const pauseThenResume = () => {
+    if (resumeTimerRef.current) window.clearTimeout(resumeTimerRef.current);
+    resumeTimerRef.current = window.setTimeout(() => setInteraction(false), 1600);
+  };
+
+  const handlePointerDown = (event: React.PointerEvent<HTMLDivElement>) => {
+    const viewport = viewportRef.current;
+    if (!viewport) return;
+    pointerRef.current = { active: true, x: event.clientX, scroll: viewport.scrollLeft };
+    viewport.setPointerCapture(event.pointerId);
+    setInteraction(true);
+  };
+
+  const handlePointerMove = (event: React.PointerEvent<HTMLDivElement>) => {
+    const viewport = viewportRef.current;
+    if (!viewport || !pointerRef.current.active) return;
+    viewport.scrollLeft = pointerRef.current.scroll - (event.clientX - pointerRef.current.x);
+  };
+
+  const handlePointerUp = (event: React.PointerEvent<HTMLDivElement>) => {
+    const viewport = viewportRef.current;
+    pointerRef.current.active = false;
+    if (viewport?.hasPointerCapture(event.pointerId)) viewport.releasePointerCapture(event.pointerId);
+    centerNearest();
+    pauseThenResume();
+    setInteraction(false);
+  };
+
+  const handleWheel = () => {
+    setInteraction(true);
+    pauseThenResume();
   };
 
   return (
@@ -60,12 +113,11 @@ export default function Testimonials() {
         ref={viewportRef}
         className={`testimonial-viewport ${interacting ? 'is-interacting' : ''}`}
         aria-label="Testimonial carousel"
-        onPointerDown={() => setInteraction(true)}
-        onPointerUp={() => setInteraction(false)}
-        onPointerCancel={() => setInteraction(false)}
-        onPointerLeave={() => setInteraction(false)}
-        onWheel={() => setInteraction(true)}
-        onTouchEnd={() => setInteraction(false)}
+        onPointerDown={handlePointerDown}
+        onPointerMove={handlePointerMove}
+        onPointerUp={handlePointerUp}
+        onPointerCancel={handlePointerUp}
+        onWheel={handleWheel}
         tabIndex={0}
       >
         <div className="testimonial-track">
@@ -77,6 +129,12 @@ export default function Testimonials() {
             </article>
           ))}
         </div>
+      </div>
+      <div className="testimonial-swipe-hint" aria-hidden="true">
+        <span className="testimonial-swipe-line"><ArrowLeftRight size={12} strokeWidth={1.8} /></span>
+        <span>Geser untuk menjelajah</span>
+        <span className="testimonial-swipe-dot" />
+        <span>Auto</span>
       </div>
     </section>
   );
