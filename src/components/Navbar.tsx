@@ -98,9 +98,9 @@ export default function Navbar() {
           <a
             href="#hero"
             className="group flex min-h-11 items-center gap-2 rounded-full px-2 text-base font-semibold text-[var(--color-ink)] transition-colors hover:text-[var(--color-accent)]"
-            aria-label="JRHs beranda"
+            aria-label="JRH beranda"
           >
-            JRHs <span className="h-1.5 w-1.5 rounded-full bg-[var(--color-accent)]" aria-hidden="true" />
+            JRH <span className="h-1.5 w-1.5 rounded-full bg-[var(--color-accent)]" aria-hidden="true" />
           </a>
 
           <div className="hidden items-center gap-0.5 lg:flex">
@@ -142,7 +142,7 @@ export default function Navbar() {
             aria-label="Navigasi seluler"
           >
             <div className="flex items-center justify-between border-b border-[var(--color-line)] px-2 pb-3">
-              <a href="#hero" onClick={closeMenu} className="flex min-h-11 items-center text-base font-semibold text-[var(--color-ink)]">JRHs</a>
+              <a href="#hero" onClick={closeMenu} className="flex min-h-11 items-center text-base font-semibold text-[var(--color-ink)]">JRH</a>
               <button
                 ref={closeRef}
                 type="button"
