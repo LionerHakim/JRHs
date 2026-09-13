@@ -25,8 +25,7 @@ export default function Projects() {
     const onKey = (event: KeyboardEvent) => {
       if (event.key === 'Escape') {
         event.preventDefault();
-        setSelected(null);
-        opener?.focus();
+        closeProject();
         return;
       }
 
@@ -70,7 +69,7 @@ export default function Projects() {
     <section id="projects" className="section-shell" aria-labelledby="projects-title">
       <div className="section-grid">
         <div>
-          <p className="eyebrow">04 / Projects</p>
+          <p className="eyebrow">03 / Projects</p>
           <h2 id="projects-title" className="display-title">Projects.</h2>
         </div>
         <div className="grid gap-3">
