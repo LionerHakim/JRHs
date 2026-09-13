@@ -6,12 +6,12 @@ export default function Hero() {
       <div className="relative z-10 mx-auto grid w-full max-w-6xl items-center gap-8 py-10 md:grid-cols-[1fr_.72fr] md:gap-12 lg:py-16">
         <div>
           <p className="eyebrow">JRHs · Personal space</p>
-          <h1 id="hero-title" className="mt-3 max-w-4xl font-[var(--font-inter)] text-[clamp(2.8rem,12vw,5.5rem)] font-bold leading-[.98] tracking-[-.045em] text-[var(--color-ink)]">JRHs</h1>
+          <h1 id="hero-title" className="mt-3 max-w-4xl font-[var(--font-perfectly-nineties-regular)] text-[clamp(3.2rem,12vw,6rem)] font-normal leading-[.92] tracking-[-.035em] text-[var(--color-ink)]">JRHs</h1>
           <p className="mt-5 max-w-2xl text-[clamp(1rem,2vw,1.25rem)] leading-7 text-[var(--color-text)]">Economics, markets, technology, and the way people think.</p>
           <p className="mt-4 max-w-xl border-l-2 border-[var(--color-accent)] pl-4 text-sm leading-6 text-[var(--color-muted)]">Understanding how someone thinks and operates is far more important than simply knowing what they did.</p>
           <div className="mt-7 flex flex-wrap gap-2">
-            <a href="#rekam-jejak" className="portal-pill border border-[var(--color-success)] bg-[rgba(46,160,67,.15)] px-4 font-semibold text-[var(--color-success)] transition hover:bg-[rgba(46,160,67,.25)] active:scale-[.98] focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-accent)]">Explore Journey</a>
-            <a href="#projects" className="portal-pill border border-[var(--color-line)] bg-[var(--color-control)] px-4 font-medium text-[var(--color-text)] transition hover:border-[#8b949e] hover:text-[var(--color-ink)] active:scale-[.98] focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-accent)]">View Projects</a>
+            <a href="#rekam-jejak" className="portal-pill border border-[var(--color-accent)] bg-[var(--color-accent-soft)] px-4 font-semibold text-[var(--color-accent)] transition hover:bg-[rgba(0,122,255,.2)] active:scale-[.98] focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-accent)]">Explore Journey</a>
+            <a href="#projects" className="portal-pill border border-[var(--color-line)] bg-[var(--color-control)] px-4 font-medium text-[var(--color-text)] transition hover:border-[#404040] hover:text-[var(--color-ink)] active:scale-[.98] focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-accent)]">View Projects</a>
           </div>
         </div>
         <div className="justify-self-center md:justify-self-end">
