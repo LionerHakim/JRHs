@@ -2,67 +2,67 @@
 
 Ruang digital personal dan portofolio editorial JRHs.
 
-## Portofolio JRHs — Portal / Twilight Serif Editorial
+## Struktur
 
-JRHs dirancang sebagai pengalaman portofolio personal yang berfokus pada proyek, konteks, dan perjalanan. Antarmukanya ringan, taktil, responsif, dan sengaja dibuat terasa seperti produk digital personal, bukan templat portofolio generik.
+Halaman publik sengaja ringkas dan berisi tepat enam bagian utama:
 
-### Struktur
+1. **Hero** — identitas JRHs, pernyataan utama, dan akses cepat ke perjalanan serta proyek
+2. **About** — konteks personal, fokus, dan titik awal perjalanan trading/investing
+3. **Rekam Jejak** — kronologi pendidikan, organisasi, dan aktivitas yang benar-benar tercatat
+4. **Projects** — bukti kerja yang nyata, dengan detail dibuka tanpa meninggalkan alur halaman
+5. **Contact** — kanal komunikasi yang benar-benar tersedia
+6. **Footer** — identitas dan navigasi sekunder
 
-1. **Hero** — identitas, pernyataan utama, dan ajakan menuju proyek atau profil
-2. **About** — konteks personal dan pendekatan yang sudah tersedia di repositori
-3. **Projects / Megaprojects** — pusat utama portofolio dengan hierarki proyek unggulan dan proyek lainnya
-4. **Experience** — perjalanan pendidikan dan aktivitas yang tersedia
-5. **Contact** — kanal kontak dan media sosial yang tersedia
-6. **Footer** — identitas dan hak cipta
+Bagian legacy seperti Vision, Hobbies, Skills, Reflection, Knowledge, Motivation, Web Tools, dan Testimonials tidak menjadi bagian dari pengalaman akhir.
 
-Bagian lama berikut tidak digunakan dalam pengalaman akhir: Hobbies, Skills, Reflection, Vision, Knowledge, dan Motivation.
+## Bahasa visual
 
-### Bahasa visual
+Arah visual V99: **dark editorial** — quiet, premium, precise, intelligent, human, tactile, minimal, confident, dan timeless.
 
-Arah visual: **Portal / Twilight Serif Editorial** dengan perpaduan majalah independen premium, estetika antarmuka iOS, dan portofolio produk modern.
-
-- Kanvas: `#F7F7F7`
-- Permukaan: `#FFFFFF`
-- Teks utama: `#000000`
-- Graphite: `#3E3E3E`
-- Smoke: `#636363`
+- Kanvas: `#050505`
+- Surface/Card: `#0A0A0A` / `#101010`
+- Border: `#1D1D1D`
+- Teks utama: `#F5F5F5`
+- Teks sekunder: `#A0A0A0`
+- Teks muted: `#666666`
 - Aksen fungsional: `#007AFF`
-- Serif untuk judul dan momen editorial
-- Inter untuk isi, navigasi, dan metadata
-- Tidak ada aksen warna kedua atau efek dekoratif berlebihan
+- Serif untuk heading/editorial emphasis
+- Inter/system sans untuk body, navigasi, dan metadata
+- Tanpa sunset/twilight gradient, neon glow, glassmorphism, decorative noise, atau filler visual
 
-### Proyek
+## Interaksi utama
 
-Proyek merupakan pusat perhatian utama. Proyek unggulan diberi bobot visual lebih kuat, sedangkan proyek lain tetap ringkas dan konsisten. Informasi tambahan tersedia melalui pembukaan detail tanpa memindahkan pengguna dari alur halaman.
+### Navigasi
 
-Tautan eksternal hanya ditampilkan ketika URL nyata tersedia di data proyek. Informasi yang belum tersedia tidak dibuat-buat.
+Desktop menampilkan JRHs, About, Rekam Jejak, Projects, Contact, Music, dan Menu. Mobile mempertahankan JRHs, Music, dan Menu. Menu seluler hanya memuat empat anchor konten utama dan mendukung Escape, focus containment, pemulihan fokus, serta safe-area spacing.
 
-### Pemutar musik VVIP+
+### Music
 
-Pemutar musik mempertahankan daftar lagu yang sudah tersedia, tanpa putar otomatis. Mode ringkas tersedia di navigasi, sedangkan panel VVIP+ menyediakan lagu aktif, kemajuan pemutaran, pencarian posisi lagu, volume, bisu, lagu sebelumnya/berikutnya, serta daftar putar. Kesalahan audio ditangani tanpa merusak halaman utama.
+Playlist yang sudah tersedia dipertahankan tanpa autoplay. Player mendukung idle, playing, paused, loading, dan error; seek, volume, mute, previous/next, playlist, keyboard focus, dan graceful failure.
 
-### Aksesibilitas dan performa
+### Projects
 
-- Navigasi ramah papan ketik dan fokus terlihat
-- Target sentuh minimal 44px
-- Dialog dan menu mendukung ESC serta pemulihan fokus
-- Mendukung `prefers-reduced-motion`
-- Tidak menggunakan pengguliran paksa
-- Tidak ada bilah gulir visual yang mengganggu
-- Media nonkritis dimuat secara hemat
-- Implementasi tetap ringan dan kompatibel dengan Vite/React/TypeScript
+Setiap proyek menampilkan nama, deskripsi singkat, metadata, dan **Info Detail**. Detail menggunakan drawer di desktop dan sheet di mobile, dengan Escape, klik luar, focus containment, focus restoration, preserved background scroll, semantic dialog, serta external links memakai `rel="noopener noreferrer"`.
 
-### Integritas konten
+## Aksesibilitas
 
-Repositori menjadi sumber kebenaran. Proyek, pendidikan, kontak, media, audio, dan tautan yang tersedia dipertahankan. Tidak ada statistik, klien, jabatan, teknologi, hasil, atau URL yang dibuat hanya demi kelengkapan visual.
+Implementasi mempertahankan semantic HTML, satu H1, hierarchy heading yang jelas, focus state yang terlihat, target sentuh minimal 44px, keyboard activation, dialog semantics, Escape handling, dan dukungan `prefers-reduced-motion`.
 
-### Pengembangan dan penerapan
+## Performa & ketahanan
 
-Alur kerja utama:
+Media yang ada dipertahankan, JavaScript dijaga ringan, event listener dibersihkan, native scrolling digunakan, scrollbar visual disembunyikan tanpa mematikan scroll, dan kegagalan optional capability seperti audio tidak boleh merusak halaman utama.
 
-`Audit → Implementasi → Build → Pengujian → Inspeksi → Perbaikan → Pengujian ulang → QA akhir`
+## Integritas konten
 
-Portofolio tetap menggunakan arsitektur Vite/React/TypeScript dan penerapan GitHub Pages yang sudah ada.
+Repositori adalah sumber kebenaran. Tidak ada testimonial, statistik, klien, jabatan, teknologi, progres, atau URL yang dibuat hanya untuk mengisi layout. Proyek hanya menggunakan URL nyata yang sudah tersedia.
+
+## Pengembangan
+
+Stack: Vite, React, TypeScript, Tailwind CSS, dan Lucide React.
+
+Alur kerja yang ditargetkan:
+
+`Audit → Implementasi → Build → Pengujian → Inspeksi → Perbaikan → QA akhir`
 
 ## Prinsip
 
