@@ -1,8 +1,6 @@
-/* JRH editorial refinement: restraint, hierarchy, and native-feeling interaction. */
+/* JRH editorial refinements: small overrides kept separate from the base system. */
 
 .page-shell{background:var(--color-canvas);color:var(--color-ink)}
-.hero-clean-inner{max-width:1080px}
-.hero-kicker,.hero-scroll-hint,.project-live-label,.jrh-nav-link,.project-visit,.hero-button,.music-player-pill,.music-player-panel,.contact-wrap,.back-to-top{will-change:transform}
 .project-visit:focus-visible,.hero-button:focus-visible,.jrh-nav-link:focus-visible,.hero-scroll-hint:focus-visible{outline-offset:4px}
 
 @media (min-width:900px){
@@ -14,13 +12,5 @@
 @media (max-width:719px){
   .hero-clean{padding-top:106px}
   .hero-kicker{margin-bottom:14px}
-  .section-shell::before{left:0;right:0}
   .about-reading,.contact-copy{font-size:16px}
-  .music-player-panel{padding-bottom:max(15px,env(safe-area-inset-bottom))}
 }
-
-@media (prefers-reduced-motion:reduce){
-  .hero-kicker,.hero-scroll-hint,.project-live-label,.jrh-nav-link,.project-visit,.hero-button,.music-player-pill,.music-player-panel,.contact-wrap,.back-to-top{will-change:auto}
-}
-
-@keyframes music-sheet-in{from{transform:translateY(18px);opacity:.7}to{transform:translateY(0);opacity:1}}
