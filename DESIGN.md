@@ -61,7 +61,7 @@ Desktop: right-side drawer. Mobile: full-screen sheet. Support smooth open/close
 Editorial journey, not a resume template. Preserve existing education, roles, organizations, periods, and activities. Desktop structured chronology; mobile single-column chronology. Never invent experience, metrics, or progression.
 
 ## Contact
-Minimal closing CTA using only existing contact destinations. Keep Instagram, WhatsApp, and Email accurate. No unsupported booking flows or invented accounts.
+Minimal closing CTA using only the contact destinations currently verified in the repository. The current implementation exposes Instagram only; do not add WhatsApp, Email, booking flows, or other accounts until their real destinations are present and verified.
 
 ## Brand
 Minimal JRHs wordmark/monogram. Single-color system. Must work at favicon, navbar, footer, mobile, desktop, and small sizes. Avoid complex or multi-color marks.
