@@ -1,12 +1,12 @@
-# JRHs
+# JRH
 
-Ruang digital personal dan portofolio editorial JRHs.
+Ruang digital personal dan portofolio editorial JRH.
 
 ## Struktur
 
 Halaman publik sengaja ringkas dan berisi tepat enam bagian utama:
 
-1. **Hero** — identitas JRHs, pernyataan utama, dan akses cepat ke perjalanan serta proyek
+1. **Hero** — identitas JRH, pernyataan utama, dan akses cepat ke perjalanan serta proyek
 2. **About** — konteks personal, fokus, dan titik awal perjalanan trading/investing
 3. **Rekam Jejak** — kronologi pendidikan, organisasi, dan aktivitas yang benar-benar tercatat
 4. **Projects** — bukti kerja yang nyata, dengan detail dibuka tanpa meninggalkan alur halaman
@@ -17,7 +17,7 @@ Bagian legacy seperti Vision, Hobbies, Skills, Reflection, Knowledge, Motivation
 
 ## Bahasa visual
 
-Arah visual V99: **dark editorial** — quiet, premium, precise, intelligent, human, tactile, minimal, confident, dan timeless.
+Arah visual: **dark editorial** — quiet, premium, precise, intelligent, human, tactile, minimal, confident, dan timeless.
 
 - Kanvas: `#050505`
 - Surface/Card: `#0A0A0A` / `#101010`
@@ -34,7 +34,7 @@ Arah visual V99: **dark editorial** — quiet, premium, precise, intelligent, hu
 
 ### Navigasi
 
-Desktop menampilkan JRHs, About, Rekam Jejak, Projects, Contact, Music, dan Menu. Mobile mempertahankan JRHs, Music, dan Menu. Menu seluler hanya memuat empat anchor konten utama dan mendukung Escape, focus containment, pemulihan fokus, serta safe-area spacing.
+Desktop menampilkan JRH, About, Rekam Jejak, Projects, Contact, Music, dan Menu. Mobile mempertahankan JRH, Music, dan Menu. Menu seluler hanya memuat empat anchor konten utama dan mendukung Escape, focus containment, pemulihan fokus, serta safe-area spacing.
 
 ### Music
 
@@ -66,8 +66,10 @@ Alur kerja yang ditargetkan:
 
 ## Prinsip
 
-> **BUAT JRHs TERASA DIRANCANG, BUKAN DIRAKIT.**
+> **BUAT JRH TERASA DIRANCANG, BUKAN DIRAKIT.**
 >
 > **JADIKAN PROYEK ALASAN ORANG BERTAHAN.**
+>
+> **JANGAN MEMBUAT JRH TERLIHAT LEBIH BESAR DARIPADA KENYATAANNYA.**
 
-© 2026 JRHs. Hak cipta dilindungi.
+© 2026 JRH. Hak cipta dilindungi.
