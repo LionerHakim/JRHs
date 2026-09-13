@@ -11,7 +11,7 @@ export default function Hero() {
           <p className="mt-4 max-w-xl border-l-2 border-[var(--color-accent)] pl-4 text-sm leading-6 text-[var(--color-muted)]">Understanding how someone thinks and operates is far more important than simply knowing what they did.</p>
           <div className="mt-8 flex flex-wrap gap-3">
             <a href="#rekam-jejak" className="portal-pill bg-[var(--color-ink)] px-5 font-semibold text-[var(--color-canvas)] shadow-[var(--shadow-soft)] transition active:scale-[.97] hover:-translate-y-0.5 focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-accent)]">Explore Journey</a>
-            <a href="#web-tools" className="portal-pill border border-[var(--color-line)] bg-[var(--color-paper)] px-5 font-medium text-[var(--color-ink)] shadow-[var(--shadow-soft)] transition active:scale-[.97] hover:-translate-y-0.5 focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-accent)]">Lihat Web Tools</a>
+            <a href="#projects" className="portal-pill border border-[var(--color-line)] bg-[var(--color-paper)] px-5 font-medium text-[var(--color-ink)] shadow-[var(--shadow-soft)] transition active:scale-[.97] hover:-translate-y-0.5 focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-accent)]">View Projects</a>
           </div>
         </div>
         <div className="justify-self-center md:justify-self-end">
