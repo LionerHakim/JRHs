@@ -4,7 +4,6 @@ import Profile from './components/Profile';
 import Projects from './components/Projects';
 import RekamJejak from './components/RekamJejak';
 import Contact from './components/Contact';
-import BackToTop from './components/BackToTop';
 import ScrollProgress from './components/ScrollProgress';
 
 const footerLinks = [
@@ -44,7 +43,6 @@ export default function App() {
           </div>
         </div>
       </footer>
-      <BackToTop />
     </div>
   );
 }
