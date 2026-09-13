@@ -11,8 +11,7 @@ const playlist = [
 ];
 
 type PlayerState = 'idle' | 'playing' | 'paused' | 'loading' | 'error';
-
-type FocusableElement = HTMLElement & { focus: () => void; hasAttribute: (name: string) => boolean };
+type FocusableElement = HTMLElement;
 
 export default function MusicPlayer() {
   const audioRef = useRef<HTMLAudioElement>(null);
@@ -20,6 +19,7 @@ export default function MusicPlayer() {
   const panelRef = useRef<HTMLDivElement>(null);
   const [index, setIndex] = useState(0);
   const [state, setState] = useState<PlayerState>('idle');
+  const [shouldPlay, setShouldPlay] = useState(false);
   const [muted, setMuted] = useState(false);
   const [volume, setVolume] = useState(0.65);
   const [progress, setProgress] = useState(0);
@@ -30,13 +30,16 @@ export default function MusicPlayer() {
     const audio = audioRef.current;
     if (!audio) return;
     audio.volume = muted ? 0 : volume;
-    if (state === 'playing') {
-      setState('loading');
-      audio.play().then(() => setState('playing')).catch(() => setState('error'));
-    } else {
+    if (!shouldPlay) {
       audio.pause();
+      return;
     }
-  }, [index]);
+
+    setState('loading');
+    audio.pause();
+    audio.load();
+    audio.play().then(() => setState('playing')).catch(() => setState('error'));
+  }, [index, shouldPlay]);
 
   useEffect(() => {
     const audio = audioRef.current;
@@ -53,16 +56,15 @@ export default function MusicPlayer() {
         return;
       }
       if (event.key !== 'Tab' || !panelRef.current) return;
-      const focusable = Array.from(panelRef.current.querySelectorAll('button, input, a[href], [tabindex]:not([tabindex="-1"])')) as FocusableElement[];
-      const enabled = focusable.filter((el) => !el.hasAttribute('disabled'));
-      if (!enabled.length) return;
-      const first = enabled[0];
-      const last = enabled[enabled.length - 1];
+      const focusable = Array.from(panelRef.current.querySelectorAll<FocusableElement>('button:not([disabled]), input:not([disabled]), a[href], [tabindex]:not([tabindex="-1"])'));
+      if (!focusable.length) return;
+      const first = focusable[0];
+      const last = focusable[focusable.length - 1];
       if (event.shiftKey && document.activeElement === first) { event.preventDefault(); last.focus(); }
       else if (!event.shiftKey && document.activeElement === last) { event.preventDefault(); first.focus(); }
     };
     document.addEventListener('keydown', onKey);
-    const focusTimer = window.setTimeout(() => panelRef.current?.querySelector('button')?.focus(), 0);
+    const focusTimer = window.setTimeout(() => panelRef.current?.querySelector<HTMLElement>('button')?.focus(), 0);
     return () => { document.removeEventListener('keydown', onKey); window.clearTimeout(focusTimer); };
   }, [open]);
 
@@ -82,32 +84,30 @@ export default function MusicPlayer() {
   const togglePlayback = () => {
     const audio = audioRef.current;
     if (!audio || state === 'loading') return;
-    if (state === 'playing') { audio.pause(); setState('paused'); return; }
+    if (state === 'playing') {
+      audio.pause();
+      setShouldPlay(false);
+      setState('paused');
+      return;
+    }
+    setShouldPlay(true);
     setState('loading');
-    audio.play().then(() => setState('playing')).catch(() => setState('error'));
   };
 
   const changeTrack = (step: number) => {
-    setIndex((current) => (current + step + playlist.length) % playlist.length);
     setProgress(0);
     setDuration(0);
-    setState('playing');
+    setShouldPlay(true);
+    setIndex((current) => (current + step + playlist.length) % playlist.length);
   };
 
   const selectTrack = (songIndex: number) => {
-    const audio = audioRef.current;
     setProgress(0);
     setDuration(0);
     setOpen(false);
     triggerRef.current?.focus();
-    if (songIndex === index && audio) {
-      setState('loading');
-      audio.currentTime = 0;
-      audio.play().then(() => setState('playing')).catch(() => setState('error'));
-      return;
-    }
     setIndex(songIndex);
-    setState('playing');
+    setShouldPlay(true);
   };
 
   const seek = (event: ChangeEvent<HTMLInputElement>) => {
@@ -130,34 +130,34 @@ export default function MusicPlayer() {
       <audio ref={audioRef} preload="metadata" src={playlist[index].src}
         onLoadedMetadata={(event) => setDuration(event.currentTarget.duration || 0)}
         onPlay={() => setState('playing')}
-        onPause={() => setState((current) => current === 'error' ? current : 'paused')}
+        onPause={() => setState((current) => current === 'error' || !shouldPlay ? current : 'paused')}
         onEnded={() => changeTrack(1)}
         onError={() => setState('error')}
         onTimeUpdate={(event) => { const audio = event.currentTarget; setProgress(audio.duration ? (audio.currentTime / audio.duration) * 100 : 0); }} />
 
-      <div className="flex items-center gap-1 rounded-full border border-[var(--color-line)] bg-[var(--color-control)] px-1.5 py-1.5 shadow-[var(--shadow-soft)]">
-        <button ref={triggerRef} type="button" onClick={togglePlayback} className="inline-flex min-h-11 min-w-11 items-center justify-center rounded-full text-[var(--color-ink)] transition active:scale-[.97] hover:bg-[var(--color-ash-mist)] focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-accent)]" aria-label={state === 'playing' ? 'Jeda musik' : state === 'loading' ? 'Memuat musik' : state === 'error' ? 'Coba putar musik lagi' : 'Putar musik'} disabled={state === 'loading'}>
-          {state === 'playing' ? <Pause size={15} aria-hidden="true" /> : <Play size={15} aria-hidden="true" />}
+      <div className="music-player-pill">
+        <button ref={triggerRef} type="button" onClick={togglePlayback} className="music-player-button" aria-label={state === 'playing' ? 'Jeda musik' : state === 'loading' ? 'Memuat musik' : state === 'error' ? 'Coba putar musik lagi' : 'Putar musik'} disabled={state === 'loading'}>
+          {state === 'playing' ? <Pause size={14} aria-hidden="true" /> : <Play size={14} aria-hidden="true" />}
         </button>
-        <button type="button" onClick={() => setOpen((value) => !value)} className="inline-flex min-h-11 max-w-[8rem] items-center gap-2 rounded-full px-1 text-left sm:max-w-36" aria-label="Buka pemutar musik" aria-expanded={open} aria-controls="music-player-panel">
+        <button type="button" onClick={() => setOpen((value) => !value)} className="music-player-track-button" aria-label="Buka pemutar musik" aria-expanded={open} aria-controls="music-player-panel">
           <Headphones size={13} className="shrink-0 text-[var(--color-accent)]" aria-hidden="true" />
-          <span className="hidden truncate text-xs font-medium text-[var(--color-text)] sm:inline">{state === 'error' ? 'Audio tidak tersedia' : playlist[index].title}</span>
-          <span className="sr-only sm:hidden">{state === 'error' ? 'Audio tidak tersedia' : playlist[index].title}</span>
-          <ChevronDown size={13} className={`shrink-0 text-[var(--color-muted)] transition-transform ${open ? 'rotate-180' : ''}`} aria-hidden="true" />
+          <span className="music-player-title">{state === 'error' ? 'Audio bermasalah' : playlist[index].title}</span>
+          <ChevronDown size={12} className={`shrink-0 text-[var(--color-muted)] transition-transform ${open ? 'rotate-180' : ''}`} aria-hidden="true" />
         </button>
-        <button type="button" onClick={() => changeTrack(-1)} className="hidden min-h-11 min-w-10 items-center justify-center rounded-full text-[var(--color-muted)] transition active:scale-[.97] hover:text-[var(--color-ink)] md:flex" aria-label="Lagu sebelumnya"><SkipBack size={14} aria-hidden="true" /></button>
-        <button type="button" onClick={() => changeTrack(1)} className="inline-flex min-h-11 min-w-10 items-center justify-center rounded-full text-[var(--color-muted)] transition active:scale-[.97] hover:text-[var(--color-ink)] focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-accent)]" aria-label="Lagu berikutnya"><SkipForward size={14} aria-hidden="true" /></button>
-        <button type="button" onClick={() => setMuted((value) => !value)} className="hidden min-h-11 min-w-10 items-center justify-center rounded-full text-[var(--color-muted)] transition active:scale-[.97] hover:text-[var(--color-ink)] lg:flex" aria-label={muted ? 'Nyalakan suara' : 'Bisukan musik'}>{muted ? <VolumeX size={14} aria-hidden="true" /> : <Volume2 size={14} aria-hidden="true" />}</button>
+        <button type="button" onClick={() => changeTrack(1)} className="music-player-next" aria-label="Lagu berikutnya"><SkipForward size={13} aria-hidden="true" /></button>
       </div>
 
-      <div className="pointer-events-none absolute bottom-0 left-14 right-14 h-px overflow-hidden rounded-full bg-[var(--color-line)] sm:left-16 sm:right-28"><div className="h-full bg-[var(--color-accent)] transition-[width] duration-150" style={{ width: `${progress}%` }} /></div>
+      <div className="music-player-progress" aria-hidden="true"><div style={{ width: `${progress}%` }} /></div>
 
-      {open && <div id="music-player-panel" ref={panelRef} className="absolute right-0 top-[calc(100%+10px)] z-[70] w-[min(21rem,calc(100vw-2rem))] rounded-2xl border border-[var(--color-line)] bg-[var(--color-control)] p-3 shadow-[var(--shadow-raised)]" role="dialog" aria-label="Pemutar musik VVIP+">
-        <div className="flex items-start justify-between gap-3 border-b border-[var(--color-line)] px-2 pb-3"><div><p className="eyebrow">Pemutar musik</p><p className="mt-1 text-sm font-semibold text-[var(--color-ink)]">{state === 'error' ? 'Audio tidak tersedia' : playlist[index].title}</p></div><button type="button" onClick={() => { setOpen(false); triggerRef.current?.focus(); }} className="inline-flex min-h-11 min-w-11 items-center justify-center rounded-full border border-[var(--color-line)] bg-[var(--color-ash-mist)] text-[var(--color-ink)] focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-accent)]" aria-label="Tutup pemutar musik"><X size={16} aria-hidden="true" /></button></div>
-        <div className="mt-4"><label className="sr-only" htmlFor="music-progress">Posisi lagu</label><input id="music-progress" type="range" min="0" max="100" step="0.1" value={progress} onChange={seek} disabled={!duration} className="h-1.5 w-full accent-[var(--color-accent)]" /><div className="mt-1 flex justify-between text-[11px] text-[var(--color-muted)]"><span>{formatTime((progress / 100) * duration)}</span><span>{formatTime(duration)}</span></div></div>
-        <div className="mt-3 flex items-center justify-center gap-1"><button type="button" onClick={() => changeTrack(-1)} className="inline-flex min-h-11 min-w-11 items-center justify-center rounded-full text-[var(--color-text)] hover:bg-[var(--color-ash-mist)] focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-accent)]" aria-label="Lagu sebelumnya"><SkipBack size={17} /></button><button type="button" onClick={togglePlayback} className="inline-flex min-h-12 min-w-12 items-center justify-center rounded-full bg-[var(--color-ink)] text-[var(--color-paper)] active:scale-[.97] focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-accent)]" aria-label={state === 'playing' ? 'Jeda musik' : 'Putar musik'} disabled={state === 'loading'}>{state === 'playing' ? <Pause size={17} /> : <Play size={17} />}</button><button type="button" onClick={() => changeTrack(1)} className="inline-flex min-h-11 min-w-11 items-center justify-center rounded-full text-[var(--color-text)] hover:bg-[var(--color-ash-mist)] focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-accent)]" aria-label="Lagu berikutnya"><SkipForward size={17} /></button></div>
-        <div className="mt-4 flex items-center gap-3 border-t border-[var(--color-line)] pt-4">{muted ? <VolumeX size={15} className="text-[var(--color-muted)]" aria-hidden="true" /> : <Volume2 size={15} className="text-[var(--color-muted)]" aria-hidden="true" />}<label className="sr-only" htmlFor="music-volume">Volume</label><input id="music-volume" type="range" min="0" max="1" step="0.01" value={muted ? 0 : volume} onChange={(event) => { setMuted(false); setVolume(Number(event.target.value)); }} className="h-1.5 flex-1 accent-[var(--color-accent)]" /></div>
-        <div className="mt-4 space-y-1" role="list" aria-label="Daftar lagu">{playlist.map((song, songIndex) => <div key={song.src} role="listitem"><button type="button" onClick={() => selectTrack(songIndex)} className={`flex min-h-11 w-full items-center gap-3 rounded-xl px-3 text-left text-sm transition active:scale-[.99] focus:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-[var(--color-accent)] ${songIndex === index ? 'bg-[var(--color-ash-mist)] text-[var(--color-ink)]' : 'text-[var(--color-muted)] hover:bg-[var(--color-ash-mist)] hover:text-[var(--color-ink)]'}`}><span className="w-5 text-[11px] text-[var(--color-muted)]">0{songIndex + 1}</span><span className="truncate">{song.title}</span>{songIndex === index && <span className="ml-auto text-[11px] font-semibold text-[var(--color-accent)]">Diputar</span>}</button></div>)}</div>
+      {open && <div id="music-player-panel" ref={panelRef} className="music-player-panel" role="dialog" aria-label="Pemutar musik">
+        <div className="flex items-start justify-between gap-3 border-b border-[var(--color-line)] px-2 pb-3">
+          <div className="min-w-0"><p className="eyebrow">Pemutar musik</p><p className="mt-1 truncate text-sm font-semibold text-[var(--color-ink)]">{state === 'error' ? 'Audio tidak tersedia' : playlist[index].title}</p></div>
+          <button type="button" onClick={() => { setOpen(false); triggerRef.current?.focus(); }} className="music-player-close" aria-label="Tutup pemutar musik"><X size={15} aria-hidden="true" /></button>
+        </div>
+        <div className="mt-4"><label className="sr-only" htmlFor="music-progress">Posisi lagu</label><input id="music-progress" type="range" min="0" max="100" step="0.1" value={progress} onChange={seek} disabled={!duration} className="music-range" /><div className="mt-1 flex justify-between text-[11px] text-[var(--color-muted)]"><span>{formatTime((progress / 100) * duration)}</span><span>{formatTime(duration)}</span></div></div>
+        <div className="mt-3 flex items-center justify-center gap-1"><button type="button" onClick={() => changeTrack(-1)} className="music-player-action" aria-label="Lagu sebelumnya"><SkipBack size={16} /></button><button type="button" onClick={togglePlayback} className="music-player-main-action" aria-label={state === 'playing' ? 'Jeda musik' : 'Putar musik'} disabled={state === 'loading'}>{state === 'playing' ? <Pause size={16} /> : <Play size={16} />}</button><button type="button" onClick={() => changeTrack(1)} className="music-player-action" aria-label="Lagu berikutnya"><SkipForward size={16} /></button></div>
+        <div className="mt-4 flex items-center gap-3 border-t border-[var(--color-line)] pt-4">{muted ? <VolumeX size={14} className="text-[var(--color-muted)]" aria-hidden="true" /> : <Volume2 size={14} className="text-[var(--color-muted)]" aria-hidden="true" />}<label className="sr-only" htmlFor="music-volume">Volume</label><input id="music-volume" type="range" min="0" max="1" step="0.01" value={muted ? 0 : volume} onChange={(event) => { setMuted(false); setVolume(Number(event.target.value)); }} className="music-range flex-1" /><button type="button" onClick={() => setMuted((value) => !value)} className="music-player-action" aria-label={muted ? 'Nyalakan suara' : 'Bisukan musik'}>{muted ? <VolumeX size={14} /> : <Volume2 size={14} />}</button></div>
+        <div className="mt-4 space-y-1" role="list" aria-label="Daftar lagu">{playlist.map((song, songIndex) => <div key={song.src} role="listitem"><button type="button" onClick={() => selectTrack(songIndex)} className={`music-playlist-item ${songIndex === index ? 'is-active' : ''}`}><span className="w-5 text-[11px] text-[var(--color-muted)]">0{songIndex + 1}</span><span className="truncate">{song.title}</span>{songIndex === index && <span className="ml-auto text-[10px] font-semibold text-[var(--color-accent)]">Diputar</span>}</button></div>)}</div>
       </div>}
     </div>
   );
