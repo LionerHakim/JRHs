@@ -1,4 +1,3 @@
-import { motion, useReducedMotion } from 'motion/react';
 import { Award, Calendar, ChevronDown } from 'lucide-react';
 import { useState } from 'react';
 
@@ -11,7 +10,6 @@ const educationData = [
 
 export default function RekamJejak() {
   const [active, setActive] = useState(0);
-  const reduceMotion = useReducedMotion();
 
   return (
     <section id="rekam-jejak" className="section-shell" aria-labelledby="experience-title">
@@ -24,15 +22,11 @@ export default function RekamJejak() {
           {educationData.map((item, index) => {
             const selected = active === index;
             return (
-              <motion.button
+              <button
                 key={item.institution}
                 type="button"
-                initial={reduceMotion ? false : { opacity: 0, y: 12 }}
-                whileInView={reduceMotion ? undefined : { opacity: 1, y: 0 }}
-                viewport={{ once: true, margin: '-60px' }}
-                transition={{ duration: .28, delay: index * .04 }}
-                onClick={() => setActive(index)}
-                aria-pressed={selected}
+                onClick={() => setActive(selected && index !== 0 ? 0 : index)}
+                aria-expanded={selected}
                 className="experience-card w-full text-left outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-accent)]"
               >
                 <div className="flex items-start justify-between gap-4">
@@ -45,15 +39,15 @@ export default function RekamJejak() {
                 </div>
                 <div className="mt-4 flex flex-wrap items-center gap-x-3 gap-y-1">
                   <span className="timeline-date"><Calendar size={13} aria-hidden="true" />{item.year}</span>
-                  <span className="rounded-full bg-[var(--color-accent-soft)] px-2.5 py-1 text-[11px] font-semibold text-[var(--color-accent)]">{selected ? 'Aktif' : 'Detail'}</span>
+                  <span className="rounded-full bg-[var(--color-accent-soft)] px-2.5 py-1 text-[11px] font-semibold text-[var(--color-accent)]">{selected ? 'Terbuka' : 'Lihat detail'}</span>
                 </div>
-                {selected && item.activities.length > 0 && (
-                  <div className="timeline-activity">
+                <div className={`timeline-activity ${selected ? 'is-open' : ''}`} aria-hidden={!selected}>
+                  {item.activities.length > 0 ? <>
                     <span><Award size={13} aria-hidden="true" />Aktivitas</span>
                     {item.activities.map((activity) => <p key={activity}>{activity}</p>)}
-                  </div>
-                )}
-              </motion.button>
+                  </> : <p>Tidak ada aktivitas tambahan yang dicatat.</p>}
+                </div>
+              </button>
             );
           })}
         </div>
