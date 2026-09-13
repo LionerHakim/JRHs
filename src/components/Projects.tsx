@@ -36,25 +36,32 @@ export default function Projects() {
       </div>
 
       <div className="projects-list">
-        {projects.map((project, index) => (
-          <article key={project.title} className={`project-object ${project.featured ? 'project-featured' : ''}`}>
-            <div className="project-index" aria-hidden="true">0{index + 1}</div>
-            <div className="project-content">
-              <p className="project-meta">{project.meta}</p>
-              <h3>{project.title}</h3>
-              <p className="project-description">{project.description}</p>
-            </div>
-            <a
-              className="project-visit"
-              href={project.url}
-              target="_blank"
-              rel="noopener noreferrer"
-              aria-label={`Lihat project ${project.title}`}
+        {projects.map((project, index) => {
+          const titleId = `project-title-${index + 1}`;
+          return (
+            <article
+              key={project.title}
+              className={`project-object ${project.featured ? 'project-featured' : ''}`}
+              aria-labelledby={titleId}
             >
-              View Project <ArrowUpRight size={16} aria-hidden="true" />
-            </a>
-          </article>
-        ))}
+              <div className="project-index" aria-hidden="true">0{index + 1}</div>
+              <div className="project-content">
+                <p className="project-meta">{project.meta}</p>
+                <h3 id={titleId}>{project.title}</h3>
+                <p className="project-description">{project.description}</p>
+              </div>
+              <a
+                className="project-visit"
+                href={project.url}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label={`Buka project ${project.title} di GitHub`}
+              >
+                Open Project <ArrowUpRight size={16} aria-hidden="true" />
+              </a>
+            </article>
+          );
+        })}
       </div>
     </section>
   );
