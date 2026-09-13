@@ -1,5 +1,5 @@
-import { Activity, ArrowUpRight } from 'lucide-react';
-import { useEffect, useMemo, useState } from 'react';
+import { Activity, ArrowUpRight, RefreshCw } from 'lucide-react';
+import { useEffect, useState } from 'react';
 
 type Quote = {
   id: 'bitcoin' | 'ethereum' | 'solana';
@@ -25,6 +25,7 @@ function formatPrice(value: number | null) {
 export default function MarketTicker() {
   const [quotes, setQuotes] = useState<Quote[]>(emptyQuotes);
   const [live, setLive] = useState(false);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const controller = new AbortController();
@@ -32,11 +33,9 @@ export default function MarketTicker() {
     let stopped = false;
 
     const load = async () => {
+      setLoading(true);
       try {
-        const response = await fetch(
-          'https://api.coingecko.com/api/v3/simple/price?ids=bitcoin,ethereum,solana&vs_currencies=usd&include_24hr_change=true',
-          { signal: controller.signal, headers: { accept: 'application/json' } },
-        );
+        const response = await fetch('/api/market', { signal: controller.signal, headers: { accept: 'application/json' }, cache: 'no-store' });
         if (!response.ok) throw new Error('Market data unavailable');
         const data = await response.json() as Record<string, { usd?: number; usd_24h_change?: number }>;
         const next = assets.map((asset) => ({
@@ -51,7 +50,10 @@ export default function MarketTicker() {
       } catch (reason: unknown) {
         if ((reason as { name?: string })?.name !== 'AbortError' && !stopped) setLive(false);
       } finally {
-        if (!stopped) timer = window.setTimeout(load, 60_000);
+        if (!stopped) {
+          setLoading(false);
+          timer = window.setTimeout(load, 60_000);
+        }
       }
     };
 
@@ -63,13 +65,13 @@ export default function MarketTicker() {
     };
   }, []);
 
-  const loop = useMemo(() => [...quotes, ...quotes], [quotes]);
+  const loop = [...quotes, ...quotes];
 
   return (
     <section className="market-ticker" aria-label="Live market data">
       <div className="market-ticker__label">
-        <span className="market-ticker__signal" aria-hidden="true"><Activity size={13} /></span>
-        <span>LIVE MARKETS</span>
+        <span className="market-ticker__signal" aria-hidden="true">{loading ? <RefreshCw size={13} className="market-ticker__spin" /> : <Activity size={13} />}</span>
+        <span>{live ? 'LIVE MARKETS' : 'MARKET DATA'}</span>
       </div>
       <div className="market-ticker__viewport">
         <div className="market-ticker__track" aria-live="polite">
@@ -85,7 +87,7 @@ export default function MarketTicker() {
         </div>
       </div>
       <a className="market-ticker__source" href="https://www.coingecko.com/" target="_blank" rel="noopener noreferrer" aria-label="Market data by CoinGecko">
-        <span>{live ? 'LIVE' : 'MARKET'} · COINGECKO</span><ArrowUpRight size={11} aria-hidden="true" />
+        <span>{live ? 'LIVE' : 'WAITING'} · COINGECKO</span><ArrowUpRight size={11} aria-hidden="true" />
       </a>
     </section>
   );
