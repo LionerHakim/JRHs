@@ -1,61 +1,3 @@
-.testimonial-viewport {
-  position: relative;
-  overflow-x: auto;
-  overflow-y: hidden;
-  scroll-behavior: auto;
-  scroll-snap-type: none;
-  scroll-padding-inline: 50%;
-  overscroll-behavior-x: contain;
-  -webkit-overflow-scrolling: touch;
-  scrollbar-width: none;
-  touch-action: pan-x;
-  cursor: grab;
-  user-select: none;
-  mask-image: linear-gradient(to right, transparent, black 5%, black 95%, transparent);
-}
-.testimonial-viewport::-webkit-scrollbar { display: none; }
-.testimonial-viewport.is-interacting { cursor: grabbing; }
-.testimonial-track {
-  display: flex;
-  width: max-content;
-  gap: 1rem;
-  padding: .55rem max(1rem, calc(50vw - 12.5rem)) 1.15rem;
-  will-change: scroll-position;
-  animation: none !important;
-}
-.testimonial-card {
-  flex: 0 0 min(84vw, 25rem);
-  width: min(84vw, 25rem);
-  scroll-snap-align: center;
-  scroll-snap-stop: always;
-  transition: transform 220ms ease, box-shadow 220ms ease, border-color 180ms ease;
-}
-.testimonial-card:hover { transform: translateY(-4px); box-shadow: var(--shadow-raised); border-color: color-mix(in srgb, var(--color-accent) 24%, var(--color-line)); }
-.testimonial-card:active { transform: scale(.985); }
-.testimonial-swipe-hint {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: .45rem;
-  margin: .25rem auto 0;
-  width: fit-content;
-  padding: .42rem .7rem;
-  border: 1px solid var(--color-line);
-  border-radius: 999px;
-  background: color-mix(in srgb, var(--color-paper) 88%, transparent);
-  box-shadow: var(--shadow-soft);
-  color: var(--color-muted);
-  font-size: .62rem;
-  font-weight: 600;
-  letter-spacing: .08em;
-  text-transform: uppercase;
-  pointer-events: none;
-  opacity: .82;
-}
-.testimonial-swipe-line { display: inline-flex; align-items: center; justify-content: center; width: 1.25rem; height: 1.25rem; border-radius: 50%; background: var(--color-accent-soft); color: var(--color-accent); }
-.testimonial-swipe-dot { width: 3px; height: 3px; border-radius: 50%; background: var(--color-line); }
-
-/* Twilight Editorial interaction language: quiet glow, tactile lift, clear press state. */
 .ios-tile, .project-card, .experience-card, .contact-panel {
   transition: transform 180ms cubic-bezier(.2,.8,.2,1), box-shadow 220ms ease, border-color 180ms ease, background-color 220ms ease, color 180ms ease;
 }
@@ -63,9 +5,6 @@
 .ios-tile:focus-within, .project-card:focus-within, .experience-card:focus-within, .contact-panel:focus-within { box-shadow: var(--shadow-raised), 0 0 0 3px var(--color-accent-soft); }
 
 .jrhs-footer { position: relative; overflow: hidden; }
-.jrhs-footer::before { content: ''; position: absolute; left: 10%; right: 10%; top: 0; height: 1px; background: linear-gradient(90deg, transparent, var(--color-accent), var(--color-accent-violet), transparent); opacity: .55; }
-.jrhs-footer-hero { position: relative; overflow: hidden; }
-.jrhs-footer-hero::after { content: ''; position: absolute; width: 18rem; height: 18rem; right: -9rem; bottom: -11rem; border-radius: 50%; background: radial-gradient(circle, var(--color-accent-soft), transparent 68%); pointer-events: none; }
 .jrhs-footer a { -webkit-tap-highlight-color: transparent; }
 
 .floating-music { position: fixed; right: max(1rem, env(safe-area-inset-right)); bottom: calc(max(1rem, env(safe-area-inset-bottom)) + 4.1rem); z-index: 46; }
@@ -75,12 +14,9 @@
 @media (max-width: 767px) {
   .floating-music { right: .75rem; bottom: calc(max(.75rem, env(safe-area-inset-bottom)) + 3.9rem); }
   .floating-music .music-player-panel { right: .75rem; bottom: calc(max(.75rem, env(safe-area-inset-bottom)) + 7.1rem); top: auto; }
-  .testimonial-card { flex-basis: min(82vw, 22rem); width: min(82vw, 22rem); }
-  .testimonial-track { padding-inline: calc(50vw - 41vw); }
   .jrhs-footer-hero { border-radius: 24px; }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .testimonial-viewport { scroll-behavior: auto; }
-  .testimonial-card, .ios-tile, .project-card, .experience-card { transition: none !important; }
+  .ios-tile, .project-card, .experience-card, .contact-panel { transition: none !important; }
 }
