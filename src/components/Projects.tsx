@@ -1,4 +1,4 @@
-import { ArrowUpRight } from 'lucide-react';
+import { ArrowUpRight, Star } from 'lucide-react';
 
 const projects = [
   {
@@ -46,18 +46,27 @@ export default function Projects() {
             >
               <div className="project-index" aria-hidden="true">0{index + 1}</div>
               <div className="project-content">
-                <p className="project-meta">{project.meta}</p>
+                <div className="flex flex-wrap items-center gap-2">
+                  <p className="project-meta">{project.meta}</p>
+                  {project.featured && (
+                    <span className="inline-flex min-h-7 items-center gap-1 rounded-full border border-[var(--color-line)] bg-[var(--color-control)] px-2.5 text-[11px] font-semibold text-[var(--color-ink)]">
+                      <Star size={11} fill="currentColor" aria-hidden="true" />
+                      Featured
+                    </span>
+                  )}
+                </div>
                 <h3 id={titleId}>{project.title}</h3>
                 <p className="project-description">{project.description}</p>
               </div>
               <a
-                className="project-visit"
+                className="project-visit group"
                 href={project.url}
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label={`Buka project ${project.title} di GitHub`}
               >
-                Open Project <ArrowUpRight size={16} aria-hidden="true" />
+                Open Project
+                <ArrowUpRight size={16} aria-hidden="true" className="transition-transform duration-200 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
               </a>
             </article>
           );
