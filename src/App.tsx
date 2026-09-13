@@ -29,7 +29,7 @@ export default function App() {
           <div className="jrhs-footer-hero rounded-[30px] border border-[var(--color-line)] bg-[var(--color-surface-raised)] p-6 shadow-[var(--shadow-soft)] md:p-8 lg:p-10">
             <div className="grid gap-10 lg:grid-cols-[1.25fr_.75fr] lg:items-end">
               <div>
-                <span className="eyebrow">06 / Endnote</span>
+                <span className="eyebrow">05 / Endnote</span>
                 <a href="#hero" className="mt-4 inline-flex min-h-12 items-center gap-3 font-[var(--font-perfectly-nineties-regular)] text-4xl text-[var(--color-ink)] transition-transform hover:-translate-y-0.5 active:scale-[.98] focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-accent)]">JRHs <span className="h-2 w-2 rounded-full bg-[var(--color-accent)]" aria-hidden="true" /></a>
                 <p className="mt-4 max-w-xl text-sm leading-7 text-[var(--color-muted)]">Economics · Markets · Technology · Human Behavior. Ruang personal untuk ide, perjalanan, eksperimen, dan hal-hal yang sedang dibangun.</p>
               </div>
