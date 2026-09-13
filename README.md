@@ -1,75 +1,69 @@
 # JRH
 
-Ruang digital personal dan portofolio editorial JRH.
+Personal editorial portfolio and digital space for JRH.
 
-## Struktur
+## Final structure
 
-Halaman publik sengaja ringkas dan berisi tepat enam bagian utama:
+The public experience is intentionally focused:
 
-1. **Hero** — identitas JRH, pernyataan utama, dan akses cepat ke perjalanan serta proyek
-2. **About** — konteks personal, fokus, dan titik awal perjalanan trading/investing
-3. **Rekam Jejak** — kronologi pendidikan, organisasi, dan aktivitas yang benar-benar tercatat
-4. **Projects** — bukti kerja yang nyata, dengan detail dibuka tanpa meninggalkan alur halaman
-5. **Contact** — kanal komunikasi yang benar-benar tersedia
-6. **Footer** — identitas dan navigasi sekunder
+1. **Hero** — identity, positioning, and direct entry to the work
+2. **About** — personal context and approach
+3. **Projects** — the visual centerpiece and clearest record of work
+4. **Experience** — concise editorial timeline
+5. **Contact** — verified contact channel
+6. **Footer** — minimal identity and secondary navigation
 
-Bagian legacy seperti Vision, Hobbies, Skills, Reflection, Knowledge, Motivation, Web Tools, dan Testimonials tidak menjadi bagian dari pengalaman akhir.
+Hobbies, Skills, Reflection, Vision, Knowledge, Motivation, Web Tools, Testimonials, and other filler sections are not rendered.
 
-## Bahasa visual
+## Visual direction
 
-Arah visual: **dark editorial** — quiet, premium, precise, intelligent, human, tactile, minimal, confident, dan timeless.
+**Portal / Twilight Serif Editorial**
 
-- Kanvas: `#050505`
-- Surface/Card: `#0A0A0A` / `#101010`
-- Border: `#1D1D1D`
-- Teks utama: `#F5F5F5`
-- Teks sekunder: `#A0A0A0`
-- Teks muted: `#666666`
-- Aksen fungsional: `#007AFF`
-- Serif untuk heading/editorial emphasis
-- Inter/system sans untuk body, navigasi, dan metadata
-- Tanpa sunset/twilight gradient, neon glow, glassmorphism, decorative noise, atau filler visual
+- Light-first canvas: `#F7F7F7`
+- Paper: `#FFFFFF`
+- Primary: `#000000`
+- Graphite: `#3E3E3E`
+- Smoke: `#636363`
+- Functional accent: `#007AFF`
+- Twilight gradient is reserved for the Hero atmosphere
+- Perfectly Nineties (when available) for display typography
+- Inter/system sans for UI, navigation, metadata, and body copy
+- Tactile cards, pill CTAs, restrained borders, and subtle motion
 
-## Interaksi utama
+A dark mode remains available through the theme control, but light is the default editorial presentation.
 
-### Navigasi
+## Projects
 
-Desktop menampilkan JRH, About, Rekam Jejak, Projects, Contact, Music, dan Menu. Mobile mempertahankan JRH, Music, dan Menu. Menu seluler hanya memuat empat anchor konten utama dan mendukung Escape, focus containment, pemulihan fokus, serta safe-area spacing.
+Projects are sourced from real public repositories. The current featured project is JRH Portfolio, followed by real public work from the JRH GitHub account. Each project uses a direct external URL and opens safely in a new tab.
 
-### Music
+No fake URLs, metrics, clients, roles, results, testimonials, or achievements are introduced.
 
-Playlist yang sudah tersedia dipertahankan tanpa autoplay. Player mendukung idle, playing, paused, loading, dan error; seek, volume, mute, previous/next, playlist, keyboard focus, dan graceful failure.
+## Interaction
 
-### Projects
+- Floating desktop/mobile navigation with active-section indication
+- Keyboard-accessible mobile menu with Escape and focus containment
+- Light/dark theme persistence
+- Existing music player retained without autoplay
+- Tactile press states and reduced-motion support
+- Native scrolling; no scroll hijacking
+- Minimum 44px touch targets for controls
 
-Setiap proyek menampilkan nama, deskripsi singkat, metadata, dan **Info Detail**. Detail menggunakan drawer di desktop dan sheet di mobile, dengan Escape, klik luar, focus containment, focus restoration, preserved background scroll, semantic dialog, serta external links memakai `rel="noopener noreferrer"`.
+## Accessibility, performance, resilience
 
-## Aksesibilitas
+Semantic HTML, one H1, ordered heading hierarchy, visible keyboard focus, meaningful alt text, reduced-motion support, lightweight client behavior, cleaned-up listeners, and graceful optional-feature failures are required.
 
-Implementasi mempertahankan semantic HTML, satu H1, hierarchy heading yang jelas, focus state yang terlihat, target sentuh minimal 44px, keyboard activation, dialog semantics, Escape handling, dan dukungan `prefers-reduced-motion`.
+Existing photo and music assets are preserved. GitHub Pages compatibility is retained through Vite static asset paths and the existing repository deployment setup.
 
-## Performa & ketahanan
+## Development
 
-Media yang ada dipertahankan, JavaScript dijaga ringan, event listener dibersihkan, native scrolling digunakan, scrollbar visual disembunyikan tanpa mematikan scroll, dan kegagalan optional capability seperti audio tidak boleh merusak halaman utama.
+Stack: Vite, React, TypeScript, Tailwind CSS, and Lucide React.
 
-## Integritas konten
+Quality loop:
 
-Repositori adalah sumber kebenaran. Tidak ada testimonial, statistik, klien, jabatan, teknologi, progres, atau URL yang dibuat hanya untuk mengisi layout. Proyek hanya menggunakan URL nyata yang sudah tersedia.
+`Audit → Design → Implement → Build → Test → Inspect → Fix → Test again`
 
-## Pengembangan
+## Principle
 
-Stack: Vite, React, TypeScript, Tailwind CSS, dan Lucide React.
-
-Alur kerja yang ditargetkan:
-
-`Audit → Implementasi → Build → Pengujian → Inspeksi → Perbaikan → QA akhir`
-
-## Prinsip
-
-> **BUAT JRH TERASA DIRANCANG, BUKAN DIRAKIT.**
+> **MAKE JRH FEEL DESIGNED, NOT ASSEMBLED.**
 >
-> **JADIKAN PROYEK ALASAN ORANG BERTAHAN.**
->
-> **JANGAN MEMBUAT JRH TERLIHAT LEBIH BESAR DARIPADA KENYATAANNYA.**
-
-© 2026 JRH. Hak cipta dilindungi.
+> **MAKE THE PROJECTS THE REASON PEOPLE STAY.**
