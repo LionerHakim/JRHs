@@ -53,15 +53,12 @@ export default function Navbar() {
   return (
     <>
       <header className={`fixed inset-x-0 top-0 z-50 px-3 transition-all duration-300 sm:px-4 ${scrolled ? 'pt-3' : 'pt-4'}`} style={{ paddingTop: 'max(.75rem, env(safe-area-inset-top))' }}>
-        <nav className={`mx-auto flex max-w-6xl items-center justify-between gap-3 rounded-[22px] px-2 py-1.5 transition-all duration-300 ${scrolled ? 'border border-[var(--color-line)] bg-[var(--color-paper)]/92 shadow-[var(--shadow-soft)]' : 'bg-transparent'}`} aria-label="Navigasi utama">
+        <nav className={`mx-auto flex max-w-6xl items-center justify-between gap-3 rounded-[22px] px-2 py-1.5 transition-all duration-300 ${scrolled ? 'border border-[var(--color-line)] bg-[var(--color-paper)] shadow-[var(--shadow-soft)]' : 'bg-transparent'}`} aria-label="Navigasi utama">
           <a href="#hero" className="group flex min-h-11 items-center gap-2 rounded-full px-2 text-[18px] font-semibold tracking-tight text-[var(--color-ink)] transition-transform hover:-translate-y-px active:scale-[.97]" aria-label="JRHs beranda"><span>JRHs</span><span className="h-1.5 w-1.5 rounded-full bg-[var(--color-accent)]" aria-hidden="true" /></a>
           <div className="hidden items-center gap-1 xl:flex">
             {navLinks.map((link) => { const isActive = active === link.href.slice(1); return <a key={link.href} href={link.href} className={`group relative min-h-10 rounded-full px-3.5 py-2 text-sm font-medium transition-all duration-200 active:scale-[.97] ${isActive ? 'bg-[var(--color-ash-mist)] text-[var(--color-ink)]' : 'text-[var(--color-muted)] hover:bg-[var(--color-ash-mist)] hover:text-[var(--color-ink)]'}`} aria-current={isActive ? 'location' : undefined}>{link.name}<span className={`absolute bottom-1 left-1/2 h-0.5 -translate-x-1/2 rounded-full bg-[var(--color-accent)] transition-all duration-200 ${isActive ? 'w-3 opacity-100' : 'w-0 opacity-0 group-hover:w-2 group-hover:opacity-60'}`} /></a>; })}
           </div>
-          <div className="flex items-center gap-1">
-            <div className="hidden xl:block"><MusicTrigger /></div>
-            <button ref={openerRef} type="button" onClick={() => setOpen(true)} className="inline-flex min-h-11 min-w-11 items-center justify-center rounded-full border border-[var(--color-line)] bg-[var(--color-control)] text-[var(--color-ink)] shadow-[var(--shadow-soft)] transition-all hover:-translate-y-px hover:border-[var(--color-accent)] hover:text-[var(--color-accent)] active:scale-[.94] focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-accent)] xl:hidden" aria-label="Buka menu" aria-expanded={open}><Menu size={18} aria-hidden="true" /></button>
-          </div>
+          <div className="flex items-center gap-1"><button ref={openerRef} type="button" onClick={() => setOpen(true)} className="inline-flex min-h-11 min-w-11 items-center justify-center rounded-full border border-[var(--color-line)] bg-[var(--color-control)] text-[var(--color-ink)] shadow-[var(--shadow-soft)] transition-all hover:-translate-y-px hover:border-[var(--color-accent)] hover:text-[var(--color-accent)] active:scale-[.94] focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-accent)] xl:hidden" aria-label="Buka menu" aria-expanded={open}><Menu size={18} aria-hidden="true" /></button></div>
         </nav>
       </header>
 
@@ -74,8 +71,4 @@ export default function Navbar() {
       </div>}
     </>
   );
-}
-
-function MusicTrigger() {
-  return <span className="inline-flex min-h-10 items-center rounded-full border border-[var(--color-line)] bg-[var(--color-control)] px-3 text-xs text-[var(--color-muted)]">Music near Menu</span>;
 }
