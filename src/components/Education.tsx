@@ -9,13 +9,13 @@ const educationData = [
 ];
 
 export default function RekamJejak() {
-  const [active, setActive] = useState(0);
+  const [active, setActive] = useState<number | null>(null);
 
   return (
     <section id="rekam-jejak" className="section-shell" aria-labelledby="experience-title">
       <div className="mx-auto max-w-6xl">
         <div className="section-heading">
-          <p className="eyebrow">03 / Experience</p>
+          <p className="eyebrow">02 / Experience</p>
           <h2 id="experience-title" className="display-title">Rekam jejak.</h2>
         </div>
         <div className="timeline">
@@ -25,7 +25,7 @@ export default function RekamJejak() {
               <button
                 key={item.institution}
                 type="button"
-                onClick={() => setActive(selected && index !== 0 ? 0 : index)}
+                onClick={() => setActive(selected ? null : index)}
                 aria-expanded={selected}
                 className="experience-card w-full text-left outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-accent)]"
               >
@@ -42,10 +42,10 @@ export default function RekamJejak() {
                   <span className="rounded-full bg-[var(--color-accent-soft)] px-2.5 py-1 text-[11px] font-semibold text-[var(--color-accent)]">{selected ? 'Terbuka' : 'Lihat detail'}</span>
                 </div>
                 <div className={`timeline-activity ${selected ? 'is-open' : ''}`} aria-hidden={!selected}>
-                  {item.activities.length > 0 ? <>
+                  {item.activities.length > 0 && <>
                     <span><Award size={13} aria-hidden="true" />Aktivitas</span>
                     {item.activities.map((activity) => <p key={activity}>{activity}</p>)}
-                  </> : <p>Tidak ada aktivitas tambahan yang dicatat.</p>}
+                  </>}
                 </div>
               </button>
             );
