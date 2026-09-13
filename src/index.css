@@ -38,7 +38,7 @@ html.dark {
 
 * { box-sizing: border-box; }
 html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; background: var(--color-canvas); }
-body { margin: 0; min-width: 320px; background: var(--color-canvas); color: var(--color-ink); font-family: var(--font-inter); letter-spacing: -.02em; overflow-x: hidden; transition: background-color 220ms ease, color 220ms ease; }
+body { margin: 0; min-width: 320px; background: var(--color-canvas); color: var(--color-ink); font-family: var(--font-inter); letter-spacing: -.02em; overflow-x: hidden; overscroll-behavior-x: none; -webkit-overflow-scrolling: touch; transition: background-color 220ms ease, color 220ms ease; }
 button, a, input { -webkit-tap-highlight-color: transparent; }
 button:focus-visible, a:focus-visible, input:focus-visible { outline: 2px solid var(--color-accent); outline-offset: 3px; }
 ::selection { background: var(--color-accent-soft); }
