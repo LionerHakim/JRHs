@@ -1,5 +1,5 @@
 import { ArrowUp } from 'lucide-react';
-import { useEffect, useState } from 'react';
+import { useEffect, useState, type MouseEvent } from 'react';
 
 export default function BackToTop() {
   const [visible, setVisible] = useState(false);
@@ -25,7 +25,7 @@ export default function BackToTop() {
 
   if (!visible) return null;
 
-  const goTop = (event: React.MouseEvent<HTMLAnchorElement>) => {
+  const goTop = (event: MouseEvent<HTMLAnchorElement>) => {
     event.preventDefault();
     window.scrollTo({ top: 0, behavior: 'smooth' });
     window.history.replaceState(null, '', '#hero');
