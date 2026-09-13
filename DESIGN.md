@@ -1,66 +1,63 @@
-# JRH V100 Design System
+# JRH Future iOS Design System
 
 ## Identity
-JRH is a personal digital space and editorial portfolio. The visible brand is JRH; never use the full personal name as the Hero headline. The experience should feel future-facing, quiet, premium, precise, intelligent, human, tactile, minimal, confident, and timeless — never like a SaaS dashboard, generic portfolio, CV template, or AI-generated landing page.
+JRH is a personal digital space and editorial portfolio. The visible brand is JRH. The experience is future-facing, quiet, premium, precise, intelligent, human, tactile, minimal, confident, and timeless — never a SaaS dashboard, CV template, or generic AI landing page.
 
 ## Core rule
-DESIGNED, NOT ASSEMBLED. Every visual or interactive element must improve comprehension, navigation, hierarchy, identity, interaction, accessibility, performance, or resilience. Otherwise remove it.
+DESIGNED, NOT ASSEMBLED. Every visual or interactive element must improve comprehension, navigation, identity, interaction, accessibility, performance, or resilience. Otherwise remove it.
 
 ## Visual language
-Dark is the default editorial environment, with an optional light mode. Use contrast, typography, spacing, border, scale, and restrained motion as the primary visual language. No sunset/twilight gradient, random gradients, rainbow colors, neon glow, heavy blur, excessive shadows, glassmorphism, or decorative noise.
+Light is the default environment. Use iOS-inspired spatial UI, floating capsules, soft borders, restrained blur, editorial typography, generous spacing, tactile controls, and subtle motion. Canvas `#F7F7F7`, paper `#FFFFFF`, ink `#000000`, graphite `#3E3E3E`, smoke `#636363`, functional accent `#007AFF`. The Twilight gradient is reserved for the Hero atmosphere.
 
 ## Structure
-The public page contains exactly: HERO, ABOUT, REKAM JEJAK, PROJECTS, CONTACT, FOOTER.
+The public page contains exactly: HERO, ABOUT, PROJECTS, EXPERIENCE, CONTACT, FOOTER.
 
-Do not restore Vision, Hobbies, Skills, Reflection, Knowledge, Motivation, testimonials, strategic filler, duplicate project groups, fake stats, or redundant legacy sections.
+Do not restore removed legacy sections, duplicate project groups, fake stats, fake testimonials, strategic filler, or redundant navigation.
 
 ## Hero
-Visible identity: JRH. Preserve the existing hero sentence and photo asset. No full-name Hero headline, fake badges, fake metrics, giant marketing copy, or decorative clutter.
+Visible identity: JRH. Preserve the real photo asset and existing factual content. The Hero uses the Twilight atmosphere, dark lower landscape silhouette, a readable white editorial content surface, clear primary/secondary CTAs, and responsive composition. Never place black text directly on the gradient.
 
 ## Navigation
-Desktop: JRH on the left; About, Rekam Jejak, Projects, Contact, theme toggle, Music, and Menu grouped on the right. Mobile: JRH on the left; theme toggle, Music, and Menu on the right. Mobile menu contains only About, Rekam Jejak, Projects, Contact. Use a compact floating capsule, active-section tracking, safe-area awareness, and 44px+ touch targets.
+Desktop: JRH on the left; About, Projects, Experience, and Contact on the right, with theme and Music controls. Mobile: compact JRH mark with theme, Music, and Menu controls. Mobile menu contains only About, Projects, Experience, Contact. Use a floating capsule, active-section tracking, safe-area awareness, keyboard support, focus containment, and 44px+ touch targets.
 
 ## Theme
-Provide a functional dark/light toggle. Dark is the default. Persist the user's choice locally and update the document color scheme. Both modes must retain readable contrast and the JRH visual hierarchy.
+Light is the default. Dark mode is optional and persistent. Initialize the saved theme before the application renders to avoid a flash, then keep `color-scheme` and browser theme color synchronized.
 
 ## Music
-Preserve all existing tracks and audio paths. Compact capsule near the right-side controls. No autoplay. Support idle, playing, paused, loading, and error states with graceful failure.
+Preserve all existing tracks and paths. No autoplay. Support idle, playing, paused, loading, and error states. Keep the control compact on mobile and expose the full player panel on demand.
 
 ## Projects
-Projects are the primary proof of work. The project index supports three entries and gives every entry a dedicated `url` field for a direct link. Existing real links remain intact. Unfilled links must not become fake URLs or dead anchors. Project detail uses the existing drawer/sheet interaction.
+Projects are the primary proof of work. Featured/flagship work receives the strongest visual hierarchy. Every project uses its real URL, opens directly, and uses `rel="noopener noreferrer"`. Never fabricate URLs or placeholder projects.
 
-## Project detail UX
-Desktop: right-side drawer. Mobile: full-screen sheet. Support smooth open/close, outside click, Escape, keyboard navigation, focus containment, focus restoration, preserved background scroll, correct dialog semantics, and no page reload. External links use rel="noopener noreferrer".
-
-## Rekam Jejak
-Editorial journey, not a resume template. Preserve existing education, roles, organizations, periods, and activities. Never invent factual credentials.
+## Experience
+Use an editorial timeline/list rather than a CV card grid. Preserve only verified education, roles, organizations, periods, and activities.
 
 ## Contact
 Use only verified contact destinations currently present in the repository.
 
 ## Brand
-Minimal JRH wordmark/monogram. Single-color system. Must work at favicon, navbar, footer, mobile, desktop, and small sizes. Avoid complex or multi-color marks.
+Minimal JRH wordmark/monogram. Keep it legible from favicon to large display. Avoid unnecessary decorative marks.
 
 ## Motion
-Micro interaction 120–180ms; UI transition 180–240ms; drawer/sheet 220–280ms. No bounce, particles, cursor trails, infinite decorative animation, excessive parallax, or scroll hijacking. Respect prefers-reduced-motion.
+Use fast, purposeful micro-interactions with an iOS-style easing curve. Hover is subtle; press feedback is tactile. No bounce, particles, cursor trails, infinite decorative animation, excessive parallax, or scroll hijacking. Respect `prefers-reduced-motion`.
 
 ## Scroll
-Native browser scrolling. Hide visible scrollbar without disabling scrolling. Use a subtle 1–2px top-edge progress indicator.
+Use native browser scrolling. The visible scrollbar may be hidden without disabling scrolling. Keep a lightweight 1–2px top progress indicator driven with `requestAnimationFrame`.
 
 ## Accessibility
 Semantic HTML, one H1, ordered H2/H3 hierarchy, meaningful alt text, visible focus, keyboard activation, Escape handling, focus management, 44px+ touch targets, adequate contrast, reduced-motion support, and no inaccessible custom controls.
 
 ## Performance & resilience
-Preserve existing assets, keep JavaScript light, clean up listeners/observers, lazy-load non-critical media, and fail gracefully when optional capabilities such as audio or external links are unavailable.
+Keep JavaScript light, avoid unnecessary state updates, use passive listeners where appropriate, clean up observers/listeners, load non-critical media lazily, and fail gracefully for optional audio/external capabilities.
 
 ## SEO and links
-Preserve title, meta description, single H1, H2/H3 hierarchy, Open Graph, favicon, social preview, semantic HTML, and alt text. Audit navbar, anchor, project, social, contact, and external links. No invented URLs.
+Preserve title, meta description, one H1, H2/H3 hierarchy, Open Graph, favicon, canonical URL, social preview, semantic HTML, and alt text. Audit all navigation, project, social, contact, and external links. No invented URLs.
 
 ## Architecture
-Keep components understandable and single-purpose. Remove dead components and duplicate logic safely. Keep future extensibility for additional real projects without placeholder content.
+Keep components understandable and single-purpose. Remove dead components and duplicate logic safely. Keep the design system extensible without placeholder content.
 
 ## Anti-slop gate
-Reject generic AI/SaaS filler, fake badges, fake statistics, fake testimonials, fake projects, fake social accounts, fake URLs, duplicate CTAs, decorative clutter, emoji UI, and excessive animation. Data exists: design it beautifully. Data does not exist: do not invent it.
+Reject generic AI/SaaS filler, fake badges, fake statistics, fake testimonials, fake projects, fake social accounts, fake URLs, duplicate CTAs, emoji UI, decorative clutter, and excessive animation. Data exists: design it beautifully. Data does not exist: do not invent it.
 
 ## Quality gate
-Review the experience as an art director, UX designer, frontend engineer, mobile user, accessibility reviewer, performance engineer, and ordinary visitor. Simplify anything that does not earn its place.
+Review the experience as art direction, UX, frontend, mobile, accessibility, performance, and ordinary visitor. Test 320px through large desktop, light/dark themes, keyboard navigation, reduced motion, project links, music states, and production build before declaring the release ready.
