@@ -32,7 +32,10 @@ export default function Projects() {
           <p className="eyebrow">02 / Projects</p>
           <h2 id="projects-title" className="display-title">Things I build.</h2>
         </div>
-        <p className="projects-intro">Projects are the clearest record of how JRH turns curiosity into something tangible.</p>
+        <div className="projects-intro-wrap">
+          <span className="projects-system-dot" aria-hidden="true" />
+          <p className="projects-intro">Projects are the clearest record of how JRH turns curiosity into something tangible.</p>
+        </div>
       </div>
 
       <div className="projects-list">
@@ -43,13 +46,15 @@ export default function Projects() {
               key={project.title}
               className={`project-object ${project.featured ? 'project-featured' : ''}`}
               aria-labelledby={titleId}
+              data-index={`0${index + 1}`}
             >
               <div className="project-index" aria-hidden="true">0{index + 1}</div>
+              <div className="project-visual-field" aria-hidden="true"><span /><span /><span /></div>
               <div className="project-content">
-                <div className="flex flex-wrap items-center gap-2">
+                <div className="project-meta-row">
                   <p className="project-meta">{project.meta}</p>
                   {project.featured && (
-                    <span className="inline-flex min-h-7 items-center gap-1 rounded-full border border-[var(--color-line)] bg-[var(--color-control)] px-2.5 text-[11px] font-semibold text-[var(--color-ink)]">
+                    <span className="project-featured-badge">
                       <Star size={11} fill="currentColor" aria-hidden="true" />
                       Featured
                     </span>
@@ -65,8 +70,8 @@ export default function Projects() {
                 rel="noopener noreferrer"
                 aria-label={`Buka project ${project.title} di GitHub`}
               >
-                Open Project
-                <ArrowUpRight size={16} aria-hidden="true" className="transition-transform duration-200 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+                <span>Open Project</span>
+                <ArrowUpRight size={16} aria-hidden="true" className="transition-transform duration-200 group-hover:translate-x-1 group-hover:-translate-y-1" />
               </a>
             </article>
           );
