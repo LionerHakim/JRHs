@@ -6,20 +6,21 @@ const experienceData = [
 export default function RekamJejak() {
   return (
     <section id="experience" className="section-shell experience-section" aria-labelledby="experience-title">
-      <div className="editorial-grid">
-        <div className="experience-heading">
+      <div className="section-orbit-mark section-orbit-mark-right" aria-hidden="true" />
+      <div className="editorial-grid experience-grid">
+        <div className="section-intro-sticky experience-heading">
           <p className="eyebrow">03 / Journey</p>
           <h2 id="experience-title" className="display-title">Dari SMA sampai sekarang.</h2>
           <p className="section-lead">Perjalanan pendidikan dan aktivitas yang membentuk langkah JRH hingga saat ini.</p>
         </div>
         <div className="experience-list" aria-label="Perjalanan pendidikan dan aktivitas">
           {experienceData.map((item, index) => (
-            <article key={item.institution} className={`experience-row ${item.institution.startsWith('SMA') ? 'experience-highlight' : ''}`}>
+            <article key={item.institution} className={`experience-row ${index === 0 ? 'experience-highlight' : ''}`}>
               <div className="experience-node" aria-hidden="true"><span>{String(index + 1).padStart(2, '0')}</span></div>
               <div className="experience-main">
                 <div className="experience-topline">
                   <span>{item.year}</span>
-                  {item.institution.startsWith('SMA') && <span className="experience-tag">Milestone</span>}
+                  {index === 0 && <span className="experience-tag">Milestone</span>}
                 </div>
                 <h3>{item.institution}</h3>
                 {item.degree && <p className="experience-degree">{item.degree}</p>}
@@ -29,8 +30,10 @@ export default function RekamJejak() {
                   </ul>
                 )}
               </div>
+              <span className="experience-row-mark" aria-hidden="true">↗</span>
             </article>
           ))}
+          <div className="experience-endline" aria-hidden="true"><span /> CURRENT POSITION</div>
         </div>
       </div>
     </section>
