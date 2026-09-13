@@ -1,6 +1,4 @@
-import { ChevronRight, Quote, Star } from 'lucide-react';
-import { motion, useReducedMotion } from 'motion/react';
-import { useState } from 'react';
+import { Quote, Star } from 'lucide-react';
 
 const testimonials = [
   { name: 'Pak Jokowi', role: 'Pengusaha', text: 'Insight dari Mas Jefri sangat membantu saya memahami arah pasar dengan lebih jernih. Sangat direkomendasikan untuk diskusi mendalam!' },
@@ -10,8 +8,6 @@ const testimonials = [
 ];
 
 export default function Testimonials() {
-  const reduceMotion = useReducedMotion();
-  const [paused, setPaused] = useState(false);
   const loop = [...testimonials, ...testimonials];
 
   return (
@@ -24,26 +20,15 @@ export default function Testimonials() {
           </div>
           <div className="max-w-sm">
             <div className="inline-flex items-center gap-2 rounded-full border border-[var(--color-line)] bg-[var(--color-paper)] px-3 py-2 text-[10px] font-semibold uppercase tracking-[.12em] text-[var(--color-muted)] shadow-[var(--shadow-soft)]">
-              <Star size={12} className="text-amber-500" aria-hidden="true" /> 5+ Tahun Pengalaman & Kepercayaan Publik
+              <Star size={12} className="text-[var(--color-accent-warm)]" aria-hidden="true" /> Percakapan & perspektif
             </div>
             <p className="mt-3 text-sm leading-6 text-[var(--color-muted)]">Perspektif yang pernah hadir dari berbagai percakapan dan sudut pandang.</p>
           </div>
         </div>
       </div>
 
-      <div
-        className="relative mt-9 -mx-1 overflow-hidden [mask-image:linear-gradient(to_right,transparent,black_7%,black_93%,transparent)]"
-        aria-label="Testimonial carousel"
-        onMouseEnter={() => setPaused(true)}
-        onMouseLeave={() => setPaused(false)}
-        onTouchStart={() => setPaused(true)}
-        onTouchEnd={() => setPaused(false)}
-      >
-        <motion.div
-          className="flex w-max gap-4 pr-4"
-          animate={reduceMotion || paused ? undefined : { x: ['0%', '-50%'] }}
-          transition={reduceMotion || paused ? undefined : { duration: 36, ease: 'linear', repeat: Infinity }}
-        >
+      <div className="testimonial-viewport" aria-label="Testimonial carousel">
+        <div className="testimonial-track">
           {loop.map((item, index) => (
             <article key={`${item.name}-${index}`} className="testimonial-card ios-tile">
               <div className="flex items-start justify-between gap-4">
@@ -57,12 +42,7 @@ export default function Testimonials() {
               </div>
             </article>
           ))}
-        </motion.div>
-      </div>
-
-      <div className="mx-auto mt-5 flex max-w-7xl items-center justify-between px-1 text-[11px] font-medium text-[var(--color-muted)]">
-        <span className="inline-flex items-center gap-2"><span className="h-1.5 w-1.5 rounded-full bg-emerald-500" aria-hidden="true" /> Geser untuk eksplorasi</span>
-        <ChevronRight size={15} aria-hidden="true" />
+        </div>
       </div>
     </section>
   );
