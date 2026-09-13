@@ -28,7 +28,7 @@ export default function Projects() {
                   <p className="project-meta">{project.meta}</p>
                   {project.featured && <span className="project-live-label"><span aria-hidden="true" /> Current portfolio</span>}
                 </div>
-                <h3 id={titleId}>{project.title}</h3>
+                <h3 id={titleId} className="project-title">{project.title}</h3>
                 <p className="project-description">{project.description}</p>
               </div>
               <a className="project-visit" href={project.url} target="_blank" rel="noopener noreferrer" aria-label={`Buka project ${project.title} di GitHub`}>
