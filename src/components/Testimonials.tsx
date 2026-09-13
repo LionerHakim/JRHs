@@ -16,31 +16,6 @@ export default function Testimonials() {
   const [interacting, setInteracting] = useState(false);
   const loop = [...testimonials, ...testimonials];
 
-  useEffect(() => {
-    const viewport = viewportRef.current;
-    if (!viewport) return;
-    let frame = 0;
-    let last = performance.now();
-    const reduced = window.matchMedia('(prefers-reduced-motion: reduce)');
-
-    const tick = (now: number) => {
-      const delta = now - last;
-      last = now;
-      if (!interactingRef.current && !reduced.matches) {
-        viewport.scrollLeft += delta * 0.018;
-        const halfway = viewport.scrollWidth / 2;
-        if (halfway > 0 && viewport.scrollLeft >= halfway) viewport.scrollLeft -= halfway;
-      }
-      frame = requestAnimationFrame(tick);
-    };
-
-    frame = requestAnimationFrame(tick);
-    return () => {
-      cancelAnimationFrame(frame);
-      if (resumeTimerRef.current) window.clearTimeout(resumeTimerRef.current);
-    };
-  }, []);
-
   const setInteraction = (value: boolean) => {
     interactingRef.current = value;
     setInteracting(value);
@@ -48,7 +23,7 @@ export default function Testimonials() {
 
   const centerNearest = () => {
     const viewport = viewportRef.current;
-    if (!viewport) return;
+    if (!viewport) return 0;
     const cards = Array.from(viewport.querySelectorAll<HTMLElement>('.testimonial-card'));
     const center = viewport.scrollLeft + viewport.clientWidth / 2;
     const nearest = cards.reduce<HTMLElement | null>((best, card) => {
@@ -57,13 +32,48 @@ export default function Testimonials() {
       const bestCenter = best.offsetLeft + best.offsetWidth / 2;
       return Math.abs(cardCenter - center) < Math.abs(bestCenter - center) ? card : best;
     }, null);
-    if (nearest) viewport.scrollTo({ left: nearest.offsetLeft - (viewport.clientWidth - nearest.offsetWidth) / 2, behavior: 'smooth' });
+    if (!nearest) return 0;
+    const target = nearest.offsetLeft - (viewport.clientWidth - nearest.offsetWidth) / 2;
+    viewport.scrollTo({ left: target, behavior: 'smooth' });
+    return 700;
   };
 
-  const pauseThenResume = () => {
+  const pauseThenResume = (delay = 1500) => {
     if (resumeTimerRef.current) window.clearTimeout(resumeTimerRef.current);
-    resumeTimerRef.current = window.setTimeout(() => setInteraction(false), 1600);
+    resumeTimerRef.current = window.setTimeout(() => setInteraction(false), delay);
   };
+
+  useEffect(() => {
+    const viewport = viewportRef.current;
+    if (!viewport) return;
+    let frame = 0;
+    let last = performance.now();
+    const reduced = window.matchMedia('(prefers-reduced-motion: reduce)');
+
+    const tick = (now: number) => {
+      const delta = Math.min(now - last, 40);
+      last = now;
+      if (!interactingRef.current && !reduced.matches) {
+        viewport.scrollLeft += delta * 0.0125;
+        const loopWidth = viewport.scrollWidth / 2;
+        if (loopWidth > 0 && viewport.scrollLeft >= loopWidth) viewport.scrollLeft -= loopWidth;
+      }
+      frame = requestAnimationFrame(tick);
+    };
+
+    const pauseOnTouch = () => {
+      setInteraction(true);
+      pauseThenResume(1800);
+    };
+
+    viewport.addEventListener('touchstart', pauseOnTouch, { passive: true });
+    frame = requestAnimationFrame(tick);
+    return () => {
+      cancelAnimationFrame(frame);
+      viewport.removeEventListener('touchstart', pauseOnTouch);
+      if (resumeTimerRef.current) window.clearTimeout(resumeTimerRef.current);
+    };
+  }, []);
 
   const handlePointerDown = (event: React.PointerEvent<HTMLDivElement>) => {
     const viewport = viewportRef.current;
@@ -83,14 +93,14 @@ export default function Testimonials() {
     const viewport = viewportRef.current;
     pointerRef.current.active = false;
     if (viewport?.hasPointerCapture(event.pointerId)) viewport.releasePointerCapture(event.pointerId);
-    centerNearest();
-    pauseThenResume();
-    setInteraction(false);
+    setInteraction(true);
+    const settleTime = centerNearest();
+    pauseThenResume(settleTime + 1200);
   };
 
   const handleWheel = () => {
     setInteraction(true);
-    pauseThenResume();
+    pauseThenResume(1500);
   };
 
   return (
@@ -132,9 +142,7 @@ export default function Testimonials() {
       </div>
       <div className="testimonial-swipe-hint" aria-hidden="true">
         <span className="testimonial-swipe-line"><ArrowLeftRight size={12} strokeWidth={1.8} /></span>
-        <span>Geser untuk menjelajah</span>
-        <span className="testimonial-swipe-dot" />
-        <span>Auto</span>
+        <span>Geser untuk menjelajah</span><span className="testimonial-swipe-dot" /><span>Auto</span>
       </div>
     </section>
   );
