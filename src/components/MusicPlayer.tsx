@@ -54,7 +54,6 @@ export default function MusicPlayer() {
   useEffect(() => {
     const audio = audioRef.current;
     if (!audio) return;
-    audio.playsInline = true;
     audio.preload = 'metadata';
     audio.volume = muted ? 0 : volume;
     audio.src = playlist[index].src;
