@@ -2,7 +2,7 @@
 
 ## Supported Version
 
-The `main` branch is the supported version of JRHs.
+The `main` branch is the supported version of JRH.
 
 ## Reporting a Vulnerability
 
