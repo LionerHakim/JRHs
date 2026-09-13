@@ -18,6 +18,11 @@ export default function Navbar() {
   const menuRef = useRef<HTMLElement>(null);
   const openerRef = useRef<HTMLButtonElement>(null);
 
+  const closeMenu = () => {
+    setOpen(false);
+    openerRef.current?.focus();
+  };
+
   useEffect(() => {
     const observer = new IntersectionObserver(
       (entries) => {
@@ -74,11 +79,6 @@ export default function Navbar() {
       document.body.style.overflow = previousOverflow;
     };
   }, [open]);
-
-  const closeMenu = () => {
-    setOpen(false);
-    openerRef.current?.focus();
-  };
 
   return (
     <>
