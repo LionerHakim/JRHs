@@ -1,4 +1,5 @@
 import { Quote, Star } from 'lucide-react';
+import { useEffect, useRef, useState } from 'react';
 
 const testimonials = [
   { name: 'Pak Jokowi', role: 'Pengusaha', text: 'Insight dari Mas Jefri sangat membantu saya memahami arah pasar dengan lebih jernih. Sangat direkomendasikan untuk diskusi mendalam!' },
@@ -8,7 +9,36 @@ const testimonials = [
 ];
 
 export default function Testimonials() {
+  const viewportRef = useRef<HTMLDivElement>(null);
+  const interactingRef = useRef(false);
+  const [interacting, setInteracting] = useState(false);
   const loop = [...testimonials, ...testimonials];
+
+  useEffect(() => {
+    const viewport = viewportRef.current;
+    if (!viewport) return;
+    let frame = 0;
+    let last = performance.now();
+
+    const tick = (now: number) => {
+      const delta = now - last;
+      last = now;
+      if (!interactingRef.current && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+        viewport.scrollLeft += delta * 0.018;
+        const halfway = viewport.scrollWidth / 2;
+        if (halfway > 0 && viewport.scrollLeft >= halfway) viewport.scrollLeft -= halfway;
+      }
+      frame = requestAnimationFrame(tick);
+    };
+
+    frame = requestAnimationFrame(tick);
+    return () => cancelAnimationFrame(frame);
+  }, []);
+
+  const setInteraction = (value: boolean) => {
+    interactingRef.current = value;
+    setInteracting(value);
+  };
 
   return (
     <section id="testimonials" className="section-shell overflow-hidden" aria-labelledby="testimonials-title">
@@ -26,7 +56,18 @@ export default function Testimonials() {
           </div>
         </div>
       </div>
-      <div className="testimonial-viewport" aria-label="Testimonial carousel">
+      <div
+        ref={viewportRef}
+        className={`testimonial-viewport ${interacting ? 'is-interacting' : ''}`}
+        aria-label="Testimonial carousel"
+        onPointerDown={() => setInteraction(true)}
+        onPointerUp={() => setInteraction(false)}
+        onPointerCancel={() => setInteraction(false)}
+        onPointerLeave={() => setInteraction(false)}
+        onWheel={() => setInteraction(true)}
+        onTouchEnd={() => setInteraction(false)}
+        tabIndex={0}
+      >
         <div className="testimonial-track">
           {loop.map((item, index) => (
             <article key={`${item.name}-${index}`} className="testimonial-card ios-tile">
