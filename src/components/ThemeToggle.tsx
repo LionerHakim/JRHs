@@ -6,28 +6,30 @@ const getInitialTheme = () => {
   return document.documentElement.classList.contains('dark');
 };
 
+function applyTheme(root: HTMLElement, next: boolean) {
+  root.classList.toggle('dark', next);
+  root.style.colorScheme = next ? 'dark' : 'light';
+  const themeColor = document.querySelector<HTMLMetaElement>('meta[name="theme-color"]');
+  if (themeColor) themeColor.setAttribute('content', next ? '#0d1015' : '#f4f7fb');
+}
+
 export default function ThemeToggle() {
   const [dark, setDark] = useState(getInitialTheme);
 
   useEffect(() => {
     const root = document.documentElement;
     const media = window.matchMedia('(prefers-color-scheme: dark)');
-
-    const apply = (next: boolean) => {
-      root.classList.toggle('dark', next);
-      root.style.colorScheme = next ? 'dark' : 'light';
-      setDark(next);
-    };
-
     const saved = localStorage.getItem('jrhs-theme');
-    if (saved === 'dark' || saved === 'light') {
-      apply(saved === 'dark');
-    } else {
-      apply(media.matches);
-    }
+    const initial = saved === 'dark' ? true : saved === 'light' ? false : media.matches;
+
+    applyTheme(root, initial);
+    setDark(initial);
 
     const onSystemChange = (event: MediaQueryListEvent) => {
-      if (!localStorage.getItem('jrhs-theme')) apply(event.matches);
+      if (!localStorage.getItem('jrhs-theme')) {
+        applyTheme(root, event.matches);
+        setDark(event.matches);
+      }
     };
     media.addEventListener?.('change', onSystemChange);
     return () => media.removeEventListener?.('change', onSystemChange);
@@ -35,9 +37,8 @@ export default function ThemeToggle() {
 
   const toggle = () => {
     const next = !dark;
-    document.documentElement.classList.toggle('dark', next);
-    document.documentElement.style.colorScheme = next ? 'dark' : 'light';
     localStorage.setItem('jrhs-theme', next ? 'dark' : 'light');
+    applyTheme(document.documentElement, next);
     setDark(next);
   };
 
