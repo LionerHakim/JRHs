@@ -25,10 +25,28 @@
   --shadow-raised: 0 16px 40px rgba(0, 0, 0, .42);
 }
 
+html.light {
+  color-scheme: light;
+  --color-canvas: #F7F7F5;
+  --color-section: #F2F2EF;
+  --color-paper: #FFFFFF;
+  --color-surface-raised: #FFFFFF;
+  --color-control: #ECECEA;
+  --color-ink: #111111;
+  --color-text: #4F4F4F;
+  --color-muted: #777777;
+  --color-line: #D9D9D5;
+  --color-accent: #006FE6;
+  --color-accent-soft: rgba(0, 111, 230, .10);
+  --color-ash-mist: rgba(0, 0, 0, .05);
+  --shadow-soft: 0 8px 24px rgba(0, 0, 0, .08);
+  --shadow-raised: 0 16px 40px rgba(0, 0, 0, .14);
+}
+
 * { box-sizing: border-box; }
-html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; background: var(--color-canvas); color-scheme: dark; scrollbar-width: none; }
+html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; background: var(--color-canvas); scrollbar-width: none; }
 html::-webkit-scrollbar { width: 0; height: 0; }
-body { margin: 0; min-width: 320px; min-height: 100%; background: var(--color-canvas); color: var(--color-ink); font-family: var(--font-inter); letter-spacing: 0; overflow-x: hidden; overscroll-behavior-x: none; -webkit-overflow-scrolling: touch; }
+body { margin: 0; min-width: 320px; min-height: 100%; background: var(--color-canvas); color: var(--color-ink); font-family: var(--font-inter); letter-spacing: 0; overflow-x: hidden; overscroll-behavior-x: none; -webkit-overflow-scrolling: touch; transition: background-color 180ms ease, color 180ms ease; }
 button, a, input, select, textarea { -webkit-tap-highlight-color: transparent; }
 button, input, select, textarea { font: inherit; }
 button { color: inherit; }
@@ -36,7 +54,7 @@ input, select, textarea { color: var(--color-ink); background: var(--color-contr
 button:focus-visible, a:focus-visible, input:focus-visible, select:focus-visible, textarea:focus-visible { outline: 2px solid var(--color-accent); outline-offset: 2px; }
 ::selection { background: var(--color-accent-soft); color: var(--color-ink); }
 
-.jrhs-nav-shell { position: fixed; inset: max(.75rem, env(safe-area-inset-top)) .75rem auto; z-index: 50; margin: 0 auto; width: min(76rem, calc(100% - 1.5rem)); border: 1px solid var(--color-line); border-radius: 999px; background: rgba(10, 10, 10, .92); box-shadow: var(--shadow-soft); backdrop-filter: blur(12px); }
+.jrhs-nav-shell { position: fixed; inset: max(.75rem, env(safe-area-inset-top)) .75rem auto; z-index: 50; margin: 0 auto; width: min(76rem, calc(100% - 1.5rem)); border: 1px solid var(--color-line); border-radius: 999px; background: color-mix(in srgb, var(--color-paper) 94%, transparent); box-shadow: var(--shadow-soft); backdrop-filter: blur(12px); }
 @media (min-width: 640px) { .jrhs-nav-shell { inset-inline: 1rem; width: min(76rem, calc(100% - 2rem)); } }
 
 .scroll-progress { position: fixed; inset: 0 0 auto; z-index: 120; height: 2px; pointer-events: none; background: transparent; }
@@ -50,7 +68,7 @@ button:focus-visible, a:focus-visible, input:focus-visible, select:focus-visible
 
 .ios-tile, .project-card, .experience-card { position: relative; background: var(--color-surface-raised); color: var(--color-ink); border: 1px solid var(--color-line); box-shadow: none; border-radius: 6px; transition: transform 160ms ease, background-color 160ms ease, border-color 160ms ease, box-shadow 160ms ease, color 160ms ease; }
 .ios-tile::before, .project-card::before, .experience-card::before { display: none; }
-.ios-tile:hover, .project-card:hover, .experience-card:hover { border-color: #404040; box-shadow: 0 4px 12px rgba(0, 0, 0, .2); transform: translateY(-1px); }
+.ios-tile:hover, .project-card:hover, .experience-card:hover { border-color: color-mix(in srgb, var(--color-line) 65%, var(--color-ink)); box-shadow: var(--shadow-soft); transform: translateY(-1px); }
 .ios-tile:active, .project-card:active, .experience-card:active { transform: scale(.99); }
 .experience-card.is-open { border-color: var(--color-accent); background: var(--color-surface-raised); box-shadow: none; }
 
@@ -98,6 +116,8 @@ button:focus-visible, a:focus-visible, input:focus-visible, select:focus-visible
 .music-range { width: 100%; height: 4px; accent-color: var(--color-accent); cursor: pointer; }
 .music-playlist-item { display: flex; width: 100%; min-height: 44px; align-items: center; gap: .55rem; border: 0; border-radius: 6px; padding: .35rem .5rem; background: transparent; color: var(--color-text); text-align: left; cursor: pointer; font-size: 12px; }
 .music-playlist-item:hover, .music-playlist-item.is-active { background: var(--color-accent-soft); color: var(--color-ink); }
+
+.theme-toggle { flex: 0 0 auto; }
 
 .back-to-top { position: fixed; right: max(1rem, env(safe-area-inset-right)); bottom: max(1rem, env(safe-area-inset-bottom)); z-index: 45; display: inline-flex; min-height: 44px; align-items: center; gap: .4rem; padding: 0 .75rem; border: 1px solid var(--color-line); border-radius: 999px; background: var(--color-control); color: var(--color-ink); box-shadow: var(--shadow-soft); text-decoration: none; font-size: 11px; font-weight: 600; letter-spacing: 0; }
 .back-to-top:hover { transform: translateY(-1px); border-color: var(--color-accent); color: var(--color-accent); }
