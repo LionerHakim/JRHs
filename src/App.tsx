@@ -2,12 +2,13 @@ import Navbar from './components/Navbar';
 import Hero from './components/Hero';
 import Profile from './components/Profile';
 import RekamJejak from './components/Education';
-import MarketJourney from './components/MarketJourney';
+import MarketTicker from './components/MarketTicker';
 import WebTools from './components/WebTools';
 import Projects from './components/MegaProjects';
 import Testimonials from './components/Testimonials';
 import Contact from './components/Contact';
 import ScrollProgress from './components/ScrollProgress';
+import BackToTop from './components/BackToTop';
 
 export default function App() {
   return (
@@ -17,8 +18,8 @@ export default function App() {
       <Navbar />
       <main id="content">
         <Hero />
+        <MarketTicker />
         <Profile />
-        <MarketJourney />
         <RekamJejak />
         <WebTools />
         <Projects />
@@ -42,10 +43,11 @@ export default function App() {
           </div>
           <div className="mt-12 flex flex-col gap-3 border-t border-[var(--color-line)] pt-5 text-xs text-[var(--color-muted)] sm:flex-row sm:items-center sm:justify-between">
             <span>© 2026 JRHs</span>
-            <div className="flex items-center gap-4"><a href="https://instagram.com/jefrirh_" target="_blank" rel="noopener noreferrer" className="min-h-10 inline-flex items-center hover:text-[var(--color-ink)]">Instagram ↗</a><a href="#hero" className="min-h-10 inline-flex items-center hover:text-[var(--color-ink)]">Back to top ↑</a></div>
+            <div className="flex items-center gap-4"><a href="https://instagram.com/jefrirh_" target="_blank" rel="noopener noreferrer" className="min-h-10 inline-flex items-center hover:text-[var(--color-ink)]">Instagram ↗</a><span>Built with curiosity & intent.</span></div>
           </div>
         </div>
       </footer>
+      <BackToTop />
     </div>
   );
 }
