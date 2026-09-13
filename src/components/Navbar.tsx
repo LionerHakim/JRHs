@@ -1,6 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
 import { Menu, X } from 'lucide-react';
-import MusicPlayer from './MusicPlayer';
 import ThemeToggle from './ThemeToggle';
 
 const navLinks = [
@@ -58,7 +57,6 @@ export default function Navbar() {
             {navLinks.map((link) => { const isActive = active === link.href.slice(1); return <a key={link.href} href={link.href} className={`min-h-10 rounded-full px-3 py-2 text-sm font-medium transition-colors ${isActive ? 'text-[var(--color-ink)]' : 'text-[var(--color-muted)] hover:text-[var(--color-ink)]'}`} aria-current={isActive ? 'location' : undefined}>{link.name}</a>; })}
           </div>
           <div className="flex items-center gap-1">
-            <MusicPlayer />
             <ThemeToggle />
             <button ref={openerRef} type="button" onClick={() => setOpen(true)} className="inline-flex min-h-11 min-w-11 items-center justify-center rounded-full border border-[var(--color-line)] bg-[var(--color-control)] text-[var(--color-ink)] transition active:scale-[.97] hover:border-[var(--color-accent)] focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-accent)] xl:hidden" aria-label="Buka menu" aria-expanded={open}><Menu size={18} aria-hidden="true" /></button>
           </div>
