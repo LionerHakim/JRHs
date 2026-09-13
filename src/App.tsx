@@ -30,7 +30,7 @@ export default function App() {
             <div className="grid gap-10 lg:grid-cols-[1.25fr_.75fr] lg:items-end">
               <div>
                 <span className="eyebrow">05 / Endnote</span>
-                <a href="#hero" className="mt-4 inline-flex min-h-12 items-center gap-3 font-[var(--font-perfectly-nineties-regular)] text-4xl text-[var(--color-ink)] transition-transform hover:-translate-y-0.5 active:scale-[.98] focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-accent)]">JRHs <span className="h-2 w-2 rounded-full bg-[var(--color-accent)]" aria-hidden="true" /></a>
+                <a href="#hero" className="mt-4 inline-flex min-h-12 items-center gap-3 font-[var(--font-perfectly-nineties-regular)] text-4xl text-[var(--color-ink)] transition-transform hover:-translate-y-0.5 active:scale-[.98] focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-accent)]">JRH <span className="h-2 w-2 rounded-full bg-[var(--color-accent)]" aria-hidden="true" /></a>
                 <p className="mt-4 max-w-xl text-sm leading-7 text-[var(--color-muted)]">Economics · Markets · Technology · Human Behavior. Ruang personal untuk ide, perjalanan, eksperimen, dan hal-hal yang sedang dibangun.</p>
               </div>
               <nav className="rounded-[22px] border border-[var(--color-line)] bg-[var(--color-canvas)] p-4" aria-label="Navigasi footer">
@@ -41,11 +41,11 @@ export default function App() {
               </nav>
             </div>
             <div className="mt-8 grid gap-4 border-t border-[var(--color-line)] pt-5 text-xs text-[var(--color-muted)] sm:grid-cols-[1fr_auto] sm:items-center">
-              <div className="flex flex-wrap items-center gap-x-4 gap-y-2"><span>© 2026 JRHs</span><span className="h-1 w-1 rounded-full bg-[var(--color-line)]" aria-hidden="true" /><span>Built with curiosity & intent.</span></div>
+              <div className="flex flex-wrap items-center gap-x-4 gap-y-2"><span>© 2026 JRH</span><span className="h-1 w-1 rounded-full bg-[var(--color-line)]" aria-hidden="true" /><span>Built with curiosity & intent.</span></div>
               <a href="https://instagram.com/jefrirh_" target="_blank" rel="noopener noreferrer" className="inline-flex min-h-10 items-center rounded-full border border-[var(--color-line)] bg-[var(--color-paper)] px-4 font-semibold text-[var(--color-text)] shadow-[var(--shadow-soft)] transition-all hover:-translate-y-0.5 hover:border-[var(--color-accent)] hover:text-[var(--color-accent)] active:scale-[.97] focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-accent)]">Instagram ↗</a>
             </div>
           </div>
-          <div className="flex flex-col gap-2 px-1 pb-2 pt-5 text-[10px] font-semibold uppercase tracking-[.15em] text-[var(--color-muted)] sm:flex-row sm:items-center sm:justify-between"><span>JRHs · Personal Digital Space</span><span>Stay curious.</span></div>
+          <div className="flex flex-col gap-2 px-1 pb-2 pt-5 text-[10px] font-semibold uppercase tracking-[.15em] text-[var(--color-muted)] sm:flex-row sm:items-center sm:justify-between"><span>JRH · Personal Digital Space</span><span>Stay curious.</span></div>
         </div>
       </footer>
       <BackToTop />
