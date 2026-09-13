@@ -7,6 +7,7 @@ import Projects from './components/MegaProjects';
 import Testimonials from './components/Testimonials';
 import Contact from './components/Contact';
 import BackToTop from './components/BackToTop';
+import MusicPlayer from './components/MusicPlayer';
 
 export default function App() {
   return (
@@ -43,6 +44,7 @@ export default function App() {
           </div>
         </div>
       </footer>
+      <div className="floating-music" aria-label="Pemutar musik mengambang"><MusicPlayer /></div>
       <BackToTop />
     </div>
   );
