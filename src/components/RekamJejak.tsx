@@ -1,24 +1,28 @@
 const experienceData = [
-  { institution: 'Universitas Islam Indonesia', degree: 'Ilmu Ekonomi', year: '2021 – sekarang', activities: ['Kelompok Studi Pasar Modal (KSPM)'] },
-  { institution: 'SMA Negeri 300 Brebes', degree: '', year: '2018 – 2021', activities: ['Ketua OSIS', 'Bendahara Paskibra'] },
-  { institution: 'SMP Negeri 200 Brebes', degree: '', year: '2015 – 2018', activities: ['Paskibra'] },
   { institution: 'SD Negeri 100 Brebes', degree: '', year: '2009 – 2015', activities: [] },
+  { institution: 'SMP Negeri 200 Brebes', degree: '', year: '2015 – 2018', activities: ['Paskibra'] },
+  { institution: 'SMA Negeri 300 Brebes', degree: '', year: '2018 – 2021', activities: ['Ketua OSIS', 'Bendahara Paskibra'] },
+  { institution: 'Universitas Islam Indonesia', degree: 'Ilmu Ekonomi', year: '2021 – sekarang', activities: ['Kelompok Studi Pasar Modal (KSPM)'] },
 ] as const;
 
 export default function RekamJejak() {
   return (
     <section id="experience" className="section-shell experience-section" aria-labelledby="experience-title">
       <div className="editorial-grid">
-        <div>
-          <p className="eyebrow">03 / Experience</p>
-          <h2 id="experience-title" className="display-title">Rekam jejak.</h2>
+        <div className="experience-heading">
+          <p className="eyebrow">03 / Journey</p>
+          <h2 id="experience-title" className="display-title">Dari SD sampai sekarang.</h2>
+          <p className="section-lead">Satu garis perjalanan, dari sekolah dasar hingga pendidikan ekonomi di UII.</p>
         </div>
-        <div className="experience-list">
+        <div className="experience-list" aria-label="Perjalanan pendidikan dan aktivitas">
           {experienceData.map((item, index) => (
-            <article key={item.institution} className="experience-row">
-              <div className="experience-number">0{index + 1}</div>
+            <article key={item.institution} className={`experience-row ${item.institution.startsWith('SMA') ? 'experience-highlight' : ''}`}>
+              <div className="experience-node" aria-hidden="true"><span>{String(index + 1).padStart(2, '0')}</span></div>
               <div className="experience-main">
-                <div className="experience-topline"><span>{item.year}</span></div>
+                <div className="experience-topline">
+                  <span>{item.year}</span>
+                  {item.institution.startsWith('SMA') && <span className="experience-tag">Milestone</span>}
+                </div>
                 <h3>{item.institution}</h3>
                 {item.degree && <p className="experience-degree">{item.degree}</p>}
                 {item.activities.length > 0 && (
