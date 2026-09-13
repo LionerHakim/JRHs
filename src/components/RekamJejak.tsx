@@ -14,13 +14,17 @@ export default function RekamJejak() {
         </div>
         <div className="experience-list" aria-label="Perjalanan pendidikan dan aktivitas">
           {experienceData.map((item, index) => (
-            <article key={item.institution} className="experience-row">
+            <article key={item.institution} className={`experience-row experience-row-${index + 1}`}>
               <div className="experience-node" aria-hidden="true"><span>{String(index + 1).padStart(2, '0')}</span></div>
               <div className="experience-main">
                 <div className="experience-topline"><span>{item.year}</span></div>
                 <h3>{item.institution}</h3>
                 {item.degree && <p className="experience-degree">{item.degree}</p>}
-                {item.activities.length > 0 && <ul>{item.activities.map((activity) => <li key={activity}>{activity}</li>)}</ul>}
+                {item.activities.length > 0 && (
+                  <div className="experience-activities" aria-label={`Peran di ${item.institution}`}>
+                    {item.activities.map((activity) => <span key={activity} className="experience-role">{activity}</span>)}
+                  </div>
+                )}
               </div>
             </article>
           ))}
