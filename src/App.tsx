@@ -32,6 +32,7 @@ export default function App() {
           <div className="footer-main">
             <div>
               <a href="#hero" className="footer-brand" aria-label="JRH beranda">JRH</a>
+              <p className="footer-copy">Personal portfolio.</p>
             </div>
             <nav className="footer-nav" aria-label="Navigasi footer">
               {footerLinks.map(([label, href]) => <a key={href} href={href}>{label} <span aria-hidden="true">↗</span></a>)}
