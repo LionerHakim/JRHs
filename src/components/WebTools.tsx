@@ -23,7 +23,7 @@ export default function WebTools() {
               <motion.article key={tool.title} className="project-card relative flex min-h-64 flex-col justify-between p-5" initial={reduceMotion ? false : { opacity: 0, y: 16 }} whileInView={reduceMotion ? undefined : { opacity: 1, y: 0 }} viewport={{ once: true, margin: '-30px' }} transition={{ duration: .35, delay: index * .07 }}>
                 <div>
                   <div className="flex items-center justify-between">
-                    <span className={`inline-flex h-10 w-10 items-center justify-center rounded-2xl ${tool.accent === 'blue' ? 'bg-[var(--color-accent-soft)] text-[var(--color-accent)]' : tool.accent === 'violet' ? 'bg-violet-500/10 text-violet-600 dark:text-violet-300' : 'bg-orange-500/10 text-orange-600 dark:text-orange-300'}`}><Hammer size={17} aria-hidden="true" /></span>
+                    <span className={`inline-flex h-10 w-10 items-center justify-center rounded-2xl ${tool.accent === 'blue' ? 'bg-[var(--color-accent-soft)] text-[var(--color-accent)]' : tool.accent === 'violet' ? 'bg-[color-mix(in_srgb,var(--color-accent-violet)_12%,transparent)] text-[var(--color-accent-violet)]' : 'bg-[color-mix(in_srgb,var(--color-accent-warm)_12%,transparent)] text-[var(--color-accent-warm)]'}`}><Hammer size={17} aria-hidden="true" /></span>
                     <span className="rounded-full border border-[var(--color-line)] bg-[var(--color-canvas)] px-2.5 py-1 text-[10px] font-semibold uppercase tracking-[.12em] text-[var(--color-muted)]">{tool.label}</span>
                   </div>
                   <h3 className="mt-8 font-[var(--font-perfectly-nineties-regular)] text-3xl font-normal text-[var(--color-ink)]">{tool.title}</h3>
