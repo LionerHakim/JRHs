@@ -2,23 +2,19 @@ import Navbar from './components/Navbar';
 import Hero from './components/Hero';
 import Profile from './components/Profile';
 import RekamJejak from './components/Education';
-import MarketTicker from './components/MarketTicker';
 import WebTools from './components/WebTools';
 import Projects from './components/MegaProjects';
 import Testimonials from './components/Testimonials';
 import Contact from './components/Contact';
-import ScrollProgress from './components/ScrollProgress';
 import BackToTop from './components/BackToTop';
 
 export default function App() {
   return (
     <div className="min-h-screen bg-[var(--color-canvas)] font-[var(--font-inter)] text-[var(--color-ink)] antialiased selection:bg-[var(--color-accent-soft)]">
       <a href="#content" className="sr-only focus:not-sr-only focus:fixed focus:left-3 focus:top-3 focus:z-[120] focus:rounded-full focus:bg-[var(--color-ink)] focus:px-4 focus:py-3 focus:text-sm focus:font-semibold focus:text-[var(--color-paper)]">Lewati ke konten utama</a>
-      <ScrollProgress />
       <Navbar />
       <main id="content">
         <Hero />
-        <MarketTicker />
         <Profile />
         <RekamJejak />
         <WebTools />
@@ -34,16 +30,16 @@ export default function App() {
               <p className="mt-3 max-w-md text-sm leading-6 text-[var(--color-muted)]">Economics · Markets · Technology · Human Behavior</p>
             </div>
             <nav className="flex flex-wrap gap-x-5 gap-y-2 text-sm text-[var(--color-muted)]" aria-label="Navigasi footer">
-              <a href="#about" className="min-h-10 inline-flex items-center hover:text-[var(--color-ink)]">About</a>
-              <a href="#rekam-jejak" className="min-h-10 inline-flex items-center hover:text-[var(--color-ink)]">Rekam Jejak</a>
-              <a href="#web-tools" className="min-h-10 inline-flex items-center hover:text-[var(--color-ink)]">Web Tools</a>
-              <a href="#future" className="min-h-10 inline-flex items-center hover:text-[var(--color-ink)]">Future</a>
-              <a href="#contact" className="min-h-10 inline-flex items-center hover:text-[var(--color-ink)]">Contact</a>
+              <a href="#about" className="inline-flex min-h-10 items-center hover:text-[var(--color-ink)]">About</a>
+              <a href="#rekam-jejak" className="inline-flex min-h-10 items-center hover:text-[var(--color-ink)]">Rekam Jejak</a>
+              <a href="#web-tools" className="inline-flex min-h-10 items-center hover:text-[var(--color-ink)]">Web Tools</a>
+              <a href="#future" className="inline-flex min-h-10 items-center hover:text-[var(--color-ink)]">Future</a>
+              <a href="#contact" className="inline-flex min-h-10 items-center hover:text-[var(--color-ink)]">Contact</a>
             </nav>
           </div>
           <div className="mt-12 flex flex-col gap-3 border-t border-[var(--color-line)] pt-5 text-xs text-[var(--color-muted)] sm:flex-row sm:items-center sm:justify-between">
             <span>© 2026 JRHs</span>
-            <div className="flex items-center gap-4"><a href="https://instagram.com/jefrirh_" target="_blank" rel="noopener noreferrer" className="min-h-10 inline-flex items-center hover:text-[var(--color-ink)]">Instagram ↗</a><span>Built with curiosity & intent.</span></div>
+            <div className="flex items-center gap-4"><a href="https://instagram.com/jefrirh_" target="_blank" rel="noopener noreferrer" className="inline-flex min-h-10 items-center hover:text-[var(--color-ink)]">Instagram ↗</a><span>Built with curiosity & intent.</span></div>
           </div>
         </div>
       </footer>
