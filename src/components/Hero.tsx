@@ -4,6 +4,9 @@ export default function Hero() {
   return (
     <section id="hero" className="hero-portal hero-2050" aria-labelledby="hero-title">
       <div className="hero-atmosphere" aria-hidden="true">
+        <div className="hero-scan-grid" />
+        <div className="hero-ambient-orb hero-ambient-orb-one" />
+        <div className="hero-ambient-orb hero-ambient-orb-two" />
         <div className="hero-silhouette hero-silhouette-left" />
         <div className="hero-silhouette hero-silhouette-right" />
         <div className="hero-ground" />
@@ -13,15 +16,21 @@ export default function Hero() {
       </div>
 
       <div className="hero-telemetry" aria-hidden="true">
-        <span>JRH / 2050 INTERFACE</span>
-        <span>PERSONAL SYSTEM</span>
+        <span>JRH / PERSONAL INTERFACE</span>
+        <span>EDITORIAL SYSTEM</span>
         <span>001 — ONLINE</span>
       </div>
+
+      <div className="hero-side-marker hero-side-marker-top" aria-hidden="true"><span>01</span><i /></div>
+      <div className="hero-side-marker hero-side-marker-bottom" aria-hidden="true"><i /><span>SCROLL</span></div>
 
       <div className="hero-inner hero-2050-inner">
         <div className="hero-copy-card hero-2050-copy">
           <div className="hero-live-line"><span className="hero-live-dot" /> SYSTEM ONLINE <span>LOCAL / PERSONAL</span></div>
-          <p className="eyebrow">Personal editorial portfolio</p>
+          <div className="hero-kicker-row">
+            <p className="eyebrow">Personal editorial portfolio</p>
+            <span className="hero-index-chip">01 / 05</span>
+          </div>
           <h1 id="hero-title">JRH</h1>
           <p className="hero-positioning">Ekonomi, markets, technology, dan cara manusia berpikir.</p>
           <p className="hero-description">Ruang personal untuk memahami sistem, menguji ide, dan membangun sesuatu dengan sengaja.</p>
@@ -29,18 +38,25 @@ export default function Hero() {
             <a href="#projects" className="hero-button hero-button-primary">Lihat Projects <span aria-hidden="true">↗</span></a>
             <a href="#about" className="hero-button hero-button-secondary">Tentang JRH</a>
           </div>
+          <div className="hero-command-strip" aria-hidden="true">
+            <span>EXPLORE</span><span className="hero-command-line" /><span>JRH</span>
+          </div>
         </div>
 
         <figure className="hero-image-card hero-2050-portrait">
           <div className="hero-portrait-frame">
+            <div className="hero-portrait-noise" aria-hidden="true" />
             <img src={photo} alt="Potret JRH" fetchPriority="high" decoding="async" />
             <span className="hero-scan-line" aria-hidden="true" />
             <span className="hero-corner hero-corner-tl" aria-hidden="true" />
+            <span className="hero-corner hero-corner-tr" aria-hidden="true" />
+            <span className="hero-corner hero-corner-bl" aria-hidden="true" />
             <span className="hero-corner hero-corner-br" aria-hidden="true" />
+            <span className="hero-target" aria-hidden="true" />
           </div>
           <figcaption>
             <span>JRH / Personal space</span>
-            <span className="hero-coordinate">03.2026 · ACTIVE</span>
+            <span className="hero-coordinate">ACTIVE</span>
           </figcaption>
         </figure>
       </div>
