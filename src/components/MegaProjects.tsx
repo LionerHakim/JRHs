@@ -12,7 +12,7 @@ export default function Projects() {
     <section id="future" className="section-shell" aria-labelledby="future-title">
       <div className="section-grid">
         <div>
-          <p className="eyebrow">05 / Future</p>
+          <p className="eyebrow">04 / Future</p>
           <h2 id="future-title" className="display-title">Ideas worth building.</h2>
           <p className="mt-6 max-w-md text-sm leading-6 text-[var(--color-muted)]">Rencana jangka panjang yang belum selesai—dan memang tidak perlu berpura-pura sudah selesai.</p>
         </div>
