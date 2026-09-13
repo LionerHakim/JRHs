@@ -1,16 +1,14 @@
 import { Moon, Sun } from 'lucide-react';
 import { useEffect, useState } from 'react';
 
-const getInitialTheme = () => {
-  if (typeof document === 'undefined') return false;
-  return document.documentElement.classList.contains('dark');
-};
+const getInitialTheme = () => typeof document !== 'undefined' && document.documentElement.classList.contains('dark');
 
 function applyTheme(root: HTMLElement, next: boolean) {
   root.classList.toggle('dark', next);
   root.style.colorScheme = next ? 'dark' : 'light';
-  const themeColor = document.querySelector<HTMLMetaElement>('meta[name="theme-color"]');
-  if (themeColor) themeColor.setAttribute('content', next ? '#0d1015' : '#f4f7fb');
+  document.querySelectorAll<HTMLMetaElement>('meta[name="theme-color"]').forEach((meta) => {
+    if (!meta.media) meta.setAttribute('content', next ? '#0d1015' : '#f4f7fb');
+  });
 }
 
 export default function ThemeToggle() {
@@ -21,7 +19,6 @@ export default function ThemeToggle() {
     const media = window.matchMedia('(prefers-color-scheme: dark)');
     const saved = localStorage.getItem('jrhs-theme');
     const initial = saved === 'dark' ? true : saved === 'light' ? false : media.matches;
-
     applyTheme(root, initial);
     setDark(initial);
 
@@ -43,14 +40,7 @@ export default function ThemeToggle() {
   };
 
   return (
-    <button
-      type="button"
-      onClick={toggle}
-      className="inline-flex min-h-11 min-w-11 items-center justify-center rounded-full border border-[var(--color-line)] bg-[var(--color-control)] text-[var(--color-ink)] shadow-[var(--shadow-soft)] transition duration-160 hover:-translate-y-0.5 hover:border-[var(--color-accent)] active:scale-[.97] focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-accent)]"
-      aria-label={dark ? 'Gunakan tema terang' : 'Gunakan tema gelap'}
-      aria-pressed={dark}
-      title={dark ? 'Tema terang' : 'Tema gelap'}
-    >
+    <button type="button" onClick={toggle} className="inline-flex min-h-11 min-w-11 items-center justify-center rounded-full border border-[var(--color-line)] bg-[var(--color-control)] text-[var(--color-ink)] shadow-[var(--shadow-soft)] transition duration-160 hover:-translate-y-0.5 hover:border-[var(--color-accent)] active:scale-[.97] focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-accent)]" aria-label={dark ? 'Gunakan tema terang' : 'Gunakan tema gelap'} aria-pressed={dark} title={dark ? 'Tema terang' : 'Tema gelap'}>
       {dark ? <Sun size={16} aria-hidden="true" /> : <Moon size={16} aria-hidden="true" />}
     </button>
   );
