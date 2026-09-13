@@ -6,7 +6,7 @@ export default function Contact() {
       <div className="mx-auto max-w-6xl">
         <div className="contact-panel">
           <div className="max-w-2xl">
-            <p className="eyebrow">07 / Contact</p>
+            <p className="eyebrow">06 / Contact</p>
             <h2 id="contact-title" className="mt-3 font-[var(--font-perfectly-nineties-regular)] text-[clamp(2.7rem,8vw,5.5rem)] font-normal leading-[.92] text-[var(--color-ink)]">Ada ide? Mari ngobrol.</h2>
             <p className="mt-5 max-w-xl text-base leading-7 text-[var(--color-text)]">Untuk diskusi, kolaborasi, atau sekadar bertukar perspektif tentang ekonomi, pasar, teknologi, dan ide yang sedang dibangun.</p>
           </div>
