@@ -4,6 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
     <meta name="format-detection" content="telephone=no" />
+    <meta name="color-scheme" content="light dark" />
     <meta name="theme-color" content="#F7F7F7" />
     <meta name="description" content="JRH — personal editorial portfolio tentang ekonomi, markets, technology, human behavior, dan projects." />
     <meta name="author" content="JRH" />
@@ -24,6 +25,16 @@
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
     <link rel="canonical" href="https://jrhsee.my.id/" />
     <title>JRH — Personal Editorial Portfolio</title>
+    <script>
+      (() => {
+        try {
+          if (localStorage.getItem('jrh-theme') === 'dark') {
+            document.documentElement.classList.remove('light');
+            document.documentElement.style.colorScheme = 'dark';
+          }
+        } catch (_) {}
+      })();
+    </script>
   </head>
   <body>
     <div id="root"></div>
