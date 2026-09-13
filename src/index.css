@@ -62,8 +62,11 @@ html.dark {
 * { box-sizing: border-box; }
 html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; background: var(--color-canvas); }
 body { margin: 0; min-width: 320px; min-height: 100%; background: var(--color-canvas); color: var(--color-ink); font-family: var(--font-inter); letter-spacing: -.02em; overflow-x: hidden; overscroll-behavior-x: none; -webkit-overflow-scrolling: touch; transition: background-color 220ms ease, color 220ms ease; }
-button, a, input { -webkit-tap-highlight-color: transparent; }
-button:focus-visible, a:focus-visible, input:focus-visible { outline: 2px solid var(--color-accent); outline-offset: 3px; }
+button, a, input, select, textarea { -webkit-tap-highlight-color: transparent; }
+button, input, select, textarea { font: inherit; }
+button { color: inherit; }
+input, select, textarea { color: var(--color-ink); background-color: var(--color-control); border-color: var(--color-line); }
+button:focus-visible, a:focus-visible, input:focus-visible, select:focus-visible, textarea:focus-visible { outline: 2px solid var(--color-accent); outline-offset: 3px; }
 ::selection { background: var(--color-accent-soft); color: var(--color-ink); }
 
 .section-shell { padding: 5.75rem 1.1rem; background: var(--color-canvas); color: var(--color-ink); scroll-margin-top: 5.5rem; transition: background-color 220ms ease, color 220ms ease; }
