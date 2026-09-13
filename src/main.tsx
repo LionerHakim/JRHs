@@ -2,7 +2,7 @@ import { StrictMode } from 'react';
 import { createRoot } from 'react-dom/client';
 import App from './App.tsx';
 import './index.css';
-import './spatial2050.css';
+import './editorial.css';
 
 const root = document.getElementById('root');
 
