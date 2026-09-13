@@ -1,6 +1,4 @@
 const experienceData = [
-  { institution: 'SD Negeri 100 Brebes', degree: '', year: '2009 – 2015', activities: [] },
-  { institution: 'SMP Negeri 200 Brebes', degree: '', year: '2015 – 2018', activities: ['Paskibra'] },
   { institution: 'SMA Negeri 300 Brebes', degree: '', year: '2018 – 2021', activities: ['Ketua OSIS', 'Bendahara Paskibra'] },
   { institution: 'Universitas Islam Indonesia', degree: 'Ilmu Ekonomi', year: '2021 – sekarang', activities: ['Kelompok Studi Pasar Modal (KSPM)'] },
 ] as const;
@@ -11,8 +9,8 @@ export default function RekamJejak() {
       <div className="editorial-grid">
         <div className="experience-heading">
           <p className="eyebrow">03 / Journey</p>
-          <h2 id="experience-title" className="display-title">Dari SD sampai sekarang.</h2>
-          <p className="section-lead">Satu garis perjalanan, dari sekolah dasar hingga pendidikan ekonomi di UII.</p>
+          <h2 id="experience-title" className="display-title">Dari SMA sampai sekarang.</h2>
+          <p className="section-lead">Perjalanan pendidikan dan aktivitas yang membentuk langkah JRH hingga saat ini.</p>
         </div>
         <div className="experience-list" aria-label="Perjalanan pendidikan dan aktivitas">
           {experienceData.map((item, index) => (
