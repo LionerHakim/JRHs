@@ -2,10 +2,12 @@ import Navbar from './components/Navbar';
 import Hero from './components/Hero';
 import Profile from './components/Profile';
 import RekamJejak from './components/Education';
+import MarketJourney from './components/MarketJourney';
+import WebTools from './components/WebTools';
 import Projects from './components/MegaProjects';
+import Testimonials from './components/Testimonials';
 import Contact from './components/Contact';
 import ScrollProgress from './components/ScrollProgress';
-import ThemeToggle from './components/ThemeToggle';
 
 export default function App() {
   return (
@@ -16,16 +18,31 @@ export default function App() {
       <main id="content">
         <Hero />
         <Profile />
+        <MarketJourney />
         <RekamJejak />
+        <WebTools />
         <Projects />
+        <Testimonials />
         <Contact />
       </main>
-      <footer className="border-t border-[var(--color-line)] bg-[var(--color-canvas)] px-5 py-8 md:px-8">
-        <div className="mx-auto flex max-w-7xl flex-col gap-4 text-xs text-[var(--color-muted)] sm:flex-row sm:items-center sm:justify-between">
-          <a href="#hero" className="font-[var(--font-perfectly-nineties-regular)] text-sm text-[var(--color-ink)] transition-opacity hover:opacity-60 focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-accent)]">JRHs</a>
-          <div className="flex items-center gap-3">
-            <span>© 2026 JRHs. Hak cipta dilindungi.</span>
-            <ThemeToggle />
+      <footer className="border-t border-[var(--color-line)] bg-[var(--color-canvas)] px-5 pb-[calc(2rem+env(safe-area-inset-bottom))] pt-12 md:px-8 md:pt-16">
+        <div className="mx-auto max-w-7xl">
+          <div className="grid gap-10 md:grid-cols-[1.3fr_.7fr] md:items-end">
+            <div>
+              <a href="#hero" className="inline-flex min-h-11 items-center font-[var(--font-perfectly-nineties-regular)] text-3xl text-[var(--color-ink)] focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-accent)]">JRHs</a>
+              <p className="mt-3 max-w-md text-sm leading-6 text-[var(--color-muted)]">Economics · Markets · Technology · Human Behavior</p>
+            </div>
+            <nav className="flex flex-wrap gap-x-5 gap-y-2 text-sm text-[var(--color-muted)]" aria-label="Navigasi footer">
+              <a href="#about" className="min-h-10 inline-flex items-center hover:text-[var(--color-ink)]">About</a>
+              <a href="#rekam-jejak" className="min-h-10 inline-flex items-center hover:text-[var(--color-ink)]">Rekam Jejak</a>
+              <a href="#web-tools" className="min-h-10 inline-flex items-center hover:text-[var(--color-ink)]">Web Tools</a>
+              <a href="#future" className="min-h-10 inline-flex items-center hover:text-[var(--color-ink)]">Future</a>
+              <a href="#contact" className="min-h-10 inline-flex items-center hover:text-[var(--color-ink)]">Contact</a>
+            </nav>
+          </div>
+          <div className="mt-12 flex flex-col gap-3 border-t border-[var(--color-line)] pt-5 text-xs text-[var(--color-muted)] sm:flex-row sm:items-center sm:justify-between">
+            <span>© 2026 JRHs</span>
+            <div className="flex items-center gap-4"><a href="https://instagram.com/jefrirh_" target="_blank" rel="noopener noreferrer" className="min-h-10 inline-flex items-center hover:text-[var(--color-ink)]">Instagram ↗</a><a href="#hero" className="min-h-10 inline-flex items-center hover:text-[var(--color-ink)]">Back to top ↑</a></div>
           </div>
         </div>
       </footer>
