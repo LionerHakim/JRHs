@@ -8,9 +8,9 @@ export default function RekamJejak() {
     <section id="experience" className="section-shell experience-section" aria-labelledby="experience-title">
       <div className="editorial-grid experience-grid">
         <div className="experience-heading">
-          <p className="eyebrow">03 / Journey</p>
-          <h2 id="experience-title" className="display-title">Dari SMA sampai sekarang.</h2>
-          <p className="section-lead">Perjalanan pendidikan dan aktivitas yang membentuk langkah JRH hingga saat ini.</p>
+          <p className="eyebrow">03 / Experience</p>
+          <h2 id="experience-title" className="display-title">Dari sekolah sampai sekarang.</h2>
+          <p className="section-lead">Pendidikan dan aktivitas yang membentuk perjalanan JRH hingga saat ini.</p>
         </div>
         <div className="experience-list" aria-label="Perjalanan pendidikan dan aktivitas">
           {experienceData.map((item, index) => (
