@@ -11,7 +11,6 @@
   touch-action: pan-x;
   cursor: grab;
 }
-
 .testimonial-viewport::-webkit-scrollbar { display: none; }
 .testimonial-viewport.is-dragging { cursor: grabbing; user-select: none; }
 .testimonial-track {
@@ -20,11 +19,14 @@
   gap: 1rem;
   padding: .4rem max(1rem, calc((100vw - 72rem) / 2)) 1.25rem;
   will-change: transform;
+  animation: jrhs-testimonial-drift 52s linear infinite;
 }
-.testimonial-card {
-  scroll-snap-align: center;
-  width: min(84vw, 25rem);
+.testimonial-viewport:hover .testimonial-track { animation-play-state: paused; }
+@keyframes jrhs-testimonial-drift {
+  from { transform: translate3d(0, 0, 0); }
+  to { transform: translate3d(-50%, 0, 0); }
 }
+.testimonial-card { scroll-snap-align: center; width: min(84vw, 25rem); }
 
 .floating-music {
   position: fixed;
@@ -38,10 +40,14 @@
   right: max(.75rem, env(safe-area-inset-right));
   bottom: calc(max(1rem, env(safe-area-inset-bottom)) + 7.5rem);
 }
-
 .back-to-top { z-index: 45; }
 
 @media (max-width: 767px) {
   .floating-music { right: .75rem; bottom: calc(max(.75rem, env(safe-area-inset-bottom)) + 3.9rem); }
   .floating-music .music-player-panel { right: .75rem; bottom: calc(max(.75rem, env(safe-area-inset-bottom)) + 7.1rem); top: auto; }
+  .testimonial-card { width: min(82vw, 22rem); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .testimonial-track { animation: none !important; }
 }
