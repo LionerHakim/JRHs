@@ -17,31 +17,58 @@ const footerLinks = [
 
 export default function App() {
   useEffect(() => {
-    const sections = Array.from(document.querySelectorAll<HTMLElement>('.section-shell'));
-    if (!sections.length || window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    const root = document.documentElement;
+    const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    let frame = 0;
 
-    sections.forEach((section) => {
-      section.style.opacity = '0';
-      section.style.transform = 'translate3d(0, 24px, 0)';
-      section.style.transition = 'opacity .7s cubic-bezier(.22,1,.36,1), transform .7s cubic-bezier(.22,1,.36,1)';
-    });
-
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach((entry) => {
-        if (!entry.isIntersecting) return;
-        const section = entry.target as HTMLElement;
-        section.style.opacity = '1';
-        section.style.transform = 'translate3d(0, 0, 0)';
-        observer.unobserve(section);
+    const updatePointer = (event: PointerEvent) => {
+      if (reducedMotion || event.pointerType === 'touch') return;
+      if (frame) return;
+      frame = window.requestAnimationFrame(() => {
+        frame = 0;
+        root.style.setProperty('--pointer-x', `${event.clientX}px`);
+        root.style.setProperty('--pointer-y', `${event.clientY}px`);
       });
-    }, { rootMargin: '0px 0px -10% 0px', threshold: 0.08 });
+    };
 
-    sections.forEach((section) => observer.observe(section));
-    return () => observer.disconnect();
+    const onPointerLeave = () => {
+      root.style.setProperty('--pointer-x', '50vw');
+      root.style.setProperty('--pointer-y', '50vh');
+    };
+
+    window.addEventListener('pointermove', updatePointer, { passive: true });
+    window.addEventListener('pointerleave', onPointerLeave, { passive: true });
+
+    const sections = Array.from(document.querySelectorAll<HTMLElement>('.section-shell'));
+    if (reducedMotion || !sections.length) {
+      sections.forEach((section) => section.classList.add('is-visible'));
+    } else {
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+          if (!entry.isIntersecting) return;
+          entry.target.classList.add('is-visible');
+          observer.unobserve(entry.target);
+        });
+      }, { rootMargin: '0px 0px -8% 0px', threshold: 0.06 });
+      sections.forEach((section) => observer.observe(section));
+      return () => {
+        observer.disconnect();
+        window.removeEventListener('pointermove', updatePointer);
+        window.removeEventListener('pointerleave', onPointerLeave);
+        if (frame) window.cancelAnimationFrame(frame);
+      };
+    }
+
+    return () => {
+      window.removeEventListener('pointermove', updatePointer);
+      window.removeEventListener('pointerleave', onPointerLeave);
+      if (frame) window.cancelAnimationFrame(frame);
+    };
   }, []);
 
   return (
-    <div className="min-h-screen bg-[var(--color-canvas)] font-[var(--font-inter)] text-[var(--color-ink)] antialiased">
+    <div className="page-shell">
+      <div className="pointer-aura" aria-hidden="true" />
       <ScrollProgress />
       <a href="#content" className="skip-link">Lewati ke konten utama</a>
       <Navbar />
