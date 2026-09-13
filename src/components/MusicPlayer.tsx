@@ -12,6 +12,8 @@ const playlist = [
 
 type PlayerState = 'idle' | 'playing' | 'paused' | 'loading' | 'error';
 
+type FocusableElement = HTMLElement & { focus: () => void; hasAttribute: (name: string) => boolean };
+
 export default function MusicPlayer() {
   const audioRef = useRef<HTMLAudioElement>(null);
   const triggerRef = useRef<HTMLButtonElement>(null);
@@ -51,15 +53,16 @@ export default function MusicPlayer() {
         return;
       }
       if (event.key !== 'Tab' || !panelRef.current) return;
-      const focusable = Array.from(panelRef.current.querySelectorAll<HTMLElement>('button, input, a[href], [tabindex]:not([tabindex="-1"])')).filter((el) => !el.hasAttribute('disabled'));
-      if (!focusable.length) return;
-      const first = focusable[0];
-      const last = focusable[focusable.length - 1];
+      const focusable = Array.from(panelRef.current.querySelectorAll('button, input, a[href], [tabindex]:not([tabindex="-1"])')) as FocusableElement[];
+      const enabled = focusable.filter((el) => !el.hasAttribute('disabled'));
+      if (!enabled.length) return;
+      const first = enabled[0];
+      const last = enabled[enabled.length - 1];
       if (event.shiftKey && document.activeElement === first) { event.preventDefault(); last.focus(); }
       else if (!event.shiftKey && document.activeElement === last) { event.preventDefault(); first.focus(); }
     };
     document.addEventListener('keydown', onKey);
-    const focusTimer = window.setTimeout(() => panelRef.current?.querySelector<HTMLElement>('button')?.focus(), 0);
+    const focusTimer = window.setTimeout(() => panelRef.current?.querySelector('button')?.focus(), 0);
     return () => { document.removeEventListener('keydown', onKey); window.clearTimeout(focusTimer); };
   }, [open]);
 
