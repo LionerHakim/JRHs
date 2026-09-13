@@ -15,7 +15,7 @@ export default function Testimonials() {
       <div className="mx-auto max-w-7xl">
         <div className="flex flex-col gap-5 sm:flex-row sm:items-end sm:justify-between">
           <div>
-            <p className="eyebrow">06 / Voices</p>
+            <p className="eyebrow">05 / Voices</p>
             <h2 id="testimonials-title" className="display-title">Dampak & insight.</h2>
           </div>
           <div className="max-w-sm">
@@ -26,20 +26,13 @@ export default function Testimonials() {
           </div>
         </div>
       </div>
-
       <div className="testimonial-viewport" aria-label="Testimonial carousel">
         <div className="testimonial-track">
           {loop.map((item, index) => (
             <article key={`${item.name}-${index}`} className="testimonial-card ios-tile">
-              <div className="flex items-start justify-between gap-4">
-                <span className="testimonial-avatar" aria-hidden="true">{item.name.charAt(0)}</span>
-                <Quote size={24} className="text-[var(--color-accent)]" aria-hidden="true" />
-              </div>
+              <div className="flex items-start justify-between gap-4"><span className="testimonial-avatar" aria-hidden="true">{item.name.charAt(0)}</span><Quote size={24} className="text-[var(--color-accent)]" aria-hidden="true" /></div>
               <p className="mt-7 flex-1 text-[15px] leading-7 text-[var(--color-text)]">“{item.text}”</p>
-              <div className="mt-7 border-t border-[var(--color-line)] pt-4">
-                <p className="font-semibold text-[var(--color-ink)]">{item.name}</p>
-                <p className="mt-1 text-xs text-[var(--color-muted)]">{item.role}</p>
-              </div>
+              <div className="mt-7 border-t border-[var(--color-line)] pt-4"><p className="font-semibold text-[var(--color-ink)]">{item.name}</p><p className="mt-1 text-xs text-[var(--color-muted)]">{item.role}</p></div>
             </article>
           ))}
         </div>
