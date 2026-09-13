@@ -11,6 +11,8 @@ const navLinks = [
   { name: 'Contact', href: '#contact' },
 ];
 
+type FocusableElement = HTMLElement & { focus: () => void };
+
 export default function Navbar() {
   const [open, setOpen] = useState(false);
   const [active, setActive] = useState('about');
@@ -33,7 +35,7 @@ export default function Navbar() {
     const onKey = (event: KeyboardEvent) => {
       if (event.key === 'Escape') { event.preventDefault(); setOpen(false); openerRef.current?.focus(); return; }
       if (event.key !== 'Tab' || !menuRef.current) return;
-      const focusable = Array.from(menuRef.current.querySelectorAll<HTMLElement>('a[href], button:not([disabled])'));
+      const focusable = Array.from(menuRef.current.querySelectorAll('a[href], button:not([disabled])')) as FocusableElement[];
       if (!focusable.length) return;
       const first = focusable[0]; const last = focusable[focusable.length - 1];
       if (event.shiftKey && document.activeElement === first) { event.preventDefault(); last.focus(); }
