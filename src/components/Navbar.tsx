@@ -58,7 +58,9 @@ export default function Navbar() {
     <>
       <header className="jrh-nav-shell" aria-label="Navigasi situs">
         <nav className="jrh-nav-inner" aria-label="Navigasi utama">
-          <a href="#hero" className="jrh-wordmark" aria-label="JRH beranda">JRH</a>
+          <a href="#hero" className="jrh-wordmark" aria-label="JRH beranda">
+            <img src={`${import.meta.env.BASE_URL}jrh-logo.svg`} alt="JRH" className="jrh-logo" width="96" height="48" />
+          </a>
           <div className="jrh-nav-right">
             <div className="jrh-nav-links">
               {navLinks.map((link) => {
@@ -78,7 +80,7 @@ export default function Navbar() {
           <button type="button" className="absolute inset-0 h-full w-full" onClick={closeMenu} aria-label="Tutup menu" />
           <aside ref={menuRef} className="jrh-mobile-menu" role="dialog" aria-modal="true" aria-label="Navigasi seluler">
             <div className="jrh-mobile-menu-head">
-              <span className="jrh-wordmark">JRH</span>
+              <img src={`${import.meta.env.BASE_URL}jrh-logo.svg`} alt="JRH" className="jrh-logo jrh-logo-mobile" width="96" height="48" />
               <button ref={closeRef} type="button" onClick={closeMenu} className="jrh-menu-button" aria-label="Tutup menu"><X size={18} aria-hidden="true" /></button>
             </div>
             <nav className="jrh-mobile-links" aria-label="Navigasi utama seluler">
