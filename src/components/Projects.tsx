@@ -25,7 +25,8 @@ export default function Projects() {
     const onKey = (event: KeyboardEvent) => {
       if (event.key === 'Escape') {
         event.preventDefault();
-        closeProject();
+        setSelected(null);
+        opener?.focus();
         return;
       }
 
