@@ -1,6 +1,6 @@
 import { createPortal } from 'react-dom';
 import { useEffect, useRef, useState } from 'react';
-import { ChevronDown, Headphones, Pause, Play, X } from 'lucide-react';
+import { ChevronDown, ChevronRight, Headphones, Pause, Play, X } from 'lucide-react';
 
 const base = import.meta.env.BASE_URL;
 const playlist = [
@@ -78,11 +78,19 @@ export default function MusicPlayer() {
   const panel = open ? (
     <div id="music-player-panel" className="music-player-panel" role="dialog" aria-modal="false" aria-label="Pilih musik">
       <div className="music-player-panel-head">
-        <div><span className="music-panel-label">Pilih musik</span><strong>{playlist[index].title}</strong></div>
+        <div>
+          <span className="music-panel-label">Music</span>
+          <strong>Pilih lagu</strong>
+          <span className="music-panel-current">Sedang dipilih: {playlist[index].title}</span>
+        </div>
         <button type="button" onClick={closePanel} className="music-player-close" aria-label="Tutup pilihan musik"><X size={16} /></button>
       </div>
       <div className="music-player-playlist" role="list">
-        {playlist.map((song, songIndex) => <button key={song.title} type="button" className={`music-player-song${songIndex === index ? ' is-current' : ''}`} onClick={() => selectTrack(songIndex)} role="listitem" aria-current={songIndex === index ? 'true' : undefined}><span className="music-song-index">{String(songIndex + 1).padStart(2, '0')}</span><span>{song.title}</span>{songIndex === index && <span className="music-song-state" aria-hidden="true">Sedang dipilih</span>}</button>)}
+        {playlist.map((song, songIndex) => <button key={song.title} type="button" className={`music-player-song${songIndex === index ? ' is-current' : ''}`} onClick={() => selectTrack(songIndex)} role="listitem" aria-current={songIndex === index ? 'true' : undefined}>
+          <span className="music-song-index">{String(songIndex + 1).padStart(2, '0')}</span>
+          <span>{song.title}</span>
+          <span className="music-song-state">{songIndex === index ? 'Dipilih' : ''}</span>
+        </button>)}
       </div>
       <div className="music-player-mini-volume"><label htmlFor="music-volume">Volume</label><input id="music-volume" type="range" min="0" max="1" step="0.01" value={muted ? 0 : volume} onChange={(event) => { setMuted(false); setVolume(Number(event.target.value)); }} /></div>
       {state === 'error' && <div className="music-player-error-inline" role="status">Musik gagal dimuat. Tekan tombol play untuk mencoba lagi.</div>}
@@ -98,7 +106,7 @@ export default function MusicPlayer() {
         <span className="music-player-copy"><span className="music-player-kicker">MUSIC</span><span className="music-player-title">{playlist[index].title}</span></span>
         <ChevronDown size={14} aria-hidden="true" />
       </button>
-      <button type="button" className="music-player-next" onClick={() => changeTrack(1)} aria-label="Lagu berikutnya"><span aria-hidden="true">›</span></button>
+      <button type="button" className="music-player-next" onClick={() => changeTrack(1)} aria-label="Lagu berikutnya"><ChevronRight size={17} aria-hidden="true" /></button>
     </div>
     {typeof document !== 'undefined' && createPortal(panel, document.body)}
   </div>;
