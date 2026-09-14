@@ -22,7 +22,8 @@ const projects = [
   {
     title: 'Pinterest',
     description: 'Koleksi visual Galuh Purba sebagai referensi inspirasi dan eksplorasi visual.',
-    url: 'https://images.unsplash.com/photo-1547891654-e66ed7ebb968?auto=format&fit=crop&w=900&h=1125&q=86',
+    url: 'https://id.pinterest.com/galuhpurba/',
+    image: 'https://images.unsplash.com/photo-1547891654-e66ed7ebb968?auto=format&fit=crop&w=900&h=1125&q=86',
   },
 ] as const;
 
