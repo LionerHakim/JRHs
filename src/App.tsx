@@ -5,6 +5,7 @@ import Projects from './components/Projects';
 import RekamJejak from './components/RekamJejak';
 import Contact from './components/Contact';
 import ScrollProgress from './components/ScrollProgress';
+import './components/Footer.css';
 
 const footerLinks = [
   ['About', '#about'],
