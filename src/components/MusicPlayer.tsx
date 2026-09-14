@@ -1,5 +1,5 @@
-import { useEffect, useRef, useState, type ChangeEvent } from 'react';
-import { ChevronDown, Headphones, Pause, Play, RefreshCw, SkipBack, SkipForward, Volume2, VolumeX, X } from 'lucide-react';
+import { useEffect, useRef, useState } from 'react';
+import { ChevronDown, Headphones, Pause, Play, X } from 'lucide-react';
 
 const base = import.meta.env.BASE_URL;
 const playlist = [
@@ -8,305 +8,141 @@ const playlist = [
   { title: 'Tak Ada Ujungnya', src: `${base}data/musik/Tak-AdaUjungnya.mp3` },
   { title: 'Tourner Dans Le Vide', src: `${base}data/musik/Tourner-DansLeVide.mp3` },
   { title: 'Who Knows', src: `${base}data/musik/Who-Knows.mp3` },
-];
+] as const;
 
-type PlayerState = 'idle' | 'playing' | 'paused' | 'loading' | 'error';
 const STORAGE_KEY = 'jrh-music-player-v3';
-type StoredPlayer = { index?: number; volume?: number; muted?: boolean };
 
-function readStoredPlayer(): StoredPlayer {
-  try {
-    const raw = localStorage.getItem(STORAGE_KEY);
-    return raw ? JSON.parse(raw) as StoredPlayer : {};
-  } catch {
-    return {};
-  }
+type Stored = { index?: number; volume?: number; muted?: boolean };
+type State = 'idle' | 'playing' | 'paused' | 'loading' | 'error';
+
+function readStored(): Stored {
+  try { return JSON.parse(localStorage.getItem(STORAGE_KEY) || '{}') as Stored; } catch { return {}; }
 }
 
 export default function MusicPlayer() {
+  const stored = useRef(readStored());
   const audioRef = useRef<HTMLAudioElement>(null);
+  const playerRef = useRef<HTMLDivElement>(null);
   const triggerRef = useRef<HTMLButtonElement>(null);
-  const panelRef = useRef<HTMLDivElement>(null);
-  const indexRef = useRef(0);
-  const playRequestRef = useRef(false);
-  const switchTokenRef = useRef(0);
-  const stored = useRef(readStoredPlayer());
-  const [index, setIndex] = useState(() => Number.isInteger(stored.current.index) && (stored.current.index as number) >= 0 && (stored.current.index as number) < playlist.length ? (stored.current.index as number) : 0);
-  const [state, setState] = useState<PlayerState>('idle');
+  const [index, setIndex] = useState(() => Number.isInteger(stored.current.index) && Number(stored.current.index) >= 0 && Number(stored.current.index) < playlist.length ? Number(stored.current.index) : 0);
+  const [state, setState] = useState<State>('idle');
+  const [volume, setVolume] = useState(() => typeof stored.current.volume === 'number' ? Math.min(1, Math.max(0, stored.current.volume)) : 0.65);
   const [muted, setMuted] = useState(() => Boolean(stored.current.muted));
-  const [volume, setVolume] = useState(() => typeof stored.current.volume === 'number' && stored.current.volume >= 0 && stored.current.volume <= 1 ? stored.current.volume : 0.65);
-  const [progress, setProgress] = useState(0);
-  const [duration, setDuration] = useState(0);
   const [open, setOpen] = useState(false);
 
-  useEffect(() => { indexRef.current = index; }, [index]);
-
   useEffect(() => {
-    try { localStorage.setItem(STORAGE_KEY, JSON.stringify({ index, volume, muted })); } catch { /* Storage may be unavailable. */ }
+    try { localStorage.setItem(STORAGE_KEY, JSON.stringify({ index, volume, muted })); } catch { /* ignore storage errors */ }
   }, [index, volume, muted]);
 
   useEffect(() => {
     const audio = audioRef.current;
     if (!audio) return;
+    audio.src = playlist[index].src;
     audio.preload = 'metadata';
     audio.setAttribute('playsinline', '');
-    audio.setAttribute('webkit-playsinline', '');
     audio.volume = muted ? 0 : volume;
-    audio.src = playlist[index].src;
     audio.load();
-    setProgress(0);
-    setDuration(0);
   }, []);
 
   useEffect(() => {
-    const audio = audioRef.current;
-    if (audio) audio.volume = muted ? 0 : volume;
+    if (audioRef.current) audioRef.current.volume = muted ? 0 : volume;
   }, [muted, volume]);
 
   useEffect(() => {
     const mediaSession = typeof navigator !== 'undefined' ? navigator.mediaSession : undefined;
     if (!mediaSession || typeof MediaMetadata === 'undefined') return;
-
     mediaSession.metadata = new MediaMetadata({ title: playlist[index].title, artist: 'JRH' });
-
-    const run = (action: MediaSessionAction, handler: () => void) => {
-      try { mediaSession.setActionHandler(action, handler); } catch { /* Browser may not support this action. */ }
-    };
-    run('play', () => play());
-    run('pause', () => pause());
-    run('previoustrack', () => changeTrack(-1));
-    run('nexttrack', () => changeTrack(1));
-    run('seekbackward', () => seekBy(-10));
-    run('seekforward', () => seekBy(10));
-
-    return () => {
-      ['play', 'pause', 'previoustrack', 'nexttrack', 'seekbackward', 'seekforward'].forEach((action) => {
-        try { mediaSession.setActionHandler(action as MediaSessionAction, null); } catch { /* Ignore unsupported actions. */ }
-      });
-    };
+    const safe = (action: MediaSessionAction, handler: () => void) => { try { mediaSession.setActionHandler(action, handler); } catch { /* unsupported */ } };
+    safe('play', play);
+    safe('pause', pause);
+    safe('nexttrack', () => changeTrack(1));
+    safe('previoustrack', () => changeTrack(-1));
+    return () => ['play', 'pause', 'nexttrack', 'previoustrack'].forEach((action) => { try { mediaSession.setActionHandler(action as MediaSessionAction, null); } catch { /* ignore */ } });
   }, [index, state]);
 
   useEffect(() => {
     if (!open) return;
     const onKey = (event: KeyboardEvent) => {
-      if (event.key === 'Escape') {
-        event.preventDefault();
-        setOpen(false);
-        triggerRef.current?.focus();
-        return;
-      }
-      if (event.key !== 'Tab' || !panelRef.current) return;
-      const focusable = Array.from(panelRef.current.querySelectorAll<HTMLElement>('button:not([disabled]), input:not([disabled])'));
-      if (!focusable.length) return;
-      const first = focusable[0];
-      const last = focusable[focusable.length - 1];
-      if (event.shiftKey && document.activeElement === first) { event.preventDefault(); last.focus(); }
-      else if (!event.shiftKey && document.activeElement === last) { event.preventDefault(); first.focus(); }
+      if (event.key === 'Escape') { event.preventDefault(); closePanel(); }
     };
-    document.addEventListener('keydown', onKey);
-    const timer = window.setTimeout(() => panelRef.current?.querySelector<HTMLElement>('button:not([disabled])')?.focus(), 0);
-    return () => { document.removeEventListener('keydown', onKey); window.clearTimeout(timer); };
-  }, [open]);
-
-  useEffect(() => {
-    if (!open) return;
     const onPointerDown = (event: PointerEvent) => {
       const target = event.target as Node;
-      if (!panelRef.current?.contains(target) && !triggerRef.current?.contains(target)) {
-        setOpen(false);
-        triggerRef.current?.focus();
-      }
+      if (!playerRef.current?.contains(target)) closePanel();
     };
+    document.addEventListener('keydown', onKey);
     document.addEventListener('pointerdown', onPointerDown);
-    return () => document.removeEventListener('pointerdown', onPointerDown);
+    return () => { document.removeEventListener('keydown', onKey); document.removeEventListener('pointerdown', onPointerDown); };
   }, [open]);
 
-  const setPlaybackState = (next: PlayerState) => {
-    setState(next);
-    const mediaSession = typeof navigator !== 'undefined' ? navigator.mediaSession : undefined;
-    if (mediaSession) mediaSession.playbackState = next === 'playing' ? 'playing' : 'paused';
-  };
-
-  const play = () => {
+  function play() {
     const audio = audioRef.current;
     if (!audio) return;
-    const token = switchTokenRef.current;
-    playRequestRef.current = true;
     setState('loading');
-    void audio.play().then(() => {
-      if (token !== switchTokenRef.current) return;
-      playRequestRef.current = false;
-      setPlaybackState('playing');
-    }).catch(() => {
-      if (token !== switchTokenRef.current) return;
-      playRequestRef.current = false;
-      setState('error');
-    });
-  };
+    void audio.play().then(() => setState('playing')).catch(() => setState('error'));
+  }
 
-  const pause = () => {
+  function pause() {
     const audio = audioRef.current;
     if (!audio) return;
-    playRequestRef.current = false;
     audio.pause();
-    setPlaybackState('paused');
-  };
+    setState('paused');
+  }
 
-  const togglePlayback = () => {
-    if (state === 'loading') return;
-    if (state === 'playing') pause();
-    else play();
-  };
+  function togglePlayback() {
+    if (state === 'playing') pause(); else if (state !== 'loading') play();
+  }
 
-  const switchTrack = (nextIndex: number, autoplay = true) => {
+  function changeTrack(step: number) {
+    const next = (index + step + playlist.length) % playlist.length;
     const audio = audioRef.current;
+    setIndex(next);
     if (!audio) return;
-    const safeIndex = (nextIndex + playlist.length) % playlist.length;
-    const token = ++switchTokenRef.current;
-
-    indexRef.current = safeIndex;
-    setIndex(safeIndex);
-    setProgress(0);
-    setDuration(0);
-    playRequestRef.current = autoplay;
-
     audio.pause();
-    audio.src = playlist[safeIndex].src;
+    audio.src = playlist[next].src;
     audio.currentTime = 0;
     audio.volume = muted ? 0 : volume;
-
-    if (!autoplay) {
-      playRequestRef.current = false;
-      setState('idle');
-      return;
-    }
-
-    setState('loading');
-    void audio.play().then(() => {
-      if (token !== switchTokenRef.current) return;
-      playRequestRef.current = false;
-      setPlaybackState('playing');
-    }).catch(() => {
-      if (token !== switchTokenRef.current) return;
-      playRequestRef.current = false;
-      setState('error');
-    });
-  };
-
-  const changeTrack = (step: number) => switchTrack(indexRef.current + step, true);
-
-  const seekBy = (seconds: number) => {
-    const audio = audioRef.current;
-    if (!audio || !Number.isFinite(audio.duration)) return;
-    audio.currentTime = Math.min(audio.duration, Math.max(0, audio.currentTime + seconds));
-  };
-
-  const selectTrack = (songIndex: number) => {
     setOpen(false);
-    switchTrack(songIndex, true);
-    window.setTimeout(() => triggerRef.current?.focus(), 0);
-  };
+    void audio.play().then(() => setState('playing')).catch(() => setState('error'));
+  }
 
-  const retry = () => {
+  function selectTrack(next: number) {
     const audio = audioRef.current;
+    setIndex(next);
+    setOpen(false);
     if (!audio) return;
-    const token = ++switchTokenRef.current;
-    playRequestRef.current = true;
     audio.pause();
-    audio.src = playlist[indexRef.current].src;
+    audio.src = playlist[next].src;
     audio.currentTime = 0;
-    audio.load();
-    setState('loading');
-    void audio.play().then(() => {
-      if (token !== switchTokenRef.current) return;
-      playRequestRef.current = false;
-      setPlaybackState('playing');
-    }).catch(() => {
-      if (token !== switchTokenRef.current) return;
-      playRequestRef.current = false;
-      setState('error');
-    });
-  };
+    audio.volume = muted ? 0 : volume;
+    void audio.play().then(() => setState('playing')).catch(() => setState('error'));
+  }
 
-  const seek = (event: ChangeEvent<HTMLInputElement>) => {
-    const audio = audioRef.current;
-    if (!audio || !duration) return;
-    const next = Number(event.target.value);
-    audio.currentTime = (next / 100) * duration;
-    setProgress(next);
-  };
-
-  const formatTime = (value: number) => Number.isFinite(value)
-    ? `${Math.floor(value / 60)}:${Math.floor(value % 60).toString().padStart(2, '0')}`
-    : '0:00';
-  const statusLabel = state === 'error' ? 'Audio tidak tersedia' : state === 'loading' ? 'Memuat musik' : state === 'playing' ? 'Sedang diputar' : state === 'paused' ? 'Dijeda' : 'Siap diputar';
+  function closePanel() {
+    setOpen(false);
+    window.setTimeout(() => triggerRef.current?.focus(), 0);
+  }
 
   return (
-    <div className="music-player" aria-label="Pemutar musik">
-      <audio
-        ref={audioRef}
-        preload="metadata"
-        onLoadedMetadata={(event) => setDuration(Number.isFinite(event.currentTarget.duration) ? event.currentTarget.duration : 0)}
-        onDurationChange={(event) => setDuration(Number.isFinite(event.currentTarget.duration) ? event.currentTarget.duration : 0)}
-        onPlay={() => { if (playRequestRef.current || !audioRef.current?.paused) setPlaybackState('playing'); }}
-        onPause={() => {
-          if (!playRequestRef.current && state !== 'error') setPlaybackState('paused');
-        }}
-        onWaiting={() => { if (!audioRef.current?.paused) setState('loading'); }}
-        onPlaying={() => { playRequestRef.current = false; setPlaybackState('playing'); }}
-        onStalled={() => { if (!audioRef.current?.paused) setState('loading'); }}
-        onEnded={() => changeTrack(1)}
-        onError={() => { if (!playRequestRef.current) setState('error'); }}
-        onTimeUpdate={(event) => {
-          const audio = event.currentTarget;
-          setProgress(audio.duration > 0 ? (audio.currentTime / audio.duration) * 100 : 0);
-        }}
-      />
-
-      <div className="music-player-pill" title={`${playlist[index].title} — ${statusLabel}`}>
-        <button ref={triggerRef} type="button" onClick={togglePlayback} className="music-player-button" aria-label={state === 'playing' ? 'Jeda musik' : 'Putar musik'} disabled={state === 'loading'}>
-          {state === 'playing' ? <Pause size={14} aria-hidden="true" /> : <Play size={14} aria-hidden="true" />}
+    <div ref={playerRef} className="music-player" aria-label="Pemutar musik">
+      <audio ref={audioRef} onPlay={() => setState('playing')} onPause={() => { if (state !== 'error') setState('paused'); }} onEnded={() => changeTrack(1)} onError={() => setState('error')} />
+      <div className="music-player-pill">
+        <button ref={triggerRef} type="button" className="music-player-button" onClick={togglePlayback} aria-label={state === 'playing' ? 'Jeda musik' : 'Putar musik'}>{state === 'playing' ? <Pause size={14} /> : <Play size={14} />}</button>
+        <button type="button" className="music-player-track-button" onClick={() => setOpen((value) => !value)} aria-expanded={open} aria-controls="music-player-panel">
+          <Headphones size={13} aria-hidden="true" /><span className="music-player-title">{playlist[index].title}</span><ChevronDown size={13} aria-hidden="true" />
         </button>
-        <button type="button" onClick={() => setOpen((value) => !value)} className="music-player-track-button" aria-label={`Pilih musik, ${playlist[index].title}`} aria-expanded={open} aria-controls="music-player-panel">
-          <Headphones size={13} aria-hidden="true" />
-          <span className="music-player-track-label">Music</span>
-          <span className="music-player-title">{state === 'error' ? 'Audio bermasalah' : playlist[index].title}</span>
-          <ChevronDown size={13} aria-hidden="true" />
-        </button>
-        <button type="button" onClick={() => changeTrack(1)} className="music-player-next" aria-label="Lagu berikutnya"><SkipForward size={13} aria-hidden="true" /></button>
+        <button type="button" className="music-player-next" onClick={() => changeTrack(1)} aria-label="Lagu berikutnya"><span aria-hidden="true">›</span></button>
       </div>
-      <div className="music-player-progress" aria-hidden="true"><div style={{ width: `${progress}%` }} /></div>
-
-      {open && <>
-        <div className="music-player-panel-backdrop" aria-hidden="true" />
-        <div id="music-player-panel" ref={panelRef} className="music-player-panel" role="dialog" aria-modal="false" aria-label="Pemutar musik">
-          <div className="music-player-panel-head">
-            <div className="min-w-0"><p className="eyebrow">Music</p><p className="music-player-current">{state === 'error' ? 'Audio tidak tersedia' : playlist[index].title}</p></div>
-            <button type="button" onClick={() => { setOpen(false); triggerRef.current?.focus(); }} className="music-player-close" aria-label="Tutup pemutar musik"><X size={15} aria-hidden="true" /></button>
-          </div>
-
-          {state === 'error' && <div className="music-player-error" role="status" aria-live="polite">
-            <p>Tidak bisa memutar file ini di browser saat ini.</p>
-            <button type="button" onClick={retry} className="music-player-retry"><RefreshCw size={14} aria-hidden="true" /> Coba lagi</button>
-          </div>}
-
-          <div className="music-player-timeline"><label className="sr-only" htmlFor="music-progress">Posisi lagu</label><input id="music-progress" type="range" min="0" max="100" step="0.1" value={progress} onChange={seek} disabled={!duration || state === 'error'} className="music-range" /><div><span>{formatTime((progress / 100) * duration)}</span><span>{formatTime(duration)}</span></div></div>
-          <div className="music-player-main-controls"><button type="button" onClick={() => changeTrack(-1)} className="music-player-action" aria-label="Lagu sebelumnya"><SkipBack size={17} aria-hidden="true" /></button><button type="button" onClick={togglePlayback} className="music-player-main-action" aria-label={state === 'playing' ? 'Jeda musik' : 'Putar musik'} disabled={state === 'loading'}>{state === 'playing' ? <Pause size={17} aria-hidden="true" /> : <Play size={17} aria-hidden="true" />}</button><button type="button" onClick={() => changeTrack(1)} className="music-player-action" aria-label="Lagu berikutnya"><SkipForward size={17} aria-hidden="true" /></button></div>
-
-          <div className="music-player-volume"><div className="music-player-volume-icon">{muted ? <VolumeX size={14} aria-hidden="true" /> : <Volume2 size={14} aria-hidden="true" />}</div><label className="sr-only" htmlFor="music-volume">Volume</label><input id="music-volume" type="range" min="0" max="1" step="0.01" value={muted ? 0 : volume} onChange={(event) => { setMuted(false); setVolume(Number(event.target.value)); }} className="music-range" /><button type="button" onClick={() => setMuted((value) => !value)} className="music-player-action" aria-label={muted ? 'Nyalakan suara' : 'Bisukan musik'}>{muted ? <VolumeX size={14} aria-hidden="true" /> : <Volume2 size={14} aria-hidden="true" />}</button></div>
-
-          <div className="music-player-playlist" role="list" aria-label="Daftar lagu">
-            <p className="music-player-playlist-label">Pilih lagu</p>
+      {open && (
+        <div ref={undefined} id="music-player-panel" className="music-player-panel" role="dialog" aria-label="Pilih musik">
+          <div className="music-player-panel-head"><div><span className="music-panel-label">Music</span><strong>{playlist[index].title}</strong></div><button type="button" onClick={closePanel} className="music-player-close" aria-label="Tutup"><X size={15} /></button></div>
+          <div className="music-player-playlist" role="list">
             {playlist.map((song, songIndex) => (
-              <button key={song.src} type="button" onClick={() => selectTrack(songIndex)} className={`music-playlist-item ${songIndex === index ? 'is-active' : ''}`} role="listitem">
-                <span className="music-playlist-number">{String(songIndex + 1).padStart(2, '0')}</span>
-                <span className="music-playlist-name">{song.title}</span>
-                {songIndex === index && <span className="music-playlist-now">Now playing</span>}
-              </button>
+              <button key={song.title} type="button" className={`music-player-song${songIndex === index ? ' is-current' : ''}`} onClick={() => selectTrack(songIndex)} role="listitem"><span className="music-song-index">{String(songIndex + 1).padStart(2, '0')}</span><span>{song.title}</span>{songIndex === index && <span className="music-song-state">●</span>}</button>
             ))}
           </div>
+          <div className="music-player-mini-volume"><label htmlFor="music-volume">Volume</label><input id="music-volume" type="range" min="0" max="1" step="0.01" value={muted ? 0 : volume} onChange={(event) => { setMuted(false); setVolume(Number(event.target.value)); }} /></div>
         </div>
-      </>}
+      )}
     </div>
   );
 }
