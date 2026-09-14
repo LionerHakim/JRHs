@@ -8,7 +8,6 @@ export default function RekamJejak() {
     <section id="experience" className="section-shell experience-section" aria-labelledby="experience-title">
       <div className="editorial-grid experience-grid">
         <div className="experience-heading">
-          <p className="eyebrow">03 / Experience</p>
           <h2 id="experience-title" className="display-title">Dari sekolah sampai sekarang.</h2>
           <p className="section-lead">Pendidikan dan aktivitas yang membentuk perjalanan hingga saat ini.</p>
         </div>
@@ -20,11 +19,7 @@ export default function RekamJejak() {
                 <div className="experience-topline"><span>{item.year}</span></div>
                 <h3>{item.institution}</h3>
                 {item.degree && <p className="experience-degree">{item.degree}</p>}
-                {item.activities.length > 0 && (
-                  <div className="experience-activities" aria-label={`Peran di ${item.institution}`}>
-                    {item.activities.map((activity) => <span key={activity} className="experience-role">{activity}</span>)}
-                  </div>
-                )}
+                {item.activities.length > 0 && <div className="experience-activities" aria-label={`Peran di ${item.institution}`}>{item.activities.map((activity) => <span key={activity} className="experience-role">{activity}</span>)}</div>}
               </div>
             </article>
           ))}
