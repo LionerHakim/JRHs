@@ -12,7 +12,7 @@
 .music-player{overflow:visible!important;contain:none!important}
 .music-player-panel{transform:translateZ(0)!important;will-change:transform!important}
 
-/* Quiet-luxury navigation: monochrome by default, blue only for interaction. */
+/* Navigation — quiet luxury, monochrome first. */
 .jrh-wordmark{position:relative!important;padding:6px 4px!important;border-radius:12px!important;color:#111!important;transition:transform .2s ease,opacity .2s ease!important}
 .jrh-wordmark:hover{transform:translateY(-1px)!important;opacity:.78!important}
 .jrh-logo{width:82px!important;height:32px!important;display:block!important;overflow:visible!important}
@@ -21,96 +21,78 @@
 .jrh-nav-link.is-active{background:#111!important;color:#fff!important;box-shadow:0 6px 16px rgba(0,0,0,.08)!important}
 .jrh-menu-button{transition:transform .2s ease,background .2s ease,border-color .2s ease,color .2s ease,box-shadow .2s ease!important}
 .jrh-menu-button:hover{border-color:rgba(37,99,235,.36)!important;background:#fafbff!important;color:var(--jrh-blue)!important;box-shadow:0 8px 20px rgba(37,99,235,.08)!important}
+.jrh-nav-link:focus-visible,.jrh-menu-button:focus-visible,.jrh-wordmark:focus-visible{outline:2px solid rgba(37,99,235,.55)!important;outline-offset:3px!important}
 
-/* Hero stays white. Blue is reserved for a single moment of emphasis. */
+/* Hero — white canvas, strong type, surgical accent. */
 .hero-button-primary{background:#111!important;border-color:#111!important;box-shadow:0 10px 26px rgba(0,0,0,.08)!important}
 .hero-button-primary:hover{background:var(--jrh-blue)!important;border-color:var(--jrh-blue)!important;box-shadow:0 12px 30px rgba(37,99,235,.16)!important}
 .hero-button-secondary:hover{border-color:rgba(37,99,235,.45)!important;color:var(--jrh-blue)!important;background:#fafbff!important}
 .hero-positioning strong,.hero-clean .hero-positioning em{color:#111!important}
+.hero-button,.project-visit,.footer-nav a,.footer-meta a{ -webkit-tap-highlight-color:transparent!important }
 
-/* Projects: one visual system across every card. */
+/* Projects — one restrained system, image-first. */
 .projects-section{background:#fff!important}
-.project-object,.project-object.project-featured{
-  position:relative!important;
-  border:1px solid var(--jrh-line)!important;
-  background:var(--jrh-card)!important;
-  box-shadow:0 2px 6px rgba(0,0,0,.02),0 18px 48px rgba(0,0,0,.055)!important;
-  transition:transform .25s ease,box-shadow .25s ease,border-color .25s ease!important;
-}
+.project-object,.project-object.project-featured{position:relative!important;border:1px solid var(--jrh-line)!important;background:#fff!important;box-shadow:0 2px 6px rgba(0,0,0,.02),0 18px 48px rgba(0,0,0,.055)!important;transition:transform .25s ease,box-shadow .25s ease,border-color .25s ease!important}
 .project-object::after{content:"";position:absolute;left:20px;top:0;width:34px;height:2px;border-radius:0 0 6px 6px;background:#111!important;opacity:.88!important}
 .project-object:hover,.project-object.project-featured:hover{transform:translateY(-4px)!important;border-color:#d8d8d5!important;box-shadow:0 6px 12px rgba(0,0,0,.025),0 26px 70px rgba(0,0,0,.085)!important}
 .project-visit{border-color:#e1e1de!important;box-shadow:0 4px 12px rgba(0,0,0,.03)!important;transition:all .2s ease!important}
 .project-visit:hover{border-color:rgba(37,99,235,.38)!important;background:#fafbff!important;color:var(--jrh-blue)!important;box-shadow:0 8px 18px rgba(37,99,235,.08)!important}
 
-/* Experience: restrained, monochrome, editorial. */
+/* Experience — editorial timeline, no multicolor states. */
 .experience-list{border-color:var(--jrh-line)!important;box-shadow:0 12px 34px rgba(0,0,0,.04)!important}
-.experience-node{background:#111!important;box-shadow:0 0 0 5px #fff,0 0 0 6px #d9d9d5!important}
-.experience-row-2 .experience-node{background:#111!important;box-shadow:0 0 0 5px #fff,0 0 0 6px #d9d9d5!important}
-.experience-role{border-color:#e1e1de!important;background:#fafaf9!important;color:#333!important}
-.experience-row-2 .experience-role{border-color:#e1e1de!important;background:#fafaf9!important;color:#333!important}
+.experience-node,.experience-row-2 .experience-node{background:#111!important;box-shadow:0 0 0 5px #fff,0 0 0 6px #d9d9d5!important}
+.experience-role,.experience-row-2 .experience-role{border-color:#e1e1de!important;background:#fafaf9!important;color:#333!important}
 
-/* Contact: black anchor, one blue interaction state. */
+/* Contact — deep black anchor with one blue interaction moment. */
 .contact-wrap{box-shadow:0 24px 70px rgba(0,0,0,.11)!important}
 .contact-wrap .hero-button-primary:hover{background:var(--jrh-blue)!important;border-color:var(--jrh-blue)!important;color:#fff!important;box-shadow:0 14px 34px rgba(37,99,235,.16)!important}
 
-/* Footer: premium card, no decorative rainbow rails. */
-.site-footer{border-top:0!important;background:#fff!important;padding:18px 0 24px!important}
-.site-footer .footer-inner{
-  position:relative!important;
-  box-sizing:border-box!important;
-  border:1px solid var(--jrh-line)!important;
-  border-radius:24px!important;
-  background:#fff!important;
-  box-shadow:0 3px 8px rgba(0,0,0,.02),0 20px 55px rgba(0,0,0,.07)!important;
-  overflow:hidden!important;
-}
-.site-footer .footer-inner::before{content:"";position:absolute;top:0;left:0;width:34px;height:2px;background:#111!important;border-radius:0 0 5px 0}
+/* Footer — dark editorial close, visually distinct from content cards. */
+.site-footer{border-top:0!important;background:#fff!important;padding:22px 0 28px!important}
+.site-footer .footer-inner{position:relative!important;box-sizing:border-box!important;border:1px solid #292929!important;border-radius:28px!important;background:#111!important;color:#f7f7f5!important;box-shadow:0 20px 60px rgba(0,0,0,.12),0 2px 8px rgba(0,0,0,.08)!important;overflow:hidden!important}
+.site-footer .footer-inner::before{content:""!important;display:block!important;position:absolute!important;top:0!important;left:34px!important;width:46px!important;height:2px!important;background:#fff!important;border-radius:0 0 4px 4px!important}
 .site-footer .footer-inner::after{display:none!important}
-.site-footer .footer-main{padding:0 28px!important}
-.site-footer .footer-bottom{margin-left:28px!important;margin-right:28px!important;border-top-color:#ededeb!important}
-.site-footer .footer-brand{transition:transform .2s ease,color .2s ease!important}
-.site-footer .footer-brand:hover{transform:translateY(-1px)!important;color:var(--jrh-blue)!important}
-.site-footer .footer-nav a{transition:color .2s ease,transform .2s ease!important}
-.site-footer .footer-nav a:hover{color:var(--jrh-blue)!important;transform:translateX(2px)!important}
-.site-footer .footer-meta a:hover{color:var(--jrh-blue)!important}
+.site-footer .footer-main{padding:0 34px!important}
+.site-footer .footer-brand{color:#fff!important;transition:transform .2s ease,color .2s ease!important}
+.site-footer .footer-brand:hover{transform:translateY(-1px)!important;color:#79a6ff!important}
+.site-footer .footer-tagline{color:#fff!important}
+.site-footer .footer-focus{color:#a7a7a2!important}
+.site-footer .footer-nav-label{color:#7f817c!important}
+.site-footer .footer-nav a{color:#f4f4f1!important;transition:color .2s ease,transform .2s ease!important}
+.site-footer .footer-nav a:hover{color:#79a6ff!important;transform:translateX(3px)!important}
+.site-footer .footer-bottom{margin-left:34px!important;margin-right:34px!important;border-top-color:#2a2a28!important;color:#858780!important}
+.site-footer .footer-meta a{color:#fff!important}
+.site-footer .footer-meta a:hover{color:#79a6ff!important}
 
-/* Music is not redesigned here: only preserve depth/fidelity. */
-.music-player-pill{box-shadow:0 8px 22px rgba(0,0,0,.07)!important}
-.music-player-button{background:#111!important;box-shadow:0 6px 14px rgba(0,0,0,.10)!important;transition:background .2s ease,transform .2s ease!important}
+/* Music — stable, compact, touch-friendly. */
+.music-player{z-index:800!important}
+.music-player-pill{box-shadow:0 8px 24px rgba(0,0,0,.08)!important}
+.music-player-button{background:#111!important;color:#fff!important;box-shadow:0 6px 14px rgba(0,0,0,.10)!important;transition:background .2s ease,transform .2s ease!important}
 .music-player-button:hover{background:#111!important;transform:scale(1.03)!important}
-.music-player-panel{border-color:#dededb!important;box-shadow:0 22px 58px rgba(0,0,0,.15)!important}
+.music-player-track-button,.music-player-next,.music-player-close{touch-action:manipulation!important}
+.music-player-panel{border-color:#dededb!important;background:#fff!important;box-shadow:0 22px 58px rgba(0,0,0,.15)!important}
+.music-player-song{min-height:44px!important}
 .music-player-song.is-current{background:#f5f5f3!important;color:#111!important}
 .music-player-mini-volume input{accent-color:#111!important}
 
-/* Mobile: Samsung-style edge polish, restrained to one cool-blue accent. */
+/* Mobile platform polish: safe-area aware and never trapped behind the browser chrome. */
 @media (max-width:767px){
   .jrh-nav-inner{position:relative!important;z-index:701!important}
   .music-player{position:static!important}
-  .music-player-panel{position:fixed!important;z-index:2147483000!important;right:10px!important;bottom:72px!important;left:auto!important;top:auto!important;width:min(300px,calc(100vw - 20px))!important;max-height:calc(100dvh - 88px)!important;overflow:auto!important;overscroll-behavior:contain!important;-webkit-overflow-scrolling:touch!important}
+  .music-player-panel{position:fixed!important;z-index:2147483000!important;right:10px!important;bottom:calc(68px + env(safe-area-inset-bottom))!important;left:auto!important;top:auto!important;width:min(300px,calc(100vw - 20px))!important;max-height:calc(100dvh - 92px - env(safe-area-inset-top) - env(safe-area-inset-bottom))!important;overflow:auto!important;overscroll-behavior:contain!important;-webkit-overflow-scrolling:touch!important;border-radius:18px!important}
   .music-player-pill{position:relative!important;z-index:2147483001!important}
   .music-player-track-button,.music-player-song{cursor:pointer!important;user-select:none!important;-webkit-user-select:none!important;-webkit-touch-callout:none!important}
-
-  .page-shell::before{
-    content:"";position:fixed;inset:0;z-index:480;pointer-events:none;
-    border:1px solid rgba(37,99,235,.16)!important;
-    box-shadow:inset 0 0 14px rgba(37,99,235,.055),inset 0 0 34px rgba(255,255,255,.72)!important;
-    opacity:.58;animation:jrh-edge-mobile 5s ease-in-out infinite!important;
-  }
-  .page-shell::after{
-    content:"";position:fixed;inset:7px;z-index:479;pointer-events:none;border-radius:15px;
-    border:1px solid rgba(37,99,235,.07)!important;
-    box-shadow:inset 0 0 8px rgba(37,99,235,.035),inset 0 0 22px rgba(255,255,255,.68)!important;
-    opacity:.42;animation:jrh-edge-mobile-soft 5s ease-in-out infinite!important;
-  }
+  .music-player-title{max-width:132px!important;overflow:hidden!important;text-overflow:ellipsis!important;white-space:nowrap!important}
+  .page-shell::before{content:"";position:fixed;inset:0;z-index:480;pointer-events:none;border:1px solid rgba(37,99,235,.16)!important;box-shadow:inset 0 0 14px rgba(37,99,235,.055),inset 0 0 34px rgba(255,255,255,.72)!important;opacity:.58;animation:jrh-edge-mobile 5s ease-in-out infinite!important}
+  .page-shell::after{content:"";position:fixed;inset:7px;z-index:479;pointer-events:none;border-radius:15px;border:1px solid rgba(37,99,235,.07)!important;box-shadow:inset 0 0 8px rgba(37,99,235,.035),inset 0 0 22px rgba(255,255,255,.68)!important;opacity:.42;animation:jrh-edge-mobile-soft 5s ease-in-out infinite!important}
   @keyframes jrh-edge-mobile{0%,100%{opacity:.28}50%{opacity:.66}}
   @keyframes jrh-edge-mobile-soft{0%,100%{opacity:.2}50%{opacity:.46}}
-
-  .site-footer{padding:14px 16px 18px!important}
-  .site-footer .footer-inner{width:100%!important;padding:42px 0 26px!important;border-radius:22px!important;box-shadow:0 12px 32px rgba(0,0,0,.065),0 3px 10px rgba(0,0,0,.025)!important}
-  .site-footer .footer-main{padding:0 20px!important}
-  .site-footer .footer-bottom{margin-left:20px!important;margin-right:20px!important}
-  .site-footer .footer-inner::before{height:2px!important;width:28px!important}
+  .site-footer{padding:16px 12px calc(20px + env(safe-area-inset-bottom))!important}
+  .site-footer .footer-inner{width:100%!important;padding:50px 0 24px!important;border-radius:24px!important;box-shadow:0 14px 40px rgba(0,0,0,.10),0 2px 8px rgba(0,0,0,.06)!important}
+  .site-footer .footer-main{padding:0 22px!important}
+  .site-footer .footer-inner::before{left:24px!important;width:34px!important}
+  .site-footer .footer-bottom{margin-left:22px!important;margin-right:22px!important}
   .project-object,.project-object.project-featured{box-shadow:0 3px 8px rgba(0,0,0,.025),0 12px 30px rgba(0,0,0,.055)!important}
   .project-object:hover,.project-object.project-featured:hover{transform:none!important}
 }
-@media (prefers-reduced-motion:reduce){.page-shell::after,.page-shell::before{animation:none!important}}
+@media (prefers-reduced-motion:reduce){.page-shell::after,.page-shell::before{animation:none!important}.jrh-wordmark,.jrh-nav-link,.jrh-menu-button,.project-object,.project-visit,.footer-brand,.footer-nav a{transition:none!important}}
