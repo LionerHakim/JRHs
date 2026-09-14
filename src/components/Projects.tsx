@@ -60,14 +60,15 @@ export default function Projects() {
               aria-labelledby={titleId}
             >
               <div className="project-media" aria-hidden="true">
-                <img src={project.image} alt="" loading="lazy" decoding="async" />
+                <img
+                  src={project.image}
+                  alt=""
+                  loading={project.featured ? 'eager' : 'lazy'}
+                  decoding="async"
+                  fetchPriority={project.featured ? 'high' : 'auto'}
+                />
               </div>
-              <div className="project-index" aria-hidden="true">{String(index + 1).padStart(2, '0')}</div>
               <div className="project-content">
-                <div className="project-meta-row">
-                  <p className="project-meta">{project.meta}</p>
-                  {project.featured && <span className="project-live-label"><span aria-hidden="true" /> Current portfolio</span>}
-                </div>
                 <h3 id={titleId} className="project-title">{project.title}</h3>
                 <p className="project-description">{project.description}</p>
               </div>
@@ -78,7 +79,7 @@ export default function Projects() {
                 rel="noopener noreferrer"
                 aria-label={`Buka ${project.title}`}
               >
-                <span>Open</span><ArrowUpRight size={16} aria-hidden="true" />
+                <span>Lihat project</span><ArrowUpRight size={16} aria-hidden="true" />
               </a>
             </article>
           );
