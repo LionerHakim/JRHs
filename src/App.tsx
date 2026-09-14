@@ -23,7 +23,7 @@ export default function App() {
 
       <footer className="site-footer">
         <div className="footer-inner">
-          <div className="footer-minimal">
+          <div className="footer-minimal" aria-label="Hak cipta">
             <span>© 2026 JRH</span>
           </div>
         </div>
