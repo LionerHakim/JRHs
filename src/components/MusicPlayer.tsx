@@ -48,7 +48,6 @@ export default function MusicPlayer() {
     const audio = audioRef.current;
     if (!audio) return;
     audio.preload = 'auto';
-    audio.playsInline = true;
     audio.setAttribute('playsinline', '');
     audio.setAttribute('webkit-playsinline', '');
     audio.volume = muted ? 0 : volume;
@@ -227,7 +226,6 @@ export default function MusicPlayer() {
       <audio
         ref={audioRef}
         preload="auto"
-        playsInline
         onLoadedMetadata={(event) => setDuration(Number.isFinite(event.currentTarget.duration) ? event.currentTarget.duration : 0)}
         onDurationChange={(event) => setDuration(Number.isFinite(event.currentTarget.duration) ? event.currentTarget.duration : 0)}
         onPlay={() => {
