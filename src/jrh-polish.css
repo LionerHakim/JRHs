@@ -66,14 +66,15 @@ body{color:var(--jrh-ink);overflow-x:hidden}
 .footer-minimal{display:flex!important;visibility:visible!important;opacity:1!important;align-items:center!important;justify-content:center!important;min-height:26px!important;color:#666!important;font-family:'Switzer',Inter,system-ui,sans-serif!important;font-size:13px!important;line-height:1.4!important;letter-spacing:.01em!important}
 .footer-minimal span{display:block!important;color:#666!important;text-align:center!important}
 
-/* Music: always a proper player control, never a lone circle. */
-.music-player{z-index:260!important;min-width:0}
+/* Music: compact trigger plus a mobile-safe, independently positioned picker. */
+.music-player{z-index:260!important;min-width:0!important}
 .music-player-pill{box-sizing:border-box;width:min(252px,34vw)!important;min-height:44px!important;padding:2px!important;border:1px solid var(--jrh-line)!important;border-radius:999px!important;background:#fff!important;box-shadow:0 8px 24px rgba(0,0,0,.06)!important}
 .music-player-button{background:#111!important;color:#fff!important}
 .music-player-next{color:#666!important}
 .music-player-progress>div{background:#111!important}
-.music-player-panel-backdrop{background:rgba(17,17,17,.18)!important;backdrop-filter:blur(7px);-webkit-backdrop-filter:blur(7px)}
-.music-player-panel{border:1px solid var(--jrh-line)!important;background:#fff!important;box-shadow:0 24px 70px rgba(0,0,0,.14)!important}
+.music-player-panel-backdrop{position:fixed!important;inset:0!important;z-index:998!important;background:rgba(17,17,17,.18)!important;backdrop-filter:blur(7px);-webkit-backdrop-filter:blur(7px);pointer-events:auto!important}
+.music-player-panel{position:fixed!important;right:20px!important;bottom:20px!important;z-index:999!important;width:min(360px,calc(100vw - 32px))!important;max-height:min(680px,calc(100vh - 40px))!important;overflow:auto!important;box-sizing:border-box!important;border:1px solid var(--jrh-line)!important;background:#fff!important;border-radius:24px!important;box-shadow:0 24px 70px rgba(0,0,0,.14)!important;pointer-events:auto!important}
+.music-player-panel *{pointer-events:auto}
 .music-player-main-action{background:#111!important;border-color:#111!important;color:#fff!important;box-shadow:none!important}
 .music-range{accent-color:#111!important}
 
@@ -92,13 +93,16 @@ body{color:var(--jrh-ink);overflow-x:hidden}
   .music-player{margin:0!important}
   .music-player-pill{width:166px!important;height:42px!important;min-width:166px!important;min-height:42px!important;padding:2px!important;overflow:hidden!important}
   .music-player-button{width:38px!important;height:38px!important;min-width:38px!important;min-height:38px!important}
-  .music-player-track-button{position:static!important;inset:auto!important;opacity:1!important;z-index:auto!important;width:auto!important;height:38px!important;min-width:0!important;display:flex!important;flex:1 1 auto!important;justify-content:flex-start!important;gap:6px!important;padding:0 7px!important;overflow:hidden!important;background:transparent!important}
+  .music-player-track-button{position:static!important;inset:auto!important;opacity:1!important;z-index:auto!important;width:auto!important;height:38px!important;min-width:0!important;display:flex!important;flex:1 1 auto!important;justify-content:flex-start!important;gap:6px!important;padding:0 7px!important;overflow:hidden!important;background:transparent!important;touch-action:manipulation!important;-webkit-tap-highlight-color:transparent!important}
   .music-player-track-label{display:none!important}
   .music-player-title{display:block!important;min-width:0!important;max-width:82px!important;overflow:hidden!important;text-overflow:ellipsis!important;white-space:nowrap!important;font-size:11px!important}
   .music-player-track-button svg{display:block!important;flex:none!important}
   .music-player-track-button svg:last-child{display:none!important}
   .music-player-next{display:inline-flex!important;width:34px!important;height:38px!important;min-width:34px!important}
   .music-player-progress{display:block!important;left:12px!important;right:12px!important;bottom:0!important}
+
+  .music-player-panel-backdrop{inset:0!important;z-index:998!important}
+  .music-player-panel{left:16px!important;right:16px!important;bottom:max(16px,env(safe-area-inset-bottom))!important;width:auto!important;max-height:calc(100dvh - 32px)!important;border-radius:22px!important;padding-bottom:env(safe-area-inset-bottom)!important;-webkit-overflow-scrolling:touch!important}
 
   .hero-clean{padding-top:96px!important}
   .hero-portrait{max-width:330px!important}
