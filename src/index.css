@@ -1,19 +1,51 @@
 @import "tailwindcss";
 
 @theme {
-  /* JRHs solid palette — keep legacy token names only as compatibility aliases. */
-  --color-raspberry-pulse: #111111;
+  --color-background: hsl(0 0% 100%);
+  --color-foreground: hsl(0 0% 29.4%);
+  --color-card: hsl(0 0% 97.6%);
+  --color-card-foreground: hsl(0 0% 29.4%);
+  --color-popover: hsl(0 0% 97.6%);
+  --color-popover-foreground: hsl(0 0% 29.4%);
+  --color-primary: hsl(225 100% 40%);
+  --color-primary-foreground: hsl(0 0% 100%);
+  --color-secondary: hsl(8.3 94.7% 92.5%);
+  --color-secondary-foreground: hsl(0 0% 3.9%);
+  --color-muted: hsl(0 0% 96.1%);
+  --color-muted-foreground: hsl(0 0% 55.7%);
+  --color-accent: hsl(356.2 96.2% 41.8%);
+  --color-accent-foreground: hsl(0 0% 100%);
+  --color-destructive: hsl(0 72.2% 50.6%);
+  --color-destructive-foreground: hsl(0 0% 100%);
+  --color-border: hsl(0 0% 91%);
+  --color-input: hsl(0 0% 91%);
+  --color-ring: hsl(356.2 96.2% 41.8%);
+  --color-sidebar: hsl(0 0% 96.9%);
+  --color-sidebar-foreground: hsl(0 0% 29.4%);
+  --color-sidebar-primary: hsl(225 100% 40%);
+  --color-sidebar-primary-foreground: hsl(0 0% 100%);
+  --color-sidebar-accent: hsl(356.2 96.2% 41.8%);
+  --color-sidebar-accent-foreground: hsl(0 0% 100%);
+  --color-sidebar-border: hsl(0 0% 91%);
+  --color-sidebar-ring: hsl(356.2 96.2% 41.8%);
+  --color-chart-1: hsl(356.2 96.2% 41.8%);
+  --color-chart-2: hsl(225 100% 40%);
+  --color-chart-3: hsl(8.3 94.7% 92.5%);
+  --color-chart-4: hsl(0 100% 39.2%);
+  --color-chart-5: hsl(223.2 84.7% 23.1%);
+
   --color-ink-black: #111111;
-  --color-lavender-mist: #ffffff;
-  --color-mint-cream: #ffffff;
-  --color-butter-cream: #f2c94c;
-  --color-sky-wash: #2563eb;
-  --color-sand-wash: #f3f3f0;
+  --color-pure-white: #ffffff;
   --color-carbon: #111111;
   --color-steel: #777777;
   --color-silver: #ddddda;
-  --color-pure-white: #ffffff;
+  --color-butter-cream: #f2c94c;
+  --color-sky-wash: #2563eb;
+  --color-sand-wash: #f3f3f0;
   --color-lime-zest: #d92d20;
+  --color-raspberry-pulse: #111111;
+  --color-lavender-mist: #ffffff;
+  --color-mint-cream: #ffffff;
   --color-teal-current: #2563eb;
 
   --font-montreal-neue: 'Montreal Neue', Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
@@ -94,11 +126,43 @@
 }
 
 :root {
+  --background: 0 0% 100%;
+  --foreground: 0 0% 29.4%;
+  --card: 0 0% 97.6%;
+  --card-foreground: 0 0% 29.4%;
+  --popover: 0 0% 97.6%;
+  --popover-foreground: 0 0% 29.4%;
+  --primary: 225 100% 40%;
+  --primary-foreground: 0 0% 100%;
+  --secondary: 8.3 94.7% 92.5%;
+  --secondary-foreground: 0 0% 3.9%;
+  --muted: 0 0% 96.1%;
+  --muted-foreground: 0 0% 55.7%;
+  --accent: 356.2 96.2% 41.8%;
+  --accent-foreground: 0 0% 100%;
+  --destructive: 0 72.2% 50.6%;
+  --destructive-foreground: 0 0% 100%;
+  --border: 0 0% 91%;
+  --input: 0 0% 91%;
+  --ring: 356.2 96.2% 41.8%;
+  --sidebar: 0 0% 96.9%;
+  --sidebar-foreground: 0 0% 29.4%;
+  --sidebar-primary: 225 100% 40%;
+  --sidebar-primary-foreground: 0 0% 100%;
+  --sidebar-accent: 356.2 96.2% 41.8%;
+  --sidebar-accent-foreground: 0 0% 100%;
+  --sidebar-border: 0 0% 91%;
+  --sidebar-ring: 356.2 96.2% 41.8%;
+  --chart-1: 356.2 96.2% 41.8%;
+  --chart-2: 225 100% 40%;
+  --chart-3: 8.3 94.7% 92.5%;
+  --chart-4: 0 100% 39.2%;
+  --chart-5: 223.2 84.7% 23.1%;
+
   --color-signal-blue: #2563eb;
   --color-voltage-violet: #f2c94c;
   --color-pencil-gray: #ddddda;
   --color-ink: #111111;
-  --color-carbon: #111111;
   --color-paper: #ffffff;
   --font-inter: var(--font-montreal-neue);
   --text-display-xl-compat: var(--text-display-xl);
@@ -118,6 +182,41 @@
   --surface-card-surface: #ffffff;
   --surface-dark-surface: #111111;
   --surface-attention-red: #d92d20;
+}
+
+.dark {
+  --background: 60 4.5% 8.6%;
+  --foreground: 60 4.8% 95.9%;
+  --card: 60 2.9% 13.3%;
+  --card-foreground: 60 4.8% 95.9%;
+  --popover: 60 2.9% 13.3%;
+  --popover-foreground: 60 4.8% 95.9%;
+  --primary: 221.2 71.4% 58.8%;
+  --primary-foreground: 0 0% 3.9%;
+  --secondary: 9.7 30.1% 20.2%;
+  --secondary-foreground: 0 0% 100%;
+  --muted: 60 2.5% 15.7%;
+  --muted-foreground: 60 0.5% 57.5%;
+  --accent: 5.1 72.4% 61.6%;
+  --accent-foreground: 0 0% 3.9%;
+  --destructive: 0 84.2% 60.2%;
+  --destructive-foreground: 0 0% 3.9%;
+  --border: 60 1.7% 23.1%;
+  --input: 60 1.7% 23.1%;
+  --ring: 5.1 72.4% 61.6%;
+  --sidebar: 60 3.2% 12.2%;
+  --sidebar-foreground: 60 4.8% 95.9%;
+  --sidebar-primary: 221.2 71.4% 58.8%;
+  --sidebar-primary-foreground: 0 0% 3.9%;
+  --sidebar-accent: 5.1 72.4% 61.6%;
+  --sidebar-accent-foreground: 0 0% 3.9%;
+  --sidebar-border: 60 1.7% 23.1%;
+  --sidebar-ring: 5.1 72.4% 61.6%;
+  --chart-1: 5.1 72.4% 61.6%;
+  --chart-2: 221.2 71.4% 58.8%;
+  --chart-3: 9.7 30.1% 20.2%;
+  --chart-4: 225 100% 40%;
+  --chart-5: 0 100% 39.2%;
 }
 
 html { margin: 0; padding: 0; background: #ffffff; color-scheme: light; scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
