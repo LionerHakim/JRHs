@@ -29,9 +29,7 @@ export default function App() {
       <footer className="site-footer">
         <div className="footer-inner">
           <div className="footer-main">
-            <div>
-              <p className="footer-copy">Personal portfolio.</p>
-            </div>
+            <p className="footer-copy">Personal portfolio.</p>
             <nav className="footer-nav" aria-label="Navigasi footer">
               {footerLinks.map(([label, href]) => <a key={href} href={href}>{label} <span aria-hidden="true">↗</span></a>)}
             </nav>
