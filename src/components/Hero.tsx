@@ -6,6 +6,20 @@ export default function Hero() {
           <div className="hero-panel">
             <p className="eyebrow">2026 / Personal archive</p>
             <h1 id="hero-title">Portfolio</h1>
+
+            <figure className="hero-portrait">
+              <div className="hero-portrait-frame">
+                <img
+                  src={`${import.meta.env.BASE_URL}data/foto/s.jpg`}
+                  alt="Portrait"
+                  loading="eager"
+                  decoding="async"
+                  fetchPriority="high"
+                />
+              </div>
+              <figcaption>Personal archive</figcaption>
+            </figure>
+
             <p className="hero-positioning">Ekonomi, markets, technology, dan cara manusia berpikir.</p>
             <p className="hero-description">Ruang personal untuk memahami sistem, menguji ide, dan membangun sesuatu dengan sengaja.</p>
 
@@ -21,19 +35,6 @@ export default function Hero() {
               <span aria-hidden="true">↓</span>
             </a>
           </div>
-
-          <figure className="hero-portrait">
-            <div className="hero-portrait-frame">
-              <img
-                src={`${import.meta.env.BASE_URL}data/foto/s.jpg`}
-                alt="Portrait"
-                loading="eager"
-                decoding="async"
-                fetchPriority="high"
-              />
-            </div>
-            <figcaption>Personal archive</figcaption>
-          </figure>
         </div>
       </div>
     </section>
