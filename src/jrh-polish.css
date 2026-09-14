@@ -10,7 +10,6 @@
 html,body,#root{min-height:100%;background:#fff}
 body{color:var(--jrh-ink);overflow-x:hidden}
 
-/* Navbar + logo: visible mark is only JRH. */
 .jrh-nav-shell{background:rgba(255,255,255,.96)!important;border-bottom:1px solid rgba(233,233,231,.82)!important;box-shadow:0 6px 28px rgba(0,0,0,.035)!important;backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px)}
 .jrh-wordmark{min-width:auto!important}
 .jrh-logo{width:68px!important;height:auto!important}
@@ -19,7 +18,6 @@ body{color:var(--jrh-ink);overflow-x:hidden}
 .jrh-nav-link.is-active{background:#111!important;color:#fff!important}
 .jrh-menu-button{border:1px solid var(--jrh-line)!important;background:#fff!important;color:#111!important;box-shadow:none!important}
 
-/* Hero: calm, premium, image-led. */
 .hero-clean{background:#fff!important}
 .hero-clean::before,.hero-clean::after{display:none!important}
 .hero-portrait-frame{background:#f2f2ef!important;box-shadow:0 20px 60px rgba(0,0,0,.07)!important}
@@ -27,7 +25,15 @@ body{color:var(--jrh-ink);overflow-x:hidden}
 .hero-button-primary{background:#111!important;border-color:#111!important;box-shadow:none!important}
 .hero-button-primary:hover{background:#292929!important;transform:translateY(-2px)}
 
-/* Projects: real visual cards with replaceable image URLs in Projects.tsx. */
+/* Hero portrait now sits directly under Portfolio copy and above the CTAs. */
+.hero-panel{display:flex!important;flex-direction:column!important;align-items:flex-start!important}
+.hero-portrait-inline{order:3!important;width:min(280px,100%)!important;margin:24px 0 4px!important}
+.hero-portrait-inline .hero-portrait-frame{width:100%!important;aspect-ratio:4/5!important;border-radius:22px!important;overflow:hidden!important}
+.hero-portrait-inline img{width:100%!important;height:100%!important;display:block!important;object-fit:cover!important}
+.hero-panel .hero-actions{order:4!important}
+.hero-panel .hero-scroll-hint{order:5!important}
+
+/* Projects: editorial grid on larger screens, touch-first snap carousel on phones. */
 .projects-section{background:#fff!important}
 .projects-list{gap:20px!important}
 .project-object{min-height:0!important;padding:0!important;border:1px solid var(--jrh-line)!important;border-radius:var(--jrh-radius)!important;background:#fff!important;overflow:hidden!important;box-shadow:none!important;display:grid!important;grid-template-columns:1fr!important}
@@ -45,12 +51,17 @@ body{color:var(--jrh-ink);overflow-x:hidden}
 .project-featured{grid-column:1/-1!important}
 .project-featured .project-media{aspect-ratio:16/8}
 
-/* Experience stays readable and distinct without colored blocks. */
+@media (min-width:768px){
+  .projects-list{grid-template-columns:repeat(2,minmax(0,1fr))!important;align-items:start!important}
+  .project-featured{grid-column:1/-1!important}
+  .project-featured .project-media{aspect-ratio:16/7!important}
+  .project-object:not(.project-featured) .project-media{aspect-ratio:4/5!important}
+}
+
 .experience-section{background:#fff!important}
 .experience-list{background:#fff!important;border:1px solid var(--jrh-line)!important;box-shadow:none!important}
 .experience-row{background:#fff!important}
 
-/* Contact: Indonesian, warm, still polished. */
 .contact-section{padding-top:100px!important;padding-bottom:100px!important}
 .contact-wrap{background:#111!important;color:#fff!important;border:0!important;border-radius:32px!important;box-shadow:none!important;padding:72px 42px!important}
 .contact-kicker{color:#cfcfca!important;font-size:14px!important}
@@ -60,20 +71,19 @@ body{color:var(--jrh-ink);overflow-x:hidden}
 .contact-wrap .hero-button-primary{background:#fff!important;border-color:#fff!important;color:#111!important}
 .contact-wrap .hero-button-primary:hover{background:#eeeeea!important;border-color:#eeeeea!important}
 
-/* Footer: explicit, visible, minimal. */
 .site-footer{display:block!important;visibility:visible!important;opacity:1!important;background:#fff!important;border-top:1px solid var(--jrh-line)!important}
 .footer-inner{width:min(1180px,calc(100% - 32px))!important;margin:0 auto!important;padding:38px 0 34px!important}
 .footer-minimal{display:flex!important;visibility:visible!important;opacity:1!important;align-items:center!important;justify-content:center!important;min-height:26px!important;color:#666!important;font-family:'Switzer',Inter,system-ui,sans-serif!important;font-size:13px!important;line-height:1.4!important;letter-spacing:.01em!important}
 .footer-minimal span{display:block!important;color:#666!important;text-align:center!important}
 
-/* Music: compact trigger plus a mobile-safe, independently positioned picker. */
-.music-player{z-index:260!important;min-width:0!important}
+/* Music picker: avoid fixed-inside-fixed on iOS/Android. The navbar is fixed, so the picker is anchored locally. */
+.music-player{position:relative!important;z-index:260!important;min-width:0!important}
 .music-player-pill{box-sizing:border-box;width:min(252px,34vw)!important;min-height:44px!important;padding:2px!important;border:1px solid var(--jrh-line)!important;border-radius:999px!important;background:#fff!important;box-shadow:0 8px 24px rgba(0,0,0,.06)!important}
 .music-player-button{background:#111!important;color:#fff!important}
 .music-player-next{color:#666!important}
 .music-player-progress>div{background:#111!important}
-.music-player-panel-backdrop{position:fixed!important;inset:0!important;z-index:998!important;background:rgba(17,17,17,.18)!important;backdrop-filter:blur(7px);-webkit-backdrop-filter:blur(7px);pointer-events:auto!important}
-.music-player-panel{position:fixed!important;right:20px!important;bottom:20px!important;z-index:999!important;width:min(360px,calc(100vw - 32px))!important;max-height:min(680px,calc(100vh - 40px))!important;overflow:auto!important;box-sizing:border-box!important;border:1px solid var(--jrh-line)!important;background:#fff!important;border-radius:24px!important;box-shadow:0 24px 70px rgba(0,0,0,.14)!important;pointer-events:auto!important}
+.music-player-panel-backdrop{display:none!important}
+.music-player-panel{position:absolute!important;top:calc(100% + 12px)!important;right:0!important;left:auto!important;bottom:auto!important;z-index:9999!important;width:min(360px,calc(100vw - 32px))!important;max-height:min(680px,calc(100vh - 96px))!important;overflow:auto!important;box-sizing:border-box!important;border:1px solid var(--jrh-line)!important;background:#fff!important;border-radius:24px!important;box-shadow:0 24px 70px rgba(0,0,0,.14)!important;pointer-events:auto!important}
 .music-player-panel *{pointer-events:auto}
 .music-player-main-action{background:#111!important;border-color:#111!important;color:#fff!important;box-shadow:none!important}
 .music-range{accent-color:#111!important}
@@ -81,7 +91,6 @@ body{color:var(--jrh-ink);overflow-x:hidden}
 @media (max-width:900px){
   .jrh-nav-links{display:none}
   .jrh-menu-button{display:inline-flex}
-  .project-featured .project-media{aspect-ratio:4/3}
 }
 
 @media (max-width:767px){
@@ -100,19 +109,28 @@ body{color:var(--jrh-ink);overflow-x:hidden}
   .music-player-track-button svg:last-child{display:none!important}
   .music-player-next{display:inline-flex!important;width:34px!important;height:38px!important;min-width:34px!important}
   .music-player-progress{display:block!important;left:12px!important;right:12px!important;bottom:0!important}
-
-  .music-player-panel-backdrop{inset:0!important;z-index:998!important}
-  .music-player-panel{left:16px!important;right:16px!important;bottom:max(16px,env(safe-area-inset-bottom))!important;width:auto!important;max-height:calc(100dvh - 32px)!important;border-radius:22px!important;padding-bottom:env(safe-area-inset-bottom)!important;-webkit-overflow-scrolling:touch!important}
+  .music-player-panel{position:absolute!important;top:calc(100% + 10px)!important;right:-8px!important;left:auto!important;bottom:auto!important;width:min(360px,calc(100vw - 24px))!important;max-height:calc(100vh - 88px)!important;border-radius:22px!important;padding-bottom:env(safe-area-inset-bottom)!important;-webkit-overflow-scrolling:touch!important}
 
   .hero-clean{padding-top:96px!important}
-  .hero-portrait{max-width:330px!important}
+  .hero-portrait-inline{width:min(240px,78vw)!important;margin:22px 0 8px!important;align-self:flex-start!important}
+  .hero-portrait-inline .hero-portrait-frame{border-radius:18px!important}
   .section-shell{width:calc(100% - 32px)!important}
+
+  .projects-section{overflow:hidden!important}
+  .projects-list{display:flex!important;grid-template-columns:none!important;gap:16px!important;overflow-x:auto!important;overflow-y:visible!important;scroll-snap-type:x mandatory!important;scroll-padding-left:0!important;overscroll-behavior-x:contain!important;-webkit-overflow-scrolling:touch!important;touch-action:pan-x!important;padding:2px 8vw 14px 0!important;margin-right:-16px!important;scrollbar-width:none!important}
+  .projects-list::-webkit-scrollbar{display:none!important}
+  .project-object,.project-object.project-featured{flex:0 0 min(82vw,340px)!important;width:min(82vw,340px)!important;grid-column:auto!important;scroll-snap-align:start!important;scroll-snap-stop:always!important;transform:none!important}
+  .project-object:hover{transform:none!important;box-shadow:none!important}
+  .project-media,.project-featured .project-media,.project-object:not(.project-featured) .project-media{aspect-ratio:4/5!important}
   .project-content{padding:20px 20px 8px!important}
+  .project-content h3,.project-featured .project-content h3{font-size:38px!important;line-height:.98!important}
+  .project-description{font-size:14px!important;line-height:1.55!important}
   .project-visit{margin:0 20px 20px!important}
-  .project-media,.project-featured .project-media{aspect-ratio:4/5!important}
+
   .contact-section{padding-top:72px!important;padding-bottom:72px!important}
   .contact-wrap{padding:52px 22px!important;border-radius:24px!important}
   .contact-title{font-size:clamp(54px,17vw,78px)!important}
+  .contact-actions .hero-button{max-width:100%!important;white-space:normal!important}
   .footer-inner{padding:30px 0 34px!important}
 }
 
@@ -120,6 +138,7 @@ body{color:var(--jrh-ink);overflow-x:hidden}
   .music-player-pill{width:148px!important;min-width:148px!important}
   .music-player-title{max-width:65px!important}
   .jrh-logo{width:58px!important}
+  .project-object,.project-object.project-featured{flex-basis:84vw!important;width:84vw!important}
 }
 
 @media (prefers-reduced-motion:reduce){
