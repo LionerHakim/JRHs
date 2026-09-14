@@ -64,9 +64,9 @@ export default function Navbar() {
           <a href={base} onClick={goHome} className="jrh-wordmark" aria-label="Kembali ke halaman utama">
             <svg className="jrh-logo" viewBox="0 0 86 36" role="img" aria-labelledby="jrh-logo-title" xmlns="http://www.w3.org/2000/svg">
               <title id="jrh-logo-title">JRH</title>
-              <path d="M3 5h7v19c0 2.2 1 3.2 3 3.2s3-1 3-3.2V5h7v19.2c0 6.4-3.6 9.8-10 9.8S3 30.6 3 24.2V5Z" fill="currentColor"/>
-              <path d="M28 31V5h11.4C46.6 5 51 8.8 51 15c0 4.2-2 7.2-5.5 8.5L52 31h-8.3l-5.5-6.7H35V31h-7Zm7-12h3.8c3.5 0 5.2-1.3 5.2-4s-1.7-4-5.2-4H35v8Z" fill="currentColor"/>
-              <path d="M57 5h7v10h10V5h7v26h-7V21H64v10h-7V5Z" fill="currentColor"/>
+              <path d="M3 5h7v19c0 2.2 1 3.2 3 3.2s3-1 3-3.2V5h7v19.2c0 6.4-3.6 9.8-10 9.8S3 30.6 3 24.2V5Z" fill="#2563EB"/>
+              <path d="M28 31V5h11.4C46.6 5 51 8.8 51 15c0 4.2-2 7.2-5.5 8.5L52 31h-8.3l-5.5-6.7H35V31h-7Zm7-12h3.8c3.5 0 5.2-1.3 5.2-4s-1.7-4-5.2-4H35v8Z" fill="#7C3AED"/>
+              <path d="M57 5h7v10h10V5h7v26h-7V21H64v10h-7V5Z" fill="#14B8A6"/>
             </svg>
           </a>
           <div className="jrh-nav-right">
