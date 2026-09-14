@@ -40,7 +40,6 @@
   --tracking-display: -0.96px;
   --text-display-lg: 64px;
   --leading-display-lg: 1.06;
-  --tracking-display-lg: -1.6px;
 
   --font-weight-regular: 400;
   --font-weight-medium: 500;
@@ -86,7 +85,7 @@
   --shadow-subtle: rgba(17, 24, 39, 0.12) 0px 0px 0px 1px, rgba(17, 24, 39, 0.03) 0px 2px 2px -2px, rgba(17, 24, 39, 0.03) 0px 4px 4px 0px, rgba(17, 24, 39, 0.03) 0px 8px 8px 0px, rgba(17, 24, 39, 0.03) 0px 16px 16px 0px;
   --shadow-xl: rgba(17, 24, 39, 0.04) 0px 32px 32px 0px, rgba(17, 24, 39, 0.04) 0px 16px 16px 0px, rgba(17, 24, 39, 0.04) 0px 8px 8px 0px, rgba(17, 24, 39, 0.04) 0px 4px 4px -2px, rgba(17, 24, 39, 0.04) 0px 2px 2px -1px, rgba(17, 24, 39, 0.16) 0px 0px 0px 1px;
   --shadow-subtle-2: rgba(17, 24, 39, 0.12) 0px 0px 0px 1px;
-  --shadow-xl-2: rgba(17, 24, 39, 0.05) 0px 32px 32px 0px, rgba(17, 24, 39, 0.05) 0px 16px 16px 0px, rgba(17, 24, 39, 0.05) 0px 8px 8px 0px, rgba(17, 24, 39, 0.05) 0px 4px 4px 0px, rgba(17, 24, 39, 0.05) 0px 2px 2px -2px, rgba(17, 24, 39, 0.1) 0px 0px 0px 1px;
+  --shadow-xl-2: rgba(17, 24, 39, 0.05) 0px 32px 32px 0px, rgba(17, 24, 39, 0.05) 0px 16px 16px 0px, rgba(17, 24, 39, 0.05) 0px 8px 8px 0px, rgba(17, 24, 39, 0.05) 0px 4px 4px -2px, rgba(17, 24, 39, 0.05) 0px 2px 2px -2px, rgba(17, 24, 39, 0.1) 0px 0px 0px 1px;
   --shadow-xl-3: rgba(17, 24, 39, 0.04) 0px 32px 32px 0px, rgba(17, 24, 39, 0.04) 0px 16px 16px 0px, rgba(17, 24, 39, 0.04) 0px 8px 8px 0px, rgba(17, 24, 39, 0.04) 0px 4px 4px -2px, rgba(17, 24, 39, 0.04) 0px 2px 2px -1px, rgba(17, 24, 39, 0.1) 0px 0px 0px 1px;
   --shadow-subtle-3: rgba(17, 24, 39, 0.1) 0px 0px 0px 1px, rgba(17, 24, 39, 0.04) 0px 1px 1px -0.5px, rgba(17, 24, 39, 0.04) 0px 3px 3px -1.5px, rgba(17, 24, 39, 0.04) 0px 6px 6px -3px, rgba(17, 24, 39, 0.04) 0px 12px 12px -6px, rgba(17, 24, 39, 0.04) 0px 24px 24px -12px;
 
@@ -96,33 +95,26 @@
   --surface-ink-surface: #111827;
 }
 
-/* Component compatibility aliases. */
+/* Names used by the existing JSX/CSS while preserving the Arcade token source of truth. */
 :root {
   --color-signal-blue: var(--color-voltage-blue);
   --color-voltage-violet: var(--color-deep-voltage);
-  --color-sky-wash: #dbe5ff;
+  --color-sky-wash: #dbe3ff;
   --color-pencil-gray: var(--color-mist-200);
-  --color-graphite: var(--color-graphite);
   --color-ink: var(--color-midnight-ink);
   --color-carbon: var(--color-slate-700);
   --color-paper: var(--color-paper-white);
-  --font-inter-active: var(--font-inter);
   --text-display-xl: var(--text-display-lg);
-  --section-gap-active: var(--section-gap);
-  --card-padding-active: var(--card-padding);
-  --radius-nav-active: var(--radius-lg);
-  --radius-tags-active: var(--radius-pills);
-  --radius-cards-active: var(--radius-cards);
-  --radius-images-active: var(--radius-hero-frame);
-  --radius-inputs-active: var(--radius-inputs);
-  --radius-buttons-active: var(--radius-buttons);
-  --radius-featurecards-active: var(--radius-3xl);
-  --shadow-lg-active: var(--shadow-subtle);
+  --radius-nav: var(--radius-tabs);
+  --radius-tags: var(--radius-pills);
+  --radius-images: var(--radius-hero-frame);
+  --radius-featurecards: var(--radius-3xl);
+  --shadow-lg: var(--shadow-subtle);
 }
 
-html { margin: 0; padding: 0; background: var(--surface-page-canvas); color-scheme: light; }
-body { margin: 0; min-width: 320px; padding: 0; background: var(--surface-page-canvas); color: var(--color-midnight-ink); font-family: var(--font-inter); font-size: var(--text-body); line-height: var(--leading-body); font-feature-settings: "cv11" 1, "ss01" 1; -webkit-font-smoothing: antialiased; text-rendering: optimizeLegibility; }
-*, *::before, *::after { box-sizing: border-box; }
-button, input, select, textarea { font: inherit; }
-img, svg { display: block; max-width: 100%; }
-a { color: inherit; }
+html{margin:0;padding:0;background:var(--surface-page-canvas);color-scheme:light}
+body{margin:0;min-width:320px;padding:0;background:var(--surface-page-canvas);color:var(--color-midnight-ink);font-family:var(--font-inter);font-size:var(--text-body);line-height:var(--leading-body);font-feature-settings:"cv11" 1,"ss01" 1;-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility}
+*,*::before,*::after{box-sizing:border-box}
+button,input,select,textarea{font:inherit}
+img,svg{display:block;max-width:100%}
+a{color:inherit}
