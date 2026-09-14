@@ -1,0 +1,20 @@
+/* Tedy refinement layer: keeps the component stylesheet stable while correcting hierarchy and polish. */
+.hero-panel{position:relative;isolation:isolate;padding:48px;border-radius:32px;background:linear-gradient(to top,rgba(231,214,255,1) 0%,rgba(231,214,255,.85) 50%,rgba(255,255,255,0) 100%);overflow:hidden}
+.hero-panel::before{content:"";position:absolute;inset:-30% -20% auto auto;width:280px;height:280px;border-radius:50%;background:radial-gradient(circle,rgba(253,23,116,.13),rgba(253,23,116,0) 68%);pointer-events:none}
+.hero-panel>*{position:relative;z-index:1}
+.hero-panel .hero-scroll-hint{margin-top:24px}
+.hero-portrait{align-self:center}
+.projects-section{background:linear-gradient(180deg,#ddf5fb 0%,#fff 28%,#fff 100%)}
+.projects-list .project-accent-mint{background:#e3f7d6}
+.projects-list .project-accent-amber{background:#fff1cd}
+.projects-list .project-accent-magenta{background:#e5d6ff}
+.projects-list .project-accent-coral{background:#e5d6ff}
+.projects-list .project-object::before{background:linear-gradient(135deg,rgba(255,255,255,.28),rgba(255,255,255,0) 52%)}
+.experience-section{background:linear-gradient(180deg,#fff1cd 0%,#fff 72%)}
+.experience-list{box-shadow:var(--tedy-xl);background:#fff}
+.experience-node:nth-child(odd){background:#e3f7d6}
+.contact-wrap{box-shadow:rgba(17,24,39,.16) 0 28px 52px 0}
+.footer-brand{display:inline-block}
+.footer-brand::after{content:"";display:block;width:48px;height:4px;margin-top:12px;border-radius:999px;background:#fd1774}
+@media (min-width:768px){.hero-panel{min-height:520px;display:flex;flex-direction:column;justify-content:center}.hero-clean{min-height:720px}.hero-portrait-frame{min-height:500px}}
+@media (max-width:767px){.hero-panel{padding:32px 24px;border-radius:24px}.hero-clean{padding-top:96px}.hero-portrait-frame{min-height:0}.hero-clean h1{font-size:clamp(64px,19vw,88px)}}
