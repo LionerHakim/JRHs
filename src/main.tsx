@@ -8,6 +8,7 @@ import './jrh-final.css';
 import './jrh-polish.css';
 import './jrh-platform-fix.css';
 import './jrh-ux-max.css';
+import './jrh-interaction-final.css';
 
 const root = document.getElementById('root');
 
