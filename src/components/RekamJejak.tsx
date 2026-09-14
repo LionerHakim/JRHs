@@ -10,7 +10,7 @@ export default function RekamJejak() {
         <div className="experience-heading">
           <p className="eyebrow">03 / Experience</p>
           <h2 id="experience-title" className="display-title">Dari sekolah sampai sekarang.</h2>
-          <p className="section-lead">Pendidikan dan aktivitas yang membentuk perjalanan JRH hingga saat ini.</p>
+          <p className="section-lead">Pendidikan dan aktivitas yang membentuk perjalanan hingga saat ini.</p>
         </div>
         <div className="experience-list" aria-label="Perjalanan pendidikan dan aktivitas">
           {experienceData.map((item, index) => (
