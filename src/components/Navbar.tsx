@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from 'react';
 import { Menu, X } from 'lucide-react';
 import MusicPlayer from './MusicPlayer';
 
+const base = import.meta.env.BASE_URL;
 const navLinks = [
   { name: 'About', href: '#about' },
   { name: 'Projects', href: '#projects' },
@@ -20,6 +21,10 @@ export default function Navbar() {
   const openerRef = useRef<HTMLButtonElement>(null);
 
   const closeMenu = () => { setOpen(false); openerRef.current?.focus(); };
+  const goHome = (event: React.MouseEvent<HTMLAnchorElement>) => {
+    event.preventDefault();
+    window.location.assign(base);
+  };
 
   useEffect(() => {
     const update = () => setScrolled(window.scrollY > 24);
@@ -56,13 +61,12 @@ export default function Navbar() {
     <>
       <header className={`jrh-nav-shell${scrolled ? ' is-scrolled' : ''}`} aria-label="Navigasi situs">
         <nav className="jrh-nav-inner" aria-label="Navigasi utama">
-          <a href="#hero" className="jrh-wordmark" aria-label="Beranda">
-            <svg className="jrh-logo" viewBox="0 0 116 36" role="img" aria-labelledby="jrh-logo-title" xmlns="http://www.w3.org/2000/svg">
+          <a href={base} onClick={goHome} className="jrh-wordmark" aria-label="Kembali ke halaman utama">
+            <svg className="jrh-logo" viewBox="0 0 86 36" role="img" aria-labelledby="jrh-logo-title" xmlns="http://www.w3.org/2000/svg">
               <title id="jrh-logo-title">JRH</title>
-              <path d="M4 5v18c0 5 3 8 8 8s8-3 8-8V5h-6v17c0 2-.6 3-2 3s-2-1-2-3V5H4Z" fill="currentColor"/>
-              <path d="M30 31V5h10c7 0 11 4 11 10 0 4-2 7-5 8l7 8h-8l-6-7h-3v7h-6Zm6-13h3c4 0 6-1 6-3s-2-4-6-4h-3v7Z" fill="currentColor"/>
-              <path d="M61 5h6v10h11V5h6v26h-6V21H67v10h-6V5Z" fill="currentColor"/>
-              <path d="M91 5h21v5h-15v5h12v5h-12v6h15v5H91V5Z" fill="currentColor"/>
+              <path d="M3 5h7v19c0 2.2 1 3.2 3 3.2s3-1 3-3.2V5h7v19.2c0 6.4-3.6 9.8-10 9.8S3 30.6 3 24.2V5Z" fill="currentColor"/>
+              <path d="M28 31V5h11.4C46.6 5 51 8.8 51 15c0 4.2-2 7.2-5.5 8.5L52 31h-8.3l-5.5-6.7H35V31h-7Zm7-12h3.8c3.5 0 5.2-1.3 5.2-4s-1.7-4-5.2-4H35v8Z" fill="currentColor"/>
+              <path d="M57 5h7v10h10V5h7v26h-7V21H64v10h-7V5Z" fill="currentColor"/>
             </svg>
           </a>
           <div className="jrh-nav-right">
