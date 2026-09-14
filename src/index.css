@@ -1,120 +1,160 @@
 @import "tailwindcss";
 
 @theme {
-  --color-voltage-blue: #2142e7;
-  --color-deep-voltage: #182fa5;
-  --color-midnight-ink: #111827;
-  --color-slate-600: #4b5563;
-  --color-slate-700: #374151;
-  --color-slate-500: #70747d;
-  --color-graphite: #414652;
-  --color-paper-white: #ffffff;
-  --color-fog-50: #f9fafb;
-  --color-fog-100: #f3f4f6;
-  --color-mist-200: #e5e7eb;
-  --color-smoke-300: #d9dadc;
+  /* Colors */
+  --color-raspberry-pulse: #fd1774;
+  --color-ink-black: #030712;
+  --color-lavender-mist: #e5d6ff;
+  --color-mint-cream: #e3f7d6;
+  --color-butter-cream: #fff1cd;
+  --color-sky-wash: #ddf5fb;
+  --color-sand-wash: #f4efe9;
+  --color-carbon: #171717;
+  --color-steel: #6b7280;
+  --color-silver: #e5e7eb;
+  --color-pure-white: #ffffff;
+  --color-lime-zest: #64d71e;
+  --color-teal-current: #4bb7cf;
 
-  --font-inter: 'Inter', ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-  --font-balig-script: 'Balig Script', ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  /* Typography */
+  --font-montreal-neue: 'Montreal Neue', Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --font-georgia: Georgia, ui-serif, serif;
 
-  --text-caption: 12px;
-  --leading-caption: 1.5;
-  --text-body-sm: 14px;
+  /* Typography — Scale */
+  --text-caption: 14px;
+  --leading-caption: 1.45;
+  --tracking-caption: -0.07px;
+  --text-body-sm: 16px;
   --leading-body-sm: 1.5;
-  --text-body: 16px;
-  --leading-body: 1.56;
-  --text-subheading: 18px;
-  --leading-subheading: 1.5;
-  --tracking-subheading: -0.126px;
-  --text-heading-sm: 20px;
-  --leading-heading-sm: 1.4;
-  --tracking-heading-sm: -0.14px;
-  --text-heading: 24px;
-  --leading-heading: 1.33;
-  --tracking-heading: -0.24px;
-  --text-heading-lg: 30px;
-  --leading-heading-lg: 1.29;
-  --tracking-heading-lg: -0.45px;
-  --text-display: 48px;
-  --leading-display: 1.14;
-  --tracking-display: -0.96px;
-  --text-display-lg: 64px;
-  --leading-display-lg: 1.06;
+  --tracking-body-sm: -0.08px;
+  --text-subheading: 23px;
+  --leading-subheading: 1.38;
+  --tracking-subheading: -0.12px;
+  --text-heading-sm: 28px;
+  --leading-heading-sm: 1.05;
+  --tracking-heading-sm: -0.56px;
+  --text-heading: 56px;
+  --leading-heading: 0.98;
+  --tracking-heading: -1.4px;
+  --text-heading-lg: 64px;
+  --leading-heading-lg: 0.96;
+  --tracking-heading-lg: -2.56px;
+  --text-display: 80px;
+  --leading-display: 0.92;
+  --tracking-display: -4px;
+  --text-display-xl: 104px;
+  --leading-display-xl: 0.9;
+  --tracking-display-xl: -6.76px;
 
   --font-weight-regular: 400;
   --font-weight-medium: 500;
-  --font-weight-semibold: 600;
   --font-weight-bold: 700;
 
+  /* Spacing */
   --spacing-unit: 4px;
-  --spacing-4: 4px;
   --spacing-8: 8px;
   --spacing-12: 12px;
   --spacing-16: 16px;
+  --spacing-20: 20px;
   --spacing-24: 24px;
   --spacing-28: 28px;
   --spacing-32: 32px;
+  --spacing-36: 36px;
   --spacing-40: 40px;
   --spacing-48: 48px;
   --spacing-56: 56px;
-  --spacing-64: 64px;
+  --spacing-72: 72px;
+  --spacing-80: 80px;
+  --spacing-84: 84px;
   --spacing-96: 96px;
-  --spacing-100: 100px;
-  --spacing-108: 108px;
   --spacing-112: 112px;
-  --spacing-240: 240px;
 
+  /* Layout */
   --page-max-width: 1200px;
-  --section-gap: 64px;
-  --card-padding: 32px;
-  --element-gap: 8px;
+  --section-gap: 80px;
+  --card-padding: 24px;
+  --element-gap: 16px;
 
-  --radius-lg: 8px;
-  --radius-xl: 12px;
+  /* Border Radius */
   --radius-2xl: 16px;
+  --radius-2xl-2: 20px;
   --radius-3xl: 24px;
-  --radius-full: 72px;
-  --radius-tabs: 12px;
-  --radius-cards: 16px;
-  --radius-pills: 9999px;
-  --radius-inputs: 16px;
-  --radius-buttons: 12px;
-  --radius-hero-frame: 24px;
+  --radius-3xl-2: 32px;
+  --radius-3xl-3: 44.8px;
+  --radius-full: 48px;
+  --radius-full-2: 57.6px;
+  --radius-full-3: 999px;
+  --radius-cards: 32px;
+  --radius-badges: 32px;
+  --radius-images: 24px;
+  --radius-buttons: 999px;
+  --radius-nav-pills: 999px;
+  --radius-small-cards: 16px;
+  --radius-feature-cards: 20px;
 
-  --shadow-sm: rgba(17, 24, 39, 0.2) 0px 8px 8px 0px, rgba(17, 24, 39, 0.1) 0px 4px 4px 0px, rgba(17, 24, 39, 0.1) 0px 2px 2px 0px, rgba(17, 24, 39, 0.1) 0px 0px 0px 1px, rgba(255, 255, 255, 0.06) 0px 0px 0px 1px inset, rgba(255, 255, 255, 0.06) 0px 1px 0px 0px inset;
-  --shadow-subtle: rgba(17, 24, 39, 0.12) 0px 0px 0px 1px, rgba(17, 24, 39, 0.03) 0px 2px 2px -2px, rgba(17, 24, 39, 0.03) 0px 4px 4px 0px, rgba(17, 24, 39, 0.03) 0px 8px 8px 0px, rgba(17, 24, 39, 0.03) 0px 16px 16px 0px;
-  --shadow-xl: rgba(17, 24, 39, 0.04) 0px 32px 32px 0px, rgba(17, 24, 39, 0.04) 0px 16px 16px 0px, rgba(17, 24, 39, 0.04) 0px 8px 8px 0px, rgba(17, 24, 39, 0.04) 0px 4px 4px -2px, rgba(17, 24, 39, 0.04) 0px 2px 2px -1px, rgba(17, 24, 39, 0.16) 0px 0px 0px 1px;
-  --shadow-subtle-2: rgba(17, 24, 39, 0.12) 0px 0px 0px 1px;
-  --shadow-xl-2: rgba(17, 24, 39, 0.05) 0px 32px 32px 0px, rgba(17, 24, 39, 0.05) 0px 16px 16px 0px, rgba(17, 24, 39, 0.05) 0px 8px 8px 0px, rgba(17, 24, 39, 0.05) 0px 4px 4px -2px, rgba(17, 24, 39, 0.05) 0px 2px 2px -2px, rgba(17, 24, 39, 0.1) 0px 0px 0px 1px;
-  --shadow-xl-3: rgba(17, 24, 39, 0.04) 0px 32px 32px 0px, rgba(17, 24, 39, 0.04) 0px 16px 16px 0px, rgba(17, 24, 39, 0.04) 0px 8px 8px 0px, rgba(17, 24, 39, 0.04) 0px 4px 4px -2px, rgba(17, 24, 39, 0.04) 0px 2px 2px -1px, rgba(17, 24, 39, 0.1) 0px 0px 0px 1px;
-  --shadow-subtle-3: rgba(17, 24, 39, 0.1) 0px 0px 0px 1px, rgba(17, 24, 39, 0.04) 0px 1px 1px -0.5px, rgba(17, 24, 39, 0.04) 0px 3px 3px -1.5px, rgba(17, 24, 39, 0.04) 0px 6px 6px -3px, rgba(17, 24, 39, 0.04) 0px 12px 12px -6px, rgba(17, 24, 39, 0.04) 0px 24px 24px -12px;
-
-  --surface-page-canvas: #f9fafb;
-  --surface-card-surface: #ffffff;
-  --surface-nested-surface: #f3f4f6;
-  --surface-ink-surface: #111827;
+  /* Shadows */
+  --shadow-xl: rgba(17, 24, 39, 0.16) 0px 28px 52px 0px;
+  --shadow-subtle: rgb(255, 241, 205) 0px 0px 0px 1px;
+  --shadow-xl-2: rgba(253, 23, 116, 0.6) 0px 14px 35px -18px;
+  --shadow-subtle-2: rgba(255, 255, 255, 0.08) 0px 1px 0px 0px inset, rgba(255, 255, 255, 0.03) 0px -1px 0px 0px inset, rgba(0, 0, 0, 0.35) 0px 30px 80px 0px;
 }
 
-/* Names used by the existing JSX/CSS while preserving the Arcade token source of truth. */
 :root {
-  --color-signal-blue: var(--color-voltage-blue);
-  --color-voltage-violet: var(--color-deep-voltage);
-  --color-sky-wash: #dbe3ff;
-  --color-pencil-gray: var(--color-mist-200);
-  --color-ink: var(--color-midnight-ink);
-  --color-carbon: var(--color-slate-700);
-  --color-paper: var(--color-paper-white);
-  --text-display-xl: var(--text-display-lg);
-  --radius-nav: var(--radius-tabs);
-  --radius-tags: var(--radius-pills);
-  --radius-images: var(--radius-hero-frame);
-  --radius-featurecards: var(--radius-3xl);
-  --shadow-lg: var(--shadow-subtle);
+  /* Tedy compatibility aliases for the existing component class names. */
+  --color-signal-blue: var(--color-raspberry-pulse);
+  --color-voltage-violet: var(--color-lavender-mist);
+  --color-sky-wash: var(--color-sky-wash);
+  --color-pencil-gray: var(--color-silver);
+  --color-ink: var(--color-ink-black);
+  --color-carbon: var(--color-carbon);
+  --color-paper: var(--color-pure-white);
+  --font-inter: var(--font-montreal-neue);
+  --text-display-xl-compat: var(--text-display-xl);
+  --radius-nav: var(--radius-nav-pills);
+  --radius-tags: var(--radius-badges);
+  --radius-featurecards: var(--radius-feature-cards);
+  --shadow-sm: var(--shadow-xl-2);
+  --shadow-lg: var(--shadow-xl);
 }
 
-html{margin:0;padding:0;background:var(--surface-page-canvas);color-scheme:light}
-body{margin:0;min-width:320px;padding:0;background:var(--surface-page-canvas);color:var(--color-midnight-ink);font-family:var(--font-inter);font-size:var(--text-body);line-height:var(--leading-body);font-feature-settings:"cv11" 1,"ss01" 1;-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility}
-*,*::before,*::after{box-sizing:border-box}
-button,input,select,textarea{font:inherit}
-img,svg{display:block;max-width:100%}
-a{color:inherit}
+html {
+  margin: 0;
+  padding: 0;
+  background: var(--surface-page-canvas, #fff);
+  color-scheme: light;
+  scroll-behavior: smooth;
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  margin: 0;
+  min-width: 320px;
+  padding: 0;
+  background: var(--surface-page-canvas, #fff);
+  color: var(--color-ink-black);
+  font-family: var(--font-montreal-neue);
+  font-size: 16px;
+  line-height: 1.5;
+  font-weight: 400;
+  letter-spacing: -0.005em;
+  font-feature-settings: "ss01" 1;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+  overflow-x: hidden;
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+button, input, select, textarea { font: inherit; }
+img, svg { display: block; max-width: 100%; }
+a { color: inherit; }
+
+:root {
+  --surface-page-canvas: #ffffff;
+  --surface-lavender-surface: #e5d6ff;
+  --surface-mint-surface: #e3f7d6;
+  --surface-butter-surface: #fff1cd;
+  --surface-sky-surface: #ddf5fb;
+  --surface-sand-surface: #f4efe9;
+  --surface-card-surface: #ffffff;
+  --surface-dark-surface: #171717;
+}
