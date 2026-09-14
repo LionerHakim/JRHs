@@ -35,10 +35,10 @@ body{color:var(--jrh-ink);overflow-x:hidden}
 .project-media{position:relative;width:100%;aspect-ratio:4/3;overflow:hidden;background:#efefec}
 .project-media img{width:100%;height:100%;display:block;object-fit:cover;transition:transform .45s cubic-bezier(.2,.65,.2,1),filter .3s ease}
 .project-object:hover .project-media img{transform:scale(1.035)}
-.project-index{top:20px!important;right:20px!important;z-index:3!important;padding:7px 10px;border-radius:999px;background:rgba(255,255,255,.88);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);color:#555!important}
-.project-content{padding:24px 24px 8px!important;max-width:none!important}
-.project-meta-row{min-height:22px}
-.project-meta,.project-description,.projects-intro{color:#747474!important}
+.project-index,.project-live-label,.project-meta{display:none!important}
+.project-content{padding:24px 24px 12px!important;max-width:none!important}
+.project-meta-row{display:none!important}
+.project-description,.projects-intro{color:#747474!important}
 .project-content h3,.project-featured .project-content h3{font-size:clamp(38px,5vw,64px)!important}
 .project-description{max-width:620px!important}
 .project-visit{margin:0 24px 24px!important;justify-self:start}
@@ -60,13 +60,13 @@ body{color:var(--jrh-ink);overflow-x:hidden}
 .contact-wrap .hero-button-primary{background:#fff!important;border-color:#fff!important;color:#111!important}
 .contact-wrap .hero-button-primary:hover{background:#eeeeea!important;border-color:#eeeeea!important}
 
-/* Footer is deliberately impossible to hide. */
+/* Footer: explicit, visible, minimal. */
 .site-footer{display:block!important;visibility:visible!important;opacity:1!important;background:#fff!important;border-top:1px solid var(--jrh-line)!important}
-.footer-inner{width:min(1180px,calc(100% - 32px))!important;margin:0 auto!important;padding:30px 0 34px!important}
-.footer-minimal{display:flex!important;visibility:visible!important;opacity:1!important;align-items:center!important;justify-content:center!important;min-height:24px!important;color:#777!important;font-family:'Switzer',Inter,system-ui,sans-serif!important;font-size:12px!important;line-height:1.4!important}
-.footer-minimal span{display:block!important;color:#777!important;text-align:center!important}
+.footer-inner{width:min(1180px,calc(100% - 32px))!important;margin:0 auto!important;padding:38px 0 34px!important}
+.footer-minimal{display:flex!important;visibility:visible!important;opacity:1!important;align-items:center!important;justify-content:center!important;min-height:26px!important;color:#666!important;font-family:'Switzer',Inter,system-ui,sans-serif!important;font-size:13px!important;line-height:1.4!important;letter-spacing:.01em!important}
+.footer-minimal span{display:block!important;color:#666!important;text-align:center!important}
 
-/* Music: on phones it remains a compact pill, never a lone circle. */
+/* Music: always a proper player control, never a lone circle. */
 .music-player{z-index:260!important;min-width:0}
 .music-player-pill{box-sizing:border-box;width:min(252px,34vw)!important;min-height:44px!important;padding:2px!important;border:1px solid var(--jrh-line)!important;border-radius:999px!important;background:#fff!important;box-shadow:0 8px 24px rgba(0,0,0,.06)!important}
 .music-player-button{background:#111!important;color:#fff!important}
@@ -103,13 +103,13 @@ body{color:var(--jrh-ink);overflow-x:hidden}
   .hero-clean{padding-top:96px!important}
   .hero-portrait{max-width:330px!important}
   .section-shell{width:calc(100% - 32px)!important}
-  .project-content{padding:20px 20px 6px!important}
+  .project-content{padding:20px 20px 8px!important}
   .project-visit{margin:0 20px 20px!important}
   .project-media,.project-featured .project-media{aspect-ratio:4/5!important}
   .contact-section{padding-top:72px!important;padding-bottom:72px!important}
   .contact-wrap{padding:52px 22px!important;border-radius:24px!important}
   .contact-title{font-size:clamp(54px,17vw,78px)!important}
-  .footer-inner{padding:26px 0 30px!important}
+  .footer-inner{padding:30px 0 34px!important}
 }
 
 @media (max-width:390px){
