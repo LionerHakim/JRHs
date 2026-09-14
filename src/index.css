@@ -1,7 +1,7 @@
 @import "tailwindcss";
 
 @theme {
-  /* Colors */
+  /* Tedy colors */
   --color-raspberry-pulse: #fd1774;
   --color-ink-black: #030712;
   --color-lavender-mist: #e5d6ff;
@@ -16,11 +16,9 @@
   --color-lime-zest: #64d71e;
   --color-teal-current: #4bb7cf;
 
-  /* Typography */
+  /* Tedy typography */
   --font-montreal-neue: 'Montreal Neue', Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
   --font-georgia: Georgia, ui-serif, serif;
-
-  /* Typography — Scale */
   --text-caption: 14px;
   --leading-caption: 1.45;
   --tracking-caption: -0.07px;
@@ -48,9 +46,9 @@
 
   --font-weight-regular: 400;
   --font-weight-medium: 500;
-  --font-weight-bold: 700;
+  --font-weight-bold: 500;
 
-  /* Spacing */
+  /* Tedy spacing */
   --spacing-unit: 4px;
   --spacing-8: 8px;
   --spacing-12: 12px;
@@ -69,13 +67,13 @@
   --spacing-96: 96px;
   --spacing-112: 112px;
 
-  /* Layout */
+  /* Tedy layout */
   --page-max-width: 1200px;
   --section-gap: 80px;
   --card-padding: 24px;
   --element-gap: 16px;
 
-  /* Border Radius */
+  /* Tedy radius */
   --radius-2xl: 16px;
   --radius-2xl-2: 20px;
   --radius-3xl: 24px;
@@ -92,7 +90,7 @@
   --radius-small-cards: 16px;
   --radius-feature-cards: 20px;
 
-  /* Shadows */
+  /* Tedy shadows */
   --shadow-xl: rgba(17, 24, 39, 0.16) 0px 28px 52px 0px;
   --shadow-subtle: rgb(255, 241, 205) 0px 0px 0px 1px;
   --shadow-xl-2: rgba(253, 23, 116, 0.6) 0px 14px 35px -18px;
@@ -100,16 +98,17 @@
 }
 
 :root {
-  /* Compatibility aliases for existing JSX/CSS; Tedy tokens remain authoritative. */
   --color-signal-blue: var(--color-raspberry-pulse);
   --color-voltage-violet: var(--color-lavender-mist);
   --color-pencil-gray: var(--color-silver);
   --color-ink: var(--color-ink-black);
+  --color-carbon: var(--color-carbon);
   --color-paper: var(--color-pure-white);
   --font-inter: var(--font-montreal-neue);
   --text-display-xl-compat: var(--text-display-xl);
   --radius-nav: var(--radius-nav-pills);
   --radius-tags: var(--radius-badges);
+  --radius-images: var(--radius-images);
   --radius-featurecards: var(--radius-feature-cards);
   --shadow-sm: var(--shadow-xl-2);
   --shadow-lg: var(--shadow-xl);
