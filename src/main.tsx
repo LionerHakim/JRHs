@@ -4,6 +4,7 @@ import App from './App.tsx';
 import './index.css';
 import './editorial.css';
 import './tedy-overrides.css';
+import './jrh-final.css';
 
 const root = document.getElementById('root');
 
