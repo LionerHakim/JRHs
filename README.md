@@ -1,69 +1,52 @@
 # JRH
 
-Personal editorial portfolio and digital space for JRH.
+Personal portfolio and digital space about economics, markets, technology, human behavior, and selected projects.
 
-## Final structure
+## Public structure
 
-The public experience is intentionally focused:
+The site is intentionally focused:
 
-1. **Hero** — identity, positioning, and direct entry to the work
-2. **About** — personal context and approach
-3. **Projects** — the visual centerpiece and clearest record of work
-4. **Experience** — concise editorial timeline
-5. **Contact** — verified contact channel
+1. **Hero** — identity, positioning, portrait, and direct entry to the work
+2. **About** — context, interests, and approach
+3. **Projects** — selected work and visual reference
+4. **Experience** — education and activities timeline
+5. **Contact** — verified Instagram channel
 6. **Footer** — minimal identity and secondary navigation
 
-Hobbies, Skills, Reflection, Vision, Knowledge, Motivation, Web Tools, Testimonials, and other filler sections are not rendered.
+Legacy sections such as Hobbies, Skills, Reflection, Vision, Knowledge, Motivation, Testimonials, and Web Tools are not rendered.
 
-## Visual direction
+## Visual system
 
-**Portal / Twilight Serif Editorial**
+The interface follows the Flowmapp-inspired visual direction documented in `DESIGN.md`:
 
-- Light-first canvas: `#F7F7F7`
-- Paper: `#FFFFFF`
-- Primary: `#000000`
-- Graphite: `#3E3E3E`
-- Smoke: `#636363`
-- Functional accent: `#007AFF`
-- Twilight gradient is reserved for the Hero atmosphere
-- Perfectly Nineties (when available) for display typography
-- Inter/system sans for UI, navigation, metadata, and body copy
-- Tactile cards, pill CTAs, restrained borders, and subtle motion
+- White paper canvas with no page-wide gradients
+- Inter/system sans typography with oversized black display headings
+- Signal Blue `#0080ff` as the primary action and interface signal
+- Pencil Gray `#8c9baa` borders and restrained Graphite `#636f7b` supporting text
+- Pill buttons/tags, rounded cards, 24px image corners, and minimal shadow
+- Desktop navigation with a compact responsive mobile menu
+- Mobile-first layout with accessible 44px+ interaction targets
 
-A dark mode remains available through the theme control, but light is the default editorial presentation.
+## Content rules
 
-## Projects
+Projects and profile details are based on the current repository content. Pinterest is presented as a **visual reference**, not as a software project. Contact information is limited to the verified Instagram channel.
 
-Projects are sourced from real public repositories. The current featured project is JRH Portfolio, followed by real public work from the JRH GitHub account. Each project uses a direct external URL and opens safely in a new tab.
+No fabricated metrics, clients, achievements, testimonials, or contact channels are added.
 
-No fake URLs, metrics, clients, roles, results, testimonials, or achievements are introduced.
+## Interaction and resilience
 
-## Interaction
+- Accessible skip link and visible keyboard focus
+- Keyboard-safe mobile navigation with Escape and focus containment
+- Reduced-motion support
+- Native scrolling without scroll hijacking
+- Music player retained as an optional feature without autoplay
+- Graceful optional-feature failure states
+- Vite-compatible static asset paths for deployment
 
-- Floating desktop/mobile navigation with active-section indication
-- Keyboard-accessible mobile menu with Escape and focus containment
-- Light/dark theme persistence
-- Existing music player retained without autoplay
-- Tactile press states and reduced-motion support
-- Native scrolling; no scroll hijacking
-- Minimum 44px touch targets for controls
+## Stack
 
-## Accessibility, performance, resilience
+Vite · React · TypeScript · Tailwind CSS · Lucide React
 
-Semantic HTML, one H1, ordered heading hierarchy, visible keyboard focus, meaningful alt text, reduced-motion support, lightweight client behavior, cleaned-up listeners, and graceful optional-feature failures are required.
-
-Existing photo and music assets are preserved. GitHub Pages compatibility is retained through Vite static asset paths and the existing repository deployment setup.
-
-## Development
-
-Stack: Vite, React, TypeScript, Tailwind CSS, and Lucide React.
-
-Quality loop:
-
-`Audit → Design → Implement → Build → Test → Inspect → Fix → Test again`
-
-## Principle
+Quality loop: **Audit → Design → Implement → Build → Test → Inspect → Fix → Test again**
 
 > **MAKE JRH FEEL DESIGNED, NOT ASSEMBLED.**
->
-> **MAKE THE PROJECTS THE REASON PEOPLE STAY.**
