@@ -5,6 +5,7 @@ import './index.css';
 import './editorial.css';
 import './tedy-overrides.css';
 import './jrh-final.css';
+import './jrh-polish.css';
 
 const root = document.getElementById('root');
 
