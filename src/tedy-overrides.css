@@ -16,5 +16,15 @@
 .contact-wrap{box-shadow:rgba(17,24,39,.16) 0 28px 52px 0}
 .footer-brand{display:inline-block}
 .footer-brand::after{content:"";display:block;width:48px;height:4px;margin-top:12px;border-radius:999px;background:#fd1774}
+
+/* Music player is interactive UI, so it must always sit above the fixed navbar/backdrops. */
+.jrh-nav-shell{overflow:visible}
+.jrh-nav-inner,.jrh-nav-right{overflow:visible}
+.music-player{z-index:420}
+.music-player-panel-backdrop{z-index:400}
+.music-player-panel{z-index:430}
+.music-player-pill{isolation:isolate}
+
 @media (min-width:768px){.hero-panel{min-height:520px;display:flex;flex-direction:column;justify-content:center}.hero-clean{min-height:720px}.hero-portrait-frame{min-height:500px}}
-@media (max-width:767px){.hero-panel{padding:32px 24px;border-radius:24px}.hero-clean{padding-top:96px}.hero-portrait-frame{min-height:0}.hero-clean h1{font-size:clamp(64px,19vw,88px)}}
+@media (max-width:767px){.hero-panel{padding:32px 24px;border-radius:24px}.hero-clean{padding-top:96px}.hero-portrait-frame{min-height:0}.hero-clean h1{font-size:clamp(64px,19vw,88px)}.music-player{position:static}.music-player-pill{width:min(210px,52vw)}.music-player-panel{position:fixed;left:12px;right:12px;top:84px;width:auto;max-height:calc(100svh - 96px);overscroll-behavior:contain}.music-player-panel-backdrop{position:fixed;inset:0}}
+@media (max-width:520px){.music-player-pill{width:154px}.music-player-track-label{display:none}.music-player-title{max-width:62px}}
