@@ -28,7 +28,6 @@ export default function MusicPlayer() {
   const triggerRef = useRef<HTMLButtonElement>(null);
   const panelRef = useRef<HTMLDivElement>(null);
   const indexRef = useRef(0);
-  const resumeAfterHideRef = useRef(false);
   const playRequestRef = useRef(false);
   const stored = useRef(readStoredPlayer());
   const [index, setIndex] = useState(() => Number.isInteger(stored.current.index) && (stored.current.index as number) >= 0 && (stored.current.index as number) < playlist.length ? (stored.current.index as number) : 0);
@@ -48,7 +47,10 @@ export default function MusicPlayer() {
   useEffect(() => {
     const audio = audioRef.current;
     if (!audio) return;
-    audio.preload = 'metadata';
+    audio.preload = 'auto';
+    audio.playsInline = true;
+    audio.setAttribute('playsinline', '');
+    audio.setAttribute('webkit-playsinline', '');
     audio.volume = muted ? 0 : volume;
     audio.src = playlist[index].src;
     audio.load();
@@ -62,31 +64,30 @@ export default function MusicPlayer() {
   }, [muted, volume]);
 
   useEffect(() => {
-    const onVisibilityChange = () => {
-      const audio = audioRef.current;
-      if (!audio) return;
-      if (document.visibilityState === 'hidden' && !audio.paused) {
-        resumeAfterHideRef.current = true;
-        audio.pause();
-      } else if (document.visibilityState === 'visible' && resumeAfterHideRef.current) {
-        resumeAfterHideRef.current = false;
-        setState('paused');
-      }
+    const mediaSession = typeof navigator !== 'undefined' ? navigator.mediaSession : undefined;
+    if (!mediaSession) return;
+
+    mediaSession.metadata = new MediaMetadata({
+      title: playlist[index].title,
+      artist: 'Personal playlist',
+    });
+
+    const run = (action: MediaSessionAction, handler: () => void) => {
+      try { mediaSession.setActionHandler(action, handler); } catch { /* Browser may not support this action. */ }
     };
-    const onPageHide = () => {
-      const audio = audioRef.current;
-      if (audio && !audio.paused) {
-        resumeAfterHideRef.current = true;
-        audio.pause();
-      }
-    };
-    document.addEventListener('visibilitychange', onVisibilityChange);
-    window.addEventListener('pagehide', onPageHide);
+    run('play', () => play());
+    run('pause', () => pause());
+    run('previoustrack', () => changeTrack(-1));
+    run('nexttrack', () => changeTrack(1));
+    run('seekbackward', () => seekBy(-10));
+    run('seekforward', () => seekBy(10));
+
     return () => {
-      document.removeEventListener('visibilitychange', onVisibilityChange);
-      window.removeEventListener('pagehide', onPageHide);
+      ['play', 'pause', 'previoustrack', 'nexttrack', 'seekbackward', 'seekforward'].forEach((action) => {
+        try { mediaSession.setActionHandler(action as MediaSessionAction, null); } catch { /* Ignore unsupported actions. */ }
+      });
     };
-  }, []);
+  }, [index, state]);
 
   useEffect(() => {
     if (!open) return;
@@ -100,9 +101,15 @@ export default function MusicPlayer() {
       if (event.key !== 'Tab' || !panelRef.current) return;
       const focusable = Array.from(panelRef.current.querySelectorAll<HTMLElement>('button:not([disabled]), input:not([disabled])'));
       if (!focusable.length) return;
-      const first = focusable[0]; const last = focusable[focusable.length - 1];
-      if (event.shiftKey && document.activeElement === first) { event.preventDefault(); last.focus(); }
-      else if (!event.shiftKey && document.activeElement === last) { event.preventDefault(); first.focus(); }
+      const first = focusable[0];
+      const last = focusable[focusable.length - 1];
+      if (event.shiftKey && document.activeElement === first) {
+        event.preventDefault();
+        last.focus();
+      } else if (!event.shiftKey && document.activeElement === last) {
+        event.preventDefault();
+        first.focus();
+      }
     };
     document.addEventListener('keydown', onKey);
     const timer = window.setTimeout(() => panelRef.current?.querySelector<HTMLElement>('button:not([disabled])')?.focus(), 0);
@@ -130,6 +137,7 @@ export default function MusicPlayer() {
     void audio.play().then(() => {
       playRequestRef.current = false;
       setState('playing');
+      if (navigator.mediaSession) navigator.mediaSession.playbackState = 'playing';
     }).catch(() => {
       playRequestRef.current = false;
       setState('error');
@@ -142,6 +150,7 @@ export default function MusicPlayer() {
     playRequestRef.current = false;
     audio.pause();
     setState('paused');
+    if (navigator.mediaSession) navigator.mediaSession.playbackState = 'paused';
   };
 
   const togglePlayback = () => {
@@ -158,11 +167,11 @@ export default function MusicPlayer() {
     setIndex(safeIndex);
     setProgress(0);
     setDuration(0);
+    playRequestRef.current = false;
     audio.pause();
     audio.src = playlist[safeIndex].src;
     audio.load();
     if (!autoplay) {
-      playRequestRef.current = false;
       setState('idle');
       return;
     }
@@ -171,6 +180,7 @@ export default function MusicPlayer() {
     void audio.play().then(() => {
       playRequestRef.current = false;
       setState('playing');
+      if (navigator.mediaSession) navigator.mediaSession.playbackState = 'playing';
     }).catch(() => {
       playRequestRef.current = false;
       setState('error');
@@ -178,6 +188,12 @@ export default function MusicPlayer() {
   };
 
   const changeTrack = (step: number) => switchTrack(indexRef.current + step, true);
+
+  const seekBy = (seconds: number) => {
+    const audio = audioRef.current;
+    if (!audio || !Number.isFinite(audio.duration)) return;
+    audio.currentTime = Math.min(audio.duration, Math.max(0, audio.currentTime + seconds));
+  };
 
   const selectTrack = (songIndex: number) => {
     setOpen(false);
@@ -188,6 +204,7 @@ export default function MusicPlayer() {
   const retry = () => {
     const audio = audioRef.current;
     if (!audio) return;
+    playRequestRef.current = false;
     audio.load();
     play();
   };
@@ -200,19 +217,28 @@ export default function MusicPlayer() {
     setProgress(next);
   };
 
-  const formatTime = (value: number) => Number.isFinite(value) ? `${Math.floor(value / 60)}:${Math.floor(value % 60).toString().padStart(2, '0')}` : '0:00';
+  const formatTime = (value: number) => Number.isFinite(value)
+    ? `${Math.floor(value / 60)}:${Math.floor(value % 60).toString().padStart(2, '0')}`
+    : '0:00';
   const statusLabel = state === 'error' ? 'Audio tidak tersedia' : state === 'loading' ? 'Memuat musik' : state === 'playing' ? 'Sedang diputar' : state === 'paused' ? 'Dijeda' : 'Siap diputar';
 
   return (
     <div className="music-player" aria-label="Pemutar musik">
       <audio
         ref={audioRef}
-        preload="metadata"
+        preload="auto"
         playsInline
         onLoadedMetadata={(event) => setDuration(Number.isFinite(event.currentTarget.duration) ? event.currentTarget.duration : 0)}
         onDurationChange={(event) => setDuration(Number.isFinite(event.currentTarget.duration) ? event.currentTarget.duration : 0)}
-        onPlay={() => setState('playing')}
-        onPause={() => { if (!resumeAfterHideRef.current && state !== 'error' && !playRequestRef.current) setState('paused'); }}
+        onPlay={() => {
+          playRequestRef.current = false;
+          setState('playing');
+          if (navigator.mediaSession) navigator.mediaSession.playbackState = 'playing';
+        }}
+        onPause={() => {
+          if (!playRequestRef.current && state !== 'error') setState('paused');
+          if (navigator.mediaSession) navigator.mediaSession.playbackState = 'paused';
+        }}
         onWaiting={() => { if (!audioRef.current?.paused) setState('loading'); }}
         onPlaying={() => setState('playing')}
         onStalled={() => { if (!audioRef.current?.paused) setState('loading'); }}
@@ -242,7 +268,7 @@ export default function MusicPlayer() {
         <div className="music-player-panel-backdrop" aria-hidden="true" />
         <div id="music-player-panel" ref={panelRef} className="music-player-panel" role="dialog" aria-modal="false" aria-label="Pemutar musik">
           <div className="music-player-panel-head">
-            <div className="min-w-0"><p className="eyebrow">JRH · Music</p><p className="music-player-current">{state === 'error' ? 'Audio tidak tersedia' : playlist[index].title}</p></div>
+            <div className="min-w-0"><p className="eyebrow">Music</p><p className="music-player-current">{state === 'error' ? 'Audio tidak tersedia' : playlist[index].title}</p></div>
             <button type="button" onClick={() => { setOpen(false); triggerRef.current?.focus(); }} className="music-player-close" aria-label="Tutup pemutar musik"><X size={15} aria-hidden="true" /></button>
           </div>
 
