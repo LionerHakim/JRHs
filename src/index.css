@@ -1,19 +1,20 @@
 @import "tailwindcss";
 
 @theme {
-  --color-raspberry-pulse: #fd1774;
-  --color-ink-black: #030712;
-  --color-lavender-mist: #e5d6ff;
-  --color-mint-cream: #e3f7d6;
-  --color-butter-cream: #fff1cd;
-  --color-sky-wash: #ddf5fb;
-  --color-sand-wash: #f4efe9;
-  --color-carbon: #171717;
-  --color-steel: #6b7280;
-  --color-silver: #e5e7eb;
+  /* JRHs solid palette — keep legacy token names only as compatibility aliases. */
+  --color-raspberry-pulse: #111111;
+  --color-ink-black: #111111;
+  --color-lavender-mist: #ffffff;
+  --color-mint-cream: #ffffff;
+  --color-butter-cream: #f2c94c;
+  --color-sky-wash: #2563eb;
+  --color-sand-wash: #f3f3f0;
+  --color-carbon: #111111;
+  --color-steel: #777777;
+  --color-silver: #ddddda;
   --color-pure-white: #ffffff;
-  --color-lime-zest: #64d71e;
-  --color-teal-current: #4bb7cf;
+  --color-lime-zest: #d92d20;
+  --color-teal-current: #2563eb;
 
   --font-montreal-neue: 'Montreal Neue', Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
   --font-georgia: Georgia, ui-serif, serif;
@@ -66,7 +67,7 @@
   --spacing-112: 112px;
 
   --page-max-width: 1200px;
-  --section-gap: 80px;
+  --section-gap: 64px;
   --card-padding: 24px;
   --element-gap: 16px;
 
@@ -78,27 +79,27 @@
   --radius-full: 48px;
   --radius-full-2: 57.6px;
   --radius-full-3: 999px;
-  --radius-cards: 32px;
-  --radius-badges: 32px;
-  --radius-images: 24px;
+  --radius-cards: 24px;
+  --radius-badges: 999px;
+  --radius-images: 20px;
   --radius-buttons: 999px;
   --radius-nav-pills: 999px;
   --radius-small-cards: 16px;
   --radius-feature-cards: 20px;
 
-  --shadow-xl: rgba(17, 24, 39, 0.16) 0px 28px 52px 0px;
-  --shadow-subtle: rgb(255, 241, 205) 0px 0px 0px 1px;
-  --shadow-xl-2: rgba(253, 23, 116, 0.6) 0px 14px 35px -18px;
-  --shadow-subtle-2: rgba(255, 255, 255, 0.08) 0px 1px 0px 0px inset, rgba(255, 255, 255, 0.03) 0px -1px 0px 0px inset, rgba(0, 0, 0, 0.35) 0px 30px 80px 0px;
+  --shadow-xl: rgba(17, 17, 17, 0.10) 0px 16px 40px 0px;
+  --shadow-subtle: rgba(17, 17, 17, 0.10) 0px 0px 0px 1px;
+  --shadow-xl-2: rgba(17, 17, 17, 0.10) 0px 10px 24px -16px;
+  --shadow-subtle-2: rgba(255, 255, 255, 0.08) 0px 1px 0px 0px inset, rgba(0, 0, 0, 0.28) 0px 24px 60px 0px;
 }
 
 :root {
-  --color-signal-blue: var(--color-raspberry-pulse);
-  --color-voltage-violet: var(--color-lavender-mist);
-  --color-pencil-gray: var(--color-silver);
-  --color-ink: var(--color-ink-black);
-  --color-carbon: #171717;
-  --color-paper: var(--color-pure-white);
+  --color-signal-blue: #2563eb;
+  --color-voltage-violet: #f2c94c;
+  --color-pencil-gray: #ddddda;
+  --color-ink: #111111;
+  --color-carbon: #111111;
+  --color-paper: #ffffff;
   --font-inter: var(--font-montreal-neue);
   --text-display-xl-compat: var(--text-display-xl);
   --radius-nav: var(--radius-nav-pills);
@@ -109,17 +110,18 @@
   --shadow-lg: var(--shadow-xl);
 
   --surface-page-canvas: #ffffff;
-  --surface-lavender-surface: #e5d6ff;
-  --surface-mint-surface: #e3f7d6;
-  --surface-butter-surface: #fff1cd;
-  --surface-sky-surface: #ddf5fb;
-  --surface-sand-surface: #f4efe9;
+  --surface-lavender-surface: #ffffff;
+  --surface-mint-surface: #ffffff;
+  --surface-butter-surface: #f2c94c;
+  --surface-sky-surface: #2563eb;
+  --surface-sand-surface: #f3f3f0;
   --surface-card-surface: #ffffff;
-  --surface-dark-surface: #171717;
+  --surface-dark-surface: #111111;
+  --surface-attention-red: #d92d20;
 }
 
-html { margin: 0; padding: 0; background: var(--surface-page-canvas); color-scheme: light; scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
-body { margin: 0; min-width: 320px; padding: 0; background: var(--surface-page-canvas); color: var(--color-ink-black); font-family: var(--font-montreal-neue); font-size: 16px; line-height: 1.5; font-weight: 400; letter-spacing: -0.005em; font-feature-settings: "ss01" 1; -webkit-font-smoothing: antialiased; text-rendering: optimizeLegibility; overflow-x: hidden; }
+html { margin: 0; padding: 0; background: #ffffff; color-scheme: light; scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
+body { margin: 0; min-width: 320px; padding: 0; background: #ffffff; color: #111111; font-family: var(--font-montreal-neue); font-size: 16px; line-height: 1.5; font-weight: 400; letter-spacing: -0.005em; font-feature-settings: "ss01" 1; -webkit-font-smoothing: antialiased; text-rendering: optimizeLegibility; overflow-x: hidden; }
 *, *::before, *::after { box-sizing: border-box; }
 button, input, select, textarea { font: inherit; }
 img, svg { display: block; max-width: 100%; }
