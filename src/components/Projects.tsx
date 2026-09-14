@@ -33,10 +33,6 @@ export default function Projects() {
       <div className="projects-heading">
         <div>
           <h2 id="projects-title" className="display-title">Yang dibangun.</h2>
-          <div className="projects-swipe-hint" aria-hidden="true">
-            <MoveRight size={14} strokeWidth={1.7} />
-            <span>Geser untuk lihat project</span>
-          </div>
         </div>
         <p className="projects-intro">Beberapa project dan referensi publik yang merekam proses mengubah ide menjadi sesuatu yang bisa dibuka, diuji, dan dilihat.</p>
       </div>
@@ -59,6 +55,11 @@ export default function Projects() {
             </article>
           );
         })}
+      </div>
+
+      <div className="projects-swipe-hint" aria-label="Petunjuk project di mobile">
+        <MoveRight size={14} strokeWidth={1.7} aria-hidden="true" />
+        <span>Geser untuk lihat project lainnya</span>
       </div>
     </section>
   );
