@@ -1,4 +1,4 @@
-import { ArrowUpRight } from 'lucide-react';
+import { ArrowUpRight, MoveRight } from 'lucide-react';
 
 const projects = [
   {
@@ -22,8 +22,7 @@ const projects = [
   {
     title: 'Pinterest',
     description: 'Koleksi visual Galuh Purba sebagai referensi inspirasi dan eksplorasi visual.',
-    url: 'https://id.pinterest.com/galuhpurba/',
-    image: 'https://images.unsplash.com/photo-1547891654-e66ed7ebb968?auto=format&fit=crop&w=900&h=1125&q=86',
+    url: 'https://images.unsplash.com/photo-1547891654-e66ed7ebb968?auto=format&fit=crop&w=900&h=1125&q=86',
   },
 ] as const;
 
@@ -33,11 +32,15 @@ export default function Projects() {
       <div className="projects-heading">
         <div>
           <h2 id="projects-title" className="display-title">Yang dibangun.</h2>
+          <div className="projects-swipe-hint" aria-hidden="true">
+            <MoveRight size={14} strokeWidth={1.7} />
+            <span>Geser untuk lihat project</span>
+          </div>
         </div>
         <p className="projects-intro">Beberapa project dan referensi publik yang merekam proses mengubah ide menjadi sesuatu yang bisa dibuka, diuji, dan dilihat.</p>
       </div>
 
-      <div className="projects-list" aria-label="Daftar project">
+      <div className="projects-list" aria-label="Daftar project, geser ke samping di perangkat mobile">
         {projects.map((project, index) => {
           const titleId = `project-title-${index + 1}`;
           return (
