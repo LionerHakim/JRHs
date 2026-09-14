@@ -14,6 +14,7 @@ type FocusableElement = HTMLElement & { focus: () => void };
 export default function Navbar() {
   const [open, setOpen] = useState(false);
   const [active, setActive] = useState('about');
+  const [scrolled, setScrolled] = useState(false);
   const closeRef = useRef<HTMLButtonElement>(null);
   const menuRef = useRef<HTMLElement>(null);
   const openerRef = useRef<HTMLButtonElement>(null);
@@ -22,6 +23,13 @@ export default function Navbar() {
     setOpen(false);
     openerRef.current?.focus();
   };
+
+  useEffect(() => {
+    const update = () => setScrolled(window.scrollY > 24);
+    update();
+    window.addEventListener('scroll', update, { passive: true });
+    return () => window.removeEventListener('scroll', update);
+  }, []);
 
   useEffect(() => {
     const observer = new IntersectionObserver((entries) => {
@@ -74,7 +82,7 @@ export default function Navbar() {
 
   return (
     <>
-      <header className="jrh-nav-shell" aria-label="Navigasi situs">
+      <header className={`jrh-nav-shell${scrolled ? ' is-scrolled' : ''}`} aria-label="Navigasi situs">
         <nav className="jrh-nav-inner" aria-label="Navigasi utama">
           <a href="#hero" className="jrh-wordmark" aria-label="Beranda">
             <img
