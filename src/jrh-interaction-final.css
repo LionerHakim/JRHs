@@ -1,26 +1,21 @@
-/* JRHs: stable final interaction layer. Keep this file last. */
-:root{
-  --jrh-ink:#333333;
-  --jrh-muted:#666666;
-  --jrh-blue:#0000ee;
-  --jrh-red:#e21b3c;
-  --jrh-line:#dddddd;
-  --jrh-soft:#f2f2f2;
-  --jrh-shadow:rgba(0,0,0,.2) 0 4px 8px 0;
-}
+/* JRHs: stable final interaction layer. This file is imported last. */
+:root{--jrh-ink:#333333;--jrh-muted:#666666;--jrh-blue:#0000ee;--jrh-red:#e21b3c;--jrh-line:#dddddd;--jrh-soft:#f2f2f2;--jrh-shadow:rgba(0,0,0,.2) 0 4px 8px 0}
 
-/* Typography: one readable system across Android, iPhone and desktop. */
+/* One typography system. Explicitly override legacy visual layers. */
 html{-webkit-text-size-adjust:100%;text-size-adjust:100%}
-body{color:var(--jrh-ink)!important;background:#fff!important;font-family:'Montserrat',Arial,Helvetica,sans-serif!important;font-weight:500!important;line-height:1.5!important;-webkit-font-smoothing:antialiased!important;text-rendering:optimizeLegibility!important}
-body button,body input,body textarea,body select,body p,body li,body span,body small,body label,body a{font-family:'Montserrat',Arial,Helvetica,sans-serif!important}
-h1,h2,h3,h4,h5,h6,.display-title,.hero-clean h1,.hero-positioning,.project-content h3,.project-featured .project-content h3,.experience-main h3,.contact-title{font-family:'Montserrat',Arial,Helvetica,sans-serif!important;color:var(--jrh-ink)!important;font-weight:700!important}
+body,body *{font-family:'Montserrat',Arial,Helvetica,sans-serif!important}
+body{color:var(--jrh-ink)!important;background:#fff!important;font-weight:500!important;line-height:1.5!important;-webkit-font-smoothing:antialiased!important;text-rendering:optimizeLegibility!important}
+h1,h2,h3,h4,h5,h6{font-weight:700!important}
+p,li,span,a,button,input,label{font-weight:500}
 
-/* Hero: never allow the main word to become clipped or visually disappear. */
+/* Hero: account for the fixed navbar and never let Portfolio sit underneath it. */
 .hero-clean,.hero-clean-inner,.hero-copy,.hero-panel{overflow:visible!important}
-.hero-clean h1{display:block!important;visibility:visible!important;opacity:1!important;max-width:100%!important;margin:0!important;color:#333!important;font-size:clamp(44px,7vw,72px)!important;line-height:1.08!important;letter-spacing:-.04em!important;white-space:normal!important;overflow:visible!important}
-.hero-clean .hero-positioning{color:#333!important;font-weight:600!important;line-height:1.3!important}
-.hero-clean .hero-description{color:#666!important;font-weight:500!important;line-height:1.55!important}
-.hero-button{font-family:'Montserrat',Arial,Helvetica,sans-serif!important;font-weight:700!important}
+.hero-clean{background:#fff!important}
+.hero-panel{display:flex!important;flex-direction:column!important;align-items:flex-start!important}
+.hero-clean h1{display:block!important;visibility:visible!important;opacity:1!important;max-width:100%!important;margin:0!important;color:#333!important;font-family:'Montserrat',Arial,Helvetica,sans-serif!important;font-size:clamp(46px,7vw,72px)!important;line-height:1.08!important;letter-spacing:-.04em!important;font-weight:700!important;white-space:normal!important;overflow:visible!important}
+.hero-clean .hero-positioning{font-family:'Montserrat',Arial,Helvetica,sans-serif!important;color:#333!important;font-size:clamp(20px,2.5vw,30px)!important;font-weight:700!important;line-height:1.3!important}
+.hero-clean .hero-description{font-family:'Montserrat',Arial,Helvetica,sans-serif!important;color:#666!important;font-size:15px!important;font-weight:500!important;line-height:1.55!important}
+.hero-portrait-inline{align-self:flex-start!important}
 
 /* Shared interaction language. */
 a,button,input{-webkit-tap-highlight-color:transparent}
@@ -32,68 +27,75 @@ a:focus-visible,button:focus-visible,input:focus-visible{outline:2px solid var(-
 .jrh-menu-button{min-width:44px!important;min-height:44px!important}
 .jrh-menu-button:active,.jrh-mobile-link:active,.project-visit:active,.contact-cta:active{transform:scale(.97)!important}
 
-/* Projects: same action treatment, without turning the whole card into a fake button. */
+/* Projects. */
 .project-object{transition:transform .2s ease,border-color .2s ease,box-shadow .2s ease!important}
 .project-object:hover{transform:translateY(-3px)!important;box-shadow:var(--jrh-shadow)!important}
 .project-object:focus-within{border-color:var(--jrh-blue)!important;box-shadow:0 0 0 2px rgba(0,0,238,.12),var(--jrh-shadow)!important}
-.project-visit{min-height:44px!important;border:1px solid #333!important;background:#fff!important;color:#333!important;font-weight:700!important;transition:background-color .15s ease,color .15s ease,border-color .15s ease,transform .1s ease!important}
+.project-visit{min-height:44px!important;border:1px solid #333!important;background:#fff!important;color:#333!important;font-weight:700!important}
 .project-visit:hover,.project-visit:focus-visible{background:var(--jrh-blue)!important;border-color:var(--jrh-blue)!important;color:#fff!important}
 .project-visit:active{background:var(--jrh-red)!important;border-color:var(--jrh-red)!important;color:#fff!important}
-
-/* Experience roles remain informational. */
 .experience-role{cursor:default!important;user-select:none!important;-webkit-user-select:none!important}
-
-/* Contact uses the same primary action as Projects. */
 .contact-cta:hover{background:var(--jrh-red)!important;border-color:var(--jrh-red)!important;color:#fff!important;transform:translateY(-1px)!important}
 
-/* Music: simple trigger, obvious controls, large touch targets. */
-.music-player{position:relative!important;z-index:9000!important;isolation:isolate!important;min-width:0!important;overflow:visible!important}
-.music-player-pill{display:flex!important;align-items:center!important;width:232px!important;min-width:0!important;height:44px!important;padding:3px!important;gap:2px!important;border:1px solid #333!important;border-radius:8px!important;background:#fff!important;box-shadow:var(--jrh-shadow)!important;overflow:hidden!important}
-.music-player-button{display:grid!important;place-items:center!important;flex:0 0 38px!important;width:38px!important;height:38px!important;min-width:38px!important;min-height:38px!important;padding:0!important;border:1px solid var(--jrh-blue)!important;border-radius:6px!important;background:var(--jrh-blue)!important;color:#fff!important;cursor:pointer!important}
+/* Music: the trigger itself explains what it does. */
+.music-player{position:relative!important;z-index:9000!important;isolation:isolate!important;min-width:0!important;overflow:visible!important;flex:none!important}
+.music-player-pill{display:flex!important;align-items:center!important;flex:none!important;width:224px!important;min-width:224px!important;height:48px!important;min-height:48px!important;padding:3px!important;gap:2px!important;border:1px solid #333!important;border-radius:10px!important;background:#fff!important;box-shadow:var(--jrh-shadow)!important;overflow:hidden!important}
+.music-player-button{display:grid!important;place-items:center!important;flex:0 0 42px!important;width:42px!important;height:42px!important;min-width:42px!important;min-height:42px!important;padding:0!important;border:1px solid var(--jrh-blue)!important;border-radius:7px!important;background:var(--jrh-blue)!important;color:#fff!important;cursor:pointer!important}
 .music-player-button:hover{background:var(--jrh-red)!important;border-color:var(--jrh-red)!important}
-.music-player-track-button{display:flex!important;align-items:center!important;justify-content:flex-start!important;flex:1 1 auto!important;min-width:0!important;height:38px!important;padding:0 7px!important;gap:7px!important;border:0!important;background:#fff!important;color:#333!important;cursor:pointer!important;text-align:left!important}
-.music-player-track-button:hover{background:#f2f2f2!important;color:var(--jrh-blue)!important}
-.music-player-title{display:block!important;min-width:0!important;overflow:hidden!important;text-overflow:ellipsis!important;white-space:nowrap!important;color:#333!important;font-size:12px!important;line-height:1.2!important;font-weight:700!important}
-.music-player-next{display:grid!important;place-items:center!important;flex:0 0 38px!important;width:38px!important;height:38px!important;min-width:38px!important;min-height:38px!important;padding:0!important;border:0!important;border-radius:6px!important;background:#fff!important;color:#333!important;cursor:pointer!important;font-size:20px!important;line-height:1!important}
+.music-player-track-button{display:flex!important;align-items:center!important;justify-content:flex-start!important;flex:1 1 auto!important;min-width:0!important;height:42px!important;padding:0 7px!important;gap:7px!important;border:0!important;background:#fff!important;color:#333!important;cursor:pointer!important;text-align:left!important;overflow:hidden!important}
+.music-player-track-button>svg{flex:0 0 auto!important;color:#333!important}
+.music-player-copy{display:grid!important;grid-template-columns:minmax(0,1fr)!important;min-width:0!important;flex:1 1 auto!important;overflow:hidden!important;line-height:1.05!important}
+.music-player-kicker{display:block!important;min-width:0!important;overflow:hidden!important;color:#777!important;font-size:8px!important;line-height:1!important;font-weight:700!important;letter-spacing:.12em!important}
+.music-player-title{display:block!important;min-width:0!important;overflow:hidden!important;text-overflow:ellipsis!important;white-space:nowrap!important;color:#333!important;font-size:11px!important;line-height:1.25!important;font-weight:700!important}
+.music-player-track-button>svg:last-child{flex:0 0 auto!important;color:#333!important}
+.music-player-next{display:grid!important;place-items:center!important;flex:0 0 40px!important;width:40px!important;height:42px!important;min-width:40px!important;min-height:42px!important;padding:0!important;border:0!important;border-radius:7px!important;background:#fff!important;color:#333!important;cursor:pointer!important;font-size:22px!important;line-height:1!important}
 .music-player-next:hover{background:var(--jrh-blue)!important;color:#fff!important}
 
-/* Music chooser: clear hierarchy and easy song selection. */
+/* Music chooser: visible, labelled, thumb-friendly. */
 .music-player-panel{position:fixed!important;z-index:10000!important;top:82px!important;right:20px!important;left:auto!important;width:min(360px,calc(100vw - 32px))!important;max-height:calc(100dvh - 102px)!important;padding:18px!important;box-sizing:border-box!important;overflow:auto!important;overscroll-behavior:contain!important;-webkit-overflow-scrolling:touch!important;border:1px solid #333!important;border-radius:16px!important;background:#fff!important;box-shadow:0 12px 28px rgba(0,0,0,.18)!important;animation:jrh-panel-in .18s ease!important}
 .music-player-panel-head{display:flex!important;align-items:center!important;justify-content:space-between!important;gap:12px!important;padding:0 0 14px!important;border-bottom:1px solid #ddd!important}
 .music-player-panel-head strong{display:block!important;margin-top:3px!important;color:#333!important;font-family:'Montserrat',Arial,Helvetica,sans-serif!important;font-size:15px!important;line-height:1.3!important;font-weight:700!important}
 .music-panel-label{display:block!important;color:#666!important;font-size:10px!important;line-height:1.2!important;font-weight:700!important;letter-spacing:.08em!important;text-transform:uppercase!important}
-.music-player-close{display:grid!important;place-items:center!important;flex:0 0 44px!important;width:44px!important;height:44px!important;min-width:44px!important;min-height:44px!important;border:1px solid #333!important;border-radius:6px!important;background:#fff!important;color:#333!important;cursor:pointer!important}
+.music-player-close{display:grid!important;place-items:center!important;flex:0 0 44px!important;width:44px!important;height:44px!important;min-width:44px!important;min-height:44px!important;border:1px solid #333!important;border-radius:7px!important;background:#fff!important;color:#333!important;cursor:pointer!important}
 .music-player-close:hover{background:var(--jrh-blue)!important;border-color:var(--jrh-blue)!important;color:#fff!important}
 .music-player-playlist{display:grid!important;gap:6px!important;margin-top:14px!important;max-height:none!important;overflow:visible!important}
-.music-player-song{display:grid!important;grid-template-columns:32px minmax(0,1fr) 18px!important;align-items:center!important;width:100%!important;min-height:52px!important;padding:8px 10px!important;gap:9px!important;border:1px solid transparent!important;border-left:3px solid transparent!important;border-radius:6px!important;background:#fff!important;color:#333!important;font-family:'Montserrat',Arial,Helvetica,sans-serif!important;font-size:13px!important;font-weight:600!important;line-height:1.3!important;text-align:left!important;cursor:pointer!important}
+.music-player-song{display:grid!important;grid-template-columns:32px minmax(0,1fr) auto!important;align-items:center!important;width:100%!important;min-height:52px!important;padding:8px 10px!important;gap:9px!important;border:1px solid transparent!important;border-left:3px solid transparent!important;border-radius:7px!important;background:#fff!important;color:#333!important;font-family:'Montserrat',Arial,Helvetica,sans-serif!important;font-size:13px!important;font-weight:600!important;line-height:1.3!important;text-align:left!important;cursor:pointer!important}
 .music-player-song:hover,.music-player-song:focus-visible{background:#f2f2f2!important;color:var(--jrh-blue)!important}
 .music-player-song:active{background:var(--jrh-red)!important;color:#fff!important;transform:scale(.99)!important}
 .music-player-song.is-current{border-left-color:var(--jrh-blue)!important;background:#f2f2f2!important;color:#333!important;font-weight:700!important}
 .music-song-index{color:#666!important;font-size:11px!important;font-variant-numeric:tabular-nums!important}
-.music-song-state{color:var(--jrh-red)!important;font-size:9px!important}
+.music-song-state{color:var(--jrh-red)!important;font-size:9px!important;white-space:nowrap!important}
 .music-player-mini-volume{display:flex!important;align-items:center!important;gap:10px!important;margin-top:14px!important;padding-top:14px!important;border-top:1px solid #ddd!important;color:#666!important;font-size:11px!important;font-weight:700!important}
 .music-player-mini-volume input{flex:1!important;min-width:0!important;accent-color:var(--jrh-blue)!important;cursor:pointer!important}
 .music-player-error-inline{margin-top:12px!important;padding:10px 12px!important;border-left:3px solid var(--jrh-red)!important;background:#fff!important;color:var(--jrh-red)!important;font-size:11px!important;line-height:1.45!important;font-weight:600!important}
-
 @keyframes jrh-panel-in{from{opacity:0;transform:translateY(-5px)}to{opacity:1;transform:translateY(0)}}
 
-/* Mobile: compact navbar, readable hero, bottom-sheet music chooser. */
+/* Mobile: navbar has enough room for JRH, Music and menu without overlap. */
 @media (max-width:767px){
   .jrh-nav-shell,.jrh-nav-inner{height:64px!important;min-height:64px!important}
-  .jrh-nav-inner{width:calc(100% - 24px)!important}
-  .jrh-nav-right{gap:6px!important}
-  .jrh-menu-button{min-width:46px!important;min-height:46px!important}
+  .jrh-nav-inner{width:calc(100% - 24px)!important;gap:6px!important}
+  .jrh-wordmark{font-family:'Montserrat',Arial,Helvetica,sans-serif!important;font-size:28px!important;line-height:1!important;min-width:56px!important;flex:0 0 auto!important}
+  .jrh-nav-right{display:flex!important;align-items:center!important;gap:5px!important;min-width:0!important;flex:1 1 auto!important;justify-content:flex-end!important}
+  .music-player{flex:0 1 auto!important;min-width:0!important}
+  .music-player-pill{width:clamp(145px,44vw,184px)!important;min-width:145px!important;height:46px!important;min-height:46px!important;padding:2px!important}
+  .music-player-button{flex-basis:40px!important;width:40px!important;height:40px!important;min-width:40px!important;min-height:40px!important}
+  .music-player-track-button{height:40px!important;padding:0 5px!important;gap:6px!important}
+  .music-player-copy{min-width:0!important}
+  .music-player-kicker{font-size:7px!important}
+  .music-player-title{font-size:10px!important;line-height:1.25!important}
+  .music-player-next{flex-basis:32px!important;width:32px!important;min-width:32px!important;height:40px!important}
+  .jrh-menu-button{flex:0 0 46px!important;width:46px!important;min-width:46px!important;min-height:46px!important}
 
-  .hero-clean{padding:32px 16px 48px!important}
-  .hero-copy{gap:24px!important}
-  .hero-clean h1{font-size:clamp(42px,13vw,58px)!important;line-height:1.08!important;letter-spacing:-.035em!important}
-  .hero-clean .hero-positioning{font-size:20px!important;line-height:1.35!important}
-  .hero-clean .hero-description{font-size:14px!important;line-height:1.55!important}
-  .hero-portrait-inline{width:min(280px,82vw)!important;margin:22px auto 8px!important}
-  .hero-actions{width:100%!important;gap:8px!important}
-  .hero-button{width:min(100%,300px)!important;min-height:46px!important}
+  .hero-clean{padding:116px 16px 56px!important;min-height:auto!important}
+  .hero-copy{gap:22px!important}
+  .hero-panel{align-items:center!important;text-align:center!important}
+  .hero-clean h1{font-size:clamp(44px,14vw,60px)!important;line-height:1.08!important;letter-spacing:-.035em!important}
+  .hero-clean .hero-positioning{font-size:clamp(19px,5.4vw,22px)!important;line-height:1.32!important;margin-top:16px!important}
+  .hero-clean .hero-description{font-size:14px!important;line-height:1.55!important;margin-top:10px!important;max-width:330px!important}
+  .hero-portrait-inline{width:min(280px,82vw)!important;margin:22px auto 8px!important;align-self:center!important}
+  .hero-actions{width:100%!important;justify-content:center!important;gap:8px!important}
+  .hero-button{width:min(100%,300px)!important;min-height:48px!important}
 
-  .section-shell{width:calc(100% - 32px)!important}
   .display-title{font-size:clamp(32px,10vw,44px)!important;line-height:1.15!important}
   .project-content h3,.project-featured .project-content h3{font-size:clamp(30px,10vw,42px)!important;line-height:1.08!important}
   .project-description{font-size:14px!important;line-height:1.55!important}
@@ -101,11 +103,6 @@ a:focus-visible,button:focus-visible,input:focus-visible{outline:2px solid var(-
   .experience-main h3{font-size:clamp(24px,8vw,34px)!important;line-height:1.1!important}
   .contact-title{font-size:clamp(38px,11vw,54px)!important;line-height:1.08!important}
 
-  .music-player-pill{width:min(190px,42vw)!important;height:44px!important;min-height:44px!important;border-radius:8px!important}
-  .music-player-button{flex-basis:38px!important;width:38px!important;height:38px!important;min-width:38px!important;min-height:38px!important}
-  .music-player-track-button{height:38px!important;padding:0 5px!important}
-  .music-player-title{font-size:11px!important}
-  .music-player-next{flex-basis:34px!important;width:34px!important;min-width:34px!important;height:38px!important}
   .music-player-panel{top:auto!important;right:10px!important;left:10px!important;bottom:calc(72px + env(safe-area-inset-bottom))!important;width:auto!important;max-width:none!important;max-height:calc(100dvh - 92px - env(safe-area-inset-top) - env(safe-area-inset-bottom))!important;padding:16px!important;border-radius:16px!important}
   .music-player-panel-head{padding-bottom:12px!important}
   .music-player-panel-head strong{font-size:14px!important}
@@ -113,11 +110,5 @@ a:focus-visible,button:focus-visible,input:focus-visible{outline:2px solid var(-
   .music-player-close{flex-basis:44px!important;width:44px!important;height:44px!important}
 }
 
-@media (min-width:768px) and (max-width:1100px){
-  .jrh-nav-inner,.section-shell{width:calc(100% - 40px)!important}
-  .hero-copy{gap:32px!important}
-}
-
-@media (prefers-reduced-motion:reduce){
-  *,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important;scroll-behavior:auto!important}
-}
+@media (min-width:768px) and (max-width:1100px){.jrh-nav-inner,.section-shell{width:calc(100% - 40px)!important}.hero-copy{gap:32px!important}}
+@media (prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important;scroll-behavior:auto!important}}
