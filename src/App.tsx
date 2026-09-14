@@ -30,7 +30,6 @@ export default function App() {
         <div className="footer-inner">
           <div className="footer-main">
             <div>
-              <a href="#hero" className="footer-brand" aria-label="JRH beranda">JRH</a>
               <p className="footer-copy">Personal portfolio.</p>
             </div>
             <nav className="footer-nav" aria-label="Navigasi footer">
@@ -38,7 +37,7 @@ export default function App() {
             </nav>
           </div>
           <div className="footer-bottom">
-            <span>© 2026 JRH</span>
+            <span>© 2026</span>
             <a href="https://instagram.com/jefrirh_" target="_blank" rel="noopener noreferrer">Instagram ↗</a>
           </div>
         </div>
