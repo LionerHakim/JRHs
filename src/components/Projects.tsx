@@ -1,7 +1,7 @@
 import { ArrowUpRight } from 'lucide-react';
 
 const projects = [
-  { title: 'JRH Portfolio', description: 'Personal digital space untuk ekonomi, markets, technology, dan human behavior.', meta: 'React · TypeScript', url: 'https://github.com/LionerHakim/JRHs', featured: true },
+  { title: 'Portfolio', description: 'Personal digital space untuk ekonomi, markets, technology, dan human behavior.', meta: 'React · TypeScript', url: 'https://github.com/LionerHakim/JRHs', featured: true },
   { title: 'KitaBisa.com', description: 'Web project independen yang terinspirasi konsep social-donation dan dukungan komunitas.', meta: 'Front-end', url: 'https://github.com/LionerHakim/KITABISA.COM', featured: false },
   { title: 'Ultah', description: 'Eksperimen front-end ringan bertema ulang tahun dengan pendekatan personal dan playful.', meta: 'Front-end', url: 'https://github.com/LionerHakim/Ultah', featured: false },
 ] as const;
@@ -14,7 +14,7 @@ export default function Projects() {
           <p className="eyebrow">02 / Projects</p>
           <h2 id="projects-title" className="display-title">Yang dibangun.</h2>
         </div>
-        <p className="projects-intro">Beberapa project publik yang merekam cara JRH mengubah ide menjadi sesuatu yang bisa dibuka, diuji, dan dilihat.</p>
+        <p className="projects-intro">Beberapa project publik yang merekam proses mengubah ide menjadi sesuatu yang bisa dibuka, diuji, dan dilihat.</p>
       </div>
 
       <div className="projects-list">
