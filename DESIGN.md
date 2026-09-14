@@ -1,135 +1,128 @@
-# JRH — Arcade Visual System
-> Electric blue ripple on white paper.
+# JRH — Tedy Visual System
+> Marshmallow world with a raspberry pulse — pastel surface washes on white, one hot pink doing all the urgent work.
 
 ## Direction
 
-JRH uses a light Arcade visual language: a quiet `#f9fafb` paper canvas, white content surfaces, Inter typography, thin neutral borders, restrained shadows, and one saturated electric blue signal (`#2142e7`). The hero is the signature full-bleed flowing blue gradient; elsewhere color is deliberately rationed.
+JRH uses a light Tedy visual language: pure white canvas, soft pastel surface bands, generous rounded geometry, and one saturated action color — Raspberry Pulse `#fd1774`. Photography remains the emotional layer; typography and restrained UI provide structure.
 
-The portfolio hero remains a centered stack with this fixed visual order: **Portfolio heading → personal photo → positioning → description → CTA buttons**. The photo must remain below the heading on every breakpoint.
+The portfolio hero keeps the established JRH content order: **Portfolio heading → personal photo → positioning → description → CTA buttons**. The photo stays below the heading at every breakpoint.
 
 ## Color Tokens
 
 ```css
---color-voltage-blue: #2142e7;
---color-deep-voltage: #182fa5;
---color-midnight-ink: #111827;
---color-slate-600: #4b5563;
---color-slate-700: #374151;
---color-slate-500: #70747d;
---color-graphite: #414652;
---color-paper-white: #ffffff;
---color-fog-50: #f9fafb;
---color-fog-100: #f3f4f6;
---color-mist-200: #e5e7eb;
---color-smoke-300: #d9dadc;
+--color-raspberry-pulse: #fd1774;
+--color-ink-black: #030712;
+--color-lavender-mist: #e5d6ff;
+--gradient-lavender-mist: linear-gradient(to top, rgb(231, 214, 255) 0%, oklab(0.902604 0.0325668 -0.0481643 / 0.85) 50%, rgba(0, 0, 0, 0) 100%);
+--color-mint-cream: #e3f7d6;
+--color-butter-cream: #fff1cd;
+--color-sky-wash: #ddf5fb;
+--color-sand-wash: #f4efe9;
+--color-carbon: #171717;
+--color-steel: #6b7280;
+--color-silver: #e5e7eb;
+--color-pure-white: #ffffff;
+--color-lime-zest: #64d71e;
+--color-teal-current: #4bb7cf;
 ```
 
-Voltage Blue is the primary interactive signal. Deep Voltage is reserved for hover/pressed states and inset rings. All other colors are neutral roles. No secondary saturated accent is introduced.
+Raspberry Pulse is reserved for urgent actions, active states, and the primary CTA shadow. Pastels create hierarchy through surfaces rather than saturated UI chrome.
 
 ## Typography
 
-Inter is the sole typeface, with system fallbacks. Use 700 for display/hero headings, 600 for section titles and CTAs, 500 for UI metadata, and 400 for body copy. Display tracking tightens from roughly `-0.020em` to `-0.025em`.
+Montreal Neue is the intended interface face with Inter as the practical fallback. Use weight 500 for navigation, buttons, labels, and display emphasis; weight 400 for body copy. Display typography is intentionally poster-tight.
 
-- Caption: 12px / 1.5
-- Body SM: 14px / 1.5
-- Body: 16px / 1.56
-- Subheading: 18px / 1.5
-- Heading SM: 20px / 1.4
-- Heading: 24px / 1.33
-- Heading LG: 30px / 1.29
-- Display: 48px / 1.14
-- Display LG: 64px / 1.06
+- Caption: 14px / 1.45 / -0.07px
+- Body SM: 16px / 1.5 / -0.08px
+- Subheading: 23px / 1.38 / -0.12px
+- Heading SM: 28px / 1.05 / -0.56px
+- Heading: 56px / 0.98 / -1.4px
+- Heading LG: 64px / 0.96 / -2.56px
+- Display: 80px / 0.92 / -4px
+- Display XL: 104px / 0.90 / -6.76px
 
-Balig Script remains available as a token only; it is not loaded or used without a real font asset.
+Georgia is decorative-only and must never become body text.
 
 ## Layout
 
 - Page max-width: 1200px
-- Section gap: 64px
-- Card padding: 32px
-- Element gap: 8px
-- Desktop horizontal breathing room: 48px
+- Section gap: 80px
+- Card padding: 24px
+- Element gap: 16px
+- Base spacing unit: 4px
 - Mobile horizontal breathing room: 16px
 
-Responsive behavior:
-- `<768px`: one-column sections, full-width CTAs, compact music pill, bottom-sheet music panel.
-- `768–899px`: compact navigation with mobile menu.
-- `>=900px`: full navigation links.
+The visual rhythm is **white → pastel wash → white**, with sections separated by generous space instead of hard rules.
 
 ## Shape Tokens
 
-- Tabs: 12px
-- Buttons: 12px
-- Cards: 16px
-- Inputs: 16px
-- Pills/tags: 9999px
-- Hero/media frame: 24px
+- Cards: 32px
+- Badges: 32px
+- Images: 24px
+- Buttons: 999px
+- Navigation pills: 999px
+- Small cards: 16px
+- Feature cards: 20px
 
 ## Elevation
 
-Use the supplied cool-tinted shadow stacks. Content cards primarily rely on the `#e5e7eb` hairline border; the stronger six-layer stack is reserved for primary CTAs, floating cards, media frames, and overlays. Avoid generic hard drop shadows.
+```css
+--shadow-xl: rgba(17, 24, 39, 0.16) 0px 28px 52px 0px;
+--shadow-subtle: rgb(255, 241, 205) 0px 0px 0px 1px;
+--shadow-xl-2: rgba(253, 23, 116, 0.6) 0px 14px 35px -18px;
+--shadow-subtle-2: rgba(255, 255, 255, 0.08) 0px 1px 0px 0px inset, rgba(255, 255, 255, 0.03) 0px -1px 0px 0px inset, rgba(0, 0, 0, 0.35) 0px 30px 80px 0px;
+```
+
+The raspberry shadow is reserved for primary CTA actions. Generic cards use the neutral elevation; pastel feature cards can rely entirely on surface contrast.
 
 ## Navigation
 
-64px persistent top navigation, white background, 1px `#e5e7eb` bottom border, centered 1200px container. Keep the logo left, About/Projects/Experience/Contact links on desktop, Music Player as a utility feature, and an accessible mobile menu below 900px. No theme toggle.
+White top bar, 1200px centered content, pill-shaped utility treatment, Montreal Neue 16px weight 500. Keep JRH's current information architecture: About, Projects, Experience, Contact, with Music Player as a utility feature. Avoid adding unrelated utility controls.
 
 ## Hero
 
-The hero is a full-bleed flowing blue gradient field, approximately 600px tall, with a centered editorial stack. The implementation keeps the required portfolio-specific content sequence:
+Use a white structural canvas with a soft lavender atmospheric wash and optional radial pastel glow. The JRH portrait remains directly beneath `Portfolio` rather than becoming a separate photo collage. Primary CTA uses Raspberry Pulse with the signature pink shadow; secondary action is a white ghost pill.
 
-1. `Portfolio`
-2. Personal portrait
-3. Positioning line
-4. Supporting description
-5. Primary Voltage Blue CTA + secondary ghost CTA
-6. Small scroll hint
+## Sections
 
-The hero gradient is the only large-scale color field. It must not spill into navigation, project cards, or ordinary content sections.
+About can use Lavender Mist. Projects use pastel feature surfaces: Lavender, Mint, Butter, and Sky. Experience uses a calm pastel band with white content. Contact may use the intentional Carbon dark surface as a contained panel on a pastel background.
+
+Cards use contrast between white content and pastel surroundings rather than decorative borders wherever possible.
 
 ## Projects
 
-Projects use white surfaces, 1px `#e5e7eb` borders, 16px radius, 32px padding, restrained hover elevation, and no pastel accent bands. The featured Portfolio project may span the grid. Actions use the Arcade button system.
-
-Current public projects:
-- Portfolio — `https://github.com/LionerHakim/JRHs`
-- KitaBisa.com — `https://github.com/LionerHakim/KITABISA.COM`
-- Ultah — `https://github.com/LionerHakim/Ultah`
-- Pinterest — `https://id.pinterest.com/galuhpurba/`
-
-Pinterest is a public visual reference, not a claimed software project, and remains labeled accordingly.
-
-## About
-
-Use a centered/contained editorial reading layout with neutral text, 16px body copy, and small blue accents only where hierarchy needs them. No decorative color blocks.
+Preserve current public projects and descriptions. Pinterest stays labeled as a visual reference rather than a software project. Featured Portfolio may span the grid. Primary project action uses the raspberry pill CTA; secondary project actions use white ghost pills.
 
 ## Experience
 
-Use a simple vertical timeline with hairline separators, small neutral circular nodes, bold institution headings, secondary metadata, and compact pill activity tags. Keep it editorial rather than dashboard-like.
+Keep the factual experience data unchanged. Use generous spacing, rounded activity badges, and simple editorial structure rather than a dashboard.
 
 ## Contact
 
-Use one dark Ink feature card with the documented 92–102deg dark surface gradient, white heading/copy, and one primary Voltage Blue action. Keep the surface rounded and visually quiet.
+Use one dark Carbon feature card on the Butter/Sand family of surfaces. White heading/copy; one Raspberry Pulse primary action. Do not introduce additional saturated CTA colors.
 
 ## Music Player
 
-Music Player is functional UI. Desktop uses a white pill with neutral border, dark play control, and blue progress. Mobile uses a bottom sheet for detailed playback/playlist controls with safe-area spacing. No autoplay is introduced.
+Music Player remains a functional utility. Its compact desktop control can stay pill-shaped; detailed controls can use the same Tedy rounded geometry. Raspberry Pulse is limited to play/progress/active affordances.
 
 ## Footer
 
-Minimal `#f9fafb` footer with a single visible brand mark, short descriptor, section links, year, and verified Instagram link.
-
-## Accessibility + Interaction
-
-- Keep primary controls at least 44px, with 48px preferred for menu/mobile controls.
-- Maintain clear keyboard focus using Voltage Blue.
-- Preserve reduced-motion support.
-- Never depend on hover for essential information.
-- Keep semantic headings, meaningful alt text, and safe external-link attributes.
+Use a white footer with generous spacing. Structure: JRH identity → concise focus line → Explore navigation → lower metadata row with year, verified Instagram, and location label. Navigation links can use restrained pastel hover surfaces.
 
 ## Do
 
-Use the white paper canvas, Inter, one electric-blue signal, 12/16px radii, 64px section rhythm, and cool-tinted shadows. Let typography and the hero gradient establish hierarchy without visual noise.
+- Use white canvas and pastel washes for structural hierarchy.
+- Use Raspberry Pulse as the sole saturated action hue.
+- Use tight 56–104px display typography with line-height below 1.0.
+- Use 32px cards and 999px action pills.
+- Let imagery carry emotional weight.
+- Prefer surface contrast over unnecessary borders.
 
 ## Don't
 
-Do not add a second saturated color, pastel project bands, gradients outside the hero and documented dark surfaces, pill-shaped buttons above the 12px button radius, giant decorative shadows, dark page themes, split hero layouts, or dashboard clutter.
+- Do not bring back the Arcade electric-blue system.
+- Do not introduce a second saturated action color.
+- Do not use sharp card corners.
+- Do not use raspberry shadows on ordinary cards or decorative elements.
+- Do not make every element a pill; reserve pills for buttons, nav controls, and badges.
+- Do not use Montreal/Georgia assets that are unavailable without a practical fallback.
