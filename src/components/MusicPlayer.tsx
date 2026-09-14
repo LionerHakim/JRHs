@@ -52,7 +52,6 @@ export default function MusicPlayer() {
     audio.setAttribute('webkit-playsinline', '');
     audio.volume = muted ? 0 : volume;
     audio.src = playlist[index].src;
-    audio.load();
     setProgress(0);
     setDuration(0);
   }, []);
@@ -162,19 +161,25 @@ export default function MusicPlayer() {
     const audio = audioRef.current;
     if (!audio) return;
     const safeIndex = (nextIndex + playlist.length) % playlist.length;
+
     indexRef.current = safeIndex;
     setIndex(safeIndex);
     setProgress(0);
     setDuration(0);
-    playRequestRef.current = false;
+
+    // Keep the change inside the originating tap/click. Mobile Safari/Android
+    // browsers are more reliable when we do not call load() between src and play().
+    playRequestRef.current = autoplay;
     audio.pause();
     audio.src = playlist[safeIndex].src;
-    audio.load();
+    audio.currentTime = 0;
+
     if (!autoplay) {
+      playRequestRef.current = false;
       setState('idle');
       return;
     }
-    playRequestRef.current = true;
+
     setState('loading');
     void audio.play().then(() => {
       playRequestRef.current = false;
@@ -204,7 +209,8 @@ export default function MusicPlayer() {
     const audio = audioRef.current;
     if (!audio) return;
     playRequestRef.current = false;
-    audio.load();
+    audio.src = playlist[indexRef.current].src;
+    audio.currentTime = 0;
     play();
   };
 
