@@ -2,11 +2,14 @@ export default function Hero() {
   return (
     <section id="hero" className="hero-clean" aria-labelledby="hero-title">
       <div className="hero-clean-inner">
-        <div className="hero-copy">
-          <div className="hero-kicker">
-            <span className="hero-kicker-dot" aria-hidden="true" />
-            Personal portfolio
+        <figure className="hero-portrait">
+          <div className="hero-portrait-frame">
+            <img src={`${import.meta.env.BASE_URL}data/foto/s.jpg`} alt="Portrait" loading="eager" decoding="async" fetchPriority="high" />
           </div>
+          <figcaption>Personal archive</figcaption>
+        </figure>
+
+        <div className="hero-copy">
           <p className="eyebrow">2026 / Personal archive</p>
           <h1 id="hero-title">Portfolio</h1>
           <p className="hero-positioning">Ekonomi, markets, technology, dan cara manusia berpikir.</p>
@@ -20,13 +23,6 @@ export default function Hero() {
             <span aria-hidden="true">↓</span>
           </a>
         </div>
-
-        <figure className="hero-portrait">
-          <div className="hero-portrait-frame">
-            <img src={`${import.meta.env.BASE_URL}data/foto/s.jpg`} alt="Portrait" loading="eager" decoding="async" fetchPriority="high" />
-          </div>
-          <figcaption>Personal archive</figcaption>
-        </figure>
       </div>
     </section>
   );
