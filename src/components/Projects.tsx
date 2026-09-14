@@ -50,7 +50,7 @@ export default function Projects() {
         <p className="projects-intro">Beberapa project dan referensi publik yang merekam proses mengubah ide menjadi sesuatu yang bisa dibuka, diuji, dan dilihat.</p>
       </div>
 
-      <div className="projects-list">
+      <div className="projects-list" aria-label="Daftar project">
         {projects.map((project, index) => {
           const titleId = `project-title-${index + 1}`;
           return (
