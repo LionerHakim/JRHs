@@ -6,6 +6,7 @@ import './editorial.css';
 import './tedy-overrides.css';
 import './jrh-final.css';
 import './jrh-polish.css';
+import './jrh-platform-fix.css';
 
 const root = document.getElementById('root');
 
