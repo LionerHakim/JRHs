@@ -1,0 +1,11 @@
+/* Platform-safe finishing layer. Imported last on purpose. */
+.page-shell{overflow:visible!important}
+.music-player{overflow:visible!important;contain:none!important}
+.music-player-panel{transform:translateZ(0)!important;will-change:transform!important}
+@media (max-width:767px){
+  .music-player{position:static!important}
+  .music-player-panel{position:fixed!important;z-index:2147483000!important;right:10px!important;bottom:72px!important;left:auto!important;top:auto!important;width:min(300px,calc(100vw - 20px))!important;max-height:calc(100dvh - 88px)!important;overflow:auto!important;overscroll-behavior:contain!important;-webkit-overflow-scrolling:touch!important}
+  .music-player-pill{position:relative!important;z-index:2147483001!important}
+  .music-player-track-button,.music-player-song{cursor:pointer!important;user-select:none!important;-webkit-user-select:none!important;-webkit-touch-callout:none!important}
+}
+@media (prefers-reduced-motion:reduce){.page-shell::after{animation:none!important}}
