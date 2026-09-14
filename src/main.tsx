@@ -7,6 +7,7 @@ import './tedy-overrides.css';
 import './jrh-final.css';
 import './jrh-polish.css';
 import './jrh-platform-fix.css';
+import './jrh-ux-max.css';
 
 const root = document.getElementById('root');
 
