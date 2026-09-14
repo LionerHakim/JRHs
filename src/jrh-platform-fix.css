@@ -1,93 +1,88 @@
 /* JRHs — final finishing layer. Imported last on purpose. */
 :root{
   --jrh-blue:#2563eb;
-  --jrh-violet:#7c3aed;
-  --jrh-mint:#14b8a6;
-  --jrh-ink:#111827;
-  --jrh-muted:#64748b;
-  --jrh-line:#e5e7eb;
+  --jrh-ink:#111111;
+  --jrh-muted:#6b7280;
+  --jrh-line:#e7e7e5;
   --jrh-card:#ffffff;
-  --jrh-soft:#f8fafc;
+  --jrh-soft:#fafaf9;
 }
 
 .page-shell{overflow:visible!important;background:#fff!important}
 .music-player{overflow:visible!important;contain:none!important}
 .music-player-panel{transform:translateZ(0)!important;will-change:transform!important}
 
-/* Brand accents: saturated only where they create hierarchy. */
-.jrh-wordmark{position:relative!important;padding:6px 4px!important;border-radius:14px!important;transition:transform .2s ease,filter .2s ease!important}
-.jrh-wordmark:hover{transform:translateY(-1px)!important;filter:brightness(.97)!important}
+/* Quiet-luxury navigation: monochrome by default, blue only for interaction. */
+.jrh-wordmark{position:relative!important;padding:6px 4px!important;border-radius:12px!important;color:#111!important;transition:transform .2s ease,opacity .2s ease!important}
+.jrh-wordmark:hover{transform:translateY(-1px)!important;opacity:.78!important}
 .jrh-logo{width:82px!important;height:32px!important;display:block!important;overflow:visible!important}
-.jrh-nav-link{transition:background .2s ease,color .2s ease,box-shadow .2s ease,transform .2s ease!important}
-.jrh-nav-link:hover{background:#eff6ff!important;color:#1d4ed8!important}
-.jrh-nav-link.is-active{background:#111827!important;color:#fff!important;box-shadow:0 6px 16px rgba(37,99,235,.12)!important}
-.jrh-menu-button{transition:transform .2s ease,background .2s ease,border-color .2s ease,box-shadow .2s ease!important}
-.jrh-menu-button:hover{border-color:#c7d2fe!important;background:#f8faff!important;color:#2563eb!important;box-shadow:0 8px 20px rgba(37,99,235,.1)!important}
+.jrh-nav-link{transition:background .2s ease,color .2s ease,border-color .2s ease,transform .2s ease!important}
+.jrh-nav-link:hover{background:#f5f5f3!important;color:#111!important}
+.jrh-nav-link.is-active{background:#111!important;color:#fff!important;box-shadow:0 6px 16px rgba(0,0,0,.08)!important}
+.jrh-menu-button{transition:transform .2s ease,background .2s ease,border-color .2s ease,color .2s ease,box-shadow .2s ease!important}
+.jrh-menu-button:hover{border-color:rgba(37,99,235,.36)!important;background:#fafbff!important;color:var(--jrh-blue)!important;box-shadow:0 8px 20px rgba(37,99,235,.08)!important}
 
-/* Hero stays white: accents live in controls, not the background. */
-.hero-button-primary{background:#111827!important;border-color:#111827!important;box-shadow:0 10px 26px rgba(37,99,235,.12)!important}
-.hero-button-primary:hover{background:#2563eb!important;border-color:#2563eb!important;box-shadow:0 12px 30px rgba(37,99,235,.2)!important}
-.hero-button-secondary:hover{border-color:#2563eb!important;color:#2563eb!important;background:#eff6ff!important}
-.hero-positioning strong,.hero-clean .hero-positioning em{color:#2563eb!important}
+/* Hero stays white. Blue is reserved for a single moment of emphasis. */
+.hero-button-primary{background:#111!important;border-color:#111!important;box-shadow:0 10px 26px rgba(0,0,0,.08)!important}
+.hero-button-primary:hover{background:var(--jrh-blue)!important;border-color:var(--jrh-blue)!important;box-shadow:0 12px 30px rgba(37,99,235,.16)!important}
+.hero-button-secondary:hover{border-color:rgba(37,99,235,.45)!important;color:var(--jrh-blue)!important;background:#fafbff!important}
+.hero-positioning strong,.hero-clean .hero-positioning em{color:#111!important}
 
-/* Projects: premium cards with restrained depth + color-coded micro accents. */
+/* Projects: one visual system across every card. */
 .projects-section{background:#fff!important}
 .project-object,.project-object.project-featured{
   position:relative!important;
   border:1px solid var(--jrh-line)!important;
   background:var(--jrh-card)!important;
-  box-shadow:0 2px 6px rgba(15,23,42,.025),0 18px 48px rgba(15,23,42,.055)!important;
+  box-shadow:0 2px 6px rgba(0,0,0,.02),0 18px 48px rgba(0,0,0,.055)!important;
   transition:transform .25s ease,box-shadow .25s ease,border-color .25s ease!important;
 }
-.project-object::after{content:"";position:absolute;left:20px;top:0;width:44px;height:3px;border-radius:0 0 6px 6px;background:var(--jrh-blue);opacity:.95!important}
-.project-object:nth-child(2)::after{background:var(--jrh-violet)!important}
-.project-object:nth-child(3)::after{background:var(--jrh-mint)!important}
-.project-object:nth-child(4)::after{background:#f59e0b!important}
-.project-object:hover,.project-object.project-featured:hover{transform:translateY(-5px)!important;border-color:#dbe2ea!important;box-shadow:0 6px 12px rgba(15,23,42,.03),0 26px 70px rgba(15,23,42,.1)!important}
-.project-visit{border-color:#e2e8f0!important;box-shadow:0 4px 12px rgba(15,23,42,.035)!important;transition:all .2s ease!important}
-.project-visit:hover{border-color:#bfdbfe!important;background:#eff6ff!important;color:#1d4ed8!important;box-shadow:0 8px 18px rgba(37,99,235,.12)!important}
+.project-object::after{content:"";position:absolute;left:20px;top:0;width:34px;height:2px;border-radius:0 0 6px 6px;background:#111!important;opacity:.88!important}
+.project-object:hover,.project-object.project-featured:hover{transform:translateY(-4px)!important;border-color:#d8d8d5!important;box-shadow:0 6px 12px rgba(0,0,0,.025),0 26px 70px rgba(0,0,0,.085)!important}
+.project-visit{border-color:#e1e1de!important;box-shadow:0 4px 12px rgba(0,0,0,.03)!important;transition:all .2s ease!important}
+.project-visit:hover{border-color:rgba(37,99,235,.38)!important;background:#fafbff!important;color:var(--jrh-blue)!important;box-shadow:0 8px 18px rgba(37,99,235,.08)!important}
 
-/* Experience: stronger hierarchy without adding visual noise. */
-.experience-list{border-color:#e5e7eb!important;box-shadow:0 12px 34px rgba(15,23,42,.045)!important}
-.experience-node{background:#111827!important;box-shadow:0 0 0 5px #fff,0 0 0 6px #dbeafe!important}
-.experience-row-2 .experience-node{background:#7c3aed!important;box-shadow:0 0 0 5px #fff,0 0 0 6px #ede9fe!important}
-.experience-role{border-color:#dbeafe!important;background:#eff6ff!important;color:#1d4ed8!important}
-.experience-row-2 .experience-role{border-color:#ddd6fe!important;background:#f5f3ff!important;color:#6d28d9!important}
+/* Experience: restrained, monochrome, editorial. */
+.experience-list{border-color:var(--jrh-line)!important;box-shadow:0 12px 34px rgba(0,0,0,.04)!important}
+.experience-node{background:#111!important;box-shadow:0 0 0 5px #fff,0 0 0 6px #d9d9d5!important}
+.experience-row-2 .experience-node{background:#111!important;box-shadow:0 0 0 5px #fff,0 0 0 6px #d9d9d5!important}
+.experience-role{border-color:#e1e1de!important;background:#fafaf9!important;color:#333!important}
+.experience-row-2 .experience-role{border-color:#e1e1de!important;background:#fafaf9!important;color:#333!important}
 
-/* Contact: black anchor with a controlled blue CTA moment. */
-.contact-wrap{box-shadow:0 24px 70px rgba(15,23,42,.13)!important}
-.contact-wrap .hero-button-primary:hover{background:#14b8a6!important;border-color:#14b8a6!important;color:#052e2b!important;box-shadow:0 14px 34px rgba(20,184,166,.22)!important}
+/* Contact: black anchor, one blue interaction state. */
+.contact-wrap{box-shadow:0 24px 70px rgba(0,0,0,.11)!important}
+.contact-wrap .hero-button-primary:hover{background:var(--jrh-blue)!important;border-color:var(--jrh-blue)!important;color:#fff!important;box-shadow:0 14px 34px rgba(37,99,235,.16)!important}
 
-/* Footer card follows project-card grammar: border, radius, shadow, accent rail. */
+/* Footer: premium card, no decorative rainbow rails. */
 .site-footer{border-top:0!important;background:#fff!important;padding:18px 0 24px!important}
 .site-footer .footer-inner{
   position:relative!important;
   box-sizing:border-box!important;
-  border:1px solid #e2e8f0!important;
+  border:1px solid var(--jrh-line)!important;
   border-radius:24px!important;
   background:#fff!important;
-  box-shadow:0 3px 8px rgba(15,23,42,.025),0 20px 55px rgba(15,23,42,.075)!important;
+  box-shadow:0 3px 8px rgba(0,0,0,.02),0 20px 55px rgba(0,0,0,.07)!important;
   overflow:hidden!important;
 }
-.site-footer .footer-inner::before{content:"";position:absolute;top:0;left:0;right:0;height:3px;background:#2563eb!important}
-.site-footer .footer-inner::after{content:"";position:absolute;top:0;left:46px;width:34px;height:3px;background:#7c3aed!important;border-radius:0 0 5px 5px}
+.site-footer .footer-inner::before{content:"";position:absolute;top:0;left:0;width:34px;height:2px;background:#111!important;border-radius:0 0 5px 0}
+.site-footer .footer-inner::after{display:none!important}
 .site-footer .footer-main{padding:0 28px!important}
-.site-footer .footer-bottom{margin-left:28px!important;margin-right:28px!important;border-top-color:#edf2f7!important}
-.site-footer .footer-brand{transition:transform .2s ease,filter .2s ease!important}
-.site-footer .footer-brand:hover{transform:translateY(-1px)!important;color:#2563eb!important}
+.site-footer .footer-bottom{margin-left:28px!important;margin-right:28px!important;border-top-color:#ededeb!important}
+.site-footer .footer-brand{transition:transform .2s ease,color .2s ease!important}
+.site-footer .footer-brand:hover{transform:translateY(-1px)!important;color:var(--jrh-blue)!important}
 .site-footer .footer-nav a{transition:color .2s ease,transform .2s ease!important}
-.site-footer .footer-nav a:hover{color:#2563eb!important;transform:translateX(2px)!important}
-.site-footer .footer-meta a:hover{color:#7c3aed!important}
+.site-footer .footer-nav a:hover{color:var(--jrh-blue)!important;transform:translateX(2px)!important}
+.site-footer .footer-meta a:hover{color:var(--jrh-blue)!important}
 
-/* Music unchanged in structure; only add premium depth to the existing controls. */
-.music-player-pill{box-shadow:0 8px 22px rgba(15,23,42,.07)!important}
-.music-player-button{background:#111827!important;box-shadow:0 6px 14px rgba(37,99,235,.14)!important;transition:background .2s ease,transform .2s ease!important}
-.music-player-button:hover{background:#2563eb!important;transform:scale(1.03)!important}
-.music-player-panel{border-color:#dbe3ec!important;box-shadow:0 22px 58px rgba(15,23,42,.16)!important}
-.music-player-song.is-current{background:#eff6ff!important;color:#1d4ed8!important}
-.music-player-mini-volume input{accent-color:#2563eb!important}
+/* Music is not redesigned here: only preserve depth/fidelity. */
+.music-player-pill{box-shadow:0 8px 22px rgba(0,0,0,.07)!important}
+.music-player-button{background:#111!important;box-shadow:0 6px 14px rgba(0,0,0,.10)!important;transition:background .2s ease,transform .2s ease!important}
+.music-player-button:hover{background:#111!important;transform:scale(1.03)!important}
+.music-player-panel{border-color:#dededb!important;box-shadow:0 22px 58px rgba(0,0,0,.15)!important}
+.music-player-song.is-current{background:#f5f5f3!important;color:#111!important}
+.music-player-mini-volume input{accent-color:#111!important}
 
-/* Mobile Samsung-inspired edge lighting: visible enough to read, soft enough to preserve the white canvas. */
+/* Mobile: Samsung-style edge polish, restrained to one cool-blue accent. */
 @media (max-width:767px){
   .jrh-nav-inner{position:relative!important;z-index:701!important}
   .music-player{position:static!important}
@@ -97,26 +92,25 @@
 
   .page-shell::before{
     content:"";position:fixed;inset:0;z-index:480;pointer-events:none;
-    border:1px solid rgba(37,99,235,.28)!important;
-    box-shadow:inset 0 0 12px rgba(37,99,235,.1),inset 0 0 34px rgba(124,58,237,.075)!important;
-    opacity:.62;animation:jrh-edge-mobile 4.6s ease-in-out infinite!important;
+    border:1px solid rgba(37,99,235,.16)!important;
+    box-shadow:inset 0 0 14px rgba(37,99,235,.055),inset 0 0 34px rgba(255,255,255,.72)!important;
+    opacity:.58;animation:jrh-edge-mobile 5s ease-in-out infinite!important;
   }
   .page-shell::after{
     content:"";position:fixed;inset:7px;z-index:479;pointer-events:none;border-radius:15px;
-    border:1px solid rgba(20,184,166,.12)!important;
-    box-shadow:inset 0 0 8px rgba(20,184,166,.075),inset 0 0 22px rgba(255,255,255,.68)!important;
-    opacity:.5;animation:jrh-edge-mobile-soft 4.6s ease-in-out infinite!important;
+    border:1px solid rgba(37,99,235,.07)!important;
+    box-shadow:inset 0 0 8px rgba(37,99,235,.035),inset 0 0 22px rgba(255,255,255,.68)!important;
+    opacity:.42;animation:jrh-edge-mobile-soft 5s ease-in-out infinite!important;
   }
-  @keyframes jrh-edge-mobile{0%,100%{opacity:.34}50%{opacity:.9}}
-  @keyframes jrh-edge-mobile-soft{0%,100%{opacity:.28}50%{opacity:.72}}
+  @keyframes jrh-edge-mobile{0%,100%{opacity:.28}50%{opacity:.66}}
+  @keyframes jrh-edge-mobile-soft{0%,100%{opacity:.2}50%{opacity:.46}}
 
   .site-footer{padding:14px 16px 18px!important}
-  .site-footer .footer-inner{width:100%!important;padding:42px 0 26px!important;border-radius:22px!important;box-shadow:0 12px 32px rgba(15,23,42,.07),0 3px 10px rgba(15,23,42,.035)!important}
+  .site-footer .footer-inner{width:100%!important;padding:42px 0 26px!important;border-radius:22px!important;box-shadow:0 12px 32px rgba(0,0,0,.065),0 3px 10px rgba(0,0,0,.025)!important}
   .site-footer .footer-main{padding:0 20px!important}
   .site-footer .footer-bottom{margin-left:20px!important;margin-right:20px!important}
-  .site-footer .footer-inner::before{height:2px!important}
-  .site-footer .footer-inner::after{left:38px!important;height:2px!important;width:28px!important}
-  .project-object,.project-object.project-featured{box-shadow:0 3px 8px rgba(15,23,42,.03),0 12px 30px rgba(15,23,42,.06)!important}
+  .site-footer .footer-inner::before{height:2px!important;width:28px!important}
+  .project-object,.project-object.project-featured{box-shadow:0 3px 8px rgba(0,0,0,.025),0 12px 30px rgba(0,0,0,.055)!important}
   .project-object:hover,.project-object.project-featured:hover{transform:none!important}
 }
 @media (prefers-reduced-motion:reduce){.page-shell::after,.page-shell::before{animation:none!important}}
