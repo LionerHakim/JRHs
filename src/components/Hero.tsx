@@ -5,33 +5,16 @@ export default function Hero() {
         <div className="hero-copy">
           <div className="hero-panel">
             <h1 id="hero-title">Portfolio</h1>
-
             <p className="hero-positioning">Ekonomi, markets, technology, dan cara manusia berpikir.</p>
             <p className="hero-description">Ruang personal untuk memahami sistem, menguji ide, dan membangun sesuatu dengan sengaja.</p>
-
             <figure className="hero-portrait hero-portrait-inline">
-              <div className="hero-portrait-frame">
-                <img
-                  src={`${import.meta.env.BASE_URL}data/foto/s.jpg`}
-                  alt="Portrait"
-                  loading="eager"
-                  decoding="async"
-                  fetchPriority="high"
-                />
-              </div>
+              <div className="hero-portrait-frame"><img src={`${import.meta.env.BASE_URL}data/foto/s.jpg`} alt="Portrait" loading="eager" decoding="async" fetchPriority="high" /></div>
             </figure>
-
             <div className="hero-actions">
-              <a href="#projects" className="hero-button hero-button-primary">
-                Lihat projects <span aria-hidden="true">↗</span>
-              </a>
+              <a href="#projects" className="hero-button hero-button-primary">Lihat projects <span aria-hidden="true">↗</span></a>
               <a href="#contact" className="hero-button hero-button-secondary">Hubungi</a>
             </div>
-
-            <a className="hero-scroll-hint" href="#about" aria-label="Lanjut ke About">
-              <span>Lanjut ke About</span>
-              <span aria-hidden="true">↓</span>
-            </a>
+            <a className="hero-scroll-hint" href="#about" aria-label="Lanjut ke About"><span>Lanjut ke About</span><span aria-hidden="true">↓</span></a>
           </div>
         </div>
       </div>
