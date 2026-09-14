@@ -1,0 +1,123 @@
+/* JRHs final UI polish: one predictable layer across desktop, Android and iOS. */
+:root{
+  --jrh-ink:#111;
+  --jrh-muted:#6f6f6f;
+  --jrh-line:#e9e9e7;
+  --jrh-soft:#f7f7f4;
+  --jrh-radius:24px;
+}
+
+html,body,#root{min-height:100%;background:#fff}
+body{color:var(--jrh-ink);overflow-x:hidden}
+
+/* Navbar + logo: visible mark is only JRH. */
+.jrh-nav-shell{background:rgba(255,255,255,.96)!important;border-bottom:1px solid rgba(233,233,231,.82)!important;box-shadow:0 6px 28px rgba(0,0,0,.035)!important;backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px)}
+.jrh-wordmark{min-width:auto!important}
+.jrh-logo{width:68px!important;height:auto!important}
+.jrh-nav-link{color:#5e5e5e!important}
+.jrh-nav-link:hover{background:#f5f5f2!important;color:#111!important}
+.jrh-nav-link.is-active{background:#111!important;color:#fff!important}
+.jrh-menu-button{border:1px solid var(--jrh-line)!important;background:#fff!important;color:#111!important;box-shadow:none!important}
+
+/* Hero: calm, premium, image-led. */
+.hero-clean{background:#fff!important}
+.hero-clean::before,.hero-clean::after{display:none!important}
+.hero-portrait-frame{background:#f2f2ef!important;box-shadow:0 20px 60px rgba(0,0,0,.07)!important}
+.hero-clean h1,.display-title,.project-content h3,.contact-title,.experience-main h3{font-family:'Gambarino',Georgia,serif!important;font-weight:400!important}
+.hero-button-primary{background:#111!important;border-color:#111!important;box-shadow:none!important}
+.hero-button-primary:hover{background:#292929!important;transform:translateY(-2px)}
+
+/* Projects: real visual cards with replaceable image URLs in Projects.tsx. */
+.projects-section{background:#fff!important}
+.projects-list{gap:20px!important}
+.project-object{min-height:0!important;padding:0!important;border:1px solid var(--jrh-line)!important;border-radius:var(--jrh-radius)!important;background:#fff!important;overflow:hidden!important;box-shadow:none!important;display:grid!important;grid-template-columns:1fr!important}
+.project-object:hover{transform:translateY(-4px);box-shadow:0 20px 50px rgba(0,0,0,.07)!important}
+.project-media{position:relative;width:100%;aspect-ratio:4/3;overflow:hidden;background:#efefec}
+.project-media img{width:100%;height:100%;display:block;object-fit:cover;transition:transform .45s cubic-bezier(.2,.65,.2,1),filter .3s ease}
+.project-object:hover .project-media img{transform:scale(1.035)}
+.project-index{top:20px!important;right:20px!important;z-index:3!important;padding:7px 10px;border-radius:999px;background:rgba(255,255,255,.88);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);color:#555!important}
+.project-content{padding:24px 24px 8px!important;max-width:none!important}
+.project-meta-row{min-height:22px}
+.project-meta,.project-description,.projects-intro{color:#747474!important}
+.project-content h3,.project-featured .project-content h3{font-size:clamp(38px,5vw,64px)!important}
+.project-description{max-width:620px!important}
+.project-visit{margin:0 24px 24px!important;justify-self:start}
+.project-featured{grid-column:1/-1!important}
+.project-featured .project-media{aspect-ratio:16/8}
+
+/* Experience stays readable and distinct without colored blocks. */
+.experience-section{background:#fff!important}
+.experience-list{background:#fff!important;border:1px solid var(--jrh-line)!important;box-shadow:none!important}
+.experience-row{background:#fff!important}
+
+/* Contact: Indonesian, warm, still polished. */
+.contact-section{padding-top:100px!important;padding-bottom:100px!important}
+.contact-wrap{background:#111!important;color:#fff!important;border:0!important;border-radius:32px!important;box-shadow:none!important;padding:72px 42px!important}
+.contact-kicker{color:#cfcfca!important;font-size:14px!important}
+.contact-title{color:#fff!important}
+.contact-copy{color:#c9c9c5!important}
+.contact-actions{margin-top:30px!important}
+.contact-wrap .hero-button-primary{background:#fff!important;border-color:#fff!important;color:#111!important}
+.contact-wrap .hero-button-primary:hover{background:#eeeeea!important;border-color:#eeeeea!important}
+
+/* Footer is deliberately impossible to hide. */
+.site-footer{display:block!important;visibility:visible!important;opacity:1!important;background:#fff!important;border-top:1px solid var(--jrh-line)!important}
+.footer-inner{width:min(1180px,calc(100% - 32px))!important;margin:0 auto!important;padding:30px 0 34px!important}
+.footer-minimal{display:flex!important;visibility:visible!important;opacity:1!important;align-items:center!important;justify-content:center!important;min-height:24px!important;color:#777!important;font-family:'Switzer',Inter,system-ui,sans-serif!important;font-size:12px!important;line-height:1.4!important}
+.footer-minimal span{display:block!important;color:#777!important;text-align:center!important}
+
+/* Music: on phones it remains a compact pill, never a lone circle. */
+.music-player{z-index:260!important;min-width:0}
+.music-player-pill{box-sizing:border-box;width:min(252px,34vw)!important;min-height:44px!important;padding:2px!important;border:1px solid var(--jrh-line)!important;border-radius:999px!important;background:#fff!important;box-shadow:0 8px 24px rgba(0,0,0,.06)!important}
+.music-player-button{background:#111!important;color:#fff!important}
+.music-player-next{color:#666!important}
+.music-player-progress>div{background:#111!important}
+.music-player-panel-backdrop{background:rgba(17,17,17,.18)!important;backdrop-filter:blur(7px);-webkit-backdrop-filter:blur(7px)}
+.music-player-panel{border:1px solid var(--jrh-line)!important;background:#fff!important;box-shadow:0 24px 70px rgba(0,0,0,.14)!important}
+.music-player-main-action{background:#111!important;border-color:#111!important;color:#fff!important;box-shadow:none!important}
+.music-range{accent-color:#111!important}
+
+@media (max-width:900px){
+  .jrh-nav-links{display:none}
+  .jrh-menu-button{display:inline-flex}
+  .project-featured .project-media{aspect-ratio:4/3}
+}
+
+@media (max-width:767px){
+  .jrh-nav-shell,.jrh-nav-inner{height:64px!important;min-height:64px!important}
+  .jrh-nav-inner{width:calc(100% - 24px)!important}
+  .jrh-logo{width:62px!important}
+  .jrh-nav-right{gap:7px!important}
+
+  .music-player{margin:0!important}
+  .music-player-pill{width:166px!important;height:42px!important;min-width:166px!important;min-height:42px!important;padding:2px!important;overflow:hidden!important}
+  .music-player-button{width:38px!important;height:38px!important;min-width:38px!important;min-height:38px!important}
+  .music-player-track-button{position:static!important;inset:auto!important;opacity:1!important;z-index:auto!important;width:auto!important;height:38px!important;min-width:0!important;display:flex!important;flex:1 1 auto!important;justify-content:flex-start!important;gap:6px!important;padding:0 7px!important;overflow:hidden!important;background:transparent!important}
+  .music-player-track-label{display:none!important}
+  .music-player-title{display:block!important;min-width:0!important;max-width:82px!important;overflow:hidden!important;text-overflow:ellipsis!important;white-space:nowrap!important;font-size:11px!important}
+  .music-player-track-button svg{display:block!important;flex:none!important}
+  .music-player-track-button svg:last-child{display:none!important}
+  .music-player-next{display:inline-flex!important;width:34px!important;height:38px!important;min-width:34px!important}
+  .music-player-progress{display:block!important;left:12px!important;right:12px!important;bottom:0!important}
+
+  .hero-clean{padding-top:96px!important}
+  .hero-portrait{max-width:330px!important}
+  .section-shell{width:calc(100% - 32px)!important}
+  .project-content{padding:20px 20px 6px!important}
+  .project-visit{margin:0 20px 20px!important}
+  .project-media,.project-featured .project-media{aspect-ratio:4/5!important}
+  .contact-section{padding-top:72px!important;padding-bottom:72px!important}
+  .contact-wrap{padding:52px 22px!important;border-radius:24px!important}
+  .contact-title{font-size:clamp(54px,17vw,78px)!important}
+  .footer-inner{padding:26px 0 30px!important}
+}
+
+@media (max-width:390px){
+  .music-player-pill{width:148px!important;min-width:148px!important}
+  .music-player-title{max-width:65px!important}
+  .jrh-logo{width:58px!important}
+}
+
+@media (prefers-reduced-motion:reduce){
+  .project-object,.project-media img,.hero-button,.jrh-menu-button{transition:none!important}
+}
