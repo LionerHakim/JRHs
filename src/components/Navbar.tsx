@@ -15,7 +15,6 @@ type FocusableElement = HTMLElement & { focus: (options?: FocusOptions) => void 
 export default function Navbar() {
   const [open, setOpen] = useState(false);
   const [active, setActive] = useState('about');
-  const [scrolled, setScrolled] = useState(false);
   const closeRef = useRef<HTMLButtonElement>(null);
   const menuRef = useRef<HTMLElement>(null);
   const openerRef = useRef<HTMLButtonElement>(null);
@@ -25,12 +24,6 @@ export default function Navbar() {
     if (restoreFocus) openerRef.current?.focus({ preventScroll: true });
   };
   const goHome = (event: React.MouseEvent<HTMLAnchorElement>) => { event.preventDefault(); window.location.assign(base); };
-
-  useEffect(() => {
-    const update = () => setScrolled(window.scrollY > 24);
-    update(); window.addEventListener('scroll', update, { passive: true });
-    return () => window.removeEventListener('scroll', update);
-  }, []);
 
   useEffect(() => {
     const observer = new IntersectionObserver((entries) => {
@@ -59,7 +52,7 @@ export default function Navbar() {
 
   return (
     <>
-      <header className={`jrh-nav-shell${scrolled ? ' is-scrolled' : ''}`} aria-label="Navigasi situs">
+      <header className="jrh-nav-shell" aria-label="Navigasi situs">
         <nav className="jrh-nav-inner" aria-label="Navigasi utama">
           <a href={base} onClick={goHome} className="jrh-wordmark" aria-label="Kembali ke halaman utama">JRH</a>
           <div className="jrh-nav-right">
