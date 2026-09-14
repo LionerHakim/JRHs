@@ -3,6 +3,7 @@ import { createRoot } from 'react-dom/client';
 import App from './App.tsx';
 import './index.css';
 import './editorial.css';
+import './tedy-overrides.css';
 
 const root = document.getElementById('root');
 
