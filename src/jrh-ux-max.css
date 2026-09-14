@@ -1,70 +1,34 @@
 /* JRHs — FINAL UX: compact editorial layout + disciplined solid color system. */
 :root{--jrh-black:#111;--jrh-white:#fff;--jrh-red:#d92d20;--jrh-yellow:#f2c94c;--jrh-blue:#2563eb;--jrh-gray:#f3f3f0}
 
-/* Color psychology: BLACK=authority, WHITE=clarity, BLUE=trust/action, YELLOW=guidance, RED=attention. */
+/* Psychology: BLACK authority, WHITE clarity, BLUE trust/action, YELLOW guidance, RED attention. */
 .jrh-nav-link.is-active,.jrh-mobile-link.is-active,.jrh-menu-button,.music-player-button,.hero-button-primary{background:var(--jrh-black)!important;color:#fff!important}
 .hero-button-primary:hover,.project-visit:hover{background:var(--jrh-blue)!important;border-color:var(--jrh-blue)!important;color:#fff!important}
 .jrh-nav-link:focus-visible,.jrh-menu-button:focus-visible,.jrh-wordmark:focus-visible,.jrh-mobile-link:focus-visible,.project-visit:focus-visible,.music-player-button:focus-visible{outline:2px solid var(--jrh-blue)!important;outline-offset:3px!important}
 
-/* Compact rhythm: every major gap has a structural purpose. */
+/* Tight composition: reduce dead zones while preserving deliberate breathing room. */
 .section-shell{padding-top:clamp(52px,6vw,84px)!important;padding-bottom:clamp(52px,6vw,84px)!important}
 .hero-clean{padding-bottom:clamp(46px,6vw,78px)!important}
 .projects-heading{margin-bottom:clamp(20px,2.8vw,30px)!important}
 .projects-intro{margin-top:0!important}
-.about-grid{gap:clamp(28px,5vw,64px)!important}
-.experience-grid{gap:clamp(28px,5vw,60px)!important}
+.about-grid,.experience-grid{gap:clamp(28px,5vw,60px)!important}
 .contact-wrap{margin-top:clamp(18px,2.5vw,30px)!important}
 .site-footer{padding-top:10px!important}
 .site-footer .footer-inner{padding-top:48px!important}
 .site-footer .footer-inner::before{display:none!important}
 
-/* Hero: decisive first screen, no decorative filler. */
-.hero-copy{max-width:760px!important}
-.hero-description{max-width:560px!important}
-.hero-scroll-hint{margin-top:20px!important}
-
-/* Project cards: content first, interaction second. */
-.project-object,.project-object.project-featured{border-color:#dededb!important}
-.project-visit{border:1px solid var(--jrh-black)!important;background:#fff!important;color:var(--jrh-black)!important}
-.project-visit:hover{box-shadow:none!important}
-
-/* Experience: yellow is a tiny orientation cue, not a theme color. */
-.experience-role:hover{background:var(--jrh-blue)!important;border-color:var(--jrh-blue)!important;color:#fff!important}
-.experience-row-2 .experience-role:first-child{border-left:3px solid var(--jrh-yellow)!important}
-
-/* Contact: one unmistakable primary action. */
+.hero-copy{max-width:760px!important}.hero-description{max-width:560px!important}.hero-scroll-hint{margin-top:20px!important}
+.project-object,.project-object.project-featured{border-color:#dededb!important}.project-visit{border:1px solid var(--jrh-black)!important;background:#fff!important;color:var(--jrh-black)!important}.project-visit:hover{box-shadow:none!important}
+.experience-role:hover{background:var(--jrh-blue)!important;border-color:var(--jrh-blue)!important;color:#fff!important}.experience-row-2 .experience-role:first-child{border-left:3px solid var(--jrh-yellow)!important}
 .contact-wrap .contact-cta,.contact-wrap a[class*="button"]{background:var(--jrh-black)!important;color:#fff!important}
-
-/* Red is reserved for genuine attention/error states. */
-[aria-invalid="true"],.is-error,.music-player-error{border-color:var(--jrh-red)!important;color:var(--jrh-red)!important}
+[aria-invalid="true"],.is-error,.music-player-error,.music-player-error-inline{border-color:var(--jrh-red)!important;color:var(--jrh-red)!important}
 
 @media (max-width:767px){
-  .section-shell{padding-top:46px!important;padding-bottom:46px!important}
-  .hero-clean{padding-top:20px!important;padding-bottom:46px!important}
-  .projects-heading{margin-bottom:18px!important}
-  .about-grid,.experience-grid{gap:26px!important}
-  .contact-wrap{margin-top:16px!important}
-
-  /* Horizontal carousel + vertical page scroll. */
+  .section-shell{padding-top:46px!important;padding-bottom:46px!important}.hero-clean{padding-top:20px!important;padding-bottom:46px!important}.projects-heading{margin-bottom:18px!important}.about-grid,.experience-grid{gap:26px!important}.contact-wrap{margin-top:16px!important}
   .projects-list{touch-action:pan-x pan-y!important;overscroll-behavior-x:contain!important;overscroll-behavior-y:auto!important;scroll-snap-type:x mandatory!important;scroll-snap-stop:always!important;cursor:grab!important}
-  .projects-list:active{cursor:grabbing!important}
-  .project-object{scroll-snap-align:start!important}
-  .projects-swipe-hint{display:flex!important;align-items:center!important;gap:7px!important;margin:8px 0 0!important;color:#777!important;font-size:11px!important;letter-spacing:.015em!important;opacity:.78!important;animation:jrh-swipe-nudge 2.6s ease-in-out 1!important}
-  .projects-swipe-hint svg{color:var(--jrh-blue)!important}
-  .projects-list::after{content:"";flex:0 0 2px!important}
-  .project-object,.project-object.project-featured{flex-basis:min(82vw,330px)!important;scroll-snap-stop:always!important}
-
-  /* Music: clear utility, large touch targets, no visual competition with content. */
-  .music-player-pill{border-color:#d9d9d5!important}
-  .music-player-button{min-width:40px!important;min-height:40px!important}
-  .music-player-panel{z-index:6000!important}
-  .music-player-song.is-current{border-left:3px solid var(--jrh-blue)!important;background:var(--jrh-gray)!important}
-  .music-player-next,.music-player-close{min-width:44px!important;min-height:44px!important}
-
-  /* Menu always wins over music. */
-  .jrh-menu-backdrop{z-index:7000!important}
-  .jrh-mobile-menu{z-index:7001!important}
-  .jrh-mobile-link{min-height:54px!important}
+  .projects-list:active{cursor:grabbing!important}.project-object{scroll-snap-align:start!important}.projects-swipe-hint{display:flex!important;align-items:center!important;gap:7px!important;margin:8px 0 0!important;color:#777!important;font-size:11px!important;letter-spacing:.015em!important;opacity:.78!important;animation:jrh-swipe-nudge 2.6s ease-in-out 1!important}.projects-swipe-hint svg{color:var(--jrh-blue)!important}.projects-list::after{content:"";flex:0 0 2px!important}.project-object,.project-object.project-featured{flex-basis:min(82vw,330px)!important;scroll-snap-stop:always!important}
+  .music-player-pill{border-color:#d9d9d5!important}.music-player-button{min-width:40px!important;min-height:40px!important}.music-player-panel{z-index:6000!important}.music-player-song.is-current{border-left:3px solid var(--jrh-blue)!important;background:var(--jrh-gray)!important}.music-player-next,.music-player-close{min-width:44px!important;min-height:44px!important}
+  .jrh-menu-backdrop{z-index:7000!important}.jrh-mobile-menu{z-index:7001!important}.jrh-mobile-link{min-height:54px!important}
 }
 
 @keyframes jrh-swipe-nudge{0%,100%{transform:translateX(0);opacity:.55}35%{transform:translateX(5px);opacity:1}65%{transform:translateX(0);opacity:.75}}
