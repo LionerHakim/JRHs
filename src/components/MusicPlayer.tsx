@@ -66,12 +66,7 @@ export default function MusicPlayer() {
     const audio = audioRef.current; if (!audio) return false;
     audio.pause(); audio.src = playlist[next].src; audio.preload = 'metadata'; audio.currentTime = 0; audio.volume = muted ? 0 : volume; audio.load(); return true;
   }
-  function startPlayback(next?: number) {
-    const target = typeof next === 'number' ? next : index; const audio = audioRef.current; if (!audio) return;
-    setState('loading'); audio.volume = muted ? 0 : volume;
-    if (!audio.src || !audio.src.endsWith(playlist[target].src)) setSource(target);
-    void audio.play().then(() => setState('playing')).catch(() => setState('error'));
-  }
+  function startPlayback(next?: number) { const target = typeof next === 'number' ? next : index; const audio = audioRef.current; if (!audio) return; setState('loading'); audio.volume = muted ? 0 : volume; if (!audio.src || !audio.src.endsWith(playlist[target].src)) setSource(target); void audio.play().then(() => setState('playing')).catch(() => setState('error')); }
   function play() { startPlayback(); }
   function pause() { const audio = audioRef.current; if (!audio) return; audio.pause(); setState('paused'); }
   function togglePlayback() { if (state === 'playing') pause(); else startPlayback(); }
@@ -82,20 +77,27 @@ export default function MusicPlayer() {
 
   const panel = open ? (
     <div id="music-player-panel" className="music-player-panel" role="dialog" aria-modal="false" aria-label="Pilih musik">
-      <div className="music-player-panel-head"><div><span className="music-panel-label">Music</span><strong>{playlist[index].title}</strong></div><button type="button" onClick={closePanel} className="music-player-close" aria-label="Tutup"><X size={15} /></button></div>
+      <div className="music-player-panel-head">
+        <div><span className="music-panel-label">Pilih musik</span><strong>{playlist[index].title}</strong></div>
+        <button type="button" onClick={closePanel} className="music-player-close" aria-label="Tutup pilihan musik"><X size={16} /></button>
+      </div>
       <div className="music-player-playlist" role="list">
-        {playlist.map((song, songIndex) => <button key={song.title} type="button" className={`music-player-song${songIndex === index ? ' is-current' : ''}`} onClick={() => selectTrack(songIndex)} role="listitem" aria-current={songIndex === index ? 'true' : undefined}><span className="music-song-index">{String(songIndex + 1).padStart(2, '0')}</span><span>{song.title}</span>{songIndex === index && <span className="music-song-state" aria-hidden="true">●</span>}</button>)}
+        {playlist.map((song, songIndex) => <button key={song.title} type="button" className={`music-player-song${songIndex === index ? ' is-current' : ''}`} onClick={() => selectTrack(songIndex)} role="listitem" aria-current={songIndex === index ? 'true' : undefined}><span className="music-song-index">{String(songIndex + 1).padStart(2, '0')}</span><span>{song.title}</span>{songIndex === index && <span className="music-song-state" aria-hidden="true">Sedang dipilih</span>}</button>)}
       </div>
       <div className="music-player-mini-volume"><label htmlFor="music-volume">Volume</label><input id="music-volume" type="range" min="0" max="1" step="0.01" value={muted ? 0 : volume} onChange={(event) => { setMuted(false); setVolume(Number(event.target.value)); }} /></div>
-      {state === 'error' && <div className="music-player-error-inline" role="status">Musik gagal dimuat. Tekan play untuk mencoba lagi.</div>}
+      {state === 'error' && <div className="music-player-error-inline" role="status">Musik gagal dimuat. Tekan tombol play untuk mencoba lagi.</div>}
     </div>
   ) : null;
 
   return <div className="music-player" aria-label="Pemutar musik">
     <audio ref={audioRef} preload="metadata" playsInline onPlay={() => setState('playing')} onPause={() => { const audio = audioRef.current; if (audio && !audio.ended) setState('paused'); }} onEnded={handleEnded} onError={() => setState('error')} />
     <div className="music-player-pill">
-      <button ref={triggerRef} type="button" className="music-player-button" onClick={togglePlayback} aria-label={state === 'playing' ? 'Jeda musik' : 'Putar musik'} aria-busy={state === 'loading'}>{state === 'playing' ? <Pause size={14} /> : <Play size={14} />}</button>
-      <button type="button" className="music-player-track-button" onClick={() => setOpen((value) => !value)} aria-expanded={open} aria-controls="music-player-panel"><Headphones size={13} aria-hidden="true" /><span className="music-player-title">{playlist[index].title}</span><ChevronDown size={13} aria-hidden="true" /></button>
+      <button ref={triggerRef} type="button" className="music-player-button" onClick={togglePlayback} aria-label={state === 'playing' ? 'Jeda musik' : 'Putar musik'} aria-busy={state === 'loading'}>{state === 'playing' ? <Pause size={15} /> : <Play size={15} />}</button>
+      <button type="button" className="music-player-track-button" onClick={() => setOpen((value) => !value)} aria-expanded={open} aria-controls="music-player-panel" aria-label={`Pilih musik. Lagu saat ini ${playlist[index].title}`}>
+        <Headphones size={14} aria-hidden="true" />
+        <span className="music-player-copy"><span className="music-player-kicker">MUSIC</span><span className="music-player-title">{playlist[index].title}</span></span>
+        <ChevronDown size={14} aria-hidden="true" />
+      </button>
       <button type="button" className="music-player-next" onClick={() => changeTrack(1)} aria-label="Lagu berikutnya"><span aria-hidden="true">›</span></button>
     </div>
     {typeof document !== 'undefined' && createPortal(panel, document.body)}
