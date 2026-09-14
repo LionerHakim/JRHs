@@ -100,13 +100,11 @@
 }
 
 :root {
-  /* Tedy compatibility aliases for the existing component class names. */
+  /* Compatibility aliases for existing JSX/CSS; Tedy tokens remain authoritative. */
   --color-signal-blue: var(--color-raspberry-pulse);
   --color-voltage-violet: var(--color-lavender-mist);
-  --color-sky-wash: var(--color-sky-wash);
   --color-pencil-gray: var(--color-silver);
   --color-ink: var(--color-ink-black);
-  --color-carbon: var(--color-carbon);
   --color-paper: var(--color-pure-white);
   --font-inter: var(--font-montreal-neue);
   --text-display-xl-compat: var(--text-display-xl);
@@ -115,12 +113,21 @@
   --radius-featurecards: var(--radius-feature-cards);
   --shadow-sm: var(--shadow-xl-2);
   --shadow-lg: var(--shadow-xl);
+
+  --surface-page-canvas: #ffffff;
+  --surface-lavender-surface: #e5d6ff;
+  --surface-mint-surface: #e3f7d6;
+  --surface-butter-surface: #fff1cd;
+  --surface-sky-surface: #ddf5fb;
+  --surface-sand-surface: #f4efe9;
+  --surface-card-surface: #ffffff;
+  --surface-dark-surface: #171717;
 }
 
 html {
   margin: 0;
   padding: 0;
-  background: var(--surface-page-canvas, #fff);
+  background: var(--surface-page-canvas);
   color-scheme: light;
   scroll-behavior: smooth;
   -webkit-text-size-adjust: 100%;
@@ -130,7 +137,7 @@ body {
   margin: 0;
   min-width: 320px;
   padding: 0;
-  background: var(--surface-page-canvas, #fff);
+  background: var(--surface-page-canvas);
   color: var(--color-ink-black);
   font-family: var(--font-montreal-neue);
   font-size: 16px;
@@ -147,14 +154,3 @@ body {
 button, input, select, textarea { font: inherit; }
 img, svg { display: block; max-width: 100%; }
 a { color: inherit; }
-
-:root {
-  --surface-page-canvas: #ffffff;
-  --surface-lavender-surface: #e5d6ff;
-  --surface-mint-surface: #e3f7d6;
-  --surface-butter-surface: #fff1cd;
-  --surface-sky-surface: #ddf5fb;
-  --surface-sand-surface: #f4efe9;
-  --surface-card-surface: #ffffff;
-  --surface-dark-surface: #171717;
-}
