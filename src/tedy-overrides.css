@@ -17,14 +17,32 @@
 .footer-brand{display:inline-block}
 .footer-brand::after{content:"";display:block;width:48px;height:4px;margin-top:12px;border-radius:999px;background:#fd1774}
 
-/* Music player is interactive UI, so it must always sit above the fixed navbar/backdrops. */
+/* Music player: keep the utility above the fixed navbar and give the open layer its own viewport-safe stack. */
 .jrh-nav-shell{overflow:visible}
 .jrh-nav-inner,.jrh-nav-right{overflow:visible}
-.music-player{z-index:420}
-.music-player-panel-backdrop{z-index:400}
-.music-player-panel{z-index:430}
-.music-player-pill{isolation:isolate}
+.music-player{position:relative;z-index:420;isolation:isolate}
+.music-player-pill{isolation:isolate;touch-action:manipulation}
+.music-player-panel-backdrop{z-index:400;touch-action:manipulation}
+.music-player-panel{z-index:430;overscroll-behavior:contain;-webkit-overflow-scrolling:touch;touch-action:pan-y}
+.music-player button,.music-player input{-webkit-tap-highlight-color:transparent}
 
 @media (min-width:768px){.hero-panel{min-height:520px;display:flex;flex-direction:column;justify-content:center}.hero-clean{min-height:720px}.hero-portrait-frame{min-height:500px}}
-@media (max-width:767px){.hero-panel{padding:32px 24px;border-radius:24px}.hero-clean{padding-top:96px}.hero-portrait-frame{min-height:0}.hero-clean h1{font-size:clamp(64px,19vw,88px)}.music-player{position:static}.music-player-pill{width:min(210px,52vw)}.music-player-panel{position:fixed;left:12px;right:12px;top:84px;width:auto;max-height:calc(100svh - 96px);overscroll-behavior:contain}.music-player-panel-backdrop{position:fixed;inset:0}}
-@media (max-width:520px){.music-player-pill{width:154px}.music-player-track-label{display:none}.music-player-title{max-width:62px}}
+@media (max-width:767px){
+  .hero-panel{padding:32px 24px;border-radius:24px}
+  .hero-clean{padding-top:96px}
+  .hero-portrait-frame{min-height:0}
+  .hero-clean h1{font-size:clamp(64px,19vw,88px)}
+  .music-player{position:fixed;top:calc(8px + env(safe-area-inset-top, 0px));right:12px;z-index:420;margin:0}
+  .music-player-pill{width:min(210px,62vw);min-height:44px}
+  .music-player-panel{position:fixed;left:12px;right:12px;top:calc(72px + env(safe-area-inset-top, 0px));bottom:auto;width:auto;max-height:calc(100svh - 84px - env(safe-area-inset-bottom, 0px));overflow-y:auto;overscroll-behavior:contain}
+  .music-player-panel-backdrop{position:fixed;inset:0;z-index:400}
+  .music-player-close,.music-player-action,.music-player-main-action,.music-player-button,.music-player-next,.music-player-track-button{min-width:40px;min-height:40px}
+  .music-player input[type="range"]{min-height:36px;touch-action:pan-x}
+}
+@media (max-width:520px){
+  .music-player{right:10px}
+  .music-player-pill{width:154px}
+  .music-player-track-label{display:none}
+  .music-player-title{max-width:62px}
+  .music-player-panel{left:10px;right:10px;top:calc(68px + env(safe-area-inset-top, 0px));max-height:calc(100svh - 80px - env(safe-area-inset-bottom, 0px))}
+}
