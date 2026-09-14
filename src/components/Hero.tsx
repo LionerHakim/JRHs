@@ -14,7 +14,6 @@ export default function Hero() {
               <a href="#projects" className="hero-button hero-button-primary">Lihat projects <span aria-hidden="true">↗</span></a>
               <a href="#contact" className="hero-button hero-button-secondary">Hubungi</a>
             </div>
-            <a className="hero-scroll-hint" href="#about" aria-label="Lanjut ke About"><span>Lanjut ke About</span><span aria-hidden="true">↓</span></a>
           </div>
         </div>
       </div>
