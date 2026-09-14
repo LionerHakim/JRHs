@@ -10,7 +10,7 @@ const navLinks = [
   { name: 'Contact', href: '#contact' },
 ];
 
-type FocusableElement = HTMLElement & { focus: () => void };
+type FocusableElement = HTMLElement & { focus: (options?: FocusOptions) => void };
 
 export default function Navbar() {
   const [open, setOpen] = useState(false);
@@ -20,7 +20,10 @@ export default function Navbar() {
   const menuRef = useRef<HTMLElement>(null);
   const openerRef = useRef<HTMLButtonElement>(null);
 
-  const closeMenu = () => { setOpen(false); openerRef.current?.focus(); };
+  const closeMenu = (restoreFocus = true) => {
+    setOpen(false);
+    if (restoreFocus) openerRef.current?.focus({ preventScroll: true });
+  };
   const goHome = (event: React.MouseEvent<HTMLAnchorElement>) => { event.preventDefault(); window.location.assign(base); };
 
   useEffect(() => {
@@ -50,7 +53,7 @@ export default function Navbar() {
       else if (!event.shiftKey && document.activeElement === last) { event.preventDefault(); first.focus(); }
     };
     document.addEventListener('keydown', onKey);
-    closeRef.current?.focus();
+    closeRef.current?.focus({ preventScroll: true });
     return () => document.removeEventListener('keydown', onKey);
   }, [open]);
 
@@ -74,11 +77,11 @@ export default function Navbar() {
 
       {open && (
         <div className="jrh-menu-backdrop" role="presentation">
-          <button type="button" className="jrh-menu-scrim" onClick={closeMenu} aria-label="Tutup menu" />
+          <button type="button" className="jrh-menu-scrim" onClick={() => closeMenu()} aria-label="Tutup menu" />
           <aside ref={menuRef} className="jrh-mobile-menu" role="dialog" aria-modal="true" aria-label="Navigasi seluler">
-            <div className="jrh-mobile-menu-head"><span className="jrh-mobile-menu-label">Menu</span><button ref={closeRef} type="button" onClick={closeMenu} className="jrh-menu-button" aria-label="Tutup menu"><X size={18} aria-hidden="true" /></button></div>
+            <div className="jrh-mobile-menu-head"><span className="jrh-mobile-menu-label">Menu</span><button ref={closeRef} type="button" onClick={() => closeMenu()} className="jrh-menu-button" aria-label="Tutup menu"><X size={18} aria-hidden="true" /></button></div>
             <nav className="jrh-mobile-links" aria-label="Navigasi utama seluler">
-              {navLinks.map((link) => <a key={link.href} href={link.href} onClick={closeMenu} className={`jrh-mobile-link ${active === link.href.slice(1) ? 'is-active' : ''}`}><span>{link.name}</span><span aria-hidden="true">↗</span></a>)}
+              {navLinks.map((link) => <a key={link.href} href={link.href} onClick={() => closeMenu(false)} className={`jrh-mobile-link ${active === link.href.slice(1) ? 'is-active' : ''}`}><span>{link.name}</span><span aria-hidden="true">↗</span></a>)}
             </nav>
           </aside>
         </div>
