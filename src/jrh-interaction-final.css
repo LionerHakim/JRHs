@@ -1,0 +1,82 @@
+/* JRHs — interaction finish: every actionable surface gives immediate, restrained feedback. */
+:root{--jrh-black:#111;--jrh-white:#fff;--jrh-blue:#2563eb;--jrh-yellow:#f2c94c;--jrh-red:#d92d20;--jrh-line:#dededb;--jrh-soft:#f3f3f0}
+
+/* Universal link/button language: lift on pointer, press on touch, clear keyboard focus. */
+a,button{ -webkit-tap-highlight-color:transparent; }
+a:not(.jrh-wordmark),button{transition:transform .18s cubic-bezier(.2,.7,.2,1),background-color .18s ease,border-color .18s ease,color .18s ease,box-shadow .18s ease,opacity .18s ease!important}
+a:focus-visible,button:focus-visible,input:focus-visible{outline:2px solid var(--jrh-blue)!important;outline-offset:3px!important}
+
+/* Navbar — compact active state + precise interaction. */
+.jrh-nav-link{position:relative!important;overflow:hidden!important}
+.jrh-nav-link::after{content:"";position:absolute!important;left:14px!important;right:14px!important;bottom:5px!important;height:2px!important;background:var(--jrh-blue)!important;transform:scaleX(0)!important;transform-origin:left!important;transition:transform .2s ease!important}
+.jrh-nav-link:hover::after,.jrh-nav-link.is-active::after{transform:scaleX(1)!important}
+.jrh-nav-link:hover{transform:translateY(-1px)!important}
+.jrh-nav-link:active{transform:translateY(0) scale(.97)!important}
+.jrh-wordmark:active{transform:scale(.96)!important;opacity:.72!important}
+.jrh-menu-button:hover{transform:translateY(-2px) scale(1.02)!important;box-shadow:0 10px 22px rgba(0,0,0,.14)!important}
+.jrh-menu-button:active{transform:scale(.94)!important;box-shadow:0 3px 8px rgba(0,0,0,.12)!important}
+.jrh-mobile-link:hover{transform:translateX(3px)!important}
+.jrh-mobile-link:active{transform:scale(.985)!important}
+
+/* Projects — whole card reacts, CTA gets a decisive press state. */
+.project-object{cursor:default!important;transition:transform .2s cubic-bezier(.2,.7,.2,1),border-color .2s ease,box-shadow .2s ease,background-color .2s ease!important}
+.project-object:hover{transform:translateY(-5px)!important;border-color:#cfcfcb!important;box-shadow:inset 0 0 0 1px rgba(255,255,255,.96),0 0 0 1px rgba(37,99,235,.10),0 24px 58px rgba(0,0,0,.09)!important}
+.project-object:active{transform:translateY(-1px) scale(.992)!important;border-color:var(--jrh-blue)!important;box-shadow:inset 0 0 0 1px rgba(37,99,235,.12),0 0 0 2px rgba(37,99,235,.08),0 12px 28px rgba(0,0,0,.07)!important}
+.project-visit{position:relative!important;overflow:hidden!important}
+.project-visit::before{content:"";position:absolute!important;inset:0!important;background:var(--jrh-blue)!important;transform:scaleX(0)!important;transform-origin:left!important;transition:transform .2s ease!important;z-index:0!important}
+.project-visit>*{position:relative!important;z-index:1!important}
+.project-visit:hover::before,.project-visit:focus-visible::before{transform:scaleX(1)!important}
+.project-visit:active{transform:scale(.96)!important}
+
+/* Experience — role chips visibly respond on desktop and touch. */
+.experience-role{cursor:pointer!important;user-select:none!important;-webkit-user-select:none!important}
+.experience-role:hover{transform:translateY(-2px)!important;background:var(--jrh-blue)!important;border-color:var(--jrh-blue)!important;color:#fff!important;box-shadow:0 8px 18px rgba(37,99,235,.14)!important}
+.experience-role:active{transform:scale(.94)!important;background:var(--jrh-black)!important;border-color:var(--jrh-black)!important;color:#fff!important}
+.experience-row{transition:transform .18s ease,background-color .18s ease!important}
+.experience-row:hover{background:#fafaf9!important}
+.experience-row:active{transform:scale(.995)!important}
+
+/* Contact + footer links. */
+.contact-cta:hover{transform:translateY(-3px)!important;box-shadow:0 12px 28px rgba(0,0,0,.14)!important}
+.contact-cta:active{transform:scale(.97)!important;background:var(--jrh-blue)!important;border-color:var(--jrh-blue)!important}
+.footer-nav a:hover,.footer-meta a:hover{transform:translateX(4px)!important;color:#79a6ff!important}
+.footer-nav a:active,.footer-meta a:active{transform:scale(.96)!important}
+
+/* Music — make the utility feel like a real control, not a passive badge. */
+.music-player-pill{transition:box-shadow .2s ease,border-color .2s ease,transform .2s ease!important}
+.music-player-pill:focus-within{border-color:var(--jrh-blue)!important;box-shadow:inset 0 0 0 1px rgba(255,255,255,.95),0 0 0 2px rgba(37,99,235,.10),0 10px 28px rgba(0,0,0,.10)!important}
+.music-player-button:hover{transform:scale(1.06)!important;background:var(--jrh-blue)!important;border-color:var(--jrh-blue)!important}
+.music-player-button:active{transform:scale(.91)!important}
+.music-player-track-button:hover{color:var(--jrh-blue)!important}
+.music-player-track-button:active{transform:scale(.97)!important}
+.music-player-next:hover,.music-player-close:hover{background:var(--jrh-blue)!important;color:#fff!important;border-color:var(--jrh-blue)!important}
+.music-player-next:active,.music-player-close:active{transform:scale(.9)!important}
+.music-player-panel{animation:jrh-panel-in .18s cubic-bezier(.2,.7,.2,1)!important;transform-origin:top right!important}
+.music-player-song{border-left:3px solid transparent!important}
+.music-player-song:hover{background:#f3f3f0!important;color:var(--jrh-blue)!important;padding-left:calc(12px + 4px)!important}
+.music-player-song:active{transform:scale(.985)!important;background:var(--jrh-black)!important;color:#fff!important}
+.music-player-song.is-current{border-left-color:var(--jrh-blue)!important;background:#f3f3f0!important;font-weight:500!important}
+.music-player-mini-volume input:focus-visible{outline:2px solid var(--jrh-blue)!important;outline-offset:4px!important}
+.music-player-error-inline{border-left:3px solid var(--jrh-red)!important;background:#fff!important}
+
+/* Elegant micro-info: small, readable, never wastes vertical space. */
+.projects-swipe-hint{letter-spacing:.02em!important;font-size:11px!important}
+.projects-swipe-hint svg{stroke-width:1.8!important}
+.experience-heading .eyebrow,.music-panel-label,.footer-nav-label{letter-spacing:.10em!important}
+
+@keyframes jrh-panel-in{from{opacity:0;transform:translateY(-5px) scale(.985)}to{opacity:1;transform:translateY(0) scale(1)}}
+
+@media (max-width:767px){
+  .jrh-nav-link::after{display:none!important}
+  .jrh-menu-button{min-width:46px!important;min-height:46px!important}
+  .jrh-nav-link:active,.jrh-mobile-link:active{background:var(--jrh-blue)!important;color:#fff!important}
+  .project-object{transition:transform .16s ease,border-color .16s ease,box-shadow .16s ease!important}
+  .project-object:active{transform:scale(.985)!important;border-color:var(--jrh-blue)!important;box-shadow:0 0 0 2px rgba(37,99,235,.10),0 12px 28px rgba(0,0,0,.08)!important}
+  .project-visit:active{background:var(--jrh-blue)!important;color:#fff!important}
+  .experience-role:active{transform:scale(.94)!important;background:var(--jrh-blue)!important;border-color:var(--jrh-blue)!important}
+  .contact-cta:active{transform:scale(.965)!important;background:var(--jrh-blue)!important}
+  .music-player-song{min-height:52px!important}
+  .music-player-song:active{transform:scale(.98)!important}
+}
+
+@media (prefers-reduced-motion:reduce){a,button,.project-object,.experience-row,.experience-role,.music-player-panel{transition-duration:.01ms!important;animation:none!important}}
