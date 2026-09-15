@@ -4,7 +4,6 @@ export default function Contact() {
   return (
     <section id="contact" className="section-shell contact-section" aria-labelledby="contact-title">
       <div className="contact-wrap">
-        <div className="contact-kicker"><span aria-hidden="true">Ada yang mau dibahas?</span></div>
         <h2 id="contact-title" className="contact-title">Ngobrol aja, nggak usah sungkan.</h2>
         <p className="contact-copy">Ada ide, project, atau hal yang lagi kamu pikirin? Kirim pesan lewat Instagram. Mau mulai dari “halo” juga boleh. Yang penting ngobrolnya jalan.</p>
         <div className="contact-actions">
