@@ -13,8 +13,8 @@ export default function App() {
       <main id="content">
         <Hero />
         <Profile />
-        <Projects />
         <RekamJejak />
+        <Projects />
         <Contact />
       </main>
 
@@ -29,8 +29,8 @@ export default function App() {
             <nav className="footer-nav" aria-label="Navigasi footer">
               <span className="footer-nav-label">Explore</span>
               <a href="#about">About <span aria-hidden="true">↗</span></a>
-              <a href="#projects">Projects <span aria-hidden="true">↗</span></a>
               <a href="#experience">Experience <span aria-hidden="true">↗</span></a>
+              <a href="#projects">Projects <span aria-hidden="true">↗</span></a>
               <a href="#contact">Contact <span aria-hidden="true">↗</span></a>
             </nav>
           </div>
