@@ -1,80 +1,175 @@
-/* JRHs Projects V2: native horizontal scrolling with accessible controls. */
-html { scroll-padding-top: 76px; }
+/* JRHs Projects V2: Apple TV inspired content rail, touch-first and responsive. */
 
-.projects-carousel-wrap { position: relative !important; min-width: 0 !important; }
-.projects-scroll-controls { display: none !important; }
+.projects-section { overflow: visible !important; }
+.projects-carousel-wrap { position: relative !important; min-width: 0 !important; overflow: visible !important; }
+
+.projects-heading {
+  display: flex !important;
+  align-items: flex-end !important;
+  justify-content: space-between !important;
+  gap: 24px !important;
+  margin-bottom: 22px !important;
+}
+
+.projects-heading > div:first-child { min-width: 0 !important; }
+.projects-intro { max-width: 620px !important; }
+
+.projects-scroll-controls {
+  display: flex !important;
+  flex: 0 0 auto !important;
+  align-items: center !important;
+  gap: 8px !important;
+}
+
+.projects-scroll-controls button {
+  width: 44px !important;
+  min-width: 44px !important;
+  height: 44px !important;
+  min-height: 44px !important;
+  display: inline-grid !important;
+  place-items: center !important;
+  padding: 0 !important;
+  border: 1px solid var(--jrh-line) !important;
+  border-radius: var(--jrh-radius-md) !important;
+  background: #fff !important;
+  color: var(--jrh-text) !important;
+  cursor: pointer !important;
+  touch-action: manipulation !important;
+  transition: background-color var(--jrh-fast) var(--jrh-ease), border-color var(--jrh-fast) var(--jrh-ease), color var(--jrh-fast) var(--jrh-ease), transform var(--jrh-fast) var(--jrh-ease) !important;
+}
+
+.projects-scroll-controls button:hover {
+  border-color: var(--jrh-primary) !important;
+  background: var(--jrh-surface) !important;
+  color: var(--jrh-primary) !important;
+}
+
+.projects-scroll-controls button:active { transform: scale(.97) !important; }
+
+.projects-list {
+  width: 100% !important;
+  max-width: 100% !important;
+  display: flex !important;
+  flex-wrap: nowrap !important;
+  align-items: stretch !important;
+  gap: 14px !important;
+  margin: 0 !important;
+  padding: 2px 2px 12px !important;
+  overflow-x: auto !important;
+  overflow-y: hidden !important;
+  overscroll-behavior-x: auto !important;
+  overscroll-behavior-y: auto !important;
+  scroll-behavior: smooth !important;
+  scroll-snap-type: x proximity !important;
+  scroll-padding-inline: 2px !important;
+  scrollbar-width: none !important;
+  -webkit-overflow-scrolling: touch !important;
+  touch-action: auto !important;
+  cursor: grab !important;
+}
+
+.projects-list:active { cursor: grabbing !important; }
+.projects-list::-webkit-scrollbar { display: none !important; }
+
+.projects-list > .project-object {
+  flex: 0 0 310px !important;
+  width: 310px !important;
+  max-width: 310px !important;
+  scroll-snap-align: start !important;
+  scroll-snap-stop: normal !important;
+}
+
+.project-object {
+  position: relative !important;
+  isolation: isolate !important;
+}
+
+.project-media {
+  position: relative !important;
+}
+
+.project-media img {
+  will-change: transform !important;
+}
+
+.project-number {
+  position: absolute !important;
+  top: 12px !important;
+  left: 12px !important;
+  z-index: 2 !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  min-width: 34px !important;
+  height: 26px !important;
+  padding: 0 8px !important;
+  border-radius: var(--jrh-radius-md) !important;
+  background: rgba(255,255,255,.92) !important;
+  color: var(--jrh-text) !important;
+  font-size: 11px !important;
+  font-weight: 600 !important;
+  line-height: 1 !important;
+}
+
+.project-content { min-height: 126px !important; }
+.project-description { display: -webkit-box !important; -webkit-box-orient: vertical !important; -webkit-line-clamp: 3 !important; overflow: hidden !important; }
+
+.project-visit {
+  min-height: 50px !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: space-between !important;
+  gap: 12px !important;
+  margin: 0 16px !important;
+  padding: 0 !important;
+  border-top: 1px solid var(--jrh-line) !important;
+  color: var(--jrh-text) !important;
+  text-decoration: none !important;
+  font-size: 13px !important;
+  font-weight: 600 !important;
+}
+
+.project-visit svg { transition: transform var(--jrh-fast) var(--jrh-ease) !important; }
+.project-visit:hover { color: var(--jrh-primary) !important; }
+.project-visit:hover svg { transform: translate(2px, -2px) !important; }
+
+@media (min-width: 980px) {
+  .projects-list > .project-object { flex-basis: 330px !important; width: 330px !important; max-width: 330px !important; }
+}
 
 @media (max-width: 767px) {
-  .projects-carousel-wrap { min-width: 0 !important; }
+  .projects-section { padding-top: 56px !important; padding-bottom: 56px !important; }
+  .projects-heading { align-items: flex-start !important; gap: 14px !important; margin-bottom: 16px !important; }
+  .projects-heading .display-title { font-size: 34px !important; }
+  .projects-intro { max-width: 340px !important; margin-top: 8px !important; }
+  .projects-scroll-controls { padding-top: 2px !important; }
   .projects-list {
-    width: 100% !important;
-    max-width: 100% !important;
-    display: flex !important;
-    flex-wrap: nowrap !important;
-    align-items: stretch !important;
-    overflow-x: auto !important;
-    overflow-y: hidden !important;
-    overscroll-behavior-x: contain !important;
-    overscroll-behavior-y: auto !important;
-    scroll-behavior: smooth !important;
-    scroll-snap-type: x mandatory !important;
-    scroll-padding-inline: 2px !important;
-    -webkit-overflow-scrolling: touch !important;
-    touch-action: pan-x !important;
-    scrollbar-width: none !important;
-    padding: 2px 2px 10px !important;
-    margin: 0 !important;
+    width: calc(100vw - 16px) !important;
+    max-width: calc(100vw - 16px) !important;
+    margin-left: 0 !important;
+    padding: 2px 0 12px !important;
     gap: 12px !important;
+    scroll-snap-type: x proximity !important;
+    touch-action: pan-x !important;
+    cursor: default !important;
   }
-
-  .projects-list::-webkit-scrollbar { display: none !important; }
-
   .projects-list > .project-object {
     flex: 0 0 min(82vw, 330px) !important;
     width: min(82vw, 330px) !important;
     max-width: min(82vw, 330px) !important;
-    scroll-snap-align: start !important;
-    scroll-snap-stop: always !important;
   }
-
+  .projects-list > .project-object:last-child { margin-right: 16px !important; }
   .project-media { pointer-events: none !important; }
   .project-content, .project-visit { position: relative !important; z-index: 1 !important; }
+  .project-content { min-height: 132px !important; }
+}
 
-  .projects-scroll-controls {
-    display: flex !important;
-    justify-content: flex-end !important;
-    gap: 8px !important;
-    margin-top: 10px !important;
-  }
-
-  .projects-scroll-controls button {
-    width: 44px !important;
-    min-width: 44px !important;
-    height: 44px !important;
-    min-height: 44px !important;
-    display: inline-grid !important;
-    place-items: center !important;
-    padding: 0 !important;
-    border: 1px solid var(--jrh-line) !important;
-    border-radius: var(--jrh-radius-md) !important;
-    background: #fff !important;
-    color: var(--jrh-text) !important;
-    cursor: pointer !important;
-    touch-action: manipulation !important;
-    transition: background-color var(--jrh-fast) var(--jrh-ease), border-color var(--jrh-fast) var(--jrh-ease), color var(--jrh-fast) var(--jrh-ease), transform var(--jrh-fast) var(--jrh-ease) !important;
-  }
-
-  .projects-scroll-controls button:hover {
-    border-color: var(--jrh-primary) !important;
-    background: var(--jrh-surface) !important;
-    color: var(--jrh-primary) !important;
-  }
-
-  .projects-scroll-controls button:active { transform: scale(.97) !important; }
-  .projects-swipe-hint { margin-top: 8px !important; }
+@media (max-width: 380px) {
+  .projects-heading .display-title { font-size: 32px !important; }
+  .projects-list > .project-object { flex-basis: 82vw !important; width: 82vw !important; max-width: 82vw !important; }
 }
 
 @media (prefers-reduced-motion: reduce) {
   .projects-list { scroll-behavior: auto !important; }
-  .projects-scroll-controls button { transition: none !important; }
+  .projects-scroll-controls button, .project-visit svg, .project-media img { transition: none !important; }
 }
