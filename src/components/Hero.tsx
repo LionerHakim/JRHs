@@ -12,8 +12,14 @@ export default function Hero() {
               <a href="#contact" className="hero-button hero-button-secondary">Hubungi</a>
             </div>
           </div>
+
           <figure className="hero-portrait hero-portrait-inline">
-            <div className="hero-portrait-frame"><img src={`${import.meta.env.BASE_URL}data/foto/s.jpg`} alt="Portrait" loading="eager" decoding="async" fetchPriority="high" /></div>
+            <div className="hero-portrait-frame">
+              <img src={`${import.meta.env.BASE_URL}data/foto/s.jpg`} alt="Portrait" loading="eager" decoding="async" fetchPriority="high" />
+              <span className="hero-portrait-glow" aria-hidden="true" />
+              <span className="hero-portrait-sheen" aria-hidden="true" />
+            </div>
+            <figcaption className="hero-portrait-caption">JRH · personal portfolio</figcaption>
           </figure>
         </div>
       </div>
