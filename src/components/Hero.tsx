@@ -19,7 +19,6 @@ export default function Hero() {
               <span className="hero-portrait-glow" aria-hidden="true" />
               <span className="hero-portrait-sheen" aria-hidden="true" />
             </div>
-            <figcaption className="hero-portrait-caption">JRH · personal portfolio</figcaption>
           </figure>
         </div>
       </div>
