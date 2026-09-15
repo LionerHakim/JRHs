@@ -1,4 +1,4 @@
-/* JRHs Projects V2: Apple TV inspired content rail, touch-first and responsive. */
+/* JRHs Projects: static responsive gallery. Vertical page scrolling stays native. */
 
 .projects-section { overflow: visible !important; }
 .projects-carousel-wrap { position: relative !important; min-width: 0 !important; overflow: visible !important; }
@@ -13,70 +13,29 @@
 
 .projects-heading > div:first-child { min-width: 0 !important; }
 .projects-intro { max-width: 620px !important; }
-
-.projects-scroll-controls {
-  display: flex !important;
-  flex: 0 0 auto !important;
-  align-items: center !important;
-  gap: 8px !important;
-}
-
-.projects-scroll-controls button {
-  width: 44px !important;
-  min-width: 44px !important;
-  height: 44px !important;
-  min-height: 44px !important;
-  display: inline-grid !important;
-  place-items: center !important;
-  padding: 0 !important;
-  border: 1px solid var(--jrh-line) !important;
-  border-radius: var(--jrh-radius-md) !important;
-  background: #fff !important;
-  color: var(--jrh-text) !important;
-  cursor: pointer !important;
-  touch-action: manipulation !important;
-  transition: background-color var(--jrh-fast) var(--jrh-ease), border-color var(--jrh-fast) var(--jrh-ease), color var(--jrh-fast) var(--jrh-ease), transform var(--jrh-fast) var(--jrh-ease) !important;
-}
-
-.projects-scroll-controls button:hover {
-  border-color: var(--jrh-primary) !important;
-  background: var(--jrh-surface) !important;
-  color: var(--jrh-primary) !important;
-}
-
-.projects-scroll-controls button:active { transform: scale(.97) !important; }
+.projects-scroll-controls { display: none !important; }
 
 .projects-list {
   width: 100% !important;
   max-width: 100% !important;
-  display: flex !important;
-  flex-wrap: nowrap !important;
+  display: grid !important;
+  grid-template-columns: repeat(4, minmax(0, 1fr)) !important;
   align-items: stretch !important;
   gap: 14px !important;
   margin: 0 !important;
-  padding: 2px 2px 12px !important;
-  overflow-x: auto !important;
-  overflow-y: hidden !important;
-  overscroll-behavior-x: auto !important;
-  overscroll-behavior-y: auto !important;
-  scroll-behavior: smooth !important;
-  scroll-snap-type: x proximity !important;
-  scroll-padding-inline: 2px !important;
-  scrollbar-width: none !important;
-  -webkit-overflow-scrolling: touch !important;
+  padding: 0 !important;
+  overflow: visible !important;
+  overscroll-behavior: auto !important;
+  scroll-behavior: auto !important;
+  scroll-snap-type: none !important;
   touch-action: auto !important;
-  cursor: grab !important;
 }
 
-.projects-list:active { cursor: grabbing !important; }
-.projects-list::-webkit-scrollbar { display: none !important; }
-
 .projects-list > .project-object {
-  flex: 0 0 310px !important;
-  width: 310px !important;
-  max-width: 310px !important;
-  scroll-snap-align: start !important;
-  scroll-snap-stop: normal !important;
+  width: auto !important;
+  max-width: none !important;
+  min-width: 0 !important;
+  scroll-snap-align: none !important;
 }
 
 .project-object {
@@ -84,13 +43,8 @@
   isolation: isolate !important;
 }
 
-.project-media {
-  position: relative !important;
-}
-
-.project-media img {
-  will-change: transform !important;
-}
+.project-media { position: relative !important; }
+.project-media img { will-change: auto !important; }
 
 .project-number {
   position: absolute !important;
@@ -133,43 +87,36 @@
 .project-visit:hover { color: var(--jrh-primary) !important; }
 .project-visit:hover svg { transform: translate(2px, -2px) !important; }
 
-@media (min-width: 980px) {
-  .projects-list > .project-object { flex-basis: 330px !important; width: 330px !important; max-width: 330px !important; }
+@media (max-width: 979px) {
+  .projects-list { grid-template-columns: repeat(2, minmax(0, 1fr)) !important; }
 }
 
 @media (max-width: 767px) {
   .projects-section { padding-top: 56px !important; padding-bottom: 56px !important; }
-  .projects-heading { align-items: flex-start !important; gap: 14px !important; margin-bottom: 16px !important; }
+  .projects-heading { display: block !important; margin-bottom: 18px !important; }
   .projects-heading .display-title { font-size: 34px !important; }
   .projects-intro { max-width: 340px !important; margin-top: 8px !important; }
-  .projects-scroll-controls { padding-top: 2px !important; }
   .projects-list {
-    width: calc(100vw - 16px) !important;
-    max-width: calc(100vw - 16px) !important;
-    margin-left: 0 !important;
-    padding: 2px 0 12px !important;
-    gap: 12px !important;
-    scroll-snap-type: x proximity !important;
-    touch-action: pan-x !important;
-    cursor: default !important;
+    display: grid !important;
+    grid-template-columns: 1fr !important;
+    gap: 16px !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    overflow: visible !important;
+    padding: 0 !important;
   }
   .projects-list > .project-object {
-    flex: 0 0 min(82vw, 330px) !important;
-    width: min(82vw, 330px) !important;
-    max-width: min(82vw, 330px) !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    min-width: 0 !important;
   }
-  .projects-list > .project-object:last-child { margin-right: 16px !important; }
-  .project-media { pointer-events: none !important; }
-  .project-content, .project-visit { position: relative !important; z-index: 1 !important; }
-  .project-content { min-height: 132px !important; }
+  .project-content { min-height: 0 !important; }
 }
 
 @media (max-width: 380px) {
   .projects-heading .display-title { font-size: 32px !important; }
-  .projects-list > .project-object { flex-basis: 82vw !important; width: 82vw !important; max-width: 82vw !important; }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .projects-list { scroll-behavior: auto !important; }
-  .projects-scroll-controls button, .project-visit svg, .project-media img { transition: none !important; }
+  .project-visit svg, .project-media img { transition: none !important; }
 }
