@@ -2,10 +2,7 @@ import { StrictMode } from 'react';
 import { createRoot } from 'react-dom/client';
 import App from './App.tsx';
 import './index.css';
-import './jrh-interaction-final.css';
-import './jrh-final-polish.css';
-import './jrh-v5.css';
-import './jrh-reference-polish.css';
+import './jrh-system.css';
 
 const root = document.getElementById('root');
 
