@@ -11,11 +11,17 @@ const playlist = [
   { title: 'Who Knows', src: `${base}data/musik/Who-Knows.mp3` },
 ] as const;
 
-const STORAGE_KEY = 'jrh-music-player-v4';
+const STORAGE_KEY = 'jrh-music-player-v5';
 type Stored = { index?: number; volume?: number; muted?: boolean };
 type State = 'idle' | 'playing' | 'paused' | 'loading' | 'error';
 
-function readStored(): Stored { try { return typeof window === 'undefined' ? {} : JSON.parse(localStorage.getItem(STORAGE_KEY) || '{}') as Stored; } catch { return {}; } }
+function readStored(): Stored {
+  try {
+    return typeof window === 'undefined' ? {} : JSON.parse(localStorage.getItem(STORAGE_KEY) || '{}') as Stored;
+  } catch {
+    return {};
+  }
+}
 function clampVolume(value: unknown): number { return typeof value === 'number' && Number.isFinite(value) ? Math.min(1, Math.max(0, value)) : 0.65; }
 function clampIndex(value: unknown): number { return Number.isInteger(value) && Number(value) >= 0 && Number(value) < playlist.length ? Number(value) : 0; }
 
@@ -30,15 +36,25 @@ export default function MusicPlayer() {
   const [muted, setMuted] = useState(() => Boolean(stored.current.muted));
   const [open, setOpen] = useState(false);
 
-  useEffect(() => { try { localStorage.setItem(STORAGE_KEY, JSON.stringify({ index, volume, muted })); } catch {} }, [index, volume, muted]);
+  useEffect(() => {
+    try { localStorage.setItem(STORAGE_KEY, JSON.stringify({ index, volume, muted })); } catch {}
+  }, [index, volume, muted]);
+
   useEffect(() => {
     if (initializedRef.current) return;
     initializedRef.current = true;
     const audio = audioRef.current;
     if (!audio) return;
-    audio.preload = 'metadata'; audio.src = playlist[index].src; audio.volume = muted ? 0 : volume; audio.load();
+    audio.preload = 'metadata';
+    audio.src = playlist[index].src;
+    audio.volume = muted ? 0 : volume;
+    audio.load();
   }, [index, muted, volume]);
-  useEffect(() => { const audio = audioRef.current; if (audio) audio.volume = muted ? 0 : volume; }, [muted, volume]);
+
+  useEffect(() => {
+    const audio = audioRef.current;
+    if (audio) audio.volume = muted ? 0 : volume;
+  }, [muted, volume]);
 
   useEffect(() => {
     const mediaSession = typeof navigator !== 'undefined' ? navigator.mediaSession : undefined;
@@ -46,7 +62,7 @@ export default function MusicPlayer() {
     mediaSession.metadata = new MediaMetadata({ title: playlist[index].title, artist: 'JRH' });
     const safe = (action: MediaSessionAction, handler: () => void) => { try { mediaSession.setActionHandler(action, handler); } catch {} };
     safe('play', play); safe('pause', pause); safe('nexttrack', () => changeTrack(1)); safe('previoustrack', () => changeTrack(-1));
-    return () => { (['play','pause','nexttrack','previoustrack'] as MediaSessionAction[]).forEach((action) => { try { mediaSession.setActionHandler(action, null); } catch {} }); };
+    return () => { (['play', 'pause', 'nexttrack', 'previoustrack'] as MediaSessionAction[]).forEach((action) => { try { mediaSession.setActionHandler(action, null); } catch {} }); };
   }, [index]);
 
   useEffect(() => {
@@ -58,15 +74,32 @@ export default function MusicPlayer() {
       const trigger = triggerRef.current?.parentElement;
       if (panel && !panel.contains(target) && trigger && !trigger.contains(target)) closePanel();
     };
-    document.addEventListener('keydown', onKey); document.addEventListener('pointerdown', onPointerDown);
+    document.addEventListener('keydown', onKey);
+    document.addEventListener('pointerdown', onPointerDown);
     return () => { document.removeEventListener('keydown', onKey); document.removeEventListener('pointerdown', onPointerDown); };
   }, [open]);
 
   function setSource(next: number) {
-    const audio = audioRef.current; if (!audio) return false;
-    audio.pause(); audio.src = playlist[next].src; audio.preload = 'metadata'; audio.currentTime = 0; audio.volume = muted ? 0 : volume; audio.load(); return true;
+    const audio = audioRef.current;
+    if (!audio) return false;
+    audio.pause();
+    audio.src = playlist[next].src;
+    audio.preload = 'metadata';
+    audio.currentTime = 0;
+    audio.volume = muted ? 0 : volume;
+    audio.load();
+    return true;
   }
-  function startPlayback(next?: number) { const target = typeof next === 'number' ? next : index; const audio = audioRef.current; if (!audio) return; setState('loading'); audio.volume = muted ? 0 : volume; if (!audio.src || !audio.src.endsWith(playlist[target].src)) setSource(target); void audio.play().then(() => setState('playing')).catch(() => setState('error')); }
+
+  function startPlayback(next?: number) {
+    const target = typeof next === 'number' ? next : index;
+    const audio = audioRef.current;
+    if (!audio) return;
+    setState('loading');
+    audio.volume = muted ? 0 : volume;
+    if (!audio.src || !audio.src.endsWith(playlist[target].src)) setSource(target);
+    void audio.play().then(() => setState('playing')).catch(() => setState('error'));
+  }
   function play() { startPlayback(); }
   function pause() { const audio = audioRef.current; if (!audio) return; audio.pause(); setState('paused'); }
   function togglePlayback() { if (state === 'playing') pause(); else startPlayback(); }
@@ -81,7 +114,7 @@ export default function MusicPlayer() {
         <div>
           <span className="music-panel-label">Music</span>
           <strong>Pilih lagu</strong>
-          <span className="music-panel-current">Sedang dipilih: {playlist[index].title}</span>
+          <span className="music-player-current-state">{state === 'playing' ? 'Sedang diputar' : state === 'loading' ? 'Menyiapkan lagu' : 'Siap diputar'} · {playlist[index].title}</span>
         </div>
         <button type="button" onClick={closePanel} className="music-player-close" aria-label="Tutup pilihan musik"><X size={16} /></button>
       </div>
@@ -90,14 +123,14 @@ export default function MusicPlayer() {
           <div key={song.title} role="listitem">
             <button type="button" className={`music-player-song${songIndex === index ? ' is-current' : ''}`} onClick={() => selectTrack(songIndex)} aria-current={songIndex === index ? 'true' : undefined}>
               <span className="music-song-index">{String(songIndex + 1).padStart(2, '0')}</span>
-              <span>{song.title}</span>
-              <span className="music-song-state">{songIndex === index ? 'Dipilih' : ''}</span>
+              <span className="music-song-name">{song.title}</span>
+              <span className="music-song-state">{songIndex === index ? (state === 'playing' ? 'Diputar' : 'Dipilih') : 'Putar'}</span>
             </button>
           </div>
         ))}
       </div>
       <div className="music-player-mini-volume"><label htmlFor="music-volume">Volume</label><input id="music-volume" type="range" min="0" max="1" step="0.01" value={muted ? 0 : volume} onChange={(event) => { setMuted(false); setVolume(Number(event.target.value)); }} /></div>
-      {state === 'error' && <div className="music-player-error-inline" role="status">Musik gagal dimuat. Tekan tombol play untuk mencoba lagi.</div>}
+      {state === 'error' && <div className="music-player-error-inline" role="status">Musik gagal dimuat. Tekan putar untuk mencoba lagi.</div>}
     </div>
   ) : null;
 
