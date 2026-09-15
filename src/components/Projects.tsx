@@ -1,20 +1,18 @@
 import { ArrowUpRight } from 'lucide-react';
 
 const projects = [
-  { title: 'Portfolio', description: 'Personal digital space untuk ekonomi, markets, technology, dan human behavior.', url: 'https://github.com/LionerHakim/JRHs', image: 'https://images.unsplash.com/photo-1498050108023-c5249f4df085?auto=format&fit=crop&w=1200&h=1500&q=88' },
-  { title: 'KitaBisa.com', description: 'Web project independen yang terinspirasi konsep social-donation dan dukungan komunitas.', url: 'https://github.com/LionerHakim/KITABISA.COM', image: 'https://images.unsplash.com/photo-1559028012-481c04fa702d?auto=format&fit=crop&w=1200&h=1500&q=88' },
-  { title: 'Ultah', description: 'Eksperimen front-end ringan bertema ulang tahun dengan pendekatan personal dan playful.', url: 'https://github.com/LionerHakim/Ultah', image: 'https://images.unsplash.com/photo-1464349095431-e9a21285b5f3?auto=format&fit=crop&w=1200&h=1500&q=88' },
-  { title: 'Pinterest', description: 'Koleksi visual Galuh Purba sebagai referensi inspirasi dan eksplorasi visual.', url: 'https://id.pinterest.com/galuhpurba/', image: 'https://images.unsplash.com/photo-1547891654-e66ed7ebb968?auto=format&fit=crop&w=1200&h=1500&q=88' },
+  { title: 'Portfolio', description: 'Personal digital space untuk ekonomi, markets, technology, dan human behavior.', url: 'https://github.com/LionerHakim/JRHs', image: 'https://images.unsplash.com/photo-1498050108023-c5249f4df085?auto=format&fit=crop&w=1200&h=900&q=88' },
+  { title: 'KitaBisa.com', description: 'Web project independen yang terinspirasi konsep social-donation dan dukungan komunitas.', url: 'https://github.com/LionerHakim/KITABISA.COM', image: 'https://images.unsplash.com/photo-1559028012-481c04fa702d?auto=format&fit=crop&w=1200&h=900&q=88' },
+  { title: 'Ultah', description: 'Eksperimen front-end ringan bertema ulang tahun dengan pendekatan personal dan playful.', url: 'https://github.com/LionerHakim/Ultah', image: 'https://images.unsplash.com/photo-1464349095431-e9a21285b5f3?auto=format&fit=crop&w=1200&h=900&q=88' },
+  { title: 'Pinterest', description: 'Koleksi visual Galuh Purba sebagai referensi inspirasi dan eksplorasi visual.', url: 'https://id.pinterest.com/galuhpurba/', image: 'https://images.unsplash.com/photo-1547891654-e66ed7ebb968?auto=format&fit=crop&w=1200&h=900&q=88' },
 ] as const;
 
 export default function Projects() {
   return (
     <section id="projects" className="section-shell projects-section" aria-labelledby="projects-title">
       <div className="projects-heading">
-        <div className="projects-heading-copy">
-          <h2 id="projects-title" className="display-title">Yang dibangun.</h2>
-          <p className="projects-intro">Beberapa project dan referensi publik yang merekam proses mengubah ide menjadi sesuatu yang bisa dibuka, diuji, dan dilihat.</p>
-        </div>
+        <h2 id="projects-title" className="display-title">Yang dibangun.</h2>
+        <p className="projects-intro">Beberapa project dan referensi publik yang merekam proses mengubah ide menjadi sesuatu yang bisa dibuka, diuji, dan dilihat.</p>
       </div>
 
       <div className="projects-list" aria-label="Daftar project">
