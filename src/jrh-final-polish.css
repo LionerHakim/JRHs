@@ -19,6 +19,23 @@
 .hero-portrait-inline .hero-portrait-frame { border-radius: var(--jrh-radius-xl) !important; box-shadow: 0 18px 44px rgba(0,0,0,.10) !important; }
 .hero-button { border-radius: 10px !important; }
 
+/* ABOUT v5: editorial reading field with a deliberate quiet focal point. */
+.about-section { position: relative !important; overflow: clip !important; }
+.about-v5-grid { display:grid !important; grid-template-columns:minmax(240px,.72fr) minmax(0,1.28fr) !important; gap:clamp(48px,8vw,112px) !important; align-items:start !important; }
+.about-v5-heading { position:sticky !important; top:96px !important; }
+.about-v5-heading .eyebrow { display:inline-flex !important; align-items:center !important; min-height:26px !important; margin:0 0 14px !important; padding:0 9px !important; border:1px solid rgba(120,86,79,.30) !important; border-radius:8px !important; background:#fff !important; color:var(--jrh-accent) !important; font-size:11px !important; line-height:1 !important; font-weight:600 !important; letter-spacing:.06em !important; text-transform:uppercase !important; }
+.about-v5-heading .display-title { max-width:340px !important; }
+.about-v5-reading { position:relative !important; min-width:0 !important; max-width:720px !important; padding:2px 0 4px !important; }
+.about-v5-lead { margin:0 !important; max-width:700px !important; color:#000 !important; font-size:clamp(30px,3.25vw,44px) !important; line-height:1.12 !important; letter-spacing:-.04em !important; text-wrap:balance !important; }
+.about-v5-rule { width:48px !important; height:2px !important; margin:28px 0 26px !important; border-radius:2px !important; background:var(--jrh-accent) !important; transform-origin:left center !important; transition:width var(--jrh-base) var(--jrh-ease) !important; }
+.about-v5-reading:hover .about-v5-rule { width:72px !important; }
+.about-v5-body { max-width:620px !important; margin:0 !important; color:var(--jrh-muted) !important; font-size:17px !important; line-height:1.62 !important; letter-spacing:-.005em !important; }
+.about-v5-quote { position:relative !important; margin:44px 0 0 !important; padding:26px 0 0 30px !important; border-top:1px solid var(--jrh-line) !important; }
+.about-v5-quote::before { content:"" !important; position:absolute !important; top:26px !important; left:0 !important; bottom:0 !important; width:2px !important; border-radius:2px !important; background:var(--jrh-accent) !important; transform:scaleY(.25) !important; transform-origin:top !important; transition:transform var(--jrh-slow) var(--jrh-ease) !important; }
+.about-v5-reading:hover .about-v5-quote::before { transform:scaleY(1) !important; }
+.about-v5-quote-mark { position:absolute !important; top:13px !important; left:18px !important; color:rgba(120,86,79,.20) !important; font-size:34px !important; line-height:1 !important; font-weight:400 !important; pointer-events:none !important; }
+.about-v5-quote p { max-width:610px !important; margin:0 !important; color:#000 !important; font-size:16px !important; line-height:1.62 !important; letter-spacing:-.005em !important; }
+
 /* Section rhythm. */
 .section-shell { padding-block: clamp(72px, 9vw, 112px) !important; }
 .display-title { font-size: clamp(38px, 4.2vw, 52px) !important; letter-spacing: -.04em !important; }
@@ -65,6 +82,8 @@
 
 @media (max-width: 979px) {
   .hero-copy { grid-template-columns: minmax(0, 1fr) minmax(240px, 330px) !important; gap: 40px !important; }
+  .about-v5-grid { grid-template-columns:minmax(220px,.8fr) minmax(0,1.2fr) !important; gap:44px !important; }
+  .about-v5-lead { font-size:clamp(28px,3.8vw,38px) !important; }
   .projects-heading { grid-template-columns: 1fr 1fr !important; gap: 28px !important; }
   .projects-list { gap: 16px !important; }
 }
@@ -80,6 +99,16 @@
   .section-shell { width: calc(100% - 24px) !important; padding-block: 64px !important; }
   .display-title { font-size: 34px !important; }
   .about-lead { font-size: 27px !important; }
+  .about-v5-grid { display:grid !important; grid-template-columns:1fr !important; gap:28px !important; }
+  .about-v5-heading { position:static !important; }
+  .about-v5-heading .eyebrow { margin-bottom:10px !important; }
+  .about-v5-lead { font-size:28px !important; line-height:1.13 !important; }
+  .about-v5-rule { margin:22px 0 20px !important; }
+  .about-v5-body { font-size:15px !important; line-height:1.62 !important; }
+  .about-v5-quote { margin-top:30px !important; padding:21px 0 0 24px !important; }
+  .about-v5-quote::before { top:21px !important; }
+  .about-v5-quote-mark { left:13px !important; top:8px !important; font-size:28px !important; }
+  .about-v5-quote p { font-size:14px !important; line-height:1.6 !important; }
   .projects-heading { display: block !important; margin-bottom: 22px !important; }
   .projects-intro { margin-top: 9px !important; }
   .projects-list { grid-template-columns: 1fr !important; gap: 16px !important; overflow: visible !important; touch-action: auto !important; }
@@ -98,9 +127,12 @@
   .hero-clean h1 { font-size: 38px !important; }
   .hero-clean .hero-positioning { font-size: 22px !important; }
   .projects-list { gap: 14px !important; }
+  .about-v5-lead { font-size:26px !important; }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .project-object, .project-media img, .hero-button { transition: none !important; }
+  .project-object, .project-media img, .hero-button, .about-v5-rule, .about-v5-quote::before { transition: none !important; }
   .project-object:hover, .hero-button-primary:hover { transform: none !important; }
+  .about-v5-reading:hover .about-v5-rule { width:48px !important; }
+  .about-v5-reading:hover .about-v5-quote::before { transform:scaleY(.25) !important; }
 }
