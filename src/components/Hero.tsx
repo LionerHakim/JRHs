@@ -7,9 +7,9 @@ export default function Hero() {
             <h1 id="hero-title">Portfolio</h1>
             <p className="hero-positioning">Ekonomi, markets, technology, dan cara manusia berpikir.</p>
             <p className="hero-description">Ruang personal untuk memahami sistem, menguji ide, dan membangun sesuatu dengan sengaja.</p>
-            <div className="hero-actions">
+            <div className="hero-actions" aria-label="Aksi utama">
               <a href="#projects" className="hero-button hero-button-primary">Lihat projects <span aria-hidden="true">↗</span></a>
-              <a href="#contact" className="hero-button hero-button-secondary">Hubungi</a>
+              <a href="#experience" className="hero-button hero-button-secondary">Lihat perjalanan</a>
             </div>
           </div>
 
