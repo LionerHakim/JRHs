@@ -1,6 +1,6 @@
 const experienceData = [
-  { institution: 'SMA Negeri 300 Brebes', degree: '', year: '2018-2021', activities: ['Ketua OSIS', 'Bendahara Paskibra'] },
-  { institution: 'Universitas Islam Indonesia', degree: 'Ilmu Ekonomi', year: '2021-sekarang', activities: ['Kelompok Studi Pasar Modal (KSPM)'] },
+  { institution: 'SMA Negeri 300 Brebes', degree: '', year: '2018 hingga 2021', activities: ['Ketua OSIS', 'Bendahara Paskibra'] },
+  { institution: 'Universitas Islam Indonesia', degree: 'Ilmu Ekonomi', year: '2021 hingga sekarang', activities: ['Kelompok Studi Pasar Modal (KSPM)'] },
 ] as const;
 
 export default function RekamJejak() {
@@ -8,7 +8,6 @@ export default function RekamJejak() {
     <section id="experience" className="section-shell experience-section" aria-labelledby="experience-title">
       <div className="editorial-grid experience-grid">
         <div className="experience-heading">
-          <span className="eyebrow">Rekam jejak</span>
           <h2 id="experience-title" className="display-title">Yang membentuk perjalanan.</h2>
           <p className="section-lead">Pendidikan, organisasi, dan lingkungan belajar yang ikut membentuk cara berpikir hingga hari ini.</p>
         </div>
