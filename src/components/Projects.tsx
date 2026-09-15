@@ -23,11 +23,10 @@ export default function Projects() {
           const titleId = `project-title-${index + 1}`;
           return (
             <article key={project.title} className={`project-v5-card project-v5-card-${index + 1}`} aria-labelledby={titleId}>
-              <a className="project-v5-media" href={project.url} target="_blank" rel="noopener noreferrer" aria-label={`Buka ${project.title}`}>
+              <div className="project-v5-media">
                 <img src={project.image} alt="" loading={index === 0 ? 'eager' : 'lazy'} decoding="async" fetchPriority={index === 0 ? 'high' : 'auto'} />
                 <span className="project-v5-index">0{index + 1}</span>
-                <span className="project-v5-open" aria-hidden="true"><ArrowUpRight size={18} /></span>
-              </a>
+              </div>
               <div className="project-v5-content">
                 <div>
                   <h3 id={titleId}>{project.title}</h3>
