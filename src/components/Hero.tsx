@@ -15,7 +15,7 @@ export default function Hero() {
 
           <figure className="hero-portrait hero-portrait-inline">
             <div className="hero-portrait-frame">
-              <img src={`${import.meta.env.BASE_URL}data/foto/s.jpg`} alt="Portrait" loading="eager" decoding="async" fetchPriority="high" />
+              <img src={`${import.meta.env.BASE_URL}data/foto/s.jpg`} alt="Foto JRH" loading="eager" decoding="async" fetchPriority="high" />
               <span className="hero-portrait-glow" aria-hidden="true" />
               <span className="hero-portrait-sheen" aria-hidden="true" />
             </div>
