@@ -4,6 +4,7 @@ import App from './App.tsx';
 import './index.css';
 import './jrh-interaction-final.css';
 import './jrh-final-polish.css';
+import './jrh-v5.css';
 
 const root = document.getElementById('root');
 
