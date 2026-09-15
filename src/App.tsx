@@ -4,13 +4,11 @@ import Profile from './components/Profile';
 import Projects from './components/Projects';
 import RekamJejak from './components/RekamJejak';
 import Contact from './components/Contact';
-import ScrollProgress from './components/ScrollProgress';
 import './components/Footer.css';
 
 export default function App() {
   return (
     <div className="page-shell">
-      <ScrollProgress />
       <a href="#content" className="skip-link">Lewati ke konten utama</a>
       <Navbar />
       <main id="content">
@@ -38,7 +36,7 @@ export default function App() {
             </nav>
           </div>
           <div className="footer-bottom">
-            <span>© 2026 JRH — Personal portfolio</span>
+            <span>© 2026 JRH - Personal portfolio</span>
             <div className="footer-meta">
               <span>Indonesia</span>
               <a href="https://instagram.com/jefrirh_" target="_blank" rel="noopener noreferrer">Instagram ↗</a>
