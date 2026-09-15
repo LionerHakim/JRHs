@@ -11,7 +11,10 @@ export default function App() {
     const block = (event: Event) => event.preventDefault();
 
     const blockCopyKeys = (event: KeyboardEvent) => {
-      if ((event.ctrlKey || event.metaKey) && (event.key === 'c' || event.key === 'x')) {
+      const target = event.target as HTMLElement | null;
+      const isEditable = target?.matches('input, textarea, [contenteditable="true"]');
+
+      if (!isEditable && (event.ctrlKey || event.metaKey) && (event.key === 'c' || event.key === 'x')) {
         event.preventDefault();
       }
     };
@@ -19,14 +22,18 @@ export default function App() {
     document.addEventListener('contextmenu', block);
     document.addEventListener('copy', block);
     document.addEventListener('cut', block);
+    document.addEventListener('selectstart', block);
     document.addEventListener('dragstart', block);
+    document.addEventListener('gesturestart', block);
     document.addEventListener('keydown', blockCopyKeys);
 
     return () => {
       document.removeEventListener('contextmenu', block);
       document.removeEventListener('copy', block);
       document.removeEventListener('cut', block);
+      document.removeEventListener('selectstart', block);
       document.removeEventListener('dragstart', block);
+      document.removeEventListener('gesturestart', block);
       document.removeEventListener('keydown', blockCopyKeys);
     };
   }, []);
