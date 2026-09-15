@@ -1,8 +1,8 @@
 import { ArrowUpRight } from 'lucide-react';
 
 const experienceData = [
-  { institution: 'SMA Negeri 300 Brebes', degree: '', year: '2018 – 2021', activities: ['Ketua OSIS', 'Bendahara Paskibra'] },
-  { institution: 'Universitas Islam Indonesia', degree: 'Ilmu Ekonomi', year: '2021 – sekarang', activities: ['Kelompok Studi Pasar Modal (KSPM)'] },
+  { institution: 'SMA Negeri 300 Brebes', degree: '', year: '2018-2021', activities: ['Ketua OSIS', 'Bendahara Paskibra'] },
+  { institution: 'Universitas Islam Indonesia', degree: 'Ilmu Ekonomi', year: '2021-sekarang', activities: ['Kelompok Studi Pasar Modal (KSPM)'] },
 ] as const;
 
 export default function RekamJejak() {
