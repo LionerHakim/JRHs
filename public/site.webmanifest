@@ -1,0 +1,11 @@
+{
+  "name": "JRH Personal Portfolio",
+  "short_name": "JRH",
+  "description": "Personal portfolio JRH tentang ekonomi, markets, technology, human behavior, dan projects.",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#ffffff",
+  "lang": "id"
+}
