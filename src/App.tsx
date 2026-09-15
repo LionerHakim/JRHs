@@ -1,3 +1,4 @@
+import { useEffect } from 'react';
 import Navbar from './components/Navbar';
 import Hero from './components/Hero';
 import Profile from './components/Profile';
@@ -6,6 +7,30 @@ import RekamJejak from './components/RekamJejak';
 import Contact from './components/Contact';
 
 export default function App() {
+  useEffect(() => {
+    const block = (event: Event) => event.preventDefault();
+
+    const blockCopyKeys = (event: KeyboardEvent) => {
+      if ((event.ctrlKey || event.metaKey) && (event.key === 'c' || event.key === 'x')) {
+        event.preventDefault();
+      }
+    };
+
+    document.addEventListener('contextmenu', block);
+    document.addEventListener('copy', block);
+    document.addEventListener('cut', block);
+    document.addEventListener('dragstart', block);
+    document.addEventListener('keydown', blockCopyKeys);
+
+    return () => {
+      document.removeEventListener('contextmenu', block);
+      document.removeEventListener('copy', block);
+      document.removeEventListener('cut', block);
+      document.removeEventListener('dragstart', block);
+      document.removeEventListener('keydown', blockCopyKeys);
+    };
+  }, []);
+
   return (
     <div className="page-shell">
       <a href="#content" className="skip-link">Lewati ke konten utama</a>
