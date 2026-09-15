@@ -67,7 +67,7 @@ export default function App() {
             </nav>
           </div>
           <div className="footer-bottom">
-            <span>© 2026 JRH · Personal portfolio</span>
+            <span>© 2026 JRH - Personal portfolio</span>
             <div className="footer-meta">
               <span>Indonesia</span>
               <a href="https://instagram.com/jefrirh_" target="_blank" rel="noopener noreferrer">Instagram ↗</a>
