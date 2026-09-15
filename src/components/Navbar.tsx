@@ -5,8 +5,8 @@ import MusicPlayer from './MusicPlayer';
 const base = import.meta.env.BASE_URL;
 const navLinks = [
   { name: 'About', href: '#about' },
-  { name: 'Projects', href: '#projects' },
   { name: 'Experience', href: '#experience' },
+  { name: 'Projects', href: '#projects' },
   { name: 'Contact', href: '#contact' },
 ];
 
