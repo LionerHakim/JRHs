@@ -59,14 +59,30 @@ body {
   -webkit-font-smoothing: antialiased;
   text-rendering: optimizeLegibility;
   overflow-x: hidden;
+  -webkit-user-select: none;
+  user-select: none;
+  -webkit-touch-callout: none;
 }
 
 *, *::before, *::after { box-sizing: border-box; }
 button, input, select, textarea { font: inherit; }
 img, svg { display: block; max-width: 100%; }
+img { -webkit-user-drag: none; user-drag: none; pointer-events: none; }
 a { color: inherit; }
 
-::selection { background: var(--jrh-primary); color: var(--jrh-on-primary); }
+/* Content protection: prevent normal text/image copying without blocking navigation or controls. */
+.page-shell {
+  -webkit-user-select: none;
+  user-select: none;
+}
+
+input, textarea, select, [contenteditable="true"] {
+  -webkit-user-select: text;
+  user-select: text;
+  -webkit-touch-callout: default;
+}
+
+::selection { background: transparent; color: inherit; }
 
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
