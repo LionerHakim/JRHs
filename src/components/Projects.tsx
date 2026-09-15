@@ -10,28 +10,33 @@ const projects = [
 export default function Projects() {
   return (
     <section id="projects" className="section-shell projects-section" aria-labelledby="projects-title">
-      <div className="projects-heading">
-        <h2 id="projects-title" className="display-title">Yang dibangun.</h2>
+      <div className="projects-v5-heading">
+        <div>
+          <span className="eyebrow">Projects</span>
+          <h2 id="projects-title" className="display-title">Yang dibangun.</h2>
+        </div>
         <p className="projects-intro">Beberapa project dan referensi publik yang merekam proses mengubah ide menjadi sesuatu yang bisa dibuka, diuji, dan dilihat.</p>
       </div>
 
-      <div className="projects-list" aria-label="Daftar project">
+      <div className="projects-v5-grid" aria-label="Daftar project">
         {projects.map((project, index) => {
           const titleId = `project-title-${index + 1}`;
           return (
-            <article key={project.title} className="project-object" aria-labelledby={titleId}>
-              <div className="project-media" aria-hidden="true">
+            <article key={project.title} className={`project-v5-card project-v5-card-${index + 1}`} aria-labelledby={titleId}>
+              <a className="project-v5-media" href={project.url} target="_blank" rel="noopener noreferrer" aria-label={`Buka ${project.title}`}>
                 <img src={project.image} alt="" loading={index === 0 ? 'eager' : 'lazy'} decoding="async" fetchPriority={index === 0 ? 'high' : 'auto'} />
-                <span className="project-number">0{index + 1}</span>
-              </div>
-              <div className="project-content">
-                <h3 id={titleId} className="project-title">{project.title}</h3>
-                <p className="project-description">{project.description}</p>
-              </div>
-              <a className="project-visit" href={project.url} target="_blank" rel="noopener noreferrer" aria-label={`Buka ${project.title}`}>
-                <span>Lihat project</span>
-                <ArrowUpRight size={16} aria-hidden="true" />
+                <span className="project-v5-index">0{index + 1}</span>
+                <span className="project-v5-open" aria-hidden="true"><ArrowUpRight size={18} /></span>
               </a>
+              <div className="project-v5-content">
+                <div>
+                  <h3 id={titleId}>{project.title}</h3>
+                  <p>{project.description}</p>
+                </div>
+                <a className="project-v5-link" href={project.url} target="_blank" rel="noopener noreferrer" aria-label={`Lihat project ${project.title}`}>
+                  Lihat project <ArrowUpRight size={16} aria-hidden="true" />
+                </a>
+              </div>
             </article>
           );
         })}
