@@ -4,7 +4,6 @@ import Profile from './components/Profile';
 import Projects from './components/Projects';
 import RekamJejak from './components/RekamJejak';
 import Contact from './components/Contact';
-import './components/Footer.css';
 
 export default function App() {
   return (
