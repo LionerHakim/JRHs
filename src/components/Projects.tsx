@@ -24,7 +24,7 @@ export default function Projects() {
           return (
             <article key={project.title} className={`project-v5-card project-v5-card-${index + 1}`} aria-labelledby={titleId}>
               <div className="project-v5-media">
-                <img src={project.image} alt="" loading={index === 0 ? 'eager' : 'lazy'} decoding="async" fetchPriority={index === 0 ? 'high' : 'auto'} />
+                <img src={project.image} alt="" loading={index === 0 ? 'eager' : 'lazy'} decoding="async" fetchPriority={index === 0 ? 'high' : 'auto'} onError={(event) => { event.currentTarget.style.opacity = '0'; }} />
                 <span className="project-v5-index">0{index + 1}</span>
               </div>
               <div className="project-v5-content">
