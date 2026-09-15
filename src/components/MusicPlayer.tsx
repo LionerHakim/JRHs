@@ -1,4 +1,3 @@
-import { createPortal } from 'react-dom';
 import { useEffect, useRef, useState } from 'react';
 import { ChevronDown, ChevronRight, Headphones, Pause, Play, X } from 'lucide-react';
 
@@ -10,51 +9,28 @@ const playlist = [
   { title: 'Tourner Dans Le Vide', src: `${base}data/musik/Tourner-DansLeVide.mp3` },
   { title: 'Who Knows', src: `${base}data/musik/Who-Knows.mp3` },
 ] as const;
-
-const STORAGE_KEY = 'jrh-music-player-v5';
+const STORAGE_KEY = 'jrh-music-player-v6';
 type Stored = { index?: number; volume?: number; muted?: boolean };
 type State = 'idle' | 'playing' | 'paused' | 'loading' | 'error';
 
 function readStored(): Stored {
-  try {
-    return typeof window === 'undefined' ? {} : JSON.parse(localStorage.getItem(STORAGE_KEY) || '{}') as Stored;
-  } catch {
-    return {};
-  }
+  try { return typeof window === 'undefined' ? {} : JSON.parse(localStorage.getItem(STORAGE_KEY) || '{}') as Stored; } catch { return {}; }
 }
-function clampVolume(value: unknown): number { return typeof value === 'number' && Number.isFinite(value) ? Math.min(1, Math.max(0, value)) : 0.65; }
-function clampIndex(value: unknown): number { return Number.isInteger(value) && Number(value) >= 0 && Number(value) < playlist.length ? Number(value) : 0; }
+function clampVolume(value: unknown) { return typeof value === 'number' && Number.isFinite(value) ? Math.min(1, Math.max(0, value)) : 0.65; }
+function clampIndex(value: unknown) { return Number.isInteger(value) && Number(value) >= 0 && Number(value) < playlist.length ? Number(value) : 0; }
 
 export default function MusicPlayer() {
   const stored = useRef(readStored());
   const audioRef = useRef<HTMLAudioElement>(null);
   const triggerRef = useRef<HTMLButtonElement>(null);
-  const initializedRef = useRef(false);
   const [index, setIndex] = useState(() => clampIndex(stored.current.index));
   const [state, setState] = useState<State>('idle');
   const [volume, setVolume] = useState(() => clampVolume(stored.current.volume));
   const [muted, setMuted] = useState(() => Boolean(stored.current.muted));
   const [open, setOpen] = useState(false);
 
-  useEffect(() => {
-    try { localStorage.setItem(STORAGE_KEY, JSON.stringify({ index, volume, muted })); } catch {}
-  }, [index, volume, muted]);
-
-  useEffect(() => {
-    if (initializedRef.current) return;
-    initializedRef.current = true;
-    const audio = audioRef.current;
-    if (!audio) return;
-    audio.preload = 'metadata';
-    audio.src = playlist[index].src;
-    audio.volume = muted ? 0 : volume;
-    audio.load();
-  }, [index, muted, volume]);
-
-  useEffect(() => {
-    const audio = audioRef.current;
-    if (audio) audio.volume = muted ? 0 : volume;
-  }, [muted, volume]);
+  useEffect(() => { try { localStorage.setItem(STORAGE_KEY, JSON.stringify({ index, volume, muted })); } catch {} }, [index, volume, muted]);
+  useEffect(() => { const audio = audioRef.current; if (audio) audio.volume = muted ? 0 : volume; }, [muted, volume]);
 
   useEffect(() => {
     const mediaSession = typeof navigator !== 'undefined' ? navigator.mediaSession : undefined;
@@ -71,8 +47,8 @@ export default function MusicPlayer() {
     const onPointerDown = (event: PointerEvent) => {
       const target = event.target as Node;
       const panel = document.getElementById('music-player-panel');
-      const trigger = triggerRef.current?.parentElement;
-      if (panel && !panel.contains(target) && trigger && !trigger.contains(target)) closePanel();
+      const root = triggerRef.current?.closest('.music-player');
+      if (panel && !panel.contains(target) && root && !root.contains(target)) closePanel();
     };
     document.addEventListener('keydown', onKey);
     document.addEventListener('pointerdown', onPointerDown);
@@ -80,24 +56,15 @@ export default function MusicPlayer() {
   }, [open]);
 
   function setSource(next: number) {
-    const audio = audioRef.current;
-    if (!audio) return false;
-    audio.pause();
-    audio.src = playlist[next].src;
-    audio.preload = 'metadata';
-    audio.currentTime = 0;
-    audio.volume = muted ? 0 : volume;
-    audio.load();
+    const audio = audioRef.current; if (!audio) return false;
+    audio.pause(); audio.removeAttribute('src'); audio.load();
+    audio.src = playlist[next].src; audio.preload = 'none'; audio.volume = muted ? 0 : volume;
     return true;
   }
-
-  function startPlayback(next?: number) {
-    const target = typeof next === 'number' ? next : index;
-    const audio = audioRef.current;
-    if (!audio) return;
+  function startPlayback(next = index) {
+    const audio = audioRef.current; if (!audio) return;
     setState('loading');
-    audio.volume = muted ? 0 : volume;
-    if (!audio.src || !audio.src.endsWith(playlist[target].src)) setSource(target);
+    if (!audio.currentSrc || !audio.currentSrc.endsWith(playlist[next].src)) setSource(next);
     void audio.play().then(() => setState('playing')).catch(() => setState('error'));
   }
   function play() { startPlayback(); }
@@ -108,43 +75,20 @@ export default function MusicPlayer() {
   function handleEnded() { const next = (index + 1) % playlist.length; setIndex(next); if (setSource(next)) startPlayback(next); }
   function closePanel() { setOpen(false); window.setTimeout(() => triggerRef.current?.focus({ preventScroll: true }), 0); }
 
-  const panel = open ? (
-    <div id="music-player-panel" className="music-player-panel" role="dialog" aria-modal="false" aria-label="Pilih musik">
-      <div className="music-player-panel-head">
-        <div>
-          <span className="music-panel-label">Music</span>
-          <strong>Pilih lagu</strong>
-          <span className="music-player-current-state">{state === 'playing' ? 'Sedang diputar' : state === 'loading' ? 'Menyiapkan lagu' : 'Siap diputar'} · {playlist[index].title}</span>
-        </div>
-        <button type="button" onClick={closePanel} className="music-player-close" aria-label="Tutup pilihan musik"><X size={16} /></button>
-      </div>
-      <div className="music-player-playlist" role="list" aria-label="Daftar lagu">
-        {playlist.map((song, songIndex) => (
-          <div key={song.title} role="listitem">
-            <button type="button" className={`music-player-song${songIndex === index ? ' is-current' : ''}`} onClick={() => selectTrack(songIndex)} aria-current={songIndex === index ? 'true' : undefined}>
-              <span className="music-song-index">{String(songIndex + 1).padStart(2, '0')}</span>
-              <span className="music-song-name">{song.title}</span>
-              <span className="music-song-state">{songIndex === index ? (state === 'playing' ? 'Diputar' : 'Dipilih') : 'Putar'}</span>
-            </button>
-          </div>
-        ))}
-      </div>
-      <div className="music-player-mini-volume"><label htmlFor="music-volume">Volume</label><input id="music-volume" type="range" min="0" max="1" step="0.01" value={muted ? 0 : volume} onChange={(event) => { setMuted(false); setVolume(Number(event.target.value)); }} /></div>
-      {state === 'error' && <div className="music-player-error-inline" role="status">Musik gagal dimuat. Tekan putar untuk mencoba lagi.</div>}
-    </div>
-  ) : null;
-
   return <div className="music-player" aria-label="Pemutar musik">
-    <audio ref={audioRef} preload="metadata" playsInline onPlay={() => setState('playing')} onPause={() => { const audio = audioRef.current; if (audio && !audio.ended) setState('paused'); }} onEnded={handleEnded} onError={() => setState('error')} />
+    <audio ref={audioRef} preload="none" playsInline onPlay={() => setState('playing')} onPause={() => { const audio = audioRef.current; if (audio && !audio.ended) setState('paused'); }} onEnded={handleEnded} onError={() => setState('error')} />
     <div className="music-player-pill">
-      <button ref={triggerRef} type="button" className="music-player-button" onClick={togglePlayback} aria-label={state === 'playing' ? `Jeda ${playlist[index].title}` : `Putar ${playlist[index].title}`} aria-busy={state === 'loading'}>{state === 'playing' ? <Pause size={15} /> : <Play size={15} />}</button>
+      <button ref={triggerRef} type="button" className="music-player-button" onClick={togglePlayback} aria-label={state === 'playing' ? `Jeda ${playlist[index].title}` : `Putar ${playlist[index].title}`} aria-busy={state === 'loading'}>{state === 'playing' ? <Pause size={15} aria-hidden="true" /> : <Play size={15} aria-hidden="true" />}</button>
       <button type="button" className="music-player-track-button" onClick={() => setOpen((value) => !value)} aria-expanded={open} aria-controls="music-player-panel" aria-label={`Pilih musik. Lagu saat ini ${playlist[index].title}`}>
-        <Headphones size={14} aria-hidden="true" />
-        <span className="music-player-copy"><span className="music-player-kicker">MUSIC</span><span className="music-player-title">{playlist[index].title}</span></span>
-        <ChevronDown size={14} aria-hidden="true" />
+        <Headphones size={14} aria-hidden="true" /><span className="music-player-copy"><span className="music-player-kicker">MUSIC</span><span className="music-player-title">{playlist[index].title}</span></span><ChevronDown size={14} aria-hidden="true" />
       </button>
       <button type="button" className="music-player-next" onClick={() => changeTrack(1)} aria-label="Lagu berikutnya"><ChevronRight size={17} aria-hidden="true" /></button>
     </div>
-    {typeof document !== 'undefined' && createPortal(panel, document.body)}
+    {open && <div id="music-player-panel" className="music-player-panel" role="dialog" aria-modal="false" aria-label="Pilih musik">
+      <div className="music-player-panel-head"><div><span className="music-panel-label">Music</span><strong>Pilih lagu</strong><span className="music-player-current-state">{state === 'playing' ? 'Sedang diputar' : state === 'loading' ? 'Menyiapkan lagu' : 'Siap diputar'} · {playlist[index].title}</span></div><button type="button" onClick={closePanel} className="music-player-close" aria-label="Tutup pilihan musik"><X size={16} aria-hidden="true" /></button></div>
+      <div className="music-player-playlist" role="list" aria-label="Daftar lagu">{playlist.map((song, songIndex) => <div key={song.title} role="listitem"><button type="button" className={`music-player-song${songIndex === index ? ' is-current' : ''}`} onClick={() => selectTrack(songIndex)} aria-current={songIndex === index ? 'true' : undefined}><span className="music-song-index">{String(songIndex + 1).padStart(2, '0')}</span><span className="music-song-name">{song.title}</span><span className="music-song-state">{songIndex === index ? (state === 'playing' ? 'Diputar' : 'Dipilih') : 'Putar'}</span></button></div>)}</div>
+      <div className="music-player-mini-volume"><label htmlFor="music-volume">Volume</label><input id="music-volume" type="range" min="0" max="1" step="0.01" value={muted ? 0 : volume} onChange={(event) => { setMuted(false); setVolume(Number(event.target.value)); }} /></div>
+      {state === 'error' && <div className="music-player-error-inline" role="status">Musik gagal dimuat. Tekan putar untuk mencoba lagi.</div>}
+    </div>}
   </div>;
 }
