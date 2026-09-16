@@ -1,12 +1,7 @@
 import { useEffect, useRef, useState } from 'react'
 import { ArrowUpRight, BookOpen, Code2, ExternalLink, Instagram, Menu, Moon, Quote, Sun, TrendingUp, Volume2, VolumeX, X } from 'lucide-react'
+import { siteConfig } from './config/site'
 import './index.css'
-
-const projects = [
-  { n: '01', t: 'JRH Portfolio', k: 'Personal brand', d: 'A living portfolio for economics, technology, markets and experiments.', tags: ['React', 'Vite', 'TypeScript'], url: 'https://github.com/LionerHakim/JRHs' },
-  { n: '02', t: 'KitaBisa.com', k: 'Web experiment', d: 'A focused interface study exploring familiar product patterns and interaction.', tags: ['Web', 'UI', 'Experiment'], url: 'https://github.com/LionerHakim/KITABISA.COM' },
-  { n: '03', t: 'Ultah', k: 'Creative web', d: 'A playful interactive web experience built around storytelling and motion.', tags: ['Creative', 'Web', 'Motion'], url: 'https://github.com/LionerHakim/Ultah' },
-]
 
 function getSavedTheme() {
   try { return localStorage.getItem('jrh-theme') === 'dark' } catch { return false }
@@ -17,24 +12,13 @@ function App() {
   const [menu, setMenu] = useState(false)
   const [playing, setPlaying] = useState(false)
   const [audioError, setAudioError] = useState(false)
-  const [photoSrc, setPhotoSrc] = useState('')
-  const audioRef = useRef<AudioContext | null>(null)
-  const timerRef = useRef<number | null>(null)
+  const audioRef = useRef<HTMLAudioElement | null>(null)
 
   useEffect(() => {
     document.documentElement.dataset.theme = dark ? 'dark' : 'light'
     document.documentElement.style.colorScheme = dark ? 'dark' : 'light'
     try { localStorage.setItem('jrh-theme', dark ? 'dark' : 'light') } catch {}
   }, [dark])
-
-  useEffect(() => {
-    let alive = true
-    fetch('/profile.webp.b64', { cache: 'force-cache' })
-      .then(r => r.ok ? r.text() : Promise.reject(new Error('profile unavailable')))
-      .then(base64 => { if (alive) setPhotoSrc(`data:image/webp;base64,${base64.trim()}`) })
-      .catch(() => {})
-    return () => { alive = false }
-  }, [])
 
   useEffect(() => {
     const onPointer = (event: PointerEvent) => {
@@ -58,57 +42,41 @@ function App() {
       document.removeEventListener('selectstart', prevent)
       document.removeEventListener('dragstart', prevent)
       document.removeEventListener('keydown', onKey)
-      if (timerRef.current) window.clearInterval(timerRef.current)
-      void audioRef.current?.close()
+      audioRef.current?.pause()
+      audioRef.current = null
     }
   }, [])
-
-  const stopMusic = async () => {
-    if (timerRef.current) window.clearInterval(timerRef.current)
-    timerRef.current = null
-    if (audioRef.current) await audioRef.current.close()
-    audioRef.current = null
-    setPlaying(false)
-  }
-
-  const toggleMusic = async () => {
-    if (playing) { await stopMusic(); return }
-    setAudioError(false)
-    try {
-      const AudioCtx = window.AudioContext || (window as typeof window & { webkitAudioContext?: typeof AudioContext }).webkitAudioContext
-      if (!AudioCtx) throw new Error('AudioContext unavailable')
-      const ctx = new AudioCtx()
-      await ctx.resume()
-      if (ctx.state !== 'running') throw new Error('AudioContext not running')
-      audioRef.current = ctx
-      const master = ctx.createGain()
-      master.gain.value = 0.11
-      master.connect(ctx.destination)
-      const phrase = () => {
-        if (ctx.state !== 'running') return
-        const now = ctx.currentTime
-        ;[261.63,329.63,392,329.63,293.66,349.23,440,392].forEach((frequency, i) => {
-          const start = now + i * .34
-          const osc = ctx.createOscillator(), gain = ctx.createGain()
-          osc.type = 'triangle'; osc.frequency.value = frequency
-          gain.gain.setValueAtTime(.0001, start)
-          gain.gain.exponentialRampToValueAtTime(.07, start + .035)
-          gain.gain.exponentialRampToValueAtTime(.0001, start + .3)
-          osc.connect(gain).connect(master); osc.start(start); osc.stop(start + .32)
-        })
-      }
-      phrase(); timerRef.current = window.setInterval(phrase, 3000); setPlaying(true)
-    } catch { await stopMusic(); setAudioError(true) }
-  }
 
   const go = (id: string) => {
     setMenu(false)
     requestAnimationFrame(() => document.getElementById(id)?.scrollIntoView({ behavior: 'smooth', block: 'start' }))
   }
 
+  const toggleMusic = async () => {
+    const audio = audioRef.current ?? new Audio(siteConfig.music.src)
+    audioRef.current = audio
+    audio.loop = true
+    audio.volume = 0.28
+    setAudioError(false)
+
+    if (!audio.paused) {
+      audio.pause()
+      setPlaying(false)
+      return
+    }
+
+    try {
+      await audio.play()
+      setPlaying(true)
+    } catch {
+      setPlaying(false)
+      setAudioError(true)
+    }
+  }
+
   return <div className="app">
     <header className="nav" aria-label="Main navigation">
-      <a className="brand" href="#top" aria-label="JRH home" onClick={() => setMenu(false)}>JRH<span>.</span></a>
+      <a className="brand" href="#top" aria-label={`${siteConfig.shortName} home`} onClick={() => setMenu(false)}>{siteConfig.shortName}<span>.</span></a>
       <nav id="primary-navigation" className={menu ? 'open' : ''} aria-label="Primary navigation">
         <a href="#about" onClick={e => { e.preventDefault(); go('about') }}>About</a>
         <a href="#work" onClick={e => { e.preventDefault(); go('work') }}>Work</a>
@@ -116,33 +84,50 @@ function App() {
         <a href="#contact" onClick={e => { e.preventDefault(); go('contact') }}>Contact</a>
       </nav>
       <div className="nav-actions">
-        <button className={`glass-icon ${playing ? 'is-active' : ''}`} type="button" onClick={toggleMusic} aria-label={playing ? 'Matikan musik' : 'Putar musik'} aria-pressed={playing} title={audioError ? 'Audio tidak tersedia' : playing ? 'Matikan musik' : 'Putar musik'}>{playing ? <Volume2 size={16}/> : <VolumeX size={16}/>}</button>
-        <button className="glass-icon" type="button" onClick={() => setDark(v => !v)} aria-label={dark ? 'Aktifkan light mode' : 'Aktifkan dark mode'} aria-pressed={dark}>{dark ? <Sun size={16}/> : <Moon size={16}/>}</button>
-        <button className="mobile-menu glass-icon" type="button" onClick={() => setMenu(v => !v)} aria-label={menu ? 'Tutup menu' : 'Buka menu'} aria-expanded={menu} aria-controls="primary-navigation">{menu ? <X size={18}/> : <Menu size={18}/>}</button>
+        <button className={`glass-icon ${playing ? 'is-active' : ''}`} type="button" onClick={toggleMusic} aria-label={playing ? 'Matikan musik' : 'Putar musik'} aria-pressed={playing} title={audioError ? `Tambahkan ${siteConfig.music.src}` : siteConfig.music.title}>
+          {playing ? <Volume2 size={16}/> : <VolumeX size={16}/>} 
+        </button>
+        <button className="glass-icon" type="button" onClick={() => setDark(v => !v)} aria-label={dark ? 'Aktifkan light mode' : 'Aktifkan dark mode'} aria-pressed={dark}>
+          {dark ? <Sun size={16}/> : <Moon size={16}/>} 
+        </button>
+        <button className="mobile-menu glass-icon" type="button" onClick={() => setMenu(v => !v)} aria-label={menu ? 'Tutup menu' : 'Buka menu'} aria-expanded={menu} aria-controls="primary-navigation">
+          {menu ? <X size={18}/> : <Menu size={18}/>} 
+        </button>
       </div>
     </header>
 
     <main id="top">
       <section className="hero">
         <div className="hero-copy">
-          <div className="eyebrow"><span className="status"/> AVAILABLE FOR SELECTED PROJECTS</div>
-          <h1>Think deeply.<br/><em>Build boldly.</em></h1>
-          <p>Jefri Rahman Hakim — economics student, market observer and digital maker exploring the space between ideas, technology and people.</p>
-          <div className="hero-actions"><button className="button primary" type="button" onClick={() => go('work')}>Explore work <ArrowUpRight size={16}/></button><a className="text-link" href="https://instagram.com/jefrirh_" target="_blank" rel="noreferrer">Instagram <ExternalLink size={13}/></a></div>
+          <div className="eyebrow"><span className="status"/> {siteConfig.hero.eyebrow}</div>
+          <h1>{siteConfig.hero.titleLine1}<br/><em>{siteConfig.hero.titleLine2}</em></h1>
+          <p>{siteConfig.hero.description}</p>
+          <div className="hero-actions"><button className="button primary" type="button" onClick={() => go('work')}>Explore work <ArrowUpRight size={16}/></button><a className="text-link" href={siteConfig.instagram} target="_blank" rel="noreferrer">Instagram <ExternalLink size={13}/></a></div>
         </div>
-        <div className="hero-orbit" aria-label="JRH profile">
-          <div className="profile-photo-wrap">{photoSrc ? <img className="profile-photo" src={photoSrc} alt="Jefri Rahman Hakim" draggable="false"/> : <div className="profile-fallback" aria-label="JRH">JRH</div>}</div>
-          <div className="orbit-card"><span>JRH</span><strong>23</strong><small>years of curiosity</small></div><div className="orbit-dot one"/><div className="orbit-dot two"/>
+        <div className="hero-orbit" aria-label={`${siteConfig.shortName} profile`}>
+          <div className="profile-photo-wrap"><img className="profile-photo" src={siteConfig.profileImage} alt={siteConfig.name} draggable="false"/></div>
+          <div className="orbit-card"><span>{siteConfig.shortName}</span><strong>JRH</strong><small>digital portfolio</small></div><div className="orbit-dot one"/><div className="orbit-dot two"/>
         </div>
       </section>
-      <section className="ticker" aria-label="Interests"><span>ECONOMICS</span><span className="ticker-sep">—</span><span>MARKETS</span><span className="ticker-sep">—</span><span>TECHNOLOGY</span><span className="ticker-sep">—</span><span>EXPERIMENTS</span><span className="ticker-sep">—</span><span>IDEAS</span></section>
-      <section id="about" className="section about"><div className="section-label">01 / ABOUT</div><div className="about-grid"><div><h2>Curiosity is<br/><em>the common thread.</em></h2></div><div><p className="lead">I like turning questions into things people can see, use, test and understand.</p><p>My work sits across development economics, financial literacy, investing, AI and the web. This portfolio is the small digital laboratory where those interests meet.</p><div className="facts"><div><b>2021</b><span>Started at UII</span></div><div><b>ECON</b><span>Development Economics</span></div><div><b>JRH</b><span>Independent projects</span></div></div></div></div></section>
-      <section id="work" className="section work"><div className="section-head"><div><div className="section-label">02 / SELECTED WORK</div><h2>Things I’ve<br/><em>made.</em></h2></div><span className="count">03 projects</span></div><div className="project-list">{projects.map(p => <article className="project" key={p.t}><div className="project-no">{p.n}</div><div className="project-main"><div className="project-top"><span>{p.k}</span><a href={p.url} target="_blank" rel="noreferrer" aria-label={`Open ${p.t} on GitHub`}><ArrowUpRight size={18}/></a></div><h3>{p.t}</h3><p>{p.d}</p><div className="tags">{p.tags.map(x => <span key={x}>{x}</span>)}</div></div></article>)}</div></section>
-      <section id="journal" className="section journal"><div className="journal-card"><div><div className="section-label">03 / CURRENTLY</div><h2>Reading the world<br/><em>between the lines.</em></h2><p>Economics, behavioral finance, AI, Web3, geopolitics and the strange little patterns that connect them.</p></div><div className="stack"><div><BookOpen size={17}/><span>Reading</span><b>Books & research</b></div><div><TrendingUp size={17}/><span>Markets</span><b>Macro & investing</b></div><div><Code2 size={17}/><span>Building</span><b>Web & AI</b></div></div></div></section>
-      <section className="quote"><Quote size={28}/><p>“Berpikir, membangun, dan terus mengeksplorasi.”</p></section>
-      <section id="contact" className="section contact"><div className="section-label">04 / CONTACT</div><div className="contact-row"><div><h2>Have an idea?<br/><em>Let’s talk.</em></h2><p>Open to thoughtful collaborations, experiments and conversations.</p></div><a className="contact-button" href="https://instagram.com/jefrirh_" target="_blank" rel="noreferrer"><Instagram size={18}/> Start a conversation <ArrowUpRight size={16}/></a></div></section>
+
+      <section className="ticker" aria-label="Interests">{siteConfig.interests.map((item, index) => <span key={item}>{index > 0 && <span className="ticker-sep">—</span>}{item}</span>)}</section>
+
+      <section id="about" className="section about">
+        <div className="section-label">{siteConfig.about.label}</div>
+        <div className="about-grid"><div><h2>{siteConfig.about.titleLine1}<br/><em>{siteConfig.about.titleLine2}</em></h2></div><div><p className="lead">{siteConfig.about.lead}</p><p>{siteConfig.about.body}</p><div className="facts">{siteConfig.facts.map(([title, text]) => <div key={title}><b>{title}</b><span>{text}</span></div>)}</div></div></div>
+      </section>
+
+      <section id="work" className="section work">
+        <div className="section-head"><div><div className="section-label">02 / SELECTED WORK</div><h2>Things I’ve<br/><em>made.</em></h2></div><span className="count">{String(siteConfig.projects.length).padStart(2, '0')} projects</span></div>
+        <div className="project-list">{siteConfig.projects.map(project => <article className="project" key={project.title}><div className="project-no">{project.number}</div><div className="project-main"><div className="project-top"><span>{project.category}</span><a href={project.url} target="_blank" rel="noreferrer" aria-label={`Open ${project.title} on GitHub`}><ArrowUpRight size={18}/></a></div><h3>{project.title}</h3><p>{project.description}</p><div className="tags">{project.tags.map(tag => <span key={tag}>{tag}</span>)}</div></div></article>)}</div>
+      </section>
+
+      <section id="journal" className="section journal"><div className="journal-card"><div><div className="section-label">03 / CURRENTLY</div><h2>Reading the world<br/><em>between the lines.</em></h2><p>Economics, behavioral finance, AI, Web3, geopolitics and the strange little patterns that connect them.</p></div><div className="stack">{siteConfig.currently.map(([label, value], index) => <div key={label}>{index === 0 ? <BookOpen size={17}/> : index === 1 ? <TrendingUp size={17}/> : <Code2 size={17}/>}<span>{label}</span><b>{value}</b></div>)}</div></div></section>
+      <section className="quote"><Quote size={28}/><p>{siteConfig.quote}</p></section>
+      <section id="contact" className="section contact"><div className="section-label">04 / CONTACT</div><div className="contact-row"><div><h2>{siteConfig.contact.titleLine1}<br/><em>{siteConfig.contact.titleLine2}</em></h2><p>{siteConfig.contact.description}</p></div><a className="contact-button" href={siteConfig.instagram} target="_blank" rel="noreferrer"><Instagram size={18}/> Start a conversation <ArrowUpRight size={16}/></a></div></section>
     </main>
-    <footer><div><a className="brand" href="#top">JRH<span>.</span></a><p>Personal portfolio · Indonesia</p></div><a href="https://instagram.com/jefrirh_" target="_blank" rel="noreferrer"><Instagram size={17}/> @jefrirh_</a><small>© 2026 JRH</small></footer>
+
+    <footer><div><a className="brand" href="#top">{siteConfig.shortName}<span>.</span></a><p>Personal portfolio · Indonesia</p></div><a href={siteConfig.instagram} target="_blank" rel="noreferrer"><Instagram size={17}/> @jefrirh_</a><small>© 2026 JRH</small></footer>
   </div>
 }
 
