@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from 'react'
 import { ArrowUpRight, BookOpen, Code2, ExternalLink, Instagram, Menu, Moon, Quote, Sun, TrendingUp, Volume2, VolumeX, X } from 'lucide-react'
 import { siteConfig } from './config/site'
 import './index.css'
+import './nav.css'
 
 function getSavedTheme() {
   try { return localStorage.getItem('jrh-theme') === 'dark' } catch { return false }
