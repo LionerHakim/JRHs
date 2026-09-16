@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from 'react'
+import { createRoot } from 'react-dom/client'
 import { ArrowUpRight, BookOpen, Code2, ExternalLink, Github, Instagram, Menu, Moon, Quote, Sparkles, Sun, TrendingUp, Volume2, VolumeX, X } from 'lucide-react'
 import { siteConfig, type Project } from './config/site'
 import './index.css'
@@ -113,18 +114,13 @@ function App() {
       </section>
 
       <section className="ticker" aria-label="Interests">{siteConfig.interests.map((item, index) => <span key={item}>{index > 0 && <span className="ticker-sep">—</span>}{item}</span>)}</section>
-
       <section id="about" className="section about"><div className="section-label">{siteConfig.about.label}</div><div className="about-grid"><div><h2>{siteConfig.about.titleLine1}<br/><em>{siteConfig.about.titleLine2}</em></h2></div><div><p className="lead">{siteConfig.about.lead}</p><p>{siteConfig.about.body}</p><div className="facts">{siteConfig.facts.map(([title,text]) => <div key={title}><b>{title}</b><span>{text}</span></div>)}</div></div></div></section>
-
       <section id="work" className="section work"><div className="section-head"><div><div className="section-label">02 / SELECTED WORK</div><h2>Things I’ve<br/><em>made.</em></h2></div><span className="count">{String(siteConfig.projects.length).padStart(2,'0')} projects</span></div><div className="project-list">{siteConfig.projects.map(project => <article className="project" key={project.title} tabIndex={0} onClick={() => setSelectedProject(project)} onKeyDown={e => { if(e.key === 'Enter') setSelectedProject(project) }}><div className="project-no">{project.number}</div><div className="project-main"><div className="project-top"><span>{project.category}</span><span className="project-open"><ArrowUpRight size={18}/></span></div><h3>{project.title}</h3><p>{project.description}</p><div className="tags">{project.tags.map(tag => <span key={tag}>{tag}</span>)}</div><span className="detail-hint">View details <ArrowUpRight size={13}/></span></div></article>)}</div></section>
-
       <section id="journal" className="section journal"><div className="journal-card"><div><div className="section-label">03 / CURRENTLY</div><h2>Reading the world<br/><em>between the lines.</em></h2><p>Economics, behavioral finance, AI, Web3, geopolitics and the strange little patterns that connect them.</p></div><div className="stack">{siteConfig.currently.map(([label,value],index) => <div key={label}>{index === 0 ? <BookOpen size={17}/> : index === 1 ? <TrendingUp size={17}/> : <Code2 size={17}/>}<span>{label}</span><b>{value}</b></div>)}</div></div></section>
       <section className="quote"><Quote size={28}/><p>{siteConfig.quote}</p></section>
       <section id="contact" className="section contact"><div className="section-label">04 / CONTACT</div><div className="contact-row"><div><h2>{siteConfig.contact.titleLine1}<br/><em>{siteConfig.contact.titleLine2}</em></h2><p>{siteConfig.contact.description}</p></div><a className="contact-button" href={siteConfig.instagram} target="_blank" rel="noreferrer"><Instagram size={18}/> Start a conversation <ArrowUpRight size={16}/></a></div></section>
     </main>
-
     <footer><div><a className="brand" href="#top"><span className="brand-mark">J</span><span>{siteConfig.shortName}<i>.</i></span></a><p>Personal portfolio · Indonesia</p></div><div className="footer-links"><a href={siteConfig.github} target="_blank" rel="noreferrer"><Github size={15}/> GitHub</a><a href={siteConfig.instagram} target="_blank" rel="noreferrer"><Instagram size={15}/> @jefrirh_</a></div><small>© 2026 JRH</small></footer>
-
     {selectedProject && <div className="project-modal-backdrop" role="presentation" onClick={() => setSelectedProject(null)}><div className="project-modal" role="dialog" aria-modal="true" aria-labelledby="project-title" onClick={e => e.stopPropagation()}><button className="modal-close glass-icon" onClick={() => setSelectedProject(null)} aria-label="Tutup detail"><X size={18}/></button><span className="modal-number">{selectedProject.number} / PROJECT</span><h2 id="project-title">{selectedProject.title}</h2><p>{selectedProject.description}</p><div className="modal-tags">{selectedProject.tags.map(tag => <span key={tag}>{tag}</span>)}</div><a className="modal-link" href={selectedProject.url} target="_blank" rel="noreferrer">Open project <Github size={16}/><ArrowUpRight size={16}/></a></div></div>}
   </div>
 }
