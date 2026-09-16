@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from 'react'
-import { ArrowUpRight, BookOpen, Code2, ExternalLink, Instagram, Menu, Moon, Play, Quote, Sun, TrendingUp, Volume2, VolumeX, X } from 'lucide-react'
+import { ArrowUpRight, BookOpen, Code2, ExternalLink, Instagram, Menu, Moon, Quote, Sun, TrendingUp, Volume2, VolumeX, X } from 'lucide-react'
 import './index.css'
 
 const projects = [
@@ -23,33 +23,24 @@ function App() {
 
   useEffect(() => {
     const close = () => setMenu(false)
-    window.addEventListener('resize', close)
-    return () => window.removeEventListener('resize', close)
-  }, [])
-
-  useEffect(() => {
-    const stop = () => {
-      if (timerRef.current) window.clearInterval(timerRef.current)
-      timerRef.current = null
-      audioRef.current?.close()
-      audioRef.current = null
-      setPlaying(false)
-    }
+    const prevent = (event: Event) => event.preventDefault()
     const onKey = (event: KeyboardEvent) => {
       const key = event.key.toLowerCase()
-      const blocked = (event.ctrlKey || event.metaKey) && ['c', 'x', 'u', 's', 'a', 'p'].includes(key)
-      if (blocked) event.preventDefault()
+      if ((event.ctrlKey || event.metaKey) && ['c', 'x', 'u', 's', 'p', 'a'].includes(key)) event.preventDefault()
     }
-    document.addEventListener('contextmenu', e => e.preventDefault())
-    document.addEventListener('selectstart', e => e.preventDefault())
-    document.addEventListener('dragstart', e => e.preventDefault())
+    window.addEventListener('resize', close)
+    document.addEventListener('contextmenu', prevent)
+    document.addEventListener('selectstart', prevent)
+    document.addEventListener('dragstart', prevent)
     document.addEventListener('keydown', onKey)
-    window.addEventListener('beforeunload', stop)
     return () => {
+      window.removeEventListener('resize', close)
+      document.removeEventListener('contextmenu', prevent)
+      document.removeEventListener('selectstart', prevent)
+      document.removeEventListener('dragstart', prevent)
       document.removeEventListener('keydown', onKey)
-      window.removeEventListener('beforeunload', stop)
       if (timerRef.current) window.clearInterval(timerRef.current)
-      audioRef.current?.close()
+      void audioRef.current?.close()
     }
   }, [])
 
@@ -67,7 +58,6 @@ function App() {
     const ctx = new AudioCtx()
     await ctx.resume()
     audioRef.current = ctx
-
     const playChord = () => {
       const now = ctx.currentTime
       ;[261.63, 329.63, 392].forEach((frequency, index) => {
@@ -97,7 +87,7 @@ function App() {
     <div className="app">
       <header className="nav" aria-label="Main navigation">
         <a className="brand" href="#top" aria-label="JRH home" onClick={() => setMenu(false)}>JRH<span>.</span></a>
-        <nav className={menu ? 'open' : ''} aria-label="Primary navigation">
+        <nav id="primary-navigation" className={menu ? 'open' : ''} aria-label="Primary navigation">
           <a href="#about" onClick={() => go('about')}>About</a>
           <a href="#work" onClick={() => go('work')}>Work</a>
           <a href="#journal" onClick={() => go('journal')}>Journal</a>
@@ -128,44 +118,22 @@ function App() {
             </div>
           </div>
           <div className="hero-orbit">
-            <div className="profile-photo-wrap">
-              <img className="profile-photo" src="https://github.com/LionerHakim.png?size=512" alt="Jefri Rahman Hakim" draggable="false" />
-            </div>
+            <div className="profile-photo-wrap"><img className="profile-photo" src="https://github.com/LionerHakim.png?size=512" alt="Jefri Rahman Hakim" draggable="false" /></div>
             <div className="orbit-card"><span>JRH</span><strong>23</strong><small>years of curiosity</small></div>
             <div className="orbit-dot one" /><div className="orbit-dot two" />
           </div>
         </section>
 
-        <section className="ticker" aria-label="Interests">
-          <span>ECONOMICS</span><span className="ticker-sep">—</span><span>MARKETS</span><span className="ticker-sep">—</span><span>TECHNOLOGY</span><span className="ticker-sep">—</span><span>EXPERIMENTS</span><span className="ticker-sep">—</span><span>IDEAS</span>
-        </section>
+        <section className="ticker" aria-label="Interests"><span>ECONOMICS</span><span className="ticker-sep">—</span><span>MARKETS</span><span className="ticker-sep">—</span><span>TECHNOLOGY</span><span className="ticker-sep">—</span><span>EXPERIMENTS</span><span className="ticker-sep">—</span><span>IDEAS</span></section>
 
-        <section id="about" className="section about">
-          <div className="section-label">01 / ABOUT</div>
-          <div className="about-grid">
-            <div><h2>Curiosity is<br /><em>the common thread.</em></h2></div>
-            <div><p className="lead">I like turning questions into things people can see, use, test and understand.</p><p>My work sits across development economics, financial literacy, investing, AI and the web. This portfolio is the small digital laboratory where those interests meet.</p>
-              <div className="facts"><div><b>2021</b><span>Started at UII</span></div><div><b>ECON</b><span>Development Economics</span></div><div><b>JRH</b><span>Independent projects</span></div></div>
-            </div>
-          </div>
-        </section>
+        <section id="about" className="section about"><div className="section-label">01 / ABOUT</div><div className="about-grid"><div><h2>Curiosity is<br /><em>the common thread.</em></h2></div><div><p className="lead">I like turning questions into things people can see, use, test and understand.</p><p>My work sits across development economics, financial literacy, investing, AI and the web. This portfolio is the small digital laboratory where those interests meet.</p><div className="facts"><div><b>2021</b><span>Started at UII</span></div><div><b>ECON</b><span>Development Economics</span></div><div><b>JRH</b><span>Independent projects</span></div></div></div></div></section>
 
-        <section id="work" className="section work">
-          <div className="section-head"><div><div className="section-label">02 / SELECTED WORK</div><h2>Things I’ve<br /><em>made.</em></h2></div><span className="count">03 projects</span></div>
-          <div className="project-list">{projects.map(p => <article className="project" key={p.t}><div className="project-no">{p.n}</div><div className="project-main"><div className="project-top"><span>{p.k}</span><a href={p.url} target="_blank" rel="noreferrer" aria-label={`Open ${p.t} on GitHub`}><ArrowUpRight size={18} /></a></div><h3>{p.t}</h3><p>{p.d}</p><div className="tags">{p.tags.map(x => <span key={x}>{x}</span>)}</div></div></article>)}</div>
-        </section>
+        <section id="work" className="section work"><div className="section-head"><div><div className="section-label">02 / SELECTED WORK</div><h2>Things I’ve<br /><em>made.</em></h2></div><span className="count">03 projects</span></div><div className="project-list">{projects.map(p => <article className="project" key={p.t}><div className="project-no">{p.n}</div><div className="project-main"><div className="project-top"><span>{p.k}</span><a href={p.url} target="_blank" rel="noreferrer" aria-label={`Open ${p.t} on GitHub`}><ArrowUpRight size={18} /></a></div><h3>{p.t}</h3><p>{p.d}</p><div className="tags">{p.tags.map(x => <span key={x}>{x}</span>)}</div></div></article>)}</div></section>
 
-        <section id="journal" className="section journal">
-          <div className="journal-card"><div><div className="section-label">03 / CURRENTLY</div><h2>Reading the world<br /><em>between the lines.</em></h2><p>Economics, behavioral finance, AI, Web3, geopolitics and the strange little patterns that connect them.</p></div>
-            <div className="stack"><div><BookOpen size={17} /><span>Reading</span><b>Books & research</b></div><div><TrendingUp size={17} /><span>Markets</span><b>Macro & investing</b></div><div><Code2 size={17} /><span>Building</span><b>Web & AI</b></div></div>
-          </div>
-        </section>
+        <section id="journal" className="section journal"><div className="journal-card"><div><div className="section-label">03 / CURRENTLY</div><h2>Reading the world<br /><em>between the lines.</em></h2><p>Economics, behavioral finance, AI, Web3, geopolitics and the strange little patterns that connect them.</p></div><div className="stack"><div><BookOpen size={17} /><span>Reading</span><b>Books & research</b></div><div><TrendingUp size={17} /><span>Markets</span><b>Macro & investing</b></div><div><Code2 size={17} /><span>Building</span><b>Web & AI</b></div></div></div></section>
 
         <section className="quote"><Quote size={28} /><p>“Berpikir, membangun, dan terus mengeksplorasi.”</p></section>
-
-        <section id="contact" className="section contact">
-          <div className="section-label">04 / CONTACT</div><div className="contact-row"><div><h2>Have an idea?<br /><em>Let’s talk.</em></h2><p>Open to thoughtful collaborations, experiments and conversations.</p></div><a className="contact-button" href="https://instagram.com/jefrirh_" target="_blank" rel="noreferrer"><Instagram size={18} /> Start a conversation <ArrowUpRight size={16} /></a></div>
-        </section>
+        <section id="contact" className="section contact"><div className="section-label">04 / CONTACT</div><div className="contact-row"><div><h2>Have an idea?<br /><em>Let’s talk.</em></h2><p>Open to thoughtful collaborations, experiments and conversations.</p></div><a className="contact-button" href="https://instagram.com/jefrirh_" target="_blank" rel="noreferrer"><Instagram size={18} /> Start a conversation <ArrowUpRight size={16} /></a></div></section>
       </main>
 
       <footer><div><a className="brand" href="#top">JRH<span>.</span></a><p>Personal portfolio · Indonesia</p></div><a href="https://instagram.com/jefrirh_" target="_blank" rel="noreferrer"><Instagram size={17} /> @jefrirh_</a><small>© 2026 JRH</small></footer>
