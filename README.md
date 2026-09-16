@@ -1,130 +1,160 @@
 # JRHs — Personal Digital Portfolio
 
-A modern personal portfolio for **Jefri Rahman Hakim (JRH)** — combining economics, markets, technology, AI, and independent digital experiments in one focused experience.
+A modern personal portfolio for **Jefri Rahman Hakim (JRH)**, combining economics, markets, technology, AI, and independent digital experiments.
 
 > **Think deeply. Build boldly.**
 
-## ✦ Overview
+## ✦ Design
 
-JRHs is designed as a living digital profile rather than a conventional CV. The interface presents personal identity, selected work, current interests, and contact information through a clean, futuristic visual system inspired by contemporary Apple-style interfaces.
+**iOS 3070** — a futuristic Apple-inspired visual concept using liquid-glass surfaces, spatial depth, restrained motion, responsive layouts, and light/dark themes.
 
-The current visual direction is called **iOS 3070**: a futuristic design concept built around liquid-glass surfaces, spatial depth, restrained motion, responsive layouts, and light/dark themes.
+## 🧩 Stack
 
-## ✦ Highlights
+- React + TypeScript
+- Vite
+- CSS3
+- Lucide React
+- GitHub
+- Vercel
 
-- Responsive portfolio for desktop, tablet, Android, and iPhone
-- Futuristic liquid-glass navigation
-- Light / dark mode with persistent preference
-- Personal profile photo
-- Smooth section navigation
-- Selected projects and external GitHub links
-- Journal / currently exploring section
-- Built-in ambient audio interaction
-- Mobile-first touch interactions
-- Safe-area support for modern iOS devices
-- Accessibility-friendly focus states
-- Reduced-motion support
-- Copy, selection, context-menu, and drag interaction restrictions
-- Minimal dependency footprint
-
-## 🧩 Tech Stack
-
-- **React**
-- **TypeScript**
-- **Vite**
-- **CSS3**
-- **Lucide React**
-- **GitHub** for source control
-- **Vercel** for deployment
-
-## 📁 Project Structure
+## 📁 Clean Project Structure
 
 ```text
 JRHs/
 ├── public/
-│   └── profile.webp.b64
+│   └── assets/
+│       ├── images/
+│       │   ├── profile.webp          # EDIT PHOTO HERE
+│       │   └── README.md
+│       ├── audio/
+│       │   ├── ambient.mp3           # EDIT MUSIC HERE
+│       │   └── README.md
+│       └── README.md
 ├── src/
-│   ├── main.tsx
-│   └── index.css
+│   ├── config/
+│   │   └── site.ts                   # EDIT CONTENT + LINKS HERE
+│   ├── main.tsx                      # UI / logic
+│   └── index.css                     # DESIGN SYSTEM / styling
 ├── index.html
 ├── package.json
 ├── tsconfig.json
 ├── vite.config.ts
-├── AUDIT.md
-└── remix_-jrh-biography.zip
+└── README.md
 ```
 
-## 🚀 Local Development
+## ✏️ Easy Maintenance
 
-Clone the repository:
+### 1. Change your photo
+
+Replace:
+
+```text
+public/assets/images/profile.webp
+```
+
+Keep the filename `profile.webp` and the website will use the new image automatically.
+
+Recommended: square WebP, around 768–1200px.
+
+### 2. Change music
+
+Replace:
+
+```text
+public/assets/audio/ambient.mp3
+```
+
+Keep the filename `ambient.mp3`. The navbar music button will automatically use the new track.
+
+Use music that you own or are licensed to publish.
+
+### 3. Change project links
+
+Open:
+
+```text
+src/config/site.ts
+```
+
+Find:
+
+```ts
+projects: [
+  {
+    title: 'JRH Portfolio',
+    url: 'https://github.com/LionerHakim/JRHs'
+  }
+]
+```
+
+Change `url`, `title`, `description`, `category`, or `tags` there. **Do not edit `main.tsx` just to change portfolio content.**
+
+### 4. Change Instagram / GitHub / portfolio
+
+At the top of `src/config/site.ts`:
+
+```ts
+instagram: 'https://instagram.com/jefrirh_',
+github: 'https://github.com/LionerHakim',
+portfolio: 'https://jrhsee.my.id/',
+```
+
+Change the value and every connected UI location can use the central configuration.
+
+### 5. Change hero text
+
+Still in `src/config/site.ts`, edit:
+
+```ts
+hero: {
+  eyebrow: '...',
+  titleLine1: '...',
+  titleLine2: '...',
+  description: '...'
+}
+```
+
+The same principle applies to About, facts, interests, currently, quote, and Contact.
+
+## 🚀 Development
 
 ```bash
 gh repo clone LionerHakim/JRHs
 cd JRHs
-```
-
-Install dependencies:
-
-```bash
 npm install
-```
-
-Start the development server:
-
-```bash
 npm run dev
 ```
 
-Build for production:
+Production build:
 
 ```bash
 npm run build
 ```
 
-Type-check the project:
+Type-check:
 
 ```bash
 npm run lint
 ```
 
-## 🎨 Design Principles
+## 📱 Responsive
 
-### Spatial
-Large typography, intentional whitespace, clear hierarchy, and comfortable touch targets create a calm visual rhythm.
-
-### Liquid Glass
-Navigation and interactive controls use translucent surfaces, blur, subtle borders, and layered shadows to create depth without visual noise.
-
-### Responsive
-The layout adapts from large desktop displays to compact mobile screens while preserving the same hierarchy and interaction model.
-
-### Motion
-Motion is subtle and functional. Users who prefer reduced motion are automatically given a static experience.
-
-### Personal
-The portfolio keeps the identity of JRH at the center: economics, markets, technology, ideas, and experimentation.
-
-## 📱 Mobile
-
-The interface is optimized for modern mobile browsers with:
-
-- Safe-area insets
-- Large touch targets
-- Mobile navigation drawer
-- Horizontal interest ticker
-- Responsive typography
-- Touch-friendly controls
-- iOS-style glass surfaces
+Built for desktop, tablet, Android, and iPhone with safe-area support, touch-friendly controls, responsive typography, mobile navigation, and reduced-motion support.
 
 ## 🔒 Interaction Protection
 
-The portfolio intentionally restricts casual copying, text selection, image dragging, and context-menu interactions. These controls are only a deterrent and **cannot provide real protection against browser developer tools, screenshots, or determined extraction**.
+The portfolio discourages casual text selection, copying, image dragging, and context-menu use. These are only deterrents; browser developer tools, screenshots, and determined extraction cannot be prevented by a frontend application.
 
-## 🗂️ Recovery & Legacy Data
+## 🧠 Architecture Rules
 
-The repository retains `remix_-jrh-biography.zip` as a legacy source/archive. It should not be removed during future redesigns or refactors unless its contents have been independently backed up.
-
-See [`AUDIT.md`](./AUDIT.md) for the current recovery notes.
+1. **Content belongs in `src/config/site.ts`.**
+2. **Media belongs in `public/assets/`.**
+3. **UI logic belongs in `src/main.tsx`.**
+4. **Visual styling belongs in `src/index.css`.**
+5. Do not hard-code project URLs throughout React components.
+6. Do not put personal media inside `src/`.
+7. Keep asset filenames stable when possible so content changes do not require code changes.
+8. Run `npm run build` before deploying.
 
 ## 👤 Author
 
@@ -137,4 +167,4 @@ Personal portfolio · Indonesia
 
 ## 📄 License
 
-This repository is a personal portfolio project. Unless otherwise stated, the original content, personal assets, and branding belong to JRH.
+Personal portfolio project. Unless otherwise stated, original content, personal assets, and branding belong to JRH.
