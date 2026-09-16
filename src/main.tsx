@@ -29,7 +29,7 @@ function App() {
   useEffect(() => {
     const close = () => setMenu(false)
     const onPointer = (event: PointerEvent) => {
-      if (menu && !(event.target as HTMLElement).closest('.nav')) setMenu(false)
+      if (!(event.target as HTMLElement).closest('.nav')) setMenu(false)
     }
     const onKey = (event: KeyboardEvent) => {
       const key = event.key.toLowerCase()
@@ -53,7 +53,7 @@ function App() {
       if (timerRef.current) window.clearInterval(timerRef.current)
       void audioRef.current?.close()
     }
-  }, [menu])
+  }, [])
 
   const toggleMusic = async () => {
     if (playing) {
@@ -126,9 +126,7 @@ function App() {
             <div className="hero-actions"><button className="button primary" type="button" onClick={() => go('work')}>Explore work <ArrowUpRight size={16} /></button><a className="text-link" href="https://instagram.com/jefrirh_" target="_blank" rel="noreferrer">Instagram <ExternalLink size={13} /></a></div>
           </div>
           <div className="hero-orbit">
-            <div className="profile-photo-wrap">
-              {photoFailed ? <div className="profile-fallback" aria-label="JRH">JRH</div> : <img className="profile-photo" src="https://github.com/LionerHakim.png?size=512" alt="Jefri Rahman Hakim" draggable="false" onError={() => setPhotoFailed(true)} />}
-            </div>
+            <div className="profile-photo-wrap">{photoFailed ? <div className="profile-fallback" aria-label="JRH">JRH</div> : <img className="profile-photo" src="https://github.com/LionerHakim.png?size=512" alt="Jefri Rahman Hakim" draggable="false" onError={() => setPhotoFailed(true)} />}</div>
             <div className="orbit-card"><span>JRH</span><strong>23</strong><small>years of curiosity</small></div>
             <div className="orbit-dot one" /><div className="orbit-dot two" />
           </div>
