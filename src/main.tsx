@@ -1,6 +1,5 @@
-import { useEffect, useState } from 'react'
-import { createRoot } from 'react-dom/client'
-import { ArrowUpRight, BookOpen, Code2, ExternalLink, Instagram, Menu, Moon, Play, Quote, Sun, TrendingUp, X } from 'lucide-react'
+import { useEffect, useRef, useState } from 'react'
+import { ArrowUpRight, BookOpen, Code2, ExternalLink, Instagram, Menu, Moon, Play, Quote, Sun, TrendingUp, Volume2, VolumeX, X } from 'lucide-react'
 import './index.css'
 
 const projects = [
@@ -10,13 +9,16 @@ const projects = [
 ]
 
 function App() {
-  const [dark, setDark] = useState(false)
+  const [dark, setDark] = useState(() => localStorage.getItem('jrh-theme') === 'dark')
   const [menu, setMenu] = useState(false)
   const [playing, setPlaying] = useState(false)
+  const audioRef = useRef<AudioContext | null>(null)
+  const timerRef = useRef<number | null>(null)
 
   useEffect(() => {
     document.documentElement.dataset.theme = dark ? 'dark' : 'light'
     document.documentElement.style.colorScheme = dark ? 'dark' : 'light'
+    localStorage.setItem('jrh-theme', dark ? 'dark' : 'light')
   }, [dark])
 
   useEffect(() => {
@@ -24,6 +26,67 @@ function App() {
     window.addEventListener('resize', close)
     return () => window.removeEventListener('resize', close)
   }, [])
+
+  useEffect(() => {
+    const stop = () => {
+      if (timerRef.current) window.clearInterval(timerRef.current)
+      timerRef.current = null
+      audioRef.current?.close()
+      audioRef.current = null
+      setPlaying(false)
+    }
+    const onKey = (event: KeyboardEvent) => {
+      const key = event.key.toLowerCase()
+      const blocked = (event.ctrlKey || event.metaKey) && ['c', 'x', 'u', 's', 'a', 'p'].includes(key)
+      if (blocked) event.preventDefault()
+    }
+    document.addEventListener('contextmenu', e => e.preventDefault())
+    document.addEventListener('selectstart', e => e.preventDefault())
+    document.addEventListener('dragstart', e => e.preventDefault())
+    document.addEventListener('keydown', onKey)
+    window.addEventListener('beforeunload', stop)
+    return () => {
+      document.removeEventListener('keydown', onKey)
+      window.removeEventListener('beforeunload', stop)
+      if (timerRef.current) window.clearInterval(timerRef.current)
+      audioRef.current?.close()
+    }
+  }, [])
+
+  const toggleMusic = async () => {
+    if (playing) {
+      if (timerRef.current) window.clearInterval(timerRef.current)
+      timerRef.current = null
+      await audioRef.current?.close()
+      audioRef.current = null
+      setPlaying(false)
+      return
+    }
+    const AudioCtx = window.AudioContext || (window as typeof window & { webkitAudioContext?: typeof AudioContext }).webkitAudioContext
+    if (!AudioCtx) return
+    const ctx = new AudioCtx()
+    await ctx.resume()
+    audioRef.current = ctx
+
+    const playChord = () => {
+      const now = ctx.currentTime
+      ;[261.63, 329.63, 392].forEach((frequency, index) => {
+        const osc = ctx.createOscillator()
+        const gain = ctx.createGain()
+        osc.type = 'sine'
+        osc.frequency.value = frequency
+        gain.gain.setValueAtTime(0, now)
+        gain.gain.linearRampToValueAtTime(0.035, now + 0.5)
+        gain.gain.exponentialRampToValueAtTime(0.001, now + 3.8)
+        osc.connect(gain).connect(ctx.destination)
+        osc.start(now + index * 0.12)
+        osc.stop(now + 4)
+      })
+    }
+    playChord()
+    timerRef.current = window.setInterval(playChord, 4000)
+    setPlaying(true)
+  }
 
   const go = (id: string) => {
     setMenu(false)
@@ -33,22 +96,22 @@ function App() {
   return (
     <div className="app">
       <header className="nav" aria-label="Main navigation">
-        <a className="brand" href="#top" aria-label="JRH home">JRH<span>.</span></a>
-        <nav className={menu ? 'open' : ''} aria-label="Primary">
-          <a href="#about" onClick={() => setMenu(false)}>About</a>
-          <a href="#work" onClick={() => setMenu(false)}>Work</a>
-          <a href="#journal" onClick={() => setMenu(false)}>Journal</a>
-          <a href="#contact" onClick={() => setMenu(false)}>Contact</a>
+        <a className="brand" href="#top" aria-label="JRH home" onClick={() => setMenu(false)}>JRH<span>.</span></a>
+        <nav className={menu ? 'open' : ''} aria-label="Primary navigation">
+          <a href="#about" onClick={() => go('about')}>About</a>
+          <a href="#work" onClick={() => go('work')}>Work</a>
+          <a href="#journal" onClick={() => go('journal')}>Journal</a>
+          <a href="#contact" onClick={() => go('contact')}>Contact</a>
         </nav>
         <div className="nav-actions">
-          <button className="glass-icon" type="button" onClick={() => setPlaying(v => !v)} aria-label={playing ? 'Pause music' : 'Play music'} aria-pressed={playing}>
-            <Play size={15} fill={playing ? 'currentColor' : 'none'} />
+          <button className="glass-icon" type="button" onClick={toggleMusic} aria-label={playing ? 'Matikan musik' : 'Putar musik'} aria-pressed={playing}>
+            {playing ? <Volume2 size={16} /> : <VolumeX size={16} />}
           </button>
-          <button className="glass-icon" type="button" onClick={() => setDark(v => !v)} aria-label={dark ? 'Switch to light mode' : 'Switch to dark mode'} aria-pressed={dark}>
+          <button className="glass-icon" type="button" onClick={() => setDark(v => !v)} aria-label={dark ? 'Aktifkan light mode' : 'Aktifkan dark mode'} aria-pressed={dark}>
             {dark ? <Sun size={16} /> : <Moon size={16} />}
           </button>
-          <button className="mobile-menu glass-icon" type="button" onClick={() => setMenu(v => !v)} aria-label={menu ? 'Close menu' : 'Open menu'} aria-expanded={menu}>
-            {menu ? <X size={17} /> : <Menu size={17} />}
+          <button className="mobile-menu glass-icon" type="button" onClick={() => setMenu(v => !v)} aria-label={menu ? 'Tutup menu' : 'Buka menu'} aria-expanded={menu} aria-controls="primary-navigation">
+            {menu ? <X size={18} /> : <Menu size={18} />}
           </button>
         </div>
       </header>
@@ -64,7 +127,10 @@ function App() {
               <a className="text-link" href="https://instagram.com/jefrirh_" target="_blank" rel="noreferrer">Instagram <ExternalLink size={13} /></a>
             </div>
           </div>
-          <div className="hero-orbit" aria-hidden="true">
+          <div className="hero-orbit">
+            <div className="profile-photo-wrap">
+              <img className="profile-photo" src="https://github.com/LionerHakim.png?size=512" alt="Jefri Rahman Hakim" draggable="false" />
+            </div>
             <div className="orbit-card"><span>JRH</span><strong>23</strong><small>years of curiosity</small></div>
             <div className="orbit-dot one" /><div className="orbit-dot two" />
           </div>
