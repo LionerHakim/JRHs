@@ -19,14 +19,14 @@ function App() {
   const [menu, setMenu] = useState(false)
   const [playing, setPlaying] = useState(false)
   const [audioError, setAudioError] = useState(false)
+  const [trackIndex, setTrackIndex] = useState(0)
   const [photoFailed, setPhotoFailed] = useState(false)
   const [active, setActive] = useState('top')
   const [selectedProject, setSelectedProject] = useState<Project | null>(null)
   const [scrollProgress, setScrollProgress] = useState(0)
   const audioRef = useRef<HTMLAudioElement | null>(null)
-  const audioContextRef = useRef<AudioContext | null>(null)
-  const synthOscillatorsRef = useRef<OscillatorNode[]>([])
-  const synthAudioNodesRef = useRef<AudioNode[]>([])
+
+  const currentTrack = siteConfig.music.tracks[trackIndex]
 
   useEffect(() => {
     document.documentElement.dataset.theme = dark ? 'dark' : 'light'
@@ -72,12 +72,6 @@ function App() {
       document.removeEventListener('keydown', onKey)
       audioRef.current?.pause()
       audioRef.current = null
-      synthOscillatorsRef.current.forEach(node => { try { node.stop() } catch {} })
-      synthAudioNodesRef.current.forEach(node => { try { node.disconnect() } catch {} })
-      synthOscillatorsRef.current = []
-      synthAudioNodesRef.current = []
-      audioContextRef.current?.close().catch(() => {})
-      audioContextRef.current = null
     }
   }, [])
 
@@ -91,73 +85,50 @@ function App() {
     requestAnimationFrame(() => document.getElementById(id)?.scrollIntoView({ behavior: 'smooth', block: 'start' }))
   }
 
-  const stopSynth = () => {
-    synthOscillatorsRef.current.forEach(node => { try { node.stop() } catch {} })
-    synthAudioNodesRef.current.forEach(node => { try { node.disconnect() } catch {} })
-    synthOscillatorsRef.current = []
-    synthAudioNodesRef.current = []
-    audioContextRef.current?.suspend().catch(() => {})
+  const stopMusic = () => {
+    audioRef.current?.pause()
+    setPlaying(false)
   }
 
-  const startSynth = async () => {
-    const AudioCtx = window.AudioContext || (window as typeof window & { webkitAudioContext?: typeof AudioContext }).webkitAudioContext
-    if (!AudioCtx) throw new Error('Web Audio is not supported')
-    const ctx = audioContextRef.current ?? new AudioCtx()
-    audioContextRef.current = ctx
-    await ctx.resume()
-    const master = ctx.createGain()
-    master.gain.value = 0.07
-    master.connect(ctx.destination)
-    const filter = ctx.createBiquadFilter()
-    filter.type = 'lowpass'
-    filter.frequency.value = 820
-    filter.Q.value = 0.7
-    filter.connect(master)
-    const notes = [110, 164.81, 220]
-    const oscillators = notes.map((frequency, index) => {
-      const osc = ctx.createOscillator()
-      const gain = ctx.createGain()
-      osc.type = index === 0 ? 'sine' : 'triangle'
-      osc.frequency.value = frequency
-      gain.gain.value = index === 0 ? 0.32 : 0.12
-      osc.connect(gain)
-      gain.connect(filter)
-      osc.start()
-      return { osc, gain }
-    })
-    const lfo = ctx.createOscillator()
-    const lfoGain = ctx.createGain()
-    lfo.type = 'sine'
-    lfo.frequency.value = 0.08
-    lfoGain.gain.value = 180
-    lfo.connect(lfoGain)
-    lfoGain.connect(filter.frequency)
-    lfo.start()
-    synthOscillatorsRef.current = [lfo, ...oscillators.map(({ osc }) => osc)]
-    synthAudioNodesRef.current = [master, filter, lfoGain, ...oscillators.map(({ gain }) => gain)]
-  }
-
-  const toggleMusic = async () => {
+  const playTrack = async (index: number) => {
+    const track = siteConfig.music.tracks[index]
+    if (!track) return
     setAudioError(false)
-    if (playing) {
-      audioRef.current?.pause()
-      if (audioContextRef.current) stopSynth()
-      setPlaying(false)
-      return
-    }
     try {
-      if (siteConfig.music.src) {
-        const audio = audioRef.current ?? new Audio(siteConfig.music.src)
-        audioRef.current = audio
-        audio.loop = true
-        audio.volume = 0.28
-        await audio.play()
-      } else await startSynth()
+      if (!audioRef.current) {
+        audioRef.current = new Audio(track.src)
+        audioRef.current.preload = 'metadata'
+        audioRef.current.volume = 0.28
+        audioRef.current.addEventListener('ended', () => {
+          setTrackIndex(current => (current + 1) % siteConfig.music.tracks.length)
+        })
+      } else {
+        audioRef.current.pause()
+        audioRef.current.src = track.src
+        audioRef.current.load()
+      }
+      await audioRef.current.play()
+      setTrackIndex(index)
       setPlaying(true)
     } catch {
       setPlaying(false)
       setAudioError(true)
     }
+  }
+
+  const toggleMusic = async () => {
+    if (playing) { stopMusic(); return }
+    await playTrack(trackIndex)
+  }
+
+  useEffect(() => {
+    if (!playing) return
+    void playTrack(trackIndex)
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [trackIndex])
+
+  const nextTrack = () => {
+    setTrackIndex(index => (index + 1) % siteConfig.music.tracks.length)
   }
 
   const nav = [['about', 'About'], ['profile', 'Profile'], ['work', 'Projects'], ['contact', 'Contact']] as const
@@ -170,7 +141,8 @@ function App() {
         {nav.map(([id, label]) => <a key={id} className={active === id ? 'active' : ''} href={`#${id}`} onClick={e => { e.preventDefault(); go(id) }}><span>{label}</span>{active === id && <i />}</a>)}
       </nav>
       <div className="nav-actions">
-        <button className={`glass-icon ${playing ? 'is-active' : ''}`} onClick={toggleMusic} aria-label={playing ? 'Pause ambient music' : 'Play ambient music'} title={audioError ? 'Audio gagal dimulai — coba lagi' : siteConfig.music.title}>{playing ? <Volume2 size={16} /> : <VolumeX size={16} />}</button>
+        <button className={`glass-icon ${playing ? 'is-active' : ''}`} onClick={toggleMusic} aria-label={playing ? `Pause ${currentTrack?.title ?? 'music'}` : `Play ${currentTrack?.title ?? 'music'}`} title={audioError ? 'Audio gagal dimulai — coba lagi' : currentTrack?.title ?? siteConfig.music.title}>{playing ? <Volume2 size={16} /> : <VolumeX size={16} />}</button>
+        <button className="glass-icon" onClick={nextTrack} aria-label="Next music track" title={currentTrack?.title ?? siteConfig.music.title}><span className="track-number">{trackIndex + 1}</span></button>
         <button className="glass-icon" onClick={() => setDark(v => !v)} aria-label={dark ? 'Use light theme' : 'Use dark theme'} title={dark ? 'Light mode' : 'Dark mode'}>{dark ? <Sun size={16} /> : <Moon size={16} />}</button>
         <button className="mobile-menu glass-icon" onClick={() => setMenu(v => !v)} aria-label={menu ? 'Close menu' : 'Open menu'} aria-expanded={menu} aria-controls="primary-navigation">{menu ? <X size={18} /> : <Menu size={18} />}</button>
       </div>
@@ -207,6 +179,8 @@ function App() {
     </main>
 
     <footer><div><a className="brand" href="#top" aria-label="JRH home"><span className="brand-mark">J</span><span>{siteConfig.shortName}<i>.</i></span></a><p>Personal portfolio · Indonesia</p></div><div className="footer-links"><a href={siteConfig.instagram} target="_blank" rel="noreferrer">Instagram</a><a href={siteConfig.github} target="_blank" rel="noreferrer">GitHub</a></div></footer>
+
+    <div className="music-dock" aria-label="Music player"><div className="music-info"><span className="card-kicker">NOW PLAYING</span><strong>{currentTrack?.title ?? 'JRH Music'}</strong></div><button className="music-next" onClick={nextTrack} aria-label="Next track"><ArrowUpRight size={15} /></button></div>
 
     {selectedProject && <div className="modal-backdrop" role="presentation" onMouseDown={e => { if (e.target === e.currentTarget) setSelectedProject(null) }}><div className="project-modal" role="dialog" aria-modal="true" aria-label={`${selectedProject.title} details`}><button className="glass-icon project-modal-close" onClick={() => setSelectedProject(null)} aria-label="Close project details"><X size={18} /></button><span className="card-kicker">{selectedProject.number} / {selectedProject.category}</span><h2>{selectedProject.title}</h2><p>{selectedProject.description}</p><div className="tags">{selectedProject.tags.map(t => <span key={t}>{t}</span>)}</div>{selectedProject.links && <div className="modal-links">{selectedProject.links.map(link => <a key={link.url} href={link.url} target="_blank" rel="noreferrer"><span>{link.name}</span>{link.handle && <small>{link.handle}</small>}<ArrowUpRight size={15} /></a>)}</div>}<a className="button primary modal-cta" href={selectedProject.url} target="_blank" rel="noreferrer">Open project <ArrowUpRight size={16} /></a></div></div>}
   </div>
