@@ -6,9 +6,17 @@ on:
   pull_request:
     branches: [main]
 
+permissions:
+  contents: read
+
+concurrency:
+  group: quality-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
 jobs:
   build:
     runs-on: ubuntu-latest
+    timeout-minutes: 10
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -17,6 +25,7 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: 22
+          cache: npm
 
       - name: Install
         run: npm install --no-audit --no-fund
@@ -26,3 +35,16 @@ jobs:
 
       - name: Production build
         run: npm run build
+
+      - name: Verify deploy artifact
+        shell: bash
+        run: |
+          test -f dist/index.html
+          test -f dist/favicon.svg
+          test -f dist/robots.txt
+          test -f dist/sitemap.xml
+          test -f dist/site.webmanifest
+          test -f dist/404.html
+          test -f dist/_headers
+          test -s dist/index.html
+          echo "Production artifact verified: $(du -sh dist | cut -f1)"
