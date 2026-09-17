@@ -3,6 +3,7 @@ import { ArrowUpRight, BookOpen, BriefcaseBusiness, Code2, ExternalLink, Github,
 import { siteConfig, type Project } from './config/site'
 import './index.css'
 import './level5.css'
+import './ecosystem.css'
 
 function getSavedTheme() { try { return localStorage.getItem('jrh-theme') === 'dark' } catch { return false } }
 
