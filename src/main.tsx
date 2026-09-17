@@ -1,8 +1,40 @@
-import { useEffect, useRef, useState } from 'react'
-import { ArrowRight, ArrowUpRight, BookOpen, ExternalLink, Link2, Menu, Moon, Pause, Play, SkipForward, Sun, TrendingUp, X } from 'lucide-react'
+import { useEffect, useMemo, useRef, useState } from 'react'
+import {
+  ArrowRight,
+  ArrowUp,
+  ArrowUpRight,
+  BookOpen,
+  Check,
+  ChevronRight,
+  Copy,
+  ExternalLink,
+  Github,
+  Instagram,
+  Menu,
+  Moon,
+  Pause,
+  Play,
+  Search,
+  Send,
+  Share2,
+  SkipForward,
+  Sparkles,
+  Sun,
+  X,
+} from 'lucide-react'
 import { createRoot } from 'react-dom/client'
 import { siteConfig, type Project } from './config/site'
 import './index.css'
+
+const navItems = [
+  ['about', 'About'],
+  ['work', 'Projects'],
+  ['experience', 'Experience'],
+  ['contact', 'Contact'],
+] as const
+
+const slugify = (value: string) =>
+  value.toLowerCase().trim().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '')
 
 function getInitialDark() {
   try {
@@ -13,13 +45,6 @@ function getInitialDark() {
   return window.matchMedia?.('(prefers-color-scheme: dark)').matches ?? false
 }
 
-const navItems = [
-  ['about', 'About'],
-  ['profile', 'Profile'],
-  ['work', 'Projects'],
-  ['contact', 'Contact'],
-] as const
-
 function App() {
   const [dark, setDark] = useState(getInitialDark)
   const [menu, setMenu] = useState(false)
@@ -29,23 +54,46 @@ function App() {
   const [trackIndex, setTrackIndex] = useState(0)
   const [currentTime, setCurrentTime] = useState(0)
   const [duration, setDuration] = useState(0)
-  const [active, setActive] = useState('top')
+  const [active, setActive] = useState('about')
   const [scrolled, setScrolled] = useState(false)
   const [selectedProject, setSelectedProject] = useState<Project | null>(null)
+  const [query, setQuery] = useState('')
+  const [category, setCategory] = useState('All')
+  const [copied, setCopied] = useState(false)
+  const [showTop, setShowTop] = useState(false)
+
   const audioRef = useRef<HTMLAudioElement | null>(null)
   const musicWrapRef = useRef<HTMLDivElement | null>(null)
   const modalCloseRef = useRef<HTMLButtonElement | null>(null)
+  const searchRef = useRef<HTMLInputElement | null>(null)
   const lastFocusedRef = useRef<HTMLElement | null>(null)
   const trackIndexRef = useRef(0)
 
+  const projects = siteConfig.projects as readonly Project[]
   const currentTrack = siteConfig.music.tracks[trackIndex]
   const progress = duration > 0 ? Math.min(100, (currentTime / duration) * 100) : 0
-  const projects = siteConfig.projects as readonly Project[]
+
+  const categories = useMemo(
+    () => ['All', ...Array.from(new Set(projects.map(project => project.category)))],
+    [projects],
+  )
+
+  const filteredProjects = useMemo(() => {
+    const normalized = query.trim().toLowerCase()
+    return projects.filter(project => {
+      const categoryMatch = category === 'All' || project.category === category
+      const searchMatch = !normalized || [project.title, project.category, project.description, ...project.tags]
+        .join(' ')
+        .toLowerCase()
+        .includes(normalized)
+      return categoryMatch && searchMatch
+    })
+  }, [category, projects, query])
 
   useEffect(() => {
     document.documentElement.dataset.theme = dark ? 'dark' : 'light'
     document.documentElement.style.colorScheme = dark ? 'dark' : 'light'
-    document.querySelector('meta[name="theme-color"]')?.setAttribute('content', dark ? '#000000' : '#f5f5f7')
+    document.querySelector('meta[name="theme-color"]')?.setAttribute('content', dark ? '#0a0a0a' : '#ffffff')
     try { localStorage.setItem('jrh-theme', dark ? 'dark' : 'light') } catch {}
   }, [dark])
 
@@ -57,7 +105,8 @@ function App() {
         const max = Math.max(1, document.documentElement.scrollHeight - window.innerHeight)
         const percent = Math.min(100, Math.max(0, (window.scrollY / max) * 100))
         document.documentElement.style.setProperty('--scroll-progress', `${percent}%`)
-        setScrolled(window.scrollY > 24)
+        setScrolled(window.scrollY > 18)
+        setShowTop(window.scrollY > window.innerHeight * 0.7)
       })
     }
     onScroll()
@@ -81,7 +130,7 @@ function App() {
         .filter(entry => entry.isIntersecting)
         .sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0]
       if (visible) setActive(visible.target.id)
-    }, { rootMargin: '-28% 0px -58% 0px', threshold: [0.15, 0.35, 0.6] })
+    }, { rootMargin: '-20% 0px -62% 0px', threshold: [0.12, 0.25, 0.5] })
 
     targets.forEach(target => observer.observe(target))
     return () => observer.disconnect()
@@ -98,18 +147,25 @@ function App() {
 
     document.querySelectorAll('.reveal').forEach(node => observer.observe(node))
     return () => observer.disconnect()
-  }, [])
+  }, [filteredProjects.length, category])
 
   useEffect(() => {
     const onKey = (event: KeyboardEvent) => {
+      const target = event.target as HTMLElement | null
+      const typing = target?.tagName === 'INPUT' || target?.tagName === 'TEXTAREA' || target?.isContentEditable
+
+      if (event.key === '/' && !typing) {
+        event.preventDefault()
+        searchRef.current?.focus()
+      }
       if (event.key === 'Escape') {
         setMenu(false)
         setMusicOpen(false)
-        setSelectedProject(null)
+        closeProject()
       }
     }
-    const preventDrag = (event: DragEvent) => event.preventDefault()
 
+    const preventDrag = (event: DragEvent) => event.preventDefault()
     document.addEventListener('keydown', onKey)
     document.addEventListener('dragstart', preventDrag)
     return () => {
@@ -118,7 +174,18 @@ function App() {
       audioRef.current?.pause()
       audioRef.current = null
     }
-  }, [])
+  }, [selectedProject])
+
+  useEffect(() => {
+    const onHashChange = () => {
+      const raw = window.location.hash.startsWith('#project=') ? window.location.hash.slice(9) : ''
+      const project = projects.find(item => slugify(item.title) === raw)
+      setSelectedProject(project ?? null)
+    }
+    onHashChange()
+    window.addEventListener('hashchange', onHashChange)
+    return () => window.removeEventListener('hashchange', onHashChange)
+  }, [projects])
 
   useEffect(() => {
     if (!musicOpen) return
@@ -134,14 +201,19 @@ function App() {
     if (!selectedProject) return
     lastFocusedRef.current = document.activeElement instanceof HTMLElement ? document.activeElement : null
     document.body.style.overflow = 'hidden'
+    document.title = `${selectedProject.title} — JRH`
     requestAnimationFrame(() => modalCloseRef.current?.focus())
     return () => {
       document.body.style.overflow = ''
+      document.title = siteConfig.title
       requestAnimationFrame(() => lastFocusedRef.current?.focus())
     }
   }, [selectedProject])
 
-  const closeProject = () => setSelectedProject(null)
+  useEffect(() => {
+    if (selectedProject) return
+    document.title = siteConfig.title
+  }, [selectedProject])
 
   const go = (id: string) => {
     setMenu(false)
@@ -174,13 +246,12 @@ function App() {
   async function playTrack(index: number) {
     const track = siteConfig.music.tracks[index]
     if (!track) return
-
     const audio = ensureAudio(track.src)
     setAudioError(false)
-    const currentSrc = audio.getAttribute('src') || audio.src
+    const expectedSrc = new URL(track.src, window.location.href).href
 
-    if (!currentSrc.endsWith(track.src)) {
-      audio.src = track.src
+    if (audio.src !== expectedSrc) {
+      audio.src = expectedSrc
       audio.load()
       setCurrentTime(0)
       setDuration(0)
@@ -219,16 +290,48 @@ function App() {
     setCurrentTime(value)
   }
 
-  const openProject = (project: Project) => setSelectedProject(project)
+  const openProject = (project: Project) => {
+    window.history.replaceState(null, '', `#project=${slugify(project.title)}`)
+    setCopied(false)
+    setSelectedProject(project)
+  }
+
+  const closeProject = () => {
+    if (window.location.hash.startsWith('#project=')) window.history.replaceState(null, '', window.location.pathname + window.location.search)
+    setCopied(false)
+    setSelectedProject(null)
+  }
+
+  const copyProjectLink = async (project: Project) => {
+    const url = `${window.location.origin}${window.location.pathname}#project=${slugify(project.title)}`
+    try {
+      await navigator.clipboard.writeText(url)
+      setCopied(true)
+      window.setTimeout(() => setCopied(false), 1800)
+    } catch {}
+  }
+
+  const shareProject = async (project: Project) => {
+    const url = `${window.location.origin}${window.location.pathname}#project=${slugify(project.title)}`
+    if (navigator.share) {
+      try {
+        await navigator.share({ title: `${project.title} — JRH`, text: project.description, url })
+        return
+      } catch {}
+    }
+    await copyProjectLink(project)
+  }
 
   return (
     <div className="app">
       <div className="scroll-progress" aria-hidden="true" />
+      <div className="ambient-grid" aria-hidden="true" />
 
       <header className={`nav ${scrolled ? 'is-scrolled' : ''} ${menu ? 'is-open' : ''}`}>
         <a className="brand" href="#top" onClick={(event) => { event.preventDefault(); go('top') }} aria-label="JRH home">
-          <span className="brand-word">{siteConfig.shortName}<i>.</i></span>
-          <span className="brand-context">Economics, markets, software</span>
+          <span className="brand-mark">J</span>
+          <span className="brand-word">JRH<span>.</span></span>
+          <span className="brand-context">Digital portfolio</span>
         </a>
 
         <nav id="primary-navigation" className={menu ? 'open' : ''} aria-label="Primary navigation">
@@ -265,7 +368,7 @@ function App() {
                   <button className="music-control" onClick={toggleMusic} aria-label={playing ? 'Pause music' : 'Play music'}>
                     {playing ? <Pause size={18} /> : <Play size={18} />}
                   </button>
-                  <div className="music-copy"><strong>{currentTrack?.title ?? siteConfig.music.title}</strong><small>{audioError ? 'Audio tidak dapat diputar' : playing ? 'Now playing' : 'Ready to play'}</small></div>
+                  <div className="music-copy"><strong>{currentTrack?.title ?? siteConfig.music.title}</strong><small>{audioError ? 'Audio tidak tersedia' : playing ? 'Now playing' : 'Ready to play'}</small></div>
                   <button className="music-next" onClick={nextTrack} aria-label="Next track"><SkipForward size={16} /></button>
                 </div>
                 <div className="music-slider-wrap">
@@ -289,47 +392,51 @@ function App() {
       {menu && <button className="menu-backdrop" aria-label="Close menu" onClick={() => setMenu(false)} />}
 
       <main id="top">
-        <section className="hero" aria-labelledby="hero-title">
+        <section className="hero">
           <div className="hero-copy reveal is-visible">
             <div className="eyebrow"><span className="eyebrow-rule" />{siteConfig.hero.eyebrow}</div>
+            <div className="hero-kicker"><Sparkles size={14} /> Independent digital workspace</div>
             <h1 id="hero-title">{siteConfig.hero.titleLine1}<br /><em>{siteConfig.hero.titleLine2}</em></h1>
             <p>{siteConfig.hero.description}</p>
             <div className="hero-actions">
-              <button className="button primary" onClick={() => go('work')}>View projects <ArrowRight size={16} /></button>
-              <a className="button secondary" href={siteConfig.instagram} target="_blank" rel="noreferrer">Instagram <ExternalLink size={14} /></a>
+              <button className="button primary" onClick={() => go('work')}>Explore work <ArrowRight size={16} /></button>
+              <a className="button secondary" href={siteConfig.github} target="_blank" rel="noreferrer">GitHub <Github size={15} /></a>
             </div>
-            <div className="hero-meta" aria-label="JRH location and focus">
-              <span>{siteConfig.location}</span>
-              <span className="meta-dot" aria-hidden="true" />
-              <span>Development Economics</span>
+            <div className="hero-signals" aria-label="Portfolio summary">
+              <div><span>Projects</span><strong>{String(projects.length).padStart(2, '0')}</strong></div>
+              <div><span>Channels</span><strong>03</strong></div>
+              <div><span>Mode</span><strong>BUILD</strong></div>
             </div>
           </div>
 
           <div className="hero-visual reveal is-visible">
             <div className="hero-photo-wrap">
+              <div className="hero-photo-orbit orbit-one" aria-hidden="true" />
+              <div className="hero-photo-orbit orbit-two" aria-hidden="true" />
               <div className="portrait-frame">
                 <img src={siteConfig.profileImage} alt="Jefri Rahman Hakim" className="profile-photo" fetchPriority="high" />
+                <div className="photo-overlay" aria-hidden="true"><span>JRH</span><span>2026</span></div>
               </div>
-              <div className="photo-index" aria-hidden="true">01 / JRH</div>
+              <div className="photo-index" aria-hidden="true">01 / 04</div>
             </div>
             <div className="hero-caption">
-              <div><span>Current frame</span><strong>Economics, markets, digital systems</strong></div>
-              <span className="caption-arrow" aria-hidden="true"><ArrowUpRight size={15} /></span>
+              <div><span>Current frame</span><strong>A personal system for projects, publishing, and experiments.</strong></div>
+              <button className="caption-arrow" onClick={() => go('about')} aria-label="Go to about section"><ArrowUpRight size={16} /></button>
             </div>
           </div>
         </section>
 
-        <section className="interest-band" aria-label="Areas of interest">
-          <div className="interest-title">Focus</div>
-          <div className="interest-items">
-            {siteConfig.interests.map((item, index) => <span key={item}><i>{String(index + 1).padStart(2, '0')}</i>{item}</span>)}
-          </div>
-        </section>
+        <div className="signal-strip" aria-label="Portfolio status">
+          <span><i />Available for selected digital projects</span>
+          <span>JRH / 2026</span>
+          <span>Scroll to explore <ChevronRight size={14} /></span>
+        </div>
 
         <section id="about" className="section about-section">
           <div className="section-kicker reveal"><span>01</span><span>About</span></div>
           <div className="about-layout">
             <div className="section-intro reveal">
+              <span className="section-overline">The point of the work</span>
               <h2>{siteConfig.about.titleLine1}<br /><em>{siteConfig.about.titleLine2}</em></h2>
               <p>{siteConfig.about.lead}</p>
             </div>
@@ -347,121 +454,141 @@ function App() {
           </div>
         </section>
 
-        <section id="profile" className="section profile-section">
-          <div className="section-kicker reveal"><span>02</span><span>Profile</span></div>
+        <section id="work" className="section projects-section">
+          <div className="section-kicker reveal"><span>02</span><span>Projects</span></div>
           <div className="section-heading reveal">
-            <h2>Study, market, build.</h2>
-            <p>The academic foundation and market practice behind the work.</p>
+            <div>
+              <span className="section-overline">Selected work</span>
+              <h2>Built, published, iterated.</h2>
+            </div>
+            <p>{filteredProjects.length} of {projects.length} projects shown. Open any card for the full link set.</p>
           </div>
 
-          <div className="profile-layout">
-            <article className="profile-card reveal">
-              <div className="card-topline"><div className="card-icon"><BookOpen size={17} /></div><span>Education</span></div>
-              <div className="card-title-row"><h3>Academic path</h3><span className="card-index">A</span></div>
+          <div className="project-toolbar reveal">
+            <label className="search-box">
+              <Search size={16} />
+              <input ref={searchRef} value={query} onChange={event => setQuery(event.target.value)} placeholder="Search projects…" aria-label="Search projects" />
+              <kbd>/</kbd>
+            </label>
+            <div className="filter-row" aria-label="Project categories">
+              {categories.map(item => (
+                <button key={item} className={category === item ? 'filter-chip active' : 'filter-chip'} onClick={() => setCategory(item)} aria-pressed={category === item}>{item}</button>
+              ))}
+            </div>
+          </div>
+
+          <div className="project-grid">
+            {filteredProjects.map((project, index) => (
+              <article className={`project-card reveal card-accent-${(index % 4) + 1}`} key={project.title}>
+                <button className="project-card-hit" onClick={() => openProject(project)} aria-label={`Open details for ${project.title}`}>
+                  <div className="project-topline"><span className="number-display">{project.number}</span><span>{project.category}</span></div>
+                  <div className="project-body">
+                    <div className="project-icon"><ArrowUpRight size={18} /></div>
+                    <h3>{project.title}</h3>
+                    <p>{project.description}</p>
+                    <div className="tags">{project.tags.map(tag => <span key={tag}>{tag}</span>)}</div>
+                  </div>
+                  <div className="project-footer"><span>View details</span><ChevronRight size={15} /></div>
+                </button>
+              </article>
+            ))}
+          </div>
+
+          {filteredProjects.length === 0 && (
+            <div className="empty-state reveal"><Search size={20} /><strong>No matching projects.</strong><span>Try a different search or switch the category.</span></div>
+          )}
+        </section>
+
+        <section className="statement reveal" aria-label="JRH principle">
+          <div className="statement-mark"><Sparkles size={18} /> JRH</div>
+          <div><span className="section-note">Working principle</span><p>“{siteConfig.quote}”</p></div>
+        </section>
+
+        <section id="experience" className="section experience-section">
+          <div className="section-kicker reveal"><span>03</span><span>Experience</span></div>
+          <div className="section-heading reveal">
+            <div>
+              <span className="section-overline">Timeline</span>
+              <h2>Learning by doing.</h2>
+            </div>
+            <p>A compact record of the academic path and working approach behind this portfolio.</p>
+          </div>
+
+          <div className="experience-layout">
+            <article className="experience-card reveal">
+              <div className="card-topline"><div className="card-icon"><BookOpen size={17} /></div><span>Academic path</span></div>
               <div className="timeline-list">
                 {siteConfig.education.map(item => (
                   <div className="timeline-item" key={item.period}>
                     <span className="number-display">{item.period}</span>
-                    <div>
-                      <strong>{item.institution}</strong>
-                      <p>{item.program}</p>
-                      <small>{item.detail}. {item.location}</small>
-                    </div>
+                    <div><strong>{item.institution}</strong><p>{item.program}</p><small>{item.detail}</small></div>
                   </div>
                 ))}
               </div>
             </article>
 
-            <article className="profile-card reveal">
-              <div className="card-topline"><div className="card-icon"><TrendingUp size={17} /></div><span>Market profile</span></div>
-              <div className="card-title-row"><h3>Risk before return</h3><span className="card-index">B</span></div>
-              <div className="market-stats">
-                <div><span>Since</span><strong className="number-display">{siteConfig.marketProfile.start}</strong></div>
-                <div><span>Focus</span><strong>{siteConfig.marketProfile.focus}</strong></div>
+            <article className="experience-card principle-card reveal">
+              <div className="card-topline"><div className="card-icon"><Sparkles size={17} /></div><span>Working approach</span></div>
+              <div className="principle-list">
+                {siteConfig.workPrinciples.map((item, index) => (
+                  <div key={item}><span className="principle-number">0{index + 1}</span><strong>{item}</strong></div>
+                ))}
               </div>
-              <p className="market-description">{siteConfig.marketProfile.description}</p>
-              <div className="method-group">
-                <span>Methods</span>
-                <div className="method-list">{siteConfig.marketProfile.methods.map(method => <span key={method}>{method}</span>)}</div>
-              </div>
-              <div className="principle"><span>Principle</span><strong>{siteConfig.marketProfile.philosophy}</strong></div>
+              <div className="principle-quote"><span>JRH</span><strong>Clear thinking × useful output</strong></div>
             </article>
           </div>
-        </section>
-
-        <section id="work" className="section projects-section">
-          <div className="section-kicker reveal"><span>03</span><span>Projects</span></div>
-          <div className="section-heading projects-heading reveal">
-            <h2>Selected work.</h2>
-            <p>{projects.length} projects and digital channels connected to the JRH portfolio.</p>
-          </div>
-
-          <div className="project-list">
-            {projects.map((project, index) => (
-              <article className={`project-row reveal project-row-${index + 1}`} key={project.title}>
-                <div className="project-number number-display">{project.number}</div>
-                <div className="project-main">
-                  <span className="project-category">{project.category}</span>
-                  <h3>{project.title}</h3>
-                  <p>{project.description}</p>
-                  <div className="tags">{project.tags.map(tag => <span key={tag}>{tag}</span>)}</div>
-                </div>
-                <button className="project-action" onClick={() => openProject(project)} aria-label={`Open details for ${project.title}`}>
-                  <span>Details</span><ArrowUpRight size={17} />
-                </button>
-              </article>
-            ))}
-          </div>
-        </section>
-
-        <section className="statement reveal" aria-label="JRH principle">
-          <div className="statement-mark">JRH</div>
-          <div><span className="section-note">Principle</span><p>“{siteConfig.quote}”</p></div>
         </section>
 
         <section id="contact" className="cta-section reveal">
           <div className="section-kicker"><span>04</span><span>Contact</span></div>
           <div className="cta-grid">
             <div className="cta-copy">
+              <span className="section-overline">Open channel</span>
               <h2>{siteConfig.contact.titleLine1}<br /><em>{siteConfig.contact.titleLine2}</em></h2>
               <p>{siteConfig.contact.description}</p>
             </div>
-            <div className="cta-action">
-              <a className="button primary large" href={siteConfig.instagram} target="_blank" rel="noreferrer">Instagram <ArrowUpRight size={16} /></a>
-              <span>Open conversation via Instagram</span>
+            <div className="cta-actions">
+              <a className="button primary large" href={siteConfig.instagram} target="_blank" rel="noreferrer">Instagram <Instagram size={16} /></a>
+              <a className="button secondary large" href={siteConfig.telegram} target="_blank" rel="noreferrer">Telegram <Send size={15} /></a>
+              <span>Choose the channel that works for you.</span>
             </div>
           </div>
         </section>
       </main>
 
       <footer className="footer">
-        <div className="footer-brand"><span className="brand-word">{siteConfig.shortName}<i>.</i></span><span>Economics, markets, software</span></div>
-        <nav aria-label="Footer navigation">
-          {navItems.map(([id, label]) => <a key={id} href={`#${id}`} onClick={event => { event.preventDefault(); go(id) }}>{label}</a>)}
-        </nav>
-        <div className="footer-links">
-          <a href={siteConfig.github} target="_blank" rel="noreferrer" aria-label="GitHub"><ExternalLink size={15} /></a>
-          <a href={siteConfig.instagram} target="_blank" rel="noreferrer" aria-label="Instagram"><Link2 size={15} /></a>
+        <div className="footer-top">
+          <div className="footer-brand"><span className="brand-mark">J</span><span className="brand-word">JRH<span>.</span></span></div>
+          <div className="footer-socials">
+            <a href={siteConfig.github} target="_blank" rel="noreferrer" aria-label="GitHub"><Github size={16} /></a>
+            <a href={siteConfig.instagram} target="_blank" rel="noreferrer" aria-label="Instagram"><Instagram size={16} /></a>
+          </div>
         </div>
-        <div className="footer-meta">© 2026 JRH. Built with purpose in Indonesia.</div>
+        <nav aria-label="Footer navigation">{navItems.map(([id, label]) => <a key={id} href={`#${id}`} onClick={event => { event.preventDefault(); go(id) }}>{label}</a>)}</nav>
+        <div className="footer-bottom"><span>© 2026 JRH.</span><span>Built with clarity and purpose.</span></div>
       </footer>
+
+      {showTop && <button className="to-top" onClick={() => go('top')} aria-label="Back to top"><ArrowUp size={16} /></button>}
 
       {selectedProject && (
         <div className="modal-backdrop" role="presentation" onMouseDown={event => { if (event.target === event.currentTarget) closeProject() }}>
           <section className="project-modal" role="dialog" aria-modal="true" aria-labelledby="project-modal-title">
             <div className="modal-head">
-              <div><span className="number-display">{selectedProject.number}</span><span className="project-category">{selectedProject.category}</span></div>
+              <div className="modal-eyebrow"><span className="number-display">{selectedProject.number}</span><span>{selectedProject.category}</span></div>
               <button ref={modalCloseRef} className="icon-button modal-close" onClick={closeProject} aria-label="Close project details"><X size={18} /></button>
             </div>
-            <h2 id="project-modal-title">{selectedProject.title}</h2>
-            <p>{selectedProject.description}</p>
+            <div className="modal-title-row"><div><span className="section-overline">Project</span><h2 id="project-modal-title">{selectedProject.title}</h2></div><div className="project-icon modal-icon"><ArrowUpRight size={20} /></div></div>
+            <p className="modal-description">{selectedProject.description}</p>
             <div className="tags modal-tags">{selectedProject.tags.map(tag => <span key={tag}>{tag}</span>)}</div>
             <div className="modal-links">
               {(selectedProject.links ?? [{ name: 'Open project', url: selectedProject.url }]).map(link => (
-                <a key={link.url} className="button secondary" href={link.url} target="_blank" rel="noreferrer">
-                  <span>{link.name}</span>{link.handle && <small>{link.handle}</small>}<ArrowUpRight size={14} />
-                </a>
+                <a key={link.url} className="button secondary" href={link.url} target="_blank" rel="noreferrer"><span>{link.name}</span>{link.handle && <small>{link.handle}</small>}<ArrowUpRight size={14} /></a>
               ))}
+            </div>
+            <div className="modal-tools">
+              <button className="tool-button" onClick={() => void copyProjectLink(selectedProject)}>{copied ? <Check size={15} /> : <Copy size={15} />} {copied ? 'Copied' : 'Copy link'}</button>
+              <button className="tool-button" onClick={() => void shareProject(selectedProject)}><Share2 size={15} /> Share</button>
+              <span>Esc to close</span>
             </div>
           </section>
         </div>
