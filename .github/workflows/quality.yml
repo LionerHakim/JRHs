@@ -32,6 +32,9 @@ jobs:
       - name: Typecheck
         run: npm run typecheck
 
+      - name: Quality audit
+        run: npm run quality
+
       - name: Production build
         run: npm run build
 
@@ -46,4 +49,5 @@ jobs:
           test -f dist/404.html
           test -f dist/_headers
           test -s dist/index.html
+          ! grep -RniE 'linear-gradient\(|radial-gradient\(' dist --include='*.css' --include='*.js'
           echo "Production artifact verified: $(du -sh dist | cut -f1)"
