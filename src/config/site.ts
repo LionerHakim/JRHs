@@ -19,7 +19,6 @@ export const siteConfig = {
   telegram: 'https://t.me/jefri_rh',
   linkedin: '',
   portfolio: 'https://jrhsee.my.id/',
-  profileImage: '/assets/images/s.jpg',
   music: {
     title: 'JRH Music',
     tracks: [
@@ -54,7 +53,7 @@ export const siteConfig = {
   ],
   marketProfile: {
     start: '9 Maret 2019',
-    experience: '5+ tahun pengalaman empiris',
+    experience: '7+ tahun pengalaman empiris',
     focus: 'Pasar modal & instrumen derivatif',
     philosophy: 'Risk First, Return Follows',
     methods: ['Position sizing', 'Fractional Kelly', 'Drawdown asymmetry', 'Liquidity & market structure', 'Interest-rate transmission'],
