@@ -1,13 +1,12 @@
 # Audio
 
-Put the portfolio music file in this folder.
+Portfolio music assets live in this folder.
 
-## Main music
+Current tracks:
 
-Use this exact filename:
+- `Budi-Doremi.mp3`
+- `Tak-AdaUjungnya.mp3`
 
-`ambient.mp3`
-
-The navbar music button reads this path automatically. Replace the MP3 to change the track — no React code needs to change.
+The navbar music player reads these paths from `src/config/site.ts`.
 
 For production, use audio you own or are licensed to publish.
