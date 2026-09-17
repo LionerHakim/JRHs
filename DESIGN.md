@@ -1,0 +1,50 @@
+# JRH Design Direction
+
+## Identity
+JRH is a personal portfolio and digital laboratory connecting Development Economics, financial markets, technology, and independent web projects. The visual identity should feel authored, editorial, precise, and personal rather than like a generic SaaS landing page.
+
+## Visual language
+An iOS-inspired translucent interface is used as a reference for material quality, spacing, and interaction polish, but JRH must keep its own economics and editorial character. Glass is an accent, not the whole interface.
+
+## Palette
+- Neutral base: white, near-black, cool grey
+- Primary accent: electric blue `#0052ff`
+- Supporting tones: muted grey only
+- No blue-purple gradient system, neon palette, or decorative color glows
+
+## Typography
+Use the system Apple-style sans stack already in the project. It is chosen for excellent readability on Android, iPhone, desktop, and dense editorial content. Numbers may use a restrained mono face only when they communicate data or chronology.
+
+## Composition
+- Hero: asymmetric editorial split between identity/copy and the real profile photograph.
+- About: text-led narrative with factual anchors, not a feature-card wall.
+- Profile: academic timeline paired with market practice because those are the two real foundations of the portfolio.
+- Projects: varied list/grid rhythm based on project importance and content volume.
+- Contact: concise closing action, not a generic marketing section.
+- Footer: only real destinations.
+
+## Material rules
+- Glass: maximum two functional surfaces, primarily the floating navbar and its transient music surface.
+- Cards: solid surfaces by default so content hierarchy remains readable.
+- Shadows: only where an element is intentionally elevated above the document plane.
+- Glow: removed from decorative backgrounds; no ambient blobs.
+- Radius: varied by hierarchy. Pills are reserved for compact controls, not every container.
+
+## Motion
+Dial: ENERGY 2 / RHYTHM 3 / MOTION 2.
+
+- Scroll reveal communicates section entry.
+- Hover/press motion communicates interactivity.
+- No endless decorative loops.
+- Reduced-motion users receive the same content without ornamental movement.
+
+## Identity motif
+A single blue focus accent plus strong whitespace and editorial asymmetry. The motif is repeated only where it communicates hierarchy, active state, or action.
+
+## Anti-slop purpose notes
+- Real profile photography is used because the portfolio is personal.
+- Glass is limited because translucency should identify the navigation layer rather than flatten the whole page.
+- No fabricated statistics, testimonials, customer logos, or product claims.
+- Navigation maps only to sections that exist.
+- Project cards open real project details and real external destinations.
+- Music controls operate on the supplied local audio assets.
