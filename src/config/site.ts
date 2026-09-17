@@ -3,7 +3,7 @@ export type Project = {
   title: string
   category: string
   description: string
-  tags: string[]
+  tags: readonly string[]
   url: string
   links?: readonly { name: string; handle?: string; url: string }[]
 }
@@ -28,7 +28,7 @@ export const siteConfig = {
     description: 'An economics student and independent digital maker exploring macroeconomics, financial markets, financial literacy, AI and the web — connecting analytical thinking with things people can actually use.',
   },
   about: {
-    label: '01 / PROFILE',
+    label: '01 / ABOUT',
     titleLine1: 'Ideas become',
     titleLine2: 'systems.',
     lead: 'JRH is a personal laboratory where economics, markets, technology and curiosity meet.',
