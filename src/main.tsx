@@ -53,13 +53,20 @@ function App() {
     let frame = 0
     const onScroll = () => {
       cancelAnimationFrame(frame)
-      frame = requestAnimationFrame(() => setScrolled(window.scrollY > 24))
+      frame = requestAnimationFrame(() => {
+        const max = Math.max(1, document.documentElement.scrollHeight - window.innerHeight)
+        const percent = Math.min(100, Math.max(0, (window.scrollY / max) * 100))
+        document.documentElement.style.setProperty('--scroll-progress', `${percent}%`)
+        setScrolled(window.scrollY > 24)
+      })
     }
     onScroll()
     window.addEventListener('scroll', onScroll, { passive: true })
+    window.addEventListener('resize', onScroll, { passive: true })
     return () => {
       cancelAnimationFrame(frame)
       window.removeEventListener('scroll', onScroll)
+      window.removeEventListener('resize', onScroll)
     }
   }, [])
 
@@ -230,7 +237,7 @@ function App() {
               key={id}
               className={active === id ? 'active' : ''}
               href={`#${id}`}
-              aria-current={active === id ? 'page' : undefined}
+              aria-current={active === id ? 'location' : undefined}
               onClick={event => { event.preventDefault(); go(id) }}
             >
               {label}
