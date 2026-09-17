@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://jrhsee.my.id/sitemap.xml
