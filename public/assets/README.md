@@ -1,20 +1,24 @@
 # JRHs Assets
 
-All editable media lives under this folder.
+Editable media lives under this folder.
 
 ```text
 assets/
 ├── images/
-│   └── profile.webp
+│   └── s.jpg
 └── audio/
-    └── ambient.mp3
+    ├── Budi-Doremi.mp3
+    └── Tak-AdaUjungnya.mp3
 ```
 
-### Change the profile photo
-Replace `images/profile.webp` with your new photo using the same filename.
+### Profile photo
 
-### Change the music
-Replace `audio/ambient.mp3` with your licensed MP3 using the same filename.
+The portfolio currently uses `images/s.jpg`. Keep the path synchronized with `profileImage` in `src/config/site.ts`.
 
-### Add more media
-Use clear, lowercase filenames such as `project-01.webp`, `project-02.webp`, or `research-cover.webp`. Keep the media here rather than inside `src/`.
+### Music
+
+The navbar player reads local tracks from `audio/` through `src/config/site.ts`. Use only audio you own or are licensed to publish.
+
+### Add media
+
+Use descriptive filenames such as `project-01.webp`, `project-02.webp`, or `research-cover.webp`. Keep media in `public/assets/` rather than inside `src/`.
