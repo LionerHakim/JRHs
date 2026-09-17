@@ -8,8 +8,6 @@ import {
   ChevronRight,
   Copy,
   ExternalLink,
-  Github,
-  Instagram,
   Menu,
   Moon,
   Pause,
@@ -336,56 +334,30 @@ function App() {
 
         <nav id="primary-navigation" className={menu ? 'open' : ''} aria-label="Primary navigation">
           {navItems.map(([id, label]) => (
-            <a
-              key={id}
-              className={active === id ? 'active' : ''}
-              href={`#${id}`}
-              aria-current={active === id ? 'location' : undefined}
-              onClick={event => { event.preventDefault(); go(id) }}
-            >
-              {label}
-            </a>
+            <a key={id} className={active === id ? 'active' : ''} href={`#${id}`} aria-current={active === id ? 'location' : undefined} onClick={event => { event.preventDefault(); go(id) }}>{label}</a>
           ))}
         </nav>
 
         <div className="nav-actions">
           <div className="music-nav-wrap" ref={musicWrapRef}>
-            <button
-              className={`music-nav ${playing ? 'is-playing' : ''}`}
-              onClick={() => setMusicOpen(value => !value)}
-              aria-expanded={musicOpen}
-              aria-controls="music-popover"
-              aria-label="Open music player"
-            >
+            <button className={`music-nav ${playing ? 'is-playing' : ''}`} onClick={() => setMusicOpen(value => !value)} aria-expanded={musicOpen} aria-controls="music-popover" aria-label="Open music player">
               <span className="music-play-icon">{playing ? <Pause size={14} /> : <Play size={14} />}</span>
               <span className="music-title"><b>Music</b><small>{currentTrack?.title ?? siteConfig.music.title}</small></span>
             </button>
-
             {musicOpen && (
               <div id="music-popover" className="music-popover glass" role="dialog" aria-label="JRH music player">
                 <div className="music-head"><span>{siteConfig.music.title}</span><span>{trackIndex + 1} / {siteConfig.music.tracks.length}</span></div>
                 <div className="music-main">
-                  <button className="music-control" onClick={toggleMusic} aria-label={playing ? 'Pause music' : 'Play music'}>
-                    {playing ? <Pause size={18} /> : <Play size={18} />}
-                  </button>
+                  <button className="music-control" onClick={toggleMusic} aria-label={playing ? 'Pause music' : 'Play music'}>{playing ? <Pause size={18} /> : <Play size={18} />}</button>
                   <div className="music-copy"><strong>{currentTrack?.title ?? siteConfig.music.title}</strong><small>{audioError ? 'Audio tidak tersedia' : playing ? 'Now playing' : 'Ready to play'}</small></div>
                   <button className="music-next" onClick={nextTrack} aria-label="Next track"><SkipForward size={16} /></button>
                 </div>
-                <div className="music-slider-wrap">
-                  <input type="range" min="0" max={duration || 0} step="0.1" value={currentTime} onChange={event => seekMusic(Number(event.target.value))} aria-label="Music progress" disabled={!duration} />
-                  <span style={{ width: `${progress}%` }} />
-                </div>
+                <div className="music-slider-wrap"><input type="range" min="0" max={duration || 0} step="0.1" value={currentTime} onChange={event => seekMusic(Number(event.target.value))} aria-label="Music progress" disabled={!duration} /><span style={{ width: `${progress}%` }} /></div>
               </div>
             )}
           </div>
-
-          <button className="icon-button" onClick={() => setDark(value => !value)} aria-label={dark ? 'Use light theme' : 'Use dark theme'}>
-            {dark ? <Sun size={17} /> : <Moon size={17} />}
-          </button>
-
-          <button className="icon-button mobile-menu" onClick={() => { setMenu(value => !value); setMusicOpen(false) }} aria-label={menu ? 'Close menu' : 'Open menu'} aria-expanded={menu} aria-controls="primary-navigation">
-            {menu ? <X size={19} /> : <Menu size={19} />}
-          </button>
+          <button className="icon-button" onClick={() => setDark(value => !value)} aria-label={dark ? 'Use light theme' : 'Use dark theme'}>{dark ? <Sun size={17} /> : <Moon size={17} />}</button>
+          <button className="icon-button mobile-menu" onClick={() => { setMenu(value => !value); setMusicOpen(false) }} aria-label={menu ? 'Close menu' : 'Open menu'} aria-expanded={menu} aria-controls="primary-navigation">{menu ? <X size={19} /> : <Menu size={19} />}</button>
         </div>
       </header>
 
@@ -400,7 +372,7 @@ function App() {
             <p>{siteConfig.hero.description}</p>
             <div className="hero-actions">
               <button className="button primary" onClick={() => go('work')}>Explore work <ArrowRight size={16} /></button>
-              <a className="button secondary" href={siteConfig.github} target="_blank" rel="noreferrer">GitHub <Github size={15} /></a>
+              <a className="button secondary" href={siteConfig.github} target="_blank" rel="noreferrer">GitHub <ExternalLink size={15} /></a>
             </div>
             <div className="hero-signals" aria-label="Portfolio summary">
               <div><span>Projects</span><strong>{String(projects.length).padStart(2, '0')}</strong></div>
@@ -435,105 +407,45 @@ function App() {
         <section id="about" className="section about-section">
           <div className="section-kicker reveal"><span>01</span><span>About</span></div>
           <div className="about-layout">
-            <div className="section-intro reveal">
-              <span className="section-overline">The point of the work</span>
-              <h2>{siteConfig.about.titleLine1}<br /><em>{siteConfig.about.titleLine2}</em></h2>
-              <p>{siteConfig.about.lead}</p>
-            </div>
-            <div className="about-body reveal">
-              <p className="lead-copy">{siteConfig.about.body}</p>
-              <div className="fact-grid">
-                {siteConfig.facts.map(([label, value]) => (
-                  <div className="fact" key={label}>
-                    <span className="number-display">{label}</span>
-                    <strong>{value}</strong>
-                  </div>
-                ))}
-              </div>
-            </div>
+            <div className="section-intro reveal"><span className="section-overline">The point of the work</span><h2>{siteConfig.about.titleLine1}<br /><em>{siteConfig.about.titleLine2}</em></h2><p>{siteConfig.about.lead}</p></div>
+            <div className="about-body reveal"><p className="lead-copy">{siteConfig.about.body}</p><div className="fact-grid">{siteConfig.facts.map(([label, value]) => <div className="fact" key={label}><span className="number-display">{label}</span><strong>{value}</strong></div>)}</div></div>
           </div>
         </section>
 
         <section id="work" className="section projects-section">
           <div className="section-kicker reveal"><span>02</span><span>Projects</span></div>
-          <div className="section-heading reveal">
-            <div>
-              <span className="section-overline">Selected work</span>
-              <h2>Built, published, iterated.</h2>
-            </div>
-            <p>{filteredProjects.length} of {projects.length} projects shown. Open any card for the full link set.</p>
-          </div>
-
+          <div className="section-heading reveal"><div><span className="section-overline">Selected work</span><h2>Built, published, iterated.</h2></div><p>{filteredProjects.length} of {projects.length} projects shown. Open any card for the full link set.</p></div>
           <div className="project-toolbar reveal">
-            <label className="search-box">
-              <Search size={16} />
-              <input ref={searchRef} value={query} onChange={event => setQuery(event.target.value)} placeholder="Search projects…" aria-label="Search projects" />
-              <kbd>/</kbd>
-            </label>
-            <div className="filter-row" aria-label="Project categories">
-              {categories.map(item => (
-                <button key={item} className={category === item ? 'filter-chip active' : 'filter-chip'} onClick={() => setCategory(item)} aria-pressed={category === item}>{item}</button>
-              ))}
-            </div>
+            <label className="search-box"><Search size={16} /><input ref={searchRef} value={query} onChange={event => setQuery(event.target.value)} placeholder="Search projects…" aria-label="Search projects" /><kbd>/</kbd></label>
+            <div className="filter-row" aria-label="Project categories">{categories.map(item => <button key={item} className={category === item ? 'filter-chip active' : 'filter-chip'} onClick={() => setCategory(item)} aria-pressed={category === item}>{item}</button>)}</div>
           </div>
-
           <div className="project-grid">
             {filteredProjects.map((project, index) => (
               <article className={`project-card reveal card-accent-${(index % 4) + 1}`} key={project.title}>
                 <button className="project-card-hit" onClick={() => openProject(project)} aria-label={`Open details for ${project.title}`}>
                   <div className="project-topline"><span className="number-display">{project.number}</span><span>{project.category}</span></div>
-                  <div className="project-body">
-                    <div className="project-icon"><ArrowUpRight size={18} /></div>
-                    <h3>{project.title}</h3>
-                    <p>{project.description}</p>
-                    <div className="tags">{project.tags.map(tag => <span key={tag}>{tag}</span>)}</div>
-                  </div>
+                  <div className="project-body"><div className="project-icon"><ArrowUpRight size={18} /></div><h3>{project.title}</h3><p>{project.description}</p><div className="tags">{project.tags.map(tag => <span key={tag}>{tag}</span>)}</div></div>
                   <div className="project-footer"><span>View details</span><ChevronRight size={15} /></div>
                 </button>
               </article>
             ))}
           </div>
-
-          {filteredProjects.length === 0 && (
-            <div className="empty-state reveal"><Search size={20} /><strong>No matching projects.</strong><span>Try a different search or switch the category.</span></div>
-          )}
+          {filteredProjects.length === 0 && <div className="empty-state reveal"><Search size={20} /><strong>No matching projects.</strong><span>Try a different search or switch the category.</span></div>}
         </section>
 
-        <section className="statement reveal" aria-label="JRH principle">
-          <div className="statement-mark"><Sparkles size={18} /> JRH</div>
-          <div><span className="section-note">Working principle</span><p>“{siteConfig.quote}”</p></div>
-        </section>
+        <section className="statement reveal" aria-label="JRH principle"><div className="statement-mark"><Sparkles size={18} /> JRH</div><div><span className="section-note">Working principle</span><p>“{siteConfig.quote}”</p></div></section>
 
         <section id="experience" className="section experience-section">
           <div className="section-kicker reveal"><span>03</span><span>Experience</span></div>
-          <div className="section-heading reveal">
-            <div>
-              <span className="section-overline">Timeline</span>
-              <h2>Learning by doing.</h2>
-            </div>
-            <p>A compact record of the academic path and working approach behind this portfolio.</p>
-          </div>
-
+          <div className="section-heading reveal"><div><span className="section-overline">Timeline</span><h2>Learning by doing.</h2></div><p>A compact record of the academic path and working approach behind this portfolio.</p></div>
           <div className="experience-layout">
             <article className="experience-card reveal">
               <div className="card-topline"><div className="card-icon"><BookOpen size={17} /></div><span>Academic path</span></div>
-              <div className="timeline-list">
-                {siteConfig.education.map(item => (
-                  <div className="timeline-item" key={item.period}>
-                    <span className="number-display">{item.period}</span>
-                    <div><strong>{item.institution}</strong><p>{item.program}</p><small>{item.detail}</small></div>
-                  </div>
-                ))}
-              </div>
+              <div className="timeline-list">{siteConfig.education.map(item => <div className="timeline-item" key={item.period}><span className="number-display">{item.period}</span><div><strong>{item.institution}</strong><p>{item.program}</p><small>{item.detail}</small></div></div>)}</div>
             </article>
-
             <article className="experience-card principle-card reveal">
               <div className="card-topline"><div className="card-icon"><Sparkles size={17} /></div><span>Working approach</span></div>
-              <div className="principle-list">
-                {siteConfig.workPrinciples.map((item, index) => (
-                  <div key={item}><span className="principle-number">0{index + 1}</span><strong>{item}</strong></div>
-                ))}
-              </div>
+              <div className="principle-list">{siteConfig.workPrinciples.map((item, index) => <div key={item}><span className="principle-number">0{index + 1}</span><strong>{item}</strong></div>)}</div>
               <div className="principle-quote"><span>JRH</span><strong>Clear thinking × useful output</strong></div>
             </article>
           </div>
@@ -542,28 +454,14 @@ function App() {
         <section id="contact" className="cta-section reveal">
           <div className="section-kicker"><span>04</span><span>Contact</span></div>
           <div className="cta-grid">
-            <div className="cta-copy">
-              <span className="section-overline">Open channel</span>
-              <h2>{siteConfig.contact.titleLine1}<br /><em>{siteConfig.contact.titleLine2}</em></h2>
-              <p>{siteConfig.contact.description}</p>
-            </div>
-            <div className="cta-actions">
-              <a className="button primary large" href={siteConfig.instagram} target="_blank" rel="noreferrer">Instagram <Instagram size={16} /></a>
-              <a className="button secondary large" href={siteConfig.telegram} target="_blank" rel="noreferrer">Telegram <Send size={15} /></a>
-              <span>Choose the channel that works for you.</span>
-            </div>
+            <div className="cta-copy"><span className="section-overline">Open channel</span><h2>{siteConfig.contact.titleLine1}<br /><em>{siteConfig.contact.titleLine2}</em></h2><p>{siteConfig.contact.description}</p></div>
+            <div className="cta-actions"><a className="button primary large" href={siteConfig.instagram} target="_blank" rel="noreferrer">Instagram <ExternalLink size={16} /></a><a className="button secondary large" href={siteConfig.telegram} target="_blank" rel="noreferrer">Telegram <Send size={15} /></a><span>Choose the channel that works for you.</span></div>
           </div>
         </section>
       </main>
 
       <footer className="footer">
-        <div className="footer-top">
-          <div className="footer-brand"><span className="brand-mark">J</span><span className="brand-word">JRH<span>.</span></span></div>
-          <div className="footer-socials">
-            <a href={siteConfig.github} target="_blank" rel="noreferrer" aria-label="GitHub"><Github size={16} /></a>
-            <a href={siteConfig.instagram} target="_blank" rel="noreferrer" aria-label="Instagram"><Instagram size={16} /></a>
-          </div>
-        </div>
+        <div className="footer-top"><div className="footer-brand"><span className="brand-mark">J</span><span className="brand-word">JRH<span>.</span></span></div><div className="footer-socials"><a href={siteConfig.github} target="_blank" rel="noreferrer" aria-label="GitHub"><ExternalLink size={16} /></a><a href={siteConfig.instagram} target="_blank" rel="noreferrer" aria-label="Instagram"><ExternalLink size={16} /></a></div></div>
         <nav aria-label="Footer navigation">{navItems.map(([id, label]) => <a key={id} href={`#${id}`} onClick={event => { event.preventDefault(); go(id) }}>{label}</a>)}</nav>
         <div className="footer-bottom"><span>© 2026 JRH.</span><span>Built with clarity and purpose.</span></div>
       </footer>
@@ -573,23 +471,12 @@ function App() {
       {selectedProject && (
         <div className="modal-backdrop" role="presentation" onMouseDown={event => { if (event.target === event.currentTarget) closeProject() }}>
           <section className="project-modal" role="dialog" aria-modal="true" aria-labelledby="project-modal-title">
-            <div className="modal-head">
-              <div className="modal-eyebrow"><span className="number-display">{selectedProject.number}</span><span>{selectedProject.category}</span></div>
-              <button ref={modalCloseRef} className="icon-button modal-close" onClick={closeProject} aria-label="Close project details"><X size={18} /></button>
-            </div>
+            <div className="modal-head"><div className="modal-eyebrow"><span className="number-display">{selectedProject.number}</span><span>{selectedProject.category}</span></div><button ref={modalCloseRef} className="icon-button modal-close" onClick={closeProject} aria-label="Close project details"><X size={18} /></button></div>
             <div className="modal-title-row"><div><span className="section-overline">Project</span><h2 id="project-modal-title">{selectedProject.title}</h2></div><div className="project-icon modal-icon"><ArrowUpRight size={20} /></div></div>
             <p className="modal-description">{selectedProject.description}</p>
             <div className="tags modal-tags">{selectedProject.tags.map(tag => <span key={tag}>{tag}</span>)}</div>
-            <div className="modal-links">
-              {(selectedProject.links ?? [{ name: 'Open project', url: selectedProject.url }]).map(link => (
-                <a key={link.url} className="button secondary" href={link.url} target="_blank" rel="noreferrer"><span>{link.name}</span>{link.handle && <small>{link.handle}</small>}<ArrowUpRight size={14} /></a>
-              ))}
-            </div>
-            <div className="modal-tools">
-              <button className="tool-button" onClick={() => void copyProjectLink(selectedProject)}>{copied ? <Check size={15} /> : <Copy size={15} />} {copied ? 'Copied' : 'Copy link'}</button>
-              <button className="tool-button" onClick={() => void shareProject(selectedProject)}><Share2 size={15} /> Share</button>
-              <span>Esc to close</span>
-            </div>
+            <div className="modal-links">{(selectedProject.links ?? [{ name: 'Open project', url: selectedProject.url }]).map(link => <a key={link.url} className="button secondary" href={link.url} target="_blank" rel="noreferrer"><span>{link.name}</span>{link.handle && <small>{link.handle}</small>}<ArrowUpRight size={14} /></a>)}</div>
+            <div className="modal-tools"><button className="tool-button" onClick={() => void copyProjectLink(selectedProject)}>{copied ? <Check size={15} /> : <Copy size={15} />} {copied ? 'Copied' : 'Copy link'}</button><button className="tool-button" onClick={() => void shareProject(selectedProject)}><Share2 size={15} /> Share</button><span>Esc to close</span></div>
           </section>
         </div>
       )}
