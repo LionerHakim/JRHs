@@ -124,6 +124,7 @@ function App() {
   useEffect(() => {
     if (!playing) return
     void playTrack(trackIndex)
+    // Track changes while playing intentionally restart the selected local file.
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [trackIndex])
 
@@ -132,6 +133,7 @@ function App() {
   }
 
   const nav = [['about', 'About'], ['profile', 'Profile'], ['work', 'Projects'], ['contact', 'Contact']] as const
+  const projects = siteConfig.projects as readonly Project[]
 
   return <div className="app">
     <div className="scroll-progress" style={{ width: `${scrollProgress}%` }} aria-hidden="true" />
@@ -171,7 +173,7 @@ function App() {
 
       <section id="profile" className="section profile-section"><div className="section-label">02 / PROFILE</div><div className="profile-grid"><div><h2>Study.<br /><em>Market.</em><br />Build.</h2></div><div className="profile-panels"><article className="info-card"><div className="card-icon"><BookOpen size={17} /></div><span className="card-kicker">EDUCATION</span>{siteConfig.education.map(e => <div className="timeline" key={e.period}><b>{e.period}</b><strong>{e.institution}</strong><span>{e.program}</span><small>{e.detail} · {e.location}</small></div>)}</article><article className="info-card market-card"><div className="card-icon"><TrendingUp size={17} /></div><span className="card-kicker">MARKET PROFILE</span><div className="market-stat"><strong>{siteConfig.marketProfile.start}</strong><span>{siteConfig.marketProfile.experience}</span></div><p>{siteConfig.marketProfile.description}</p><div className="tags">{siteConfig.marketProfile.methods.map(x => <span key={x}>{x}</span>)}</div><div className="philosophy">{siteConfig.marketProfile.philosophy}</div></article></div></div></section>
 
-      <section id="work" className="section work"><div className="section-head"><div><div className="section-label">03 / PROJECTS</div><h2>Things I’ve<br /><em>made.</em></h2></div><span className="count">{String(siteConfig.projects.length).padStart(2, '0')} projects</span></div><div className="project-list">{siteConfig.projects.map(project => <article className="project" key={project.title} tabIndex={0} aria-label={`Open details for ${project.title}`} onClick={() => setSelectedProject(project)} onKeyDown={e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); setSelectedProject(project) } }}><div className="project-no">{project.number}</div><div className="project-main"><div className="project-top"><span>{project.category}</span><span className="project-open"><ArrowUpRight size={18} /></span></div><h3>{project.title}</h3><p>{project.description}</p><div className="tags">{project.tags.map(t => <span key={t}>{t}</span>)}</div>{project.links && <div className="project-links">{project.links.map(link => <a key={link.url} href={link.url} target="_blank" rel="noreferrer" onClick={e => e.stopPropagation()}><span>{link.name}</span>{link.handle && <small>{link.handle}</small>}<ExternalLink size={12} /></a>)}</div>}<span className="detail-hint">View details <ArrowUpRight size={13} /></span></div></article>)}</div></section>
+      <section id="work" className="section work"><div className="section-head"><div><div className="section-label">03 / PROJECTS</div><h2>Things I’ve<br /><em>made.</em></h2></div><span className="count">{String(projects.length).padStart(2, '0')} projects</span></div><div className="project-list">{projects.map(project => <article className="project" key={project.title} tabIndex={0} aria-label={`Open details for ${project.title}`} onClick={() => setSelectedProject(project)} onKeyDown={e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); setSelectedProject(project) } }}><div className="project-no">{project.number}</div><div className="project-main"><div className="project-top"><span>{project.category}</span><span className="project-open"><ArrowUpRight size={18} /></span></div><h3>{project.title}</h3><p>{project.description}</p><div className="tags">{project.tags.map(t => <span key={t}>{t}</span>)}</div>{project.links && <div className="project-links">{project.links.map(link => <a key={link.url} href={link.url} target="_blank" rel="noreferrer" onClick={e => e.stopPropagation()}><span>{link.name}</span>{link.handle && <small>{link.handle}</small>}<ExternalLink size={12} /></a>)}</div>}<span className="detail-hint">View details <ArrowUpRight size={13} /></span></div></article>)}</div></section>
 
       <section className="quote"><Quote size={28} /><p>{siteConfig.quote}</p></section>
 
