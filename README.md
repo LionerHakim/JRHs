@@ -6,7 +6,7 @@ Personal portfolio for **Jefri Rahman Hakim (JRH)**, combining Development Econo
 
 ## Experience
 
-The interface uses an iOS-inspired material language without cloning Apple's UI: strong typography, high-contrast hierarchy, restrained blue accents, a floating navigation layer, responsive spacing, subtle interaction feedback, light/dark themes, mobile navigation, project detail modals, and local music controls.
+The interface uses an iOS-inspired material language without cloning Apple's UI: strong typography, high-contrast hierarchy, restrained iOS-blue accents, a floating navigation layer, responsive spacing, subtle interaction feedback, project detail modals, light-only rendering, and local music controls.
 
 The visual system is also filtered through the open-source **antislop** project so decorative techniques stay purposeful and the content remains specific. See `DESIGN.md` and `AGENTS.md` for the project direction and working rules.
 
@@ -25,6 +25,7 @@ The visual system is also filtered through the open-source **antislop** project 
 JRHs/
 ├── public/
 │   ├── _headers
+│   ├── 404.html
 │   ├── anti-slop.css
 │   └── assets/
 │       ├── images/
@@ -33,13 +34,16 @@ JRHs/
 │           ├── Budi-Doremi.mp3
 │           ├── Tak-AdaUjungnya.mp3
 │           └── README.md
+├── scripts/
+│   └── quality.mjs                 # deterministic visual/SEO/config audit
 ├── src/
 │   ├── config/
 │   │   └── site.ts                 # content + links
-│   ├── index.css                   # design system + responsive UI
+│   ├── index.css                   # global foundation
+│   ├── future.css                  # final light-only visual system
 │   ├── main.tsx                    # UI + interaction logic
 │   └── vite-env.d.ts
-├── .github/workflows/quality.yml   # typecheck + production build
+├── .github/workflows/quality.yml   # quality audit + typecheck + production build
 ├── AGENTS.md
 ├── DESIGN.md
 ├── index.html
@@ -80,7 +84,7 @@ Edit:
 src/config/site.ts
 ```
 
-This centralizes the portfolio copy, social links, education, market profile, projects, media paths, and contact details.
+This centralizes the portfolio copy, social links, education, projects, media paths, and contact details.
 
 ## Local Development
 
@@ -93,6 +97,7 @@ Checks:
 
 ```bash
 npm run typecheck
+npm run quality
 npm run build
 ```
 
@@ -106,15 +111,15 @@ Node.js          : 22
 Root directory   : /
 ```
 
-Connect the `main` branch to the Cloudflare Pages project for automatic deployments. GitHub Actions also runs type-checking and a production build on pushes and pull requests.
+Connect the `main` branch to the Cloudflare Pages project for automatic deployments. GitHub Actions runs the deterministic quality audit, TypeScript check, production build, and deploy-artifact verification on pushes and pull requests.
 
 ## Responsive + Accessibility
 
-The UI is designed for desktop, tablet, Android, and iPhone with safe-area spacing, touch-friendly controls, keyboard focus, escape-to-close behavior, visible interaction states, responsive typography, and reduced-motion support.
+The UI is designed for desktop, tablet, Android, and iPhone with safe-area-aware mobile sizing, touch-friendly controls, keyboard focus, escape-to-close behavior, modal focus trapping, visible interaction states, responsive typography, and reduced-motion support.
 
 ## Interaction Protection
 
-The frontend blocks image dragging as a light deterrent against casual extraction. Browser-based protection cannot prevent screenshots, developer tools, or determined copying.
+Images are not forcibly blocked from dragging because browser controls should remain predictable and accessible. The portfolio does not claim to prevent screenshots, developer tools, or determined copying.
 
 ## Design Rules
 
@@ -122,10 +127,12 @@ The frontend blocks image dragging as a light deterrent against casual extractio
 2. Keep content and links in `src/config/site.ts`.
 3. Keep personal media under `public/assets/`.
 4. Keep UI and interaction in `src/main.tsx`.
-5. Keep the main visual system in `src/index.css`.
+5. Keep the global foundation in `src/index.css` and the final visual system in `src/future.css`.
 6. Keep the iOS reference as a material and interaction reference, not a clone.
 7. Keep glass limited to functional navigation surfaces.
-8. Run `npm run typecheck` and `npm run build` before release.
+8. Keep all page backgrounds pure white.
+9. Keep dark-theme and page-gradient code out of the source.
+10. Run `npm run typecheck`, `npm run quality`, and `npm run build` before release.
 
 ## Author
 
