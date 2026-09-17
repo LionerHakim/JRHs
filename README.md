@@ -34,10 +34,10 @@ JRHs/
 │   ├── ecosystem.css                 # profile / ecosystem styling
 │   ├── index.css                     # core design system
 │   ├── level5.css                    # premium interaction layer
-│   ├── nav.css                       # navigation styling
-│   ├── premium.css                   # premium visual layer
-│   └── main.tsx                      # UI + interaction logic
+│   ├── main.tsx                      # UI + interaction logic
+│   └── vite-env.d.ts                 # Vite type declarations
 ├── .github/workflows/quality.yml     # typecheck + production build
+├── .gitignore
 ├── index.html
 ├── package.json
 ├── tsconfig.json
@@ -115,7 +115,7 @@ The frontend discourages casual text selection, copy shortcuts, image dragging, 
 2. **Personal media:** `public/assets/`
 3. **UI and interaction:** `src/main.tsx`
 4. **Core styling:** `src/index.css`
-5. **Premium/mobile styling:** `src/level5.css`, `src/nav.css`, `src/premium.css`, `src/ecosystem.css`
+5. **Premium/mobile styling:** `src/level5.css`, `src/ecosystem.css`
 6. Keep filenames stable when possible.
 7. Run both `npm run typecheck` and `npm run build` before release.
 
