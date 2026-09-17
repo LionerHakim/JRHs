@@ -1,0 +1,30 @@
+/* JRH anti-slop guard layer
+   Purpose: keep the iOS-inspired material language focused on the navigation layer,
+   while the content plane stays solid and editorial.
+*/
+
+/* Decorative ambient glows do not carry information. */
+.ambient,
+.hero-photo-glow {
+  display: none !important;
+}
+
+/* The profile photograph is evidence and identity, not a frosted surface. */
+.portrait-frame.glass {
+  background: var(--surface-solid);
+  border-color: var(--line);
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+  box-shadow: var(--shadow-float);
+}
+
+.portrait-frame.glass::before,
+.portrait-frame.glass::after {
+  display: none;
+}
+
+/* Keep focus visible without adding decorative glow. */
+:focus-visible {
+  outline: 2px solid var(--blue);
+  outline-offset: 4px;
+}
