@@ -19,8 +19,14 @@ export const siteConfig = {
   telegram: 'https://t.me/jefri_rh',
   linkedin: '',
   portfolio: 'https://jrhsee.my.id/',
-  profileImage: '/assets/images/profile.webp',
-  music: { title: 'JRH Ambient', src: '' },
+  profileImage: '/assets/images/s.jpg',
+  music: {
+    title: 'JRH Music',
+    tracks: [
+      { title: 'Budi Doremi', src: '/assets/audio/Budi-Doremi.mp3' },
+      { title: 'Tak Ada Ujungnya', src: '/assets/audio/Tak-AdaUjungnya.mp3' },
+    ],
+  },
   hero: {
     eyebrow: 'ECONOMICS · MARKETS · SOFTWARE',
     titleLine1: 'Think deeply.',
