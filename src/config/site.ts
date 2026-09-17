@@ -28,7 +28,7 @@ export const siteConfig = {
     ],
   },
   hero: {
-    eyebrow: 'ECONOMICS · MARKETS · SOFTWARE',
+    eyebrow: 'ECONOMICS / MARKETS / SOFTWARE',
     titleLine1: 'Think deeply.',
     titleLine2: 'Build with purpose.',
     description: 'Economics, markets, and software meet here through research, experiments, and digital products.',
@@ -80,10 +80,10 @@ export const siteConfig = {
       { name: 'TikTok', handle: '@jokowi.gov', url: 'https://www.tiktok.com/@jokowi.gov' },
     ] },
   ],
-  quote: '“Berpikir dari dasar. Mengukur risiko. Membangun sesuatu yang berarti.”',
+  quote: 'Berpikir dari dasar. Mengukur risiko. Membangun sesuatu yang berarti.',
   contact: {
     titleLine1: 'Have an idea?',
-    titleLine2: 'Let’s build.',
+    titleLine2: "Let's build.",
     description: 'Open to collaborations, research, digital experiments, and conversations around economics, markets, and technology.',
   },
 } as const
