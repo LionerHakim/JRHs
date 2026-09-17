@@ -7,6 +7,12 @@ export type Project = {
   url: string
 }
 
+export type EcosystemItem = {
+  name: string
+  handle?: string
+  url: string
+}
+
 export const siteConfig = {
   name: 'Jefri Rahman Hakim',
   shortName: 'JRH',
@@ -53,6 +59,25 @@ export const siteConfig = {
     philosophy: 'Risk First, Return Follows',
     methods: ['Position sizing', 'Fractional Kelly', 'Drawdown asymmetry', 'Liquidity & market structure', 'Interest-rate transmission'],
     description: 'Mempelajari pasar melalui kombinasi risk management, probabilitas, struktur mikro likuiditas dan transmisi kebijakan moneter — dengan prioritas pada survival dan pengendalian downside sebelum mengejar return.',
+  },
+  digitalEcosystem: {
+    title: 'JRH Digital Ecosystem',
+    description: 'Satu pintu untuk kanal digital, konten, distribusi dan monetisasi JRH.',
+    pinterest: [
+      { name: 'Pinterest · JRH Art', url: 'https://pin.it/u90jfYk6p' },
+      { name: 'Pinterest · JRH', url: 'https://pin.it/6k7sezYIK' },
+    ] satisfies EcosystemItem[],
+    youtube: [
+      { name: 'JRHs 369', handle: '@jrhs369', url: 'https://youtube.com/@jrhs369' },
+      { name: 'GOVshorts', handle: '@govshortss', url: 'https://youtube.com/@govshortss' },
+    ] satisfies EcosystemItem[],
+    monetization: [
+      { name: 'Collshp', handle: '23369', url: 'https://collshp.com/23369' },
+      { name: 'Lynk.id — Nusantara', handle: 'nusantara9', url: 'https://lynk.id/nusantara9' },
+    ] satisfies EcosystemItem[],
+    tiktok: [
+      { name: 'TikTok', handle: '@jokowi.gov', url: 'https://www.tiktok.com/@jokowi.gov' },
+    ] satisfies EcosystemItem[],
   },
   projects: [
     { number: '01', title: 'JRH Portfolio', category: 'Personal digital system', description: 'A living portfolio and personal digital laboratory for economics, markets, technology and independent experiments.', tags: ['React', 'Vite', 'TypeScript'], url: 'https://github.com/LionerHakim/JRHs' },
