@@ -4,29 +4,31 @@
 JRH is a personal portfolio and digital laboratory connecting Development Economics, financial markets, technology, and independent web projects. The visual identity should feel authored, editorial, precise, and personal rather than like a generic SaaS landing page.
 
 ## Visual language
-An iOS-inspired translucent interface is used as a reference for material quality, spacing, and interaction polish, but JRH must keep its own economics and editorial character. Glass is an accent, not the whole interface.
+An iOS-inspired translucent interface is used as a reference for material quality, spacing, and interaction polish, but JRH keeps its own economics and editorial character. Glass is an accent, not the whole interface.
 
 ## Palette
-- Neutral base: white, near-black, cool grey
-- Primary accent: electric blue `#0052ff`
-- Supporting tones: muted grey only
-- No blue-purple gradient system, neon palette, or decorative color glows
+- Canvas and section backgrounds: pure white `#ffffff`
+- Primary text: near-black `#000000`
+- Secondary text: graphite `#3e3e3e` and smoke `#636363`
+- Primary accent: iOS blue `#007aff`
+- Supporting tones: restrained yellow, purple, and green only for small UI accents
+- No page gradients, ambient blobs, dark theme, neon palette, or decorative background glows
 
 ## Typography
-Use the system Apple-style sans stack already in the project. It is chosen for excellent readability on Android, iPhone, desktop, and dense editorial content. Numbers may use a restrained mono face only when they communicate data or chronology.
+Use Inter for UI/body text and Playfair Display for editorial headings. Numbers may use a restrained mono face only when they communicate data or chronology.
 
 ## Composition
-- Hero: asymmetric editorial split between identity/copy and the real profile photograph.
+- Hero: asymmetric editorial split between identity/copy and the real profile photograph, on a pure-white canvas.
 - About: text-led narrative with factual anchors, not a feature-card wall.
-- Profile: academic timeline paired with market practice because those are the two real foundations of the portfolio.
-- Projects: varied list/grid rhythm based on project importance and content volume.
+- Experience: academic timeline paired with a concise working approach.
+- Projects: one unified collection with search/filter and progressive disclosure through project detail modal.
 - Contact: concise closing action, not a generic marketing section.
 - Footer: only real destinations.
 
 ## Material rules
-- Glass: maximum two functional surfaces, primarily the floating navbar and its transient music surface.
-- Cards: solid surfaces by default so content hierarchy remains readable.
-- Shadows: only where an element is intentionally elevated above the document plane.
+- Glass: limited to functional surfaces such as the floating navbar and transient music surface.
+- Cards: solid white surfaces by default so content hierarchy remains readable.
+- Shadows: restrained and used only for intentional elevation.
 - Glow: removed from decorative backgrounds; no ambient blobs.
 - Radius: varied by hierarchy. Pills are reserved for compact controls, not every container.
 
