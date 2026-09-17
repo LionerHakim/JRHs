@@ -1,9 +1,8 @@
 import { useEffect, useRef, useState } from 'react'
-import { ArrowUpRight, BookOpen, ExternalLink, Link2, Menu, Moon, Quote, Sparkles, Sun, TrendingUp, Volume2, VolumeX, X } from 'lucide-react'
+import { ArrowUpRight, BookOpen, ExternalLink, Link2, Menu, Moon, Pause, Play, Quote, SkipForward, Sparkles, Sun, TrendingUp, X } from 'lucide-react'
 import { createRoot } from 'react-dom/client'
 import { siteConfig, type Project } from './config/site'
 import './index.css'
-import './level5.css'
 
 function getInitialDark() {
   try {
@@ -20,18 +19,20 @@ function App() {
   const [playing, setPlaying] = useState(false)
   const [audioError, setAudioError] = useState(false)
   const [trackIndex, setTrackIndex] = useState(0)
-  const [photoFailed, setPhotoFailed] = useState(false)
+  const [currentTime, setCurrentTime] = useState(0)
+  const [duration, setDuration] = useState(0)
   const [active, setActive] = useState('top')
   const [selectedProject, setSelectedProject] = useState<Project | null>(null)
   const [scrollProgress, setScrollProgress] = useState(0)
   const audioRef = useRef<HTMLAudioElement | null>(null)
 
   const currentTrack = siteConfig.music.tracks[trackIndex]
+  const progress = duration > 0 ? Math.min(100, currentTime / duration * 100) : 0
 
   useEffect(() => {
     document.documentElement.dataset.theme = dark ? 'dark' : 'light'
     document.documentElement.style.colorScheme = dark ? 'dark' : 'light'
-    document.querySelector('meta[name="theme-color"]')?.setAttribute('content', dark ? '#07070a' : '#f5f5f7')
+    document.querySelector('meta[name="theme-color"]')?.setAttribute('content', dark ? '#090a0d' : '#f7f7f8')
     try { localStorage.setItem('jrh-theme', dark ? 'dark' : 'light') } catch {}
   }, [dark])
 
@@ -47,29 +48,21 @@ function App() {
       }
       setActive(current)
     }
-    const onPointer = (e: PointerEvent) => {
-      const target = e.target as HTMLElement | null
-      if (target && !target.closest('.nav')) setMenu(false)
-    }
     const onKey = (e: KeyboardEvent) => {
-      if (e.key === 'Escape') { setMenu(false); setSelectedProject(null) }
-      if ((e.ctrlKey || e.metaKey) && ['c', 'x', 'u', 's', 'p', 'a'].includes(e.key.toLowerCase())) e.preventDefault()
+      if (e.key === 'Escape') {
+        setMenu(false)
+        setSelectedProject(null)
+      }
     }
-    const prevent = (e: Event) => e.preventDefault()
+    const preventDrag = (e: DragEvent) => e.preventDefault()
     window.addEventListener('scroll', onScroll, { passive: true })
-    document.addEventListener('pointerdown', onPointer)
-    document.addEventListener('contextmenu', prevent)
-    document.addEventListener('selectstart', prevent)
-    document.addEventListener('dragstart', prevent)
     document.addEventListener('keydown', onKey)
+    document.addEventListener('dragstart', preventDrag)
     onScroll()
     return () => {
       window.removeEventListener('scroll', onScroll)
-      document.removeEventListener('pointerdown', onPointer)
-      document.removeEventListener('contextmenu', prevent)
-      document.removeEventListener('selectstart', prevent)
-      document.removeEventListener('dragstart', prevent)
       document.removeEventListener('keydown', onKey)
+      document.removeEventListener('dragstart', preventDrag)
       audioRef.current?.pause()
       audioRef.current = null
     }
@@ -80,35 +73,60 @@ function App() {
     return () => { document.body.style.overflow = '' }
   }, [selectedProject])
 
+  useEffect(() => {
+    const audio = audioRef.current
+    if (!audio) return
+    const onTimeUpdate = () => setCurrentTime(audio.currentTime || 0)
+    const onLoadedMetadata = () => setDuration(audio.duration || 0)
+    const onEnded = () => {
+      const next = (trackIndex + 1) % siteConfig.music.tracks.length
+      void playTrack(next)
+    }
+    const onError = () => {
+      setPlaying(false)
+      setAudioError(true)
+    }
+    audio.addEventListener('timeupdate', onTimeUpdate)
+    audio.addEventListener('loadedmetadata', onLoadedMetadata)
+    audio.addEventListener('ended', onEnded)
+    audio.addEventListener('error', onError)
+    return () => {
+      audio.removeEventListener('timeupdate', onTimeUpdate)
+      audio.removeEventListener('loadedmetadata', onLoadedMetadata)
+      audio.removeEventListener('ended', onEnded)
+      audio.removeEventListener('error', onError)
+    }
+  }, [trackIndex])
+
   const go = (id: string) => {
     setMenu(false)
     requestAnimationFrame(() => document.getElementById(id)?.scrollIntoView({ behavior: 'smooth', block: 'start' }))
   }
 
-  const stopMusic = () => {
-    audioRef.current?.pause()
-    setPlaying(false)
+  const ensureAudio = (src: string) => {
+    if (audioRef.current) return audioRef.current
+    const audio = new Audio(src)
+    audio.preload = 'metadata'
+    audio.volume = 0.28
+    audioRef.current = audio
+    return audio
   }
 
-  const playTrack = async (index: number) => {
+  async function playTrack(index: number) {
     const track = siteConfig.music.tracks[index]
     if (!track) return
+    const audio = ensureAudio(track.src)
     setAudioError(false)
+    const currentSrc = audio.getAttribute('src') || audio.src
+    if (!currentSrc.endsWith(track.src)) {
+      audio.src = track.src
+      audio.load()
+      setCurrentTime(0)
+      setDuration(0)
+    }
+    setTrackIndex(index)
     try {
-      if (!audioRef.current) {
-        audioRef.current = new Audio(track.src)
-        audioRef.current.preload = 'metadata'
-        audioRef.current.volume = 0.28
-        audioRef.current.addEventListener('ended', () => {
-          setTrackIndex(current => (current + 1) % siteConfig.music.tracks.length)
-        })
-      } else {
-        audioRef.current.pause()
-        audioRef.current.src = track.src
-        audioRef.current.load()
-      }
-      await audioRef.current.play()
-      setTrackIndex(index)
+      await audio.play()
       setPlaying(true)
     } catch {
       setPlaying(false)
@@ -117,19 +135,24 @@ function App() {
   }
 
   const toggleMusic = async () => {
-    if (playing) { stopMusic(); return }
+    const audio = audioRef.current
+    if (playing && audio) {
+      audio.pause()
+      setPlaying(false)
+      return
+    }
     await playTrack(trackIndex)
   }
 
-  useEffect(() => {
-    if (!playing) return
-    void playTrack(trackIndex)
-    // Track changes while playing intentionally restart the selected local file.
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [trackIndex])
-
   const nextTrack = () => {
-    setTrackIndex(index => (index + 1) % siteConfig.music.tracks.length)
+    const next = (trackIndex + 1) % siteConfig.music.tracks.length
+    void playTrack(next)
+  }
+
+  const seekMusic = (value: number) => {
+    if (!audioRef.current || duration <= 0) return
+    audioRef.current.currentTime = value
+    setCurrentTime(value)
   }
 
   const nav = [['about', 'About'], ['profile', 'Profile'], ['work', 'Projects'], ['contact', 'Contact']] as const
@@ -137,54 +160,167 @@ function App() {
 
   return <div className="app">
     <div className="scroll-progress" style={{ width: `${scrollProgress}%` }} aria-hidden="true" />
+
     <header className={`nav ${menu ? 'is-open' : ''}`} aria-label="Main navigation">
-      <a className="brand" href="#top" onClick={() => setMenu(false)} aria-label="JRH home"><span className="brand-mark">J</span><span className="brand-name">{siteConfig.shortName}<i>.</i></span></a>
+      <a className="brand" href="#top" onClick={() => setMenu(false)} aria-label="JRH home">
+        <span className="brand-mark">J</span>
+        <span className="brand-name">{siteConfig.shortName}<i>.</i></span>
+      </a>
+
       <nav id="primary-navigation" className={menu ? 'open' : ''} aria-label="Primary">
-        {nav.map(([id, label]) => <a key={id} className={active === id ? 'active' : ''} href={`#${id}`} onClick={e => { e.preventDefault(); go(id) }}><span>{label}</span>{active === id && <i />}</a>)}
+        {nav.map(([id, label], index) => <a key={id} className={active === id ? 'active' : ''} href={`#${id}`} onClick={e => { e.preventDefault(); go(id) }}>
+          <span className="nav-num">{String(index + 1).padStart(2, '0')}</span>
+          <span>{label}</span>
+          {active === id && <span className="nav-state" aria-hidden="true" />}
+        </a>)}
       </nav>
+
       <div className="nav-actions">
-        <button className={`glass-icon ${playing ? 'is-active' : ''}`} onClick={toggleMusic} aria-label={playing ? `Pause ${currentTrack?.title ?? 'music'}` : `Play ${currentTrack?.title ?? 'music'}`} title={audioError ? 'Audio gagal dimulai — coba lagi' : currentTrack?.title ?? siteConfig.music.title}>{playing ? <Volume2 size={16} /> : <VolumeX size={16} />}</button>
-        <button className="glass-icon" onClick={nextTrack} aria-label="Next music track" title={currentTrack?.title ?? siteConfig.music.title}><span className="track-number">{trackIndex + 1}</span></button>
-        <button className="glass-icon" onClick={() => setDark(v => !v)} aria-label={dark ? 'Use light theme' : 'Use dark theme'} title={dark ? 'Light mode' : 'Dark mode'}>{dark ? <Sun size={16} /> : <Moon size={16} />}</button>
-        <button className="mobile-menu glass-icon" onClick={() => setMenu(v => !v)} aria-label={menu ? 'Close menu' : 'Open menu'} aria-expanded={menu} aria-controls="primary-navigation">{menu ? <X size={18} /> : <Menu size={18} />}</button>
+        <button className={`icon-button music-trigger ${playing ? 'is-active' : ''}`} onClick={toggleMusic} aria-label={playing ? 'Pause music' : 'Play music'} title={audioError ? 'Audio tidak dapat diputar. Coba lagi.' : currentTrack?.title ?? 'JRH Music'}>
+          {playing ? <Pause size={16} /> : <Play size={16} />}
+        </button>
+        <button className="icon-button theme-trigger" onClick={() => setDark(v => !v)} aria-label={dark ? 'Use light theme' : 'Use dark theme'} title={dark ? 'Light mode' : 'Dark mode'}>
+          {dark ? <Sun size={16} /> : <Moon size={16} />}
+        </button>
+        <button className="icon-button mobile-menu" onClick={() => setMenu(v => !v)} aria-label={menu ? 'Close menu' : 'Open menu'} aria-expanded={menu} aria-controls="primary-navigation">
+          {menu ? <X size={19} /> : <Menu size={19} />}
+        </button>
       </div>
     </header>
+
+    {menu && <button className="menu-backdrop" aria-label="Close menu" onClick={() => setMenu(false)} />}
 
     <main id="top">
       <section className="hero">
         <div className="hero-copy">
-          <div className="eyebrow"><span className="status" /> {siteConfig.hero.eyebrow}<Sparkles size={12} /></div>
+          <div className="eyebrow"><span className="status" />{siteConfig.hero.eyebrow}<Sparkles size={12} /></div>
           <h1>{siteConfig.hero.titleLine1}<br /><em>{siteConfig.hero.titleLine2}</em></h1>
           <p>{siteConfig.hero.description}</p>
-          <div className="hero-actions"><button className="button primary" onClick={() => go('work')}>Explore projects <ArrowUpRight size={16} /></button><a className="text-link" href={siteConfig.instagram} target="_blank" rel="noreferrer">Instagram <ExternalLink size={13} /></a></div>
-          <div className="hero-meta"><span><b>01</b> Digital portfolio</span><span><b>2026</b> Independent work</span><span><b>{siteConfig.location}</b></span></div>
+          <div className="hero-actions">
+            <button className="button primary" onClick={() => go('work')}>Explore projects <ArrowUpRight size={16} /></button>
+            <a className="text-link" href={siteConfig.instagram} target="_blank" rel="noreferrer">Instagram <ExternalLink size={13} /></a>
+          </div>
+          <div className="hero-meta">
+            <span><b>01</b> Digital portfolio</span>
+            <span><b>2026</b> Independent work</span>
+            <span><b>UII</b> Development Economics</span>
+          </div>
         </div>
-        <div className="hero-orbit">
-          <div className="hero-glow" />
-          <div className="profile-photo-wrap">{photoFailed ? <div className="profile-fallback"><span>JRH</span><small>economics · markets · software</small></div> : <img className="profile-photo" src={siteConfig.profileImage} alt={siteConfig.name} draggable="false" onError={() => setPhotoFailed(true)} />}</div>
-          <div className="orbit-card"><span>{siteConfig.shortName}</span><strong>JRH</strong><small>economics · markets · software</small></div>
-          <div className="orbit-dot one" /><div className="orbit-dot two" />
+
+        <div className="hero-panel" aria-label="JRH focus">
+          <div className="hero-panel-top"><span>JRH / 2026</span><span>Yogyakarta · Brebes</span></div>
+          <div className="hero-monogram">JRH</div>
+          <div className="signal-grid">
+            <div><span>01</span><strong>Economics</strong><small>Development · Macro · Applied</small></div>
+            <div><span>02</span><strong>Markets</strong><small>{siteConfig.marketProfile.focus}</small></div>
+            <div><span>03</span><strong>Digital Systems</strong><small>AI · Web · Experiments</small></div>
+          </div>
+          <div className="hero-panel-line"><span>PHILOSOPHY</span><strong>{siteConfig.marketProfile.philosophy}</strong></div>
         </div>
       </section>
 
-      <section className="ticker" aria-label="Interests">{siteConfig.interests.map((item, i) => <span key={item}>{i > 0 && <span className="ticker-sep">—</span>}{item}</span>)}</section>
+      <section className="ticker" aria-label="Interests">
+        {siteConfig.interests.map((item, i) => <span key={item}>{i > 0 && <span className="ticker-sep">—</span>}{item}</span>)}
+      </section>
 
-      <section id="about" className="section about"><div className="section-label">01 / ABOUT</div><div className="about-grid"><div><h2>{siteConfig.about.titleLine1}<br /><em>{siteConfig.about.titleLine2}</em></h2></div><div><p className="lead">{siteConfig.about.lead}</p><p>{siteConfig.about.body}</p><div className="facts">{siteConfig.facts.map(([t, x]) => <div key={t}><b>{t}</b><span>{x}</span></div>)}</div></div></div></section>
+      <section id="about" className="section about">
+        <div className="section-label">01 / ABOUT</div>
+        <div className="about-grid">
+          <div><h2>{siteConfig.about.titleLine1}<br /><em>{siteConfig.about.titleLine2}</em></h2></div>
+          <div>
+            <p className="lead">{siteConfig.about.lead}</p>
+            <p>{siteConfig.about.body}</p>
+            <div className="facts">
+              {siteConfig.facts.map(([t, x]) => <div key={t}><b>{t}</b><span>{x}</span></div>)}
+            </div>
+          </div>
+        </div>
+      </section>
 
-      <section id="profile" className="section profile-section"><div className="section-label">02 / PROFILE</div><div className="profile-grid"><div><h2>Study.<br /><em>Market.</em><br />Build.</h2></div><div className="profile-panels"><article className="info-card"><div className="card-icon"><BookOpen size={17} /></div><span className="card-kicker">EDUCATION</span>{siteConfig.education.map(e => <div className="timeline" key={e.period}><b>{e.period}</b><strong>{e.institution}</strong><span>{e.program}</span><small>{e.detail} · {e.location}</small></div>)}</article><article className="info-card market-card"><div className="card-icon"><TrendingUp size={17} /></div><span className="card-kicker">MARKET PROFILE</span><div className="market-stat"><strong>{siteConfig.marketProfile.start}</strong><span>{siteConfig.marketProfile.experience}</span></div><p>{siteConfig.marketProfile.description}</p><div className="tags">{siteConfig.marketProfile.methods.map(x => <span key={x}>{x}</span>)}</div><div className="philosophy">{siteConfig.marketProfile.philosophy}</div></article></div></div></section>
+      <section id="profile" className="section profile-section">
+        <div className="section-label">02 / PROFILE</div>
+        <div className="profile-grid">
+          <div className="profile-heading"><h2>Study.<br /><em>Market.</em><br />Build.</h2><p>A clearer view of the academic foundation and market practice behind the work.</p></div>
+          <div className="profile-panels">
+            <article className="info-card education-card">
+              <div className="card-head"><div className="card-icon"><BookOpen size={17} /></div><div><span className="card-kicker">EDUCATION</span><h3>Academic path</h3></div></div>
+              <div className="timeline-list">
+                {siteConfig.education.map(e => <div className="timeline" key={e.period}><div className="timeline-period">{e.period}</div><strong>{e.institution}</strong><span>{e.program}</span><small>{e.detail} · {e.location}</small></div>)}
+              </div>
+            </article>
 
-      <section id="work" className="section work"><div className="section-head"><div><div className="section-label">03 / PROJECTS</div><h2>Things I’ve<br /><em>made.</em></h2></div><span className="count">{String(projects.length).padStart(2, '0')} projects</span></div><div className="project-list">{projects.map(project => <article className="project" key={project.title} tabIndex={0} aria-label={`Open details for ${project.title}`} onClick={() => setSelectedProject(project)} onKeyDown={e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); setSelectedProject(project) } }}><div className="project-no">{project.number}</div><div className="project-main"><div className="project-top"><span>{project.category}</span><span className="project-open"><ArrowUpRight size={18} /></span></div><h3>{project.title}</h3><p>{project.description}</p><div className="tags">{project.tags.map(t => <span key={t}>{t}</span>)}</div>{project.links && <div className="project-links">{project.links.map(link => <a key={link.url} href={link.url} target="_blank" rel="noreferrer" onClick={e => e.stopPropagation()}><span>{link.name}</span>{link.handle && <small>{link.handle}</small>}<ExternalLink size={12} /></a>)}</div>}<span className="detail-hint">View details <ArrowUpRight size={13} /></span></div></article>)}</div></section>
+            <article className="info-card market-card">
+              <div className="card-head"><div className="card-icon"><TrendingUp size={17} /></div><div><span className="card-kicker">MARKET PROFILE</span><h3>Risk before return</h3></div></div>
+              <div className="market-metrics">
+                <div><span>START</span><strong>{siteConfig.marketProfile.start}</strong></div>
+                <div><span>EXPERIENCE</span><strong>{siteConfig.marketProfile.experience}</strong></div>
+                <div><span>FOCUS</span><strong>{siteConfig.marketProfile.focus}</strong></div>
+              </div>
+              <p>{siteConfig.marketProfile.description}</p>
+              <div className="methods"><span className="card-kicker">METHODS</span><div className="tags">{siteConfig.marketProfile.methods.map(x => <span key={x}>{x}</span>)}</div></div>
+              <div className="philosophy"><span>PRINCIPLE</span><strong>{siteConfig.marketProfile.philosophy}</strong></div>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section id="work" className="section work">
+        <div className="section-head">
+          <div><div className="section-label">03 / PROJECTS</div><h2>Things I’ve<br /><em>made.</em></h2></div>
+          <span className="count">{String(projects.length).padStart(2, '0')} projects</span>
+        </div>
+        <div className="project-list">
+          {projects.map(project => <article className="project" key={project.title} tabIndex={0} aria-label={`Open details for ${project.title}`} onClick={() => setSelectedProject(project)} onKeyDown={e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); setSelectedProject(project) } }}>
+            <div className="project-no">{project.number}</div>
+            <div className="project-main">
+              <div className="project-top"><span>{project.category}</span><span className="project-open"><ArrowUpRight size={18} /></span></div>
+              <h3>{project.title}</h3>
+              <p>{project.description}</p>
+              <div className="tags">{project.tags.map(t => <span key={t}>{t}</span>)}</div>
+              {project.links && <div className="project-links">{project.links.map(link => <a key={link.url} href={link.url} target="_blank" rel="noreferrer" onClick={e => e.stopPropagation()}><span>{link.name}</span>{link.handle && <small>{link.handle}</small>}<ExternalLink size={12} /></a>)}</div>}
+              <span className="detail-hint">Open details <ArrowUpRight size={13} /></span>
+            </div>
+          </article>)}
+        </div>
+      </section>
 
       <section className="quote"><Quote size={28} /><p>{siteConfig.quote}</p></section>
 
-      <section id="contact" className="section contact"><div className="section-label">04 / CONTACT</div><div className="contact-row"><div><h2>{siteConfig.contact.titleLine1}<br /><em>{siteConfig.contact.titleLine2}</em></h2><p>{siteConfig.contact.description}</p></div><a className="contact-button" href={siteConfig.instagram} target="_blank" rel="noreferrer"><Link2 size={18} /> Instagram <ArrowUpRight size={16} /></a></div></section>
+      <section id="contact" className="section contact">
+        <div className="section-label">04 / CONTACT</div>
+        <div className="contact-row">
+          <div><h2>{siteConfig.contact.titleLine1}<br /><em>{siteConfig.contact.titleLine2}</em></h2><p>{siteConfig.contact.description}</p></div>
+          <a className="contact-button" href={siteConfig.instagram} target="_blank" rel="noreferrer"><Link2 size={18} /> Instagram <ArrowUpRight size={16} /></a>
+        </div>
+      </section>
     </main>
 
-    <footer><div><a className="brand" href="#top" aria-label="JRH home"><span className="brand-mark">J</span><span>{siteConfig.shortName}<i>.</i></span></a><p>Personal portfolio · Indonesia</p></div><div className="footer-links"><a href={siteConfig.instagram} target="_blank" rel="noreferrer">Instagram</a><a href={siteConfig.github} target="_blank" rel="noreferrer">GitHub</a></div></footer>
+    <footer>
+      <div><a className="brand" href="#top" aria-label="JRH home"><span className="brand-mark">J</span><span>{siteConfig.shortName}<i>.</i></span></a><p>Personal portfolio · Indonesia</p></div>
+      <div className="footer-links"><a href={siteConfig.instagram} target="_blank" rel="noreferrer">Instagram</a><a href={siteConfig.github} target="_blank" rel="noreferrer">GitHub</a></div>
+    </footer>
 
-    <div className="music-dock" aria-label="Music player"><div className="music-info"><span className="card-kicker">NOW PLAYING</span><strong>{currentTrack?.title ?? 'JRH Music'}</strong></div><button className="music-next" onClick={nextTrack} aria-label="Next track"><ArrowUpRight size={15} /></button></div>
+    <aside className="music-player" aria-label="Music player">
+      <div className="music-topline"><span>JRH MUSIC</span><span>{String(trackIndex + 1).padStart(2, '0')} / {String(siteConfig.music.tracks.length).padStart(2, '0')}</span></div>
+      <div className="music-main">
+        <button className={`music-play ${playing ? 'is-playing' : ''}`} onClick={toggleMusic} aria-label={playing ? 'Pause music' : 'Play music'}>{playing ? <Pause size={17} /> : <Play size={17} />}</button>
+        <div className="music-copy"><strong>{currentTrack?.title ?? siteConfig.music.title}</strong><small>{audioError ? 'Audio belum dapat diputar' : playing ? 'Now playing' : 'Ready to play'}</small></div>
+        <button className="music-skip" onClick={nextTrack} aria-label="Next track"><SkipForward size={16} /></button>
+      </div>
+      <div className="music-progress"><input type="range" min="0" max={duration || 0} step="0.1" value={currentTime} onChange={e => seekMusic(Number(e.target.value))} aria-label="Music progress" disabled={!duration} /><span style={{ width: `${progress}%` }} /></div>
+    </aside>
 
-    {selectedProject && <div className="modal-backdrop" role="presentation" onMouseDown={e => { if (e.target === e.currentTarget) setSelectedProject(null) }}><div className="project-modal" role="dialog" aria-modal="true" aria-label={`${selectedProject.title} details`}><button className="glass-icon project-modal-close" onClick={() => setSelectedProject(null)} aria-label="Close project details"><X size={18} /></button><span className="card-kicker">{selectedProject.number} / {selectedProject.category}</span><h2>{selectedProject.title}</h2><p>{selectedProject.description}</p><div className="tags">{selectedProject.tags.map(t => <span key={t}>{t}</span>)}</div>{selectedProject.links && <div className="modal-links">{selectedProject.links.map(link => <a key={link.url} href={link.url} target="_blank" rel="noreferrer"><span>{link.name}</span>{link.handle && <small>{link.handle}</small>}<ArrowUpRight size={15} /></a>)}</div>}<a className="button primary modal-cta" href={selectedProject.url} target="_blank" rel="noreferrer">Open project <ArrowUpRight size={16} /></a></div></div>}
+    {selectedProject && <div className="modal-backdrop" role="presentation" onMouseDown={e => { if (e.target === e.currentTarget) setSelectedProject(null) }}>
+      <div className="project-modal" role="dialog" aria-modal="true" aria-label={`${selectedProject.title} details`}>
+        <button className="icon-button project-modal-close" onClick={() => setSelectedProject(null)} aria-label="Close project details"><X size={18} /></button>
+        <span className="card-kicker">{selectedProject.number} / {selectedProject.category}</span>
+        <h2>{selectedProject.title}</h2>
+        <p>{selectedProject.description}</p>
+        <div className="tags">{selectedProject.tags.map(t => <span key={t}>{t}</span>)}</div>
+        {selectedProject.links && <div className="modal-links">{selectedProject.links.map(link => <a key={link.url} href={link.url} target="_blank" rel="noreferrer"><span>{link.name}</span>{link.handle && <small>{link.handle}</small>}<ArrowUpRight size={15} /></a>)}</div>}
+        <a className="button primary modal-cta" href={selectedProject.url} target="_blank" rel="noreferrer">Open project <ArrowUpRight size={16} /></a>
+      </div>
+    </div>}
   </div>
 }
 
