@@ -59,9 +59,6 @@ export const siteConfig = {
     description: '',
   },
   projects: [
-    { number: '01', title: 'JRH Portfolio', category: 'Personal digital system', description: 'A living portfolio and personal digital laboratory for independent experiments.', tags: ['React', 'Vite', 'TypeScript'], url: 'https://github.com/LionerHakim/JRHs' },
-    { number: '02', title: 'KitaBisa.com', category: 'Web experiment', description: 'A focused interface study exploring familiar product patterns, interaction, and digital presentation.', tags: ['Web', 'UI', 'Experiment'], url: 'https://github.com/LionerHakim/KITABISA.COM' },
-    { number: '03', title: 'Ultah', category: 'Creative web', description: 'A playful interactive web experience built around storytelling, visual interaction, and motion.', tags: ['Creative', 'Web', 'Motion'], url: 'https://github.com/LionerHakim/Ultah' },
     { number: '04', title: 'Pinterest', category: 'Digital channel', description: 'JRH visual publishing channels for art, inspiration, discovery, and digital distribution.', tags: ['Pinterest', 'Content', 'Visual'], url: 'https://pin.it/u90jfYk6p', links: [
       { name: 'JRH Art', url: 'https://pin.it/u90jfYk6p' },
       { name: 'JRH', url: 'https://pin.it/6k7sezYIK' },
@@ -75,7 +72,7 @@ export const siteConfig = {
       { name: 'Lynk.id - Nusantara', handle: 'nusantara9', url: 'https://lynk.id/nusantara9' },
     ] },
     { number: '07', title: 'TikTok', category: 'Digital channel', description: 'Short-form video channel included in the JRH digital portfolio and distribution system.', tags: ['TikTok', 'Short-form', 'Content'], url: 'https://www.tiktok.com/@jokowi.gov', links: [
-      { name: 'TikTok', handle: '@jokowi.gov', url: 'https://www.tiktok.com/@jokowi.gov' },
+      { name: 'TikTok', handle: '@jokowi.gov', url: 'https://www.tiktok.com/@jokowi.gov', },
     ] },
   ],
   quote: 'Berpikir dari dasar. Mengukur risiko. Membangun sesuatu yang berarti.',
