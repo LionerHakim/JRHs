@@ -7,58 +7,71 @@ export type Project = {
   url: string
 }
 
-/**
- * SINGLE SOURCE OF TRUTH
- *
- * Most portfolio content you will want to edit lives in this file.
- * Images/audio live in /public/assets.
- */
 export const siteConfig = {
   name: 'Jefri Rahman Hakim',
   shortName: 'JRH',
-  title: 'JRH — Personal Portfolio',
-  description: 'JRH — personal portfolio of Jefri Rahman Hakim.',
+  title: 'JRH — Economics, Markets & Digital Systems',
+  description: 'Jefri Rahman Hakim — economics, financial markets and software development.',
+  email: 'jefrirhyt2@gmail.com',
+  location: 'Yogyakarta · Brebes, Jawa Tengah',
   instagram: 'https://instagram.com/jefrirh_',
   github: 'https://github.com/LionerHakim',
+  telegram: 'https://t.me/jefri_rh',
+  linkedin: '',
   portfolio: 'https://jrhsee.my.id/',
   profileImage: '/assets/images/profile.webp',
-  music: {
-    title: 'JRH Ambient',
-    src: '/assets/audio/ambient.mp3',
-  },
+  music: { title: 'JRH Ambient', src: '/assets/audio/ambient.mp3' },
   hero: {
-    eyebrow: 'AVAILABLE FOR SELECTED PROJECTS',
+    eyebrow: 'ECONOMICS · MARKETS · SOFTWARE',
     titleLine1: 'Think deeply.',
-    titleLine2: 'Build boldly.',
-    description: 'Economics student, market observer and digital maker exploring the space between ideas, technology and people.',
+    titleLine2: 'Build with purpose.',
+    description: 'An economics student and independent digital maker exploring macroeconomics, financial markets, financial literacy, AI and the web — connecting analytical thinking with things people can actually use.',
   },
   about: {
-    label: '01 / ABOUT',
-    titleLine1: 'Curiosity is',
-    titleLine2: 'the common thread.',
-    lead: 'I like turning questions into things people can see, use, test and understand.',
-    body: 'My work sits across development economics, financial literacy, investing, AI and the web. This portfolio is the small digital laboratory where those interests meet.',
+    label: '01 / PROFILE',
+    titleLine1: 'Ideas become',
+    titleLine2: 'systems.',
+    lead: 'JRH is a personal laboratory where economics, markets, technology and curiosity meet.',
+    body: 'My academic foundation is Development Economics at Universitas Islam Indonesia, with interests spanning macroeconomics, monetary economics, econometrics, capital markets, investing, financial literacy, AI, Web3 and digital products. I approach projects from first principles: understand the problem, structure the evidence, manage the risk, then build.',
   },
   facts: [
-    ['2021', 'Started at UII'],
+    ['2021 — NOW', 'Universitas Islam Indonesia'],
     ['ECON', 'Development Economics'],
-    ['JRH', 'Independent projects'],
+    ['2019 — NOW', 'Financial markets journey'],
   ],
-  interests: ['ECONOMICS', 'MARKETS', 'TECHNOLOGY', 'EXPERIMENTS', 'IDEAS'],
+  interests: ['MACROECONOMICS', 'FINANCIAL MARKETS', 'INVESTING', 'AI & WEB3', 'SOFTWARE', 'BEHAVIOR'],
+  education: [
+    { period: '2021 — Now', institution: 'Universitas Islam Indonesia', program: 'S1 Ekonomi Pembangunan', detail: 'Makroekonomi · Moneter · Ekonometrika Terapan · Pasar Modal', location: 'Sleman, D.I. Yogyakarta' },
+    { period: '2018 — 2021', institution: 'SMA Negeri Brebes', program: 'Ketua OSIS · Bendahara Paskibra', detail: 'Organisasi · Kepemimpinan · Administrasi', location: 'Brebes, Jawa Tengah' },
+    { period: '2015 — 2018', institution: 'SMP Negeri Brebes', program: 'Anggota Aktif · Bendahara Paskibra', detail: 'Organisasi · Disiplin · Administrasi', location: 'Brebes, Jawa Tengah' },
+    { period: '2009 — 2015', institution: 'SD Negeri Brebes', program: 'Pendidikan Dasar', detail: 'Fondasi numerik · Logika aritmetika', location: 'Brebes, Jawa Tengah' },
+  ],
+  marketProfile: {
+    start: '9 Maret 2019',
+    experience: '5+ tahun pengalaman empiris',
+    focus: 'Pasar modal & instrumen derivatif',
+    philosophy: 'Risk First, Return Follows',
+    methods: ['Position sizing', 'Fractional Kelly', 'Drawdown asymmetry', 'Liquidity & market structure', 'Interest-rate transmission'],
+    description: 'Mempelajari pasar melalui kombinasi risk management, probabilitas, struktur mikro likuiditas dan transmisi kebijakan moneter — dengan prioritas pada survival dan pengendalian downside sebelum mengejar return.',
+  },
   projects: [
-    { number: '01', title: 'JRH Portfolio', category: 'Personal brand', description: 'A living portfolio for economics, technology, markets and experiments.', tags: ['React', 'Vite', 'TypeScript'], url: 'https://github.com/LionerHakim/JRHs' },
-    { number: '02', title: 'KitaBisa.com', category: 'Web experiment', description: 'A focused interface study exploring familiar product patterns and interaction.', tags: ['Web', 'UI', 'Experiment'], url: 'https://github.com/LionerHakim/KITABISA.COM' },
-    { number: '03', title: 'Ultah', category: 'Creative web', description: 'A playful interactive web experience built around storytelling and motion.', tags: ['Creative', 'Web', 'Motion'], url: 'https://github.com/LionerHakim/Ultah' },
+    { number: '01', title: 'JRH Portfolio', category: 'Personal digital system', description: 'A living portfolio and personal digital laboratory for economics, markets, technology and independent experiments.', tags: ['React', 'Vite', 'TypeScript'], url: 'https://github.com/LionerHakim/JRHs' },
+    { number: '02', title: 'KitaBisa.com', category: 'Web experiment', description: 'A focused interface study exploring familiar product patterns, interaction and digital presentation.', tags: ['Web', 'UI', 'Experiment'], url: 'https://github.com/LionerHakim/KITABISA.COM' },
+    { number: '03', title: 'Ultah', category: 'Creative web', description: 'A playful interactive web experience built around storytelling, visual interaction and motion.', tags: ['Creative', 'Web', 'Motion'], url: 'https://github.com/LionerHakim/Ultah' },
   ] satisfies Project[],
   currently: [
-    ['Reading', 'Books & research'],
-    ['Markets', 'Macro & investing'],
-    ['Building', 'Web & AI'],
+    ['Research', 'Economics & financial literacy'],
+    ['Markets', 'Macro, investing & risk'],
+    ['Building', 'Web, AI & digital products'],
   ],
-  quote: '“Berpikir, membangun, dan terus mengeksplorasi.”',
+  publications: [
+    { title: 'Riset Literasi Keuangan & Kesiapan Investasi', status: 'Academic research', detail: 'Riset kuantitatif mengenai edukasi keuangan digital, literasi keuangan dan kesiapan investasi.' },
+    { title: 'Digital Economy & Financial Markets', status: 'Research direction', detail: 'Eksplorasi ekonomi digital, perilaku investor, pasar finansial dan teknologi.' },
+  ],
+  quote: '“Berpikir dari dasar. Mengukur risiko. Membangun sesuatu yang berarti.”',
   contact: {
     titleLine1: 'Have an idea?',
-    titleLine2: 'Let’s talk.',
-    description: 'Open to thoughtful collaborations, experiments and conversations.',
+    titleLine2: 'Let’s build.',
+    description: 'Open to thoughtful collaborations, research, digital experiments and conversations around economics, markets and technology.',
   },
 } as const
