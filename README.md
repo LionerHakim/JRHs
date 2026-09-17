@@ -1,14 +1,16 @@
-# JRHs — Personal Digital Portfolio
+# JRHs - Personal Digital Portfolio
 
-Modern personal portfolio for **Jefri Rahman Hakim (JRH)**, combining economics, financial markets, technology, AI, research, and independent digital experiments.
+Personal portfolio for **Jefri Rahman Hakim (JRH)**, combining Development Economics, financial markets, technology, AI, research, and independent digital work.
 
 > **Think deeply. Build with purpose.**
 
-## ✦ Experience
+## Experience
 
-Apple-inspired liquid glass, spatial depth, responsive typography, subtle motion, light/dark themes, mobile navigation, project detail modals, a digital ecosystem section, and touch-friendly controls for Android and iPhone.
+The interface uses an iOS-inspired material language without cloning Apple's UI: strong typography, high-contrast hierarchy, restrained blue accents, a floating navigation layer, responsive spacing, subtle interaction feedback, light/dark themes, mobile navigation, project detail modals, and local music controls.
 
-## 🧩 Stack
+The visual system is also filtered through the open-source **antislop** project so decorative techniques stay purposeful and the content remains specific. See `DESIGN.md` and `AGENTS.md` for the project direction and working rules.
+
+## Stack
 
 - React + TypeScript
 - Vite
@@ -17,27 +19,29 @@ Apple-inspired liquid glass, spatial depth, responsive typography, subtle motion
 - GitHub
 - Cloudflare Pages
 
-## 📁 Project Structure
+## Project Structure
 
 ```text
 JRHs/
 ├── public/
-│   ├── _headers                      # production security headers
+│   ├── _headers
+│   ├── anti-slop.css
 │   └── assets/
 │       ├── images/
-│       │   └── profile.webp           # replace photo here
+│       │   └── s.jpg
 │       └── audio/
-│           └── README.md              # optional licensed music notes
+│           ├── Budi-Doremi.mp3
+│           ├── Tak-AdaUjungnya.mp3
+│           └── README.md
 ├── src/
 │   ├── config/
-│   │   └── site.ts                   # EDIT CONTENT + LINKS HERE
-│   ├── ecosystem.css                 # profile / ecosystem styling
-│   ├── index.css                     # core design system
-│   ├── level5.css                    # premium interaction layer
-│   ├── main.tsx                      # UI + interaction logic
-│   └── vite-env.d.ts                 # Vite type declarations
-├── .github/workflows/quality.yml     # typecheck + production build
-├── .gitignore
+│   │   └── site.ts                 # content + links
+│   ├── index.css                   # design system + responsive UI
+│   ├── main.tsx                    # UI + interaction logic
+│   └── vite-env.d.ts
+├── .github/workflows/quality.yml   # typecheck + production build
+├── AGENTS.md
+├── DESIGN.md
 ├── index.html
 ├── package.json
 ├── tsconfig.json
@@ -45,35 +49,40 @@ JRHs/
 └── README.md
 ```
 
-## ✏️ Easy Maintenance
+## Maintenance
 
-### Change profile photo
+### Profile photo
 
-Replace:
+The hero reads:
 
 ```text
-public/assets/images/profile.webp
+public/assets/images/s.jpg
 ```
 
-Keep the filename and use a square WebP image for the cleanest result on the hero.
+Keep the path in sync with `profileImage` inside `src/config/site.ts`.
 
-### Change music
+### Music
 
-The default navbar player uses a built-in Web Audio ambient loop, so the site does not depend on a missing MP3 asset. To use a real track, set `music.src` in `src/config/site.ts` to a licensed file under `public/assets/audio/`.
+The navbar player reads local audio paths from `src/config/site.ts`:
+
+```text
+public/assets/audio/Budi-Doremi.mp3
+public/assets/audio/Tak-AdaUjungnya.mp3
+```
 
 Only publish music you own or are licensed to publish.
 
-### Change portfolio content
+### Portfolio content
 
-Edit only:
+Edit:
 
 ```text
 src/config/site.ts
 ```
 
-Projects, social links, hero copy, education, market profile, ecosystem links, currently, publications, quote, and contact details are centralized there. Avoid scattering URLs or personal data through components.
+This centralizes the portfolio copy, social links, education, market profile, projects, media paths, and contact details.
 
-## 🚀 Local Development
+## Local Development
 
 ```bash
 npm install
@@ -87,9 +96,7 @@ npm run typecheck
 npm run build
 ```
 
-## ☁️ Cloudflare Pages
-
-Use the GitHub repository as the source and deploy the `main` branch.
+## Cloudflare Pages
 
 ```text
 Framework preset : Vite
@@ -99,35 +106,36 @@ Node.js          : 22
 Root directory   : /
 ```
 
-Every push to `main` is intended to trigger the Cloudflare Pages deployment when the repository is connected to the Pages project. The GitHub Actions quality workflow also runs type-checking and a production build on pushes and pull requests.
+Connect the `main` branch to the Cloudflare Pages project for automatic deployments. GitHub Actions also runs type-checking and a production build on pushes and pull requests.
 
-## 📱 Responsive
+## Responsive + Accessibility
 
-Designed for desktop, tablet, Android, and iPhone with safe-area support, touch targets, responsive typography, mobile navigation, and reduced-motion support.
+The UI is designed for desktop, tablet, Android, and iPhone with safe-area spacing, touch-friendly controls, keyboard focus, escape-to-close behavior, visible interaction states, responsive typography, and reduced-motion support.
 
-## 🔒 Interaction Protection
+## Interaction Protection
 
-The frontend discourages casual text selection, copy shortcuts, image dragging, and context-menu use. These are deterrents only; screenshots, developer tools, and determined extraction cannot be prevented by a browser application.
+The frontend blocks image dragging as a light deterrent against casual extraction. Browser-based protection cannot prevent screenshots, developer tools, or determined copying.
 
-## 🧠 Architecture Rules
+## Design Rules
 
-1. **Content and links:** `src/config/site.ts`
-2. **Personal media:** `public/assets/`
-3. **UI and interaction:** `src/main.tsx`
-4. **Core styling:** `src/index.css`
-5. **Premium/mobile styling:** `src/level5.css`, `src/ecosystem.css`
-6. Keep filenames stable when possible.
-7. Run both `npm run typecheck` and `npm run build` before release.
+1. Read `DESIGN.md` before changing visual direction.
+2. Keep content and links in `src/config/site.ts`.
+3. Keep personal media under `public/assets/`.
+4. Keep UI and interaction in `src/main.tsx`.
+5. Keep the main visual system in `src/index.css`.
+6. Keep the iOS reference as a material and interaction reference, not a clone.
+7. Keep glass limited to functional navigation surfaces.
+8. Run `npm run typecheck` and `npm run build` before release.
 
-## 👤 Author
+## Author
 
 **Jefri Rahman Hakim (JRH)**
 
-Personal portfolio · Indonesia
+Personal portfolio - Indonesia
 
 - GitHub: [@LionerHakim](https://github.com/LionerHakim)
 - Portfolio: [jrhsee.my.id](https://jrhsee.my.id/)
 
-## 📄 License
+## License
 
 Personal portfolio project. Unless otherwise stated, original content, personal assets, and branding belong to JRH.
