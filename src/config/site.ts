@@ -19,6 +19,7 @@ export const siteConfig = {
   telegram: 'https://t.me/jefri_rh',
   linkedin: '',
   portfolio: 'https://jrhsee.my.id/',
+  profileImage: '/assets/images/s.jpg',
   music: {
     title: 'JRH Music',
     tracks: [
