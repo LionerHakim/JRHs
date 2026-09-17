@@ -1,12 +1,12 @@
 # JRHs — Personal Digital Portfolio
 
-A modern personal portfolio for **Jefri Rahman Hakim (JRH)**, combining economics, markets, technology, AI, and independent digital experiments.
+Modern personal portfolio for **Jefri Rahman Hakim (JRH)**, combining economics, financial markets, technology, AI, research, and independent digital experiments.
 
-> **Think deeply. Build boldly.**
+> **Think deeply. Build with purpose.**
 
-## ✦ Design
+## ✦ Experience
 
-**iOS 3070** — a futuristic Apple-inspired visual concept using liquid-glass surfaces, spatial depth, restrained motion, responsive layouts, and light/dark themes.
+Apple-inspired liquid glass, spatial depth, responsive typography, subtle motion, light/dark themes, mobile navigation, project detail modals, a digital ecosystem section, and touch-friendly controls for Android and iPhone.
 
 ## 🧩 Stack
 
@@ -15,26 +15,29 @@ A modern personal portfolio for **Jefri Rahman Hakim (JRH)**, combining economic
 - CSS3
 - Lucide React
 - GitHub
-- Vercel
+- Cloudflare Pages
 
-## 📁 Clean Project Structure
+## 📁 Project Structure
 
 ```text
 JRHs/
 ├── public/
+│   ├── _headers                      # production security headers
 │   └── assets/
 │       ├── images/
-│       │   ├── profile.webp          # EDIT PHOTO HERE
-│       │   └── README.md
-│       ├── audio/
-│       │   ├── ambient.mp3           # EDIT MUSIC HERE
-│       │   └── README.md
-│       └── README.md
+│       │   └── profile.webp           # replace photo here
+│       └── audio/
+│           └── README.md              # optional licensed music notes
 ├── src/
 │   ├── config/
 │   │   └── site.ts                   # EDIT CONTENT + LINKS HERE
-│   ├── main.tsx                      # UI / logic
-│   └── index.css                     # DESIGN SYSTEM / styling
+│   ├── ecosystem.css                 # profile / ecosystem styling
+│   ├── index.css                     # core design system
+│   ├── level5.css                    # premium interaction layer
+│   ├── nav.css                       # navigation styling
+│   ├── premium.css                   # premium visual layer
+│   └── main.tsx                      # UI + interaction logic
+├── .github/workflows/quality.yml     # typecheck + production build
 ├── index.html
 ├── package.json
 ├── tsconfig.json
@@ -44,7 +47,7 @@ JRHs/
 
 ## ✏️ Easy Maintenance
 
-### 1. Change your photo
+### Change profile photo
 
 Replace:
 
@@ -52,109 +55,69 @@ Replace:
 public/assets/images/profile.webp
 ```
 
-Keep the filename `profile.webp` and the website will use the new image automatically.
+Keep the filename and use a square WebP image for the cleanest result on the hero.
 
-Recommended: square WebP, around 768–1200px.
+### Change music
 
-### 2. Change music
+The default navbar player uses a built-in Web Audio ambient loop, so the site does not depend on a missing MP3 asset. To use a real track, set `music.src` in `src/config/site.ts` to a licensed file under `public/assets/audio/`.
 
-Replace:
+Only publish music you own or are licensed to publish.
 
-```text
-public/assets/audio/ambient.mp3
-```
+### Change portfolio content
 
-Keep the filename `ambient.mp3`. The navbar music button will automatically use the new track.
-
-Use music that you own or are licensed to publish.
-
-### 3. Change project links
-
-Open:
+Edit only:
 
 ```text
 src/config/site.ts
 ```
 
-Find:
+Projects, social links, hero copy, education, market profile, ecosystem links, currently, publications, quote, and contact details are centralized there. Avoid scattering URLs or personal data through components.
 
-```ts
-projects: [
-  {
-    title: 'JRH Portfolio',
-    url: 'https://github.com/LionerHakim/JRHs'
-  }
-]
-```
-
-Change `url`, `title`, `description`, `category`, or `tags` there. **Do not edit `main.tsx` just to change portfolio content.**
-
-### 4. Change Instagram / GitHub / portfolio
-
-At the top of `src/config/site.ts`:
-
-```ts
-instagram: 'https://instagram.com/jefrirh_',
-github: 'https://github.com/LionerHakim',
-portfolio: 'https://jrhsee.my.id/',
-```
-
-Change the value and every connected UI location can use the central configuration.
-
-### 5. Change hero text
-
-Still in `src/config/site.ts`, edit:
-
-```ts
-hero: {
-  eyebrow: '...',
-  titleLine1: '...',
-  titleLine2: '...',
-  description: '...'
-}
-```
-
-The same principle applies to About, facts, interests, currently, quote, and Contact.
-
-## 🚀 Development
+## 🚀 Local Development
 
 ```bash
-gh repo clone LionerHakim/JRHs
-cd JRHs
 npm install
 npm run dev
 ```
 
-Production build:
+Checks:
 
 ```bash
+npm run typecheck
 npm run build
 ```
 
-Type-check:
+## ☁️ Cloudflare Pages
 
-```bash
-npm run lint
+Use the GitHub repository as the source and deploy the `main` branch.
+
+```text
+Framework preset : Vite
+Build command    : npm run build
+Build output     : dist
+Node.js          : 22
+Root directory   : /
 ```
+
+Every push to `main` is intended to trigger the Cloudflare Pages deployment when the repository is connected to the Pages project. The GitHub Actions quality workflow also runs type-checking and a production build on pushes and pull requests.
 
 ## 📱 Responsive
 
-Built for desktop, tablet, Android, and iPhone with safe-area support, touch-friendly controls, responsive typography, mobile navigation, and reduced-motion support.
+Designed for desktop, tablet, Android, and iPhone with safe-area support, touch targets, responsive typography, mobile navigation, and reduced-motion support.
 
 ## 🔒 Interaction Protection
 
-The portfolio discourages casual text selection, copying, image dragging, and context-menu use. These are only deterrents; browser developer tools, screenshots, and determined extraction cannot be prevented by a frontend application.
+The frontend discourages casual text selection, copy shortcuts, image dragging, and context-menu use. These are deterrents only; screenshots, developer tools, and determined extraction cannot be prevented by a browser application.
 
 ## 🧠 Architecture Rules
 
-1. **Content belongs in `src/config/site.ts`.**
-2. **Media belongs in `public/assets/`.**
-3. **UI logic belongs in `src/main.tsx`.**
-4. **Visual styling belongs in `src/index.css`.**
-5. Do not hard-code project URLs throughout React components.
-6. Do not put personal media inside `src/`.
-7. Keep asset filenames stable when possible so content changes do not require code changes.
-8. Run `npm run build` before deploying.
+1. **Content and links:** `src/config/site.ts`
+2. **Personal media:** `public/assets/`
+3. **UI and interaction:** `src/main.tsx`
+4. **Core styling:** `src/index.css`
+5. **Premium/mobile styling:** `src/level5.css`, `src/nav.css`, `src/premium.css`, `src/ecosystem.css`
+6. Keep filenames stable when possible.
+7. Run both `npm run typecheck` and `npm run build` before release.
 
 ## 👤 Author
 
