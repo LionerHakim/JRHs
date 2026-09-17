@@ -25,6 +25,7 @@ function App() {
   const [selectedProject, setSelectedProject] = useState<Project | null>(null)
   const [scrollProgress, setScrollProgress] = useState(0)
   const audioRef = useRef<HTMLAudioElement | null>(null)
+  const trackIndexRef = useRef(0)
 
   const currentTrack = siteConfig.music.tracks[trackIndex]
   const progress = duration > 0 ? Math.min(100, currentTime / duration * 100) : 0
@@ -73,31 +74,6 @@ function App() {
     return () => { document.body.style.overflow = '' }
   }, [selectedProject])
 
-  useEffect(() => {
-    const audio = audioRef.current
-    if (!audio) return
-    const onTimeUpdate = () => setCurrentTime(audio.currentTime || 0)
-    const onLoadedMetadata = () => setDuration(audio.duration || 0)
-    const onEnded = () => {
-      const next = (trackIndex + 1) % siteConfig.music.tracks.length
-      void playTrack(next)
-    }
-    const onError = () => {
-      setPlaying(false)
-      setAudioError(true)
-    }
-    audio.addEventListener('timeupdate', onTimeUpdate)
-    audio.addEventListener('loadedmetadata', onLoadedMetadata)
-    audio.addEventListener('ended', onEnded)
-    audio.addEventListener('error', onError)
-    return () => {
-      audio.removeEventListener('timeupdate', onTimeUpdate)
-      audio.removeEventListener('loadedmetadata', onLoadedMetadata)
-      audio.removeEventListener('ended', onEnded)
-      audio.removeEventListener('error', onError)
-    }
-  }, [trackIndex])
-
   const go = (id: string) => {
     setMenu(false)
     requestAnimationFrame(() => document.getElementById(id)?.scrollIntoView({ behavior: 'smooth', block: 'start' }))
@@ -108,6 +84,16 @@ function App() {
     const audio = new Audio(src)
     audio.preload = 'metadata'
     audio.volume = 0.28
+    audio.addEventListener('timeupdate', () => setCurrentTime(audio.currentTime || 0))
+    audio.addEventListener('loadedmetadata', () => setDuration(audio.duration || 0))
+    audio.addEventListener('ended', () => {
+      const next = (trackIndexRef.current + 1) % siteConfig.music.tracks.length
+      void playTrack(next)
+    })
+    audio.addEventListener('error', () => {
+      setPlaying(false)
+      setAudioError(true)
+    })
     audioRef.current = audio
     return audio
   }
@@ -124,6 +110,7 @@ function App() {
       setCurrentTime(0)
       setDuration(0)
     }
+    trackIndexRef.current = index
     setTrackIndex(index)
     try {
       await audio.play()
