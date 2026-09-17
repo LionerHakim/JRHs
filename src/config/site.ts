@@ -26,7 +26,8 @@ export const siteConfig = {
   linkedin: '',
   portfolio: 'https://jrhsee.my.id/',
   profileImage: '/assets/images/profile.webp',
-  music: { title: 'JRH Ambient', src: '/assets/audio/ambient.mp3' },
+  // Leave src empty to use the built-in Web Audio ambient loop. Add a licensed MP3 later if desired.
+  music: { title: 'JRH Ambient', src: '' },
   hero: {
     eyebrow: 'ECONOMICS · MARKETS · SOFTWARE',
     titleLine1: 'Think deeply.',
