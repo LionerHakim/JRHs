@@ -6,10 +6,17 @@ import './index.css'
 import './level5.css'
 import './ecosystem.css'
 
-function getSavedTheme() { try { return localStorage.getItem('jrh-theme') === 'dark' } catch { return false } }
+function getInitialDark() {
+  try {
+    const saved = localStorage.getItem('jrh-theme')
+    if (saved === 'dark') return true
+    if (saved === 'light') return false
+  } catch {}
+  return window.matchMedia?.('(prefers-color-scheme: dark)').matches ?? false
+}
 
 function App() {
-  const [dark, setDark] = useState(getSavedTheme)
+  const [dark, setDark] = useState(getInitialDark)
   const [menu, setMenu] = useState(false)
   const [playing, setPlaying] = useState(false)
   const [audioError, setAudioError] = useState(false)
@@ -18,42 +25,215 @@ function App() {
   const [selectedProject, setSelectedProject] = useState<Project | null>(null)
   const [scrollProgress, setScrollProgress] = useState(0)
   const audioRef = useRef<HTMLAudioElement | null>(null)
-  useEffect(() => { document.documentElement.dataset.theme = dark ? 'dark' : 'light'; document.documentElement.style.colorScheme = dark ? 'dark' : 'light'; try { localStorage.setItem('jrh-theme', dark ? 'dark' : 'light') } catch {} }, [dark])
+  const audioContextRef = useRef<AudioContext | null>(null)
+  const synthNodesRef = useRef<Array<OscillatorNode | GainNode | BiquadFilterNode>>([])
+
   useEffect(() => {
-    const onScroll = () => { const max = document.documentElement.scrollHeight - window.innerHeight; setScrollProgress(max > 0 ? Math.min(100, window.scrollY / max * 100) : 0); const ids = ['about','profile','work','ecosystem','journal','contact']; let current = 'top'; for (const id of ids) { const el = document.getElementById(id); if (el && window.scrollY + 180 >= el.offsetTop) current = id }; setActive(current) }
-    const onPointer = (e: PointerEvent) => { const t = e.target as HTMLElement | null; if (t && !t.closest('.nav')) setMenu(false) }
-    const onKey = (e: KeyboardEvent) => { if (e.key === 'Escape') { setMenu(false); setSelectedProject(null) }; if ((e.ctrlKey || e.metaKey) && ['c','x','u','s','p','a'].includes(e.key.toLowerCase())) e.preventDefault() }
+    document.documentElement.dataset.theme = dark ? 'dark' : 'light'
+    document.documentElement.style.colorScheme = dark ? 'dark' : 'light'
+    document.querySelector('meta[name="theme-color"]')?.setAttribute('content', dark ? '#07070a' : '#f5f5f7')
+    try { localStorage.setItem('jrh-theme', dark ? 'dark' : 'light') } catch {}
+  }, [dark])
+
+  useEffect(() => {
+    const onScroll = () => {
+      const max = document.documentElement.scrollHeight - window.innerHeight
+      setScrollProgress(max > 0 ? Math.min(100, window.scrollY / max * 100) : 0)
+      const ids = ['about', 'profile', 'work', 'ecosystem', 'journal', 'contact']
+      let current = 'top'
+      for (const id of ids) {
+        const el = document.getElementById(id)
+        if (el && window.scrollY + 180 >= el.offsetTop) current = id
+      }
+      setActive(current)
+    }
+
+    const onPointer = (e: PointerEvent) => {
+      const target = e.target as HTMLElement | null
+      if (target && !target.closest('.nav')) setMenu(false)
+    }
+
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') {
+        setMenu(false)
+        setSelectedProject(null)
+      }
+      if ((e.ctrlKey || e.metaKey) && ['c', 'x', 'u', 's', 'p', 'a'].includes(e.key.toLowerCase())) e.preventDefault()
+    }
+
     const prevent = (e: Event) => e.preventDefault()
-    window.addEventListener('scroll', onScroll, { passive:true }); document.addEventListener('pointerdown', onPointer); document.addEventListener('contextmenu', prevent); document.addEventListener('selectstart', prevent); document.addEventListener('dragstart', prevent); document.addEventListener('keydown', onKey); onScroll()
-    return () => { window.removeEventListener('scroll', onScroll); document.removeEventListener('pointerdown', onPointer); document.removeEventListener('contextmenu', prevent); document.removeEventListener('selectstart', prevent); document.removeEventListener('dragstart', prevent); document.removeEventListener('keydown', onKey); audioRef.current?.pause(); audioRef.current=null }
+    window.addEventListener('scroll', onScroll, { passive: true })
+    document.addEventListener('pointerdown', onPointer)
+    document.addEventListener('contextmenu', prevent)
+    document.addEventListener('selectstart', prevent)
+    document.addEventListener('dragstart', prevent)
+    document.addEventListener('keydown', onKey)
+    onScroll()
+
+    return () => {
+      window.removeEventListener('scroll', onScroll)
+      document.removeEventListener('pointerdown', onPointer)
+      document.removeEventListener('contextmenu', prevent)
+      document.removeEventListener('selectstart', prevent)
+      document.removeEventListener('dragstart', prevent)
+      document.removeEventListener('keydown', onKey)
+      audioRef.current?.pause()
+      audioRef.current = null
+      synthNodesRef.current.forEach(node => node.stop?.())
+      synthNodesRef.current = []
+      audioContextRef.current?.close().catch(() => {})
+      audioContextRef.current = null
+    }
   }, [])
-  useEffect(() => { document.body.style.overflow = selectedProject ? 'hidden' : ''; return () => { document.body.style.overflow='' } }, [selectedProject])
-  const go = (id:string) => { setMenu(false); requestAnimationFrame(() => document.getElementById(id)?.scrollIntoView({behavior:'smooth',block:'start'})) }
-  const toggleMusic = async () => { const audio = audioRef.current ?? new Audio(siteConfig.music.src); audioRef.current=audio; audio.loop=true; audio.volume=.28; setAudioError(false); if(!audio.paused){audio.pause();setPlaying(false);return}; try{await audio.play();setPlaying(true)}catch{setPlaying(false);setAudioError(true)} }
-  const nav = [['about','About'],['profile','Profile'],['work','Work'],['ecosystem','Ecosystem'],['journal','Journal'],['contact','Contact']] as const
+
+  useEffect(() => {
+    document.body.style.overflow = selectedProject ? 'hidden' : ''
+    return () => { document.body.style.overflow = '' }
+  }, [selectedProject])
+
+  const go = (id: string) => {
+    setMenu(false)
+    requestAnimationFrame(() => document.getElementById(id)?.scrollIntoView({ behavior: 'smooth', block: 'start' }))
+  }
+
+  const stopSynth = () => {
+    synthNodesRef.current.forEach(node => {
+      try { node.stop?.() } catch {}
+      try { node.disconnect?.() } catch {}
+    })
+    synthNodesRef.current = []
+    audioContextRef.current?.suspend().catch(() => {})
+  }
+
+  const startSynth = async () => {
+    const AudioCtx = window.AudioContext || (window as typeof window & { webkitAudioContext?: typeof AudioContext }).webkitAudioContext
+    if (!AudioCtx) throw new Error('Web Audio is not supported')
+
+    const ctx = audioContextRef.current ?? new AudioCtx()
+    audioContextRef.current = ctx
+    await ctx.resume()
+
+    const master = ctx.createGain()
+    master.gain.value = 0.07
+    master.connect(ctx.destination)
+
+    const filter = ctx.createBiquadFilter()
+    filter.type = 'lowpass'
+    filter.frequency.value = 820
+    filter.Q.value = 0.7
+    filter.connect(master)
+
+    const notes = [110, 164.81, 220]
+    const oscillators = notes.map((frequency, index) => {
+      const osc = ctx.createOscillator()
+      const gain = ctx.createGain()
+      osc.type = index === 0 ? 'sine' : 'triangle'
+      osc.frequency.value = frequency
+      gain.gain.value = index === 0 ? 0.32 : 0.12
+      osc.connect(gain)
+      gain.connect(filter)
+      osc.start()
+      return { osc, gain }
+    })
+
+    const lfo = ctx.createOscillator()
+    const lfoGain = ctx.createGain()
+    lfo.type = 'sine'
+    lfo.frequency.value = 0.08
+    lfoGain.gain.value = 180
+    lfo.connect(lfoGain)
+    lfoGain.connect(filter.frequency)
+    lfo.start()
+
+    synthNodesRef.current = [master, filter, lfo, lfoGain, ...oscillators.flatMap(({ osc, gain }) => [osc, gain])]
+  }
+
+  const toggleMusic = async () => {
+    setAudioError(false)
+    if (playing) {
+      audioRef.current?.pause()
+      if (audioContextRef.current) stopSynth()
+      setPlaying(false)
+      return
+    }
+
+    try {
+      if (siteConfig.music.src) {
+        const audio = audioRef.current ?? new Audio(siteConfig.music.src)
+        audioRef.current = audio
+        audio.loop = true
+        audio.volume = 0.28
+        await audio.play()
+      } else {
+        await startSynth()
+      }
+      setPlaying(true)
+    } catch {
+      setPlaying(false)
+      setAudioError(true)
+    }
+  }
+
+  const nav = [['about', 'About'], ['profile', 'Profile'], ['work', 'Work'], ['ecosystem', 'Ecosystem'], ['journal', 'Journal'], ['contact', 'Contact']] as const
+
   return <div className="app">
-    <div className="scroll-progress" style={{width:`${scrollProgress}%`}} />
-    <header className={`nav ${menu?'is-open':''}`} aria-label="Main navigation">
-      <a className="brand" href="#top" onClick={()=>setMenu(false)}><span className="brand-mark">J</span><span className="brand-name">{siteConfig.shortName}<i>.</i></span></a>
-      <nav id="primary-navigation" className={menu?'open':''}>{nav.map(([id,label])=><a key={id} className={active===id?'active':''} href={`#${id}`} onClick={e=>{e.preventDefault();go(id)}}><span>{label}</span>{active===id&&<i/>}</a>)}</nav>
-      <div className="nav-actions"><button className={`glass-icon ${playing?'is-active':''}`} onClick={toggleMusic} aria-label="Music" title={audioError?`Tambahkan ${siteConfig.music.src}`:siteConfig.music.title}>{playing?<Volume2 size={16}/>:<VolumeX size={16}/>}</button><button className="glass-icon" onClick={()=>setDark(v=>!v)} aria-label="Theme">{dark?<Sun size={16}/>:<Moon size={16}/>}</button><button className="mobile-menu glass-icon" onClick={()=>setMenu(v=>!v)} aria-label="Menu" aria-expanded={menu}>{menu?<X size={18}/>:<Menu size={18}/>}</button></div>
+    <div className="scroll-progress" style={{ width: `${scrollProgress}%` }} aria-hidden="true" />
+    <header className={`nav ${menu ? 'is-open' : ''}`} aria-label="Main navigation">
+      <a className="brand" href="#top" onClick={() => setMenu(false)} aria-label="JRH home"><span className="brand-mark">J</span><span className="brand-name">{siteConfig.shortName}<i>.</i></span></a>
+      <nav id="primary-navigation" className={menu ? 'open' : ''} aria-label="Primary">
+        {nav.map(([id, label]) => <a key={id} className={active === id ? 'active' : ''} href={`#${id}`} onClick={e => { e.preventDefault(); go(id) }}><span>{label}</span>{active === id && <i />}</a>)}
+      </nav>
+      <div className="nav-actions">
+        <button className={`glass-icon ${playing ? 'is-active' : ''}`} onClick={toggleMusic} aria-label={playing ? 'Pause ambient music' : 'Play ambient music'} title={audioError ? 'Audio gagal dimulai — coba lagi' : siteConfig.music.title}>{playing ? <Volume2 size={16} /> : <VolumeX size={16} />}</button>
+        <button className="glass-icon" onClick={() => setDark(v => !v)} aria-label={dark ? 'Use light theme' : 'Use dark theme'} title={dark ? 'Light mode' : 'Dark mode'}>{dark ? <Sun size={16} /> : <Moon size={16} />}</button>
+        <button className="mobile-menu glass-icon" onClick={() => setMenu(v => !v)} aria-label={menu ? 'Close menu' : 'Open menu'} aria-expanded={menu} aria-controls="primary-navigation">{menu ? <X size={18} /> : <Menu size={18} />}</button>
+      </div>
     </header>
+
     <main id="top">
-      <section className="hero"><div className="hero-copy"><div className="eyebrow"><span className="status"/> {siteConfig.hero.eyebrow}<Sparkles size={12}/></div><h1>{siteConfig.hero.titleLine1}<br/><em>{siteConfig.hero.titleLine2}</em></h1><p>{siteConfig.hero.description}</p><div className="hero-actions"><button className="button primary" onClick={()=>go('work')}>Explore work <ArrowUpRight size={16}/></button><a className="text-link" href={siteConfig.instagram} target="_blank" rel="noreferrer">Instagram <ExternalLink size={13}/></a></div><div className="hero-meta"><span><b>01</b> Digital portfolio</span><span><b>2026</b> Independent work</span><span><b>{siteConfig.location}</b></span></div></div><div className="hero-orbit"><div className="hero-glow"/><div className="profile-photo-wrap">{photoFailed?<div className="profile-fallback">JRH</div>:<img className="profile-photo" src={siteConfig.profileImage} alt={siteConfig.name} draggable="false" onError={()=>setPhotoFailed(true)}/>}</div><div className="orbit-card"><span>{siteConfig.shortName}</span><strong>JRH</strong><small>economics · markets · software</small></div><div className="orbit-dot one"/><div className="orbit-dot two"/></div></section>
-      <section className="ticker">{siteConfig.interests.map((item,i)=><span key={item}>{i>0&&<span className="ticker-sep">—</span>}{item}</span>)}</section>
-      <section id="about" className="section about"><div className="section-label">{siteConfig.about.label}</div><div className="about-grid"><div><h2>{siteConfig.about.titleLine1}<br/><em>{siteConfig.about.titleLine2}</em></h2></div><div><p className="lead">{siteConfig.about.lead}</p><p>{siteConfig.about.body}</p><div className="facts">{siteConfig.facts.map(([t,x])=><div key={t}><b>{t}</b><span>{x}</span></div>)}</div></div></div></section>
-      <section id="profile" className="section profile-section"><div className="section-label">05 / PROFILE</div><div className="profile-grid"><div><h2>Study.<br/><em>Market.</em><br/>Build.</h2></div><div className="profile-panels"><article className="info-card"><div className="card-icon"><BookOpen size={17}/></div><span className="card-kicker">EDUCATION</span>{siteConfig.education.map(e=><div className="timeline" key={e.period}><b>{e.period}</b><strong>{e.institution}</strong><span>{e.program}</span><small>{e.detail} · {e.location}</small></div>)}</article><article className="info-card market-card"><div className="card-icon"><TrendingUp size={17}/></div><span className="card-kicker">MARKET PROFILE</span><div className="market-stat"><strong>{siteConfig.marketProfile.start}</strong><span>{siteConfig.marketProfile.experience}</span></div><p>{siteConfig.marketProfile.description}</p><div className="tags">{siteConfig.marketProfile.methods.map(x=><span key={x}>{x}</span>)}</div><div className="philosophy">{siteConfig.marketProfile.philosophy}</div></article></div></div></section>
-      <section id="work" className="section work"><div className="section-head"><div><div className="section-label">02 / SELECTED WORK</div><h2>Things I’ve<br/><em>made.</em></h2></div><span className="count">{String(siteConfig.projects.length).padStart(2,'0')} projects</span></div><div className="project-list">{siteConfig.projects.map(project=><article className="project" key={project.title} tabIndex={0} onClick={()=>setSelectedProject(project)} onKeyDown={e=>{if(e.key==='Enter')setSelectedProject(project)}}><div className="project-no">{project.number}</div><div className="project-main"><div className="project-top"><span>{project.category}</span><span className="project-open"><ArrowUpRight size={18}/></span></div><h3>{project.title}</h3><p>{project.description}</p><div className="tags">{project.tags.map(t=><span key={t}>{t}</span>)}</div><span className="detail-hint">View details <ArrowUpRight size={13}/></span></div></article>)}</div></section>
-      <section id="ecosystem" className="section ecosystem"><div className="section-head"><div><div className="section-label">06 / DIGITAL ECOSYSTEM</div><h2>One identity.<br/><em>Many channels.</em></h2></div><span className="count">LIVE LINKS</span></div><p className="ecosystem-intro">{siteConfig.digitalEcosystem.description}</p><div className="ecosystem-grid"><EcosystemColumn title="Pinterest" icon={<Globe2 size={17}/>} items={siteConfig.digitalEcosystem.pinterest}/><EcosystemColumn title="YouTube" icon={<span className="brand-mini">YT</span>} items={siteConfig.digitalEcosystem.youtube}/><EcosystemColumn title="Monetization" icon={<Link2 size={17}/>} items={siteConfig.digitalEcosystem.monetization}/><EcosystemColumn title="TikTok" icon={<BriefcaseBusiness size={17}/>} items={siteConfig.digitalEcosystem.tiktok}/></div></section>
-      <section id="journal" className="section journal"><div className="journal-card"><div><div className="section-label">03 / CURRENTLY</div><h2>Reading the world<br/><em>between the lines.</em></h2><p>Economics, behavioral finance, AI, Web3, geopolitics and the strange little patterns that connect them.</p></div><div className="stack">{siteConfig.currently.map(([label,value],i)=><div key={label}>{i===0?<BookOpen size={17}/>:i===1?<TrendingUp size={17}/>:<Code2 size={17}/>}<span>{label}</span><b>{value}</b></div>)}</div></div><div className="publication-grid">{siteConfig.publications.map(p=><article className="publication" key={p.title}><span>{p.status}</span><h3>{p.title}</h3><p>{p.detail}</p></article>)}</div></section>
-      <section className="quote"><Quote size={28}/><p>{siteConfig.quote}</p></section>
-      <section id="contact" className="section contact"><div className="section-label">04 / CONTACT</div><div className="contact-row"><div><h2>{siteConfig.contact.titleLine1}<br/><em>{siteConfig.contact.titleLine2}</em></h2><p>{siteConfig.contact.description}</p></div><a className="contact-button" href={`mailto:${siteConfig.email}`}><Link2 size={18}/> {siteConfig.email} <ArrowUpRight size={16}/></a></div></section>
+      <section className="hero">
+        <div className="hero-copy">
+          <div className="eyebrow"><span className="status" /> {siteConfig.hero.eyebrow}<Sparkles size={12} /></div>
+          <h1>{siteConfig.hero.titleLine1}<br /><em>{siteConfig.hero.titleLine2}</em></h1>
+          <p>{siteConfig.hero.description}</p>
+          <div className="hero-actions"><button className="button primary" onClick={() => go('work')}>Explore work <ArrowUpRight size={16} /></button><a className="text-link" href={siteConfig.instagram} target="_blank" rel="noreferrer">Instagram <ExternalLink size={13} /></a></div>
+          <div className="hero-meta"><span><b>01</b> Digital portfolio</span><span><b>2026</b> Independent work</span><span><b>{siteConfig.location}</b></span></div>
+        </div>
+        <div className="hero-orbit">
+          <div className="hero-glow" />
+          <div className="profile-photo-wrap">
+            {photoFailed ? <div className="profile-fallback"><span>JRH</span><small>economics · markets · software</small></div> : <img className="profile-photo" src={siteConfig.profileImage} alt={siteConfig.name} draggable="false" onError={() => setPhotoFailed(true)} />}
+          </div>
+          <div className="orbit-card"><span>{siteConfig.shortName}</span><strong>JRH</strong><small>economics · markets · software</small></div>
+          <div className="orbit-dot one" /><div className="orbit-dot two" />
+        </div>
+      </section>
+
+      <section className="ticker" aria-label="Interests">{siteConfig.interests.map((item, i) => <span key={item}>{i > 0 && <span className="ticker-sep">—</span>}{item}</span>)}</section>
+
+      <section id="about" className="section about"><div className="section-label">{siteConfig.about.label}</div><div className="about-grid"><div><h2>{siteConfig.about.titleLine1}<br /><em>{siteConfig.about.titleLine2}</em></h2></div><div><p className="lead">{siteConfig.about.lead}</p><p>{siteConfig.about.body}</p><div className="facts">{siteConfig.facts.map(([t, x]) => <div key={t}><b>{t}</b><span>{x}</span></div>)}</div></div></div></section>
+
+      <section id="profile" className="section profile-section"><div className="section-label">05 / PROFILE</div><div className="profile-grid"><div><h2>Study.<br /><em>Market.</em><br />Build.</h2></div><div className="profile-panels"><article className="info-card"><div className="card-icon"><BookOpen size={17} /></div><span className="card-kicker">EDUCATION</span>{siteConfig.education.map(e => <div className="timeline" key={e.period}><b>{e.period}</b><strong>{e.institution}</strong><span>{e.program}</span><small>{e.detail} · {e.location}</small></div>)}</article><article className="info-card market-card"><div className="card-icon"><TrendingUp size={17} /></div><span className="card-kicker">MARKET PROFILE</span><div className="market-stat"><strong>{siteConfig.marketProfile.start}</strong><span>{siteConfig.marketProfile.experience}</span></div><p>{siteConfig.marketProfile.description}</p><div className="tags">{siteConfig.marketProfile.methods.map(x => <span key={x}>{x}</span>)}</div><div className="philosophy">{siteConfig.marketProfile.philosophy}</div></article></div></div></section>
+
+      <section id="work" className="section work"><div className="section-head"><div><div className="section-label">02 / SELECTED WORK</div><h2>Things I’ve<br /><em>made.</em></h2></div><span className="count">{String(siteConfig.projects.length).padStart(2, '0')} projects</span></div><div className="project-list">{siteConfig.projects.map(project => <article className="project" key={project.title} tabIndex={0} onClick={() => setSelectedProject(project)} onKeyDown={e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); setSelectedProject(project) } }}><div className="project-no">{project.number}</div><div className="project-main"><div className="project-top"><span>{project.category}</span><span className="project-open"><ArrowUpRight size={18} /></span></div><h3>{project.title}</h3><p>{project.description}</p><div className="tags">{project.tags.map(t => <span key={t}>{t}</span>)}</div><span className="detail-hint">View details <ArrowUpRight size={13} /></span></div></article>)}</div></section>
+
+      <section id="ecosystem" className="section ecosystem"><div className="section-head"><div><div className="section-label">06 / DIGITAL ECOSYSTEM</div><h2>One identity.<br /><em>Many channels.</em></h2></div><span className="count">LIVE LINKS</span></div><p className="ecosystem-intro">{siteConfig.digitalEcosystem.description}</p><div className="ecosystem-grid"><EcosystemColumn title="Pinterest" icon={<Globe2 size={17} />} items={siteConfig.digitalEcosystem.pinterest} /><EcosystemColumn title="YouTube" icon={<span className="brand-mini">YT</span>} items={siteConfig.digitalEcosystem.youtube} /><EcosystemColumn title="Monetization" icon={<Link2 size={17} />} items={siteConfig.digitalEcosystem.monetization} /><EcosystemColumn title="TikTok" icon={<BriefcaseBusiness size={17} />} items={siteConfig.digitalEcosystem.tiktok} /></div></section>
+
+      <section id="journal" className="section journal"><div className="journal-card"><div><div className="section-label">03 / CURRENTLY</div><h2>Reading the world<br /><em>between the lines.</em></h2><p>Economics, behavioral finance, AI, Web3, geopolitics and the strange little patterns that connect them.</p></div><div className="stack">{siteConfig.currently.map(([label, value], i) => <div key={label}>{i === 0 ? <BookOpen size={17} /> : i === 1 ? <TrendingUp size={17} /> : <Code2 size={17} />}<span>{label}</span><b>{value}</b></div>)}</div></div><div className="publication-grid">{siteConfig.publications.map(p => <article className="publication" key={p.title}><span>{p.status}</span><h3>{p.title}</h3><p>{p.detail}</p></article>)}</div></section>
+
+      <section className="quote"><Quote size={28} /><p>{siteConfig.quote}</p></section>
+
+      <section id="contact" className="section contact"><div className="section-label">04 / CONTACT</div><div className="contact-row"><div><h2>{siteConfig.contact.titleLine1}<br /><em>{siteConfig.contact.titleLine2}</em></h2><p>{siteConfig.contact.description}</p></div><a className="contact-button" href={`mailto:${siteConfig.email}`}><Link2 size={18} /> {siteConfig.email} <ArrowUpRight size={16} /></a></div></section>
     </main>
-    <footer><div><a className="brand" href="#top"><span className="brand-mark">J</span><span>{siteConfig.shortName}<i>.</i></span></a><p>Personal portfolio · Indonesia</p></div><div className="footer-links"><a href={siteConfig.github} target="_blank" rel="noreferrer"><span className="brand-mini">GH</span> GitHub</a><a href={siteConfig.instagram} target="_blank" rel="noreferrer"><span className="brand-mini">IG</span> @jefrirh_</a></div><small>© 2026 JRH</small></footer>
-    {selectedProject&&<div className="project-modal-backdrop" onClick={()=>setSelectedProject(null)}><div className="project-modal" onClick={e=>e.stopPropagation()}><button className="modal-close glass-icon" onClick={()=>setSelectedProject(null)}><X size={18}/></button><span className="modal-number">{selectedProject.number} / PROJECT</span><h2>{selectedProject.title}</h2><p>{selectedProject.description}</p><div className="modal-tags">{selectedProject.tags.map(t=><span key={t}>{t}</span>)}</div><a className="modal-link" href={selectedProject.url} target="_blank" rel="noreferrer">Open project <span className="brand-mini">GH</span><ArrowUpRight size={16}/></a></div></div>}
+
+    <footer><div><a className="brand" href="#top" aria-label="JRH home"><span className="brand-mark">J</span><span>{siteConfig.shortName}<i>.</i></span></a><p>Personal portfolio · Indonesia</p></div><div className="footer-links"><a href={siteConfig.github} target="_blank" rel="noreferrer"><span className="brand-mini">GH</span> GitHub</a><a href={siteConfig.instagram} target="_blank" rel="noreferrer"><span className="brand-mini">IG</span> @jefrirh_</a></div><small>© 2026 JRH</small></footer>
+
+    {selectedProject && <div className="project-modal-backdrop" role="presentation" onClick={() => setSelectedProject(null)}><div className="project-modal" role="dialog" aria-modal="true" aria-label={selectedProject.title} onClick={e => e.stopPropagation()}><button className="modal-close glass-icon" onClick={() => setSelectedProject(null)} aria-label="Close project details"><X size={18} /></button><span className="modal-number">{selectedProject.number} / PROJECT</span><h2>{selectedProject.title}</h2><p>{selectedProject.description}</p><div className="modal-tags">{selectedProject.tags.map(t => <span key={t}>{t}</span>)}</div><a className="modal-link" href={selectedProject.url} target="_blank" rel="noreferrer">Open project <span className="brand-mini">GH</span><ArrowUpRight size={16} /></a></div></div>}
   </div>
 }
 
-function EcosystemColumn({title,icon,items}:{title:string;icon:ReactNode;items:readonly {name:string;handle?:string;url:string}[]}) { return <article className="ecosystem-card"><div className="ecosystem-title">{icon}<strong>{title}</strong><span>{items.length} links</span></div><div className="ecosystem-links">{items.map(item=><a key={item.url} href={item.url} target="_blank" rel="noreferrer"><span>{item.name}</span>{item.handle&&<small>{item.handle}</small>}<ArrowUpRight size={15}/></a>)}</div></article> }
+function EcosystemColumn({ title, icon, items }: { title: string; icon: ReactNode; items: readonly { name: string; handle?: string; url: string }[] }) {
+  return <article className="ecosystem-card"><div className="ecosystem-title">{icon}<strong>{title}</strong><span>{items.length} links</span></div><div className="ecosystem-links">{items.map(item => <a key={item.url} href={item.url} target="_blank" rel="noreferrer"><span>{item.name}</span>{item.handle && <small>{item.handle}</small>}<ArrowUpRight size={15} /></a>)}</div></article>
+}
 
 createRoot(document.getElementById('root')!).render(<App />)
