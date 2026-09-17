@@ -26,7 +26,8 @@ function App() {
   const [scrollProgress, setScrollProgress] = useState(0)
   const audioRef = useRef<HTMLAudioElement | null>(null)
   const audioContextRef = useRef<AudioContext | null>(null)
-  const synthNodesRef = useRef<Array<OscillatorNode | GainNode | BiquadFilterNode>>([])
+  const synthOscillatorsRef = useRef<OscillatorNode[]>([])
+  const synthAudioNodesRef = useRef<AudioNode[]>([])
 
   useEffect(() => {
     document.documentElement.dataset.theme = dark ? 'dark' : 'light'
@@ -79,8 +80,10 @@ function App() {
       document.removeEventListener('keydown', onKey)
       audioRef.current?.pause()
       audioRef.current = null
-      synthNodesRef.current.forEach(node => node.stop?.())
-      synthNodesRef.current = []
+      synthOscillatorsRef.current.forEach(node => { try { node.stop() } catch {} })
+      synthOscillatorsRef.current = []
+      synthAudioNodesRef.current.forEach(node => { try { node.disconnect() } catch {} })
+      synthAudioNodesRef.current = []
       audioContextRef.current?.close().catch(() => {})
       audioContextRef.current = null
     }
@@ -97,11 +100,10 @@ function App() {
   }
 
   const stopSynth = () => {
-    synthNodesRef.current.forEach(node => {
-      try { node.stop?.() } catch {}
-      try { node.disconnect?.() } catch {}
-    })
-    synthNodesRef.current = []
+    synthOscillatorsRef.current.forEach(node => { try { node.stop() } catch {} })
+    synthOscillatorsRef.current = []
+    synthAudioNodesRef.current.forEach(node => { try { node.disconnect() } catch {} })
+    synthAudioNodesRef.current = []
     audioContextRef.current?.suspend().catch(() => {})
   }
 
@@ -145,7 +147,8 @@ function App() {
     lfoGain.connect(filter.frequency)
     lfo.start()
 
-    synthNodesRef.current = [master, filter, lfo, lfoGain, ...oscillators.flatMap(({ osc, gain }) => [osc, gain])]
+    synthOscillatorsRef.current = [lfo, ...oscillators.map(({ osc }) => osc)]
+    synthAudioNodesRef.current = [master, filter, lfoGain, ...oscillators.flatMap(({ gain }) => [gain])]
   }
 
   const toggleMusic = async () => {
