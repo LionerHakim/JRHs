@@ -5,12 +5,7 @@ export type Project = {
   description: string
   tags: string[]
   url: string
-}
-
-export type EcosystemItem = {
-  name: string
-  handle?: string
-  url: string
+  links?: readonly { name: string; handle?: string; url: string }[]
 }
 
 export const siteConfig = {
@@ -18,7 +13,6 @@ export const siteConfig = {
   shortName: 'JRH',
   title: 'JRH — Economics, Markets & Digital Systems',
   description: 'Jefri Rahman Hakim — economics, financial markets and software development.',
-  email: 'jefrirhyt2@gmail.com',
   location: 'Yogyakarta · Brebes, Jawa Tengah',
   instagram: 'https://instagram.com/jefrirh_',
   github: 'https://github.com/LionerHakim',
@@ -26,7 +20,6 @@ export const siteConfig = {
   linkedin: '',
   portfolio: 'https://jrhsee.my.id/',
   profileImage: '/assets/images/profile.webp',
-  // Leave src empty to use the built-in Web Audio ambient loop. Add a licensed MP3 later if desired.
   music: { title: 'JRH Ambient', src: '' },
   hero: {
     eyebrow: 'ECONOMICS · MARKETS · SOFTWARE',
@@ -61,38 +54,25 @@ export const siteConfig = {
     methods: ['Position sizing', 'Fractional Kelly', 'Drawdown asymmetry', 'Liquidity & market structure', 'Interest-rate transmission'],
     description: 'Mempelajari pasar melalui kombinasi risk management, probabilitas, struktur mikro likuiditas dan transmisi kebijakan moneter — dengan prioritas pada survival dan pengendalian downside sebelum mengejar return.',
   },
-  digitalEcosystem: {
-    title: 'JRH Digital Ecosystem',
-    description: 'Satu pintu untuk kanal digital, konten, distribusi dan monetisasi JRH.',
-    pinterest: [
-      { name: 'Pinterest · JRH Art', url: 'https://pin.it/u90jfYk6p' },
-      { name: 'Pinterest · JRH', url: 'https://pin.it/6k7sezYIK' },
-    ] satisfies EcosystemItem[],
-    youtube: [
-      { name: 'JRHs 369', handle: '@jrhs369', url: 'https://youtube.com/@jrhs369' },
-      { name: 'GOVshorts', handle: '@govshortss', url: 'https://youtube.com/@govshortss' },
-    ] satisfies EcosystemItem[],
-    monetization: [
-      { name: 'Collshp', handle: '23369', url: 'https://collshp.com/23369' },
-      { name: 'Lynk.id — Nusantara', handle: 'nusantara9', url: 'https://lynk.id/nusantara9' },
-    ] satisfies EcosystemItem[],
-    tiktok: [
-      { name: 'TikTok', handle: '@jokowi.gov', url: 'https://www.tiktok.com/@jokowi.gov' },
-    ] satisfies EcosystemItem[],
-  },
   projects: [
     { number: '01', title: 'JRH Portfolio', category: 'Personal digital system', description: 'A living portfolio and personal digital laboratory for economics, markets, technology and independent experiments.', tags: ['React', 'Vite', 'TypeScript'], url: 'https://github.com/LionerHakim/JRHs' },
     { number: '02', title: 'KitaBisa.com', category: 'Web experiment', description: 'A focused interface study exploring familiar product patterns, interaction and digital presentation.', tags: ['Web', 'UI', 'Experiment'], url: 'https://github.com/LionerHakim/KITABISA.COM' },
     { number: '03', title: 'Ultah', category: 'Creative web', description: 'A playful interactive web experience built around storytelling, visual interaction and motion.', tags: ['Creative', 'Web', 'Motion'], url: 'https://github.com/LionerHakim/Ultah' },
-  ] satisfies Project[],
-  currently: [
-    ['Research', 'Economics & financial literacy'],
-    ['Markets', 'Macro, investing & risk'],
-    ['Building', 'Web, AI & digital products'],
-  ],
-  publications: [
-    { title: 'Riset Literasi Keuangan & Kesiapan Investasi', status: 'Academic research', detail: 'Riset kuantitatif mengenai edukasi keuangan digital, literasi keuangan dan kesiapan investasi.' },
-    { title: 'Digital Economy & Financial Markets', status: 'Research direction', detail: 'Eksplorasi ekonomi digital, perilaku investor, pasar finansial dan teknologi.' },
+    { number: '04', title: 'Pinterest', category: 'Digital channel', description: 'JRH visual publishing channels for art, inspiration, discovery and digital distribution.', tags: ['Pinterest', 'Content', 'Visual'], url: 'https://pin.it/u90jfYk6p', links: [
+      { name: 'JRH Art', url: 'https://pin.it/u90jfYk6p' },
+      { name: 'JRH', url: 'https://pin.it/6k7sezYIK' },
+    ] },
+    { number: '05', title: 'YouTube', category: 'Content platform', description: 'Video publishing channels for JRH and GOVshorts content.', tags: ['YouTube', 'Shorts', 'Content'], url: 'https://youtube.com/@jrhs369', links: [
+      { name: 'JRHs 369', handle: '@jrhs369', url: 'https://youtube.com/@jrhs369' },
+      { name: 'GOVshorts', handle: '@govshortss', url: 'https://youtube.com/@govshortss' },
+    ] },
+    { number: '06', title: 'Monetization', category: 'Digital distribution', description: 'JRH distribution and monetization points for products, recommendations and digital activity.', tags: ['Collshp', 'Lynk.id', 'Monetization'], url: 'https://collshp.com/23369', links: [
+      { name: 'Collshp', handle: '23369', url: 'https://collshp.com/23369' },
+      { name: 'Lynk.id — Nusantara', handle: 'nusantara9', url: 'https://lynk.id/nusantara9' },
+    ] },
+    { number: '07', title: 'TikTok', category: 'Digital channel', description: 'Short-form video channel included in the JRH digital portfolio and distribution system.', tags: ['TikTok', 'Short-form', 'Content'], url: 'https://www.tiktok.com/@jokowi.gov', links: [
+      { name: 'TikTok', handle: '@jokowi.gov', url: 'https://www.tiktok.com/@jokowi.gov' },
+    ] },
   ],
   quote: '“Berpikir dari dasar. Mengukur risiko. Membangun sesuatu yang berarti.”',
   contact: {
