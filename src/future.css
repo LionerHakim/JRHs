@@ -185,7 +185,7 @@ button{cursor:pointer}
 .footer .button:hover{background:var(--color-pure-white)!important;color:#111!important}
 
 /* Modal */
-.modal-backdrop{background:rgba(8,8,8,.55)!important;!important;-webkit-backdrop-filter:blur(14px)!important}
+.modal-backdrop{background:rgba(8,8,8,.55)!important}
 .project-modal{border:1px solid #ddd!important;border-radius:28px!important;}
 .modal-close{background:#f3efeb!important}
 .modal-title-row h2{font-family:var(--font-geist)!important;color:var(--color-ink)!important}
