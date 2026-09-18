@@ -6,7 +6,7 @@ Personal portfolio for **Jefri Rahman Hakim (JRH)**, combining Development Econo
 
 ## Experience
 
-The interface uses an iOS-inspired material language without cloning Apple's UI: strong typography, high-contrast hierarchy, restrained iOS-blue accents, a floating navigation layer, responsive spacing, subtle interaction feedback, project detail modals, light-only rendering, and local music controls.
+The interface uses an iOS-inspired material language without cloning Apple's UI: strong typography, high-contrast hierarchy, a floating navigation layer, responsive spacing, subtle interaction feedback, project detail modals, light-only rendering, and local music controls.
 
 The visual system is also filtered through the open-source **antislop** project so decorative techniques stay purposeful and the content remains specific. See `DESIGN.md` and `AGENTS.md` for the project direction and working rules.
 
@@ -26,8 +26,7 @@ JRHs/
 ├── public/
 │   ├── _headers
 │   ├── 404.html
-│   ├── anti-slop.css
-│   └── assets/
+││   └── assets/
 │       ├── images/
 │       │   └── s.jpg
 │       └── audio/
@@ -40,7 +39,7 @@ JRHs/
 │   ├── config/
 │   │   └── site.ts                 # content + links
 │   ├── index.css                   # global foundation
-│   ├── future.css                  # final light-only visual system
+│   ├──                   # final light-only visual system
 │   ├── main.tsx                    # UI + interaction logic
 │   └── vite-env.d.ts
 ├── .github/workflows/quality.yml   # quality audit + typecheck + production build
@@ -127,7 +126,7 @@ Images are not forcibly blocked from dragging because browser controls should re
 2. Keep content and links in `src/config/site.ts`.
 3. Keep personal media under `public/assets/`.
 4. Keep UI and interaction in `src/main.tsx`.
-5. Keep the global foundation in `src/index.css` and the final visual system in `src/future.css`.
+5. Keep the global foundation in `src/index.css` and the final visual system in `src/`.
 6. Keep the iOS reference as a material and interaction reference, not a clone.
 7. Keep glass limited to functional navigation surfaces.
 8. Keep all page backgrounds pure white.
