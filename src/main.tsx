@@ -223,8 +223,7 @@ export default function App() {
             <p className="section-kicker">CONTACT</p>
             <h2 id="links-title">Contact</h2>
           </div>
-          <p className="editorial-copy">Public links currently configured for JRH.</p>
-          <div className="links-list" style={{ marginTop: 36 }}>
+          <div className="links-list">
             {Object.entries(siteConfig.social).filter(([, url]) => url).map(([name, url]) => (
               <a key={name} href={url} target="_blank" rel="noreferrer">
                 <span>{name === "instagram" ? "Instagram" : name === "github" ? "GitHub" : name === "telegram" ? "Telegram" : name === "portfolio" ? "Website" : name}</span>
@@ -237,8 +236,7 @@ export default function App() {
 
       <footer>
         <strong>JRH</strong>
-        <span>Jefri Rahman Hakim</span>
-        <span>JRH Digital Portfolio</span>
+        <span>Digital Portfolio</span>
       </footer>
 
       {activeProject !== null && (
