@@ -9,7 +9,7 @@ const read = file => existsSync(join(root, file)) ? readFileSync(join(root, file
 const source = files.map(read).join('\n')
 const main = read('src/main.tsx')
 const html = read('index.html')
-const requiredColors = ['#b00020','#ffc400','#080808','#ffffff']
+const requiredColors = ['#b00020','#ffc400','#2457d6','#080808','#ffffff']
 const forbidden = ['linear-gradient(','radial-gradient(','#007aff','#ff3154','#b9d9ff','jrh-theme','prefers-color-scheme: dark','data-theme="dark"','localStorage.getItem','setDark(','box-shadow:']
 for (const token of forbidden) if (source.includes(token)) failures.push(`Forbidden legacy/decorative token found: ${token}`)
 for (const color of requiredColors) if (!source.includes(color)) failures.push(`Required brand color missing from source: ${color}`)
