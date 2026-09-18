@@ -52,6 +52,7 @@ function App() {
   const [category, setCategory] = useState('All')
   const [copied, setCopied] = useState(false)
   const [showTop, setShowTop] = useState(false)
+  const [commandOpen, setCommandOpen] = useState(false)
 
   const audioRef = useRef<HTMLAudioElement | null>(null)
   const musicWrapRef = useRef<HTMLDivElement | null>(null)
@@ -60,6 +61,7 @@ function App() {
   const searchRef = useRef<HTMLInputElement | null>(null)
   const lastFocusedRef = useRef<HTMLElement | null>(null)
   const trackIndexRef = useRef(0)
+  const magneticRef = useRef<Set<HTMLElement>>(new Set())
 
   const projects = siteConfig.projects as readonly Project[]
   const currentTrack = siteConfig.music.tracks[trackIndex]
@@ -137,11 +139,19 @@ function App() {
     const onKey = (event: KeyboardEvent) => {
       const target = event.target as HTMLElement | null
       const typing = target?.tagName === 'INPUT' || target?.tagName === 'TEXTAREA' || target?.isContentEditable
+      if ((event.metaKey || event.ctrlKey) && event.key.toLowerCase() === 'k') {
+        event.preventDefault()
+        setCommandOpen(value => !value)
+        setMenu(false)
+        setMusicOpen(false)
+        return
+      }
       if (event.key === '/' && !typing) {
         event.preventDefault()
         searchRef.current?.focus()
       }
       if (event.key === 'Escape') {
+        setCommandOpen(false)
         setMenu(false)
         setMusicOpen(false)
         closeProject()
@@ -222,9 +232,30 @@ function App() {
   }, [selectedProject])
 
   const go = (id: string) => {
+    setCommandOpen(false)
     setMenu(false)
     setMusicOpen(false)
-    requestAnimationFrame(() => document.getElementById(id)?.scrollIntoView({ behavior: 'smooth', block: 'start' }))
+    const target = document.getElementById(id)
+    if (!target) return
+    const scroll = () => target.scrollIntoView({ behavior: 'smooth', block: 'start' })
+    if ('startViewTransition' in document && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      ;(document as Document & { startViewTransition?: (callback: () => void) => unknown }).startViewTransition?.(scroll)
+    } else scroll()
+  }
+
+  const magnetic = (event: React.PointerEvent<HTMLElement>) => {
+    const element = event.currentTarget
+    if (window.matchMedia('(pointer: coarse)').matches || window.matchMedia('(prefers-reduced-motion: reduce)').matches) return
+    const rect = element.getBoundingClientRect()
+    const x = ((event.clientX - rect.left) / rect.width - .5) * 8
+    const y = ((event.clientY - rect.top) / rect.height - .5) * 8
+    element.style.transform = `translate(${x}px, ${y}px)`
+    magneticRef.current.add(element)
+  }
+
+  const releaseMagnetic = (event: React.PointerEvent<HTMLElement>) => {
+    event.currentTarget.style.transform = ''
+    magneticRef.current.delete(event.currentTarget)
   }
 
   const ensureAudio = (src: string) => {
@@ -324,6 +355,11 @@ function App() {
     await copyProjectLink(project)
   }
 
+  const commandItems = [
+    ...navItems.map(([id, label]) => ({ id, label, meta: 'Section', action: () => go(id) })),
+    ...projects.map(project => ({ id: `project-${slugify(project.title)}`, label: project.title, meta: project.category, action: () => openProject(project) })),
+  ]
+
   return (
     <div className="app">
       <div className="scroll-progress" aria-hidden="true" />
@@ -372,8 +408,8 @@ function App() {
             <h1 id="hero-title">{siteConfig.hero.titleLine1}<br /><em>{siteConfig.hero.titleLine2}</em></h1>
             <p>{siteConfig.hero.description}</p>
             <div className="hero-actions">
-              <button className="button primary" onClick={() => go('work')}>Explore work <ArrowRight size={16} /></button>
-              <a className="button secondary" href={siteConfig.github} target="_blank" rel="noreferrer">GitHub <ExternalLink size={15} /></a>
+              <button className="button primary magnetic" onPointerMove={magnetic} onPointerLeave={releaseMagnetic} onClick={() => go('work')}>Explore work <ArrowRight size={16} /></button>
+              <a className="button secondary magnetic" onPointerMove={magnetic} onPointerLeave={releaseMagnetic} href={siteConfig.github} target="_blank" rel="noreferrer">GitHub <ExternalLink size={15} /></a>
             </div>
             <div className="hero-signals" aria-label="Portfolio summary">
               <div><span>Projects</span><strong>{String(projects.length).padStart(2, '0')}</strong></div>
@@ -421,9 +457,9 @@ function App() {
           <div className="project-grid">
             {filteredProjects.map((project, index) => (
               <article className={`project-card reveal`} key={project.title}>
-                <button className="project-card-hit" onClick={() => openProject(project)} aria-label={`Open details for ${project.title}`}>
+                <button className="project-card-hit" onPointerMove={magnetic} onPointerLeave={releaseMagnetic} onClick={() => openProject(project)} aria-label={`Open details for ${project.title}`}>
                   <div className="project-topline"><span className="number-display">{project.number}</span><span>{project.category}</span></div>
-                  <div className="project-body"><div className="project-icon"><ArrowUpRight size={18} /></div><h3>{project.title}</h3><p>{project.description}</p><div className="tags">{project.tags.map(tag => <span key={tag}>{tag}</span>)}</div></div>
+                  <div className="project-body"><div className="project-preview"><span>LIVE ARCHIVE</span><strong>{project.title}</strong><small>{project.category}</small></div><div className="project-icon"><ArrowUpRight size={18} /></div><h3>{project.title}</h3><p>{project.description}</p><div className="tags">{project.tags.map(tag => <span key={tag}>{tag}</span>)}</div></div>
                   <div className="project-footer"><span>View details</span><ChevronRight size={15} /></div>
                 </button>
               </article>
@@ -445,7 +481,7 @@ function App() {
 
         <section id="contact" className="cta-section reveal">
           <div className="section-kicker"><span>05</span><span>Contact</span></div>
-          <div className="cta-grid"><div className="cta-copy"><span className="section-overline">Open channel</span><h2>{siteConfig.contact.titleLine1}<br /><em>{siteConfig.contact.titleLine2}</em></h2><p>{siteConfig.contact.description}</p></div><div className="cta-actions"><a className="button primary large" href={siteConfig.instagram} target="_blank" rel="noreferrer">Instagram <ExternalLink size={16} /></a><a className="button secondary large" href={siteConfig.telegram} target="_blank" rel="noreferrer">Telegram <Send size={15} /></a><span>Choose the channel that works for you.</span></div></div>
+          <div className="cta-grid"><div className="cta-copy"><span className="section-overline">Open channel</span><h2>{siteConfig.contact.titleLine1}<br /><em>{siteConfig.contact.titleLine2}</em></h2><p>{siteConfig.contact.description}</p></div><div className="cta-actions"><a className="button primary large magnetic" onPointerMove={magnetic} onPointerLeave={releaseMagnetic} href={siteConfig.instagram} target="_blank" rel="noreferrer">Instagram <ExternalLink size={16} /></a><a className="button secondary large magnetic" onPointerMove={magnetic} onPointerLeave={releaseMagnetic} href={siteConfig.telegram} target="_blank" rel="noreferrer">Telegram <Send size={15} /></a><span>Choose the channel that works for you.</span></div></div>
         </section>
       </main>
 
@@ -454,6 +490,18 @@ function App() {
         <nav aria-label="Footer navigation">{navItems.map(([id, label]) => <a key={id} href={`#${id}`} onClick={event => { event.preventDefault(); go(id) }}>{label}</a>)}</nav>
         <div className="footer-bottom"><span>© 2026 JRH.</span><span>Built with clarity and purpose.</span></div>
       </footer>
+
+      <button className="command-trigger magnetic" onPointerMove={magnetic} onPointerLeave={releaseMagnetic} onClick={() => setCommandOpen(true)} aria-label="Open command palette"><span>⌘K</span><Search size={15} /></button>
+
+      {commandOpen && (
+        <div className="command-backdrop" role="presentation" onMouseDown={event => { if (event.target === event.currentTarget) setCommandOpen(false) }}>
+          <section className="command-palette" role="dialog" aria-modal="true" aria-labelledby="command-title">
+            <div className="command-head"><div><span className="section-overline">JRH / Command</span><h2 id="command-title">Jump anywhere.</h2></div><button className="icon-button" onClick={() => setCommandOpen(false)} aria-label="Close command palette"><X size={18} /></button></div>
+            <div className="command-list">{commandItems.map(item => <button key={item.id} className="command-item" onClick={item.action}><span>{item.label}</span><small>{item.meta}</small><ArrowRight size={15} /></button>)}</div>
+            <p className="command-hint">ESC closes · ⌘K / Ctrl+K toggles</p>
+          </section>
+        </div>
+      )}
 
       {showTop && <button className="to-top" onClick={() => go('top')} aria-label="Back to top"><ArrowUp size={16} /></button>}
 
