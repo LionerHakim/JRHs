@@ -328,7 +328,6 @@ function App() {
   return (
     <div className="app">
       <div className="scroll-progress" aria-hidden="true" />
-      <div className="ambient-grid" aria-hidden="true" />
       <header className={`nav ${scrolled ? 'is-scrolled' : ''} ${menu ? 'is-open' : ''}`}>
         <a className="brand" href="#top" onClick={(event) => { event.preventDefault(); go('top') }} aria-label="JRH home">
           <span className="brand-mark" aria-hidden="true">J</span>
@@ -371,8 +370,7 @@ function App() {
         <section className="hero">
           <div className="hero-copy reveal is-visible">
             <div className="eyebrow"><span className="eyebrow-rule" />{siteConfig.hero.eyebrow}</div>
-            <div className="hero-kicker"><Sparkles size={14} /> Independent digital workspace</div>
-            <h1 id="hero-title">{siteConfig.hero.titleLine1}<br /><em>{siteConfig.hero.titleLine2}</em></h1>
+                        <h1 id="hero-title">{siteConfig.hero.titleLine1}<br /><em>{siteConfig.hero.titleLine2}</em></h1>
             <p>{siteConfig.hero.description}</p>
             <div className="hero-actions">
               <button className="button primary" onClick={() => go('work')}>Explore work <ArrowRight size={16} /></button>
@@ -390,7 +388,7 @@ function App() {
               <div className="hero-photo-orbit orbit-two" aria-hidden="true" />
               <div className="portrait-frame">
                 <img src={siteConfig.profileImage} alt="Jefri Rahman Hakim" className="profile-photo" fetchPriority="high" decoding="async" />
-                <div className="photo-overlay" aria-hidden="true"><span>JRH</span><span>2026</span></div>
+                
               </div>
               <div className="photo-index" aria-hidden="true">01 / 04</div>
             </div>
