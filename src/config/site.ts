@@ -12,13 +12,7 @@ export const siteConfig = {
     description: 'Digital portfolio, projects, publishing, and independent work.',
     profileImage: '/assets/images/s.jpg',
   },
-  social: {
-    instagram: 'https://instagram.com/jefrirh_',
-    github: 'https://github.com/LionerHakim',
-    telegram: 'https://t.me/jefri_rh',
-    linkedin: '',
-    portfolio: 'https://jrhsee.my.id/',
-  },
+  contactEmail: 'contact@jrhsee.my.id',
   education: [
     { period: '2021 — 2026', institution: 'Universitas Islam Indonesia', program: 'S1 Ekonomi Pembangunan' },
     { period: '2018 — 2021', institution: 'SMA Negeri 300 Brebes', program: 'SMA' },
