@@ -173,19 +173,33 @@ button{cursor:pointer}
 .principle-list li strong{display:block!important;color:#111111!important;font-size:18px!important;font-weight:500!important;line-height:1.35!important}
 .principle-list li span{display:block!important;margin-top:8px!important;color:#615e5b!important;font-size:16px!important;line-height:1.5!important}
 
-/* CTA */
+/* CTA — Editorial contact */
 .cta-section{padding:120px 0!important;border-top:0!important}
-.cta-grid{gap:80px!important}
-.cta-copy h2{font-size:clamp(48px,6vw,80px)!important}
-.cta-copy p{color:#666!important;font-size:15px!important}
+.cta-grid{gap:80px!important;align-items:end!important}
+.cta-copy h2{font-size:clamp(48px,6vw,80px)!important;font-weight:500!important;letter-spacing:-.03em!important;line-height:1.05!important}
+.cta-copy p{max-width:520px!important;color:#615e5b!important;font-size:16px!important;line-height:1.5!important}
 .cta-actions .button{width:100%!important}
 
-/* Footer */
-.footer{padding:28px 0 40px!important;border-top:1px solid #e8e8e8!important}
-.footer-socials a{border-color:#e4e4e4!important;background:#fff!important;color:#777!important}
-.footer-socials a:hover{color:#111111!important;border-color:#b9d9ff!important}
-.footer nav a{color:#777!important}
-.footer-bottom{border-color:#e8e8e8!important;color:#999!important}
+/* Footer — Obsidian inversion */
+.footer{
+  width:100%!important;max-width:none!important;margin:0!important;
+  padding:64px max(24px,calc((100% - 1180px)/2)) 28px!important;
+  border-top:0!important;background:#1e1e1d!important;color:#fff!important;
+}
+.footer *{color:inherit}
+.footer a{color:rgba(255,255,255,.72)!important}
+.footer a:hover{color:#fff!important}
+.footer-socials a{
+  border:1px solid rgba(255,255,255,.18)!important;background:transparent!important;
+  color:#fff!important;
+}
+.footer-socials a:hover{border-color:rgba(255,255,255,.5)!important;background:rgba(255,255,255,.08)!important}
+.footer nav a{color:rgba(255,255,255,.72)!important}
+.footer-bottom{border-color:rgba(255,255,255,.16)!important;color:rgba(255,255,255,.52)!important}
+.footer .button,.footer .button.secondary{
+  background:#fff!important;color:#111!important;border-color:#fff!important;border-radius:160px!important;
+}
+.footer .button:hover{background:#fff!important;color:#111!important}
 
 /* Modal */
 .modal-backdrop{background:rgba(8,8,8,.55)!important;backdrop-filter:blur(14px)!important;-webkit-backdrop-filter:blur(14px)!important}
