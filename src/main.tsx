@@ -158,8 +158,8 @@ export default function App() {
           </div>
 
           <div className="contact-intro">
-            <p className="contact-question">Ada yang ingin dibicarakan?</p>
-            <p className="contact-answer">Mari terhubung. Untuk kolaborasi, pekerjaan, atau sekadar bertukar pikiran.</p>
+            <p className="contact-question">Mari terhubung.</p>
+            <p className="contact-answer">Terbuka untuk percakapan profesional, kolaborasi, peluang kerja, dan pertukaran ide yang relevan.</p>
           </div>
 
           <div className="contact-benefits" aria-label="Contact opportunities">
@@ -168,6 +168,8 @@ export default function App() {
             <span>Peluang</span>
             <span>Koneksi</span>
           </div>
+
+          <div className="contact-cta-label">Hubungi saya</div>
 
           <div className="links-list">
             <a href={`mailto:${siteConfig.contactEmail}`}>
