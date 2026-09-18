@@ -421,7 +421,7 @@ function App() {
           </div>
           <div className="project-grid">
             {filteredProjects.map((project, index) => (
-              <article className={`project-card reveal card-accent-${(index % 4) + 1}`} key={project.title}>
+              <article className={`project-card reveal`} key={project.title}>
                 <button className="project-card-hit" onClick={() => openProject(project)} aria-label={`Open details for ${project.title}`}>
                   <div className="project-topline"><span className="number-display">{project.number}</span><span>{project.category}</span></div>
                   <div className="project-body"><div className="project-icon"><ArrowUpRight size={18} /></div><h3>{project.title}</h3><p>{project.description}</p><div className="tags">{project.tags.map(tag => <span key={tag}>{tag}</span>)}</div></div>
