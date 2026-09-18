@@ -146,6 +146,11 @@ export default function App() {
           </div>
         </section>
 
+        <aside className="project-quote" aria-label="Decision-making principle">
+          <strong>GABUNGKAN DATA DAN INTUISI</strong>
+          <p>gunakan data dan sistem algoritma, tapi jangan buang intuisi manusia. gabungkan keduanya untuk pengambilan keputusan terbaik.</p>
+        </aside>
+
         <section id="links" className="section" aria-labelledby="links-title">
           <div className="section-head">
             <p className="section-kicker">CONTACT</p>
