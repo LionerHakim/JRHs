@@ -502,32 +502,65 @@ main {
   transform: translate(3px, -2px);
 }
 
-/* Decision-making quote */
+/* Decision-making quote — restrained editorial callout */
 .project-quote {
+  position: relative;
   width: min(100%, 1030px);
   margin: 0 0 var(--section-space) auto;
-  padding: 28px 0 30px;
-  border-top: 1px solid var(--ink);
-  border-bottom: 1px solid var(--line);
+  padding: clamp(30px, 4vw, 48px) clamp(24px, 4vw, 52px);
+  border: 1px solid var(--line-strong);
+  background: #fafafa;
+}
+
+.project-quote::before {
+  content: '“';
+  position: absolute;
+  top: clamp(16px, 2vw, 24px);
+  left: clamp(18px, 3vw, 34px);
+  color: var(--signal);
+  font-family: var(--font-editorial);
+  font-size: 42px;
+  line-height: 1;
 }
 
 .project-quote strong {
   display: block;
+  margin-left: 42px;
   color: var(--ink);
   font-size: 10px;
   font-weight: 600;
-  letter-spacing: 0.13em;
+  letter-spacing: 0.14em;
   line-height: 1.4;
 }
 
 .project-quote p {
-  max-width: 760px;
-  margin: 10px 0 0;
-  color: var(--smoke);
+  max-width: 820px;
+  margin: 14px 0 0 42px;
+  color: var(--graphite);
   font-family: var(--font-editorial);
-  font-size: clamp(15px, 1.7vw, 20px);
-  line-height: 1.55;
-  letter-spacing: -0.015em;
+  font-size: clamp(17px, 2vw, 24px);
+  line-height: 1.5;
+  letter-spacing: -0.02em;
+}
+
+@media (max-width: 640px) {
+  .project-quote {
+    margin-bottom: 92px;
+    padding: 28px 20px 30px;
+  }
+
+  .project-quote strong {
+    margin-left: 30px;
+  }
+
+  .project-quote p {
+    margin-left: 30px;
+    font-size: 17px;
+  }
+
+  .project-quote::before {
+    left: 16px;
+  }
 }
 
 /* 15 — Contact as a single, oversized action */
