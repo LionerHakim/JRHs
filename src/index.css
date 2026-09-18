@@ -305,9 +305,23 @@ main {
 }
 
 .portrait-quote {
+  position: relative;
   margin: 18px 2px 0;
-  padding-top: 15px;
-  border-top: 1px solid var(--line);
+  padding: 22px 22px 23px 38px;
+  border: 1px solid rgba(60, 60, 67, 0.16);
+  border-radius: var(--radius-md);
+  background: var(--surface);
+}
+
+.portrait-quote::before {
+  content: '“';
+  position: absolute;
+  top: 14px;
+  left: 15px;
+  color: var(--signal);
+  font-family: var(--font-editorial);
+  font-size: 30px;
+  line-height: 1;
 }
 
 .portrait-quote strong {
@@ -320,8 +334,8 @@ main {
 }
 
 .portrait-quote p {
-  margin: 8px 0 0;
-  color: var(--smoke);
+  margin: 9px 0 0;
+  color: var(--graphite);
   font-family: var(--font-editorial);
   font-size: clamp(14px, 1.45vw, 17px);
   line-height: 1.55;
