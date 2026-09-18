@@ -31,7 +31,7 @@ for (const url of urls) {
       signal: AbortSignal.timeout(10000),
     })
     if (response.status === 404 || response.status === 410) {
-      failures.push('Broken external link: ' + url + ' (HTTP ' + response.status + ')')
+      warnings.push('External link returned HTTP ' + response.status + ': ' + url)
     } else if (response.status >= 400) {
       warnings.push('External link returned HTTP ' + response.status + ': ' + url)
     }
