@@ -46,7 +46,7 @@ export default function App() {
     )
 
     sections.forEach((section) => observer.observe(section))
-    
+
     return () => observer.disconnect()
   }, [])
 
@@ -56,12 +56,20 @@ export default function App() {
     setContactStatus(null)
 
     if (!name.trim()) return setContactError('Nama belum diisi.')
+
     const normalizedEmail = email.trim().toLowerCase()
     const trustedEmailDomains = ['gmail.com', 'outlook.com', 'hotmail.com', 'live.com', 'yahoo.com', 'icloud.com', 'proton.me', 'protonmail.com']
     const emailPattern = /^[^\s@]+@([^\s@]+)$/
     const emailMatch = normalizedEmail.match(emailPattern)
-    if (!emailMatch || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(normalizedEmail)) return setContactError('Gunakan email yang valid.')
-    if (!trustedEmailDomains.includes(emailMatch[1])) return setContactError('Gunakan email dari Gmail, Outlook, Hotmail, Yahoo, iCloud, atau Proton.')
+
+    if (!emailMatch || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(normalizedEmail)) {
+      return setContactError('Gunakan email yang valid.')
+    }
+
+    if (!trustedEmailDomains.includes(emailMatch[1])) {
+      return setContactError('Gunakan email dari Gmail, Outlook, Hotmail, Yahoo, iCloud, atau Proton.')
+    }
+
     if (!privacy) return setContactError('Centang persetujuan privasi dulu.')
 
     const subject = encodeURIComponent(`[JRHs Contact] ${purpose || 'Pesan dari website'}`)
@@ -88,6 +96,7 @@ https://jrhsee.my.id
 
 Terima kasih,
 ${name.trim()}`)
+
     window.location.href = `mailto:${siteConfig.contactEmail}?subject=${subject}&body=${body}`
     setContactStatus('Email sudah disiapkan ✨')
   }
@@ -217,22 +226,22 @@ ${name.trim()}`)
               <div className="contact-fields">
                 <label className="contact-field">
                   <span className="contact-icon" aria-hidden="true">♙</span>
-                  <input value={name} onChange={(event) => setName(event.target.value)} placeholder="Nama kamu" autoComplete="name" />
+                  <input aria-label="Nama kamu" value={name} onChange={(event) => setName(event.target.value)} placeholder="Nama kamu" autoComplete="name" />
                 </label>
                 <label className="contact-field">
                   <span className="contact-icon" aria-hidden="true">✉</span>
-                  <input type="email" value={email} onChange={(event) => setEmail(event.target.value)} placeholder="email kamu" autoComplete="email" inputMode="email" />
+                  <input aria-label="Email kamu" type="email" value={email} onChange={(event) => setEmail(event.target.value)} placeholder="email kamu" autoComplete="email" inputMode="email" />
                 </label>
                 <label className="contact-field">
                   <span className="contact-icon" aria-hidden="true">☰</span>
-                  <select value={purpose} onChange={(event) => setPurpose(event.target.value)} aria-label="Topik email (opsional)">
+                  <select aria-label="Topik email (opsional)" value={purpose} onChange={(event) => setPurpose(event.target.value)}>
                     <option value="" disabled>Pilih topik</option>
                     {['Pertanyaan umum', 'Kolaborasi', 'Project', 'Bisnis', 'Investasi', 'Akademik', 'Feedback', 'Relationships', 'Tambah teman'].map((item) => <option key={item} value={item}>{item}</option>)}
                   </select>
                 </label>
                 <label className="contact-field contact-message">
                   <span className="contact-icon" aria-hidden="true">💬</span>
-                  <textarea value={message} onChange={(event) => {
+                  <textarea aria-label="Pesan kamu" value={message} onChange={(event) => {
                     const words = event.target.value.trim().split(/\s+/).filter(Boolean)
                     setMessage(words.length > 169 ? words.slice(0, 169).join(' ') : event.target.value)
                   }} placeholder="Tulis pesan kamu di sini... (opsional, maksimal 169 kata)" rows={5} />
@@ -241,7 +250,7 @@ ${name.trim()}`)
               </div>
 
               {contactError ? <p className="contact-feedback is-error" role="alert">{contactError}</p> : null}
-              {contactStatus ? <p className="contact-feedback is-success" role="status">{contactStatus}<span>Aplikasi email Anda akan terbuka. Tinggal cek pesannya, lalu klik Kirim.</span></p> : null}
+              {contactStatus ? <p className="contact-feedback is-success" role="status">{contactStatus}<span>Aplikasi email kamu akan terbuka. Tinggal cek pesannya, lalu klik Kirim.</span></p> : null}
 
               <div className="contact-submit">
                 <label className="contact-privacy">
