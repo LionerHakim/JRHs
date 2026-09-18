@@ -4,33 +4,12 @@ Personal portfolio for **Jefri Rahman Hakim (JRH)**.
 
 ## Stack
 
-- React
+- React 19
 - TypeScript
 - Vite
 - CSS
 - GitHub
 - Cloudflare Pages
-
-## Structure
-
-```text
-JRHs/
-├── public/
-│   └── assets/
-│       └── images/
-│           └── s.jpg
-├── src/
-│   ├── config/
-│   │   └── site.ts
-│   ├── index.css
-│   ├── main.tsx
-│   └── vite-env.d.ts
-├── AGENTS.md
-├── index.html
-├── package.json
-├── tsconfig.json
-└── vite.config.ts
-```
 
 ## Development
 
@@ -60,7 +39,9 @@ Root directory   : /
 
 Portfolio content and external links are centralized in `src/config/site.ts`.
 
-The current interface follows the SIGNAL direction: dark void, signal red/amber accents, restrained panel geometry, functional command palette, project detail dialogs, keyboard-first interaction, reduced-motion fallback, and responsive layouts.
+The interface follows the SIGNAL direction: a dark void, precise red and amber signal accents, modular hairline structure, restrained premium depth, command palette, project dialogs, keyboard-first interaction, reduced-motion fallback, and responsive layouts.
+
+No project descriptions, testimonials, dates, or claims are invented by the interface. Content is limited to the portfolio data currently stored in the repository.
 
 ## Assets
 
@@ -70,7 +51,7 @@ The active profile image is:
 public/assets/images/s.jpg
 ```
 
-Unused legacy audio assets should not be reintroduced unless a real licensed use case is added.
+Legacy audio assets are not used by the current interface.
 
 ## Deployment note
 
