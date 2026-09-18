@@ -3,7 +3,6 @@ export type Education = { period: string; institution: string; program: string }
 export type Project = {
   number: string
   title: string
-  url: string
   links?: readonly Link[]
 }
 
@@ -29,7 +28,6 @@ export const siteConfig = {
     {
       number: '01',
       title: 'Pinterest',
-      url: 'https://pin.it/u90jfYk6p',
       links: [
         { name: 'JRH Art', url: 'https://pin.it/u90jfYk6p' },
         { name: 'JRH', url: 'https://pin.it/6k7sezYIK' },
@@ -38,7 +36,6 @@ export const siteConfig = {
     {
       number: '02',
       title: 'YouTube',
-      url: 'https://youtube.com/@jrhs369',
       links: [
         { name: 'JRHs 369', handle: '@jrhs369', url: 'https://youtube.com/@jrhs369' },
         { name: 'GOVshorts', handle: '@govshortss', url: 'https://youtube.com/@govshortss' },
@@ -47,7 +44,6 @@ export const siteConfig = {
     {
       number: '03',
       title: 'Collshp',
-      url: 'https://collshp.com/23369',
       links: [
         { name: 'Collshp', handle: '23369', url: 'https://collshp.com/23369' },
         { name: 'Lynk.id', handle: 'nusantara9', url: 'https://lynk.id/nusantara9' },
@@ -56,7 +52,6 @@ export const siteConfig = {
     {
       number: '04',
       title: 'TikTok',
-      url: 'https://www.tiktok.com/@jokowi.gov',
       links: [
         { name: 'TikTok', handle: '@jokowi.gov', url: 'https://www.tiktok.com/@jokowi.gov' },
       ],
