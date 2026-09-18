@@ -1195,3 +1195,15 @@ Generated as a practical release checklist. Each row is a concrete verification 
 - Automated typecheck, quality, external-link audit, and production build are wired into CI.
 - Domain/DNS and real-device/browser verification remain environment-dependent checks.
 - Image binary conversion to WebP/AVIF remains optional until the actual asset pipeline is available.
+
+## Final release sign-off
+991. [ ] Final release sign-off: verify production domain serves the latest commit.
+992. [ ] Final release sign-off: verify HTTPS and HTTP-to-HTTPS redirect.
+993. [ ] Final release sign-off: verify the production HTML title and description.
+994. [ ] Final release sign-off: verify favicon and manifest load without 404.
+995. [ ] Final release sign-off: verify navigation and project deep links.
+996. [ ] Final release sign-off: verify external link destinations from a real device.
+997. [ ] Final release sign-off: verify audio playback and graceful failure behavior.
+998. [ ] Final release sign-off: verify mobile layout on Android and iOS Safari.
+999. [ ] Final release sign-off: verify GitHub Actions release gate is green.
+1000. [ ] Final release sign-off: verify visual approval before public announcement.
