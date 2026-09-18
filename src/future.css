@@ -220,6 +220,12 @@ button{cursor:pointer}
   .mobile-menu{display:inline-grid!important}
   .hero{grid-template-columns:1fr 1fr!important;gap:48px!important}
 }
+@media (max-width:900px){
+  .hero{gap:56px!important}
+  .fact-grid{grid-template-columns:1fr!important}
+  .fact,.fact:not(:first-child){padding:22px 0!important;border-left:0!important}
+  .project-grid{grid-template-columns:1fr!important}
+}
 @media (max-width:760px){
   .nav{top:10px!important;width:calc(100% - 20px)!important;min-height:56px!important}
   .brand-context{display:none!important}
@@ -232,6 +238,17 @@ button{cursor:pointer}
   .section{padding:82px 0!important}
   .section-kicker{margin-bottom:32px!important}
   .about-layout,.experience-layout,.cta-grid{grid-template-columns:1fr!important;gap:44px!important}
+  .fact-grid{margin-top:36px!important}
+  .fact{min-height:0!important}
+  .fact .number-display{font-size:40px!important;margin-bottom:12px!important}
+  .project-card-hit{padding:32px!important}
+  .project-card h3{font-size:32px!important}
+  .search-box{width:100%!important}
+  .project-toolbar{flex-direction:column!important;align-items:stretch!important}
+  .filter-row{overflow-x:auto!important;flex-wrap:nowrap!important;padding-bottom:4px!important;scrollbar-width:none!important}
+  .filter-row::-webkit-scrollbar{display:none!important}
+  .filter-chip{flex:0 0 auto!important}
+  .footer{padding:48px 14px 24px!important}
   .lead-copy{font-size:18px!important}
   .project-grid{grid-template-columns:1fr!important}
   .project-card-hit{min-height:300px!important}
@@ -242,6 +259,10 @@ button{cursor:pointer}
 }
 @media (max-width:480px){
   .music-title{display:none!important}
+  .nav-actions{gap:5px!important}
+  .brand-mark{width:34px!important;height:34px!important}
+  .nav{padding-left:10px!important;padding-right:8px!important}
+  .button{min-height:48px!important}
   .hero{padding-top:94px!important}
   .hero-actions .button{width:100%!important}
   .hero-signals{margin-top:38px!important}
