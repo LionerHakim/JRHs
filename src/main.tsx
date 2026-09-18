@@ -102,30 +102,16 @@ export default function App() {
           </div>
 
           <div className="links-list">
-            {Object.entries(siteConfig.social)
-              .filter(([, url]) => url)
-              .map(([name, url]) => {
-                const label =
-                  name === 'instagram' ? 'Instagram' :
-                  name === 'github' ? 'GitHub' :
-                  name === 'telegram' ? 'Telegram' :
-                  name === 'portfolio' ? 'Website' :
-                  name
-
-                return (
-                  <a key={name} href={url} target="_blank" rel="noreferrer">
-                    <span>{label}</span>
-                    <span aria-hidden="true">↗</span>
-                  </a>
-                )
-              })}
+            <a href={`mailto:${siteConfig.contactEmail}`}>
+              <span>{siteConfig.contactEmail}</span>
+              <span aria-hidden="true">↗</span>
+            </a>
           </div>
         </section>
       </main>
 
       <footer>
         <strong>JRH</strong>
-        <span>Digital Portfolio</span>
       </footer>
     </div>
   )
