@@ -103,6 +103,13 @@ export default function App() {
                 <div>
                   <h3>{item.institution}</h3>
                   <p>{item.program}</p>
+                  {item.activities?.length ? (
+                    <ul className="record-activities" aria-label="Activities and roles">
+                      {item.activities.map((activity) => (
+                        <li key={activity}>{activity}</li>
+                      ))}
+                    </ul>
+                  ) : null}
                 </div>
               </article>
             ))}
