@@ -1,4 +1,4 @@
-import { createRoot } from 'react-dom/client'
+import { useEffect, useState, createRoot } from 'react-dom/client'
 import { siteConfig } from './config/site'
 import './index.css'
 
@@ -9,7 +9,39 @@ const sectionItems = [
   ['links', 'Contact'],
 ] as const
 
+const sectionIds = sectionItems.map(([id]) => id)
+
 export default function App() {
+  const [activeSection, setActiveSection] = useState<(typeof sectionIds)[number]>('identity')
+
+  useEffect(() => {
+    const sections = sectionIds
+      .map((id) => document.getElementById(id))
+      .filter((section): section is HTMLElement => Boolean(section))
+
+    if (!sections.length) return
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        const visibleEntries = entries
+          .filter((entry) => entry.isIntersecting)
+          .sort((a, b) => b.intersectionRatio - a.intersectionRatio)
+
+        if (visibleEntries[0]) {
+          setActiveSection(visibleEntries[0].target.id as (typeof sectionIds)[number])
+        }
+      },
+      {
+        rootMargin: '-20% 0px -60% 0px',
+        threshold: [0.1, 0.35, 0.6],
+      },
+    )
+
+    sections.forEach((section) => observer.observe(section))
+
+    return () => observer.disconnect()
+  }, [])
+
   return (
     <div className="site-shell">
       <header className="nav">
@@ -20,7 +52,14 @@ export default function App() {
 
         <nav aria-label="Primary navigation">
           {sectionItems.map(([id, label]) => (
-            <a key={id} href={`#${id}`}>{label}</a>
+            <a
+              key={id}
+              href={`#${id}`}
+              aria-current={activeSection === id ? 'page' : undefined}
+              className={activeSection === id ? 'is-active' : undefined}
+            >
+              {label}
+            </a>
           ))}
         </nav>
       </header>
