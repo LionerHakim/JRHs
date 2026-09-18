@@ -1,72 +1,12 @@
-/* JRH production guardrails. Keep this file small and deterministic. */
-html,
-body,
-.app,
-main,
-section,
-.hero,
-.projects-section,
-.experience-section,
-.cta-section,
-.footer,
-.statement,
-.signal-strip {
-  background: #ffffff !important;
-}
-
-html {
-  color-scheme: light !important;
-}
-
-.hero::before,
-.hero::after,
-.ambient-grid {
-  display: none !important;
-  content: none !important;
-}
-
-.brand-mark {
-  background: #000000 !important;
-  color: #ffffff !important;
-  box-shadow: none !important;
-}
-
-.button.primary {
-  background: #000000 !important;
-  color: #ffffff !important;
-}
-
-.button.primary:hover,
-.to-top:hover {
-  background: #007aff !important;
-}
-
-.button.secondary {
-  background: #ffffff !important;
-  color: #000000 !important;
-  border-color: rgba(0,0,0,.20) !important;
-}
-
-.hero h1,
-.section-intro h2,
-.section-heading h2,
-.cta-copy h2,
-.statement p {
-  color: #000000;
-}
-
-.hero h1 em,
-.section-intro h2 em,
-.cta-copy h2 em {
-  color: #007aff;
-}
-
-@media (prefers-reduced-motion: reduce) {
-  *,
-  *::before,
-  *::after {
-    animation-duration: .01ms !important;
-    transition-duration: .01ms !important;
-    scroll-behavior: auto !important;
-  }
-}
+/* JRH production guardrails — final light system */
+html,body,.app,main,section,.hero,.statement,.signal-strip,.footer,.cta-section,.projects-section,.experience-section{background:#fff!important;color:#0a0a0a!important}
+html{color-scheme:light!important}
+.ambient-grid,.hero::before,.hero::after{display:none!important;content:none!important}
+.brand-mark{background:#0a0a0a!important;color:#fff!important;box-shadow:none!important}
+.button.primary{background:#0a0a0a!important;color:#fff!important;border-color:#0a0a0a!important}
+.button.primary:hover{background:#007aff!important;border-color:#007aff!important}
+.button.secondary{background:#fff!important;color:#0a0a0a!important;border-color:#dcdcdc!important}
+.hero h1,.section-intro h2,.section-heading h2,.cta-copy h2,.statement p{color:#0a0a0a!important}
+.hero h1 em,.section-intro h2 em,.cta-copy h2 em{color:#007aff!important}
+:focus-visible{outline:3px solid rgba(0,122,255,.35)!important;outline-offset:3px!important}
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.01ms!important;transition-duration:.01ms!important;scroll-behavior:auto!important}.reveal{opacity:1!important;transform:none!important}}
