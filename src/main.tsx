@@ -413,3 +413,13 @@ export default function App() {
     </div>
   )
 }
+
+
+import { createRoot } from 'react-dom/client'
+
+const rootElement = document.getElementById('root')
+if (!rootElement) {
+  throw new Error('JRH root element not found')
+}
+
+createRoot(rootElement).render(<App />)
