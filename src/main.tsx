@@ -366,8 +366,8 @@ function App() {
         </div>
       </header>
       {menu && <button className="menu-backdrop" aria-label="Close menu" onClick={() => setMenu(false)} />}
-      <main id="top" className="organic-page">
-        <section className="hero organic-hero">
+      <main id="top">
+        <section className="hero">
           <div className="hero-copy reveal is-visible">
             <div className="eyebrow"><span className="eyebrow-rule" />{siteConfig.hero.eyebrow}</div>
             <h1 id="hero-title">{siteConfig.hero.titleLine1}<br /><em>{siteConfig.hero.titleLine2}</em></h1>
@@ -395,11 +395,11 @@ function App() {
           </div>
         </section>
 
-        <section className="organic-intro" aria-label="Portfolio identity">
+        <section className="portfolio-intro" aria-label="Portfolio identity">
           <span>01 / JRH</span><p>Think deeply. Build with purpose.</p><span>Digital portfolio · Independent workspace</span>
         </section>
 
-        <section id="about" className="section about-section organic-section">
+        <section id="about" className="section about-section">
           <div className="section-kicker reveal"><span>02</span><span>About</span></div>
           <div className="about-layout">
             <div className="section-intro reveal"><span className="section-overline">The point of the work</span><h2>{siteConfig.about.titleLine1}<br /><em>{siteConfig.about.titleLine2}</em></h2><p>{siteConfig.about.lead}</p></div>
@@ -407,9 +407,9 @@ function App() {
           </div>
         </section>
 
-        <section id="work" className="section projects-section organic-section">
+        <section id="work" className="section projects-section">
           <div className="section-kicker reveal"><span>03</span><span>Work</span></div>
-          <div className="organic-work-head reveal">
+          <div className="work-head reveal">
             <div><span className="section-overline">Selected archive</span><h2>Built, published, iterated.</h2></div>
             <p>{filteredProjects.length} / {projects.length} projects · open any work to explore.</p>
           </div>
@@ -433,9 +433,9 @@ function App() {
           {filteredProjects.length === 0 && <div className="empty-state reveal"><Search size={20} /><strong>No matching projects.</strong><span>Try a different search or switch the category.</span></div>}
         </section>
 
-        <section className="statement reveal organic-statement" aria-label="JRH principle"><div className="statement-mark"><Sparkles size={18} /> JRH</div><div><span className="section-note">Working principle</span><p>“{siteConfig.quote}”</p></div></section>
+        <section className="statement reveal" aria-label="JRH principle"><div className="statement-mark"><Sparkles size={18} /> JRH</div><div><span className="section-note">Working principle</span><p>“{siteConfig.quote}”</p></div></section>
 
-        <section id="experience" className="section experience-section organic-section">
+        <section id="experience" className="section experience-section">
           <div className="section-kicker reveal"><span>04</span><span>Experience</span></div>
           <div className="section-heading reveal"><div><span className="section-overline">Timeline</span><h2>Learning by doing.</h2></div><p>A compact record of the academic path and working approach behind this portfolio.</p></div>
           <div className="experience-layout">
@@ -444,7 +444,7 @@ function App() {
           </div>
         </section>
 
-        <section id="contact" className="cta-section reveal organic-contact">
+        <section id="contact" className="cta-section reveal">
           <div className="section-kicker"><span>05</span><span>Contact</span></div>
           <div className="cta-grid"><div className="cta-copy"><span className="section-overline">Open channel</span><h2>{siteConfig.contact.titleLine1}<br /><em>{siteConfig.contact.titleLine2}</em></h2><p>{siteConfig.contact.description}</p></div><div className="cta-actions"><a className="button primary large" href={siteConfig.instagram} target="_blank" rel="noreferrer">Instagram <ExternalLink size={16} /></a><a className="button secondary large" href={siteConfig.telegram} target="_blank" rel="noreferrer">Telegram <Send size={15} /></a><span>Choose the channel that works for you.</span></div></div>
         </section>
