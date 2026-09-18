@@ -1,102 +1,48 @@
-# JRHs - Personal Digital Portfolio
+# JRHs — Personal Digital Portfolio
 
-Personal portfolio for **Jefri Rahman Hakim (JRH)**, combining Development Economics, financial markets, technology, AI, research, and independent digital work.
-
-> **Think deeply. Build with purpose.**
-
-## Experience
-
-The interface uses an iOS-inspired material language without cloning Apple's UI: strong typography, high-contrast hierarchy, a floating navigation layer, responsive spacing, subtle interaction feedback, project detail modals, four-color Redline rendering, and local music controls.
-
-The visual system is also filtered through the open-source **antislop** project so decorative techniques stay purposeful and the content remains specific. See `DESIGN.md` and `AGENTS.md` for the project direction and working rules.
+Personal portfolio for **Jefri Rahman Hakim (JRH)**.
 
 ## Stack
 
-- React + TypeScript
+- React
+- TypeScript
 - Vite
-- CSS3
-- Lucide React
+- CSS
 - GitHub
 - Cloudflare Pages
 
-## Project Structure
+## Structure
 
 ```text
 JRHs/
 ├── public/
-│   ├── _headers
-│   ├── 404.html
-││   └── assets/
-│       ├── images/
-│       │   └── s.jpg
-│       └── audio/
-│           ├── Budi-Doremi.mp3
-│           ├── Tak-AdaUjungnya.mp3
-│           └── README.md
-├── scripts/
-│   └── quality.mjs                 # deterministic visual/SEO/config audit
+│   └── assets/
+│       └── images/
+│           └── s.jpg
 ├── src/
 │   ├── config/
-│   │   └── site.ts                 # content + links
-│   ├── index.css                   # global foundation
-│   ├──                   # final light-only visual system
-│   ├── main.tsx                    # UI + interaction logic
+│   │   └── site.ts
+│   ├── index.css
+│   ├── main.tsx
 │   └── vite-env.d.ts
-├── .github/workflows/quality.yml   # quality audit + typecheck + production build
 ├── AGENTS.md
-├── DESIGN.md
 ├── index.html
 ├── package.json
 ├── tsconfig.json
-├── vite.config.ts
-└── README.md
+└── vite.config.ts
 ```
 
-## Maintenance
-
-### Profile photo
-
-The hero reads:
-
-```text
-public/assets/images/s.jpg
-```
-
-Keep the path in sync with `profileImage` inside `src/config/site.ts`.
-
-### Music
-
-The navbar player reads local audio paths from `src/config/site.ts`:
-
-```text
-public/assets/audio/Budi-Doremi.mp3
-public/assets/audio/Tak-AdaUjungnya.mp3
-```
-
-Only publish music you own or are licensed to publish.
-
-### Portfolio content
-
-Edit:
-
-```text
-src/config/site.ts
-```
-
-This centralizes the portfolio copy, social links, education, projects, media paths, and contact details.
-
-## Local Development
+## Development
 
 ```bash
 npm install
 npm run dev
 ```
 
-Checks:
+Production verification:
 
 ```bash
 npm run typecheck
-npm run quality
 npm run build
 ```
 
@@ -110,38 +56,24 @@ Node.js          : 22
 Root directory   : /
 ```
 
-Connect the `main` branch to the Cloudflare Pages project for automatic deployments. GitHub Actions runs the deterministic quality audit, TypeScript check, production build, and deploy-artifact verification on pushes and pull requests.
+## Content
 
-## Responsive + Accessibility
+Portfolio content and external links are centralized in `src/config/site.ts`.
 
-The UI is designed for desktop, tablet, Android, and iPhone with safe-area-aware mobile sizing, touch-friendly controls, keyboard focus, escape-to-close behavior, modal focus trapping, visible interaction states, responsive typography, and reduced-motion support.
+The current interface follows the SIGNAL direction: dark void, signal red/amber accents, restrained panel geometry, functional command palette, project detail dialogs, keyboard-first interaction, reduced-motion fallback, and responsive layouts.
 
-## Interaction Protection
+## Assets
 
-Images are not forcibly blocked from dragging because browser controls should remain predictable and accessible. The portfolio does not claim to prevent screenshots, developer tools, or determined copying.
+The active profile image is:
 
-## Design Rules
+```text
+public/assets/images/s.jpg
+```
 
-1. Read `DESIGN.md` before changing visual direction.
-2. Keep content and links in `src/config/site.ts`.
-3. Keep personal media under `public/assets/`.
-4. Keep UI and interaction in `src/main.tsx`.
-5. Keep the global foundation in `src/index.css` and the final visual system in `src/`.
-6. Keep the iOS reference as a material and interaction reference, not a clone.
-7. Keep glass limited to functional navigation surfaces.
-8. Keep all page backgrounds pure white.
-9. Keep dark-theme and page-gradient code out of the source.
-10. Run `npm run typecheck`, `npm run quality`, and `npm run build` before release.
+Unused legacy audio assets should not be reintroduced unless a real licensed use case is added.
 
-## Author
+## Deployment note
 
-**Jefri Rahman Hakim (JRH)**
+GitHub repository: `LionerHakim/JRHs`
 
-Personal portfolio - Indonesia
-
-- GitHub: [@LionerHakim](https://github.com/LionerHakim)
-- Portfolio: [jrhsee.my.id](https://jrhsee.my.id/)
-
-## License
-
-Personal portfolio project. Unless otherwise stated, original content, personal assets, and branding belong to JRH.
+Production site: `https://jrhsee.my.id/`
