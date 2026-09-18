@@ -252,7 +252,7 @@ export default function App() {
             <div className="dialog-links">
               {(siteConfig.projects[activeProject].links ?? []).map((link) => (
                 <a key={link.url} href={link.url} target="_blank" rel="noreferrer">
-                  <span>{link.name}{link.handle ? ` · ${link.handle}` : ''}</span>
+                  <span>{link.name}{('handle' in link && link.handle) ? ` · ${link.handle}` : ''}</span>
                   <span>Open</span>
                 </a>
               ))}
