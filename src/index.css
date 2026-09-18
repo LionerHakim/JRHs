@@ -502,3 +502,106 @@ a:active, button:active { transform: translateY(1px); }
 @media (prefers-reduced-motion: reduce) {
   ::view-transition-old(root), ::view-transition-new(root) { animation:none; }
 }
+
+
+/* v2 precision layer */
+.app::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: 1080;
+  pointer-events: none;
+  background-image: radial-gradient(circle at 1px 1px, rgba(8,8,8,.16) 1px, transparent 0);
+  background-size: 18px 18px;
+  mask-image: linear-gradient(to bottom, black, transparent 32%);
+  opacity: .12;
+}
+.nav::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -5px;
+  height: 3px;
+  transform: scaleX(0);
+  transform-origin: left;
+  background: var(--yellow);
+  transition: transform .45s var(--ease);
+}
+.nav.is-scrolled::after { transform: scaleX(1); }
+.hero-copy { animation: hero-in .65s var(--ease) both; }
+.hero-visual { animation: hero-in .8s .08s var(--ease) both; }
+@keyframes hero-in {
+  from { opacity: 0; transform: translateY(22px); }
+  to { opacity: 1; transform: none; }
+}
+.hero h1 { text-wrap: balance; }
+.hero h1 em { display: inline-block; position: relative; }
+.hero h1 em::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 9%;
+  bottom: -7px;
+  height: 5px;
+  background: var(--yellow);
+  transform: skewX(-18deg);
+}
+.project-card { view-transition-name: none; }
+.project-card-hit { position: relative; overflow: hidden; }
+.project-card-hit::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: var(--blue);
+  clip-path: polygon(0 0, 0 5px, 100% 5px, 100% 0);
+  transition: clip-path .45s var(--ease);
+}
+.project-card:hover .project-card-hit::before,
+.project-card-hit:focus-visible::before {
+  clip-path: polygon(0 0, 0 9px, 100% 9px, 100% 0);
+}
+.project-card:hover .project-icon { transform: rotate(8deg); background: var(--red); color: var(--white); border-color: var(--red); }
+.project-card:hover h3 { transform: translateX(5px); color: var(--yellow); }
+.project-footer span::after {
+  content: " ↗";
+  color: var(--yellow);
+}
+.search-box { position: relative; }
+.search-box::after {
+  content: "⌘K";
+  display: none;
+  color: var(--blue);
+  font: 800 9px/1 var(--font-mono);
+}
+.command-item:focus-visible { outline: 3px solid var(--yellow); outline-offset: 2px; }
+.statement { position: relative; overflow: hidden; }
+.statement::after {
+  content: "JRH";
+  position: absolute;
+  right: -2vw;
+  bottom: -4vw;
+  color: var(--red);
+  font: 900 clamp(100px, 18vw, 260px)/.7 var(--font-display);
+  opacity: .1;
+  pointer-events: none;
+}
+.footer { position: relative; overflow: hidden; }
+.footer::before {
+  content: "JRH / END";
+  position: absolute;
+  right: max(20px, calc((100% - var(--page-max-width)) / 2));
+  top: 28px;
+  color: var(--yellow);
+  font: 800 10px/1 var(--font-mono);
+  letter-spacing: .12em;
+}
+@media (max-width: 720px) {
+  .app::before { opacity: .07; background-size: 22px 22px; }
+  .hero h1 em::after { height: 4px; bottom: -5px; }
+  .footer::before { display: none; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .hero-copy, .hero-visual { animation: none; }
+}
