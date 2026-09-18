@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { FormEvent, useEffect, useState } from 'react'
 import { createRoot } from 'react-dom/client'
 import { siteConfig } from './config/site'
 import './index.css'
@@ -14,6 +14,13 @@ const sectionIds = sectionItems.map(([id]) => id)
 
 export default function App() {
   const [activeSection, setActiveSection] = useState<(typeof sectionIds)[number]>('identity')
+  const [name, setName] = useState('')
+  const [email, setEmail] = useState('')
+  const [purpose, setPurpose] = useState('')
+  const [message, setMessage] = useState('')
+  const [privacy, setPrivacy] = useState(false)
+  const [contactStatus, setContactStatus] = useState<string | null>(null)
+  const [contactError, setContactError] = useState<string | null>(null)
 
   useEffect(() => {
     const sections = sectionIds
@@ -40,7 +47,46 @@ export default function App() {
 
     sections.forEach((section) => observer.observe(section))
 
-    return () => observer.disconnect()
+    const handleContactSubmit = (event: FormEvent<HTMLFormElement>) => {
+    event.preventDefault()
+    setContactError(null)
+    setContactStatus(null)
+
+    if (!name.trim()) return setContactError('Nama belum diisi.')
+    if (!/^[^\\s@]+@[^\\s@]+\\.[^\\s@]+$/.test(email.trim())) return setContactError('Emailnya belum valid.')
+    if (!purpose) return setContactError('Silakan pilih topik dulu.')
+    if (!message.trim()) return setContactError('Pesannya masih kosong.')
+    if (!privacy) return setContactError('Centang persetujuan privasi dulu.')
+
+    const subject = encodeURIComponent(`[JRHs Contact] ${purpose}`)
+    const body = encodeURIComponent(`Halo JRHs,
+
+Saya ingin menghubungi terkait:
+
+Nama:
+${name.trim()}
+
+Email:
+${email.trim()}
+
+Topik:
+${purpose}
+
+Pesan:
+${message.trim()}
+
+--------------------------------
+Dikirim melalui JRHs
+https://jrhsee.my.id
+--------------------------------
+
+Terima kasih,
+${name.trim()}`)
+    window.location.href = `mailto:${siteConfig.contactEmail}?subject=${subject}&body=${body}`
+    setContactStatus('Email sudah disiapkan ✨')
+  }
+
+  return () => observer.disconnect()
   }, [])
 
   return (
@@ -157,25 +203,62 @@ export default function App() {
             <h2 id="links-title">Contact</h2>
           </div>
 
-          <div className="contact-intro">
-            <p className="contact-question">Mari terhubung.</p>
-            <p className="contact-answer">Terbuka untuk percakapan profesional, kolaborasi, peluang kerja, dan pertukaran ide yang relevan.</p>
-          </div>
+          <div className="contact-card">
+            <div className="contact-intro">
+              <p className="contact-question">Ada yang mau dibahas?</p>
+              <p className="contact-answer">Punya pertanyaan, ide, project, peluang kolaborasi, atau sekadar mau ngobrol?</p>
+              <p className="contact-note">Tulis aja. Saya siapkan emailnya. Anda tinggal cek dan klik Kirim.</p>
+            </div>
 
-          <div className="contact-benefits" aria-label="Contact opportunities">
-            <span>Kolaborasi</span>
-            <span>Diskusi</span>
-            <span>Peluang</span>
-            <span>Koneksi</span>
-          </div>
+            <form className="contact-form" onSubmit={handleContactSubmit} noValidate>
+              <div className="contact-fields">
+                <label className="contact-field">
+                  <span className="contact-icon" aria-hidden="true">♙</span>
+                  <input value={name} onChange={(event) => setName(event.target.value)} placeholder="Nama lengkap" autoComplete="name" />
+                </label>
+                <label className="contact-field">
+                  <span className="contact-icon" aria-hidden="true">✉</span>
+                  <input type="email" value={email} onChange={(event) => setEmail(event.target.value)} placeholder="email@saya.com" autoComplete="email" />
+                </label>
+                <label className="contact-field">
+                  <span className="contact-icon" aria-hidden="true">☰</span>
+                  <select value={purpose} onChange={(event) => setPurpose(event.target.value)}>
+                    <option value="">Pilih topik</option>
+                    {['Pertanyaan umum', 'Kolaborasi', 'Project', 'Bisnis', 'Investasi', 'Akademik', 'Feedback', 'Lainnya'].map((item) => <option key={item} value={item}>{item}</option>)}
+                  </select>
+                </label>
+                <label className="contact-field contact-message">
+                  <span className="contact-icon" aria-hidden="true">💬</span>
+                  <textarea value={message} onChange={(event) => setMessage(event.target.value.slice(0, 1000))} placeholder="Tulis pesan Anda di sini..." maxLength={1000} rows={5} />
+                  <span className="contact-counter">{message.length}/1000</span>
+                </label>
+              </div>
 
-          <div className="contact-cta-label">Hubungi saya</div>
+              {contactError ? <p className="contact-feedback is-error" role="alert">{contactError}</p> : null}
+              {contactStatus ? <p className="contact-feedback is-success" role="status">{contactStatus}<span>Aplikasi email Anda akan terbuka. Tinggal cek pesannya, lalu klik Kirim.</span></p> : null}
 
-          <div className="links-list">
-            <a href={`mailto:${siteConfig.contactEmail}`}>
-              <span>{siteConfig.contactEmail}</span>
-              <span aria-hidden="true">↗</span>
-            </a>
+              <div className="contact-submit">
+                <label className="contact-privacy">
+                  <input type="checkbox" checked={privacy} onChange={(event) => setPrivacy(event.target.checked)} />
+                  <span>Saya setuju dengan kebijakan privasi</span>
+                </label>
+                <button type="submit">✈ <span>Buka Email Saya</span> <span aria-hidden="true">→</span></button>
+              </div>
+
+              <div className="contact-benefits" aria-label="Contact benefits">
+                <span>⚡ <strong>Cepat</strong> <small>Langsung ke email</small></span>
+                <span>🔒 <strong>Privasi</strong> <small>Data tetap aman</small></span>
+                <span>♡ <strong>Mudah</strong> <small>Tinggal isi &amp; kirim</small></span>
+              </div>
+
+              <div className="contact-email-info">
+                <span className="contact-email-icon" aria-hidden="true">✉</span>
+                <div>
+                  <strong>Email akan terbuka dengan format yang sudah disiapkan.</strong>
+                  <a href={`mailto:${siteConfig.contactEmail}`}>{siteConfig.contactEmail}</a>
+                </div>
+              </div>
+            </form>
           </div>
         </section>
       </main>
