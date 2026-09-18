@@ -10,9 +10,7 @@ export type Project = {
 export const siteConfig = {
   identity: {
     name: 'Jefri Rahman Hakim',
-    shortName: 'JRH',
-    title: 'JRH Digital Portfolio',
-    description: 'Jefri Rahman Hakim — digital portfolio, projects, publishing, and independent work.',
+    description: 'Digital portfolio, projects, publishing, and independent work.',
     profileImage: '/assets/images/s.jpg',
   },
   social: {
