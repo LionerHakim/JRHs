@@ -62,7 +62,6 @@ export default function App() {
     const emailMatch = normalizedEmail.match(emailPattern)
     if (!emailMatch || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(normalizedEmail)) return setContactError('Gunakan email yang valid.')
     if (!trustedEmailDomains.includes(emailMatch[1])) return setContactError('Gunakan email dari Gmail, Outlook, Hotmail, Yahoo, iCloud, atau Proton.')
-    if (!purpose) return setContactError('Pilih topik atau pilih Opsional.')
     if (!privacy) return setContactError('Centang persetujuan privasi dulu.')
 
     const subject = encodeURIComponent(`[JRHs Contact] ${purpose === 'Opsional' ? 'Pesan dari website' : purpose}`)
@@ -77,7 +76,7 @@ Email:
 ${email.trim()}
 
 Topik:
-${purpose}
+${purpose || 'Tidak ditentukan'}
 
 Pesan:
 ${message.trim()}
@@ -211,30 +210,33 @@ ${name.trim()}`)
             <div className="contact-intro">
               <p className="contact-question">Ada yang mau dibahas?</p>
               <p className="contact-answer">Punya pertanyaan, ide, project, peluang kolaborasi, atau sekadar mau ngobrol?</p>
-              <p className="contact-note">Tulis aja. Saya siapkan emailnya. Anda tinggal cek dan klik Kirim.</p>
+              <p className="contact-note">Tulis aja. Saya siapkan emailnya. Kamu tinggal cek dan klik Kirim.</p>
             </div>
 
             <form className="contact-form" onSubmit={handleContactSubmit} noValidate>
               <div className="contact-fields">
                 <label className="contact-field">
                   <span className="contact-icon" aria-hidden="true">♙</span>
-                  <input value={name} onChange={(event) => setName(event.target.value)} placeholder="Nama lengkap" autoComplete="name" />
+                  <input value={name} onChange={(event) => setName(event.target.value)} placeholder="Nama kamu" autoComplete="name" />
                 </label>
                 <label className="contact-field">
                   <span className="contact-icon" aria-hidden="true">✉</span>
-                  <input type="email" value={email} onChange={(event) => setEmail(event.target.value)} placeholder="email@kamu.com" autoComplete="email" inputMode="email" />
+                  <input type="email" value={email} onChange={(event) => setEmail(event.target.value)} placeholder="email kamu" autoComplete="email" inputMode="email" />
                 </label>
                 <label className="contact-field">
                   <span className="contact-icon" aria-hidden="true">☰</span>
-                  <select value={purpose} onChange={(event) => setPurpose(event.target.value)} aria-label="Pilih topik">
-                    <option value="">Pilih topik</option>
-                    {['Pertanyaan umum', 'Kolaborasi', 'Project', 'Bisnis', 'Investasi', 'Akademik', 'Feedback', 'Opsional'].map((item) => <option key={item} value={item}>{item}</option>)}
+                  <select value={purpose} onChange={(event) => setPurpose(event.target.value)} aria-label="Topik email (opsional)">
+                    <option value="" disabled>Pilih topik</option>
+                    {['Pertanyaan umum', 'Kolaborasi', 'Project', 'Bisnis', 'Investasi', 'Akademik', 'Feedback', 'Relationships', 'Tambah teman'].map((item) => <option key={item} value={item}>{item}</option>)}
                   </select>
                 </label>
                 <label className="contact-field contact-message">
                   <span className="contact-icon" aria-hidden="true">💬</span>
-                  <textarea value={message} onChange={(event) => setMessage(event.target.value.slice(0, 1000))} placeholder="Tulis pesan Anda di sini... (opsional)" maxLength={1000} rows={5} />
-                  <span className="contact-counter">{message.length}/1000</span>
+                  <textarea value={message} onChange={(event) => {
+                    const words = event.target.value.trim().split(/\s+/).filter(Boolean)
+                    setMessage(words.length > 169 ? words.slice(0, 169).join(' ') : event.target.value)
+                  }} placeholder="Tulis pesan kamu di sini... (opsional, maksimal 169 kata)" rows={5} />
+                  <span className="contact-counter">{message.trim() ? message.trim().split(/\s+/).length : 0}/169 kata</span>
                 </label>
               </div>
 
@@ -244,20 +246,19 @@ ${name.trim()}`)
               <div className="contact-submit">
                 <label className="contact-privacy">
                   <input type="checkbox" checked={privacy} onChange={(event) => setPrivacy(event.target.checked)} />
-                  <span>Saya setuju dengan kebijakan privasi</span>
+                  <span>Aku setuju dengan kebijakan privasi</span>
                 </label>
                 <button type="submit">✈ <span>Buka Email Saya</span> <span aria-hidden="true">→</span></button>
               </div>
 
               <div className="contact-benefits" aria-label="Contact benefits">
-                <span aria-label="Cepat">⚡</span>
-                <span aria-label="Privasi">🔒</span>
+                <span aria-label="Cepat">◷</span>
+                <span aria-label="Aman">⊙</span>
                 <span aria-label="Mudah">✓</span>
               </div>
 
               <div className="contact-closing">
-                <p>Terima kasih sudah mampir. Sampai jumpa di email.</p>
-                <a href={`mailto:${siteConfig.contactEmail}`}>{siteConfig.contactEmail}</a>
+                <p>Terima kasih sudah berkunjung.</p>
               </div>
             </form>
           </div>
