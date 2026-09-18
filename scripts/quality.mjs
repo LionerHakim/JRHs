@@ -9,7 +9,7 @@ const files = [
   'package.json',
   'src/main.tsx',
   'src/index.css',
-  'src/future.css',
+  'DESIGN.md',
   'public/site.webmanifest',
   'public/404.html',
   'public/favicon.svg',
