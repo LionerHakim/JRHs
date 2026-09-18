@@ -1,4 +1,5 @@
-import { useEffect, useState, createRoot } from 'react-dom/client'
+import { useEffect, useState } from 'react'
+import { createRoot } from 'react-dom/client'
 import { siteConfig } from './config/site'
 import './index.css'
 
