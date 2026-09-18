@@ -60,8 +60,9 @@ function App() {
   const modalRef = useRef<HTMLElement | null>(null)
   const searchRef = useRef<HTMLInputElement | null>(null)
   const lastFocusedRef = useRef<HTMLElement | null>(null)
+  const commandRef = useRef<HTMLElement | null>(null)
+  const commandLastFocusedRef = useRef<HTMLElement | null>(null)
   const trackIndexRef = useRef(0)
-  const magneticRef = useRef<Set<HTMLElement>>(new Set())
 
   const projects = siteConfig.projects as readonly Project[]
   const currentTrack = siteConfig.music.tracks[trackIndex]
@@ -184,6 +185,37 @@ function App() {
   }, [musicOpen])
 
   useEffect(() => {
+    if (!commandOpen) return
+    commandLastFocusedRef.current = document.activeElement instanceof HTMLElement ? document.activeElement : null
+    const previousOverflow = document.body.style.overflow
+    document.body.style.overflow = 'hidden'
+    const focusFirst = () => commandRef.current?.querySelector<HTMLElement>('.command-item')?.focus()
+    requestAnimationFrame(focusFirst)
+    const onCommandKey = (event: KeyboardEvent) => {
+      if (event.key !== 'Tab' || !commandRef.current) return
+      const focusable = Array.from(commandRef.current.querySelectorAll<HTMLElement>(
+        'button:not([disabled]),a[href],input:not([disabled]),[tabindex]:not([tabindex="-1"])',
+      ))
+      if (!focusable.length) return
+      const first = focusable[0]
+      const last = focusable[focusable.length - 1]
+      if (event.shiftKey && document.activeElement === first) {
+        event.preventDefault()
+        last.focus()
+      } else if (!event.shiftKey && document.activeElement === last) {
+        event.preventDefault()
+        first.focus()
+      }
+    }
+    document.addEventListener('keydown', onCommandKey)
+    return () => {
+      document.body.style.overflow = previousOverflow
+      document.removeEventListener('keydown', onCommandKey)
+      requestAnimationFrame(() => commandLastFocusedRef.current?.focus())
+    }
+  }, [commandOpen])
+
+  useEffect(() => {
     if (!selectedProject) return
     lastFocusedRef.current = document.activeElement instanceof HTMLElement ? document.activeElement : null
     const previousOverflow = document.body.style.overflow
@@ -250,12 +282,10 @@ function App() {
     const x = ((event.clientX - rect.left) / rect.width - .5) * 8
     const y = ((event.clientY - rect.top) / rect.height - .5) * 8
     element.style.transform = `translate(${x}px, ${y}px)`
-    magneticRef.current.add(element)
   }
 
   const releaseMagnetic = (event: ReactPointerEvent<HTMLElement>) => {
     event.currentTarget.style.transform = ''
-    magneticRef.current.delete(event.currentTarget)
   }
 
   const ensureAudio = (src: string) => {
