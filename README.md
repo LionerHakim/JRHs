@@ -6,7 +6,7 @@ Personal portfolio for **Jefri Rahman Hakim (JRH)**, combining Development Econo
 
 ## Experience
 
-The interface uses an iOS-inspired material language without cloning Apple's UI: strong typography, high-contrast hierarchy, a floating navigation layer, responsive spacing, subtle interaction feedback, project detail modals, light-only rendering, and local music controls.
+The interface uses an iOS-inspired material language without cloning Apple's UI: strong typography, high-contrast hierarchy, a floating navigation layer, responsive spacing, subtle interaction feedback, project detail modals, four-color Redline rendering, and local music controls.
 
 The visual system is also filtered through the open-source **antislop** project so decorative techniques stay purposeful and the content remains specific. See `DESIGN.md` and `AGENTS.md` for the project direction and working rules.
 
