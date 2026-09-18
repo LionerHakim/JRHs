@@ -167,21 +167,19 @@ export default function App() {
       <main>
         <section id="identity" className="hero" aria-labelledby="identity-title">
           <div className="hero-copy">
-            <p className="section-kicker">JRH / DIGITAL PORTFOLIO</p>
+            <p className="section-kicker">PORTFOLIO</p>
             <h1 id="identity-title">{siteConfig.identity.name}</h1>
             <p className="hero-description">{siteConfig.identity.description}</p>
             <div className="hero-actions">
               <a className="hero-pill" href="#projects">Explore projects</a>
               <a className="ghost-pill" href="#links">Contact</a>
             </div>
-            <p className="hero-meta">Jefri Rahman Hakim / JRH Digital Portfolio</p>
           </div>
 
           <figure className="hero-portrait">
             <div className="portrait-frame">
               <img src={siteConfig.identity.profileImage} alt={siteConfig.identity.name} width="640" height="800" fetchPriority="high" />
             </div>
-            <figcaption className="portrait-caption"><span>JRH</span><span>Portrait</span></figcaption>
           </figure>
         </section>
 
