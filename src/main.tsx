@@ -46,8 +46,11 @@ export default function App() {
     )
 
     sections.forEach((section) => observer.observe(section))
+    
+    return () => observer.disconnect()
+  }, [])
 
-    const handleContactSubmit = (event: FormEvent<HTMLFormElement>) => {
+  const handleContactSubmit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault()
     setContactError(null)
     setContactStatus(null)
@@ -85,9 +88,6 @@ ${name.trim()}`)
     window.location.href = `mailto:${siteConfig.contactEmail}?subject=${subject}&body=${body}`
     setContactStatus('Email sudah disiapkan ✨')
   }
-
-  return () => observer.disconnect()
-  }, [])
 
   return (
     <div className="site-shell">
