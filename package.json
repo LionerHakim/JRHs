@@ -8,7 +8,9 @@
     "build": "vite build",
     "preview": "vite preview",
     "typecheck": "tsc --noEmit",
-    "quality": "node scripts/quality.mjs"
+    "quality": "node scripts/quality.mjs",
+    "audit:links": "node scripts/link-audit.mjs",
+    "verify": "npm run typecheck && npm run quality && npm run audit:links && npm run build"
   },
   "dependencies": {
     "lucide-react": "1.46.0",
