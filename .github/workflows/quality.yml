@@ -35,6 +35,9 @@ jobs:
       - name: Quality audit
         run: npm run quality
 
+      - name: External link audit
+        run: npm run audit:links
+
       - name: Production build
         run: npm run build
 
