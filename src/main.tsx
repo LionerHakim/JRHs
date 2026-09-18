@@ -21,7 +21,7 @@ function App() {
       <section id="about" aria-labelledby="about-title">
         <h2 id="about-title">{siteConfig.about.titleLine1} {siteConfig.about.titleLine2}</h2>
         <p>{siteConfig.about.lead}</p><p>{siteConfig.about.body}</p>
-        <dl>{siteConfig.about.facts.map(([label, value]) => <div key={label}><dt>{label}</dt><dd>{value}</dd></div>)}</dl>
+        <dl>{siteConfig.about.facts.map(fact => <div key={fact.label}><dt>{fact.label}</dt><dd>{fact.value}</dd></div>)}</dl>
       </section>
       <section id="work" aria-labelledby="work-title">
         <h2 id="work-title">Projects</h2>
