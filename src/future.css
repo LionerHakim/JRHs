@@ -62,7 +62,7 @@ button{cursor:pointer}
 .hero-kicker{margin:20px 0 18px!important;display:inline-flex!important;align-items:center!important;gap:8px!important;
   padding:7px 10px!important;border:1px solid #e8e8e8!important;border-radius:999px!important;background:#fff!important}
 .hero h1{
-  margin:0!important;color:#080808!important;font-family:var(--font-display)!important;
+  margin:0!important;color:#080808!important;font-family:var(--font-geist)!important;
   font-size:clamp(48px,5.2vw,60px)!important;line-height:1.1!important;letter-spacing:-.03em!important;font-weight:500!important
 }
 .hero h1 em{color:#111111!important;font-style:normal!important}
@@ -75,7 +75,7 @@ button{cursor:pointer}
 .button.secondary:hover{border-color:#0a0a0a!important}
 .hero-signals{margin-top:58px!important;border-top:1px solid #e7e7e7!important}
 .hero-signals>div{min-height:82px!important}
-.hero-signals strong{color:#0a0a0a!important;font-family:var(--font-mono)!important}
+.hero-signals strong{color:#0a0a0a!important;font-family:var(--font-geist-mono)!important}
 .hero-signals span{color:#888!important}
 
 /* Hero image */
@@ -106,10 +106,10 @@ button{cursor:pointer}
 .section,.statement,.cta-section,.footer{width:min(1180px,calc(100% - 48px))!important;margin:auto!important}
 .section{padding:120px 0!important;border-top:0!important}
 .section-kicker{margin-bottom:48px!important;color:#8b8b8b!important;border-bottom:1px solid #e8e8e8!important;padding-bottom:12px!important}
-.section-kicker span:first-child{color:#111111!important;font-family:var(--font-mono)!important}
+.section-kicker span:first-child{color:#111111!important;font-family:var(--font-geist-mono)!important}
 .section-overline{color:#8a8a8a!important}
 .section-intro h2,.section-heading h2,.cta-copy h2,.statement p{
-  color:#0a0a0a!important;font-family:var(--font-display)!important;font-weight:400!important;
+  color:#0a0a0a!important;font-family:var(--font-geist)!important;font-weight:400!important;
   letter-spacing:-.045em!important;line-height:.98!important
 }
 .section-intro h2 em,.cta-copy h2 em{color:#111111!important}
@@ -122,7 +122,7 @@ button{cursor:pointer}
 .fact-grid{margin-top:48px!important;display:grid!important;grid-template-columns:repeat(3,minmax(0,1fr))!important;gap:0!important}
 .fact{min-height:150px!important;padding:24px 24px 24px 0!important;border:0!important;border-top:1px solid #e9eaeb!important}
 .fact:not(:first-child){padding-left:24px!important;border-left:1px solid #e9eaeb!important}
-.fact .number-display{display:block!important;margin-bottom:20px!important;color:#111111!important;font-family:var(--font-geist-mono,var(--font-mono))!important;font-size:48px!important;line-height:1.1!important;letter-spacing:-.01em!important}
+.fact .number-display{display:block!important;margin-bottom:20px!important;color:#111111!important;font-family:var(--font-geist-mono,var(--font-geist-mono))!important;font-size:48px!important;line-height:1.1!important;letter-spacing:-.01em!important}
 .fact strong{display:block!important;color:#111111!important;font-size:16px!important;font-weight:500!important;line-height:1.35!important}
 
 /* Projects — Cream Editorial Cards */
@@ -145,9 +145,9 @@ button{cursor:pointer}
 .project-card:hover{transform:translateY(-3px)!important}
 .project-card-hit{width:100%!important;min-height:390px!important;padding:56px!important;background:transparent!important;text-align:left!important;display:flex!important;flex-direction:column!important}
 .project-topline{color:#615e5b!important;font-size:13px!important;letter-spacing:.03em!important}
-.project-topline .number-display{color:#111111!important;font-family:var(--font-geist-mono,var(--font-mono))!important}
+.project-topline .number-display{color:#111111!important;font-family:var(--font-geist-mono,var(--font-geist-mono))!important}
 .project-icon{width:40px!important;height:40px!important;border:1px solid #d8d3cc!important;border-radius:50%!important;background:transparent!important;color:#111!important;margin:32px 0 24px!important}
-.project-card h3{color:#111111!important;font-family:var(--font-geist,var(--font-display))!important;font-size:32px!important;font-weight:500!important;letter-spacing:-.03em!important;line-height:1.1!important}
+.project-card h3{color:#111111!important;font-family:var(--font-geist,var(--font-geist))!important;font-size:32px!important;font-weight:500!important;letter-spacing:-.03em!important;line-height:1.1!important}
 .project-card p{max-width:520px!important;color:#111111!important;font-size:16px!important;line-height:1.5!important;margin-top:12px!important}
 .tags{display:flex!important;flex-wrap:wrap!important;gap:8px!important}
 .project-card .tags{margin-top:24px!important}
@@ -164,8 +164,8 @@ button{cursor:pointer}
 .timeline{position:relative!important}
 .timeline-item{padding:28px 0!important;border-color:#e9eaeb!important}
 .timeline-item:first-child{padding-top:0!important}
-.timeline-period{color:#111111!important;font-family:var(--font-mono)!important;font-size:13px!important;font-weight:500!important;letter-spacing:.03em!important}
-.timeline-item h3{margin-top:12px!important;color:#111111!important;font-family:var(--font-display)!important;font-size:24px!important;font-weight:500!important;letter-spacing:-.02em!important;line-height:1.2!important}
+.timeline-period{color:#111111!important;font-family:var(--font-geist-mono)!important;font-size:13px!important;font-weight:500!important;letter-spacing:.03em!important}
+.timeline-item h3{margin-top:12px!important;color:#111111!important;font-family:var(--font-geist)!important;font-size:24px!important;font-weight:500!important;letter-spacing:-.02em!important;line-height:1.2!important}
 .timeline-item p{margin-top:8px!important;color:#615e5b!important;font-size:16px!important;line-height:1.5!important}
 .principle-list{margin-top:0!important}
 .principle-list li{padding:24px 0!important;border-color:#e9eaeb!important}
@@ -205,7 +205,7 @@ button{cursor:pointer}
 .modal-backdrop{background:rgba(8,8,8,.55)!important;backdrop-filter:blur(14px)!important;-webkit-backdrop-filter:blur(14px)!important}
 .project-modal{border:1px solid #ddd!important;border-radius:28px!important;}
 .modal-close{background:#f3efeb!important}
-.modal-title-row h2{font-family:var(--font-display)!important;color:#0a0a0a!important}
+.modal-title-row h2{font-family:var(--font-geist)!important;color:#0a0a0a!important}
 .modal-description{color:#555!important}
 .modal-links .button{border-color:#e3e3e3!important}
 .tool-button{background:#fff!important;border-color:#ddd!important}
