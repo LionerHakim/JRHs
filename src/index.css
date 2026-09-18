@@ -668,6 +668,7 @@ main {
 }
 
 .contact-field input,
+.contact-field select,
 .contact-field textarea {
   width: 100%;
   min-width: 0;
@@ -679,10 +680,22 @@ main {
   font-size: 14px;
 }
 
-.contact-field input {
+.contact-field input,
+.contact-field select {
   min-height: 54px;
 }
 
+
+.contact-field select {
+  appearance: none;
+  cursor: pointer;
+}
+
+.contact-field:has(select)::after {
+  content: '⌄';
+  color: var(--smoke);
+  pointer-events: none;
+}
 
 .contact-message {
   align-items: flex-start;
