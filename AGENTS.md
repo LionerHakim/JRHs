@@ -1,7 +1,21 @@
-# JRH project guidance
+# JRHs project guidance
 
-For UI work, read `DESIGN.md` first. Apply the anti-slop principles from `miqdadbadjuber/anti-slop` as a quality filter: every visual technique needs a purpose, real content beats invented claims, interactive controls must work, composition should follow the content, and the final result must be checked across mobile, desktop, light mode, dark mode, and keyboard use.
+Keep the portfolio specific, restrained, and content-led.
 
-Upstream reference: https://github.com/miqdadbadjuber/anti-slop
+For UI work:
+- Use the SIGNAL design direction defined by the current implementation.
+- Keep the palette limited to Void, Panel, Signal Red, Signal Amber, Primary White, and Muted.
+- Do not invent portfolio facts, projects, testimonials, dates, or claims.
+- Keep interactions functional and keyboard accessible.
+- Respect `prefers-reduced-motion`.
+- Avoid decorative sci-fi clichés, gradients, generic SaaS cards, and unnecessary animation.
+- Keep the React + TypeScript + Vite stack unless a concrete compatibility issue requires otherwise.
 
-Current design read: personal economics and digital portfolio, iOS-inspired material quality without cloning Apple, ENERGY 2 / RHYTHM 3 / MOTION 2.
+Before release:
+- Run `npm run typecheck`.
+- Run `npm run build`.
+- Check mobile, tablet, and desktop layouts.
+- Check keyboard navigation, dialogs, command palette, and reduced-motion behavior.
+- Verify metadata and active asset paths.
+
+Note: `design.md` is not present in the current repository, so there is no legacy design document available to reconcile against.
