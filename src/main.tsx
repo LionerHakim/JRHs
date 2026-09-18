@@ -1,4 +1,5 @@
 import { useEffect, useMemo, useRef, useState, type CSSProperties, type PointerEvent as ReactPointerEvent } from 'react'
+import { createRoot } from 'react-dom/client'
 import { siteConfig } from './config/site'
 import './index.css'
 
@@ -281,5 +282,4 @@ export default function App() {
 
 const rootElement = document.getElementById('root')
 if (!rootElement) throw new Error('JRH root element not found')
-import { createRoot } from 'react-dom/client'
 createRoot(rootElement).render(<App />)
