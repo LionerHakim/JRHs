@@ -36,7 +36,7 @@ export default function App() {
   const filteredProjects = useMemo(() => {
     if (!normalized) return siteConfig.projects
     return siteConfig.projects.filter((project) =>
-      [project.title, ...(project.links ?? []).flatMap((link) => [link.name, link.handle ?? ''])]
+      [project.title, ...(project.links ?? []).flatMap((link) => [link.name, 'handle' in link ? link.handle : ''])]
         .join(' ')
         .toLowerCase()
         .includes(normalized),
