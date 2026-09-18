@@ -381,13 +381,14 @@ main {
 .record {
   position: relative;
   display: grid;
-  grid-template-columns: minmax(120px, 0.28fr) minmax(0, 1fr);
-  gap: clamp(24px, 5vw, 72px);
-  padding: 28px 0;
+  grid-template-columns: minmax(150px, 0.28fr) minmax(0, 1fr);
+  gap: clamp(32px, 5vw, 76px);
+  padding: clamp(26px, 3vw, 34px) 0;
   border-bottom: 1px solid var(--line);
 }
 
 .record time {
+  padding-top: 3px;
   color: var(--smoke);
   font-size: 11px;
   font-variant-numeric: tabular-nums;
@@ -406,7 +407,7 @@ main {
 }
 
 .record p {
-  margin: 7px 0 0;
+  margin: 6px 0 0;
   color: var(--smoke);
   font-size: 13px;
   line-height: 1.5;
@@ -414,8 +415,8 @@ main {
 
 .record-activities {
   display: grid;
-  gap: 6px;
-  margin: 13px 0 0;
+  gap: 4px;
+  margin: 12px 0 0;
   padding: 0;
   list-style: none;
 }
