@@ -17,6 +17,7 @@ export default function App() {
   const [name, setName] = useState('')
   const [email, setEmail] = useState('')
   const [purpose, setPurpose] = useState('')
+  const [customPurpose, setCustomPurpose] = useState('')
   const [message, setMessage] = useState('')
   const [privacy, setPrivacy] = useState(false)
   const [contactStatus, setContactStatus] = useState<string | null>(null)
@@ -58,10 +59,12 @@ export default function App() {
     if (!name.trim()) return setContactError('Nama belum diisi.')
     if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.trim())) return setContactError('Emailnya belum valid.')
     if (!purpose) return setContactError('Silakan pilih topik dulu.')
+    const finalPurpose = purpose === 'Lainnya' ? customPurpose.trim() : purpose
+    if (purpose === 'Lainnya' && !finalPurpose) return setContactError('Tulis topiknya dulu, ya.')
     if (!message.trim()) return setContactError('Pesannya masih kosong.')
     if (!privacy) return setContactError('Centang persetujuan privasi dulu.')
 
-    const subject = encodeURIComponent(`[JRHs Contact] ${purpose}`)
+    const subject = encodeURIComponent(`[JRHs Contact] ${finalPurpose}`)
     const body = encodeURIComponent(`Halo JRHs,
 
 Saya ingin menghubungi terkait:
@@ -222,11 +225,17 @@ ${name.trim()}`)
                 </label>
                 <label className="contact-field">
                   <span className="contact-icon" aria-hidden="true">☰</span>
-                  <select value={purpose} onChange={(event) => setPurpose(event.target.value)}>
+                  <select value={purpose} onChange={(event) => { setPurpose(event.target.value); setCustomPurpose('') }}>
                     <option value="">Pilih topik</option>
                     {['Pertanyaan umum', 'Kolaborasi', 'Project', 'Bisnis', 'Investasi', 'Akademik', 'Feedback', 'Lainnya'].map((item) => <option key={item} value={item}>{item}</option>)}
                   </select>
                 </label>
+                {purpose === 'Lainnya' ? (
+                  <label className="contact-field">
+                    <span className="contact-icon" aria-hidden="true">✦</span>
+                    <input value={customPurpose} onChange={(event) => setCustomPurpose(event.target.value)} placeholder="Tulis topik Anda..." maxLength={80} />
+                  </label>
+                ) : null}
                 <label className="contact-field contact-message">
                   <span className="contact-icon" aria-hidden="true">💬</span>
                   <textarea value={message} onChange={(event) => setMessage(event.target.value.slice(0, 1000))} placeholder="Tulis pesan Anda di sini..." maxLength={1000} rows={5} />
@@ -246,17 +255,14 @@ ${name.trim()}`)
               </div>
 
               <div className="contact-benefits" aria-label="Contact benefits">
-                <span>⚡ <strong>Cepat</strong> <small>Langsung ke email</small></span>
-                <span>🔒 <strong>Privasi</strong> <small>Data tetap aman</small></span>
-                <span>♡ <strong>Mudah</strong> <small>Tinggal isi &amp; kirim</small></span>
+                <span aria-label="Cepat">⚡</span>
+                <span aria-label="Privasi">🔒</span>
+                <span aria-label="Mudah">✓</span>
               </div>
 
-              <div className="contact-email-info">
-                <span className="contact-email-icon" aria-hidden="true">✉</span>
-                <div>
-                  <strong>Email akan terbuka dengan format yang sudah disiapkan.</strong>
-                  <a href={`mailto:${siteConfig.contactEmail}`}>{siteConfig.contactEmail}</a>
-                </div>
+              <div className="contact-closing">
+                <p>Terima kasih sudah mampir. Sampai jumpa di email.</p>
+                <a href={`mailto:${siteConfig.contactEmail}`}>{siteConfig.contactEmail}</a>
               </div>
             </form>
           </div>
