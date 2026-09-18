@@ -784,20 +784,33 @@ main {
 }
 
 .contact-benefits {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 10px;
+  display: flex;
+  align-items: stretch;
+  gap: 0;
   padding-top: 4px;
+  border-top: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
 }
 
 .contact-benefits span {
+  flex: 1 1 0;
   display: grid;
   grid-template-columns: auto 1fr;
   column-gap: 7px;
   align-items: center;
-  padding: 12px 0;
+  padding: 13px 18px;
   color: var(--smoke);
   font-size: 12px;
+  border-right: 1px solid var(--line);
+}
+
+.contact-benefits span:first-child {
+  padding-left: 0;
+}
+
+.contact-benefits span:last-child {
+  border-right: 0;
+  padding-right: 0;
 }
 
 .contact-benefits strong {
@@ -1102,12 +1115,29 @@ footer strong {
   }
 
   .contact-benefits {
-    grid-template-columns: 1fr;
-    gap: 0;
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
   }
 
   .contact-benefits span {
-    padding: 8px 0;
+    padding: 10px 8px;
+    font-size: 10px;
+  }
+
+  .contact-benefits span:first-child {
+    padding-left: 0;
+  }
+
+  .contact-benefits span:last-child {
+    padding-right: 0;
+  }
+
+  .contact-benefits strong {
+    font-size: 10px;
+  }
+
+  .contact-benefits small {
+    font-size: 9px;
   }
 
   .contact-email-info {
