@@ -668,7 +668,6 @@ main {
 }
 
 .contact-field input,
-.contact-field select,
 .contact-field textarea {
   width: 100%;
   min-width: 0;
@@ -680,21 +679,10 @@ main {
   font-size: 14px;
 }
 
-.contact-field input,
-.contact-field select {
+.contact-field input {
   min-height: 54px;
 }
 
-.contact-field select {
-  appearance: none;
-  cursor: pointer;
-}
-
-.contact-field:has(select)::after {
-  content: '⌄';
-  color: var(--smoke);
-  pointer-events: none;
-}
 
 .contact-message {
   align-items: flex-start;
@@ -821,8 +809,9 @@ main {
 
 .contact-closing {
   display: grid;
-  gap: 4px;
-  padding-top: 2px;
+  gap: 6px;
+  padding: 14px 16px;
+  border-top: 1px solid var(--line);
   text-align: center;
 }
 
@@ -1112,7 +1101,7 @@ footer strong {
   }
 
   .contact-closing {
-    padding-top: 0;
+    padding: 12px 4px 0;
   }
 
   .links-list a {
