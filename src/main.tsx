@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useRef, useState, type KeyboardEvent as ReactKeyboardEvent } from 'react'
+import { useEffect, useMemo, useRef, useState, type CSSProperties, type PointerEvent as ReactPointerEvent } from 'react'
 import { siteConfig } from './config/site'
 import './index.css'
 
@@ -22,7 +22,7 @@ function scrollToId(id: string) {
   })
 }
 
-function isInteractiveKey(event: ReactKeyboardEvent<HTMLButtonElement>) {
+function isInteractiveKey(event: { key: string }) {
   return event.key === 'Enter' || event.key === ' '
 }
 
@@ -176,7 +176,7 @@ export default function App() {
     }
   }
 
-  const handleMagneticMove = (event: React.PointerEvent<HTMLElement>) => {
+  const handleMagneticMove = (event: ReactPointerEvent<HTMLElement>) => {
     if (event.pointerType !== 'mouse' || prefersReducedMotion()) return
     const rect = event.currentTarget.getBoundingClientRect()
     const x = ((event.clientX - rect.left) / rect.width - 0.5) * 8
@@ -185,7 +185,7 @@ export default function App() {
     event.currentTarget.style.setProperty('--my', y.toFixed(2) + 'px')
   }
 
-  const resetMagnetic = (event: React.PointerEvent<HTMLElement>) => {
+  const resetMagnetic = (event: ReactPointerEvent<HTMLElement>) => {
     event.currentTarget.style.setProperty('--mx', '0px')
     event.currentTarget.style.setProperty('--my', '0px')
   }
@@ -196,7 +196,7 @@ export default function App() {
     <div className="site-shell">
       <div className="reticle" style={{ left: cursorPoint.x, top: cursorPoint.y }} aria-hidden="true" />
       <header className="nav">
-        <a className="wordmark magnetic" href="#identity" style={{ '--mx': '0px', '--my': '0px' } as React.CSSProperties}>
+        <a className="wordmark magnetic" href="#identity" style={{ '--mx': '0px', '--my': '0px' } as CSSProperties}>
           <span>JRH</span>
           <i aria-hidden="true">/</i>
         </a>
@@ -292,7 +292,7 @@ export default function App() {
                       requestAnimationFrame(() => event.currentTarget.style.setProperty('--pressed-scale', '1'))
                     }
                   }}
-                  style={{ '--mx': '0px', '--my': '0px', '--pressed-scale': '1' } as React.CSSProperties}
+                  style={{ '--mx': '0px', '--my': '0px', '--pressed-scale': '1' } as CSSProperties}
                   aria-label={`View details for ${project.title}`}
                 >
                   <span className="project-signal" aria-hidden="true" />
