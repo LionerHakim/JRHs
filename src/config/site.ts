@@ -21,20 +21,17 @@ export const siteConfig = {
     {
       period: '2021 — 2026',
       institution: 'Universitas Islam Indonesia',
-      program: 'Undergraduate study',
-      detail: 'Research, writing, and project work',
+      program: 'S1 Ekonomi Pembangunan',
     },
     {
       period: '2018 — 2021',
-      institution: 'SMA Negeri',
-      program: 'Student leadership',
-      detail: 'Organization and administration',
+      institution: 'SMA Negeri 300 Brebes',
+      program: 'Pendidikan Menengah',
     },
     {
       period: '2015 — 2018',
-      institution: 'SMP Negeri',
-      program: 'Student activities',
-      detail: 'Discipline and organization',
+      institution: 'SMP Negeri 200 Brebes',
+      program: 'Pendidikan Menengah Pertama',
     },
   ] satisfies readonly Education[],
   projects: [
