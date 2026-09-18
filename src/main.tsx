@@ -87,6 +87,10 @@ export default function App() {
                 fetchPriority="high"
               />
             </div>
+            <figcaption className="portrait-quote">
+              <strong>BERPIKIR SEPERTI MESIN EKONOMI</strong>
+              <p>lihat dunia sebagai sistem. segala peristiwa saling berkaitan dan berulang. pahami pola, bukan hanya kejadian sesaat.</p>
+            </figcaption>
           </figure>
         </section>
 
