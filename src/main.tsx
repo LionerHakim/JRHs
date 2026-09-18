@@ -16,6 +16,7 @@ export default function App() {
   const [activeSection, setActiveSection] = useState<(typeof sectionIds)[number]>('identity')
   const [name, setName] = useState('')
   const [email, setEmail] = useState('')
+  const [purpose, setPurpose] = useState('')
   const [message, setMessage] = useState('')
   const [privacy, setPrivacy] = useState(false)
   const [contactStatus, setContactStatus] = useState<string | null>(null)
@@ -61,9 +62,10 @@ export default function App() {
     const emailMatch = normalizedEmail.match(emailPattern)
     if (!emailMatch || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(normalizedEmail)) return setContactError('Gunakan email yang valid.')
     if (!trustedEmailDomains.includes(emailMatch[1])) return setContactError('Gunakan email dari Gmail, Outlook, Hotmail, Yahoo, iCloud, atau Proton.')
+    if (!purpose) return setContactError('Pilih topik atau pilih Opsional.')
     if (!privacy) return setContactError('Centang persetujuan privasi dulu.')
 
-    const subject = encodeURIComponent('[JRHs Contact] Pesan dari website')
+    const subject = encodeURIComponent(`[JRHs Contact] ${purpose === 'Opsional' ? 'Pesan dari website' : purpose}`)
     const body = encodeURIComponent(`Halo JRHs,
 
 Saya ingin menghubungi terkait:
@@ -221,6 +223,13 @@ ${name.trim()}`)
                 <label className="contact-field">
                   <span className="contact-icon" aria-hidden="true">✉</span>
                   <input type="email" value={email} onChange={(event) => setEmail(event.target.value)} placeholder="email@kamu.com" autoComplete="email" inputMode="email" />
+                </label>
+                <label className="contact-field">
+                  <span className="contact-icon" aria-hidden="true">☰</span>
+                  <select value={purpose} onChange={(event) => setPurpose(event.target.value)} aria-label="Pilih topik">
+                    <option value="">Pilih topik</option>
+                    {['Pertanyaan umum', 'Kolaborasi', 'Project', 'Bisnis', 'Investasi', 'Akademik', 'Feedback', 'Opsional'].map((item) => <option key={item} value={item}>{item}</option>)}
+                  </select>
                 </label>
                 <label className="contact-field contact-message">
                   <span className="contact-icon" aria-hidden="true">💬</span>
