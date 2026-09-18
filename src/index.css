@@ -511,10 +511,8 @@ a:active, button:active { transform: translateY(1px); }
   inset: 0;
   z-index: 1080;
   pointer-events: none;
-  background-image: radial-gradient(circle at 1px 1px, rgba(8,8,8,.16) 1px, transparent 0);
-  background-size: 18px 18px;
-  mask-image: linear-gradient(to bottom, black, transparent 32%);
-  opacity: .12;
+  background: var(--white);
+  opacity: 0;
 }
 .nav::after {
   content: "";
@@ -598,7 +596,7 @@ a:active, button:active { transform: translateY(1px); }
   letter-spacing: .12em;
 }
 @media (max-width: 720px) {
-  .app::before { opacity: .07; background-size: 22px 22px; }
+  .app::before { opacity: 0; }
   .hero h1 em::after { height: 4px; bottom: -5px; }
   .footer::before { display: none; }
 }
