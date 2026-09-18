@@ -1,5 +1,5 @@
 export type Link = { name: string; url: string }
-export type Education = { period: string; institution: string; program: string }
+export type Education = { period: string; institution: string; program: string; activities?: readonly string[] }
 export type Project = {
   number: string
   title: string
@@ -14,9 +14,9 @@ export const siteConfig = {
   },
   contactEmail: 'contact@jrhsee.my.id',
   education: [
-    { period: '2021 — 2026', institution: 'Universitas Islam Indonesia', program: 'S1 Ekonomi Pembangunan' },
-    { period: '2018 — 2021', institution: 'SMA Negeri 300 Brebes', program: 'SMA' },
-    { period: '2015 — 2018', institution: 'SMP Negeri 200 Brebes', program: 'SMP' },
+    { period: '2021 — 2026', institution: 'Universitas Islam Indonesia', program: 'S1 Ekonomi Pembangunan', activities: ['KSPM FBEUII (Event Organizer)'] },
+    { period: '2018 — 2021', institution: 'SMA Negeri 300 Brebes', program: 'SMA', activities: ['Bendahara Paskibra', 'Ketua OSIS 19/20'] },
+    { period: '2015 — 2018', institution: 'SMP Negeri 200 Brebes', program: 'SMP', activities: ['Ketua Kelas'] },
   ] satisfies readonly Education[],
   projects: [
     {
