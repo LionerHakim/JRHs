@@ -4,16 +4,6 @@ export type Link = {
   handle?: string
 }
 
-export type Track = {
-  title: string
-  src: string
-}
-
-export type Fact = {
-  label: string
-  value: string
-}
-
 export type Education = {
   period: string
   institution: string
@@ -48,44 +38,11 @@ export const siteConfig = {
     portfolio: 'https://jrhsee.my.id/',
   },
 
-  music: {
-    title: 'JRH Music',
-    tracks: [
-      { title: 'Budi Doremi', src: '/assets/audio/Budi-Doremi.mp3' },
-      { title: 'Tak Ada Ujungnya', src: '/assets/audio/Tak-AdaUjungnya.mp3' },
-    ] satisfies readonly Track[],
-  },
-
-  hero: {
-    eyebrow: 'JRH / DIGITAL PORTFOLIO',
-    titleLine1: 'Think deeply.',
-    titleLine2: 'Build with purpose.',
-    description: 'A personal workspace for ideas, digital experiments, publishing, and things worth building.',
-  },
-
-  about: {
-    titleLine1: 'Ideas become',
-    titleLine2: 'systems.',
-    lead: 'A simple rule: make the thinking clear, then make the output useful.',
-    body: 'I work from first principles: understand the problem, structure the work, simplify the experience, then iterate until it feels right.',
-    facts: [
-      { label: '2021', value: 'Universitas Islam Indonesia' },
-      { label: '04', value: 'Current projects & channels' },
-      { label: 'JRH', value: 'Independent digital workspace' },
-    ] satisfies readonly Fact[],
-  },
-
   education: [
     { period: '2021 — 2026', institution: 'Universitas Islam Indonesia', program: 'Undergraduate study', detail: 'Research, writing, and project work' },
     { period: '2018 — 2021', institution: 'SMA Negeri', program: 'Student leadership', detail: 'Organization and administration' },
     { period: '2015 — 2018', institution: 'SMP Negeri', program: 'Student activities', detail: 'Discipline and organization' },
   ] satisfies readonly Education[],
-
-  workPrinciples: [
-    'Start from the real problem.',
-    'Keep the interface calm and readable.',
-    'Ship useful iterations, not decoration.',
-  ] as const,
 
   projects: [
     {
@@ -136,25 +93,6 @@ export const siteConfig = {
       ],
     },
   ] satisfies readonly Project[],
-
-  quote: 'Berpikir dari dasar. Menyederhanakan yang rumit. Membangun sesuatu yang berguna.',
-
-  contact: {
-    titleLine1: 'Have an idea?',
-    titleLine2: "Let's build.",
-    description: 'Open to collaborations, digital experiments, creative projects, and conversations.',
-  },
 } as const
 
-export const siteContent = {
-  identity: siteConfig.identity,
-  social: siteConfig.social,
-  hero: siteConfig.hero,
-  about: siteConfig.about,
-  education: siteConfig.education,
-  workPrinciples: siteConfig.workPrinciples,
-  projects: siteConfig.projects,
-  quote: siteConfig.quote,
-  contact: siteConfig.contact,
-  music: siteConfig.music,
-} as const
+export const siteContent = siteConfig
