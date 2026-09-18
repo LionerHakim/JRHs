@@ -151,10 +151,22 @@ export default function App() {
           <p>gunakan data dan sistem algoritma, tapi jangan buang intuisi manusia. gabungkan keduanya untuk pengambilan keputusan terbaik.</p>
         </aside>
 
-        <section id="links" className="section" aria-labelledby="links-title">
+        <section id="links" className="section contact-section" aria-labelledby="links-title">
           <div className="section-head">
             <p className="section-kicker">CONTACT</p>
             <h2 id="links-title">Contact</h2>
+          </div>
+
+          <div className="contact-intro">
+            <p className="contact-question">Ada yang ingin dibicarakan?</p>
+            <p className="contact-answer">Mari terhubung. Untuk kolaborasi, pekerjaan, atau sekadar bertukar pikiran.</p>
+          </div>
+
+          <div className="contact-benefits" aria-label="Contact opportunities">
+            <span>Kolaborasi</span>
+            <span>Diskusi</span>
+            <span>Peluang</span>
+            <span>Koneksi</span>
           </div>
 
           <div className="links-list">
