@@ -64,7 +64,7 @@ export default function App() {
     if (!trustedEmailDomains.includes(emailMatch[1])) return setContactError('Gunakan email dari Gmail, Outlook, Hotmail, Yahoo, iCloud, atau Proton.')
     if (!privacy) return setContactError('Centang persetujuan privasi dulu.')
 
-    const subject = encodeURIComponent(`[JRHs Contact] ${purpose === 'Opsional' ? 'Pesan dari website' : purpose}`)
+    const subject = encodeURIComponent(`[JRHs Contact] ${purpose || 'Pesan dari website'}`)
     const body = encodeURIComponent(`Halo JRHs,
 
 Saya ingin menghubungi terkait:
@@ -257,6 +257,9 @@ ${name.trim()}`)
                 </span>
                 <span aria-label="Aman">
                   <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="5" y="10" width="14" height="11" rx="2" /><path d="M8 10V7a4 4 0 0 1 8 0v3" /></svg>
+                </span>
+                <span aria-label="Langsung ke email">
+                  <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3.5" y="5.5" width="17" height="13" rx="2" /><path d="m4.5 7 7.5 6 7.5-6" /></svg>
                 </span>
               </div>
 
