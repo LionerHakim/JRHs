@@ -591,16 +591,16 @@ main {
 .contact-card {
   width: min(100%, 1030px);
   margin-left: auto;
-  padding: clamp(28px, 5vw, 56px);
+  padding: clamp(26px, 4.5vw, 48px);
   border: 1px solid rgba(60, 60, 67, 0.14);
-  border-radius: 28px;
+  border-radius: 24px;
   background: var(--paper);
-  box-shadow: 0 12px 34px rgba(0, 0, 0, 0.06), 0 2px 8px rgba(0, 0, 0, 0.04);
+  box-shadow: 0 10px 28px rgba(0, 0, 0, 0.05);
 }
 
 .contact-intro {
   max-width: 760px;
-  margin: 0 0 34px;
+  margin: 0 0 30px;
 }
 
 .contact-question {
@@ -636,7 +636,7 @@ main {
 .contact-fields {
   display: grid;
   gap: 10px;
-  padding-top: 24px;
+  padding-top: 22px;
   border-top: 1px solid var(--line);
 }
 
@@ -795,7 +795,6 @@ main {
 
 .contact-benefits span {
   flex: 1 1 0;
-  flex: 1 1 0;
   display: grid;
   place-items: center;
   min-height: 44px;
@@ -823,7 +822,7 @@ main {
 .contact-closing {
   display: grid;
   gap: 6px;
-  padding: 14px 16px;
+  padding: 12px 8px 0;
   border-top: 1px solid var(--line);
   text-align: center;
 }
@@ -1065,12 +1064,13 @@ footer strong {
   }
 
   .contact-card {
-    padding: 24px 18px;
-    border-radius: 24px;
+    padding: 22px 16px;
+    border-radius: 20px;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.045);
   }
 
   .contact-intro {
-    margin-bottom: 26px;
+    margin-bottom: 24px;
   }
 
   .contact-question {
@@ -1083,7 +1083,7 @@ footer strong {
   }
 
   .contact-fields {
-    padding-top: 20px;
+    padding-top: 18px;
   }
 
   .contact-field {
