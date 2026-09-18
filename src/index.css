@@ -800,9 +800,18 @@ main {
   min-height: 44px;
   padding: 10px 18px;
   color: var(--smoke);
-  font-size: 17px;
   line-height: 1;
   border-right: 1px solid var(--line);
+}
+
+.contact-benefits svg {
+  width: 17px;
+  height: 17px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.6;
+  stroke-linecap: round;
+  stroke-linejoin: round;
 }
 
 .contact-benefits span:first-child {
@@ -1102,7 +1111,11 @@ footer strong {
   .contact-benefits span {
     min-height: 42px;
     padding: 9px 8px;
-    font-size: 16px;
+  }
+
+  .contact-benefits svg {
+    width: 16px;
+    height: 16px;
   }
 
   .contact-benefits span:first-child {
