@@ -299,6 +299,30 @@ main {
   border-radius: var(--radius-sm);
 }
 
+.portrait-quote {
+  margin: 18px 2px 0;
+  padding-top: 15px;
+  border-top: 1px solid var(--line);
+}
+
+.portrait-quote strong {
+  display: block;
+  color: var(--ink);
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.13em;
+  line-height: 1.4;
+}
+
+.portrait-quote p {
+  margin: 8px 0 0;
+  color: var(--smoke);
+  font-family: var(--font-editorial);
+  font-size: clamp(14px, 1.45vw, 17px);
+  line-height: 1.55;
+  letter-spacing: -0.015em;
+}
+
 /* 12 / 14 — Shared editorial section rhythm */
 .section {
   padding: var(--section-space) 0;
