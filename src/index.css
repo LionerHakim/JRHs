@@ -16,15 +16,35 @@
   --font-geist-mono: 'Geist Mono', ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
 
   --text-micro: 11px;
+  --leading-micro: 11;
+  --tracking-micro: 0.33px;
+  --leading-overline: 13;
+  --tracking-overline: 0.39px;
   --text-overline: 13px;
+  --leading-body-sm: 19.2;
   --text-body-sm: 16px;
+  --leading-body: 23.4;
   --text-body: 18px;
+  --leading-body-lg: 26;
   --text-body-lg: 20px;
+  --leading-subheading: 30.8;
+  --tracking-subheading: -0.28px;
   --text-subheading: 28px;
+  --leading-heading-sm: 35.2;
+  --tracking-heading-sm: -0.96px;
   --text-heading-sm: 32px;
+  --leading-heading: 44;
+  --tracking-heading: -1.2px;
   --text-heading: 40px;
+  --leading-heading-lg: 52.8;
+  --tracking-heading-lg: -0.48px;
   --text-heading-lg: 48px;
+  --leading-display: 66;
+  --tracking-display: -1.8px;
   --text-display: 60px;
+
+  --font-weight-regular: 400;
+  --font-weight-medium: 500;
 
   --spacing-4: 4px;
   --spacing-8: 8px;
@@ -44,6 +64,7 @@
   --spacing-128: 128px;
 
   --page-max-width: 1280px;
+  --spacing-unit: 4px;
   --radius-nav: 160px;
   --radius-tags: 9999px;
   --radius-cards: 32px;
@@ -51,6 +72,9 @@
   --radius-buttons: 160px;
 
   --ease-titan: cubic-bezier(.83, 0, .17, 1);
+  --surface-canvas: #ffffff;
+  --surface-cream-card: #f3efeb;
+  --surface-obsidian-footer: #1e1e1d;
 }
 
 *,
@@ -112,8 +136,9 @@ h1,
 h2,
 h3 {
   color: var(--color-ink);
-  font-weight: 500;
+  font-weight: var(--font-weight-medium);
   letter-spacing: -.03em;
+  font-feature-settings: "ss02", "ss03";
 }
 
 ::selection {
@@ -424,6 +449,7 @@ main {
 }
 
 .hero {
+  position: relative;
   min-height: calc(100svh - 88px);
   display: grid;
   grid-template-columns: minmax(0, 1.15fr) minmax(340px, .85fr);
@@ -431,6 +457,17 @@ main {
   gap: 80px;
   padding: 128px 0 var(--spacing-80);
   border-bottom: 1px solid var(--color-mist-border);
+}
+
+.hero::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: calc(55% + 40px);
+  width: 1px;
+  background: var(--color-mist-border);
+  pointer-events: none;
 }
 
 .hero-copy {
@@ -860,6 +897,11 @@ main {
   overflow: hidden;
   border-radius: var(--radius-cards);
   background: var(--color-cream-surface);
+  transition: transform .3s var(--ease-titan);
+}
+
+.project-card:hover {
+  transform: translateY(-2px);
 }
 
 .project-card-hit {
@@ -1431,6 +1473,10 @@ button:active {
 }
 
 @media (max-width: 900px) {
+  .hero::before {
+    display: none;
+  }
+
   .hero {
     grid-template-columns: 1fr;
   }
