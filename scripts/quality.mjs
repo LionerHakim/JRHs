@@ -10,7 +10,7 @@ const files = [
   'src/main.tsx',
   'src/index.css',
   'src/future.css',
-    'public/site.webmanifest',
+  'public/site.webmanifest',
   'public/404.html',
   'public/favicon.svg',
   'public/_headers',
