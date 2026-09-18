@@ -366,11 +366,11 @@ function App() {
         </div>
       </header>
       {menu && <button className="menu-backdrop" aria-label="Close menu" onClick={() => setMenu(false)} />}
-      <main id="top">
-        <section className="hero">
+      <main id="top" className="organic-page">
+        <section className="hero organic-hero">
           <div className="hero-copy reveal is-visible">
             <div className="eyebrow"><span className="eyebrow-rule" />{siteConfig.hero.eyebrow}</div>
-                        <h1 id="hero-title">{siteConfig.hero.titleLine1}<br /><em>{siteConfig.hero.titleLine2}</em></h1>
+            <h1 id="hero-title">{siteConfig.hero.titleLine1}<br /><em>{siteConfig.hero.titleLine2}</em></h1>
             <p>{siteConfig.hero.description}</p>
             <div className="hero-actions">
               <button className="button primary" onClick={() => go('work')}>Explore work <ArrowRight size={16} /></button>
@@ -384,33 +384,35 @@ function App() {
           </div>
           <div className="hero-visual reveal is-visible">
             <div className="hero-photo-wrap">
-              <div className="hero-photo-orbit orbit-one" aria-hidden="true" />
-              <div className="hero-photo-orbit orbit-two" aria-hidden="true" />
               <div className="portrait-frame">
                 <img src={siteConfig.profileImage} alt="Jefri Rahman Hakim" className="profile-photo" fetchPriority="high" decoding="async" />
-                
               </div>
-              <div className="photo-index" aria-hidden="true">01 / 04</div>
             </div>
             <div className="hero-caption">
-              <div><span>Current frame</span><strong>A personal system for projects, publishing, and experiments.</strong></div>
+              <div><span>JRH / 2026</span><strong>A personal system for projects, publishing, and experiments.</strong></div>
               <button className="caption-arrow" onClick={() => go('about')} aria-label="Go to about section"><ArrowUpRight size={16} /></button>
             </div>
           </div>
         </section>
-        <div className="signal-strip" aria-label="Portfolio status"><span><i />Available for selected digital projects</span><span>JRH / 2026</span><span>Scroll to explore <ChevronRight size={14} /></span></div>
 
-        <section id="about" className="section about-section">
-          <div className="section-kicker reveal"><span>01</span><span>About</span></div>
+        <section className="organic-intro" aria-label="Portfolio identity">
+          <span>01 / JRH</span><p>Think deeply. Build with purpose.</p><span>Digital portfolio · Independent workspace</span>
+        </section>
+
+        <section id="about" className="section about-section organic-section">
+          <div className="section-kicker reveal"><span>02</span><span>About</span></div>
           <div className="about-layout">
             <div className="section-intro reveal"><span className="section-overline">The point of the work</span><h2>{siteConfig.about.titleLine1}<br /><em>{siteConfig.about.titleLine2}</em></h2><p>{siteConfig.about.lead}</p></div>
             <div className="about-body reveal"><p className="lead-copy">{siteConfig.about.body}</p><div className="fact-grid">{siteConfig.facts.map(([label, value]) => <div className="fact" key={label}><span className="number-display">{label}</span><strong>{value}</strong></div>)}</div></div>
           </div>
         </section>
 
-        <section id="work" className="section projects-section">
-          <div className="section-kicker reveal"><span>02</span><span>Projects</span></div>
-          <div className="section-heading reveal"><div><span className="section-overline">Selected work</span><h2>Built, published, iterated.</h2></div><p>{filteredProjects.length} of {projects.length} projects shown. Open any card for the full link set.</p></div>
+        <section id="work" className="section projects-section organic-section">
+          <div className="section-kicker reveal"><span>03</span><span>Work</span></div>
+          <div className="organic-work-head reveal">
+            <div><span className="section-overline">Selected archive</span><h2>Built, published, iterated.</h2></div>
+            <p>{filteredProjects.length} / {projects.length} projects · open any work to explore.</p>
+          </div>
           <div className="project-toolbar reveal">
             <label className="search-box"><Search size={16} /><input ref={searchRef} value={query} onChange={event => setQuery(event.target.value)} placeholder="Search projects…" aria-label="Search projects" /><kbd>/</kbd></label>
             <div className="filter-row" aria-label="Project categories">
@@ -431,10 +433,10 @@ function App() {
           {filteredProjects.length === 0 && <div className="empty-state reveal"><Search size={20} /><strong>No matching projects.</strong><span>Try a different search or switch the category.</span></div>}
         </section>
 
-        <section className="statement reveal" aria-label="JRH principle"><div className="statement-mark"><Sparkles size={18} /> JRH</div><div><span className="section-note">Working principle</span><p>“{siteConfig.quote}”</p></div></section>
+        <section className="statement reveal organic-statement" aria-label="JRH principle"><div className="statement-mark"><Sparkles size={18} /> JRH</div><div><span className="section-note">Working principle</span><p>“{siteConfig.quote}”</p></div></section>
 
-        <section id="experience" className="section experience-section">
-          <div className="section-kicker reveal"><span>03</span><span>Experience</span></div>
+        <section id="experience" className="section experience-section organic-section">
+          <div className="section-kicker reveal"><span>04</span><span>Experience</span></div>
           <div className="section-heading reveal"><div><span className="section-overline">Timeline</span><h2>Learning by doing.</h2></div><p>A compact record of the academic path and working approach behind this portfolio.</p></div>
           <div className="experience-layout">
             <article className="experience-card reveal"><div className="card-topline"><div className="card-icon"><BookOpen size={17} /></div><span>Academic path</span></div><div className="timeline-list">{siteConfig.education.map(item => <div className="timeline-item" key={item.period}><span className="number-display">{item.period}</span><div><strong>{item.institution}</strong><p>{item.program}</p><small>{item.detail}</small></div></div>)}</div></article>
@@ -442,8 +444,8 @@ function App() {
           </div>
         </section>
 
-        <section id="contact" className="cta-section reveal">
-          <div className="section-kicker"><span>04</span><span>Contact</span></div>
+        <section id="contact" className="cta-section reveal organic-contact">
+          <div className="section-kicker"><span>05</span><span>Contact</span></div>
           <div className="cta-grid"><div className="cta-copy"><span className="section-overline">Open channel</span><h2>{siteConfig.contact.titleLine1}<br /><em>{siteConfig.contact.titleLine2}</em></h2><p>{siteConfig.contact.description}</p></div><div className="cta-actions"><a className="button primary large" href={siteConfig.instagram} target="_blank" rel="noreferrer">Instagram <ExternalLink size={16} /></a><a className="button secondary large" href={siteConfig.telegram} target="_blank" rel="noreferrer">Telegram <Send size={15} /></a><span>Choose the channel that works for you.</span></div></div>
         </section>
       </main>
