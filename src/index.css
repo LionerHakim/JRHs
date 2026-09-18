@@ -383,8 +383,12 @@ main {
   display: grid;
   grid-template-columns: minmax(150px, 0.28fr) minmax(0, 1fr);
   gap: clamp(32px, 5vw, 76px);
-  padding: clamp(26px, 3vw, 34px) 0;
+  padding: clamp(28px, 3.4vw, 38px) 0;
   border-bottom: 1px solid var(--line);
+}
+
+.record > div {
+  min-width: 0;
 }
 
 .record time {
@@ -407,16 +411,20 @@ main {
 }
 
 .record p {
-  margin: 6px 0 0;
+  margin: 8px 0 0;
   color: var(--smoke);
   font-size: 13px;
   line-height: 1.5;
 }
 
+.record-activities + * {
+  margin-top: 0;
+}
+
 .record-activities {
   display: grid;
-  gap: 4px;
-  margin: 12px 0 0;
+  gap: 6px;
+  margin: 14px 0 0;
   padding: 0;
   list-style: none;
 }
