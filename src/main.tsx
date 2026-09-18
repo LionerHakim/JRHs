@@ -85,7 +85,7 @@ function App() {
   useEffect(() => {
     document.documentElement.dataset.theme = 'light'
     document.documentElement.style.colorScheme = 'light'
-    document.querySelector('meta[name="theme-color"]')?.setAttribute('content', '#ffffff')
+    document.querySelector('meta[name="theme-color"]')?.setAttribute('content', '#080808')
   }, [])
 
   useEffect(() => {
