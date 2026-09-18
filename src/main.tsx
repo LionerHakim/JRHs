@@ -84,7 +84,7 @@ export default function App() {
                   <div className="project-links">
                     {(project.links ?? []).map((link) => (
                       <a key={link.url} href={link.url} target="_blank" rel="noreferrer">
-                        <span>{link.name}{link.handle ? ` · ${link.handle}` : ''}</span>
+                        <span>{link.name}</span>
                         <span aria-hidden="true">↗</span>
                       </a>
                     ))}
