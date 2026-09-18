@@ -588,6 +588,81 @@ main {
   }
 }
 
+.contact-intro {
+  width: min(100%, 1030px);
+  margin: 0 0 34px auto;
+  padding: 0;
+}
+
+.contact-question {
+  margin: 0;
+  color: var(--ink);
+  font-family: var(--font-editorial);
+  font-size: clamp(30px, 4vw, 52px);
+  line-height: 1.08;
+  letter-spacing: -0.035em;
+}
+
+.contact-answer {
+  max-width: 700px;
+  margin: 14px 0 0;
+  color: var(--graphite);
+  font-size: clamp(15px, 1.5vw, 18px);
+  line-height: 1.55;
+  letter-spacing: -0.01em;
+}
+
+.contact-benefits {
+  width: min(100%, 1030px);
+  margin: 0 0 34px auto;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0;
+  border-top: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+}
+
+.contact-benefits span {
+  position: relative;
+  padding: 15px 22px 15px 0;
+  margin-right: 22px;
+  color: var(--smoke);
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.13em;
+  text-transform: uppercase;
+}
+
+.contact-benefits span:not(:last-child)::after {
+  content: '·';
+  position: absolute;
+  right: 0;
+  color: var(--signal);
+}
+
+@media (max-width: 640px) {
+  .contact-intro {
+    margin-bottom: 28px;
+  }
+
+  .contact-question {
+    font-size: clamp(30px, 9vw, 42px);
+  }
+
+  .contact-answer {
+    font-size: 15px;
+  }
+
+  .contact-benefits {
+    margin-bottom: 28px;
+  }
+
+  .contact-benefits span {
+    padding: 13px 17px 13px 0;
+    margin-right: 17px;
+  }
+}
+
 /* 15 — Contact as a single, oversized action */
 #links {
   padding-bottom: clamp(120px, 17vw, 220px);
