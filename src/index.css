@@ -502,6 +502,34 @@ main {
   transform: translate(3px, -2px);
 }
 
+/* Decision-making quote */
+.project-quote {
+  width: min(100%, 1030px);
+  margin: 0 0 var(--section-space) auto;
+  padding: 28px 0 30px;
+  border-top: 1px solid var(--ink);
+  border-bottom: 1px solid var(--line);
+}
+
+.project-quote strong {
+  display: block;
+  color: var(--ink);
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.13em;
+  line-height: 1.4;
+}
+
+.project-quote p {
+  max-width: 760px;
+  margin: 10px 0 0;
+  color: var(--smoke);
+  font-family: var(--font-editorial);
+  font-size: clamp(15px, 1.7vw, 20px);
+  line-height: 1.55;
+  letter-spacing: -0.015em;
+}
+
 /* 15 — Contact as a single, oversized action */
 #links {
   padding-bottom: clamp(120px, 17vw, 220px);
