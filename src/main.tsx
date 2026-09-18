@@ -16,8 +16,6 @@ export default function App() {
   const [activeSection, setActiveSection] = useState<(typeof sectionIds)[number]>('identity')
   const [name, setName] = useState('')
   const [email, setEmail] = useState('')
-  const [purpose, setPurpose] = useState('')
-  const [customPurpose, setCustomPurpose] = useState('')
   const [message, setMessage] = useState('')
   const [privacy, setPrivacy] = useState(false)
   const [contactStatus, setContactStatus] = useState<string | null>(null)
@@ -57,14 +55,15 @@ export default function App() {
     setContactStatus(null)
 
     if (!name.trim()) return setContactError('Nama belum diisi.')
-    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.trim())) return setContactError('Emailnya belum valid.')
-    if (!purpose) return setContactError('Silakan pilih topik dulu.')
-    const finalPurpose = purpose === 'Lainnya' ? customPurpose.trim() : purpose
-    if (purpose === 'Lainnya' && !finalPurpose) return setContactError('Tulis topiknya dulu, ya.')
-    if (!message.trim()) return setContactError('Pesannya masih kosong.')
+    const normalizedEmail = email.trim().toLowerCase()
+    const trustedEmailDomains = ['gmail.com', 'outlook.com', 'hotmail.com', 'live.com', 'yahoo.com', 'icloud.com', 'proton.me', 'protonmail.com']
+    const emailPattern = /^[^\s@]+@([^\s@]+)$/
+    const emailMatch = normalizedEmail.match(emailPattern)
+    if (!emailMatch || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(normalizedEmail)) return setContactError('Gunakan email yang valid.')
+    if (!trustedEmailDomains.includes(emailMatch[1])) return setContactError('Gunakan email dari Gmail, Outlook, Hotmail, Yahoo, iCloud, atau Proton.')
     if (!privacy) return setContactError('Centang persetujuan privasi dulu.')
 
-    const subject = encodeURIComponent(`[JRHs Contact] ${finalPurpose}`)
+    const subject = encodeURIComponent('[JRHs Contact] Pesan dari website')
     const body = encodeURIComponent(`Halo JRHs,
 
 Saya ingin menghubungi terkait:
@@ -221,24 +220,11 @@ ${name.trim()}`)
                 </label>
                 <label className="contact-field">
                   <span className="contact-icon" aria-hidden="true">✉</span>
-                  <input type="email" value={email} onChange={(event) => setEmail(event.target.value)} placeholder="email@saya.com" autoComplete="email" />
+                  <input type="email" value={email} onChange={(event) => setEmail(event.target.value)} placeholder="email@kamu.com" autoComplete="email" inputMode="email" />
                 </label>
-                <label className="contact-field">
-                  <span className="contact-icon" aria-hidden="true">☰</span>
-                  <select value={purpose} onChange={(event) => { setPurpose(event.target.value); setCustomPurpose('') }}>
-                    <option value="">Pilih topik</option>
-                    {['Pertanyaan umum', 'Kolaborasi', 'Project', 'Bisnis', 'Investasi', 'Akademik', 'Feedback', 'Lainnya'].map((item) => <option key={item} value={item}>{item}</option>)}
-                  </select>
-                </label>
-                {purpose === 'Lainnya' ? (
-                  <label className="contact-field">
-                    <span className="contact-icon" aria-hidden="true">✦</span>
-                    <input value={customPurpose} onChange={(event) => setCustomPurpose(event.target.value)} placeholder="Tulis topik Anda..." maxLength={80} />
-                  </label>
-                ) : null}
                 <label className="contact-field contact-message">
                   <span className="contact-icon" aria-hidden="true">💬</span>
-                  <textarea value={message} onChange={(event) => setMessage(event.target.value.slice(0, 1000))} placeholder="Tulis pesan Anda di sini..." maxLength={1000} rows={5} />
+                  <textarea value={message} onChange={(event) => setMessage(event.target.value.slice(0, 1000))} placeholder="Tulis pesan Anda di sini... (opsional)" maxLength={1000} rows={5} />
                   <span className="contact-counter">{message.length}/1000</span>
                 </label>
               </div>
