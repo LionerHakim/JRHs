@@ -56,7 +56,7 @@ export default function App() {
     setContactStatus(null)
 
     if (!name.trim()) return setContactError('Nama belum diisi.')
-    if (!/^[^\\s@]+@[^\\s@]+\\.[^\\s@]+$/.test(email.trim())) return setContactError('Emailnya belum valid.')
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.trim())) return setContactError('Emailnya belum valid.')
     if (!purpose) return setContactError('Silakan pilih topik dulu.')
     if (!message.trim()) return setContactError('Pesannya masih kosong.')
     if (!privacy) return setContactError('Centang persetujuan privasi dulu.')
