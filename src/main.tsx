@@ -5,7 +5,7 @@ import './index.css'
 
 const sectionItems = [
   ['identity', 'About'],
-  ['education', 'Experience'],
+  ['education', 'Education'],
   ['projects', 'Projects'],
   ['links', 'Contact'],
 ] as const
@@ -167,14 +167,14 @@ export default function App() {
       <main>
         <section id="identity" className="hero" aria-labelledby="identity-title">
           <div className="hero-copy">
-            <p className="section-kicker">JRH · DIGITAL PORTFOLIO</p>
+            <p className="section-kicker">JRH / DIGITAL PORTFOLIO</p>
             <h1 id="identity-title">{siteConfig.identity.name}</h1>
             <p className="hero-description">{siteConfig.identity.description}</p>
             <div className="hero-actions">
               <a className="hero-pill" href="#projects">Explore projects</a>
               <a className="ghost-pill" href="#links">Contact</a>
             </div>
-            <p className="hero-meta">Jefri Rahman Hakim · JRH Digital Portfolio</p>
+            <p className="hero-meta">Jefri Rahman Hakim / JRH Digital Portfolio</p>
           </div>
 
           <figure className="hero-portrait">
@@ -188,7 +188,7 @@ export default function App() {
         <section id="education" className="section" aria-labelledby="education-title">
           <div className="section-head">
             <p className="section-kicker">EDUCATION</p>
-            <h2 id="education-title">Experience</h2>
+            <h2 id="education-title">Education</h2>
           </div>
           <p className="editorial-copy">A concise record of the education currently represented in this portfolio.</p>
           <div className="records" style={{ marginTop: 36 }}>
@@ -229,7 +229,7 @@ export default function App() {
           <div className="links-list" style={{ marginTop: 36 }}>
             {Object.entries(siteConfig.social).filter(([, url]) => url).map(([name, url]) => (
               <a key={name} href={url} target="_blank" rel="noreferrer">
-                <span>{name}</span>
+                <span>{name === "instagram" ? "Instagram" : name === "github" ? "GitHub" : name === "telegram" ? "Telegram" : name === "portfolio" ? "Website" : name}</span>
                 <small>Open</small>
               </a>
             ))}
