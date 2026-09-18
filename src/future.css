@@ -263,3 +263,38 @@ button{cursor:pointer}
   .nav,.scroll-progress,.music-nav-wrap,.mobile-menu,.to-top,.modal-backdrop,.signal-strip{display:none!important}
   body,.app,main,section,.hero,.section,.statement,.cta-section,.footer{background:var(--color-pure-white)!important;color:#000!important}
 }
+
+/* Titan Organic Continuity — one visual language from top to bottom */
+.app{background:var(--surface-canvas)!important;color:var(--color-ink)!important;overflow-x:clip!important}
+main{background:var(--surface-canvas)!important}
+.hero,.signal-strip,.section,.statement,.cta-section{position:relative!important}
+.hero,.signal-strip,.section,.statement,.cta-section{max-width:var(--page-max-width)!important;margin-left:auto!important;margin-right:auto!important}
+.hero{min-height:calc(100svh - 88px)!important;align-items:center!important}
+.hero-copy,.hero-visual,.about-layout,.experience-layout,.cta-grid{min-width:0!important}
+.hero-copy{max-width:700px!important}
+.hero-copy>p,.section-intro>p,.section-heading>p,.cta-copy>p,.timeline-item>p,.principle-list li span,.project-card p{color:var(--color-warm-subtle)!important}
+.section-kicker{border-bottom-color:var(--color-mist-border)!important}
+.fact-grid{border-top:0!important}
+.fact{border-top-color:var(--color-mist-border)!important}
+.fact:not(:first-child){border-left-color:var(--color-mist-border)!important}
+.project-card{background:var(--surface-cream-card)!important}
+.project-card,.project-card-hit,.fact,.filter-chip,.search-box,.project-modal,.modal-close,.tool-button{box-shadow:none!important}
+.project-card:hover{transform:translateY(-2px)!important}
+.statement{background:var(--surface-cream-card)!important;border-color:var(--color-tan-divider)!important}
+.statement p{max-width:1080px!important;margin-inline:auto!important}
+.cta-section{background:var(--surface-canvas)!important}
+.footer{border-radius:0!important}
+.button,.filter-chip,.search-box,.modal-close,.tool-button{transition:background-color .3s cubic-bezier(.83,0,.17,1),border-color .3s cubic-bezier(.83,0,.17,1),color .3s cubic-bezier(.83,0,.17,1),transform .3s cubic-bezier(.83,0,.17,1)!important}
+img{content-visibility:auto!important}
+@media (min-width:1101px){
+  .hero{padding-top:80px!important;padding-bottom:80px!important}
+  .section{padding-top:96px!important;padding-bottom:96px!important}
+  .about-layout,.experience-layout{grid-template-columns:minmax(280px,.75fr) minmax(0,1.25fr)!important}
+}
+@media (max-width:900px){
+  .hero{min-height:auto!important}
+}
+@media (max-width:760px){
+  .hero,.signal-strip,.section,.statement,.cta-section{max-width:none!important}
+  .statement p{margin-inline:0!important}
+}
