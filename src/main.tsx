@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useRef, useState } from 'react'
+import { useEffect, useMemo, useRef, useState, type PointerEvent as ReactPointerEvent } from 'react'
 import {
   ArrowRight,
   ArrowUp,
@@ -243,7 +243,7 @@ function App() {
     } else scroll()
   }
 
-  const magnetic = (event: React.PointerEvent<HTMLElement>) => {
+  const magnetic = (event: ReactPointerEvent<HTMLElement>) => {
     const element = event.currentTarget
     if (window.matchMedia('(pointer: coarse)').matches || window.matchMedia('(prefers-reduced-motion: reduce)').matches) return
     const rect = element.getBoundingClientRect()
@@ -253,7 +253,7 @@ function App() {
     magneticRef.current.add(element)
   }
 
-  const releaseMagnetic = (event: React.PointerEvent<HTMLElement>) => {
+  const releaseMagnetic = (event: ReactPointerEvent<HTMLElement>) => {
     event.currentTarget.style.transform = ''
     magneticRef.current.delete(event.currentTarget)
   }
@@ -322,6 +322,7 @@ function App() {
   }
 
   const openProject = (project: Project) => {
+    setCommandOpen(false)
     window.history.pushState(null, '', `#project=${slugify(project.title)}`)
     setCopied(false)
     setSelectedProject(project)
