@@ -21,7 +21,6 @@ import {
 import { createRoot } from 'react-dom/client'
 import { siteConfig, type Project } from './config/site'
 import './index.css'
-import './future.css'
 
 const navItems = [
   ['about', 'About'],
