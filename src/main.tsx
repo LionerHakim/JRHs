@@ -110,7 +110,7 @@ export default function App() {
                   {item.activities?.length ? (
                     <ul className="record-activities" aria-label="Activities and roles">
                       {item.activities.map((activity) => (
-                        <li key={activity}>{activity}</li>
+                        <li key={activity}>— {activity}</li>
                       ))}
                     </ul>
                   ) : null}
