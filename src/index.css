@@ -369,6 +369,41 @@ main {
   line-height: 1.5;
 }
 
+.record-activities {
+  display: grid;
+  gap: 6px;
+  margin: 13px 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.record-activities li {
+  position: relative;
+  width: fit-content;
+  max-width: 100%;
+  padding-left: 14px;
+  color: var(--graphite);
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 1.5;
+}
+
+.record-activities li::before {
+  content: '';
+  position: absolute;
+  top: 0.7em;
+  left: 0;
+  width: 5px;
+  height: 1px;
+  background: var(--signal);
+}
+
+@media (max-width: 640px) {
+  .record-activities {
+    margin-top: 12px;
+  }
+}
+
 /* 09 / 10 / 11 / 12 / 13 — Projects as a clean index, not cards */
 .project-list {
   border-top: 1px solid var(--ink);
