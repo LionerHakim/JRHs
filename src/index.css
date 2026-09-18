@@ -74,7 +74,7 @@ body, button, input { font-family: var(--font-inter); }
 button, input { font: inherit; }
 button { color: inherit; }
 a { color: inherit; }
-img { display: block; max-width: 100%; }
+img { display: block; max-width: 100%; height: auto; }
 ::selection { background: var(--color-signal-blue); color: #fff; }
 
 .site-shell { min-height: 100vh; overflow-x: clip; background: var(--color-ash-mist); }
@@ -189,7 +189,6 @@ main { width: min(calc(100% - 32px), var(--page-max-width)); margin: 0 auto; }
 .hero-pill:hover, .hero-pill:focus-visible { filter: brightness(.94); }
 .ghost-pill { background: transparent; color: var(--color-ink-black); border: 1.5px solid var(--color-ink-black); font-weight: 500; }
 .ghost-pill:hover, .ghost-pill:focus-visible { color: var(--color-signal-blue); border-color: var(--color-signal-blue); }
-.hero-meta { margin: 22px 0 0; color: var(--color-smoke); font-size: 12px; line-height: 1.2; letter-spacing: -.24px; }
 .hero-portrait { margin: 0; justify-self: end; width: min(100%, 420px); }
 .portrait-frame {
   position: relative;
@@ -199,12 +198,13 @@ main { width: min(calc(100% - 32px), var(--page-max-width)); margin: 0 auto; }
   box-shadow: var(--shadow-subtle);
 }
 .hero-portrait img {
+  display: block;
   width: 100%;
-  aspect-ratio: 4 / 5;
-  object-fit: cover;
-  border-radius: 22px;
+  height: auto;
+  aspect-ratio: auto;
+  object-fit: contain;
+  border-radius: 18px;
 }
-.portrait-caption { display: flex; justify-content: space-between; margin-top: 14px; color: var(--color-smoke); font-size: 12px; }
 
 .section {
   padding: var(--section-gap) 0;
