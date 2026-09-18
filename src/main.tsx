@@ -6,7 +6,7 @@ function App() {
   return (
     <main id="top">
       <header>
-        <a href="#top">{siteConfig.shortName}</a>
+        <a href="#top">{siteConfig.identity.shortName}</a>
         <nav aria-label="Primary navigation">
           <a href="#about">About</a><a href="#work">Projects</a><a href="#experience">Experience</a><a href="#contact">Contact</a>
         </nav>
@@ -15,13 +15,13 @@ function App() {
         <p>{siteConfig.hero.eyebrow}</p>
         <h1 id="hero-title">{siteConfig.hero.titleLine1} {siteConfig.hero.titleLine2}</h1>
         <p>{siteConfig.hero.description}</p>
-        <p><a href={siteConfig.github}>GitHub</a></p>
-        <img src={siteConfig.profileImage} alt={siteConfig.name} />
+        <p><a href={siteConfig.social.github}>GitHub</a></p>
+        <img src={siteConfig.identity.profileImage} alt={siteConfig.identity.name} />
       </section>
       <section id="about" aria-labelledby="about-title">
         <h2 id="about-title">{siteConfig.about.titleLine1} {siteConfig.about.titleLine2}</h2>
         <p>{siteConfig.about.lead}</p><p>{siteConfig.about.body}</p>
-        <dl>{siteConfig.facts.map(([label, value]) => <div key={label}><dt>{label}</dt><dd>{value}</dd></div>)}</dl>
+        <dl>{siteConfig.about.facts.map(([label, value]) => <div key={label}><dt>{label}</dt><dd>{value}</dd></div>)}</dl>
       </section>
       <section id="work" aria-labelledby="work-title">
         <h2 id="work-title">Projects</h2>
@@ -40,10 +40,10 @@ function App() {
       </section>
       <section id="contact" aria-labelledby="contact-title">
         <h2 id="contact-title">{siteConfig.contact.titleLine1} {siteConfig.contact.titleLine2}</h2><p>{siteConfig.contact.description}</p>
-        <ul><li><a href={siteConfig.instagram}>Instagram</a></li><li><a href={siteConfig.telegram}>Telegram</a></li>{siteConfig.linkedin && <li><a href={siteConfig.linkedin}>LinkedIn</a></li>}</ul>
+        <ul><li><a href={siteConfig.social.instagram}>Instagram</a></li><li><a href={siteConfig.social.telegram}>Telegram</a></li>{siteConfig.social.linkedin && <li><a href={siteConfig.social.linkedin}>LinkedIn</a></li>}</ul>
       </section>
       <section aria-labelledby="music-title"><h2 id="music-title">{siteConfig.music.title}</h2><ul>{siteConfig.music.tracks.map(track => <li key={track.src}>{track.title} — <a href={track.src}>Audio file</a></li>)}</ul></section>
-      <footer><p>© 2026 {siteConfig.shortName}.</p><a href={siteConfig.portfolio}>Portfolio</a></footer>
+      <footer><p>© 2026 {siteConfig.identity.shortName}.</p><a href={siteConfig.social.portfolio}>Portfolio</a></footer>
     </main>
   )
 }
