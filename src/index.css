@@ -1071,6 +1071,49 @@ footer strong {
     padding: 10px 0;
   }
 
+  .contact-card {
+    padding: 24px 18px;
+    border-radius: 24px;
+  }
+
+  .contact-intro {
+    margin-bottom: 26px;
+  }
+
+  .contact-question {
+    font-size: clamp(32px, 9vw, 44px);
+  }
+
+  .contact-answer,
+  .contact-note {
+    font-size: 15px;
+  }
+
+  .contact-fields {
+    padding-top: 20px;
+  }
+
+  .contact-field {
+    border-radius: 14px;
+  }
+
+  .contact-message textarea {
+    min-height: 120px;
+  }
+
+  .contact-benefits {
+    grid-template-columns: 1fr;
+    gap: 0;
+  }
+
+  .contact-benefits span {
+    padding: 8px 0;
+  }
+
+  .contact-email-info {
+    align-items: flex-start;
+  }
+
   .links-list a {
     min-height: 74px;
     font-size: clamp(21px, 6.2vw, 30px);
