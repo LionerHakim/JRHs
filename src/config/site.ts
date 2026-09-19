@@ -41,7 +41,7 @@ export const siteConfig = {
       { label: 'Board 02', url: 'https://pin.it/6k7sezYIK' },
     ] },
     { number: '02', title: 'YOUTUBE', category: 'Video', platform: 'YOUTUBE', links: [
-      { label: 'JRH 369', url: 'https://youtube.com/@jrhs369' },
+      { label: 'IKNshorts', url: 'https://youtube.com/@jrhs369' },
       { label: 'GOVshorts', url: 'https://youtube.com/@govshortss' },
     ] },
     { number: '03', title: 'SHOPEE', category: 'Monetization', platform: 'SHOPEE', links: [
@@ -51,7 +51,7 @@ export const siteConfig = {
       { label: 'Nusantara', url: 'https://lynk.id/nusantara9' },
     ] },
     { number: '05', title: 'TIKTOK', category: 'Short Video', platform: 'TIKTOK', links: [
-      { label: '@allshorts369', url: 'https://www.tiktok.com/@allshorts369' },
+      { label: 'allshorts369', url: 'https://www.tiktok.com/@allshorts369' },
     ] },
   ] satisfies readonly MediaItem[],
   projects: [
