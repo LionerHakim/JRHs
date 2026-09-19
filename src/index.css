@@ -5217,3 +5217,147 @@ time {
     border-radius: 18px;
   }
 }
+
+
+/* JRHs — FINAL SOFT SOLID PREMIUM SYSTEM
+   Visual-only layer: content and existing data remain unchanged. */
+:root {
+  --soft-blue: #eff6ff;
+  --soft-yellow: #fffbeb;
+  --soft-red: #fef2f2;
+  --soft-green: #f0fdf4;
+  --soft-lavender: #f5f3ff;
+  --soft-gray: #f8fafc;
+  --soft-border: #e5e7eb;
+  --premium-ink: #18181b;
+  --premium-muted: #52525b;
+}
+
+/* One visual language: soft solid surfaces, never gradients. */
+.hero-pill { background: var(--premium-ink) !important; }
+.ghost-pill { background: #fff !important; border-color: var(--soft-border) !important; }
+.hero-pill:hover, .hero-pill:focus-visible { background: #2563eb !important; }
+
+/* Quote 1 follows Quote 2: same card family, soft solid blue. */
+.portrait-quote,
+.project-quote {
+  width: min(100%, 1030px);
+  aspect-ratio: auto;
+  margin-left: auto;
+  margin-right: auto;
+  border: 1px solid #bfdbfe !important;
+  border-radius: 24px;
+  background: var(--soft-blue) !important;
+  box-shadow: 0 10px 30px rgba(37,99,235,.055);
+}
+
+.portrait-quote {
+  margin-top: 14px;
+  padding: 38px clamp(28px,4vw,52px);
+  display: block;
+}
+
+.portrait-quote::before,
+.project-quote::before { color: #2563eb !important; }
+
+.portrait-quote strong,
+.project-quote strong { color: #111827 !important; }
+
+.portrait-quote p,
+.project-quote p {
+  max-width: 760px;
+  margin: 14px 0 0;
+  color: #374151 !important;
+  font-size: 16px;
+  line-height: 1.65;
+}
+
+/* Projects: soft solid premium blocks. */
+#projects .project-list {
+  border-top: 0;
+  gap: 12px;
+}
+
+#projects .project {
+  position: relative;
+  padding: 28px clamp(20px,3vw,34px);
+  border: 1px solid var(--soft-border) !important;
+  border-radius: 20px;
+  background: #fff;
+  box-shadow: 0 8px 24px rgba(17,17,17,.035);
+  transition: transform 180ms var(--ease-ios), box-shadow 180ms ease, border-color 180ms ease;
+}
+
+#projects .project:nth-child(1) { background: var(--soft-red) !important; border-color: #fecaca !important; }
+#projects .project:nth-child(2) { background: var(--soft-blue) !important; border-color: #bfdbfe !important; }
+#projects .project:nth-child(3) { background: var(--soft-yellow) !important; border-color: #fde68a !important; }
+#projects .project:nth-child(4) { background: var(--soft-lavender) !important; border-color: #ddd6fe !important; }
+
+#projects .project:hover {
+  padding-left: clamp(20px,3vw,34px);
+  transform: translateY(-2px);
+  box-shadow: 0 14px 32px rgba(17,17,17,.07);
+}
+
+#projects .project:nth-child(1):hover { border-color: #fca5a5 !important; }
+#projects .project:nth-child(2):hover { border-color: #93c5fd !important; }
+#projects .project:nth-child(3):hover { border-color: #fcd34d !important; }
+#projects .project:nth-child(4):hover { border-color: #c4b5fd !important; }
+
+#projects .project-number { color: #2563eb; }
+#projects .project:nth-child(1) .project-number { color: #dc2626; }
+#projects .project:nth-child(3) .project-number { color: #a16207; }
+#projects .project:nth-child(4) .project-number { color: #7c3aed; }
+
+#projects .project-links a {
+  border-top-color: rgba(148,163,184,.28);
+}
+
+/* Contact: soft solid blue action, neutral white base. */
+.contact-card {
+  background: #fff !important;
+  border-color: var(--soft-border) !important;
+  box-shadow: 0 12px 34px rgba(17,17,17,.045);
+}
+
+.contact-field {
+  background: var(--soft-gray) !important;
+  border-color: var(--soft-border) !important;
+}
+
+.contact-submit button,
+.contact-submit button:hover,
+.contact-submit button:focus-visible {
+  background: #2563eb !important;
+  border-color: #2563eb !important;
+}
+
+/* Footer: quiet soft-gray solid surface. */
+.site-footer-main {
+  background: var(--soft-gray) !important;
+  border-color: var(--soft-border) !important;
+}
+
+/* Music player: same soft-solid language. */
+.music-panel { background: #fff !important; border-color: var(--soft-border) !important; }
+.music-track { background: var(--soft-blue) !important; border-color: #dbeafe !important; }
+.music-track-art { background: #2563eb !important; }
+.music-status { background: var(--soft-gray) !important; }
+.music-progress { background: #dbeafe !important; }
+.music-progress span { background: #2563eb !important; }
+.music-controls .music-play { background: #2563eb !important; }
+
+/* Small UI surfaces stay restrained and solid. */
+.nav-actions nav a:hover,
+.nav-actions nav a:focus-visible { background: var(--soft-gray) !important; }
+
+@media (max-width: 760px) {
+  .portrait-quote,
+  .project-quote {
+    border-radius: 22px;
+    padding: 30px 22px;
+  }
+
+  #projects .project { border-radius: 18px; padding: 24px 20px; }
+  #projects .project:hover { padding-left: 20px; }
+}
