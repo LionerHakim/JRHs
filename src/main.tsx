@@ -25,7 +25,7 @@ function TestimonialCard({ testimonial }: { testimonial: (typeof siteConfig.test
           <span>{testimonial.role}</span>
         </div>
       </header>
-      <span className="testimonial-disclaimer">KONSEP / ILUSTRASI</span>
+      <span className="testimonial-disclaimer">GAGASAN TERINSPIRASI</span>
       <blockquote>“{testimonial.quote}”</blockquote>
       <footer className="testimonial-footer">
         <span>Perspektif</span>
@@ -78,9 +78,9 @@ function TestimonialsSection() {
     <section id="testimonials" className="section testimonials-section" aria-labelledby="testimonials-title">
       <div className="section-head">
         <p className="section-kicker">TESTIMONIALS</p>
-        <h2 id="testimonials-title">Mereka yang Menginspirasi</h2>
+        <h2 id="testimonials-title">Kutipan & Gagasan</h2>
       </div>
-      <p className="testimonials-subtitle">Berbagai perspektif tentang proses, karya, pembelajaran, dan perjalanan.</p>
+      <p className="testimonials-subtitle">16 gagasan dari tokoh lintas bidang tentang karya, pembelajaran, teknologi, ekonomi, dan kehidupan.</p>
 
       <div className="testimonials-toolbar">
         <span className="testimonial-counter" aria-live="polite">{String(activeIndex + 1).padStart(2, '0')} / 12</span>
@@ -99,7 +99,7 @@ function TestimonialsSection() {
       </div>
 
       <p className="testimonials-disclaimer">
-        “Catatan: Seluruh testimoni bertanda ‘Konsep / Ilustrasi’ merupakan konten kreatif untuk kebutuhan desain website dan bukan kutipan atau pernyataan resmi dari tokoh yang disebutkan.”
+        “Catatan: Kartu ini menyajikan gagasan yang ditulis ulang untuk kebutuhan desain JRHs. Bukan kutipan verbatim atau pernyataan resmi dari tokoh yang disebutkan.”
       </p>
     </section>
   )
