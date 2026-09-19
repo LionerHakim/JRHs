@@ -8,7 +8,8 @@ const sectionItems = [
   ['identity', 'About'],
   ['education', 'Education'],
   ['media', 'Media'],
-  ['testimonials', 'Quotes World'],
+  ['projects', 'Projects'],
+  ['testimonials', 'Quotes'],
   ['links', 'Contact'],
 ] as const
 
@@ -83,8 +84,8 @@ function TestimonialsSection() {
   return (
     <section id="testimonials" className="section testimonials-section" aria-labelledby="testimonials-title">
       <div className="section-head">
-        <p className="section-kicker">QUOTES WORLD</p>
-        <h2 id="testimonials-title">Quotes World</h2>
+        <p className="section-kicker">QUOTES</p>
+        <h2 id="testimonials-title">Quotes</h2>
       </div>
 
       <p className="testimonials-subtitle">
@@ -384,30 +385,55 @@ ${name.trim()}`)
           </div>
 
           <p className="media-subtitle">
-            Web apps, experiments, and digital products yang sedang dibangun.
+            Pinterest, YouTube, monetization, dan TikTok JRH.
           </p>
 
           <div className="media-list">
             {siteConfig.media.map((item) => (
-              <article className="media-card" key={item.number}>
+              <a className="media-card media-card-link" key={item.title + item.url} href={item.url} target="_blank" rel="noopener noreferrer">
                 <div className="media-card-top">
                   <span className="media-number">{item.number}</span>
-                  <span className="media-status">{item.status}</span>
+                  <span className="media-status">{item.platform}</span>
                 </div>
                 <div className="media-card-body">
                   <span className="media-category">{item.category}</span>
                   <h3>{item.title}</h3>
+                  <span className="media-open">Open ↗</span>
+                </div>
+              </a>
+            ))}
+          </div>
+        </section>
+
+        <section id="projects" className="section projects-section" aria-labelledby="projects-title">
+          <div className="section-head">
+            <p className="section-kicker">PROJECTS</p>
+            <h2 id="projects-title">Projects</h2>
+          </div>
+
+          <p className="projects-subtitle">
+            Web app dan digital product yang sedang dibuat. Nanti tinggal ganti template ini dengan hasil jadi.
+          </p>
+
+          <div className="projects-list">
+            {siteConfig.projects.map((item) => (
+              <article className="project-card" key={item.number}>
+                <div className="project-card-top">
+                  <span className="project-number">{item.number}</span>
+                  <span className="project-status">{item.status}</span>
+                </div>
+                <div className="project-card-body">
+                  <span className="project-category">{item.category}</span>
+                  <h3>{item.title}</h3>
                   <p>{item.description}</p>
                 </div>
                 {item.url ? (
-                  <a className="media-link" href={item.url} target="_blank" rel="noopener noreferrer">
-                    <span>Open web app</span>
-                    <span aria-hidden="true">↗</span>
+                  <a className="project-link" href={item.url} target="_blank" rel="noopener noreferrer">
+                    <span>Open web app</span><span aria-hidden="true">↗</span>
                   </a>
                 ) : (
-                  <span className="media-link is-disabled" aria-label={`${item.title} belum tersedia`}>
-                    <span>Coming soon</span>
-                    <span aria-hidden="true">→</span>
+                  <span className="project-link is-disabled">
+                    <span>Coming soon</span><span aria-hidden="true">→</span>
                   </span>
                 )}
               </article>
