@@ -1,4 +1,4 @@
-import { FormEvent, useEffect, useState } from 'react'
+import { FormEvent, useEffect, useRef, useState } from 'react'
 import { createRoot } from 'react-dom/client'
 import { siteConfig } from './config/site'
 import './index.css'
@@ -11,6 +11,94 @@ const sectionItems = [
 ] as const
 
 const sectionIds = sectionItems.map(([id]) => id)
+
+const testimonialInitials = (name: string) =>
+  name.split(' ').map((part) => part[0]).slice(0, 2).join('').toUpperCase()
+
+function TestimonialCard({ testimonial }: { testimonial: (typeof siteConfig.testimonials)[number] }) {
+  return (
+    <article className="testimonial">
+      <div className="testimonial-avatar" aria-hidden="true">{testimonialInitials(testimonial.name)}</div>
+      <div className="testimonial-meta">
+        <strong>{testimonial.name}</strong>
+        <span>{testimonial.role}</span>
+      </div>
+      <span className="testimonial-disclaimer">KONSEP / ILUSTRASI — BUKAN PERNYATAAN ASLI</span>
+      <blockquote>“{testimonial.quote}”</blockquote>
+      <span className="testimonial-category">{testimonial.category}</span>
+    </article>
+  )
+}
+
+function TestimonialsSection() {
+  const trackRef = useRef<HTMLDivElement>(null)
+  const [activeIndex, setActiveIndex] = useState(0)
+
+  const scrollToIndex = (index: number) => {
+    const items = trackRef.current?.querySelectorAll<HTMLElement>('.testimonial')
+    const nextIndex = Math.max(0, Math.min(index, siteConfig.testimonials.length - 1))
+    const item = items?.[nextIndex]
+    if (!item) return
+    trackRef.current?.scrollTo({ left: item.offsetLeft, behavior: 'smooth' })
+    setActiveIndex(nextIndex)
+  }
+
+  useEffect(() => {
+    const track = trackRef.current
+    if (!track) return
+
+    const handleScroll = () => {
+      const items = Array.from(track.querySelectorAll<HTMLElement>('.testimonial'))
+      if (!items.length) return
+      const center = track.scrollLeft + track.clientWidth / 2
+      let closest = 0
+      let distance = Infinity
+      items.forEach((item, index) => {
+        const itemCenter = item.offsetLeft + item.offsetWidth / 2
+        const currentDistance = Math.abs(itemCenter - center)
+        if (currentDistance < distance) {
+          distance = currentDistance
+          closest = index
+        }
+      })
+      setActiveIndex(closest)
+    }
+
+    track.addEventListener('scroll', handleScroll, { passive: true })
+    handleScroll()
+    return () => track.removeEventListener('scroll', handleScroll)
+  }, [])
+
+  return (
+    <section id="testimonials" className="section testimonials-section" aria-labelledby="testimonials-title">
+      <div className="section-head">
+        <p className="section-kicker">TESTIMONIALS</p>
+        <h2 id="testimonials-title">Mereka yang Menginspirasi</h2>
+      </div>
+      <p className="testimonials-subtitle">Berbagai perspektif tentang proses, karya, pembelajaran, dan perjalanan.</p>
+
+      <div className="testimonials-toolbar">
+        <span className="testimonial-counter" aria-live="polite">{String(activeIndex + 1).padStart(2, '0')} / 12</span>
+        <div className="testimonial-controls">
+          <button type="button" onClick={() => scrollToIndex(activeIndex - 1)} disabled={activeIndex === 0} aria-label="Testimoni sebelumnya">←</button>
+          <button type="button" onClick={() => scrollToIndex(activeIndex + 1)} disabled={activeIndex === siteConfig.testimonials.length - 1} aria-label="Testimoni berikutnya">→</button>
+        </div>
+      </div>
+
+      <div className="testimonials-viewport">
+        <div className="testimonials-list" ref={trackRef}>
+          {siteConfig.testimonials.map((testimonial) => (
+            <TestimonialCard key={testimonial.name + testimonial.role} testimonial={testimonial} />
+          ))}
+        </div>
+      </div>
+
+      <p className="testimonials-disclaimer">
+        “Catatan: Seluruh testimoni bertanda ‘Konsep / Ilustrasi’ merupakan konten kreatif untuk kebutuhan desain website dan bukan kutipan atau pernyataan resmi dari tokoh yang disebutkan.”
+      </p>
+    </section>
+  )
+}
 
 export default function App() {
   const [activeSection, setActiveSection] = useState<(typeof sectionIds)[number]>('identity')
@@ -266,25 +354,7 @@ ${name.trim()}`)
           <p>gunakan data dan sistem algoritma, tapi jangan buang intuisi manusia. gabungkan keduanya untuk pengambilan keputusan terbaik.</p>
         </aside>
 
-        <section id="testimonials" className="section testimonials-section" aria-labelledby="testimonials-title">
-          <div className="section-head">
-            <p className="section-kicker">TESTIMONIALS</p>
-            <h2 id="testimonials-title">Testimoni</h2>
-          </div>
-
-          <div className="testimonials-list">
-            {siteConfig.testimonials.map((testimonial) => (
-              <article className="testimonial" key={testimonial.name + testimonial.role}>
-                <span className="testimonial-mark" aria-hidden="true">“</span>
-                <blockquote>{testimonial.quote}</blockquote>
-                <footer>
-                  <strong>{testimonial.name}</strong>
-                  <span>{testimonial.role}</span>
-                </footer>
-              </article>
-            ))}
-          </div>
-        </section>
+        <TestimonialsSection />
 
         <section id="links" className="section contact-section" aria-labelledby="links-title">
           <div className="section-head">
