@@ -4320,3 +4320,13 @@ html, body, .site-shell {
     font-size: 15px;
   }
 }
+
+
+/* JRHs — email CTA blue */
+.contact-submit button,
+.contact-submit button:hover,
+.contact-submit button:focus-visible {
+  background: #2563eb;
+  border-color: #2563eb;
+  color: #fff;
+}
