@@ -284,8 +284,24 @@ ${name.trim()}`)
         </section>
       </main>
 
-      <footer>
-        <strong>JRH</strong>
+      <footer className="site-footer">
+        <div className="site-footer-main">
+          <div className="site-footer-brand">
+            <strong>JRH</strong>
+            <p>still learning.<br />still building.<br />still curious.</p>
+          </div>
+
+          <nav className="site-footer-nav" aria-label="Footer navigation">
+            {sectionItems.map(([id, label]) => (
+              <a key={id} href={`#${id}`}>{label.toUpperCase()}</a>
+            ))}
+          </nav>
+        </div>
+
+        <div className="site-footer-bottom">
+          <span>© 2026 JRH</span>
+          <a href="#identity" aria-label="Back to top">↗</a>
+        </div>
       </footer>
     </div>
   )
