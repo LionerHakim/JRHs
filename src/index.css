@@ -374,7 +374,10 @@ img { display: block; max-width: 100%; }
 
 .site-shell > main,
 .site-shell > footer { transition: filter 300ms var(--ease); }
-.site-shell.menu-open .nav { z-index: 180; }
+.site-shell.menu-open .nav,
+.site-shell.music-open .nav { z-index: 180; }
+
+/* Only one utility panel may be active at a time. */
 
 /* Floating utility panels — premium JRH utility language */
 .nav-actions > nav,
