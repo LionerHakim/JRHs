@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from 'react'
-import type { ChangeEvent, FocusEvent, FormEvent } from 'react'
+import type { ChangeEvent, FocusEvent, FormEvent, RefObject } from 'react'
 import { createRoot } from 'react-dom/client'
 import { siteConfig } from './config/site'
 
@@ -13,6 +13,7 @@ type TermsCheckboxProps = {
   termsOpen: boolean
   onTermsToggle: () => void
   id?: string
+  inputRef?: RefObject<HTMLInputElement | null>
 }
 
 function TermsCheckbox({
@@ -25,6 +26,7 @@ function TermsCheckbox({
   termsOpen,
   onTermsToggle,
   id = 'terms-checkbox',
+  inputRef,
 }: TermsCheckboxProps) {
   const popoverId = id + '-details'
 
@@ -33,6 +35,7 @@ function TermsCheckbox({
       <label className="terms-checkbox-label" htmlFor={id}>
         <input
           id={id}
+          ref={inputRef}
           className="terms-checkbox-input"
           type="checkbox"
           required={required}
@@ -54,7 +57,7 @@ function TermsCheckbox({
       <button
         className="terms-checkbox-info"
         type="button"
-        aria-label="Lihat S&K"
+        aria-label="Lihat syarat dan ketentuan"
         aria-expanded={termsOpen}
         aria-controls={popoverId}
         disabled={disabled}
@@ -71,6 +74,7 @@ function TermsCheckbox({
         <div id={popoverId} className="terms-checkbox-popover" role="dialog" aria-label="Syarat dan ketentuan">
           <div className="terms-checkbox-popover-head">
             <strong>Syarat & Ketentuan</strong>
+            <button className="terms-checkbox-close" type="button" aria-label="Tutup syarat dan ketentuan" onClick={onTermsToggle}>×</button>
           </div>
           <p>Dengan mencentang kotak ini, Anda menyetujui penggunaan data yang diberikan untuk keperluan menyiapkan dan membalas pesan melalui email. Jangan mengirim data sensitif, rahasia, atau informasi yang tidak diperlukan.</p>
           <p>Website hanya menyiapkan draft email pada aplikasi email perangkat Anda. Pengiriman pesan tetap dilakukan oleh Anda.</p>
@@ -231,6 +235,7 @@ export default function App() {
   const [touched, setTouched] = useState({ name: false, message: false, privacy: false })
   const navActionsRef = useRef<HTMLDivElement>(null)
   const contactPrivacyRef = useRef<HTMLDivElement>(null)
+  const privacyInputRef = useRef<HTMLInputElement>(null)
   const contactTopicRef = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
@@ -311,7 +316,11 @@ export default function App() {
     }
 
     if (!message.trim()) return setContactError('Pesan belum diisi.')
-    if (!privacy) return setContactError('Persetujuan penggunaan data diperlukan.')
+    if (!privacy) {
+      setContactError('Centang persetujuan S&K untuk melanjutkan.')
+      privacyInputRef.current?.focus()
+      return
+    }
 
     const subject = encodeURIComponent(`[Portfolio Contact] ${purpose || 'Pesan dari website'}`)
     const body = encodeURIComponent(`Halo JRH,
@@ -337,6 +346,9 @@ ${name.trim()}`)
 
     window.location.href = `mailto:${siteConfig.contactEmail}?subject=${subject}&body=${body}`
     setContactStatus('Email sudah disiapkan. Pilih aplikasi email di perangkat Anda, lalu kirim.')
+    setPrivacy(false)
+    setTermsOpen(false)
+    setTouched((current) => ({ ...current, privacy: false }))
   }
 
   return (
@@ -644,6 +656,7 @@ Web app dan digital product yang sedang dibangun untuk memecahkan masalah nyata.
                     required
                     termsOpen={termsOpen}
                     onTermsToggle={() => setTermsOpen((open) => !open)}
+                    inputRef={privacyInputRef}
                   />
                 </div>
                 <button type="submit">✈ <span>Buka Email Saya</span> <span aria-hidden="true">→</span></button>
