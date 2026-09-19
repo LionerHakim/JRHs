@@ -70,6 +70,7 @@ export default function App() {
       return setContactError('Gunakan email dari Gmail, Outlook, Hotmail, Yahoo, iCloud, atau Proton.')
     }
 
+    if (!message.trim()) return setContactError('Pesan belum diisi.')
     if (!privacy) return setContactError('Centang persetujuan privasi dulu.')
 
     const subject = encodeURIComponent(`[JRHs Contact] ${purpose || 'Pesan dari website'}`)
@@ -241,10 +242,10 @@ ${name.trim()}`)
                 </label>
                 <label className="contact-field contact-message">
                   <span className="contact-icon" aria-hidden="true">💬</span>
-                  <textarea aria-label="Pesan kamu" value={message} onChange={(event) => {
+                  <textarea aria-label="Pesan kamu" required value={message} onChange={(event) => {
                     const words = event.target.value.trim().split(/\s+/).filter(Boolean)
                     setMessage(words.length > 169 ? words.slice(0, 169).join(' ') : event.target.value)
-                  }} placeholder="Tulis pesan kamu di sini... (opsional, maksimal 169 kata)" rows={5} />
+                  }} placeholder="Tulis pesan kamu di sini... (maksimal 169 kata)" rows={5} />
                   <span className="contact-counter">{message.trim() ? message.trim().split(/\s+/).length : 0}/169 kata</span>
                 </label>
               </div>
