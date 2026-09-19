@@ -1137,12 +1137,13 @@ img { display: block; max-width: 100%; }
 .contact-message {
   grid-column: 1 / -1;
   padding-top: 16px;
+  padding-bottom: 34px;
 }
 
 .contact-counter {
   position: absolute;
   right: 16px;
-  bottom: 12px;
+  bottom: 11px;
   color: var(--fog);
   font-size: var(--text-caption);
 }
