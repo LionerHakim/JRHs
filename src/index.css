@@ -1565,6 +1565,7 @@ img { display: block; max-width: 100%; }
   display: inline-flex;
   align-items: center;
   gap: 8px;
+  max-width: 100%;
   color: var(--graphite);
   font-size: var(--text-body-sm);
   cursor: pointer;
@@ -1579,15 +1580,19 @@ img { display: block; max-width: 100%; }
   accent-color: var(--blue-strong);
 }
 
+.contact-consent-text {
+  min-width: 0;
+  display: inline;
+}
+
 .contact-terms-trigger {
   width: 18px;
   height: 18px;
-  flex: 0 0 18px;
-  margin: 0 0 0 1px;
-  padding: 0;
   display: inline-grid;
   place-items: center;
-  align-self: center;
+  margin: 0 0 0 5px;
+  padding: 0;
+  vertical-align: -3px;
   border: 1px solid rgba(0,105,224,.32);
   border-radius: 50%;
   background: #eef7ff;
