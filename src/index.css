@@ -4396,3 +4396,70 @@ html, body, .site-shell {
     min-height: 44px;
   }
 }
+
+
+/* JRHs — Contact: elegant square card */
+.contact-card {
+  width: min(100%, 720px);
+  aspect-ratio: 1 / 1;
+  margin-left: auto;
+  margin-right: auto;
+  padding: clamp(28px, 4vw, 42px);
+  border-radius: 28px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.contact-intro {
+  margin-bottom: 22px;
+}
+
+.contact-question {
+  font-size: clamp(32px, 4.2vw, 52px);
+}
+
+.contact-form {
+  gap: 14px;
+}
+
+.contact-fields {
+  gap: 8px;
+  padding-top: 18px;
+}
+
+.contact-field {
+  min-height: 50px;
+}
+
+.contact-field input,
+.contact-field select {
+  min-height: 48px;
+}
+
+.contact-message {
+  padding-top: 13px;
+  padding-bottom: 22px;
+}
+
+.contact-message textarea {
+  min-height: 92px;
+}
+
+@media (max-width: 760px) {
+  .contact-card {
+    width: 100%;
+    aspect-ratio: auto;
+    min-height: 0;
+    padding: 26px 20px;
+    border-radius: 24px;
+  }
+
+  .contact-question {
+    font-size: clamp(32px, 10vw, 46px);
+  }
+
+  .contact-message textarea {
+    min-height: 110px;
+  }
+}
