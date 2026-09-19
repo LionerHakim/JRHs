@@ -412,3 +412,71 @@ footer { padding: 0 0 48px; color: var(--smoke); font-size: 11px; }
   }
   .site-footer-nav a { font-size: 10px; }
 }
+
+
+/* JRHs iOS navigation — UI/UX only, no content or data changes */
+.nav {
+  min-height: 60px;
+  grid-template-columns: auto minmax(0, 1fr);
+  gap: clamp(24px, 5vw, 72px);
+  padding-inline: max(var(--page-gutter), 24px);
+  background: rgba(255,255,255,.94);
+  border-bottom: 1px solid rgba(0,0,0,.07);
+  box-shadow: 0 1px 0 rgba(10,10,10,.02);
+}
+.wordmark { gap: 8px; font-size: 15px; letter-spacing: -.035em; }
+.brand-mark { width: 28px; height: 28px; border: 0; box-shadow: none; }
+.nav nav { justify-content: flex-end; gap: 3px; min-height: 44px; }
+.nav nav a {
+  min-height: 38px;
+  padding: 0 13px;
+  border-radius: 999px;
+  color: var(--smoke);
+  font-family: var(--font-sans);
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: -.01em;
+  transition: color 180ms var(--ease-ios), background-color 180ms var(--ease-ios), transform 180ms var(--ease-ios);
+}
+.nav nav a::after { display: none; }
+.nav nav a:hover,
+.nav nav a:focus-visible {
+  color: var(--ink);
+  background: var(--surface);
+  transform: translateY(-1px);
+}
+.nav nav a.is-active {
+  color: var(--ink);
+  background: var(--surface-pressed);
+  box-shadow: inset 0 0 0 1px rgba(0,0,0,.035), 0 1px 1px rgba(0,0,0,.025);
+}
+.nav nav a:active { transform: scale(.97); }
+
+@media (max-width: 640px) {
+  .nav {
+    min-height: 60px;
+    grid-template-columns: auto minmax(0, 1fr);
+    gap: 10px;
+    padding: 7px 14px;
+  }
+  .wordmark { flex: 0 0 auto; }
+  .nav nav {
+    justify-content: flex-start;
+    min-width: 0;
+    gap: 2px;
+    overflow-x: auto;
+    overscroll-behavior-x: contain;
+    scrollbar-width: none;
+    -webkit-overflow-scrolling: touch;
+    mask-image: linear-gradient(to right, transparent 0, #000 10px, #000 calc(100% - 10px), transparent 100%);
+  }
+  .nav nav::-webkit-scrollbar { display: none; }
+  .nav nav a {
+    flex: 0 0 auto;
+    min-height: 38px;
+    padding-inline: 12px;
+    font-size: 11px;
+  }
+  .nav nav a:hover,
+  .nav nav a:focus-visible { transform: none; }
+}
