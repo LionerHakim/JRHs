@@ -354,8 +354,8 @@ img { display: block; max-width: 100%; }
   inset: 0;
   z-index: 110;
   background: var(--active-dim);
-  backdrop-filter: blur(50px) saturate(.9);
-  -webkit-backdrop-filter: blur(50px) saturate(.9);
+  backdrop-filter: blur(75px) saturate(.9);
+  -webkit-backdrop-filter: blur(75px) saturate(.9);
   pointer-events: auto;
 }
 
