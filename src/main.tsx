@@ -486,7 +486,7 @@ ${name.trim()}`)
                   <span className="contact-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><rect x="3.5" y="5.5" width="17" height="13" rx="2" /><path d="m4.5 7 7.5 6 7.5-6" /></svg></span>
                   <input aria-label="Email kamu" type="email" required value={email} onChange={(event) => setEmail(event.target.value)} onBlur={() => setTouched((current) => ({ ...current, email: true }))} aria-invalid={touched.email && !!email && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.trim())} placeholder="email kamu" autoComplete="email" inputMode="email" />
                 </label>
-                <label className="contact-field">
+                <label className="contact-field contact-topic">
                   <span className="contact-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M5 7h14M5 12h14M5 17h9" /></svg></span>
                   <select aria-label="Topik email (opsional)" value={purpose} onChange={(event) => setPurpose(event.target.value)}>
                     <option value="" disabled>Pilih topik</option>
@@ -515,17 +515,14 @@ ${name.trim()}`)
               </div>
 
               <div className="contact-benefits" aria-label="Contact benefits">
-                <span>
+                <span aria-label="Cepat" title="Cepat">
                   <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M13 2 4.5 13h6l-.5 9L19.5 11h-6L13 2Z" /></svg>
-                  <span>Cepat</span>
                 </span>
-                <span>
+                <span aria-label="Aman" title="Aman">
                   <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="5" y="10" width="14" height="11" rx="2" /><path d="M8 10V7a4 4 0 0 1 8 0v3" /></svg>
-                  <span>Aman</span>
                 </span>
-                <span>
+                <span aria-label="Langsung ke email" title="Langsung ke email">
                   <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3.5" y="5.5" width="17" height="13" rx="2" /><path d="m4.5 7 7.5 6 7.5-6" /></svg>
-                  <span>Langsung ke email</span>
                 </span>
               </div>
 
