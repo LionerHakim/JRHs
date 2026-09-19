@@ -55,9 +55,9 @@ export const siteConfig = {
     ] },
   ] satisfies readonly MediaItem[],
   projects: [
-    { number: '01', title: 'JRH PUSAT', category: 'Utility Web App', description: 'Kumpulan tools praktis untuk membuat, menghitung, mengubah, merapikan, mencetak, dan kebutuhan developer.', status: 'Coming soon' },
-    { number: '02', title: 'JRH CV', category: 'Career Web App', description: 'Platform untuk membangun identitas profesional, CV online, portfolio, dan halaman karier yang siap dibagikan.', status: 'Coming soon' },
-    { number: '03', title: 'INTEL TIKTOK', category: 'Media Web App', description: 'Eksperimen web untuk menjelajah, mengolah, dan mengakses konten TikTok secara praktis dalam satu pengalaman.', status: 'Coming soon' },
+    { number: '01', title: 'JRH PUSAT', category: 'Utility Web App', description: 'Kumpulan tools praktis untuk membuat, menghitung, mengubah, merapikan, mencetak, dan kebutuhan developer.', status: 'Coming soon', url: undefined },
+    { number: '02', title: 'JRH CV', category: 'Career Web App', description: 'Platform untuk membangun identitas profesional, CV online, portfolio, dan halaman karier yang siap dibagikan.', status: 'Coming soon', url: undefined },
+    { number: '03', title: 'INTEL TIKTOK', category: 'Media Web App', description: 'Eksperimen web untuk menjelajah, mengolah, dan mengakses konten TikTok secara praktis dalam satu pengalaman.', status: 'Coming soon', url: undefined },
   ] satisfies readonly MediaProject[],
   testimonials: [
     { name: 'Steve Jobs', role: 'Apple co-founder', category: 'Innovation', quote: 'Your time is limited, so don’t waste it living someone else’s life.' },
