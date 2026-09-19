@@ -139,9 +139,6 @@ function TestimonialsSection() {
         </div>
       </div>
 
-      <p className="testimonials-disclaimer">
-        “Catatan: Kartu ini menyajikan gagasan yang ditulis ulang untuk kebutuhan desain JRHs. Bukan kutipan verbatim atau pernyataan resmi dari tokoh yang disebutkan.”
-      </p>
     </section>
   )
 }
