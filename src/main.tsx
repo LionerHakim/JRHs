@@ -98,15 +98,15 @@ function TestimonialsSection() {
       setActiveIndex(closest)
     }
 
-    const frame = requestAnimationFrame(() => centerCard(0))
+    const frame = requestAnimationFrame(() => {
+      centerCard(0)
+      handleScroll()
+    })
     track.addEventListener('scroll', handleScroll, { passive: true })
-    window.addEventListener('resize', () => centerCard(activeIndex))
-    handleScroll()
 
     return () => {
       cancelAnimationFrame(frame)
       track.removeEventListener('scroll', handleScroll)
-      window.removeEventListener('resize', () => centerCard(activeIndex))
     }
   }, [])
 
