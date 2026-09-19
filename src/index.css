@@ -3961,3 +3961,66 @@ html, body, .site-shell {
     padding: 20px 20px 21px 40px;
   }
 }
+
+
+/* JRHs — fix mobile hero quote clipping / section overlap */
+.hero {
+  align-items: start;
+  overflow: visible;
+}
+
+.hero-portrait {
+  height: auto;
+  align-self: start;
+}
+
+.portrait-frame {
+  height: auto;
+}
+
+.hero-portrait img {
+  height: auto;
+  aspect-ratio: 4 / 5;
+  object-fit: cover;
+}
+
+.portrait-quote {
+  width: 100%;
+  min-height: 0;
+  height: auto;
+  overflow: visible;
+}
+
+.portrait-quote p {
+  max-width: none;
+  white-space: normal;
+  overflow-wrap: anywhere;
+}
+
+@media (max-width: 760px) {
+  .hero {
+    align-items: start;
+    overflow: visible;
+  }
+
+  .hero-portrait {
+    width: 100%;
+    height: auto;
+  }
+
+  .hero-portrait img {
+    min-height: 0;
+    aspect-ratio: 4 / 5;
+    height: auto;
+  }
+
+  .portrait-quote {
+    margin-top: 12px;
+    padding: 20px 20px 21px 40px;
+  }
+
+  .portrait-quote p {
+    font-size: 15px;
+    line-height: 1.55;
+  }
+}
