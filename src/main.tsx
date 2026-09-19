@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from 'react'
-import type { FormEvent, TouchEvent as ReactTouchEvent } from 'react'
+import type { FormEvent } from 'react'
 import { createRoot } from 'react-dom/client'
 import { siteConfig } from './config/site'
 import './index.css'
@@ -21,21 +21,16 @@ const testimonialInitials = (name: string) =>
 function TestimonialCard({
   testimonial,
   index,
-  isActive,
-  offset = 0,
 }: {
   testimonial: (typeof siteConfig.testimonials)[number]
   index: number
-  isActive: boolean
-  offset?: number
 }) {
   return (
-    <article className={`testimonial${isActive ? ' is-active' : offset < 0 ? ' is-prev' : ' is-next'}`}>
+    <article className="testimonial">
       <div className="testimonial-topline" aria-hidden="true">
         <span>QUOTE</span>
         <strong>{String(index + 1).padStart(2, '0')}</strong>
       </div>
-
       <header className="testimonial-head">
         <div className="testimonial-avatar" aria-hidden="true">{testimonialInitials(testimonial.name)}</div>
         <div className="testimonial-meta">
@@ -43,11 +38,8 @@ function TestimonialCard({
           <span>{testimonial.role}</span>
         </div>
       </header>
-
       <span className="testimonial-disclaimer">GAGASAN TERINSPIRASI</span>
-
       <blockquote>“{testimonial.quote}”</blockquote>
-
       <footer className="testimonial-footer">
         <span>Perspektif</span>
         <strong>{testimonial.category}</strong>
@@ -57,30 +49,7 @@ function TestimonialCard({
 }
 
 function TestimonialsSection() {
-  const [activeIndex, setActiveIndex] = useState(0)
-  const touchStartX = useRef<number | null>(null)
   const testimonials = siteConfig.testimonials
-
-  const handleTouchStart = (event: ReactTouchEvent<HTMLDivElement>) => {
-    touchStartX.current = event.touches[0]?.clientX ?? null
-  }
-
-  const handleTouchEnd = (event: React.TouchEvent<HTMLDivElement>) => {
-    const startX = touchStartX.current
-    const endX = event.changedTouches[0]?.clientX
-    touchStartX.current = null
-    if (startX === null || endX === undefined) return
-    const distance = endX - startX
-    if (Math.abs(distance) < 45) return
-    setActiveIndex((current) => distance < 0
-      ? Math.min(current + 1, testimonials.length - 1)
-      : Math.max(current - 1, 0))
-  }
-
-  const getCardIndex = (offset: number) => {
-    const index = activeIndex + offset
-    return index >= 0 && index < testimonials.length ? index : null
-  }
 
   return (
     <section id="testimonials" className="section testimonials-section" aria-labelledby="testimonials-title">
@@ -88,43 +57,28 @@ function TestimonialsSection() {
         <p className="section-kicker">QUOTES</p>
         <h2 id="testimonials-title">Quotes</h2>
       </div>
-
       <p className="testimonials-subtitle">
         16 gagasan dari tokoh lintas bidang tentang karya, pembelajaran, teknologi, ekonomi, dan kehidupan.
       </p>
-
       <div className="testimonials-toolbar">
-        <span className="testimonial-counter" aria-live="polite">
-          QUOTE {String(activeIndex + 1).padStart(2, '0')} <span aria-hidden="true">/</span> {String(testimonials.length).padStart(2, '0')}
-        </span>
-        <span className="testimonial-swipe-hint" aria-hidden="true">SWIPE →</span>
+        <span className="testimonial-counter">16 PERSPEKTIF</span>
+        <span className="testimonial-swipe-hint" aria-hidden="true">GESER ↔</span>
       </div>
-
-      <div
-        className="testimonials-viewport"
-        onTouchStart={handleTouchStart}
-        onTouchEnd={handleTouchEnd}
-        onTouchCancel={() => { touchStartX.current = null }}
-      >
+      <div className="testimonials-viewport" aria-label="Koleksi quotes yang dapat digeser">
         <div className="testimonials-list">
-          {[-1, 0, 1].map((offset) => {
-            const index = getCardIndex(offset)
-            if (index === null) return null
-            return (
-              <TestimonialCard
-                key={testimonials[index].name + testimonials[index].role}
-                testimonial={testimonials[index]}
-                index={index}
-                isActive={offset === 0}
-                offset={offset}
-              />
-            )
-          })}
+          {testimonials.map((testimonial, index) => (
+            <TestimonialCard
+              key={testimonial.name + testimonial.role}
+              testimonial={testimonial}
+              index={index}
+            />
+          ))}
         </div>
       </div>
     </section>
   )
 }
+
 export default function App() {
   const [activeSection, setActiveSection] = useState<(typeof sectionIds)[number]>('identity')
   const [menuOpen, setMenuOpen] = useState(false)
@@ -248,7 +202,7 @@ ${name.trim()}`)
   }
 
   return (
-    <div className={`site-shell${menuOpen ? " menu-open" : ""}`}>
+    <div className={`site-shell${menuOpen ? " menu-open" : ""}${musicOpen ? " music-open" : ""}`}>
       <a className="skip-link" href="#identity">Lewati ke konten utama</a>
       <header className="nav">
         <a className="wordmark" href="#identity" aria-label="JRH home">
@@ -474,6 +428,11 @@ ${name.trim()}`)
               <p className="contact-question">Ada yang mau dibahas?</p>
               <p className="contact-answer">Punya pertanyaan, ide, project, peluang kolaborasi, atau sekadar mau ngobrol?</p>
               <p className="contact-note">Tulis aja. Saya siapkan emailnya. Kamu tinggal cek dan klik Kirim.</p>
+              <a className="contact-destination" href={`mailto:${siteConfig.contactEmail}`}>
+                <span>EMAIL DIRECT</span>
+                <strong>{siteConfig.contactEmail}</strong>
+                <span aria-hidden="true">↗</span>
+              </a>
             </div>
 
             <form className="contact-form" onSubmit={handleContactSubmit} noValidate>
