@@ -2322,3 +2322,17 @@ img { display: block; max-width: 100%; }
 .terms-checkbox-close {
   display: none !important;
 }
+
+
+/* Contact closing line emphasis */
+.contact-intro p:last-child,
+.contact-copy p:last-child {
+  font-size: 18px !important;
+  line-height: 1.5 !important;
+}
+@media (max-width: 720px) {
+  .contact-intro p:last-child,
+  .contact-copy p:last-child {
+    font-size: 17px !important;
+  }
+}
