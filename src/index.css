@@ -214,7 +214,6 @@ footer { padding: 0 0 48px; color: var(--smoke); font-size: 11px; }
 }
 
 
-
 /* JRHs UI refinement — visual layer only. Existing content/data remains unchanged. */
 .nav {
   background: rgba(255,255,255,.96);
@@ -311,6 +310,17 @@ footer { padding: 0 0 48px; color: var(--smoke); font-size: 11px; }
   line-height: 1.18;
   letter-spacing: -.035em;
 }
+.footer-mindfulness {
+  display: inline-block;
+  margin-top: 10px;
+  color: var(--smoke);
+  font-family: var(--font-sans);
+  font-size: .42em;
+  font-weight: 500;
+  letter-spacing: .08em;
+  text-transform: lowercase;
+  opacity: .82;
+}
 .site-footer-nav {
   display: grid;
   grid-template-columns: repeat(2, minmax(90px, 1fr));
@@ -402,4 +412,3 @@ footer { padding: 0 0 48px; color: var(--smoke); font-size: 11px; }
   }
   .site-footer-nav a { font-size: 10px; }
 }
-
