@@ -2468,3 +2468,20 @@ button,.hero-pill,.ghost-pill,.project-link,.media-links a{
   color:#fff !important;
   border-color:rgba(255,255,255,.12) !important;
 }
+
+
+/* Navbar active triggers: keep blue, no white active effect */
+.music-toggle.is-open,
+.menu-toggle.is-open{
+  background:#0a6fe8 !important;
+  color:#fff !important;
+  border-color:#0a6fe8 !important;
+  box-shadow:0 6px 16px rgba(0,105,224,.18) !important;
+}
+.music-toggle.is-open .nav-action-glyph,
+.music-toggle.is-open::after{
+  color:#fff !important;
+}
+.menu-toggle.is-open .nav-menu-lines>span{
+  background:#fff !important;
+}
