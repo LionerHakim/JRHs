@@ -4601,15 +4601,15 @@ body {
 }
 
 
-/* JRHs — opened navbar: blur the whole page */
+/* JRHs — opened navbar: immersive menu redesign */
 .site-shell:has(.menu-toggle.is-open)::after {
   content: '';
   position: fixed;
   inset: 0;
   z-index: 20;
-  background: rgba(255,255,255,.42);
-  -webkit-backdrop-filter: blur(10px) saturate(105%);
-  backdrop-filter: blur(10px) saturate(105%);
+  background: rgba(255,255,255,.46);
+  -webkit-backdrop-filter: blur(14px) saturate(108%);
+  backdrop-filter: blur(14px) saturate(108%);
   pointer-events: none;
 }
 
@@ -4619,12 +4619,151 @@ body {
 
 .nav-actions nav {
   z-index: 50;
+  top: calc(100% + 14px);
+  right: 0;
+  width: min(340px, calc(100vw - 32px));
+  padding: 10px;
+  display: grid;
+  gap: 6px;
+  border: 1px solid rgba(17,17,17,.10);
+  border-radius: 26px;
+  background: rgba(255,255,255,.94);
+  box-shadow: 0 24px 70px rgba(17,17,17,.16), 0 4px 16px rgba(17,17,17,.06);
+  -webkit-backdrop-filter: blur(24px) saturate(125%);
+  backdrop-filter: blur(24px) saturate(125%);
+  overflow: hidden;
+  transform-origin: top right;
+  animation: jrhs-menu-in 240ms var(--ease-ios) both;
+}
+
+.nav-actions nav::before {
+  content: 'JRH / NAVIGATION';
+  display: block;
+  padding: 7px 12px 9px;
+  color: #8a8a8f;
+  font-size: 9px;
+  font-weight: 600;
+  letter-spacing: .16em;
+}
+
+.nav-actions nav a {
+  position: relative;
+  min-height: 58px;
+  display: flex;
+  align-items: center;
+  gap: 13px;
+  padding: 0 14px;
+  border: 1px solid transparent;
+  border-radius: 17px;
+  color: #111;
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: -.01em;
+  transition: background 180ms var(--ease-ios), border-color 180ms var(--ease-ios), transform 180ms var(--ease-ios), color 180ms var(--ease-ios);
+}
+
+.nav-actions nav a::before {
+  content: '';
+  width: 7px;
+  height: 7px;
+  flex: 0 0 7px;
+  border-radius: 50%;
+  background: #d1d5db;
+  transition: background 180ms ease, transform 180ms var(--ease-ios);
+}
+
+.nav-actions nav a::after {
+  content: '↗';
+  position: absolute;
+  right: 15px;
+  bottom: auto;
+  left: auto;
+  width: auto;
+  height: auto;
+  transform: none;
+  background: none;
+  color: #a1a1aa;
+  font-size: 15px;
+  opacity: 0;
+  transition: opacity 180ms ease, transform 180ms var(--ease-ios), color 180ms ease;
+}
+
+.nav-actions nav a:hover,
+.nav-actions nav a:focus-visible {
+  background: #f7f8fa;
+  border-color: #e5e7eb;
+  color: #111;
+  transform: translateX(3px);
+}
+
+.nav-actions nav a:hover::before,
+.nav-actions nav a:focus-visible::before {
+  background: #2563eb;
+  transform: scale(1.35);
+}
+
+.nav-actions nav a:hover::after,
+.nav-actions nav a:focus-visible::after {
+  opacity: 1;
+  transform: translate(1px,-1px);
+  color: #2563eb;
+}
+
+.nav-actions nav a.is-active {
+  background: #111;
+  border-color: #111;
+  color: #fff;
+}
+
+.nav-actions nav a.is-active::before {
+  background: #facc15;
+  transform: scale(1.25);
+}
+
+.nav-actions nav a.is-active::after {
+  opacity: 1;
+  color: #facc15;
+}
+
+@keyframes jrhs-menu-in {
+  from {
+    opacity: 0;
+    transform: translateY(-7px) scale(.97);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
 }
 
 @media (max-width: 760px) {
   .site-shell:has(.menu-toggle.is-open)::after {
-    -webkit-backdrop-filter: blur(8px) saturate(105%);
-    backdrop-filter: blur(8px) saturate(105%);
-    background: rgba(255,255,255,.38);
+    background: rgba(255,255,255,.42);
+    -webkit-backdrop-filter: blur(10px) saturate(108%);
+    backdrop-filter: blur(10px) saturate(108%);
+  }
+
+  .nav-actions nav {
+    top: calc(100% + 9px);
+    right: 0;
+    width: min(330px, calc(100vw - 24px));
+    padding: 9px;
+    border-radius: 23px;
+  }
+
+  .nav-actions nav::before {
+    padding: 6px 11px 8px;
+  }
+
+  .nav-actions nav a {
+    min-height: 54px;
+    border-radius: 15px;
+    padding: 0 13px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .nav-actions nav {
+    animation: none;
   }
 }
