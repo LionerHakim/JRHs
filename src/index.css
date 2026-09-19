@@ -125,8 +125,8 @@
   --section: var(--section-gap);
   --radius: var(--radius-cards);
   --pill: var(--radius-full-2);
-  --panel-mobile: min(286px, calc(100vw - 24px));
-  --panel-desktop: min(300px, calc(100vw - 32px));
+  --panel-mobile: min(200px, calc(100vw - 24px));
+  --panel-desktop: min(369px, calc(100vw - 32px));
   --active-blur: 50px;
   --active-dim: rgba(235,245,255,.26);
   font-family: var(--font-geist);
