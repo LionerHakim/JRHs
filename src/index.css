@@ -6148,3 +6148,177 @@ body { color: var(--ink); }
 @media (max-width: 760px) {
   .hero > .portrait-quote { width: min(100%, 300px) !important; }
 }
+
+
+/* JRHs — QUOTES WORLD: centered, compact, zero-glow visual system */
+.testimonials-section .section-head,
+.testimonials-section .section-kicker,
+.testimonials-section h2,
+.testimonials-section .testimonials-subtitle {
+  text-align: center;
+  margin-left: auto;
+  margin-right: auto;
+}
+.testimonials-section .section-kicker { color: #2563eb; }
+.testimonials-section h2 { letter-spacing: -.035em; }
+.testimonials-subtitle { margin-top: -12px; margin-bottom: 24px; }
+
+.testimonials-toolbar {
+  width: min(100%, 1030px);
+  margin: 0 auto 12px;
+}
+.testimonial-counter { color: #69717c; }
+
+.testimonial-controls button {
+  box-shadow: none !important;
+  background: #fff;
+  border-color: #bfc8d3;
+}
+.testimonial-controls button:hover:not(:disabled),
+.testimonial-controls button:focus-visible:not(:disabled) {
+  transform: none;
+  background: #e8f2ff;
+  border-color: #2563eb;
+}
+
+.testimonials-viewport {
+  width: min(100%, 1120px);
+  margin: 0 auto;
+}
+.testimonials-list {
+  padding: 2px 4px 8px;
+}
+.testimonial {
+  min-height: 0;
+  height: 300px;
+  padding: 22px;
+  border: 1.5px solid #cbd5e1;
+  border-radius: 16px;
+  box-shadow: none !important;
+  background: #fff;
+}
+.testimonial:hover {
+  transform: none;
+  box-shadow: none !important;
+  border-color: #2563eb;
+}
+.testimonial-head {
+  justify-content: center;
+  text-align: center;
+}
+.testimonial-meta { text-align: left; }
+.testimonial-avatar {
+  background: #e8f2ff;
+  border-color: #8fbaf2;
+  color: #2563eb;
+}
+.testimonial-disclaimer {
+  margin-left: auto;
+  margin-right: auto;
+  color: #69717c;
+}
+.testimonial blockquote {
+  max-width: 390px;
+  margin: 16px auto 18px;
+  text-align: center;
+  color: #293241;
+  font-size: 14px;
+  line-height: 1.55;
+}
+.testimonial-footer {
+  margin-top: auto;
+  justify-content: center;
+  text-align: center;
+}
+.testimonial-footer span { display: none; }
+.testimonial-footer strong {
+  max-width: 100%;
+  text-align: center;
+  color: #2563eb;
+}
+
+.testimonials-disclaimer {
+  width: min(100%, 900px);
+  margin: 12px auto 0;
+  text-align: center;
+}
+
+/* Global: no glow, no decorative shadow. */
+.site-shell,
+.site-shell * {
+  text-shadow: none !important;
+}
+.nav,
+.nav-actions nav,
+.music-panel,
+.site-footer-main,
+.contact-card,
+.project,
+.record,
+.portrait-quote,
+.project-quote,
+.testimonial,
+.hero-pill,
+.ghost-pill,
+.music-toggle,
+.music-track {
+  box-shadow: none !important;
+}
+
+/* Menu: match JRH logo — solid black, white type, blue active state. */
+.nav-actions nav {
+  background: #17181b !important;
+  border-color: #17181b !important;
+}
+.nav-actions nav a,
+.nav-actions nav a.is-active {
+  color: #fff !important;
+}
+.nav-actions nav a:hover,
+.nav-actions nav a:focus-visible {
+  background: #2b2f35 !important;
+  color: #fff !important;
+}
+.nav-actions nav a.is-active {
+  background: #fff !important;
+  color: #17181b !important;
+}
+
+/* Music: give it a deliberate blue identity without glow. */
+.music-panel {
+  background: #f4f8ff !important;
+  border: 1.5px solid #2563eb !important;
+  box-shadow: none !important;
+}
+.music-panel-head { color: #17181b; }
+.music-status {
+  background: #2563eb !important;
+  color: #fff !important;
+  border-color: #2563eb !important;
+}
+.music-track {
+  background: #e8f2ff !important;
+  border: 1.5px solid #8fbaf2 !important;
+}
+.music-track-art {
+  background: #2563eb !important;
+  color: #fff !important;
+}
+.music-progress { background: #cbdcf7 !important; }
+.music-progress span { background: #2563eb !important; }
+.music-controls .music-play {
+  background: #2563eb !important;
+  color: #fff !important;
+}
+
+/* Keep all surfaces solid and calm. */
+@media (max-width: 640px) {
+  .testimonials-subtitle { margin-top: -6px; }
+  .testimonials-list { padding-inline: 6%; }
+  .testimonial {
+    height: 292px;
+    padding: 20px 18px 18px;
+  }
+  .testimonial-head { justify-content: center; }
+  .testimonial blockquote { font-size: 14px; }
+}
