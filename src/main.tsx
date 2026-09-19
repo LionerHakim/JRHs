@@ -460,8 +460,8 @@ ${name.trim()}`)
                   <label className="contact-consent">
                     <input type="checkbox" required checked={privacy} onChange={(event) => setPrivacy(event.target.checked)} onBlur={() => setTouched((current) => ({ ...current, privacy: true }))} aria-invalid={touched.privacy && !privacy} />
                     <span>Saya setuju dan memahami S&K.</span>
+                    <button className="contact-terms-trigger" type="button" aria-label="Lihat S&K" title="Lihat S&K" onClick={(event) => { event.preventDefault(); event.stopPropagation(); setTermsOpen((open) => !open) }}>i</button>
                   </label>
-                  <button className="contact-terms-trigger" type="button" aria-label="Lihat S&K" title="Lihat S&K" onClick={() => setTermsOpen((open) => !open)}>i</button>
                   {termsOpen ? (
                     <div className="contact-terms-popover" role="dialog" aria-label="Syarat dan ketentuan">
                       <div className="contact-terms-head">
