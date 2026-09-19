@@ -1458,18 +1458,19 @@ img { display: block; max-width: 100%; }
 }
 
 .contact-terms-trigger {
-  width: 16px;
-  height: 16px;
-  flex: 0 0 16px;
+  width: 13px;
+  height: 13px;
+  flex: 0 0 13px;
   margin: 0 0 0 1px;
   padding: 0;
   display: inline-grid;
   place-items: center;
-  border: 1px solid rgba(0,105,224,.2);
+  align-self: center;
+  border: 0;
   border-radius: 50%;
-  background: var(--blue-soft);
+  background: transparent;
   color: var(--blue-strong);
-  font-size: 9px;
+  font-size: 10px;
   font-weight: 600;
   line-height: 1;
 }
