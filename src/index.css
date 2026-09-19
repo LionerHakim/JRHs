@@ -32,6 +32,7 @@
 }
 
 * { box-sizing: border-box; }
+*:focus-visible { outline: 2px solid var(--signal); outline-offset: 3px; }
 html { min-width: 320px; scroll-behavior: smooth; scroll-padding-top: 92px; background: var(--paper); }
 body { margin: 0; min-width: 320px; background: var(--paper); color: var(--ink); }
 body, button, input { font-family: var(--font-sans); }
@@ -40,6 +41,8 @@ button, a { -webkit-tap-highlight-color: transparent; }
 img { display: block; max-width: 100%; height: auto; }
 ::selection { background: var(--signal); color: var(--paper); }
 .site-shell { min-height: 100vh; overflow-x: clip; background: var(--paper); }
+.skip-link { position: fixed; top: 8px; left: 8px; z-index: 100; transform: translateY(-160%); padding: 10px 14px; border-radius: 999px; background: var(--ink); color: var(--paper); text-decoration: none; font-size: 12px; font-weight: 600; transition: transform 180ms var(--ease-ios); }
+.skip-link:focus { transform: translateY(0); }
 
 .nav {
   position: sticky; top: 0; z-index: 30; width: 100%; min-height: var(--nav-height);
@@ -121,7 +124,9 @@ main { width: min(calc(100% - (var(--page-gutter) * 2)), var(--page-max)); margi
 .contact-fields { display: grid; gap: 10px; padding-top: 22px; border-top: 1px solid var(--line); }
 .contact-field { position: relative; min-height: 56px; display: flex; align-items: center; gap: 12px; padding: 0 16px; border: 1px solid var(--line); border-radius: 16px; background: var(--surface); transition: border-color 180ms var(--ease-ios), background-color 180ms var(--ease-ios), box-shadow 180ms var(--ease-ios); }
 .contact-field:focus-within { border-color: rgba(0,122,255,.45); background: var(--paper); box-shadow: 0 0 0 3px rgba(0,122,255,.08); }
-.contact-icon { flex: 0 0 20px; width: 20px; color: var(--smoke); text-align: center; font-size: 16px; }
+.contact-icon { flex: 0 0 20px; width: 20px; height: 20px; display: grid; place-items: center; color: var(--smoke); }
+.contact-icon svg { width: 18px; height: 18px; fill: none; stroke: currentColor; stroke-width: 1.55; stroke-linecap: round; stroke-linejoin: round; }
+.contact-field:has(input[aria-invalid='true']), .contact-field:has(textarea[aria-invalid='true']) { border-color: rgba(155,28,28,.45); }
 .contact-field input, .contact-field select, .contact-field textarea { width: 100%; min-width: 0; border: 0; outline: 0; background: transparent; color: var(--ink); font: inherit; font-size: 14px; }
 .contact-field input, .contact-field select { min-height: 54px; }
 .contact-field select { appearance: none; cursor: pointer; }
@@ -136,6 +141,7 @@ main { width: min(calc(100% - (var(--page-gutter) * 2)), var(--page-max)); margi
 .contact-submit { display: grid; gap: 12px; }
 .contact-submit button { min-height: 54px; width: 100%; border: 0; border-radius: 17px; background: var(--ink); color: var(--paper); font: inherit; font-size: 14px; font-weight: 600; cursor: pointer; transition: transform 180ms var(--ease-ios), background-color 180ms var(--ease-ios); }
 .contact-submit button:hover, .contact-submit button:focus-visible { background: var(--signal); transform: translateY(-1px); }
+.contact-submit button:active { transform: translateY(0) scale(.99); }
 .contact-privacy { order: 2; display: flex; align-items: center; justify-content: center; gap: 8px; color: var(--smoke); font-size: 10px; line-height: 1.4; }
 .contact-privacy input { width: 14px; height: 14px; margin: 0; accent-color: var(--signal); }
 
