@@ -228,7 +228,7 @@ ${name.trim()}`)
           </button>
 
           <nav id="primary-navigation" className={menuOpen ? 'is-open' : undefined} aria-label="Primary navigation">
-            {sectionItems.map(([id, label]) => (
+            {sectionItems.map(([id, label], index) => (
               <a
                 key={id}
                 href={`#${id}`}
@@ -236,7 +236,9 @@ ${name.trim()}`)
                 className={activeSection === id ? 'is-active' : undefined}
                 onClick={() => setMenuOpen(false)}
               >
-                {label}
+                <span className="menu-item-index" aria-hidden="true">{String(index + 1).padStart(2, '0')}</span>
+                <span className="menu-item-label">{label}</span>
+                <span className="menu-item-arrow" aria-hidden="true">↗</span>
               </a>
             ))}
           </nav>
