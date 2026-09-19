@@ -266,6 +266,26 @@ ${name.trim()}`)
           <p>gunakan data dan sistem algoritma, tapi jangan buang intuisi manusia. gabungkan keduanya untuk pengambilan keputusan terbaik.</p>
         </aside>
 
+        <section id="testimonials" className="section testimonials-section" aria-labelledby="testimonials-title">
+          <div className="section-head">
+            <p className="section-kicker">TESTIMONIALS</p>
+            <h2 id="testimonials-title">Testimoni</h2>
+          </div>
+
+          <div className="testimonials-list">
+            {siteConfig.testimonials.map((testimonial) => (
+              <article className="testimonial" key={testimonial.name + testimonial.role}>
+                <span className="testimonial-mark" aria-hidden="true">“</span>
+                <blockquote>{testimonial.quote}</blockquote>
+                <footer>
+                  <strong>{testimonial.name}</strong>
+                  <span>{testimonial.role}</span>
+                </footer>
+              </article>
+            ))}
+          </div>
+        </section>
+
         <section id="links" className="section contact-section" aria-labelledby="links-title">
           <div className="section-head">
             <p className="section-kicker">CONTACT</p>
