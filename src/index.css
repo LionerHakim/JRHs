@@ -5930,3 +5930,173 @@ body { color: var(--ink); }
   .testimonial { min-height: 0; padding: 26px 20px; border-radius: 18px; }
   .testimonial blockquote { font-size: 15px; }
 }
+
+
+/* JRHs — TESTIMONIALS CAROUSEL */
+.testimonials-section { overflow: visible; }
+.testimonials-subtitle {
+  width: min(100%, 760px);
+  margin: -22px 0 30px auto;
+  color: #69717c;
+  font-size: 15px;
+  line-height: 1.6;
+}
+.testimonials-toolbar {
+  width: min(100%, 1030px);
+  margin: 0 0 14px auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.testimonial-counter {
+  color: #69717c;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: .12em;
+  font-variant-numeric: tabular-nums;
+}
+.testimonial-controls { display: flex; gap: 8px; }
+.testimonial-controls button {
+  width: 38px;
+  height: 38px;
+  border: 1.5px solid #bfc8d3;
+  border-radius: 50%;
+  background: #fff;
+  color: #17181b;
+  font: inherit;
+  font-size: 16px;
+  cursor: pointer;
+  transition: transform 250ms ease, background-color 250ms ease, border-color 250ms ease;
+}
+.testimonial-controls button:hover:not(:disabled),
+.testimonial-controls button:focus-visible:not(:disabled) {
+  transform: translateY(-2px);
+  background: #e8f2ff;
+  border-color: #8fbaf2;
+}
+.testimonial-controls button:disabled { opacity: .35; cursor: not-allowed; }
+
+.testimonials-viewport {
+  width: min(100%, 1030px);
+  margin-left: auto;
+  overflow: hidden;
+}
+.testimonials-list {
+  width: 100%;
+  margin: 0;
+  display: grid;
+  grid-auto-flow: column;
+  grid-auto-columns: calc((100% - 20px) / 3);
+  gap: 10px;
+  overflow-x: auto;
+  overscroll-behavior-x: contain;
+  scroll-snap-type: x mandatory;
+  scroll-behavior: smooth;
+  scrollbar-width: none;
+  padding: 2px 1px 10px;
+}
+.testimonials-list::-webkit-scrollbar { display: none; }
+.testimonial {
+  position: relative;
+  min-width: 0;
+  min-height: 330px;
+  padding: 24px;
+  scroll-snap-align: center;
+  border: 1.5px solid #cfd9e7;
+  border-radius: 18px;
+  background: #fff;
+  box-shadow: 0 8px 24px rgba(17,24,39,.045);
+  transition: transform 300ms cubic-bezier(.22,1,.36,1), box-shadow 300ms ease, border-color 250ms ease;
+}
+.testimonial:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 28px rgba(17,24,39,.07);
+  border-color: #9ec5f7;
+}
+.testimonial-avatar {
+  width: 46px;
+  height: 46px;
+  display: grid;
+  place-items: center;
+  margin-bottom: 16px;
+  border: 1.5px solid #9ec5f7;
+  border-radius: 50%;
+  background: #e8f2ff;
+  color: #2563eb;
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: .04em;
+}
+.testimonial-meta { display: grid; gap: 3px; }
+.testimonial-meta strong { color: #17181b; font-size: 17px; line-height: 1.25; }
+.testimonial-meta span {
+  color: #69717c;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+}
+.testimonial-disclaimer {
+  display: inline-flex;
+  margin-top: 14px;
+  color: #69717c;
+  font-size: 8px;
+  font-weight: 700;
+  letter-spacing: .08em;
+  line-height: 1.4;
+}
+.testimonial blockquote {
+  margin: 18px 0 18px;
+  color: #334155;
+  font-size: 15px;
+  line-height: 1.6;
+}
+.testimonial-category {
+  display: inline-flex;
+  padding-top: 10px;
+  border-top: 1px solid #dfe7f2;
+  color: #2563eb;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+}
+.testimonials-disclaimer {
+  width: min(100%, 1030px);
+  margin: 18px 0 0 auto;
+  color: #69717c;
+  font-size: 10px;
+  line-height: 1.55;
+}
+@media (max-width: 900px) {
+  .testimonials-list { grid-auto-columns: calc((100% - 10px) / 2); }
+}
+@media (max-width: 640px) {
+  .testimonials-subtitle { margin: -14px 0 24px; font-size: 14px; }
+  .testimonials-toolbar { margin-bottom: 10px; }
+  .testimonials-list {
+    grid-auto-columns: 88%;
+    gap: 10px;
+    padding-inline: 6%;
+    scroll-padding-inline: 6%;
+  }
+  .testimonial { min-height: 310px; padding: 22px; border-radius: 16px; }
+  .testimonial:hover { transform: none; }
+  .testimonial blockquote { font-size: 15px; }
+  .testimonials-disclaimer { font-size: 9px; }
+}
+
+/* Quote 1: intentionally narrower than the portrait column so it reads as a compact note. */
+.hero > .portrait-quote {
+  width: min(100%, 320px) !important;
+  justify-self: end;
+}
+@media (max-width: 900px) {
+  .hero > .portrait-quote {
+    width: min(100%, 320px) !important;
+    justify-self: start;
+  }
+}
+@media (max-width: 760px) {
+  .hero > .portrait-quote { width: min(100%, 300px) !important; }
+}
