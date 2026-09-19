@@ -247,7 +247,12 @@ ${name.trim()}`)
           </button>
 
           <nav id="primary-navigation" className={menuOpen ? 'is-open' : undefined} aria-label="Primary navigation">
-            {sectionItems.map(([id, label], index) => (
+            <div className="menu-panel-head">
+              <span>JRH / NAVIGATION</span>
+              <strong>Explore</strong>
+            </div>
+            <div className="menu-panel-grid">
+              {sectionItems.map(([id, label], index) => (
               <a
                 key={id}
                 href={`#${id}`}
@@ -259,7 +264,12 @@ ${name.trim()}`)
                 <span className="menu-item-label">{label}</span>
                 <span className="menu-item-arrow" aria-hidden="true">↗</span>
               </a>
-            ))}
+              ))}
+            </div>
+            <div className="menu-panel-foot">
+              <span>JRHs</span>
+              <span>Navigate your way ↗</span>
+            </div>
           </nav>
 
           <aside id="music-panel" className={musicOpen ? 'music-panel is-open' : 'music-panel'} aria-label="Music player">
