@@ -6322,3 +6322,13 @@ body { color: var(--ink); }
   .testimonial-head { justify-content: center; }
   .testimonial blockquote { font-size: 14px; }
 }
+
+
+/* JRHs — TYPOGRAPHY: Work Sans */
+:root {
+  --font-sans: "Work Sans", -apple-system, BlinkMacSystemFont, "Helvetica Neue", Arial, sans-serif;
+}
+html, body, button, input, select, textarea, a, nav, section, footer, header, main,
+div, span, p, h1, h2, h3, strong, li, time {
+  font-family: var(--font-sans) !important;
+}
