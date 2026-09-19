@@ -166,8 +166,8 @@ ${name.trim()}`)
               />
             </div>
             <figcaption className="portrait-quote">
-              <strong>BERPIKIR SEPERTI MESIN EKONOMI</strong>
-              <p>lihat dunia sebagai sistem. segala peristiwa saling berkaitan dan berulang. pahami pola, bukan hanya kejadian sesaat.</p>
+              <strong>BERPIKIR SEPERTI MESIN<br />EKONOMI</strong>
+              <p>Lihat dunia sebagai sistem. Segala peristiwa saling berkaitan dan berulang. Pahami pola, bukan hanya kejadian sesaat.</p>
             </figcaption>
           </figure>
         </section>
