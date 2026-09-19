@@ -1,0 +1,9 @@
+{
+  "name": "JRH",
+  "short_name": "JRH",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#ffffff",
+  "icons": [{"src":"/assets/images/s.jpg","sizes":"any","type":"image/jpeg"}]
+}
