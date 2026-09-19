@@ -5876,3 +5876,57 @@ body { color: var(--ink); }
   .portrait-quote p,
   .project-quote p { margin-left: 30px; }
 }
+
+
+/* JRHs — TESTIMONIALS: compact, honest placeholder until approved quotes are supplied. */
+.testimonials-list {
+  width: min(100%, 1030px);
+  margin-left: auto;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 10px;
+}
+.testimonial {
+  position: relative;
+  min-height: 190px;
+  padding: 30px clamp(22px, 3.2vw, 38px);
+  border: 1.5px solid #9ec5f7;
+  border-radius: 20px;
+  background: #e8f2ff;
+  box-shadow: 0 10px 26px rgba(37,99,235,.07);
+}
+.testimonial-mark {
+  display: block;
+  color: #2563eb;
+  font-size: 38px;
+  line-height: .8;
+  font-weight: 700;
+}
+.testimonial blockquote {
+  max-width: 780px;
+  margin: 12px 0 20px;
+  color: #334155;
+  font-size: 16px;
+  line-height: 1.6;
+}
+.testimonial footer {
+  display: grid;
+  gap: 3px;
+  padding-top: 14px;
+  border-top: 1px solid rgba(37,99,235,.18);
+}
+.testimonial footer strong {
+  color: #172033;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: .04em;
+}
+.testimonial footer span {
+  color: #69717c;
+  font-size: 11px;
+}
+@media (max-width: 760px) {
+  .testimonials-list { width: 100%; }
+  .testimonial { min-height: 0; padding: 26px 20px; border-radius: 18px; }
+  .testimonial blockquote { font-size: 15px; }
+}
