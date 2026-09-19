@@ -480,3 +480,24 @@ footer { padding: 0 0 48px; color: var(--smoke); font-size: 11px; }
   .nav nav a:hover,
   .nav nav a:focus-visible { transform: none; }
 }
+
+
+/* Education hierarchy — clean bullet format, content unchanged */
+.record-detail {
+  display: flex;
+  align-items: baseline;
+  gap: 9px;
+}
+.record-detail > span {
+  flex: 0 0 auto;
+  color: var(--signal);
+  font-size: 7px;
+}
+.record-activities li {
+  padding-left: 16px;
+}
+.record-activities li::before {
+  content: '●';
+  color: var(--signal);
+  font-size: 7px;
+}
