@@ -60,7 +60,7 @@ export const siteConfig = {
     { number: '01', title: 'JRH PUSAT', category: 'Utility Web App', description: 'Kumpulan tools praktis untuk membuat, menghitung, mengubah, merapikan, mencetak, dan kebutuhan developer.', status: 'Coming soon' },
     { number: '02', title: 'JRH CV', category: 'Career Web App', description: 'Platform untuk membangun identitas profesional, CV online, portfolio, dan halaman karier yang siap dibagikan.', status: 'Coming soon' },
     { number: '03', title: 'INTEL TIKTOK', category: 'Media Web App', description: 'Eksperimen web untuk menjelajah, mengolah, dan mengakses konten TikTok secara praktis dalam satu pengalaman.', status: 'Coming soon' },
-  ] satisfies readonly MediaProject[],
+  ] as readonly MediaProject[],
   testimonials: [
     { name: 'Steve Jobs', role: 'Apple co-founder', category: 'Innovation', quote: 'Your time is limited, so don’t waste it living someone else’s life.', sourceUrl: 'https://news.stanford.edu/stories/2005/06/youve-got-find-love-jobs-says', sourceStatus: 'verified' },
     { name: 'Nelson Mandela', role: 'Former President of South Africa', category: 'Education', quote: 'Education is the most powerful weapon which you can use to change the world.', sourceUrl: 'https://www.nelsonmandela.org/nm100-education', sourceStatus: 'verified' },
