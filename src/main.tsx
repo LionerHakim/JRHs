@@ -349,10 +349,6 @@ ${name.trim()}`)
             </div>
           </figure>
 
-          <aside className="portrait-quote" aria-label="Economic thinking principle">
-            <strong>BERPIKIR SEPERTI MESIN EKONOMI</strong>
-            <p>lihat dunia sebagai sistem. segala peristiwa saling berkaitan dan berulang. pahami pola, bukan hanya kejadian sesaat.</p>
-          </aside>
         </section>
 
         <section id="education" className="section" aria-labelledby="education-title">
@@ -411,6 +407,8 @@ ${name.trim()}`)
           <strong>GABUNGKAN DATA DAN INTUISI</strong>
           <p>gunakan data dan sistem algoritma, tapi jangan buang intuisi manusia. gabungkan keduanya untuk pengambilan keputusan terbaik.</p>
         </aside>
+
+
 
         <TestimonialsSection />
 
