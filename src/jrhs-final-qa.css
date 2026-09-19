@@ -255,3 +255,42 @@ textarea {
     outline: 2px solid CanvasText;
   }
 }
+
+.contact-direct {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 16px;
+}
+.contact-direct a {
+  min-width: 0;
+  max-width: 100%;
+  overflow-wrap: anywhere;
+  color: #2563eb;
+  font-weight: 700;
+  text-underline-offset: 3px;
+}
+.contact-direct button {
+  min-height: 40px;
+  padding: 8px 12px;
+  border: 1px solid #d8dde5;
+  border-radius: 999px;
+  background: #fff;
+  color: #17181b;
+  font: inherit;
+  font-size: 12px;
+  font-weight: 800;
+  cursor: pointer;
+}
+.contact-direct button:hover,
+.contact-direct button:focus-visible {
+  border-color: #2563eb;
+}
+@media (prefers-color-scheme: dark) {
+  .contact-direct button {
+    border-color: #3a414b;
+    background: #171a1e;
+    color: #f5f7fa;
+  }
+}
