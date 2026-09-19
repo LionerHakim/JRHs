@@ -39,7 +39,7 @@ export const siteConfig = {
     { number: '02', title: 'Pinterest', category: 'Inspiration', platform: 'PINTEREST', url: 'https://pin.it/6k7sezYIK' },
     { number: '03', title: 'JRHs 369', category: 'Video', platform: 'YOUTUBE', url: 'https://youtube.com/@jrhs369' },
     { number: '04', title: 'GOVshorts', category: 'Video', platform: 'YOUTUBE', url: 'https://youtube.com/@govshortss' },
-    { number: '05', title: 'Collshp', category: 'Monetization', platform: 'COLLSHP', url: 'https://collshp.com/23369' },
+    { number: '05', title: 'Shopee', category: 'Monetization', platform: 'SHOPEE', url: 'https://collshp.com/23369' },
     { number: '06', title: 'Nusantara', category: 'Monetization', platform: 'LYNK.ID', url: 'https://lynk.id/nusantara9' },
     { number: '07', title: '@allshorts369', category: 'Short Video', platform: 'TIKTOK', url: 'https://www.tiktok.com/@allshorts369' },
   ] satisfies readonly MediaItem[],
