@@ -1724,3 +1724,90 @@ main {
     border-radius: 0;
   }
 }
+
+
+/* JRHs menu integration — align navigation with the editorial white system */
+.nav {
+  background: rgba(255,255,255,.94);
+  border-color: #ededed;
+  box-shadow: 0 0 0 5px #f7f7f7;
+}
+.nav-actions { gap: 6px; }
+
+.menu-toggle {
+  width: 40px;
+  height: 40px;
+  border: 0;
+  border-radius: 12px;
+  background: transparent;
+  box-shadow: none;
+  color: var(--ink);
+}
+.menu-toggle::after { display: none; }
+.menu-toggle:hover,
+.menu-toggle:focus-visible {
+  background: var(--surface);
+  border-color: transparent;
+}
+.menu-toggle.is-open {
+  background: var(--ink);
+  color: #fff;
+}
+.menu-toggle.is-open:hover,
+.menu-toggle.is-open:focus-visible {
+  background: var(--ink);
+}
+
+.nav-actions nav {
+  width: 250px;
+  top: calc(100% + 12px);
+  padding: 8px;
+  border: 1px solid #ededed;
+  border-radius: 18px;
+  background: #fff;
+  box-shadow: 0 0 0 5px #f7f7f7, 0 18px 44px rgba(0,0,0,.055);
+}
+.nav-actions nav a {
+  min-height: 48px;
+  padding: 0 12px;
+  border-radius: 11px;
+  color: var(--graphite);
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: -.01em;
+}
+.nav-actions nav a::before {
+  width: 4px;
+  height: 4px;
+  margin-right: 11px;
+}
+.nav-actions nav a:hover,
+.nav-actions nav a:focus-visible {
+  background: #f7f7f7;
+  color: var(--ink);
+  transform: none;
+}
+.nav-actions nav a.is-active {
+  background: #f7f7f7;
+  color: var(--ink);
+  font-weight: 600;
+}
+.nav-actions nav a.is-active::before {
+  background: var(--signal);
+}
+.nav-actions nav a:active {
+  transform: scale(.985);
+}
+
+@media (max-width: 760px) {
+  .nav {
+    width: calc(100% - 20px);
+    min-height: 56px;
+    padding: 7px 9px 7px 12px;
+  }
+  .menu-toggle { width: 40px; height: 40px; }
+  .nav-actions nav {
+    width: min(240px, calc(100vw - 28px));
+    border-radius: 17px;
+  }
+}
