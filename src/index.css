@@ -2092,7 +2092,7 @@ button,.hero-pill,.ghost-pill,.project-link,.media-links a{
 }
 
 
-/* Navbar trigger buttons — preserve existing active panels */
+/* Navbar trigger buttons — canonical */
 .music-toggle,
 .menu-toggle{
   width:118px;
@@ -2104,22 +2104,22 @@ button,.hero-pill,.ghost-pill,.project-link,.media-links a{
   justify-content:center;
   padding:0 14px;
   border-radius:18px;
-}
-
-.music-toggle{
-  justify-content:space-between;
-  border-color:#0a6fe8;
-  background:#0a6fe8;
-  color:#fff;
+  border-color:#0a6fe8 !important;
+  background:#0a6fe8 !important;
+  color:#fff !important;
   box-shadow:0 6px 16px rgba(0,105,224,.18);
 }
 
+.music-toggle{justify-content:space-between;}
 .music-toggle:hover,
 .music-toggle:focus-visible,
-.music-toggle.is-open{
-  border-color:#0a6fe8;
-  background:#0a6fe8;
-  color:#fff;
+.menu-toggle:hover,
+.menu-toggle:focus-visible,
+.music-toggle.is-open,
+.menu-toggle.is-open{
+  border-color:#0a6fe8 !important;
+  background:#0a6fe8 !important;
+  color:#fff !important;
   transform:translateY(-1px);
   box-shadow:0 8px 20px rgba(0,105,224,.22);
 }
@@ -2129,17 +2129,15 @@ button,.hero-pill,.ghost-pill,.project-link,.media-links a{
   height:28px;
   flex:0 0 28px;
   border-radius:9px;
-  background:transparent;
-  color:#fff;
+  background:transparent !important;
+  color:#fff !important;
   font-size:17px;
 }
 
 .music-toggle .nav-action-label,
 .music-toggle .nav-action-meta,
 .menu-toggle .nav-action-label,
-.menu-toggle .nav-action-meta{
-  display:none;
-}
+.menu-toggle .nav-action-meta{display:none;}
 
 .music-toggle::after{
   content:"▂▅▃";
@@ -2151,35 +2149,13 @@ button,.hero-pill,.ghost-pill,.project-link,.media-links a{
   line-height:1;
 }
 
-.menu-toggle{
-  border-color:rgba(10,13,18,.14);
-  background:#f7f8fa;
-  color:#252a32;
-  box-shadow:0 4px 12px rgba(10,13,18,.06);
-}
-
-.menu-toggle:hover,
-.menu-toggle:focus-visible,
-.menu-toggle.is-open{
-  border-color:rgba(10,13,18,.18);
-  background:#fff;
-  color:#252a32;
-  transform:translateY(-1px);
-  box-shadow:0 6px 16px rgba(10,13,18,.09);
-}
-
 .menu-toggle .nav-menu-lines{
   width:30px;
   height:30px;
   border-radius:10px;
-  background:transparent;
+  background:transparent !important;
 }
-
-.menu-toggle .nav-menu-lines>span{
-  width:16px;
-  height:1.8px;
-  background:#252a32;
-}
+.menu-toggle .nav-menu-lines>span{background:#fff !important;}
 
 @media (max-width:640px){
   .music-toggle,
@@ -2191,81 +2167,9 @@ button,.hero-pill,.ghost-pill,.project-link,.media-links a{
     padding:0 10px;
     border-radius:18px;
   }
-
-  .music-toggle::after{
-    display:none;
-  }
-
-  .music-toggle .nav-action-glyph{
-    margin-inline:auto;
-  }
+  .music-toggle::after{display:none;}
+  .music-toggle .nav-action-glyph{margin-inline:auto;}
 }
-/* Navbar trigger buttons — blue menu variant */
-.menu-toggle{
-  border-color:#0a6fe8;
-  background:#0a6fe8;
-  color:#fff;
-  box-shadow:0 6px 16px rgba(0,105,224,.18);
-}
-.menu-toggle:hover,
-.menu-toggle:focus-visible,
-.menu-toggle.is-open{
-  border-color:#0a6fe8;
-  background:#0a6fe8;
-  color:#fff;
-  transform:translateY(-1px);
-  box-shadow:0 8px 20px rgba(0,105,224,.22);
-}
-.menu-toggle .nav-menu-lines{
-  background:transparent;
-}
-.menu-toggle .nav-menu-lines>span{
-  background:#fff;
-}
-
-@media (max-width:640px){
-  .music-toggle,
-  .menu-toggle{
-    width:56px;
-    min-width:56px;
-    height:48px;
-    min-height:48px;
-    padding:0 10px;
-    border-radius:18px;
-  }
-
-  .music-toggle::after{
-    display:none;
-  }
-
-  .music-toggle .nav-action-glyph{
-    margin-inline:auto;
-  }
-}
-
-
-/* Active trigger state — white */
-.music-toggle.is-open,
-.menu-toggle.is-open{
-  border-color:rgba(10,13,18,.14);
-  background:#fff;
-  color:#252a32;
-  box-shadow:0 6px 16px rgba(10,13,18,.09);
-}
-.music-toggle.is-open .nav-action-glyph{
-  background:transparent;
-  color:#0a6fe8;
-}
-.music-toggle.is-open::after{
-  color:#0a6fe8;
-}
-.menu-toggle.is-open .nav-menu-lines{
-  background:transparent;
-}
-.menu-toggle.is-open .nav-menu-lines>span{
-  background:#252a32;
-}
-
 
 /* Media links visibility fix */
 .media-section .media-card-body{
@@ -2293,159 +2197,6 @@ button,.hero-pill,.ghost-pill,.project-link,.media-links a{
 }
 
 
-/* Unified blue button system */
-:root{
-  --jrh-button-blue:#0a6fe8;
-  --jrh-button-blue-hover:#0069e0;
-}
-
-.hero-pill,
-.ghost-pill,
-.project-link:not(.is-disabled),
-.media-links a,
-.contact-submit button,
-.contact-topic-trigger,
-.terms-checkbox-info,
-.nav-action{
-  border-color:var(--jrh-button-blue) !important;
-  background:var(--jrh-button-blue) !important;
-  color:#fff !important;
-}
-
-.hero-pill:hover,
-.hero-pill:focus-visible,
-.ghost-pill:hover,
-.ghost-pill:focus-visible,
-.project-link:not(.is-disabled):hover,
-.project-link:not(.is-disabled):focus-visible,
-.media-links a:hover,
-.media-links a:focus-visible,
-.contact-submit button:hover:not(:disabled),
-.contact-submit button:focus-visible:not(:disabled),
-.contact-topic-trigger:hover,
-.contact-topic-trigger:focus-visible,
-.nav-action:hover,
-.nav-action:focus-visible{
-  border-color:var(--jrh-button-blue-hover) !important;
-  background:var(--jrh-button-blue-hover) !important;
-  color:#fff !important;
-}
-
-.nav-action.is-open,
-.music-toggle.is-open,
-.menu-toggle.is-open{
-  border-color:var(--jrh-button-blue) !important;
-  background:var(--jrh-button-blue) !important;
-  color:#fff !important;
-}
-
-.nav-action-glyph,
-.nav-menu-lines{
-  background:transparent !important;
-  color:#fff !important;
-}
-
-.nav-menu-lines>span{
-  background:#fff !important;
-}
-
-.music-toggle.is-open .nav-action-glyph,
-.music-toggle.is-open::after{
-  color:#fff !important;
-}
-
-.menu-toggle.is-open .nav-menu-lines>span{
-  background:#fff !important;
-}
-
-.project-link.is-disabled{
-  background:var(--mist) !important;
-  color:var(--fog) !important;
-  border-color:var(--ui-border) !important;
-  cursor:not-allowed;
-}
-
-/* Music panel controls remain functional, now using the same blue action language */
-.music-controls button{
-  border-color:rgba(10,111,232,.35);
-  background:var(--jrh-button-blue);
-  color:#fff;
-}
-.music-controls button:hover,
-.music-controls button:focus-visible{
-  background:var(--jrh-button-blue-hover);
-  color:#fff;
-}
-.music-controls .music-play{
-  background:#fff;
-  color:var(--jrh-button-blue);
-}
-
-
-/* Scope blue styling to link buttons only */
-.hero-pill,
-.ghost-pill,
-.contact-submit button,
-.contact-topic-trigger,
-.nav-action,
-.music-controls button{
-  border-color:initial !important;
-  background:initial !important;
-  color:initial !important;
-}
-
-.hero-pill{
-  background:var(--charcoal) !important;
-  color:var(--paper) !important;
-  border-color:transparent !important;
-}
-.ghost-pill{
-  background:transparent !important;
-  color:var(--ink) !important;
-  border-color:var(--ui-border-strong) !important;
-}
-.contact-submit button{
-  background:var(--charcoal) !important;
-  color:var(--paper) !important;
-  border-color:transparent !important;
-}
-.contact-topic-trigger{
-  background:var(--paper) !important;
-  color:var(--ink) !important;
-  border-color:var(--ui-border-strong) !important;
-}
-.nav-action{
-  color:var(--graphite) !important;
-  background:transparent !important;
-  border-color:transparent !important;
-}
-.music-toggle{
-  background:#0a6fe8 !important;
-  color:#fff !important;
-  border-color:#0a6fe8 !important;
-}
-.menu-toggle{
-  background:#0a6fe8 !important;
-  color:#fff !important;
-  border-color:#0a6fe8 !important;
-}
-.music-toggle.is-open,
-.menu-toggle.is-open{
-  background:#fff !important;
-  color:#252a32 !important;
-  border-color:rgba(10,13,18,.14) !important;
-}
-.music-controls button{
-  background:rgba(255,255,255,.045) !important;
-  color:#dfe4eb !important;
-  border-color:rgba(255,255,255,.07) !important;
-}
-.music-controls .music-play{
-  background:var(--paper) !important;
-  color:var(--charcoal) !important;
-}
-
-
 /* Fix topic selector blue override */
 .contact-topic-trigger,
 .contact-topic-trigger:hover,
@@ -2469,19 +2220,82 @@ button,.hero-pill,.ghost-pill,.project-link,.media-links a{
   border-color:rgba(255,255,255,.12) !important;
 }
 
-
-/* Navbar active triggers: keep blue, no white active effect */
-.music-toggle.is-open,
-.menu-toggle.is-open{
+/* Navbar trigger buttons — canonical */
+.music-toggle,
+.menu-toggle{
+  width:118px;
+  min-width:118px;
+  height:48px;
+  min-height:48px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  padding:0 14px;
+  border-radius:18px;
+  border-color:#0a6fe8 !important;
   background:#0a6fe8 !important;
   color:#fff !important;
+  box-shadow:0 6px 16px rgba(0,105,224,.18);
+}
+
+.music-toggle{justify-content:space-between;}
+.music-toggle:hover,
+.music-toggle:focus-visible,
+.menu-toggle:hover,
+.menu-toggle:focus-visible,
+.music-toggle.is-open,
+.menu-toggle.is-open{
   border-color:#0a6fe8 !important;
-  box-shadow:0 6px 16px rgba(0,105,224,.18) !important;
-}
-.music-toggle.is-open .nav-action-glyph,
-.music-toggle.is-open::after{
+  background:#0a6fe8 !important;
   color:#fff !important;
+  transform:translateY(-1px);
+  box-shadow:0 8px 20px rgba(0,105,224,.22);
 }
-.menu-toggle.is-open .nav-menu-lines>span{
-  background:#fff !important;
+
+.music-toggle .nav-action-glyph{
+  width:28px;
+  height:28px;
+  flex:0 0 28px;
+  border-radius:9px;
+  background:transparent !important;
+  color:#fff !important;
+  font-size:17px;
 }
+
+.music-toggle .nav-action-label,
+.music-toggle .nav-action-meta,
+.menu-toggle .nav-action-label,
+.menu-toggle .nav-action-meta{display:none;}
+
+.music-toggle::after{
+  content:"▂▅▃";
+  flex:0 0 auto;
+  color:#fff;
+  font-size:10px;
+  font-weight:700;
+  letter-spacing:-2px;
+  line-height:1;
+}
+
+.menu-toggle .nav-menu-lines{
+  width:30px;
+  height:30px;
+  border-radius:10px;
+  background:transparent !important;
+}
+.menu-toggle .nav-menu-lines>span{background:#fff !important;}
+
+@media (max-width:640px){
+  .music-toggle,
+  .menu-toggle{
+    width:56px;
+    min-width:56px;
+    height:48px;
+    min-height:48px;
+    padding:0 10px;
+    border-radius:18px;
+  }
+  .music-toggle::after{display:none;}
+  .music-toggle .nav-action-glyph{margin-inline:auto;}
+}
+
