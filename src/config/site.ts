@@ -5,6 +5,11 @@ export type Project = {
   title: string
   links?: readonly Link[]
 }
+export type Testimonial = {
+  quote: string
+  name: string
+  role: string
+}
 
 export const siteConfig = {
   identity: {
@@ -51,4 +56,11 @@ export const siteConfig = {
       ],
     },
   ] satisfies readonly Project[],
+  testimonials: [
+    {
+      quote: 'Testimoni akan ditambahkan setelah ada izin publikasi dari pemberi testimoni.',
+      name: 'Coming soon',
+      role: 'Testimonial JRHs',
+    },
+  ] satisfies readonly Testimonial[],
 } as const
