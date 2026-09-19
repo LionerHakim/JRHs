@@ -157,8 +157,26 @@ export default function App() {
     if (!name.trim()) return setContactError('Nama belum diisi.')
 
     const normalizedEmail = email.trim().toLowerCase()
-    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(normalizedEmail)) {
-      return setContactError('Gunakan email yang valid.')
+    const emailMatch = normalizedEmail.match(/^([^\s@]+)@([^\s@]+)$/)
+    const allowedEmailDomains = new Set([
+      'gmail.com',
+      'googlemail.com',
+      'outlook.com',
+      'hotmail.com',
+      'live.com',
+      'msn.com',
+      'yahoo.com',
+      'ymail.com',
+      'icloud.com',
+      'me.com',
+      'mac.com',
+      'proton.me',
+      'protonmail.com',
+      'pm.me',
+    ])
+
+    if (!emailMatch || !allowedEmailDomains.has(emailMatch[2])) {
+      return setContactError('Gunakan email Gmail, Outlook, Yahoo, iCloud, atau Proton.')
     }
 
     if (!message.trim()) return setContactError('Pesan belum diisi.')
@@ -430,7 +448,12 @@ ${name.trim()}`)
                 </label>
                 <label className="contact-field">
                   <span className="contact-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><rect x="3.5" y="5.5" width="17" height="13" rx="2" /><path d="m4.5 7 7.5 6 7.5-6" /></svg></span>
-                  <input aria-label="Email kamu" type="email" required value={email} onChange={(event) => setEmail(event.target.value)} onBlur={() => setTouched((current) => ({ ...current, email: true }))} aria-invalid={touched.email && !!email && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.trim())} placeholder="email kamu" autoComplete="email" inputMode="email" />
+                  <input aria-label="Email kamu" type="email" required value={email} onChange={(event) => setEmail(event.target.value)} onBlur={() => setTouched((current) => ({ ...current, email: true }))} aria-invalid={touched.email && !!email && (() => {
+                    const normalized = email.trim().toLowerCase()
+                    const match = normalized.match(/^([^\s@]+)@([^\s@]+)$/)
+                    const allowedDomains = ['gmail.com', 'googlemail.com', 'outlook.com', 'hotmail.com', 'live.com', 'msn.com', 'yahoo.com', 'ymail.com', 'icloud.com', 'me.com', 'mac.com', 'proton.me', 'protonmail.com', 'pm.me']
+                    return !match || !allowedDomains.includes(match[2])
+                  })()} placeholder="email kamu" autoComplete="email" inputMode="email" />
                 </label>
                 <label className="contact-field contact-topic">
                   <span className="contact-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M5 7h14M5 12h14M5 17h9" /></svg></span>
@@ -453,9 +476,10 @@ ${name.trim()}`)
               {contactStatus ? <p className="contact-feedback is-success" role="status">{contactStatus}<span>Aplikasi email kamu akan terbuka. Tinggal cek pesannya, lalu klik Kirim.</span></p> : null}
 
               <div className="contact-submit">
-                <label className="contact-privacy">
+                <label className={`contact-privacy${touched.privacy && !privacy ? ' is-invalid' : ''}`}>
                   <input type="checkbox" required checked={privacy} onChange={(event) => setPrivacy(event.target.checked)} onBlur={() => setTouched((current) => ({ ...current, privacy: true }))} aria-invalid={touched.privacy && !privacy} />
-                  <span>Aku setuju data ini digunakan untuk membalas pesan</span>
+                  <span className="contact-checkmark" aria-hidden="true"><span>✓</span></span>
+                  <span className="contact-privacy-copy">Aku setuju data ini digunakan untuk membalas pesan</span>
                 </label>
                 <button type="submit">✈ <span>Buka Email Saya</span> <span aria-hidden="true">→</span></button>
               </div>
