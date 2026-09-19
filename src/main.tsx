@@ -157,16 +157,8 @@ export default function App() {
     if (!name.trim()) return setContactError('Nama belum diisi.')
 
     const normalizedEmail = email.trim().toLowerCase()
-    const trustedEmailDomains = ['gmail.com', 'outlook.com', 'hotmail.com', 'live.com', 'yahoo.com', 'icloud.com', 'proton.me', 'protonmail.com']
-    const emailPattern = /^[^\s@]+@([^\s@]+)$/
-    const emailMatch = normalizedEmail.match(emailPattern)
-
-    if (!emailMatch || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(normalizedEmail)) {
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(normalizedEmail)) {
       return setContactError('Gunakan email yang valid.')
-    }
-
-    if (!trustedEmailDomains.includes(emailMatch[1])) {
-      return setContactError('Gunakan email dari Gmail, Outlook, Hotmail, Yahoo, iCloud, atau Proton.')
     }
 
     if (!message.trim()) return setContactError('Pesan belum diisi.')
@@ -463,7 +455,7 @@ ${name.trim()}`)
               <div className="contact-submit">
                 <label className="contact-privacy">
                   <input type="checkbox" required checked={privacy} onChange={(event) => setPrivacy(event.target.checked)} onBlur={() => setTouched((current) => ({ ...current, privacy: true }))} aria-invalid={touched.privacy && !privacy} />
-                  <span>Aku setuju dengan kebijakan privasi</span>
+                  <span>Aku setuju data ini digunakan untuk membalas pesan</span>
                 </label>
                 <button type="submit">✈ <span>Buka Email Saya</span> <span aria-hidden="true">→</span></button>
               </div>

@@ -127,7 +127,8 @@
   --pill: var(--radius-full-2);
   --panel-mobile: min(200px, calc(100vw - 24px));
   --panel-desktop: min(369px, calc(100vw - 32px));
-  --active-blur: 50px;
+  --menu-active-blur: 60px;
+  --music-active-blur: 150px;
   --active-dim: rgba(235,245,255,.26);
   font-family: var(--font-geist);
   color: var(--ink);
@@ -343,8 +344,8 @@ img { display: block; max-width: 100%; }
   inset: 0;
   z-index: 110;
   background: var(--active-dim);
-  backdrop-filter: blur(60px) saturate(.9);
-  -webkit-backdrop-filter: blur(60px) saturate(.9);
+  backdrop-filter: blur(var(--menu-active-blur)) saturate(.9);
+  -webkit-backdrop-filter: blur(var(--menu-active-blur)) saturate(.9);
   pointer-events: auto;
 }
 
@@ -354,8 +355,8 @@ img { display: block; max-width: 100%; }
   inset: 0;
   z-index: 110;
   background: var(--active-dim);
-  backdrop-filter: blur(150px) saturate(.9);
-  -webkit-backdrop-filter: blur(150px) saturate(.9);
+  backdrop-filter: blur(var(--music-active-blur)) saturate(.9);
+  -webkit-backdrop-filter: blur(var(--music-active-blur)) saturate(.9);
   pointer-events: auto;
 }
 
