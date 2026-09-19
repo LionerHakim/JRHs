@@ -21,6 +21,7 @@ export default function App() {
   const [privacy, setPrivacy] = useState(false)
   const [contactStatus, setContactStatus] = useState<string | null>(null)
   const [contactError, setContactError] = useState<string | null>(null)
+  const [touched, setTouched] = useState({ name: false, email: false, message: false, privacy: false })
 
   useEffect(() => {
     const sections = sectionIds
@@ -54,20 +55,13 @@ export default function App() {
     event.preventDefault()
     setContactError(null)
     setContactStatus(null)
+    setTouched({ name: true, email: true, message: true, privacy: true })
 
     if (!name.trim()) return setContactError('Nama belum diisi.')
 
     const normalizedEmail = email.trim().toLowerCase()
-    const trustedEmailDomains = ['gmail.com', 'outlook.com', 'hotmail.com', 'live.com', 'yahoo.com', 'icloud.com', 'proton.me', 'protonmail.com']
-    const emailPattern = /^[^\s@]+@([^\s@]+)$/
-    const emailMatch = normalizedEmail.match(emailPattern)
-
-    if (!emailMatch || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(normalizedEmail)) {
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(normalizedEmail)) {
       return setContactError('Gunakan email yang valid.')
-    }
-
-    if (!trustedEmailDomains.includes(emailMatch[1])) {
-      return setContactError('Gunakan email dari Gmail, Outlook, Hotmail, Yahoo, iCloud, atau Proton.')
     }
 
     if (!message.trim()) return setContactError('Pesan belum diisi.')
@@ -104,6 +98,7 @@ ${name.trim()}`)
 
   return (
     <div className="site-shell">
+      <a className="skip-link" href="#identity">Lewati ke konten utama</a>
       <header className="nav">
         <a className="wordmark" href="#identity" aria-label="JRH home">
           <span className="brand-mark" aria-hidden="true">J</span>
@@ -226,26 +221,26 @@ ${name.trim()}`)
             <form className="contact-form" onSubmit={handleContactSubmit} noValidate>
               <div className="contact-fields">
                 <label className="contact-field">
-                  <span className="contact-icon" aria-hidden="true">♙</span>
-                  <input aria-label="Nama kamu" value={name} onChange={(event) => setName(event.target.value)} placeholder="Nama kamu" autoComplete="name" />
+                  <span className="contact-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="3.25" /><path d="M5.5 20a6.5 6.5 0 0 1 13 0" /></svg></span>
+                  <input aria-label="Nama kamu" required value={name} onChange={(event) => setName(event.target.value)} onBlur={() => setTouched((current) => ({ ...current, name: true }))} aria-invalid={touched.name && !name.trim()} placeholder="Nama kamu" autoComplete="name" />
                 </label>
                 <label className="contact-field">
-                  <span className="contact-icon" aria-hidden="true">✉</span>
-                  <input aria-label="Email kamu" type="email" value={email} onChange={(event) => setEmail(event.target.value)} placeholder="email kamu" autoComplete="email" inputMode="email" />
+                  <span className="contact-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><rect x="3.5" y="5.5" width="17" height="13" rx="2" /><path d="m4.5 7 7.5 6 7.5-6" /></svg></span>
+                  <input aria-label="Email kamu" type="email" required value={email} onChange={(event) => setEmail(event.target.value)} onBlur={() => setTouched((current) => ({ ...current, email: true }))} aria-invalid={touched.email && !!email && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.trim())} placeholder="email kamu" autoComplete="email" inputMode="email" />
                 </label>
                 <label className="contact-field">
-                  <span className="contact-icon" aria-hidden="true">☰</span>
+                  <span className="contact-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M5 7h14M5 12h14M5 17h9" /></svg></span>
                   <select aria-label="Topik email (opsional)" value={purpose} onChange={(event) => setPurpose(event.target.value)}>
                     <option value="" disabled>Pilih topik</option>
                     {['Pertanyaan umum', 'Kolaborasi', 'Project', 'Bisnis', 'Investasi', 'Akademik', 'Feedback', 'Relationships', 'Tambah teman'].map((item) => <option key={item} value={item}>{item}</option>)}
                   </select>
                 </label>
                 <label className="contact-field contact-message">
-                  <span className="contact-icon" aria-hidden="true">💬</span>
+                  <span className="contact-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M5 6.5h14a2 2 0 0 1 2 2v7a2 2 0 0 1-2 2H11l-5 3v-3.5a2 2 0 0 1-2-2v-6.5a2 2 0 0 1 2-2Z" /></svg></span>
                   <textarea aria-label="Pesan kamu" required value={message} onChange={(event) => {
                     const words = event.target.value.trim().split(/\s+/).filter(Boolean)
                     setMessage(words.length > 169 ? words.slice(0, 169).join(' ') : event.target.value)
-                  }} placeholder="Tulis pesan kamu di sini... (maksimal 169 kata)" rows={5} />
+                  }} onBlur={() => setTouched((current) => ({ ...current, message: true }))} aria-invalid={touched.message && !message.trim()} placeholder="Tulis pesan kamu di sini... (maksimal 169 kata)" rows={5} />
                   <span className="contact-counter">{message.trim() ? message.trim().split(/\s+/).length : 0}/169 kata</span>
                 </label>
               </div>
@@ -255,7 +250,7 @@ ${name.trim()}`)
 
               <div className="contact-submit">
                 <label className="contact-privacy">
-                  <input type="checkbox" checked={privacy} onChange={(event) => setPrivacy(event.target.checked)} />
+                  <input type="checkbox" required checked={privacy} onChange={(event) => setPrivacy(event.target.checked)} onBlur={() => setTouched((current) => ({ ...current, privacy: true }))} aria-invalid={touched.privacy && !privacy} />
                   <span>Aku setuju dengan kebijakan privasi</span>
                 </label>
                 <button type="submit">✈ <span>Buka Email Saya</span> <span aria-hidden="true">→</span></button>
