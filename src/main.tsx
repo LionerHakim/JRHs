@@ -251,6 +251,10 @@ export default function App() {
     setTouched({ name: true, message: true, privacy: true })
 
     if (!name.trim()) return setContactError('Nama belum diisi.')
+    if (!purpose) {
+      setTopicOpen(true)
+      return setContactError('Topik wajib dipilih.')
+    }
 
     if (!message.trim()) return setContactError('Pesan belum diisi.')
     if (!privacy) return setContactError('Persetujuan penggunaan data diperlukan.')
@@ -531,10 +535,10 @@ ${name.trim()}`)
                     type="button"
                     aria-haspopup="listbox"
                     aria-expanded={topicOpen}
-                    aria-label="Topik email (opsional)"
+                    aria-label="Topik email (wajib)"
                     onClick={() => setTopicOpen((open) => !open)}
                   >
-                    <span>{purpose || 'Pilih topik'}</span>
+                    <span>{purpose || 'Pilih topik (wajib)'}</span>
                     <span className="contact-topic-chevron" aria-hidden="true">⌄</span>
                   </button>
                   {topicOpen ? (
