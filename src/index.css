@@ -2069,3 +2069,110 @@ main {
     min-height: 46px;
   }
 }
+
+
+/* JRHs iOS menu — final clean composition */
+.nav {
+  overflow: visible;
+  isolation: isolate;
+}
+
+.nav-actions {
+  min-width: 40px;
+  overflow: visible;
+}
+
+.nav-actions nav {
+  box-sizing: border-box;
+  width: 256px;
+  top: calc(100% + 8px);
+  right: 0;
+  padding: 6px;
+  gap: 2px;
+  border: 1px solid rgba(0,0,0,.08);
+  border-radius: 18px;
+  background: rgba(255,255,255,.98);
+  box-shadow:
+    0 0 0 4px rgba(247,247,247,.96),
+    0 14px 36px rgba(0,0,0,.08);
+  -webkit-backdrop-filter: saturate(180%) blur(20px);
+  backdrop-filter: saturate(180%) blur(20px);
+  transform: translateY(-6px) scale(.98);
+  transform-origin: top right;
+}
+
+.nav-actions nav.is-open {
+  transform: translateY(0) scale(1);
+}
+
+.nav-actions nav a {
+  min-height: 48px;
+  width: 100%;
+  margin: 0;
+  padding: 0 13px;
+  border-radius: 12px;
+  gap: 10px;
+  color: #3e3e3e;
+  font-size: 14px;
+  font-weight: 500;
+  letter-spacing: -.02em;
+  box-sizing: border-box;
+}
+
+.nav-actions nav a::before {
+  width: 6px;
+  height: 6px;
+  flex: 0 0 6px;
+  margin: 0;
+  border-radius: 50%;
+  background: transparent;
+}
+
+.nav-actions nav a:hover,
+.nav-actions nav a:focus-visible {
+  background: #f5f5f7;
+  color: #000;
+  transform: none;
+}
+
+.nav-actions nav a.is-active {
+  background: #f5f5f7;
+  color: #000;
+  font-weight: 600;
+}
+
+.nav-actions nav a.is-active::before {
+  background: #007aff;
+}
+
+.menu-toggle {
+  flex: 0 0 40px;
+  border-radius: 12px;
+}
+
+.menu-toggle.is-open {
+  background: #000;
+  color: #fff;
+  border-color: #000;
+}
+
+@media (max-width: 760px) {
+  .nav {
+    width: calc(100% - 20px);
+    margin-top: 10px;
+    padding: 7px 8px 7px 12px;
+  }
+
+  .nav-actions nav {
+    width: min(256px, calc(100vw - 24px));
+    top: calc(100% + 8px);
+    right: 0;
+    padding: 6px;
+    border-radius: 18px;
+  }
+
+  .nav-actions nav a {
+    min-height: 48px;
+    padding-inline: 13px;
+  }
+}
