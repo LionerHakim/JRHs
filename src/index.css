@@ -2292,3 +2292,33 @@ img { display: block; max-width: 100%; }
     min-height: 88px !important;
   }
 }
+
+
+/* Minimal S&K popover */
+.terms-checkbox-popover {
+  width: min(210px, calc(100vw - 32px)) !important;
+  max-width: 210px !important;
+  padding: 8px 10px !important;
+  border-radius: 12px !important;
+  font-size: 10px !important;
+  line-height: 1.35 !important;
+  gap: 6px !important;
+}
+
+.terms-checkbox-popover-head {
+  margin-bottom: 3px !important;
+}
+
+.terms-checkbox-popover-head strong {
+  font-size: 11px !important;
+}
+
+.terms-checkbox-popover p {
+  margin: 0 0 4px !important;
+  font-size: 10px !important;
+  line-height: 1.35 !important;
+}
+
+.terms-checkbox-close {
+  display: none !important;
+}

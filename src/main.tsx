@@ -73,7 +73,6 @@ function TermsCheckbox({
         <div id={popoverId} className="terms-checkbox-popover" role="dialog" aria-label="Syarat dan ketentuan">
           <div className="terms-checkbox-popover-head">
             <strong>Syarat & Ketentuan</strong>
-            <button type="button" className="terms-checkbox-close" aria-label="Tutup S&K" onClick={onTermsClose}>×</button>
           </div>
           <p>Dengan mencentang kotak ini, Anda menyetujui penggunaan data yang diberikan untuk keperluan menyiapkan dan membalas pesan melalui email. Jangan mengirim data sensitif, rahasia, atau informasi yang tidak diperlukan.</p>
           <p>Website hanya menyiapkan draft email pada aplikasi email perangkat Anda. Pengiriman pesan tetap dilakukan oleh Anda.</p>
