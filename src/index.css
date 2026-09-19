@@ -4336,3 +4336,63 @@ html, body, .site-shell {
 .contact-closing {
   text-align: center;
 }
+
+
+/* JRHs — navbar menu: clean open state */
+.nav-actions nav {
+  top: calc(100% + 10px);
+  right: 0;
+  width: 220px;
+  padding: 6px;
+  gap: 2px;
+  border: 1px solid #e5e7eb;
+  border-radius: 18px;
+  background: rgba(255,255,255,.98);
+  box-shadow: 0 14px 34px rgba(17,17,17,.10);
+  -webkit-backdrop-filter: blur(18px);
+  backdrop-filter: blur(18px);
+}
+
+.nav-actions nav a {
+  min-height: 46px;
+  padding: 0 13px;
+  border-radius: 12px;
+  color: #111;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.nav-actions nav a::before {
+  width: 5px;
+  height: 5px;
+  flex-basis: 5px;
+  background: transparent;
+}
+
+.nav-actions nav a:hover,
+.nav-actions nav a:focus-visible {
+  background: #f5f7fa;
+  color: #111;
+  transform: none;
+}
+
+.nav-actions nav a.is-active {
+  background: #facc15;
+  color: #111;
+}
+
+.nav-actions nav a.is-active::before {
+  background: #e53935;
+}
+
+@media (max-width: 760px) {
+  .nav-actions nav {
+    width: min(220px, calc(100vw - 28px));
+    top: calc(100% + 8px);
+    border-radius: 17px;
+  }
+
+  .nav-actions nav a {
+    min-height: 44px;
+  }
+}
