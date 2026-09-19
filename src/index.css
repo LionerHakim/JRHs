@@ -1672,3 +1672,55 @@ main {
     top: calc(100% + 12px);
   }
 }
+
+
+/* JRHs universal white hero — remove Portal atmospheric gradient */
+.hero {
+  background: var(--paper);
+  color: var(--ink);
+  border-radius: 0;
+}
+.hero::after {
+  display: none;
+}
+.hero .section-kicker {
+  color: var(--smoke);
+}
+.hero .section-kicker::before {
+  background: var(--signal);
+}
+.hero h1 {
+  color: var(--ink);
+  text-shadow: none;
+}
+.hero-description {
+  color: var(--graphite);
+}
+.hero-pill {
+  background: var(--ink);
+  color: #fff;
+}
+.hero-pill:hover,
+.hero-pill:focus-visible {
+  background: var(--ink);
+  color: #fff;
+}
+.ghost-pill {
+  background: #fff;
+  color: var(--ink);
+  border-color: var(--ink);
+}
+.ghost-pill:hover,
+.ghost-pill:focus-visible {
+  background: var(--surface);
+  color: var(--ink);
+}
+.portrait-quote {
+  background: var(--surface);
+  border-color: #ededed;
+}
+@media (max-width: 760px) {
+  .hero {
+    border-radius: 0;
+  }
+}
