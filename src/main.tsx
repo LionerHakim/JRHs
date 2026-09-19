@@ -253,7 +253,7 @@ export default function App() {
     if (!name.trim()) return setContactError('Nama belum diisi.')
     if (!purpose) {
       setTopicOpen(true)
-      return setContactError('Topik wajib dipilih.')
+      return setContactError('Silakan pilih topik terlebih dahulu.')
     }
 
     if (!message.trim()) return setContactError('Pesan belum diisi.')
@@ -538,7 +538,7 @@ ${name.trim()}`)
                     aria-label="Topik email (wajib)"
                     onClick={() => setTopicOpen((open) => !open)}
                   >
-                    <span>{purpose || 'Pilih topik (wajib)'}</span>
+                    <span>{purpose || 'Pilih topik'}</span>
                     <span className="contact-topic-chevron" aria-hidden="true">⌄</span>
                   </button>
                   {topicOpen ? (
