@@ -1,5 +1,5 @@
-import type { FormEvent, TouchEvent as ReactTouchEvent } from 'react'
 import { useEffect, useRef, useState } from 'react'
+import type { FormEvent, TouchEvent as ReactTouchEvent } from 'react'
 import { createRoot } from 'react-dom/client'
 import { siteConfig } from './config/site'
 import './index.css'
@@ -32,6 +32,7 @@ function TestimonialCard({
         <span>QUOTE</span>
         <strong>{String(index + 1).padStart(2, '0')}</strong>
       </div>
+
       <header className="testimonial-head">
         <div className="testimonial-avatar" aria-hidden="true">{testimonialInitials(testimonial.name)}</div>
         <div className="testimonial-meta">
@@ -39,8 +40,11 @@ function TestimonialCard({
           <span>{testimonial.role}</span>
         </div>
       </header>
+
       <span className="testimonial-disclaimer">GAGASAN TERINSPIRASI</span>
+
       <blockquote>“{testimonial.quote}”</blockquote>
+
       <footer className="testimonial-footer">
         <span>Perspektif</span>
         <strong>{testimonial.category}</strong>
@@ -59,13 +63,16 @@ function TestimonialsSection() {
     touchStartX.current = event.touches[0]?.clientX ?? null
   }
 
-  const handleTouchEnd = (event: ReactTouchEvent<HTMLDivElement>) => {
+  const handleTouchEnd = (event: React.TouchEvent<HTMLDivElement>) => {
     const startX = touchStartX.current
     const endX = event.changedTouches[0]?.clientX
     touchStartX.current = null
+
     if (startX === null || endX === undefined) return
+
     const distance = endX - startX
     if (Math.abs(distance) < 45) return
+
     if (distance < 0) {
       setActiveIndex((current) => Math.min(current + 1, testimonials.length - 1))
     } else {
@@ -79,20 +86,25 @@ function TestimonialsSection() {
         <p className="section-kicker">QUOTES WORLD</p>
         <h2 id="testimonials-title">Quotes World</h2>
       </div>
+
       <p className="testimonials-subtitle">
         16 gagasan dari tokoh lintas bidang tentang karya, pembelajaran, teknologi, ekonomi, dan kehidupan.
       </p>
+
       <div className="testimonials-toolbar">
         <span className="testimonial-counter" aria-live="polite">
           QUOTE {String(activeIndex + 1).padStart(2, '0')} <span aria-hidden="true">/</span> {String(testimonials.length).padStart(2, '0')}
         </span>
         <span className="testimonial-swipe-hint" aria-hidden="true">SWIPE →</span>
       </div>
+
       <div
         className="testimonials-viewport"
         onTouchStart={handleTouchStart}
         onTouchEnd={handleTouchEnd}
-        onTouchCancel={() => { touchStartX.current = null }}
+        onTouchCancel={() => {
+          touchStartX.current = null
+        }}
       >
         <div className="testimonials-list">
           <TestimonialCard
@@ -106,7 +118,6 @@ function TestimonialsSection() {
     </section>
   )
 }
-
 export default function App() {
   const [activeSection, setActiveSection] = useState<(typeof sectionIds)[number]>('identity')
   const [menuOpen, setMenuOpen] = useState(false)
@@ -118,37 +129,19 @@ export default function App() {
   const [privacy, setPrivacy] = useState(false)
   const [contactStatus, setContactStatus] = useState<string | null>(null)
   const [contactError, setContactError] = useState<string | null>(null)
-  const [copiedEmail, setCopiedEmail] = useState(false)
   const [touched, setTouched] = useState({ name: false, email: false, message: false, privacy: false })
   const navActionsRef = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
-    const sections = sectionIds
-      .map((id) => document.getElementById(id))
-      .filter((section): section is HTMLElement => Boolean(section))
-    if (!sections.length) return
-    const observer = new IntersectionObserver(
-      (entries) => {
-        const visibleEntries = entries
-          .filter((entry) => entry.isIntersecting)
-          .sort((a, b) => b.intersectionRatio - a.intersectionRatio)
-        if (visibleEntries[0]) {
-          setActiveSection(visibleEntries[0].target.id as (typeof sectionIds)[number])
-        }
-      },
-      { rootMargin: '-20% 0px -60% 0px', threshold: [0.1, 0.35, 0.6] },
-    )
-    sections.forEach((section) => observer.observe(section))
-    return () => observer.disconnect()
-  }, [])
+    if (!menuOpen && !musicOpen) return
 
-  useEffect(() => {
     const handleKeyDown = (event: KeyboardEvent) => {
       if (event.key === 'Escape') {
         setMenuOpen(false)
         setMusicOpen(false)
       }
     }
+
     const handlePointerDown = (event: PointerEvent) => {
       const target = event.target
       if (target instanceof Node && !navActionsRef.current?.contains(target)) {
@@ -156,42 +149,68 @@ export default function App() {
         setMusicOpen(false)
       }
     }
+
     document.addEventListener('keydown', handleKeyDown)
     document.addEventListener('pointerdown', handlePointerDown)
+
     return () => {
       document.removeEventListener('keydown', handleKeyDown)
       document.removeEventListener('pointerdown', handlePointerDown)
     }
-  }, [])
+  }, [menuOpen, musicOpen])
 
-  const copyEmail = async () => {
-    try {
-      await navigator.clipboard.writeText(siteConfig.contactEmail)
-      setCopiedEmail(true)
-      window.setTimeout(() => setCopiedEmail(false), 1800)
-    } catch {
-      setCopiedEmail(false)
-    }
-  }
+  useEffect(() => {
+    const sections = sectionIds
+      .map((id) => document.getElementById(id))
+      .filter((section): section is HTMLElement => Boolean(section))
+
+    if (!sections.length) return
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        const visibleEntries = entries
+          .filter((entry) => entry.isIntersecting)
+          .sort((a, b) => b.intersectionRatio - a.intersectionRatio)
+
+        if (visibleEntries[0]) {
+          setActiveSection(visibleEntries[0].target.id as (typeof sectionIds)[number])
+        }
+      },
+      {
+        rootMargin: '-20% 0px -60% 0px',
+        threshold: [0.1, 0.35, 0.6],
+      },
+    )
+
+    sections.forEach((section) => observer.observe(section))
+
+    return () => observer.disconnect()
+  }, [])
 
   const handleContactSubmit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault()
     setContactError(null)
     setContactStatus(null)
     setTouched({ name: true, email: true, message: true, privacy: true })
+
     if (!name.trim()) return setContactError('Nama belum diisi.')
+
     const normalizedEmail = email.trim().toLowerCase()
     const trustedEmailDomains = ['gmail.com', 'outlook.com', 'hotmail.com', 'live.com', 'yahoo.com', 'icloud.com', 'proton.me', 'protonmail.com']
     const emailPattern = /^[^\s@]+@([^\s@]+)$/
     const emailMatch = normalizedEmail.match(emailPattern)
+
     if (!emailMatch || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(normalizedEmail)) {
       return setContactError('Gunakan email yang valid.')
     }
+
     if (!trustedEmailDomains.includes(emailMatch[1])) {
       return setContactError('Gunakan email dari Gmail, Outlook, Hotmail, Yahoo, iCloud, atau Proton.')
     }
+
     if (!message.trim()) return setContactError('Pesan belum diisi.')
     if (!privacy) return setContactError('Centang persetujuan privasi dulu.')
+
     const subject = encodeURIComponent(`[JRHs Contact] ${purpose || 'Pesan dari website'}`)
     const body = encodeURIComponent(`Halo JRHs,
 
@@ -216,6 +235,7 @@ https://jrhsee.my.id
 
 Terima kasih,
 ${name.trim()}`)
+
     window.location.href = `mailto:${siteConfig.contactEmail}?subject=${subject}&body=${body}`
     setContactStatus('Email sudah disiapkan ✨')
   }
@@ -230,35 +250,71 @@ ${name.trim()}`)
         </a>
 
         <div className="nav-actions" ref={navActionsRef}>
-          <button className={`music-toggle${musicOpen ? ' is-open' : ''}`} type="button" aria-expanded={musicOpen} aria-controls="music-panel" aria-label={musicOpen ? 'Tutup music player' : 'Buka music player'} onClick={() => setMusicOpen((open) => !open)}>
-            <span className="music-toggle-icon" aria-hidden="true">♪</span><span>MUSIC</span>
+          <button
+            className={`music-toggle${musicOpen ? ' is-open' : ''}`}
+            type="button"
+            aria-expanded={musicOpen}
+            aria-controls="music-panel"
+            aria-label={musicOpen ? 'Tutup music player' : 'Buka music player'}
+            onClick={() => setMusicOpen((open) => !open)}
+          >
+            <span className="music-toggle-icon" aria-hidden="true">♪</span>
+            <span>MUSIC</span>
           </button>
-          <button className={`menu-toggle${menuOpen ? ' is-open' : ''}`} type="button" aria-expanded={menuOpen} aria-controls="primary-navigation" aria-label={menuOpen ? 'Tutup menu' : 'Buka menu'} onClick={() => setMenuOpen((open) => !open)}>
-            <span aria-hidden="true"></span><span aria-hidden="true"></span><span aria-hidden="true"></span>
+
+          <button
+            className={`menu-toggle${menuOpen ? ' is-open' : ''}`}
+            type="button"
+            aria-expanded={menuOpen}
+            aria-controls="primary-navigation"
+            aria-label={menuOpen ? 'Tutup menu' : 'Buka menu'}
+            onClick={() => setMenuOpen((open) => !open)}
+          >
+            <span aria-hidden="true"></span>
+            <span aria-hidden="true"></span>
+            <span aria-hidden="true"></span>
           </button>
 
           <nav id="primary-navigation" className={menuOpen ? 'is-open' : undefined} aria-label="Primary navigation">
-            <div className="menu-panel-head"><span>JRH / NAVIGATION</span><strong>Explore</strong></div>
+            <div className="menu-panel-head">
+              <span>JRH / NAVIGATION</span>
+              <strong>Explore</strong>
+            </div>
             <div className="menu-panel-grid">
               {sectionItems.map(([id, label], index) => (
-                <a key={id} href={`#${id}`} aria-current={activeSection === id ? 'location' : undefined} className={activeSection === id ? 'is-active' : undefined} onClick={() => setMenuOpen(false)}>
-                  <span className="menu-item-index" aria-hidden="true">{String(index + 1).padStart(2, '0')}</span>
-                  <span className="menu-item-label">{label}</span>
-                  <span className="menu-item-arrow" aria-hidden="true">↗</span>
-                </a>
+              <a
+                key={id}
+                href={`#${id}`}
+                aria-current={activeSection === id ? 'location' : undefined}
+                className={activeSection === id ? 'is-active' : undefined}
+                onClick={() => setMenuOpen(false)}
+              >
+                <span className="menu-item-index" aria-hidden="true">{String(index + 1).padStart(2, '0')}</span>
+                <span className="menu-item-label">{label}</span>
+                <span className="menu-item-arrow" aria-hidden="true">↗</span>
+              </a>
               ))}
             </div>
-            <div className="menu-panel-foot"><span>JRHs</span><span>Navigate your way ↗</span></div>
+            <div className="menu-panel-foot">
+              <span>JRHs</span>
+              <span>Navigate your way ↗</span>
+            </div>
           </nav>
 
           <aside id="music-panel" className={musicOpen ? 'music-panel is-open' : 'music-panel'} aria-label="Music player">
             <div className="music-panel-head">
-              <div><span className="music-eyebrow">JRH / SOUND</span><strong>Music Player</strong></div>
+              <div>
+                <span className="music-eyebrow">JRH / SOUND</span>
+                <strong>Music Player</strong>
+              </div>
               <span className="music-status">READY</span>
             </div>
             <div className="music-track">
               <div className="music-track-art" aria-hidden="true">♪</div>
-              <div className="music-track-copy"><strong>Select a track</strong><span>Music for the journey.</span></div>
+              <div className="music-track-copy">
+                <strong>Select a track</strong>
+                <span>Music for the journey.</span>
+              </div>
             </div>
             <div className="music-progress" aria-hidden="true"><span /></div>
             <div className="music-controls" aria-label="Music controls">
@@ -280,11 +336,19 @@ ${name.trim()}`)
               <a className="ghost-pill" href="#links">Contact</a>
             </div>
           </div>
+
           <figure className="hero-portrait">
             <div className="portrait-frame">
-              <img src={siteConfig.identity.profileImage} alt={siteConfig.identity.name} width="640" height="800" fetchPriority="high" />
+              <img
+                src={siteConfig.identity.profileImage}
+                alt={siteConfig.identity.name}
+                width="640"
+                height="800"
+                fetchPriority="high"
+              />
             </div>
           </figure>
+
           <aside className="portrait-quote" aria-label="Economic thinking principle">
             <strong>BERPIKIR SEPERTI MESIN EKONOMI</strong>
             <p>lihat dunia sebagai sistem. segala peristiwa saling berkaitan dan berulang. pahami pola, bukan hanya kejadian sesaat.</p>
@@ -292,7 +356,11 @@ ${name.trim()}`)
         </section>
 
         <section id="education" className="section" aria-labelledby="education-title">
-          <div className="section-head"><p className="section-kicker">EDUCATION</p><h2 id="education-title">Education</h2></div>
+          <div className="section-head">
+            <p className="section-kicker">EDUCATION</p>
+            <h2 id="education-title">Education</h2>
+          </div>
+
           <div className="records">
             {siteConfig.education.map((item) => (
               <article className="record" key={item.period + item.institution}>
@@ -302,7 +370,9 @@ ${name.trim()}`)
                   {item.program !== 'SMA' && item.program !== 'SMP' || item.activities?.length ? (
                     <ul className="record-activities" aria-label="Activities and roles">
                       {item.program !== 'SMA' && item.program !== 'SMP' ? <li key={item.program}>{item.program}</li> : null}
-                      {item.activities?.map((activity) => <li key={activity}>{activity}</li>)}
+                      {item.activities?.map((activity) => (
+                        <li key={activity}>{activity}</li>
+                      ))}
                     </ul>
                   ) : null}
                 </div>
@@ -312,7 +382,11 @@ ${name.trim()}`)
         </section>
 
         <section id="projects" className="section" aria-labelledby="projects-title">
-          <div className="section-head"><p className="section-kicker">WORK</p><h2 id="projects-title">Projects</h2></div>
+          <div className="section-head">
+            <p className="section-kicker">WORK</p>
+            <h2 id="projects-title">Projects</h2>
+          </div>
+
           <div className="project-list">
             {siteConfig.projects.map((project) => (
               <article className="project" key={project.title}>
@@ -322,7 +396,8 @@ ${name.trim()}`)
                   <div className="project-links">
                     {(project.links ?? []).map((link) => (
                       <a key={link.url} href={link.url} target="_blank" rel="noopener noreferrer">
-                        <span>{link.name}</span><span aria-hidden="true">↗</span>
+                        <span>{link.name}</span>
+                        <span aria-hidden="true">↗</span>
                       </a>
                     ))}
                   </div>
@@ -340,16 +415,16 @@ ${name.trim()}`)
         <TestimonialsSection />
 
         <section id="links" className="section contact-section" aria-labelledby="links-title">
-          <div className="section-head"><p className="section-kicker">CONTACT</p><h2 id="links-title">Contact</h2></div>
+          <div className="section-head">
+            <p className="section-kicker">CONTACT</p>
+            <h2 id="links-title">Contact</h2>
+          </div>
+
           <div className="contact-card">
             <div className="contact-intro">
               <p className="contact-question">Ada yang mau dibahas?</p>
               <p className="contact-answer">Punya pertanyaan, ide, project, peluang kolaborasi, atau sekadar mau ngobrol?</p>
               <p className="contact-note">Tulis aja. Saya siapkan emailnya. Kamu tinggal cek dan klik Kirim.</p>
-              <div className="contact-direct">
-                <a href={`mailto:${siteConfig.contactEmail}`} aria-label={`Email ${siteConfig.contactEmail}`}>{siteConfig.contactEmail}</a>
-                <button type="button" onClick={copyEmail} aria-label="Salin alamat email">{copiedEmail ? 'Copied ✓' : 'Copy'}</button>
-              </div>
             </div>
 
             <form className="contact-form" onSubmit={handleContactSubmit} noValidate>
@@ -378,8 +453,10 @@ ${name.trim()}`)
                   <span className="contact-counter">{message.trim() ? message.trim().split(/\s+/).length : 0}/169 kata</span>
                 </label>
               </div>
+
               {contactError ? <p className="contact-feedback is-error" role="alert">{contactError}</p> : null}
               {contactStatus ? <p className="contact-feedback is-success" role="status">{contactStatus}<span>Aplikasi email kamu akan terbuka. Tinggal cek pesannya, lalu klik Kirim.</span></p> : null}
+
               <div className="contact-submit">
                 <label className="contact-privacy">
                   <input type="checkbox" required checked={privacy} onChange={(event) => setPrivacy(event.target.checked)} onBlur={() => setTouched((current) => ({ ...current, privacy: true }))} aria-invalid={touched.privacy && !privacy} />
@@ -387,12 +464,22 @@ ${name.trim()}`)
                 </label>
                 <button type="submit">✈ <span>Buka Email Saya</span> <span aria-hidden="true">→</span></button>
               </div>
+
               <div className="contact-benefits" aria-label="Contact benefits">
-                <span aria-label="Cepat"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M13 2 4.5 13h6l-.5 9L19.5 11h-6L13 2Z" /></svg></span>
-                <span aria-label="Aman"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="5" y="10" width="14" height="11" rx="2" /><path d="M8 10V7a4 4 0 0 1 8 0v3" /></svg></span>
-                <span aria-label="Langsung ke email"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3.5" y="5.5" width="17" height="13" rx="2" /><path d="m4.5 7 7.5 6 7.5-6" /></svg></span>
+                <span aria-label="Cepat">
+                  <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M13 2 4.5 13h6l-.5 9L19.5 11h-6L13 2Z" /></svg>
+                </span>
+                <span aria-label="Aman">
+                  <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="5" y="10" width="14" height="11" rx="2" /><path d="M8 10V7a4 4 0 0 1 8 0v3" /></svg>
+                </span>
+                <span aria-label="Langsung ke email">
+                  <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3.5" y="5.5" width="17" height="13" rx="2" /><path d="m4.5 7 7.5 6 7.5-6" /></svg>
+                </span>
               </div>
-              <div className="contact-closing"><p>Terima kasih sudah berkunjung.</p></div>
+
+              <div className="contact-closing">
+                <p>Terima kasih sudah berkunjung.</p>
+              </div>
             </form>
           </div>
         </section>
@@ -404,10 +491,14 @@ ${name.trim()}`)
             <strong>JRH</strong>
             <p>still learning.<br />still building.<br />still curious.<br /><span className="footer-mindfulness">stay present.</span></p>
           </div>
+
           <nav className="site-footer-nav" aria-label="Footer navigation">
-            {sectionItems.map(([id, label]) => <a key={id} href={`#${id}`}>{label.toUpperCase()}</a>)}
+            {sectionItems.map(([id, label]) => (
+              <a key={id} href={`#${id}`}>{label.toUpperCase()}</a>
+            ))}
           </nav>
         </div>
+
         <div className="site-footer-bottom">
           <span>© 2026 JRH</span>
           <a href="#identity" aria-label="Back to top">↗</a>
