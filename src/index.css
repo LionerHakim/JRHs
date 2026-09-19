@@ -4599,3 +4599,32 @@ body {
     letter-spacing: -.012em;
   }
 }
+
+
+/* JRHs — opened navbar: blur the whole page */
+.site-shell:has(.menu-toggle.is-open)::after {
+  content: '';
+  position: fixed;
+  inset: 0;
+  z-index: 20;
+  background: rgba(255,255,255,.42);
+  -webkit-backdrop-filter: blur(10px) saturate(105%);
+  backdrop-filter: blur(10px) saturate(105%);
+  pointer-events: none;
+}
+
+.nav {
+  z-index: 40;
+}
+
+.nav-actions nav {
+  z-index: 50;
+}
+
+@media (max-width: 760px) {
+  .site-shell:has(.menu-toggle.is-open)::after {
+    -webkit-backdrop-filter: blur(8px) saturate(105%);
+    backdrop-filter: blur(8px) saturate(105%);
+    background: rgba(255,255,255,.38);
+  }
+}
