@@ -14,6 +14,7 @@ const sectionIds = sectionItems.map(([id]) => id)
 
 export default function App() {
   const [activeSection, setActiveSection] = useState<(typeof sectionIds)[number]>('identity')
+  const [menuOpen, setMenuOpen] = useState(false)
   const [name, setName] = useState('')
   const [email, setEmail] = useState('')
   const [purpose, setPurpose] = useState('')
@@ -113,18 +114,34 @@ ${name.trim()}`)
           <span>JRH</span>
         </a>
 
-        <nav aria-label="Primary navigation">
-          {sectionItems.map(([id, label]) => (
-            <a
-              key={id}
-              href={`#${id}`}
-              aria-current={activeSection === id ? 'page' : undefined}
-              className={activeSection === id ? 'is-active' : undefined}
-            >
-              {label}
-            </a>
-          ))}
-        </nav>
+        <div className="nav-actions">
+          <button
+            className={`menu-toggle${menuOpen ? ' is-open' : ''}`}
+            type="button"
+            aria-expanded={menuOpen}
+            aria-controls="primary-navigation"
+            aria-label={menuOpen ? 'Tutup menu' : 'Buka menu'}
+            onClick={() => setMenuOpen((open) => !open)}
+          >
+            <span aria-hidden="true"></span>
+            <span aria-hidden="true"></span>
+            <span aria-hidden="true"></span>
+          </button>
+
+          <nav id="primary-navigation" className={menuOpen ? 'is-open' : undefined} aria-label="Primary navigation">
+            {sectionItems.map(([id, label]) => (
+              <a
+                key={id}
+                href={`#${id}`}
+                aria-current={activeSection === id ? 'page' : undefined}
+                className={activeSection === id ? 'is-active' : undefined}
+                onClick={() => setMenuOpen(false)}
+              >
+                {label}
+              </a>
+            ))}
+          </nav>
+        </div>
       </header>
 
       <main>
