@@ -60,8 +60,16 @@ export default function App() {
     if (!name.trim()) return setContactError('Nama belum diisi.')
 
     const normalizedEmail = email.trim().toLowerCase()
-    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(normalizedEmail)) {
+    const trustedEmailDomains = ['gmail.com', 'outlook.com', 'hotmail.com', 'live.com', 'yahoo.com', 'icloud.com', 'proton.me', 'protonmail.com']
+    const emailPattern = /^[^\s@]+@([^\s@]+)$/
+    const emailMatch = normalizedEmail.match(emailPattern)
+
+    if (!emailMatch || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(normalizedEmail)) {
       return setContactError('Gunakan email yang valid.')
+    }
+
+    if (!trustedEmailDomains.includes(emailMatch[1])) {
+      return setContactError('Gunakan email dari Gmail, Outlook, Hotmail, Yahoo, iCloud, atau Proton.')
     }
 
     if (!message.trim()) return setContactError('Pesan belum diisi.')
