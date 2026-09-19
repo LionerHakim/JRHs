@@ -71,8 +71,18 @@ function TestimonialsSection() {
     const track = trackRef.current
     if (!track) return
 
+    const getItems = () => Array.from(track.querySelectorAll<HTMLElement>('.testimonial'))
+
+    const centerCard = (index: number, behavior: ScrollBehavior = 'auto') => {
+      const items = getItems()
+      const item = items[index]
+      if (!item) return
+      const left = item.offsetLeft - (track.clientWidth - item.offsetWidth) / 2
+      track.scrollTo({ left: Math.max(0, left), behavior })
+    }
+
     const handleScroll = () => {
-      const items = Array.from(track.querySelectorAll<HTMLElement>('.testimonial'))
+      const items = getItems()
       if (!items.length) return
       const center = track.scrollLeft + track.clientWidth / 2
       let closest = 0
@@ -88,9 +98,16 @@ function TestimonialsSection() {
       setActiveIndex(closest)
     }
 
+    const frame = requestAnimationFrame(() => centerCard(0))
     track.addEventListener('scroll', handleScroll, { passive: true })
+    window.addEventListener('resize', () => centerCard(activeIndex))
     handleScroll()
-    return () => track.removeEventListener('scroll', handleScroll)
+
+    return () => {
+      cancelAnimationFrame(frame)
+      track.removeEventListener('scroll', handleScroll)
+      window.removeEventListener('resize', () => centerCard(activeIndex))
+    }
   }, [])
 
   return (
