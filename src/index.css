@@ -1426,43 +1426,66 @@ img { display: block; max-width: 100%; }
   top: calc(100% + 8px);
   left: 0;
   width: 100%;
-  padding: 6px;
-  border: 1px solid rgba(10,13,18,.07);
-  border-radius: 18px;
-  background: var(--paper);
-  box-shadow: 0 22px 55px rgba(59,61,65,.14);
+  padding: 7px;
+  border: 1px solid rgba(0,105,224,.16);
+  border-radius: 20px;
+  background: linear-gradient(180deg, #ffffff 0%, #fafdff 100%);
+  box-shadow: 0 24px 60px rgba(59,61,65,.16), 0 0 0 3px rgba(0,105,224,.045);
   transform-origin: top center;
   animation: contact-topic-in 220ms var(--ease);
 }
 
 .contact-topic-menu button {
   width: 100%;
-  min-height: 38px;
+  min-height: 40px;
   display: flex;
   align-items: center;
   justify-content: space-between;
   gap: 12px;
   padding: 9px 11px;
   border: 0;
-  border-radius: 12px;
+  border-bottom: 1px solid rgba(10,13,18,.07);
+  border-radius: 10px;
   background: transparent;
   color: var(--graphite);
   text-align: left;
   font-size: 13px;
   font-weight: 500;
-  transition: background-color 180ms var(--ease), color 180ms var(--ease), transform 180ms var(--ease);
+  transition: background-color 180ms var(--ease), color 180ms var(--ease), transform 180ms var(--ease), border-color 180ms var(--ease);
+}
+
+.contact-topic-menu button:last-child {
+  border-bottom: 0;
 }
 
 .contact-topic-menu button:hover,
 .contact-topic-menu button:focus-visible {
-  background: var(--mist);
-  color: var(--ink);
+  background: var(--blue-soft);
+  color: var(--blue-strong);
   transform: translateX(2px);
 }
 
 .contact-topic-menu button.is-selected {
-  background: var(--blue-soft);
+  background: #e7f2ff;
   color: var(--blue-strong);
+  box-shadow: inset 3px 0 0 var(--blue-strong);
+}
+
+.contact-topic-menu button span:first-child::before {
+  content: "";
+  display: inline-block;
+  width: 5px;
+  height: 5px;
+  margin: 0 9px 2px 1px;
+  border-radius: 50%;
+  background: var(--blue-soft);
+  transition: background-color 180ms var(--ease);
+}
+
+.contact-topic-menu button:hover span:first-child::before,
+.contact-topic-menu button:focus-visible span:first-child::before,
+.contact-topic-menu button.is-selected span:first-child::before {
+  background: var(--blue-strong);
 }
 
 .contact-topic-menu button span:last-child {
