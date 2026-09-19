@@ -1,11 +1,12 @@
 export type Link = { name: string; url: string }
 export type Education = { period: string; institution: string; program: string; activities?: readonly string[] }
+export type MediaLink = { label: string; url: string }
 export type MediaItem = {
   number: string
   title: string
   category: string
   platform: string
-  url: string
+  links: readonly MediaLink[]
 }
 export type MediaProject = {
   number: string
@@ -35,13 +36,21 @@ export const siteConfig = {
     { period: '2015 — 2018', institution: 'SMP Negeri 200 Brebes', program: 'SMP', activities: ['Ketua Kelas'] },
   ] satisfies readonly Education[],
   media: [
-    { number: '01', title: 'Pinterest', category: 'Inspiration', platform: 'PINTEREST', url: 'https://pin.it/u90jfYk6p' },
-    { number: '02', title: 'Pinterest', category: 'Inspiration', platform: 'PINTEREST', url: 'https://pin.it/6k7sezYIK' },
-    { number: '03', title: 'JRHs 369', category: 'Video', platform: 'YOUTUBE', url: 'https://youtube.com/@jrhs369' },
-    { number: '04', title: 'GOVshorts', category: 'Video', platform: 'YOUTUBE', url: 'https://youtube.com/@govshortss' },
-    { number: '05', title: 'Shopee', category: 'Monetization', platform: 'SHOPEE', url: 'https://collshp.com/23369' },
-    { number: '06', title: 'Nusantara', category: 'Monetization', platform: 'LYNK.ID', url: 'https://lynk.id/nusantara9' },
-    { number: '07', title: '@allshorts369', category: 'Short Video', platform: 'TIKTOK', url: 'https://www.tiktok.com/@allshorts369' },
+    { number: '01', title: 'PINTEREST', category: 'Inspiration', platform: 'PINTEREST', links: [
+      { label: 'Board 01', url: 'https://pin.it/u90jfYk6p' },
+      { label: 'Board 02', url: 'https://pin.it/6k7sezYIK' },
+    ] },
+    { number: '02', title: 'YOUTUBE', category: 'Video', platform: 'YOUTUBE', links: [
+      { label: 'JRHs 369', url: 'https://youtube.com/@jrhs369' },
+      { label: 'GOVshorts', url: 'https://youtube.com/@govshortss' },
+    ] },
+    { number: '03', title: 'SHOPEE', category: 'Monetization', platform: 'SHOPEE', links: [
+      { label: 'Shop 01', url: 'https://collshp.com/23369' },
+      { label: 'Nusantara', url: 'https://lynk.id/nusantara9' },
+    ] },
+    { number: '04', title: 'TIKTOK', category: 'Short Video', platform: 'TIKTOK', links: [
+      { label: '@allshorts369', url: 'https://www.tiktok.com/@allshorts369' },
+    ] },
   ] satisfies readonly MediaItem[],
   projects: [
     { number: '01', title: 'JRH PUSAT', category: 'Utility Web App', description: 'Kumpulan tools praktis untuk membuat, menghitung, mengubah, merapikan, mencetak, dan kebutuhan developer.', status: 'Coming soon' },
