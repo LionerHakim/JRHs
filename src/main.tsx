@@ -168,11 +168,11 @@ ${name.trim()}`)
                 <time>{item.period}</time>
                 <div>
                   <h3>{item.institution}</h3>
-                  {item.program !== 'SMA' && item.program !== 'SMP' ? <p>— {item.program}</p> : null}
+                  {item.program !== 'SMA' && item.program !== 'SMP' ? <p className="record-detail"><span aria-hidden="true">●</span>{item.program}</p> : null}
                   {item.activities?.length ? (
                     <ul className="record-activities" aria-label="Activities and roles">
                       {item.activities.map((activity) => (
-                        <li key={activity}>— {activity}</li>
+                        <li key={activity}>{activity}</li>
                       ))}
                     </ul>
                   ) : null}
