@@ -1022,12 +1022,12 @@ img {
   opacity: .58;
 }
 
-.testimonial:nth-child(1):not(.is-active) {
+.testimonial.is-prev {
   z-index: 1;
   transform: translateX(calc(-50% - 54px)) scale(.91);
 }
 
-.testimonial:nth-child(3):not(.is-active) {
+.testimonial.is-next {
   z-index: 1;
   transform: translateX(calc(-50% + 54px)) scale(.91);
 }
@@ -1618,8 +1618,8 @@ img {
     border-radius: 24px;
   }
 
-  .testimonial:nth-child(1):not(.is-active) { transform: translateX(calc(-50% - 30px)) scale(.92); }
-  .testimonial:nth-child(3):not(.is-active) { transform: translateX(calc(-50% + 30px)) scale(.92); }
+  .testimonial.is-prev { transform: translateX(calc(-50% - 30px)) scale(.92); }
+  .testimonial.is-next { transform: translateX(calc(-50% + 30px)) scale(.92); }
 
   .contact-card { padding: 24px; }
 
