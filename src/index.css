@@ -7150,3 +7150,45 @@ blockquote {
     display: none;
   }
 }
+
+
+/* Quotes World — match the standard section system */
+.testimonials-section .section-head,
+.testimonials-section .section-kicker,
+.testimonials-section h2,
+.testimonials-section .testimonials-subtitle {
+  text-align: left !important;
+  margin-left: 0 !important;
+  margin-right: 0 !important;
+}
+.testimonials-section .section-head {
+  margin-bottom: 18px !important;
+}
+.testimonials-section .testimonials-subtitle {
+  width: min(100%, 760px) !important;
+  margin-top: -8px !important;
+  margin-bottom: 24px !important;
+}
+.testimonials-section .testimonials-toolbar {
+  width: 100% !important;
+  margin: 0 0 14px !important;
+}
+.testimonials-section .testimonials-viewport {
+  width: min(100%, 760px) !important;
+  margin-left: 0 !important;
+  margin-right: auto !important;
+}
+@media (max-width: 760px) {
+  .testimonials-section .section-head,
+  .testimonials-section .section-kicker,
+  .testimonials-section h2,
+  .testimonials-section .testimonials-subtitle {
+    text-align: left !important;
+  }
+  .testimonials-section .testimonials-subtitle {
+    width: min(100%, 100%) !important;
+  }
+  .testimonials-section .testimonials-viewport {
+    width: 100% !important;
+  }
+}
