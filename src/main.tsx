@@ -22,13 +22,15 @@ function TestimonialCard({
   testimonial,
   index,
   isActive,
+  offset = 0,
 }: {
   testimonial: (typeof siteConfig.testimonials)[number]
   index: number
   isActive: boolean
+  offset?: number
 }) {
   return (
-    <article className={`testimonial${isActive ? ' is-active' : ''}`}>
+    <article className={`testimonial${isActive ? ' is-active' : offset < 0 ? ' is-prev' : ' is-next'}`}>
       <div className="testimonial-topline" aria-hidden="true">
         <span>QUOTE</span>
         <strong>{String(index + 1).padStart(2, '0')}</strong>
@@ -114,6 +116,7 @@ function TestimonialsSection() {
                 testimonial={testimonials[index]}
                 index={index}
                 isActive={offset === 0}
+                offset={offset}
               />
             )
           })}
