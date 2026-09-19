@@ -77,7 +77,7 @@ function TestimonialsSection() {
   return (
     <section id="testimonials" className="section testimonials-section" aria-labelledby="testimonials-title">
       <div className="section-head">
-        <p className="section-kicker">TESTIMONIALS</p>
+        <p className="section-kicker">QUOTES WORLD</p>
         <h2 id="testimonials-title">Kutipan & Gagasan</h2>
       </div>
       <p className="testimonials-subtitle">16 gagasan dari tokoh lintas bidang tentang karya, pembelajaran, teknologi, ekonomi, dan kehidupan.</p>
