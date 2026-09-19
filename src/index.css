@@ -2090,3 +2090,113 @@ button,.hero-pill,.ghost-pill,.project-link,.media-links a{
     border-radius:24px;
   }
 }
+
+
+/* Navbar trigger buttons — preserve existing active panels */
+.music-toggle,
+.menu-toggle{
+  width:118px;
+  min-width:118px;
+  height:48px;
+  min-height:48px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  padding:0 14px;
+  border-radius:18px;
+}
+
+.music-toggle{
+  justify-content:space-between;
+  border-color:#0a6fe8;
+  background:#0a6fe8;
+  color:#fff;
+  box-shadow:0 6px 16px rgba(0,105,224,.18);
+}
+
+.music-toggle:hover,
+.music-toggle:focus-visible,
+.music-toggle.is-open{
+  border-color:#0a6fe8;
+  background:#0a6fe8;
+  color:#fff;
+  transform:translateY(-1px);
+  box-shadow:0 8px 20px rgba(0,105,224,.22);
+}
+
+.music-toggle .nav-action-glyph{
+  width:28px;
+  height:28px;
+  flex:0 0 28px;
+  border-radius:9px;
+  background:transparent;
+  color:#fff;
+  font-size:17px;
+}
+
+.music-toggle .nav-action-label,
+.music-toggle .nav-action-meta,
+.menu-toggle .nav-action-label,
+.menu-toggle .nav-action-meta{
+  display:none;
+}
+
+.music-toggle::after{
+  content:"▂▅▃";
+  flex:0 0 auto;
+  color:#fff;
+  font-size:10px;
+  font-weight:700;
+  letter-spacing:-2px;
+  line-height:1;
+}
+
+.menu-toggle{
+  border-color:rgba(10,13,18,.14);
+  background:#f7f8fa;
+  color:#252a32;
+  box-shadow:0 4px 12px rgba(10,13,18,.06);
+}
+
+.menu-toggle:hover,
+.menu-toggle:focus-visible,
+.menu-toggle.is-open{
+  border-color:rgba(10,13,18,.18);
+  background:#fff;
+  color:#252a32;
+  transform:translateY(-1px);
+  box-shadow:0 6px 16px rgba(10,13,18,.09);
+}
+
+.menu-toggle .nav-menu-lines{
+  width:30px;
+  height:30px;
+  border-radius:10px;
+  background:transparent;
+}
+
+.menu-toggle .nav-menu-lines>span{
+  width:16px;
+  height:1.8px;
+  background:#252a32;
+}
+
+@media (max-width:640px){
+  .music-toggle,
+  .menu-toggle{
+    width:56px;
+    min-width:56px;
+    height:48px;
+    min-height:48px;
+    padding:0 10px;
+    border-radius:18px;
+  }
+
+  .music-toggle::after{
+    display:none;
+  }
+
+  .music-toggle .nav-action-glyph{
+    margin-inline:auto;
+  }
+}
