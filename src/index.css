@@ -4330,3 +4330,9 @@ html, body, .site-shell {
   border-color: #2563eb;
   color: #fff;
 }
+
+
+/* JRHs — center closing message */
+.contact-closing {
+  text-align: center;
+}
