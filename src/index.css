@@ -874,3 +874,26 @@ body, button, input, select, textarea { font-family: var(--font-sans); }
   .contact-card { padding: 24px 18px; }
   .contact-question { font-size: 36px; }
 }
+
+
+/* Final white-canvas harmony — visual-only, no content/data changes */
+.hero {
+  background: var(--paper);
+  color: var(--ink);
+}
+.hero .section-kicker { color: var(--smoke); }
+.hero h1 {
+  color: var(--ink);
+  text-shadow: none;
+}
+.hero-description { color: var(--graphite); }
+.ghost-pill {
+  background: var(--paper);
+  color: var(--ink);
+  border-color: var(--line-strong);
+}
+.portrait-quote {
+  border-color: var(--line);
+  background: var(--surface);
+  box-shadow: var(--shadow-card);
+}
