@@ -295,34 +295,42 @@ ${name.trim()}`)
 
         <div className="nav-actions" ref={navActionsRef}>
           <button
-            className={`music-toggle${musicOpen ? ' is-open' : ''}`}
+            className={`nav-action music-toggle${musicOpen ? ' is-open' : ''}`}
             type="button"
             aria-expanded={musicOpen}
             aria-controls="music-panel"
             aria-label={musicOpen ? 'Tutup music player' : 'Buka music player'}
             onClick={() => { setMusicOpen((open) => !open); setMenuOpen(false) }}
           >
-            <span className="music-toggle-icon" aria-hidden="true">♪</span>
-            <span>MUSIC</span>
+            <span className="nav-action-glyph music-toggle-icon" aria-hidden="true">♪</span>
+            <span className="nav-action-label">Music</span>
+            <span className="nav-action-meta" aria-hidden="true">PLAY</span>
           </button>
 
           <button
-            className={`menu-toggle${menuOpen ? ' is-open' : ''}`}
+            className={`nav-action menu-toggle${menuOpen ? ' is-open' : ''}`}
             type="button"
             aria-expanded={menuOpen}
             aria-controls="primary-navigation"
             aria-label={menuOpen ? 'Tutup menu' : 'Buka menu'}
             onClick={() => { setMenuOpen((open) => !open); setMusicOpen(false) }}
           >
-            <span aria-hidden="true"></span>
-            <span aria-hidden="true"></span>
-            <span aria-hidden="true"></span>
+            <span className="nav-menu-lines" aria-hidden="true">
+              <span></span>
+              <span></span>
+              <span></span>
+            </span>
+            <span className="nav-action-label">Menu</span>
+            <span className="nav-action-meta" aria-hidden="true">{menuOpen ? 'CLOSE' : 'OPEN'}</span>
           </button>
 
           <nav id="primary-navigation" className={menuOpen ? 'is-open' : undefined} aria-label="Primary navigation">
             <div className="menu-panel-head">
-              <span>JRH / NAVIGATION</span>
-              <strong>Explore</strong>
+              <div>
+                <span>JRH / NAVIGATION</span>
+                <strong>Explore JRH</strong>
+              </div>
+              <span className="menu-panel-count">{String(sectionItems.length).padStart(2, '0')} SECTIONS</span>
             </div>
             <div className="menu-panel-grid">
               {sectionItems.map(([id, label], index) => (
