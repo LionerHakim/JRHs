@@ -1436,47 +1436,40 @@ img { display: block; max-width: 100%; }
 }
 
 .contact-privacy {
+  position: relative;
   display: flex;
   align-items: flex-start;
-  gap: 9px;
   color: var(--graphite);
   font-size: var(--text-body-sm);
 }
 
-.contact-privacy input {
-  margin: 2px 0 0;
-  accent-color: var(--blue-strong);
-}
-
-.contact-privacy {
-  position: relative;
-}
-
 .contact-consent {
   display: inline-flex;
-  align-items: flex-start;
-  gap: 9px;
+  align-items: center;
+  gap: 7px;
   color: var(--graphite);
   font-size: var(--text-body-sm);
   cursor: pointer;
 }
 
 .contact-consent input {
-  margin: 2px 0 0;
+  margin: 0;
   accent-color: var(--blue-strong);
 }
 
 .contact-terms-trigger {
-  width: 22px;
-  height: 22px;
-  flex: 0 0 22px;
-  margin-top: -1px;
+  width: 16px;
+  height: 16px;
+  flex: 0 0 16px;
+  margin: 0 0 0 1px;
   padding: 0;
-  border: 1px solid rgba(0,105,224,.16);
+  display: inline-grid;
+  place-items: center;
+  border: 1px solid rgba(0,105,224,.2);
   border-radius: 50%;
   background: var(--blue-soft);
   color: var(--blue-strong);
-  font-size: 11px;
+  font-size: 9px;
   font-weight: 600;
   line-height: 1;
 }
