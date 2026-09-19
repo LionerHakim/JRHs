@@ -1521,7 +1521,36 @@ img { display: block; max-width: 100%; }
   font-weight: 500;
 }
 
- .contact-terms-popover p {
+ .contact-terms-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.contact-terms-close {
+  width: 24px;
+  height: 24px;
+  flex: 0 0 24px;
+  display: grid;
+  place-items: center;
+  padding: 0;
+  border: 0;
+  border-radius: 50%;
+  background: var(--mist);
+  color: var(--graphite);
+  font-size: 17px;
+  line-height: 1;
+  transition: background-color 200ms var(--ease), color 200ms var(--ease);
+}
+
+.contact-terms-close:hover,
+.contact-terms-close:focus-visible {
+  background: var(--blue-soft);
+  color: var(--ink);
+}
+
+.contact-terms-popover p {
   margin: 5px 0 0;
   color: var(--graphite);
   font-size: 12px;
