@@ -288,7 +288,7 @@ ${name.trim()}`)
         <div className="site-footer-main">
           <div className="site-footer-brand">
             <strong>JRH</strong>
-            <p>still learning.<br />still building.<br />still curious.</p>
+            <p>still learning.<br />still building.<br />still curious.<br /><span className="footer-mindfulness">stay present.</span></p>
           </div>
 
           <nav className="site-footer-nav" aria-label="Footer navigation">
