@@ -1,4 +1,4 @@
-import { FormEvent, useEffect, useRef, useState } from 'react'
+import { FormEvent, useEffect, useLayoutEffect, useRef, useState } from 'react'
 import { createRoot } from 'react-dom/client'
 import { siteConfig } from './config/site'
 import './index.css'
@@ -67,6 +67,15 @@ function TestimonialsSection() {
     setActiveIndex(nextIndex)
   }
 
+  useLayoutEffect(() => {
+    const track = trackRef.current
+    if (!track) return
+
+    // Always start Quotes World on Quote 01.
+    track.scrollLeft = 0
+    setActiveIndex(0)
+  }, [])
+
   useEffect(() => {
     const track = trackRef.current
     if (!track) return
@@ -98,16 +107,10 @@ function TestimonialsSection() {
       setActiveIndex(closest)
     }
 
-    const frame = requestAnimationFrame(() => {
-      centerCard(0)
-      handleScroll()
-    })
     track.addEventListener('scroll', handleScroll, { passive: true })
+    centerCard(0)
 
-    return () => {
-      cancelAnimationFrame(frame)
-      track.removeEventListener('scroll', handleScroll)
-    }
+    return () => track.removeEventListener('scroll', handleScroll)
   }, [])
 
   return (
