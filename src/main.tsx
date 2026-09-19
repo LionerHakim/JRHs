@@ -458,9 +458,7 @@ ${name.trim()}`)
                   {termsOpen ? (
                     <div className="contact-terms-popover" role="dialog" aria-label="Syarat dan ketentuan">
                       <strong>Syarat & Ketentuan</strong>
-                      <p>Dengan melanjutkan, Anda menyetujui bahwa data yang Anda isi digunakan untuk menyiapkan dan membalas pesan melalui email. Data tidak dipublikasikan melalui website.</p>
-                      <p>Gunakan informasi yang benar dan jangan kirim data sensitif atau rahasia. Isi pesan menjadi tanggung jawab pengirim.</p>
-                      <p>Website ini hanya membuka aplikasi email perangkat Anda; pengiriman pesan dilakukan oleh Anda melalui penyedia email pilihan Anda.</p>
+                      <p>Data digunakan untuk membalas pesan. Jangan kirim data sensitif.</p>
                     </div>
                   ) : null}
                 </div>
