@@ -552,7 +552,7 @@ Web app dan digital product yang sedang dibangun untuk memecahkan masalah nyata.
                   <h3>{item.title}</h3>
                   <p>{item.description}</p>
                 </div>
-                {item.url ? (
+                {'url' in item && item.url ? (
                   <a className="project-link" href={item.url} target="_blank" rel="noopener noreferrer">
                     <span>Open web app</span><span aria-hidden="true">↗</span>
                   </a>
