@@ -1037,7 +1037,7 @@ img {
 
 .testimonial {
   position: relative;
-  flex: 0 0 min(680px, 76vw);
+  flex: 0 0 min(620px, 62vw);
   min-height: 338px;
   padding: 32px;
   display: flex;
@@ -1672,21 +1672,23 @@ img {
   .testimonials-subtitle { font-size: 16px; }
 
   .testimonials-viewport {
-    min-height: 340px;
-    padding-bottom: 18px;
+    width: 100vw;
+    min-height: 316px;
+    margin-left: 50%;
+    padding: 8px 10px 18px;
   }
 
-  .testimonials-list { min-height: 320px; }
+  .testimonials-list {
+    min-height: 290px;
+    gap: 10px;
+  }
 
   .testimonial {
-    width: calc(100% - 8px);
-    min-height: 312px;
-    padding: 26px;
-    border-radius: 24px;
+    flex-basis: min(250px, 62vw);
+    min-height: 290px;
+    padding: 22px;
+    border-radius: 22px;
   }
-
-  .testimonial.is-prev { transform: translateX(calc(-50% - 30px)) scale(.92); }
-  .testimonial.is-next { transform: translateX(calc(-50% + 30px)) scale(.92); }
 
   .contact-card { padding: 24px; }
 
@@ -1702,6 +1704,13 @@ img {
 
   .contact-destination {
     grid-template-columns: auto minmax(0, 1fr) auto;
+  }
+
+  .contact-destination strong {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    font-size: 11px;
   }
 
   .contact-fields { grid-template-columns: 1fr; }
