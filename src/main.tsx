@@ -15,6 +15,7 @@ const sectionIds = sectionItems.map(([id]) => id)
 export default function App() {
   const [activeSection, setActiveSection] = useState<(typeof sectionIds)[number]>('identity')
   const [menuOpen, setMenuOpen] = useState(false)
+  const [musicOpen, setMusicOpen] = useState(false)
   const [name, setName] = useState('')
   const [email, setEmail] = useState('')
   const [purpose, setPurpose] = useState('')
@@ -116,6 +117,18 @@ ${name.trim()}`)
 
         <div className="nav-actions">
           <button
+            className={`music-toggle${musicOpen ? ' is-open' : ''}`}
+            type="button"
+            aria-expanded={musicOpen}
+            aria-controls="music-panel"
+            aria-label={musicOpen ? 'Tutup music player' : 'Buka music player'}
+            onClick={() => setMusicOpen((open) => !open)}
+          >
+            <span className="music-toggle-icon" aria-hidden="true">♪</span>
+            <span>MUSIC</span>
+          </button>
+
+          <button
             className={`menu-toggle${menuOpen ? ' is-open' : ''}`}
             type="button"
             aria-expanded={menuOpen}
@@ -141,6 +154,29 @@ ${name.trim()}`)
               </a>
             ))}
           </nav>
+
+          <aside id="music-panel" className={musicOpen ? 'music-panel is-open' : 'music-panel'} aria-label="Music player">
+            <div className="music-panel-head">
+              <div>
+                <span className="music-eyebrow">JRH / SOUND</span>
+                <strong>Music Player</strong>
+              </div>
+              <span className="music-status">READY</span>
+            </div>
+            <div className="music-track">
+              <div className="music-track-art" aria-hidden="true">♪</div>
+              <div className="music-track-copy">
+                <strong>Select a track</strong>
+                <span>Music for the journey.</span>
+              </div>
+            </div>
+            <div className="music-progress" aria-hidden="true"><span /></div>
+            <div className="music-controls" aria-label="Music controls">
+              <button type="button" disabled aria-label="Previous track">‹‹</button>
+              <button className="music-play" type="button" disabled aria-label="Play">▶</button>
+              <button type="button" disabled aria-label="Next track">››</button>
+            </div>
+          </aside>
         </div>
       </header>
 
