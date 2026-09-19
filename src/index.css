@@ -981,13 +981,45 @@ img {
 .testimonials-list { width: 100%; }
 
 .testimonial {
+  position: relative;
+  isolation: isolate;
   width: 100%;
   min-height: 348px;
-  padding: 32px;
+  padding: 34px;
   display: flex;
   flex-direction: column;
+  border: 1px solid rgba(10,13,18,.055);
   border-radius: var(--radius);
-  background: var(--bone);
+  background: var(--paper);
+  box-shadow: 0 20px 50px rgba(4,69,144,.09), 0 2px 8px rgba(10,13,18,.045);
+  transform-origin: center bottom;
+  animation: quote-card-in 360ms var(--ease) both;
+}
+
+.testimonial::before,
+.testimonial::after {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  inset: 12px 10px -10px;
+  border-radius: calc(var(--radius) - 4px);
+  background: var(--blue-soft);
+  opacity: .55;
+}
+
+.testimonial::after {
+  inset: 22px 18px -18px;
+  background: var(--lavender);
+  opacity: .7;
+}
+
+.testimonial.is-active {
+  box-shadow: 0 28px 70px rgba(4,69,144,.13), 0 4px 14px rgba(10,13,18,.06);
+}
+
+.testimonial-topline {
+  position: relative;
+  z-index: 1;
 }
 
 .testimonial-topline {
@@ -997,6 +1029,11 @@ img {
   font-size: 9px;
   font-weight: 600;
   letter-spacing: .1em;
+}
+
+@keyframes quote-card-in {
+  from { opacity: 0; transform: translateY(10px) scale(.985); }
+  to { opacity: 1; transform: translateY(0) scale(1); }
 }
 
 .testimonial-topline strong {
@@ -1012,16 +1049,16 @@ img {
   gap: 12px;
 }
 
-.testimonial-avatar {
-  width: 44px;
+ .testimonial-avatar {
+  width: 48px;
   height: 44px;
   flex: 0 0 auto;
   display: grid;
   place-items: center;
   border-radius: 50%;
-  background: var(--blue-soft);
-  color: var(--blue-strong);
-  font-size: 12px;
+  background: var(--charcoal);
+  color: var(--paper);
+  font-size: 11px;
   font-weight: 500;
 }
 
@@ -1055,15 +1092,28 @@ img {
   letter-spacing: .04em;
 }
 
-.testimonial blockquote {
-  margin: 18px 0 24px;
+ .testimonial blockquote {
+  position: relative;
+  margin: 20px 0 26px;
+  padding-left: 22px;
   color: var(--graphite);
   font-size: clamp(19px, 2.5vw, 25px);
   line-height: 1.4;
   letter-spacing: -.02em;
 }
 
-.testimonial-footer {
+.testimonial blockquote::before {
+  content: "“";
+  position: absolute;
+  left: 0;
+  top: -9px;
+  color: var(--blue-strong);
+  font-size: 42px;
+  line-height: 1;
+  font-weight: 500;
+}
+
+ .testimonial-footer {
   margin-top: auto;
   padding-top: 16px;
   display: flex;
