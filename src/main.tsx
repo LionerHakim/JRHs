@@ -7,7 +7,7 @@ import './index.css'
 const sectionItems = [
   ['identity', 'About'],
   ['education', 'Education'],
-  ['projects', 'Projects'],
+  ['media', 'Media'],
   ['testimonials', 'Quotes World'],
   ['links', 'Contact'],
 ] as const
@@ -332,7 +332,7 @@ ${name.trim()}`)
             <h1 id="identity-title">PORTFOLIO</h1>
             <p className="hero-description">{siteConfig.identity.description}</p>
             <div className="hero-actions">
-              <a className="hero-pill" href="#projects">Explore projects</a>
+              <a className="hero-pill" href="#media">Explore media</a>
               <a className="ghost-pill" href="#links">Contact</a>
             </div>
           </div>
@@ -377,27 +377,39 @@ ${name.trim()}`)
           </div>
         </section>
 
-        <section id="projects" className="section" aria-labelledby="projects-title">
+        <section id="media" className="section media-section" aria-labelledby="media-title">
           <div className="section-head">
-            <p className="section-kicker">WORK</p>
-            <h2 id="projects-title">Projects</h2>
+            <p className="section-kicker">MEDIA</p>
+            <h2 id="media-title">Media</h2>
           </div>
 
-          <div className="project-list">
-            {siteConfig.projects.map((project) => (
-              <article className="project" key={project.title}>
-                <span className="project-number">{project.number}</span>
-                <div className="project-content">
-                  <h3 className="project-name">{project.title}</h3>
-                  <div className="project-links">
-                    {(project.links ?? []).map((link) => (
-                      <a key={link.url} href={link.url} target="_blank" rel="noopener noreferrer">
-                        <span>{link.name}</span>
-                        <span aria-hidden="true">↗</span>
-                      </a>
-                    ))}
-                  </div>
+          <p className="media-subtitle">
+            Web apps, experiments, and digital products yang sedang dibangun.
+          </p>
+
+          <div className="media-list">
+            {siteConfig.media.map((item) => (
+              <article className="media-card" key={item.number}>
+                <div className="media-card-top">
+                  <span className="media-number">{item.number}</span>
+                  <span className="media-status">{item.status}</span>
                 </div>
+                <div className="media-card-body">
+                  <span className="media-category">{item.category}</span>
+                  <h3>{item.title}</h3>
+                  <p>{item.description}</p>
+                </div>
+                {item.url ? (
+                  <a className="media-link" href={item.url} target="_blank" rel="noopener noreferrer">
+                    <span>Open web app</span>
+                    <span aria-hidden="true">↗</span>
+                  </a>
+                ) : (
+                  <span className="media-link is-disabled" aria-label={`${item.title} belum tersedia`}>
+                    <span>Coming soon</span>
+                    <span aria-hidden="true">→</span>
+                  </span>
+                )}
               </article>
             ))}
           </div>

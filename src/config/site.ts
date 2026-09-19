@@ -1,9 +1,12 @@
 export type Link = { name: string; url: string }
 export type Education = { period: string; institution: string; program: string; activities?: readonly string[] }
-export type Project = {
+export type MediaProject = {
   number: string
   title: string
-  links?: readonly Link[]
+  category: string
+  description: string
+  status: string
+  url?: string
 }
 export type Testimonial = {
   quote: string
@@ -24,39 +27,11 @@ export const siteConfig = {
     { period: '2018 — 2021', institution: 'SMA Negeri 300 Brebes', program: 'SMA', activities: ['Bendahara Paskibra', 'Ketua OSIS 19/20'] },
     { period: '2015 — 2018', institution: 'SMP Negeri 200 Brebes', program: 'SMP', activities: ['Ketua Kelas'] },
   ] satisfies readonly Education[],
-  projects: [
-    {
-      number: '01',
-      title: 'Pinterest',
-      links: [
-        { name: 'JRH Art', url: 'https://pin.it/u90jfYk6p' },
-        { name: 'JRH', url: 'https://pin.it/6k7sezYIK' },
-      ],
-    },
-    {
-      number: '02',
-      title: 'YouTube',
-      links: [
-        { name: 'JRHs 369', url: 'https://youtube.com/@jrhs369' },
-        { name: 'GOVshorts', url: 'https://youtube.com/@govshortss' },
-      ],
-    },
-    {
-      number: '03',
-      title: 'Collshp',
-      links: [
-        { name: 'Collshp', url: 'https://collshp.com/23369' },
-        { name: 'Lynk.id', url: 'https://lynk.id/nusantara9' },
-      ],
-    },
-    {
-      number: '04',
-      title: 'TikTok',
-      links: [
-        { name: 'TikTok', url: 'https://www.tiktok.com/@jokowi.gov' },
-      ],
-    },
-  ] satisfies readonly Project[],
+  media: [
+    { number: '01', title: 'JRH PUSAT', category: 'Utility Web App', description: 'Kumpulan tools praktis untuk membuat, menghitung, mengubah, merapikan, mencetak, dan kebutuhan developer.', status: 'Coming soon' },
+    { number: '02', title: 'JRH CV', category: 'Career Web App', description: 'Platform untuk membangun identitas profesional, CV online, portfolio, dan halaman karier yang siap dibagikan.', status: 'Coming soon' },
+    { number: '03', title: 'INTEL TIKTOK', category: 'Media Web App', description: 'Eksperimen web untuk menjelajah, mengolah, dan mengakses konten TikTok secara praktis dalam satu pengalaman.', status: 'Coming soon' },
+  ] satisfies readonly MediaProject[],
   testimonials: [
     { name: 'Steve Jobs', role: 'Inovasi & Karya', category: 'Innovation', quote: 'Kerja yang besar lahir ketika rasa ingin tahu, keberanian mencoba, dan kecintaan pada proses bertemu dalam satu karya.' },
     { name: 'Warren Buffett', role: 'Investasi & Nilai', category: 'Investing', quote: 'Harga hanyalah angka; nilai lahir dari pemahaman, kesabaran, dan kemampuan melihat jauh melampaui pergerakan sesaat.' },
