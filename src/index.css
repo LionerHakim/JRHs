@@ -2265,3 +2265,29 @@ button,.hero-pill,.ghost-pill,.project-link,.media-links a{
 .menu-toggle.is-open .nav-menu-lines>span{
   background:#252a32;
 }
+
+
+/* Media links visibility fix */
+.media-section .media-card-body{
+  display:block;
+}
+.media-section .media-links{
+  display:flex;
+  visibility:visible;
+  opacity:1;
+  position:relative;
+  z-index:2;
+}
+.media-section .media-links a{
+  display:inline-flex;
+  visibility:visible;
+  opacity:1;
+  color:var(--ink);
+  background:var(--paper);
+  border:1px solid var(--ui-border-strong);
+}
+.media-section .media-links a:hover,
+.media-section .media-links a:focus-visible{
+  color:var(--blue-strong);
+  background:var(--paper);
+}
