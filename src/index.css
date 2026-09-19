@@ -2242,3 +2242,26 @@ button,.hero-pill,.ghost-pill,.project-link,.media-links a{
     margin-inline:auto;
   }
 }
+
+
+/* Active trigger state — white */
+.music-toggle.is-open,
+.menu-toggle.is-open{
+  border-color:rgba(10,13,18,.14);
+  background:#fff;
+  color:#252a32;
+  box-shadow:0 6px 16px rgba(10,13,18,.09);
+}
+.music-toggle.is-open .nav-action-glyph{
+  background:transparent;
+  color:#0a6fe8;
+}
+.music-toggle.is-open::after{
+  color:#0a6fe8;
+}
+.menu-toggle.is-open .nav-menu-lines{
+  background:transparent;
+}
+.menu-toggle.is-open .nav-menu-lines>span{
+  background:#252a32;
+}
