@@ -2176,3 +2176,138 @@ main {
     padding-inline: 13px;
   }
 }
+
+
+/* JRHs — redesigned opened navbar: iOS command panel */
+.nav-actions nav {
+  width: 348px;
+  padding: 10px;
+  gap: 8px;
+  border: 1px solid #e6e6e8;
+  border-radius: 24px;
+  background: rgba(255,255,255,.97);
+  box-shadow:
+    0 0 0 5px rgba(247,247,247,.92),
+    0 20px 55px rgba(0,0,0,.10);
+  -webkit-backdrop-filter: saturate(180%) blur(24px);
+  backdrop-filter: saturate(180%) blur(24px);
+}
+
+.nav-actions nav::before {
+  content: 'MENU';
+  display: block;
+  padding: 4px 8px 2px;
+  color: #8a8a8f;
+  font-family: var(--font-sans);
+  font-size: 9px;
+  font-weight: 600;
+  letter-spacing: .16em;
+}
+
+.nav-actions nav a {
+  min-height: 72px;
+  padding: 12px 13px;
+  border: 1px solid transparent;
+  border-radius: 17px;
+  display: grid;
+  grid-template-columns: 28px minmax(0,1fr) auto;
+  align-items: center;
+  gap: 10px;
+  background: #f7f7f8;
+  color: #202024;
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: -.025em;
+  transition:
+    background-color 180ms var(--ease-ios),
+    border-color 180ms ease,
+    transform 180ms var(--ease-ios),
+    color 180ms ease;
+}
+
+.nav-actions nav a::before {
+  content: '';
+  width: 28px;
+  height: 28px;
+  margin: 0;
+  display: grid;
+  place-items: center;
+  border-radius: 9px;
+  background: #fff;
+  color: #8a8a8f;
+  font-size: 9px;
+  font-weight: 600;
+  letter-spacing: .02em;
+  box-shadow: inset 0 0 0 1px #e8e8ea;
+}
+
+.nav-actions nav a:nth-child(1)::before { content: '01'; }
+.nav-actions nav a:nth-child(2)::before { content: '02'; }
+.nav-actions nav a:nth-child(3)::before { content: '03'; }
+.nav-actions nav a:nth-child(4)::before { content: '04'; }
+
+.nav-actions nav a::after {
+  content: '↗';
+  display: grid;
+  place-items: center;
+  position: static;
+  width: 24px;
+  height: 24px;
+  transform: none;
+  background: transparent;
+  color: #a0a0a5;
+  font-size: 13px;
+  opacity: 1;
+}
+
+.nav-actions nav a:hover,
+.nav-actions nav a:focus-visible {
+  background: #fff;
+  border-color: #e2e2e5;
+  color: #000;
+  transform: translateY(-1px);
+}
+
+.nav-actions nav a:hover::after,
+.nav-actions nav a:focus-visible::after {
+  transform: none;
+  color: #007aff;
+}
+
+.nav-actions nav a.is-active {
+  background: #eef6ff;
+  border-color: rgba(0,122,255,.18);
+  color: #000;
+}
+
+.nav-actions nav a.is-active::before {
+  background: #007aff;
+  color: #fff;
+  box-shadow: none;
+}
+
+.nav-actions nav a.is-active::after {
+  color: #007aff;
+}
+
+.nav-actions nav a:active {
+  transform: scale(.985);
+}
+
+@media (max-width: 760px) {
+  .nav-actions nav {
+    width: min(348px, calc(100vw - 24px));
+    padding: 9px;
+    border-radius: 22px;
+    gap: 7px;
+  }
+
+  .nav-actions nav::before {
+    padding: 4px 7px 2px;
+  }
+
+  .nav-actions nav a {
+    min-height: 64px;
+    border-radius: 15px;
+  }
+}
