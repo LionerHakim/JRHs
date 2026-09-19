@@ -464,14 +464,17 @@ ${name.trim()}`)
               </div>
 
               <div className="contact-benefits" aria-label="Contact benefits">
-                <span aria-label="Cepat">
+                <span>
                   <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M13 2 4.5 13h6l-.5 9L19.5 11h-6L13 2Z" /></svg>
+                  <span>Cepat</span>
                 </span>
-                <span aria-label="Aman">
+                <span>
                   <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="5" y="10" width="14" height="11" rx="2" /><path d="M8 10V7a4 4 0 0 1 8 0v3" /></svg>
+                  <span>Aman</span>
                 </span>
-                <span aria-label="Langsung ke email">
+                <span>
                   <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3.5" y="5.5" width="17" height="13" rx="2" /><path d="m4.5 7 7.5 6 7.5-6" /></svg>
+                  <span>Langsung ke email</span>
                 </span>
               </div>
 
