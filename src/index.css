@@ -553,7 +553,7 @@ body, button, input, select, textarea { font-family: var(--font-sans); }
   align-content: center;
   gap: 30px;
   padding: clamp(72px, 9vw, 112px) max(var(--page-gutter), calc((100vw - 1200px) / 2)) clamp(76px, 9vw, 112px);
-  background: linear-gradient(180deg, #779bc1 0%, #9abfda 58%, #cbdcec 100%);
+  background: var(--paper);
   border-top: 0;
   text-align: center;
 }
