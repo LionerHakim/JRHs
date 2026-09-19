@@ -92,22 +92,29 @@ export default function App() {
   const [contactError, setContactError] = useState<string | null>(null)
   const [touched, setTouched] = useState({ name: false, message: false, privacy: false })
   const navActionsRef = useRef<HTMLDivElement>(null)
+  const contactPrivacyRef = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
-    if (!menuOpen && !musicOpen) return
+    if (!menuOpen && !musicOpen && !termsOpen) return
 
     const handleKeyDown = (event: KeyboardEvent) => {
       if (event.key === 'Escape') {
         setMenuOpen(false)
         setMusicOpen(false)
+        setTermsOpen(false)
       }
     }
 
     const handlePointerDown = (event: PointerEvent) => {
       const target = event.target
-      if (target instanceof Node && !navActionsRef.current?.contains(target)) {
-        setMenuOpen(false)
-        setMusicOpen(false)
+      if (target instanceof Node) {
+        if (!navActionsRef.current?.contains(target)) {
+          setMenuOpen(false)
+          setMusicOpen(false)
+        }
+        if (!contactPrivacyRef.current?.contains(target)) {
+          setTermsOpen(false)
+        }
       }
     }
 
@@ -118,7 +125,7 @@ export default function App() {
       document.removeEventListener('keydown', handleKeyDown)
       document.removeEventListener('pointerdown', handlePointerDown)
     }
-  }, [menuOpen, musicOpen])
+  }, [menuOpen, musicOpen, termsOpen])
 
   useEffect(() => {
     const sections = sectionIds
@@ -449,7 +456,7 @@ ${name.trim()}`)
               {contactStatus ? <p className="contact-feedback is-success" role="status">{contactStatus}<span>Aplikasi email kamu akan terbuka. Tinggal cek pesannya, lalu klik Kirim.</span></p> : null}
 
               <div className="contact-submit">
-                <div className="contact-privacy">
+                <div className="contact-privacy" ref={contactPrivacyRef}>
                   <label className="contact-consent">
                     <input type="checkbox" required checked={privacy} onChange={(event) => setPrivacy(event.target.checked)} onBlur={() => setTouched((current) => ({ ...current, privacy: true }))} aria-invalid={touched.privacy && !privacy} />
                     <span>Saya setuju dan memahami S&K.</span>
