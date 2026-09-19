@@ -453,7 +453,7 @@ ${name.trim()}`)
                     const match = normalized.match(/^([^\s@]+)@([^\s@]+)$/)
                     const allowedDomains = ['gmail.com', 'googlemail.com', 'outlook.com', 'hotmail.com', 'live.com', 'msn.com', 'yahoo.com', 'ymail.com', 'icloud.com', 'me.com', 'mac.com', 'proton.me', 'protonmail.com', 'pm.me']
                     return !match || !allowedDomains.includes(match[2])
-                  })()} placeholder="email kamu" autoComplete="email" inputMode="email" />
+                  })()} pattern="[A-Za-z0-9._%+-]+@(gmail\.com|googlemail\.com|outlook\.com|hotmail\.com|live\.com|msn\.com|yahoo\.com|ymail\.com|icloud\.com|me\.com|mac\.com|proton\.me|protonmail\.com|pm\.me)" title="Gunakan email Gmail, Outlook, Yahoo, iCloud, atau Proton." placeholder="email kamu" autoComplete="email" inputMode="email" />
                 </label>
                 <label className="contact-field contact-topic">
                   <span className="contact-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M5 7h14M5 12h14M5 17h9" /></svg></span>
@@ -476,10 +476,9 @@ ${name.trim()}`)
               {contactStatus ? <p className="contact-feedback is-success" role="status">{contactStatus}<span>Aplikasi email kamu akan terbuka. Tinggal cek pesannya, lalu klik Kirim.</span></p> : null}
 
               <div className="contact-submit">
-                <label className={`contact-privacy${touched.privacy && !privacy ? ' is-invalid' : ''}`}>
+                <label className="contact-privacy">
                   <input type="checkbox" required checked={privacy} onChange={(event) => setPrivacy(event.target.checked)} onBlur={() => setTouched((current) => ({ ...current, privacy: true }))} aria-invalid={touched.privacy && !privacy} />
-                  <span className="contact-checkmark" aria-hidden="true"><span>✓</span></span>
-                  <span className="contact-privacy-copy">Aku setuju data ini digunakan untuk membalas pesan</span>
+                  <span>Aku setuju data ini digunakan untuk membalas pesan</span>
                 </label>
                 <button type="submit">✈ <span>Buka Email Saya</span> <span aria-hidden="true">→</span></button>
               </div>
