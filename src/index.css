@@ -44,7 +44,7 @@ img { display: block; max-width: 100%; height: auto; }
 .skip-link { position: fixed; top: 8px; left: 8px; z-index: 100; transform: translateY(-160%); padding: 10px 14px; border-radius: 999px; background: var(--ink); color: var(--paper); text-decoration: none; font-size: 12px; font-weight: 600; transition: transform 180ms var(--ease-ios); }
 .skip-link:focus { transform: translateY(0); }
 
- .nav {
+.nav {
   position: sticky; top: 0; z-index: 30; width: 100%; min-height: var(--nav-height);
   display: grid; grid-template-columns: auto 1fr; align-items: center;
   gap: clamp(24px, 5vw, 72px); padding: 0 var(--page-gutter);
