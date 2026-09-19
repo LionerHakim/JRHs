@@ -1811,3 +1811,33 @@ main {
     border-radius: 17px;
   }
 }
+
+
+/* Menu bug fix — keep dropdown in the nav stacking context and fully interactive */
+.nav {
+  overflow: visible;
+  isolation: isolate;
+}
+.nav-actions {
+  position: relative;
+  z-index: 40;
+  overflow: visible;
+}
+.nav-actions nav {
+  z-index: 50;
+  pointer-events: none;
+}
+.nav-actions nav.is-open {
+  pointer-events: auto;
+}
+.nav-actions nav a {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  visibility: visible;
+}
+@media (max-width: 760px) {
+  .nav nav a:nth-child(n+4) {
+    display: flex;
+  }
+}
