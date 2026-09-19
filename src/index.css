@@ -87,15 +87,15 @@ main { width: min(calc(100% - (var(--page-gutter) * 2)), var(--page-max)); margi
 .section h2 { font-size: clamp(44px,6.2vw,78px); }
 .records, .project-list, .links-list { width: min(100%,1030px); margin-left: auto; display: grid; }
 .records { border-top: 1px solid var(--ink); }
-.record { position: relative; display: grid; grid-template-columns: minmax(150px,.28fr) minmax(0,1fr); gap: clamp(30px,4.5vw,68px); padding: clamp(26px,3.1vw,36px) 0; border-bottom: 1px solid var(--line); }
+.record { position: relative; display: grid; grid-template-columns: minmax(140px,.24fr) minmax(0,1fr); gap: clamp(28px,5vw,72px); padding: clamp(26px,3.1vw,36px) 0; border-bottom: 1px solid var(--line); }
 .record > div { min-width: 0; }
-.record time { padding-top: 3px; color: var(--smoke); font-size: 11px; font-variant-numeric: tabular-nums; letter-spacing: .08em; line-height: 1.4; }
-.record h3, .project-name { margin: 0; color: var(--ink); font-size: clamp(17px,2vw,21px); line-height: 1.35; font-weight: 600; letter-spacing: -.025em; }
-.record p { margin: 8px 0 0; color: var(--smoke); font-size: 13px; line-height: 1.5; }
+.record time { padding-top: 4px; color: var(--smoke); font-size: 12px; font-weight: 500; font-variant-numeric: tabular-nums; letter-spacing: .08em; line-height: 1.4; }
+.record h3, .project-name { margin: 0; color: var(--ink); font-size: clamp(20px,2.2vw,27px); line-height: 1.25; font-weight: 600; letter-spacing: -.032em; }
+.record p { margin: 9px 0 0; color: var(--smoke); font-size: 14px; line-height: 1.55; font-weight: 500; }
 .record-activities + * { margin-top: 0; }
-.record-activities { display: grid; gap: 6px; margin: 14px 0 0; padding: 0; list-style: none; }
-.record-activities li { position: relative; width: fit-content; max-width: 100%; padding-left: 14px; color: var(--graphite); font-size: 12px; font-weight: 500; line-height: 1.5; }
-.record-activities li::before { content: ''; position: absolute; top: .7em; left: 0; width: 5px; height: 1px; background: var(--signal); }
+.record-activities { display: grid; gap: 7px; margin: 13px 0 0; padding: 0; list-style: none; }
+.record-activities li { position: relative; width: fit-content; max-width: 100%; padding-left: 16px; color: var(--graphite); font-size: 13px; font-weight: 500; line-height: 1.55; }
+.record-activities li::before { content: '●'; position: absolute; top: 0; left: 0; color: var(--signal); font-size: 7px; line-height: 1.8; }
 
 .project-list { border-top: 1px solid var(--ink); }
 .project { display: grid; grid-template-columns: 68px minmax(0,1fr); gap: clamp(18px,3.5vw,44px); padding: clamp(22px,3.2vw,36px) 0; border-bottom: 1px solid var(--line); transition: padding-left 220ms var(--ease-ios), border-color 220ms var(--ease-ios), background-color 220ms var(--ease-ios); }
@@ -191,7 +191,11 @@ footer { padding: 0 0 48px; color: var(--smoke); font-size: 11px; }
   .section-head { grid-template-columns: 1fr; gap: 10px; margin-bottom: 40px; }
   .section-head .section-kicker { margin-bottom: 0; }
   .record { grid-template-columns: 1fr; gap: 12px; padding: 26px 0; }
-  .record-activities { margin-top: 12px; }
+  .record time { padding-top: 0; font-size: 11px; }
+  .record h3 { font-size: 21px; }
+  .record p { margin-top: 8px; font-size: 14px; }
+  .record-activities { gap: 6px; margin-top: 12px; }
+  .record-activities li { padding-left: 15px; font-size: 13px; }
   .project { grid-template-columns: 44px minmax(0,1fr); gap: 16px; }
   .project:hover { padding-left: 0; }
   .project-quote { margin-bottom: 92px; padding: 28px 20px 30px; }
