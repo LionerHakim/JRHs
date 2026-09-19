@@ -1841,3 +1841,231 @@ main {
     display: flex;
   }
 }
+
+
+/* JRHs Portal × iOS navbar — unified final treatment */
+.nav {
+  position: sticky;
+  top: 16px;
+  z-index: 100;
+  width: min(calc(100% - 32px), 1168px);
+  min-height: 56px;
+  margin: 16px auto 0;
+  padding: 8px 10px 8px 16px;
+  display: grid;
+  grid-template-columns: 1fr auto;
+  align-items: center;
+  gap: 16px;
+  border: 1px solid #ededed;
+  border-radius: 22px;
+  background: rgba(255,255,255,.94);
+  box-shadow: 0 0 0 5px #f7f7f7;
+  -webkit-backdrop-filter: saturate(180%) blur(18px);
+  backdrop-filter: saturate(180%) blur(18px);
+  isolation: isolate;
+  overflow: visible;
+}
+
+.wordmark {
+  justify-self: start;
+  gap: 8px;
+  font-family: var(--font-sans);
+  font-size: 18px;
+  font-weight: 600;
+  letter-spacing: -.03em;
+}
+
+.brand-mark {
+  width: 34px;
+  height: 34px;
+  border: 0;
+  border-radius: 50%;
+  background: var(--signal);
+  color: #fff;
+  box-shadow: inset 0 1px 0 rgba(255,255,255,.3);
+  font-size: 13px;
+}
+
+.wordmark:hover {
+  opacity: 1;
+  transform: none;
+}
+.wordmark:hover .brand-mark {
+  transform: none;
+}
+
+.nav-actions {
+  position: relative;
+  z-index: 110;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 8px;
+  overflow: visible;
+}
+
+.menu-toggle {
+  position: relative;
+  z-index: 120;
+  width: 40px;
+  height: 40px;
+  display: grid;
+  place-content: center;
+  gap: 5px;
+  padding: 0;
+  border: 1px solid #e5e5e5;
+  border-radius: 14px;
+  background: #fff;
+  color: #000;
+  cursor: pointer;
+  box-shadow: 0 .5px 0 rgba(0,0,0,.04);
+  transition: background-color 180ms var(--ease-ios), color 180ms var(--ease-ios), transform 180ms var(--ease-ios), border-color 180ms ease;
+}
+
+.menu-toggle span {
+  width: 16px;
+  height: 1.5px;
+  display: block;
+  border-radius: 2px;
+  background: currentColor;
+  transition: transform 220ms var(--ease-ios), opacity 140ms ease;
+}
+
+.menu-toggle:hover,
+.menu-toggle:focus-visible {
+  background: #f7f7f7;
+  border-color: #d9d9d9;
+  transform: none;
+}
+
+.menu-toggle:active {
+  transform: scale(.94);
+}
+
+.menu-toggle.is-open {
+  background: #000;
+  border-color: #000;
+  color: #fff;
+}
+
+.menu-toggle.is-open:hover,
+.menu-toggle.is-open:focus-visible {
+  background: #000;
+  border-color: #000;
+}
+
+.nav-actions nav {
+  position: absolute;
+  z-index: 130;
+  top: calc(100% + 12px);
+  right: 0;
+  width: 246px;
+  display: grid;
+  gap: 2px;
+  padding: 7px;
+  margin: 0;
+  border: 1px solid #e7e7e7;
+  border-radius: 20px;
+  background: #fff;
+  box-shadow: 0 0 0 5px #f7f7f7, 0 10px 28px rgba(0,0,0,.045);
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(-5px) scale(.985);
+  transform-origin: top right;
+  pointer-events: none;
+  transition: opacity 160ms ease, transform 200ms var(--ease-ios), visibility 160ms ease;
+}
+
+.nav-actions nav.is-open {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0) scale(1);
+  pointer-events: auto;
+}
+
+.nav-actions nav a {
+  position: relative;
+  min-height: 46px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 0 12px;
+  border-radius: 13px;
+  color: #3e3e3e;
+  font-family: var(--font-sans);
+  font-size: 14px;
+  font-weight: 500;
+  letter-spacing: -.02em;
+  text-decoration: none;
+  transition: background-color 150ms ease, color 150ms ease, transform 180ms var(--ease-ios);
+}
+
+.nav-actions nav a::before {
+  content: '';
+  width: 5px;
+  height: 5px;
+  flex: 0 0 5px;
+  border-radius: 50%;
+  background: transparent;
+}
+
+.nav-actions nav a::after {
+  display: none;
+}
+
+.nav-actions nav a:hover,
+.nav-actions nav a:focus-visible {
+  background: #f7f7f7;
+  color: #000;
+  transform: none;
+}
+
+.nav-actions nav a.is-active {
+  background: #f7f7f7;
+  color: #000;
+  font-weight: 600;
+}
+
+.nav-actions nav a.is-active::before {
+  background: var(--signal);
+}
+
+.nav-actions nav a:active {
+  transform: scale(.985);
+}
+
+@media (max-width: 760px) {
+  .nav {
+    top: 10px;
+    width: calc(100% - 20px);
+    min-height: 54px;
+    margin-top: 10px;
+    padding: 7px 8px 7px 12px;
+    border-radius: 20px;
+  }
+
+  .wordmark {
+    font-size: 16px;
+  }
+
+  .brand-mark {
+    width: 30px;
+    height: 30px;
+    font-size: 12px;
+  }
+
+  .menu-toggle {
+    width: 40px;
+    height: 40px;
+  }
+
+  .nav-actions nav {
+    top: calc(100% + 10px);
+    width: min(246px, calc(100vw - 28px));
+    border-radius: 18px;
+  }
+
+  .nav-actions nav a {
+    min-height: 46px;
+  }
+}
