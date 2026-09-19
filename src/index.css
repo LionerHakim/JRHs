@@ -7001,3 +7001,34 @@ blockquote {
     width: 100% !important;
   }
 }
+
+
+/* Quotes World — stable single-card layout */
+.testimonials-viewport {
+  width: min(100%, 760px) !important;
+  margin-inline: auto !important;
+  overflow: visible !important;
+}
+.testimonials-list {
+  display: block !important;
+  width: 100% !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  overflow: visible !important;
+}
+.testimonials-list .testimonial {
+  width: 100% !important;
+  min-width: 0 !important;
+  height: 300px !important;
+  margin: 0 !important;
+  opacity: 1 !important;
+  scroll-snap-align: none !important;
+}
+@media (max-width: 640px) {
+  .testimonials-viewport {
+    width: min(100%, 420px) !important;
+  }
+  .testimonials-list .testimonial {
+    height: 292px !important;
+  }
+}
