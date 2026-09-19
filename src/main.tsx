@@ -12,7 +12,6 @@ type TermsCheckboxProps = {
   disabled?: boolean
   termsOpen: boolean
   onTermsToggle: () => void
-  onTermsClose: () => void
   id?: string
 }
 
@@ -25,7 +24,6 @@ function TermsCheckbox({
   disabled = false,
   termsOpen,
   onTermsToggle,
-  onTermsClose,
   id = 'terms-checkbox',
 }: TermsCheckboxProps) {
   const popoverId = id + '-details'
@@ -143,7 +141,6 @@ function TestimonialsSection() {
     const getStep = () => {
       const firstCard = viewport.querySelector<HTMLElement>('.testimonial')
       if (!firstCard) return viewport.clientWidth
-      const styles = window.getComputedStyle(firstCard)
       const gap = Number.parseFloat(window.getComputedStyle(firstCard.parentElement as Element).gap) || 0
       return firstCard.getBoundingClientRect().width + gap
     }
@@ -528,7 +525,7 @@ ${name.trim()}`)
           </div>
 
           <p className="projects-subtitle">
-            Web app dan digital product yang sedang dibuat. Nanti tinggal ganti template ini dengan hasil jadi.
+Web app dan digital product yang sedang dibangun untuk memecahkan masalah nyata.
           </p>
 
           <div className="projects-list">
@@ -584,7 +581,7 @@ ${name.trim()}`)
             <div className="contact-intro">
               <p className="contact-question">Punya sesuatu yang ingin diwujudkan?</p>
               <p className="contact-answer">Ide baru? Project menarik? Mau kolaborasi? Atau cuma mau ngobrol?</p>
-              <p className="contact-note">saya terbuka tentangmu, hubungi saya !</p>
+              <p className="contact-note">Terbuka untuk ide, kolaborasi, dan percakapan baru.</p>
             </div>
 
             <form className="contact-form" onSubmit={handleContactSubmit} noValidate>
@@ -647,7 +644,6 @@ ${name.trim()}`)
                     required
                     termsOpen={termsOpen}
                     onTermsToggle={() => setTermsOpen((open) => !open)}
-                    onTermsClose={() => setTermsOpen(false)}
                   />
                 </div>
                 <button type="submit">✈ <span>Buka Email Saya</span> <span aria-hidden="true">→</span></button>
