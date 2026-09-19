@@ -1158,9 +1158,9 @@ img { display: block; max-width: 100%; }
 }
 
 .terms-checkbox-box {
-  width: 24px;
-  height: 24px;
-  flex: 0 0 24px;
+  width: 20px;
+  height: 20px;
+  flex: 0 0 20px;
   display: grid;
   place-items: center;
   border: 1.5px solid #6b7280;
@@ -1211,29 +1211,47 @@ img { display: block; max-width: 100%; }
 }
 
 .terms-checkbox-info {
-  width: 28px;
-  height: 28px;
-  flex: 0 0 28px;
-  margin-left: 10px;
+  position: relative;
+  width: 44px;
+  height: 44px;
+  flex: 0 0 44px;
+  margin-left: 2px;
   padding: 0;
   display: grid;
   place-items: center;
-  border: 1.5px solid #9cc8f2;
+  border: 0;
   border-radius: 50%;
-  background: #f4f9ff;
+  background: transparent;
   color: var(--blue-strong);
-  font-size: 14px;
+  font-size: 13px;
   font-weight: 600;
   line-height: 1;
   cursor: pointer;
-  transition: background-color 180ms var(--ease), border-color 180ms var(--ease), transform 180ms var(--ease);
+  transition: transform 180ms var(--ease);
 }
 
-.terms-checkbox-info:hover,
-.terms-checkbox-info:focus-visible {
+.terms-checkbox-info::before {
+  content: "";
+  position: absolute;
+  width: 22px;
+  height: 22px;
+  border: 1.5px solid #9cc8f2;
+  border-radius: 50%;
+  background: #f4f9ff;
+  transition: background-color 180ms var(--ease), border-color 180ms var(--ease), transform 180ms var(--ease);
+  z-index: -1;
+}
+
+.terms-checkbox-info:hover::before,
+.terms-checkbox-info:focus-visible::before {
   background: #e8f3ff;
   border-color: #72ace4;
-  transform: translateY(-1px);
+  transform: scale(1.04);
+}
+
+.terms-checkbox-info:focus-visible {
+  outline: 2px solid rgba(0,105,224,.22);
+  outline-offset: 1px;
 }
 
 .terms-checkbox-info:disabled {
@@ -1318,17 +1336,22 @@ img { display: block; max-width: 100%; }
   }
 
   .terms-checkbox-box {
-    width: 28px;
-    height: 28px;
-    flex-basis: 28px;
-    border-radius: 8px;
+    width: 20px;
+    height: 20px;
+    flex-basis: 20px;
+    border-radius: 5px;
   }
 
   .terms-checkbox-info {
-    width: 34px;
-    height: 34px;
-    flex-basis: 34px;
-    margin-left: 12px;
+    width: 44px;
+    height: 44px;
+    flex-basis: 44px;
+    margin-left: 0;
+  }
+
+  .terms-checkbox-info::before {
+    width: 21px;
+    height: 21px;
   }
 
   .terms-checkbox-popover {
