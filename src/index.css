@@ -7127,3 +7127,26 @@ blockquote {
     right: -2px !important;
   }
 }
+
+
+/* Quotes World — touch/swipe interaction */
+.testimonials-viewport {
+  touch-action: pan-y !important;
+  -webkit-user-select: none;
+  user-select: none;
+  cursor: grab;
+}
+.testimonials-viewport:active {
+  cursor: grabbing;
+}
+.testimonial-swipe-hint {
+  color: #69717c;
+  font-size: 9px;
+  font-weight: 800;
+  letter-spacing: .12em;
+}
+@media (min-width: 761px) {
+  .testimonial-swipe-hint {
+    display: none;
+  }
+}
