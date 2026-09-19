@@ -112,8 +112,8 @@ img {
 .skip-link:focus { transform: translateY(0); }
 
 :root {
-  --panel-mobile: min(288px, calc(100vw - 20px));
-  --panel-desktop: min(304px, calc(100vw - 28px));
+  --panel-mobile: min(304px, calc(100vw - 20px));
+  --panel-desktop: min(316px, calc(100vw - 28px));
 }
 
 /* Header */
@@ -233,9 +233,9 @@ img {
   position: fixed;
   inset: 0;
   z-index: 110;
-  background: rgba(235, 245, 255, .26);
-  backdrop-filter: blur(8px) saturate(.9);
-  -webkit-backdrop-filter: blur(8px) saturate(.9);
+  background: rgba(235, 245, 255, .34);
+  backdrop-filter: blur(10px) saturate(.92);
+  -webkit-backdrop-filter: blur(10px) saturate(.92);
   pointer-events: auto;
 }
 
@@ -1021,7 +1021,8 @@ img {
   scrollbar-width: none;
   overscroll-behavior-x: contain;
   -webkit-overflow-scrolling: touch;
-  touch-action: pan-x;
+  touch-action: auto;
+  overscroll-behavior-y: auto;
   padding: 8px max(5vw, 24px) 24px;
 }
 
@@ -1194,7 +1195,14 @@ img {
   font-size: 14px;
 }
 
-.contact-form { margin-top: 32px; }
+.contact-form {
+  margin-top: 28px;
+  padding: clamp(20px, 4vw, 30px);
+  border: 1px solid rgba(10,13,18,.07);
+  border-radius: 24px;
+  background: var(--paper);
+  box-shadow: 0 12px 32px rgba(4,69,144,.055);
+}
 
 .contact-fields {
   display: grid;
@@ -1208,17 +1216,16 @@ img {
   display: flex;
   align-items: flex-start;
   gap: 10px;
-  padding: 13px 2px;
-  border: 0;
-  border-bottom: 1px solid rgba(10,13,18,.11);
-  border-radius: 0;
-  background: transparent;
+  padding: 13px 14px;
+  border: 1px solid rgba(10,13,18,.08);
+  border-radius: 16px;
+  background: var(--bone);
   transition: border-color 180ms var(--ease), background-color 180ms var(--ease);
 }
 
 .contact-field:focus-within {
-  border-bottom-color: rgba(0,105,224,.48);
-  background: transparent;
+  border-color: rgba(0,105,224,.30);
+  background: #fff;
 }
 
 .contact-icon {
@@ -1566,8 +1573,8 @@ img {
   .nav-actions > nav,
   .music-panel {
     width: var(--panel-mobile);
-    padding: 14px;
-    border-radius: 20px;
+    padding: 16px;
+    border-radius: 22px;
   }
 
   .nav-actions > nav {
@@ -1691,6 +1698,7 @@ img {
   }
 
   .contact-card { padding: 24px; }
+  .contact-form { padding: 18px; border-radius: 22px; }
 
   .contact-topic {
     width: 100%;
@@ -1702,11 +1710,7 @@ img {
     font-size: 12px;
   }
 
-  .contact-destination {
-    grid-template-columns: auto minmax(0, 1fr) auto;
-  }
-
-  .contact-destination strong {
+    .contact-destination strong {
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
