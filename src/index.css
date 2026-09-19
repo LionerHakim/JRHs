@@ -1466,9 +1466,9 @@ img { display: block; max-width: 100%; }
 }
 
 .contact-topic-menu button.is-selected {
-  background: #e7f2ff;
-  color: var(--blue-strong);
-  box-shadow: inset 3px 0 0 var(--blue-strong);
+  background: var(--charcoal);
+  color: var(--paper);
+  box-shadow: inset 3px 0 0 var(--blue-strong), 0 5px 14px rgba(10,13,18,.12);
 }
 
 .contact-topic-menu button span:first-child::before {
@@ -1485,7 +1485,7 @@ img { display: block; max-width: 100%; }
 .contact-topic-menu button:hover span:first-child::before,
 .contact-topic-menu button:focus-visible span:first-child::before,
 .contact-topic-menu button.is-selected span:first-child::before {
-  background: var(--blue-strong);
+  background: #8fcaff;
 }
 
 .contact-topic-menu button span:last-child {
