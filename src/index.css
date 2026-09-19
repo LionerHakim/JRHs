@@ -3477,3 +3477,297 @@ main {
     border-radius: 28px;
   }
 }
+
+
+/* JRHs — Playful primary palette: RED / WHITE / YELLOW / BLUE only.
+   Visual/UI only. Existing content, data and structure remain unchanged. */
+
+:root {
+  --ink: #111111;
+  --graphite: #222222;
+  --smoke: #5f6368;
+  --line: #e6e6e6;
+  --line-strong: #cfcfcf;
+  --paper: #ffffff;
+  --surface: #ffffff;
+  --surface-pressed: #f4f4f4;
+  --signal: #e53935;
+
+  --play-red: #e53935;
+  --play-blue: #2563eb;
+  --play-yellow: #facc15;
+  --play-white: #ffffff;
+
+  --tedy-raspberry: var(--play-red);
+  --tedy-lavender: var(--play-blue);
+  --tedy-mint: var(--play-yellow);
+  --tedy-butter: var(--play-yellow);
+  --tedy-sky: var(--play-blue);
+  --tedy-sand: #ffffff;
+  --tedy-carbon: #111111;
+  --tedy-teal: var(--play-blue);
+  --tedy-lime: var(--play-yellow);
+}
+
+html, body, .site-shell {
+  background: #fff;
+  color: #111;
+}
+
+/* Navigation */
+.nav {
+  border-color: #e6e6e6;
+  background: rgba(255,255,255,.97);
+  box-shadow: 0 10px 30px rgba(17,17,17,.06);
+}
+
+.brand-mark {
+  background: var(--play-red);
+  color: #fff;
+  box-shadow: 0 8px 20px -10px rgba(229,57,53,.65);
+}
+
+.menu-toggle {
+  border-color: #e6e6e6;
+  background: #fff;
+}
+
+.menu-toggle:hover,
+.menu-toggle:focus-visible {
+  background: var(--play-yellow);
+  border-color: var(--play-yellow);
+}
+
+.menu-toggle.is-open {
+  background: var(--play-red);
+  border-color: var(--play-red);
+  color: #fff;
+  box-shadow: 0 12px 28px -16px rgba(229,57,53,.65);
+}
+
+.nav-actions nav {
+  border-color: #e6e6e6;
+  background: rgba(255,255,255,.99);
+  box-shadow: 0 18px 42px rgba(17,17,17,.10);
+}
+
+.nav-actions nav a:hover,
+.nav-actions nav a:focus-visible {
+  background: #f7f7f7;
+  color: #111;
+}
+
+.nav-actions nav a.is-active {
+  background: var(--play-yellow);
+  color: #111;
+}
+
+.nav-actions nav a.is-active::before {
+  background: var(--play-red);
+}
+
+/* Hero */
+.hero-copy {
+  background: var(--play-yellow);
+}
+
+.section-kicker::before {
+  background: var(--play-red);
+}
+
+.hero-pill {
+  background: var(--play-red);
+  color: #fff;
+  box-shadow: 0 14px 35px -18px rgba(229,57,53,.7);
+}
+
+.hero-pill:hover,
+.hero-pill:focus-visible {
+  background: var(--play-red);
+  box-shadow: 0 16px 38px -18px rgba(229,57,53,.8);
+}
+
+.ghost-pill {
+  border-color: #111;
+  background: #fff;
+}
+
+.hero-portrait .portrait-frame {
+  background: var(--play-blue);
+  box-shadow: 0 20px 48px rgba(37,99,235,.16);
+}
+
+.portrait-quote {
+  background: var(--play-yellow);
+}
+
+.portrait-quote::before {
+  color: var(--play-red);
+}
+
+/* Sections */
+.section-kicker {
+  color: #5f6368;
+}
+
+.record,
+.record:nth-child(2n),
+.record:nth-child(3n) {
+  background: #fff;
+  border: 2px solid #111;
+}
+
+.record:nth-child(2n) {
+  background: var(--play-yellow);
+  border-color: #111;
+}
+
+.record:nth-child(3n) {
+  background: var(--play-blue);
+  border-color: #111;
+}
+
+.record:nth-child(3n) h3,
+.record:nth-child(3n) .record-activities li,
+.record:nth-child(3n) time,
+.record:nth-child(3n) p {
+  color: #fff;
+}
+
+.record-activities li::before {
+  color: var(--play-red);
+}
+
+.project,
+.project:nth-child(2n),
+.project:nth-child(3n),
+.project:nth-child(4n) {
+  border: 2px solid #111;
+  box-shadow: none;
+}
+
+.project { background: #fff; }
+.project:nth-child(2n) { background: var(--play-yellow); }
+.project:nth-child(3n) { background: var(--play-blue); }
+.project:nth-child(4n) { background: var(--play-red); }
+
+.project:nth-child(3n) .project-name,
+.project:nth-child(3n) .project-links a,
+.project:nth-child(3n) .project-links a span:last-child,
+.project:nth-child(4n) .project-name,
+.project:nth-child(4n) .project-links a,
+.project:nth-child(4n) .project-links a span:last-child {
+  color: #fff;
+}
+
+.project-number {
+  color: var(--play-red);
+}
+
+.project:nth-child(3n) .project-number,
+.project:nth-child(4n) .project-number {
+  color: #fff;
+}
+
+.project-links a {
+  border-top-color: rgba(17,17,17,.16);
+}
+
+.project:nth-child(3n) .project-links a,
+.project:nth-child(4n) .project-links a {
+  border-top-color: rgba(255,255,255,.3);
+}
+
+.project-links a:hover,
+.project-links a:focus-visible,
+.project-links a:hover span:last-child,
+.project-links a:focus-visible span:last-child {
+  color: var(--play-red);
+}
+
+.project:nth-child(3n) .project-links a:hover,
+.project:nth-child(3n) .project-links a:focus-visible,
+.project:nth-child(3n) .project-links a:hover span:last-child,
+.project:nth-child(3n) .project-links a:focus-visible span:last-child,
+.project:nth-child(4n) .project-links a:hover,
+.project:nth-child(4n) .project-links a:focus-visible,
+.project:nth-child(4n) .project-links a:hover span:last-child,
+.project:nth-child(4n) .project-links a:focus-visible span:last-child {
+  color: var(--play-yellow);
+}
+
+.project-quote {
+  background: var(--play-yellow);
+  border: 2px solid #111;
+}
+
+.project-quote::before {
+  color: var(--play-red);
+}
+
+/* Contact */
+.contact-card {
+  background: var(--play-blue);
+  border: 2px solid #111;
+}
+
+.contact-card,
+.contact-card .contact-question,
+.contact-card .contact-answer,
+.contact-card .contact-note {
+  color: #fff;
+}
+
+.contact-field {
+  border-color: #111;
+  background: #fff;
+}
+
+.contact-submit button {
+  background: var(--play-red);
+  box-shadow: 0 14px 35px -18px rgba(229,57,53,.7);
+}
+
+.contact-submit button:hover,
+.contact-submit button:focus-visible {
+  background: var(--play-red);
+  box-shadow: 0 16px 38px -18px rgba(229,57,53,.8);
+}
+
+/* Footer */
+.site-footer-main {
+  background: var(--play-yellow);
+  border: 2px solid #111;
+}
+
+.site-footer-nav a:hover {
+  color: var(--play-red);
+}
+
+/* Focus + selection */
+*:focus-visible {
+  outline-color: var(--play-blue);
+}
+
+::selection {
+  background: var(--play-yellow);
+  color: #111;
+}
+
+/* Keep mobile blocks clean */
+@media (max-width: 760px) {
+  .record,
+  .project {
+    border-width: 2px;
+  }
+
+  .hero-copy {
+    border-radius: 26px;
+  }
+
+  .contact-card,
+  .project-quote,
+  .site-footer-main {
+    border-width: 2px;
+  }
+}
