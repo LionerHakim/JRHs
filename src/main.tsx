@@ -346,6 +346,9 @@ ${name.trim()}`)
 
     window.location.href = `mailto:${siteConfig.contactEmail}?subject=${subject}&body=${body}`
     setContactStatus('Email sudah disiapkan. Pilih aplikasi email di perangkat Anda, lalu kirim.')
+    setPrivacy(false)
+    setTermsOpen(false)
+    setTouched((current) => ({ ...current, privacy: false }))
   }
 
   return (
