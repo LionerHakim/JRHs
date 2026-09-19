@@ -232,9 +232,7 @@ img { display: block; max-width: 100%; }
 .nav-menu-lines{width:28px;height:28px;display:grid;place-content:center;gap:4px;border-radius:9px;background:#eef0f3}
 .nav-menu-lines>span{width:14px;height:1.6px;display:block;border-radius:99px;background:currentColor;transition:transform 240ms var(--ease),opacity 180ms var(--ease)}
 .menu-toggle.is-open .nav-menu-lines{background:#2b313c}
-.menu-toggle.is-open .nav-menu-lines>span:nth-child(1){transform:translateY(5.6px) rotate(45deg)}
-.menu-toggle.is-open .nav-menu-lines>span:nth-child(2){opacity:0}
-.menu-toggle.is-open .nav-menu-lines>span:nth-child(3){transform:translateY(-5.6px) rotate(-45deg)}
+.menu-toggle.is-open .nav-menu-lines>span:nth-child(1),.menu-toggle.is-open .nav-menu-lines>span:nth-child(2),.menu-toggle.is-open .nav-menu-lines>span:nth-child(3){transform:none;opacity:1}
 
 :root{--panel-medium:min(500px,calc(100vw - 32px));--panel-radius:28px;--panel-active-blur:60px;--panel-backdrop:rgba(235,245,255,.32)}
 .site-shell.menu-open::before,.site-shell.music-open::before{
