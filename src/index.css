@@ -5489,3 +5489,151 @@ time {
   .contact-card { padding: 24px 18px; border-radius: 20px; }
   .site-footer { padding-top: 52px; }
 }
+
+
+/* JRHs — FINAL VISUAL FIX: brighter solids, stronger borders, stable blur */
+:root {
+  --soft-blue: #e8f2ff;
+  --soft-yellow: #fff4bf;
+  --soft-red: #ffe9e9;
+  --soft-lavender: #eee8ff;
+  --soft-gray: #f5f7fa;
+  --soft-border: #d8dee7;
+}
+
+/* Hero layout: portrait and first quote are independent visual blocks. */
+.hero {
+  grid-template-columns: minmax(0,1.08fr) minmax(230px,.72fr);
+  grid-template-areas:
+    "copy portrait"
+    "copy quote";
+  align-items: center;
+}
+.hero-copy { grid-area: copy; }
+.hero-portrait { grid-area: portrait; }
+.hero > .portrait-quote {
+  grid-area: quote;
+  justify-self: end;
+  width: min(100%, 390px);
+  margin: 0;
+}
+
+/* Explore Projects: solid yellow, stronger and immediately readable. */
+.hero-pill,
+.hero-pill:hover,
+.hero-pill:focus-visible {
+  background: #facc15 !important;
+  color: #111827 !important;
+  border: 1px solid #eab308 !important;
+  box-shadow: 0 7px 18px rgba(234,179,8,.18);
+}
+
+/* Quote 1: own space, bright soft-solid blue, visible frame. */
+.portrait-quote,
+.project-quote {
+  background: var(--soft-blue) !important;
+  border: 1.5px solid #9ec5f7 !important;
+  box-shadow: 0 10px 26px rgba(37,99,235,.075) !important;
+}
+
+.portrait-quote {
+  aspect-ratio: auto !important;
+  min-height: 210px;
+  padding: 30px 32px;
+  border-radius: 20px !important;
+}
+
+.portrait-quote::before,
+.project-quote::before { color: #2563eb !important; }
+
+/* Education: brighter solid surfaces + clear borders. */
+#education .record:nth-child(1) { background: #e8f2ff !important; border: 1.5px solid #9ec5f7 !important; }
+#education .record:nth-child(2) { background: #fff4bf !important; border: 1.5px solid #efd36a !important; }
+#education .record:nth-child(3) { background: #ffe9e9 !important; border: 1.5px solid #f2a8a8 !important; }
+
+/* Projects: brighter solid blocks, stronger visible frame. */
+#projects .project:nth-child(1) { background: #ffe9e9 !important; border: 1.5px solid #f2a8a8 !important; }
+#projects .project:nth-child(2) { background: #e8f2ff !important; border: 1.5px solid #9ec5f7 !important; }
+#projects .project:nth-child(3) { background: #fff4bf !important; border: 1.5px solid #efd36a !important; }
+#projects .project:nth-child(4) { background: #eee8ff !important; border: 1.5px solid #c4b3f5 !important; }
+
+#projects .project:hover { border-width: 1.5px !important; }
+
+/* Contact: dedicated soft blue solid card. */
+.contact-card {
+  background: #e8f2ff !important;
+  border: 1.5px solid #9ec5f7 !important;
+  box-shadow: 0 12px 32px rgba(37,99,235,.08) !important;
+}
+.contact-field {
+  background: #f7fbff !important;
+  border-color: #bfd8f7 !important;
+}
+
+/* Music: explicit blue frame. */
+.music-panel {
+  border: 1.5px solid #7fb1f4 !important;
+  box-shadow: 0 22px 58px rgba(37,99,235,.14), 0 6px 18px rgba(17,17,17,.05) !important;
+}
+.music-track { border-color: #9ec5f7 !important; }
+.music-progress { background: #c7dcfa !important; }
+
+/* Navbar: clearer premium boundary without heaviness. */
+.nav {
+  border-bottom: 1.5px solid #cfd6df !important;
+  box-shadow: 0 4px 16px rgba(17,17,17,.055), 0 1px 0 rgba(255,255,255,.95) inset;
+  background: rgba(255,255,255,.94) !important;
+}
+.nav-actions nav {
+  border: 1.5px solid #cfd6df !important;
+  box-shadow: 0 24px 64px rgba(17,17,17,.16), 0 5px 18px rgba(17,17,17,.06);
+}
+.music-toggle { border-color: #cfd6df !important; }
+
+/* Stronger, stable blur: fixed backdrop only, no layout movement. */
+.site-shell:has(.menu-toggle.is-open)::after {
+  background: rgba(255,255,255,.24) !important;
+  -webkit-backdrop-filter: blur(24px) saturate(115%) !important;
+  backdrop-filter: blur(24px) saturate(115%) !important;
+  will-change: backdrop-filter;
+}
+.nav-actions nav,
+.nav-actions .music-panel { isolation: isolate; }
+
+/* Footer: more premium structure and contrast. */
+.site-footer {
+  padding-top: 76px;
+}
+.site-footer-main {
+  border: 1.5px solid #d8dee7 !important;
+  border-radius: 24px !important;
+  background: #f7f8fa !important;
+  box-shadow: 0 18px 46px rgba(17,17,17,.065), 0 2px 8px rgba(17,17,17,.025) !important;
+}
+.site-footer-brand strong { font-size: 26px; }
+.site-footer-brand p { color: #5f6368; }
+.site-footer-nav a { color: #3f444b; }
+.site-footer-bottom { border-top: 1px solid #e1e5ea; margin-top: 24px; padding-top: 18px; }
+
+@media (max-width: 900px) {
+  .hero {
+    grid-template-columns: 1fr;
+    grid-template-areas:
+      "copy"
+      "portrait"
+      "quote";
+  }
+  .hero > .portrait-quote { justify-self: start; width: min(100%, 390px); }
+}
+
+@media (max-width: 760px) {
+  .hero > .portrait-quote { width: 100%; min-height: 0; }
+  .portrait-quote { padding: 26px 22px; }
+  .nav { border-bottom-width: 1.5px !important; }
+  .site-shell:has(.menu-toggle.is-open)::after {
+    background: rgba(255,255,255,.20) !important;
+    -webkit-backdrop-filter: blur(20px) saturate(115%) !important;
+    backdrop-filter: blur(20px) saturate(115%) !important;
+  }
+  .site-footer-main { border-radius: 20px !important; }
+}
