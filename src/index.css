@@ -4197,3 +4197,69 @@ html, body, .site-shell {
   border-color: #2563eb;
   box-shadow: 0 8px 24px rgba(37,99,235,.06);
 }
+
+
+/* JRHs — Contact refinement: white card, blue email action, visible benefits */
+
+.contact-card {
+  background: #fff;
+  border: 1px solid #e5e7eb;
+}
+
+.contact-card,
+.contact-card .contact-question,
+.contact-card .contact-answer,
+.contact-card .contact-note {
+  color: #111;
+}
+
+.contact-fields {
+  border-top-color: #e5e7eb;
+}
+
+.contact-field {
+  border-color: #e5e7eb;
+  background: #fff;
+}
+
+.contact-submit button {
+  background: #2563eb;
+  color: #fff;
+  box-shadow: 0 10px 24px rgba(37,99,235,.18);
+}
+
+.contact-submit button:hover,
+.contact-submit button:focus-visible {
+  background: #2563eb;
+  color: #fff;
+  box-shadow: 0 12px 28px rgba(37,99,235,.24);
+}
+
+/* Benefits: restore visible contrast on white Contact card */
+.contact-benefits {
+  width: min(100%, 220px);
+  border-top-color: #e5e7eb;
+  border-bottom-color: #e5e7eb;
+}
+
+.contact-benefits span {
+  color: #2563eb;
+  border-right-color: #e5e7eb;
+}
+
+.contact-benefits span:hover,
+.contact-benefits span:focus-visible {
+  color: #e53935;
+}
+
+.contact-benefits svg {
+  stroke: currentColor;
+}
+
+.contact-privacy {
+  color: #5f6368;
+}
+
+.contact-closing {
+  color: #5f6368;
+}
