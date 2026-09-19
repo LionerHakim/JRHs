@@ -3771,3 +3771,120 @@ html, body, .site-shell {
     border-width: 2px;
   }
 }
+
+
+/* JRHs — restrained professional palette.
+   Primary colors are reserved for link/project cards; education stays white. */
+
+.hero-copy {
+  background: #fff;
+  border: 1px solid #e6e6e6;
+}
+
+.hero-pill {
+  background: var(--play-red);
+}
+
+.hero-portrait .portrait-frame {
+  background: #fff;
+  border: 1px solid #e6e6e6;
+  box-shadow: 0 18px 45px rgba(17,17,17,.07);
+}
+
+.portrait-quote {
+  background: #fff;
+  border: 1px solid #e6e6e6;
+}
+
+/* Education: clean white editorial records */
+.record,
+.record:nth-child(2n),
+.record:nth-child(3n) {
+  background: #fff;
+  border: 1px solid #e5e5e5;
+  box-shadow: none;
+}
+
+.record:nth-child(3n) h3,
+.record:nth-child(3n) .record-activities li,
+.record:nth-child(3n) time,
+.record:nth-child(3n) p {
+  color: inherit;
+}
+
+.record:hover {
+  border-color: #cfcfcf;
+}
+
+/* Projects: playful colors live only in the link/project cards */
+.project {
+  background: #fff;
+  border: 1px solid #e5e5e5;
+  box-shadow: none;
+}
+
+.project:nth-child(2n) {
+  background: var(--play-yellow);
+  border-color: #111;
+}
+
+.project:nth-child(3n) {
+  background: var(--play-blue);
+  border-color: #111;
+}
+
+.project:nth-child(4n) {
+  background: var(--play-red);
+  border-color: #111;
+}
+
+.project:nth-child(3n) .project-name,
+.project:nth-child(3n) .project-links a,
+.project:nth-child(3n) .project-links a span:last-child,
+.project:nth-child(4n) .project-name,
+.project:nth-child(4n) .project-links a,
+.project:nth-child(4n) .project-links a span:last-child {
+  color: #fff;
+}
+
+/* Link rows remain the colorful interaction zone */
+.project-links a {
+  border-top-color: rgba(17,17,17,.16);
+}
+
+.project:nth-child(3n) .project-links a,
+.project:nth-child(4n) .project-links a {
+  border-top-color: rgba(255,255,255,.3);
+}
+
+/* Quote/contact remain restrained */
+.project-quote {
+  background: #fff;
+  border: 1px solid #e5e5e5;
+}
+
+.contact-card {
+  background: #fff;
+  border: 1px solid #e5e5e5;
+}
+
+.contact-card,
+.contact-card .contact-question,
+.contact-card .contact-answer,
+.contact-card .contact-note {
+  color: #111;
+}
+
+.site-footer-main {
+  background: #fff;
+  border: 1px solid #e5e5e5;
+}
+
+@media (max-width: 760px) {
+  .hero-copy,
+  .contact-card,
+  .project-quote,
+  .site-footer-main {
+    border-width: 1px;
+  }
+}
