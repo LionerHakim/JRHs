@@ -6432,7 +6432,8 @@ blockquote {
   transition: background-color 180ms ease, color 180ms ease, transform 180ms ease !important;
 }
 
-.nav-actions nav a::after {
+.nav-actions nav a::after,
+.nav-actions nav a::before {
   display: none !important;
 }
 
