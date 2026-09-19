@@ -1,4 +1,5 @@
-import { FormEvent, useEffect, useRef, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
+import type { FormEvent, TouchEvent as ReactTouchEvent } from 'react'
 import { createRoot } from 'react-dom/client'
 import { siteConfig } from './config/site'
 import './index.css'
@@ -58,7 +59,7 @@ function TestimonialsSection() {
   const testimonials = siteConfig.testimonials
   const activeTestimonial = testimonials[activeIndex]
 
-  const handleTouchStart = (event: React.TouchEvent<HTMLDivElement>) => {
+  const handleTouchStart = (event: ReactTouchEvent<HTMLDivElement>) => {
     touchStartX.current = event.touches[0]?.clientX ?? null
   }
 
@@ -129,6 +130,34 @@ export default function App() {
   const [contactStatus, setContactStatus] = useState<string | null>(null)
   const [contactError, setContactError] = useState<string | null>(null)
   const [touched, setTouched] = useState({ name: false, email: false, message: false, privacy: false })
+  const navActionsRef = useRef<HTMLDivElement>(null)
+
+  useEffect(() => {
+    if (!menuOpen && !musicOpen) return
+
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if (event.key === 'Escape') {
+        setMenuOpen(false)
+        setMusicOpen(false)
+      }
+    }
+
+    const handlePointerDown = (event: PointerEvent) => {
+      const target = event.target
+      if (target instanceof Node && !navActionsRef.current?.contains(target)) {
+        setMenuOpen(false)
+        setMusicOpen(false)
+      }
+    }
+
+    document.addEventListener('keydown', handleKeyDown)
+    document.addEventListener('pointerdown', handlePointerDown)
+
+    return () => {
+      document.removeEventListener('keydown', handleKeyDown)
+      document.removeEventListener('pointerdown', handlePointerDown)
+    }
+  }, [menuOpen, musicOpen])
 
   useEffect(() => {
     const sections = sectionIds
@@ -220,7 +249,7 @@ ${name.trim()}`)
           <span>JRH</span>
         </a>
 
-        <div className="nav-actions">
+        <div className="nav-actions" ref={navActionsRef}>
           <button
             className={`music-toggle${musicOpen ? ' is-open' : ''}`}
             type="button"
@@ -256,7 +285,7 @@ ${name.trim()}`)
               <a
                 key={id}
                 href={`#${id}`}
-                aria-current={activeSection === id ? 'page' : undefined}
+                aria-current={activeSection === id ? 'location' : undefined}
                 className={activeSection === id ? 'is-active' : undefined}
                 onClick={() => setMenuOpen(false)}
               >
@@ -366,7 +395,7 @@ ${name.trim()}`)
                   <h3 className="project-name">{project.title}</h3>
                   <div className="project-links">
                     {(project.links ?? []).map((link) => (
-                      <a key={link.url} href={link.url} target="_blank" rel="noreferrer">
+                      <a key={link.url} href={link.url} target="_blank" rel="noopener noreferrer">
                         <span>{link.name}</span>
                         <span aria-hidden="true">↗</span>
                       </a>
