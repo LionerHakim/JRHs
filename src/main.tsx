@@ -84,13 +84,12 @@ export default function App() {
   const [menuOpen, setMenuOpen] = useState(false)
   const [musicOpen, setMusicOpen] = useState(false)
   const [name, setName] = useState('')
-  const [email, setEmail] = useState('')
   const [purpose, setPurpose] = useState('')
   const [message, setMessage] = useState('')
   const [privacy, setPrivacy] = useState(false)
   const [contactStatus, setContactStatus] = useState<string | null>(null)
   const [contactError, setContactError] = useState<string | null>(null)
-  const [touched, setTouched] = useState({ name: false, email: false, message: false, privacy: false })
+  const [touched, setTouched] = useState({ name: false, message: false, privacy: false })
   const navActionsRef = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
@@ -152,35 +151,12 @@ export default function App() {
     event.preventDefault()
     setContactError(null)
     setContactStatus(null)
-    setTouched({ name: true, email: true, message: true, privacy: true })
+    setTouched({ name: true, message: true, privacy: true })
 
     if (!name.trim()) return setContactError('Nama belum diisi.')
 
-    const normalizedEmail = email.trim().toLowerCase()
-    const emailMatch = normalizedEmail.match(/^([^\s@]+)@([^\s@]+)$/)
-    const allowedEmailDomains = new Set([
-      'gmail.com',
-      'googlemail.com',
-      'outlook.com',
-      'hotmail.com',
-      'live.com',
-      'msn.com',
-      'yahoo.com',
-      'ymail.com',
-      'icloud.com',
-      'me.com',
-      'mac.com',
-      'proton.me',
-      'protonmail.com',
-      'pm.me',
-    ])
-
-    if (!emailMatch || !allowedEmailDomains.has(emailMatch[2])) {
-      return setContactError('Gunakan email Gmail, Outlook, Yahoo, iCloud, atau Proton.')
-    }
-
     if (!message.trim()) return setContactError('Pesan belum diisi.')
-    if (!privacy) return setContactError('Centang persetujuan privasi dulu.')
+    if (!privacy) return setContactError('Persetujuan penggunaan data diperlukan.')
 
     const subject = encodeURIComponent(`[Portfolio Contact] ${purpose || 'Pesan dari website'}`)
     const body = encodeURIComponent(`Halo JRH,
@@ -189,9 +165,6 @@ Saya ingin menghubungi terkait:
 
 Nama:
 ${name.trim()}
-
-Email:
-${email.trim()}
 
 Topik:
 ${purpose || 'Tidak ditentukan'}
@@ -208,7 +181,7 @@ Terima kasih,
 ${name.trim()}`)
 
     window.location.href = `mailto:${siteConfig.contactEmail}?subject=${subject}&body=${body}`
-    setContactStatus('Email sudah disiapkan ✨')
+    setContactStatus('Email sudah disiapkan. Pilih aplikasi email di perangkat Anda, lalu kirim.')
   }
 
   return (
@@ -453,15 +426,6 @@ ${name.trim()}`)
                 <label className="contact-field">
                   <span className="contact-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="3.25" /><path d="M5.5 20a6.5 6.5 0 0 1 13 0" /></svg></span>
                   <input aria-label="Nama kamu" required value={name} onChange={(event) => setName(event.target.value)} onBlur={() => setTouched((current) => ({ ...current, name: true }))} aria-invalid={touched.name && !name.trim()} placeholder="Nama kamu" autoComplete="name" />
-                </label>
-                <label className="contact-field">
-                  <span className="contact-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><rect x="3.5" y="5.5" width="17" height="13" rx="2" /><path d="m4.5 7 7.5 6 7.5-6" /></svg></span>
-                  <input aria-label="Email kamu" type="email" required value={email} onChange={(event) => setEmail(event.target.value)} onBlur={() => setTouched((current) => ({ ...current, email: true }))} aria-invalid={touched.email && !!email && (() => {
-                    const normalized = email.trim().toLowerCase()
-                    const match = normalized.match(/^([^\s@]+)@([^\s@]+)$/)
-                    const allowedDomains = ['gmail.com', 'googlemail.com', 'outlook.com', 'hotmail.com', 'live.com', 'msn.com', 'yahoo.com', 'ymail.com', 'icloud.com', 'me.com', 'mac.com', 'proton.me', 'protonmail.com', 'pm.me']
-                    return !match || !allowedDomains.includes(match[2])
-                  })()} pattern="[A-Za-z0-9._%+-]+@(gmail\.com|googlemail\.com|outlook\.com|hotmail\.com|live\.com|msn\.com|yahoo\.com|ymail\.com|icloud\.com|me\.com|mac\.com|proton\.me|protonmail\.com|pm\.me)" title="Gunakan email Gmail, Outlook, Yahoo, iCloud, atau Proton." placeholder="email kamu" autoComplete="email" inputMode="email" />
                 </label>
                 <label className="contact-field contact-topic">
                   <span className="contact-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M5 7h14M5 12h14M5 17h9" /></svg></span>
