@@ -1406,16 +1406,77 @@ img { display: block; max-width: 100%; }
 }
 
 .contact-privacy {
-  display: flex;
+  position: relative;
+  display: inline-flex;
   align-items: flex-start;
-  gap: 9px;
+  gap: 10px;
+  max-width: 520px;
   color: var(--graphite);
   font-size: var(--text-body-sm);
+  line-height: 1.45;
+  cursor: pointer;
 }
 
 .contact-privacy input {
-  margin: 2px 0 0;
-  accent-color: var(--blue-strong);
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+.contact-checkmark {
+  width: 20px;
+  height: 20px;
+  flex: 0 0 20px;
+  display: grid;
+  place-items: center;
+  margin-top: 1px;
+  border: 1px solid rgba(10,13,18,.16);
+  border-radius: 7px;
+  background: var(--mist);
+  color: transparent;
+  box-shadow: inset 0 0 0 1px rgba(255,255,255,.7);
+  transition: background-color 180ms var(--ease), border-color 180ms var(--ease), color 180ms var(--ease), transform 180ms var(--ease);
+}
+
+.contact-checkmark span {
+  font-size: 13px;
+  font-weight: 600;
+  line-height: 1;
+}
+
+.contact-privacy input:checked + .contact-checkmark {
+  border-color: var(--charcoal);
+  background: var(--charcoal);
+  color: var(--paper);
+}
+
+.contact-privacy input:focus-visible + .contact-checkmark {
+  outline: 2px solid rgba(0,105,224,.28);
+  outline-offset: 3px;
+}
+
+.contact-privacy:hover .contact-checkmark {
+  transform: translateY(-1px);
+  background: var(--paper);
+}
+
+.contact-privacy:hover input:checked + .contact-checkmark {
+  background: var(--ink);
+}
+
+.contact-privacy.is-invalid .contact-checkmark {
+  border-color: rgba(111,63,43,.55);
+  background: var(--peach);
+}
+
+.contact-privacy-copy {
+  padding-top: 1px;
 }
 
 .contact-submit button {
