@@ -483,16 +483,6 @@ footer { padding: 0 0 48px; color: var(--smoke); font-size: 11px; }
 
 
 /* Education hierarchy — clean bullet format, content unchanged */
-.record-detail {
-  display: flex;
-  align-items: baseline;
-  gap: 9px;
-}
-.record-detail > span {
-  flex: 0 0 auto;
-  color: var(--signal);
-  font-size: 7px;
-}
 .record-activities li {
   padding-left: 16px;
 }
