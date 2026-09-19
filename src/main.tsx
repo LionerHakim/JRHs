@@ -18,14 +18,19 @@ const testimonialInitials = (name: string) =>
 function TestimonialCard({ testimonial }: { testimonial: (typeof siteConfig.testimonials)[number] }) {
   return (
     <article className="testimonial">
-      <div className="testimonial-avatar" aria-hidden="true">{testimonialInitials(testimonial.name)}</div>
-      <div className="testimonial-meta">
-        <strong>{testimonial.name}</strong>
-        <span>{testimonial.role}</span>
-      </div>
-      <span className="testimonial-disclaimer">KONSEP / ILUSTRASI — BUKAN PERNYATAAN ASLI</span>
+      <header className="testimonial-head">
+        <div className="testimonial-avatar" aria-hidden="true">{testimonialInitials(testimonial.name)}</div>
+        <div className="testimonial-meta">
+          <strong>{testimonial.name}</strong>
+          <span>{testimonial.role}</span>
+        </div>
+      </header>
+      <span className="testimonial-disclaimer">KONSEP / ILUSTRASI</span>
       <blockquote>“{testimonial.quote}”</blockquote>
-      <span className="testimonial-category">{testimonial.category}</span>
+      <footer className="testimonial-footer">
+        <span>Perspektif</span>
+        <strong>{testimonial.category}</strong>
+      </footer>
     </article>
   )
 }
