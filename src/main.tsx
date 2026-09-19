@@ -518,8 +518,8 @@ ${name.trim()}`)
           <div className="contact-card">
             <div className="contact-intro">
               <p className="contact-question">Ada yang mau dibahas?</p>
-              <p className="contact-answer">Punya pertanyaan, ide, project, peluang kolaborasi, atau sekadar mau ngobrol?</p>
-              <p className="contact-note">Tulis aja. Saya siapkan emailnya. Kamu tinggal cek dan klik Kirim.</p>
+              <p className="contact-answer">Ide baru? Project menarik? Mau kolaborasi? Atau cuma mau ngobrol?</p>
+              <p className="contact-note">saya terbuka tentangmu, hubungi saya !</p>
             </div>
 
             <form className="contact-form" onSubmit={handleContactSubmit} noValidate>

@@ -2157,3 +2157,39 @@ img { display: block; max-width: 100%; }
     scroll-behavior: auto !important;
   }
 }
+
+
+/* Contact picker + terms micro refinement */
+.terms-checkbox-info {
+  width: 22px;
+  height: 22px;
+  flex: 0 0 22px;
+  margin-left: 7px;
+  font-size: 11px;
+  line-height: 1;
+  border-width: 1px;
+}
+
+.contact-topic-menu button.is-selected {
+  background: #111111;
+  color: #ffffff;
+  box-shadow: none;
+}
+
+.contact-topic-menu button.is-selected::before {
+  background: #ffffff;
+}
+
+.contact-topic-menu button.is-selected span:last-child {
+  color: #ffffff;
+}
+
+@media (max-width: 720px) {
+  .terms-checkbox-info {
+    width: 24px;
+    height: 24px;
+    flex-basis: 24px;
+    margin-left: 7px;
+    font-size: 11px;
+  }
+}
