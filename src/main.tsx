@@ -457,8 +457,12 @@ ${name.trim()}`)
                   <button className="contact-terms-trigger" type="button" aria-label="Lihat S&K" title="Lihat S&K" onClick={() => setTermsOpen((open) => !open)}>i</button>
                   {termsOpen ? (
                     <div className="contact-terms-popover" role="dialog" aria-label="Syarat dan ketentuan">
-                      <strong>Syarat & Ketentuan</strong>
-                      <p>Data digunakan untuk membalas pesan. Jangan kirim data sensitif.</p>
+                      <div className="contact-terms-head">
+                        <strong>Syarat & Ketentuan</strong>
+                        <button type="button" className="contact-terms-close" aria-label="Tutup S&K" title="Tutup" onClick={() => setTermsOpen(false)}>×</button>
+                      </div>
+                      <p>Dengan mencentang kotak ini, Anda menyetujui penggunaan data yang diberikan untuk keperluan menyiapkan dan membalas pesan melalui email. Jangan mengirim data sensitif, rahasia, atau informasi yang tidak diperlukan.</p>
+                      <p>Website hanya menyiapkan draft email pada aplikasi email perangkat Anda. Pengiriman pesan tetap dilakukan oleh Anda.</p>
                     </div>
                   ) : null}
                 </div>
