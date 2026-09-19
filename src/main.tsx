@@ -533,9 +533,7 @@ ${name.trim()}`)
       <footer className="site-footer">
         <div className="site-footer-main">
           <div className="site-footer-brand">
-            <span className="footer-kicker">JRH / 2026</span>
             <strong>JRH</strong>
-            <p>still learning.<br />still building.<br />still curious.<br /><span className="footer-mindfulness">stay present.</span></p>
           </div>
 
           <nav className="site-footer-nav" aria-label="Footer navigation">
