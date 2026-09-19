@@ -2291,3 +2291,92 @@ button,.hero-pill,.ghost-pill,.project-link,.media-links a{
   color:var(--blue-strong);
   background:var(--paper);
 }
+
+
+/* Unified blue button system */
+:root{
+  --jrh-button-blue:#0a6fe8;
+  --jrh-button-blue-hover:#0069e0;
+}
+
+.hero-pill,
+.ghost-pill,
+.project-link:not(.is-disabled),
+.media-links a,
+.contact-submit button,
+.contact-topic-trigger,
+.terms-checkbox-info,
+.nav-action{
+  border-color:var(--jrh-button-blue) !important;
+  background:var(--jrh-button-blue) !important;
+  color:#fff !important;
+}
+
+.hero-pill:hover,
+.hero-pill:focus-visible,
+.ghost-pill:hover,
+.ghost-pill:focus-visible,
+.project-link:not(.is-disabled):hover,
+.project-link:not(.is-disabled):focus-visible,
+.media-links a:hover,
+.media-links a:focus-visible,
+.contact-submit button:hover:not(:disabled),
+.contact-submit button:focus-visible:not(:disabled),
+.contact-topic-trigger:hover,
+.contact-topic-trigger:focus-visible,
+.nav-action:hover,
+.nav-action:focus-visible{
+  border-color:var(--jrh-button-blue-hover) !important;
+  background:var(--jrh-button-blue-hover) !important;
+  color:#fff !important;
+}
+
+.nav-action.is-open,
+.music-toggle.is-open,
+.menu-toggle.is-open{
+  border-color:var(--jrh-button-blue) !important;
+  background:var(--jrh-button-blue) !important;
+  color:#fff !important;
+}
+
+.nav-action-glyph,
+.nav-menu-lines{
+  background:transparent !important;
+  color:#fff !important;
+}
+
+.nav-menu-lines>span{
+  background:#fff !important;
+}
+
+.music-toggle.is-open .nav-action-glyph,
+.music-toggle.is-open::after{
+  color:#fff !important;
+}
+
+.menu-toggle.is-open .nav-menu-lines>span{
+  background:#fff !important;
+}
+
+.project-link.is-disabled{
+  background:var(--mist) !important;
+  color:var(--fog) !important;
+  border-color:var(--ui-border) !important;
+  cursor:not-allowed;
+}
+
+/* Music panel controls remain functional, now using the same blue action language */
+.music-controls button{
+  border-color:rgba(10,111,232,.35);
+  background:var(--jrh-button-blue);
+  color:#fff;
+}
+.music-controls button:hover,
+.music-controls button:focus-visible{
+  background:var(--jrh-button-blue-hover);
+  color:#fff;
+}
+.music-controls .music-play{
+  background:#fff;
+  color:var(--jrh-button-blue);
+}
