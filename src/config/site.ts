@@ -45,10 +45,12 @@ export const siteConfig = {
       { label: 'GOVshorts', url: 'https://youtube.com/@govshortss' },
     ] },
     { number: '03', title: 'SHOPEE', category: 'Monetization', platform: 'SHOPEE', links: [
-      { label: 'Shop 01', url: 'https://collshp.com/23369' },
+      { label: 'Shop', url: 'https://collshp.com/23369' },
+    ] },
+    { number: '04', title: 'LYNK.ID', category: 'Monetization', platform: 'LYNK.ID', links: [
       { label: 'Nusantara', url: 'https://lynk.id/nusantara9' },
     ] },
-    { number: '04', title: 'TIKTOK', category: 'Short Video', platform: 'TIKTOK', links: [
+    { number: '05', title: 'TIKTOK', category: 'Short Video', platform: 'TIKTOK', links: [
       { label: '@allshorts369', url: 'https://www.tiktok.com/@allshorts369' },
     ] },
   ] satisfies readonly MediaItem[],
