@@ -1,4 +1,4 @@
-import { FormEvent, useEffect, useLayoutEffect, useRef, useState } from 'react'
+import { FormEvent, useEffect, useState } from 'react'
 import { createRoot } from 'react-dom/client'
 import { siteConfig } from './config/site'
 import './index.css'
@@ -53,65 +53,15 @@ function TestimonialCard({
 }
 
 function TestimonialsSection() {
-  const trackRef = useRef<HTMLDivElement>(null)
   const [activeIndex, setActiveIndex] = useState(0)
+  const testimonials = siteConfig.testimonials
+  const activeTestimonial = testimonials[activeIndex]
 
-  const scrollToIndex = (index: number) => {
-    const track = trackRef.current
-    const items = track?.querySelectorAll<HTMLElement>('.testimonial')
-    const nextIndex = Math.max(0, Math.min(index, siteConfig.testimonials.length - 1))
-    const item = items?.[nextIndex]
-    if (!item) return
-    const targetLeft = item.offsetLeft - track.clientWidth / 2 + item.offsetWidth / 2
-    trackRef.current?.scrollTo({ left: Math.max(0, targetLeft), behavior: 'smooth' })
-    setActiveIndex(nextIndex)
+  const changeQuote = (direction: number) => {
+    setActiveIndex((current) =>
+      Math.max(0, Math.min(current + direction, testimonials.length - 1)),
+    )
   }
-
-  useLayoutEffect(() => {
-    const track = trackRef.current
-    if (!track) return
-
-    // Always start Quotes World on Quote 01.
-    track.scrollLeft = 0
-    setActiveIndex(0)
-  }, [])
-
-  useEffect(() => {
-    const track = trackRef.current
-    if (!track) return
-
-    const getItems = () => Array.from(track.querySelectorAll<HTMLElement>('.testimonial'))
-
-    const centerCard = (index: number, behavior: ScrollBehavior = 'auto') => {
-      const items = getItems()
-      const item = items[index]
-      if (!item) return
-      const left = item.offsetLeft - (track.clientWidth - item.offsetWidth) / 2
-      track.scrollTo({ left: Math.max(0, left), behavior })
-    }
-
-    const handleScroll = () => {
-      const items = getItems()
-      if (!items.length) return
-      const center = track.scrollLeft + track.clientWidth / 2
-      let closest = 0
-      let distance = Infinity
-      items.forEach((item, index) => {
-        const itemCenter = item.offsetLeft + item.offsetWidth / 2
-        const currentDistance = Math.abs(itemCenter - center)
-        if (currentDistance < distance) {
-          distance = currentDistance
-          closest = index
-        }
-      })
-      setActiveIndex(closest)
-    }
-
-    track.addEventListener('scroll', handleScroll, { passive: true })
-    centerCard(0)
-
-    return () => track.removeEventListener('scroll', handleScroll)
-  }, [])
 
   return (
     <section id="testimonials" className="section testimonials-section" aria-labelledby="testimonials-title">
@@ -119,33 +69,35 @@ function TestimonialsSection() {
         <p className="section-kicker">QUOTES WORLD</p>
         <h2 id="testimonials-title">Quotes World</h2>
       </div>
-      <p className="testimonials-subtitle">16 gagasan dari tokoh lintas bidang tentang karya, pembelajaran, teknologi, ekonomi, dan kehidupan.</p>
+
+      <p className="testimonials-subtitle">
+        16 gagasan dari tokoh lintas bidang tentang karya, pembelajaran, teknologi, ekonomi, dan kehidupan.
+      </p>
 
       <div className="testimonials-toolbar">
-        <span className="testimonial-counter" aria-live="polite">QUOTE {String(activeIndex + 1).padStart(2, '0')} <span aria-hidden="true">/</span> {String(siteConfig.testimonials.length).padStart(2, '0')}</span>
+        <span className="testimonial-counter" aria-live="polite">
+          QUOTE {String(activeIndex + 1).padStart(2, '0')} <span aria-hidden="true">/</span> {String(testimonials.length).padStart(2, '0')}
+        </span>
+
         <div className="testimonial-controls">
-          <button type="button" onClick={() => scrollToIndex(activeIndex - 1)} disabled={activeIndex === 0} aria-label="Quote sebelumnya">←</button>
-          <button type="button" onClick={() => scrollToIndex(activeIndex + 1)} disabled={activeIndex === siteConfig.testimonials.length - 1} aria-label="Quote berikutnya">→</button>
+          <button type="button" onClick={() => changeQuote(-1)} disabled={activeIndex === 0} aria-label="Quote sebelumnya">←</button>
+          <button type="button" onClick={() => changeQuote(1)} disabled={activeIndex === testimonials.length - 1} aria-label="Quote berikutnya">→</button>
         </div>
       </div>
 
       <div className="testimonials-viewport">
-        <div className="testimonials-list" ref={trackRef}>
-          {siteConfig.testimonials.map((testimonial, index) => (
-            <TestimonialCard
-              key={testimonial.name + testimonial.role}
-              testimonial={testimonial}
-              index={index}
-              isActive={index === activeIndex}
-            />
-          ))}
+        <div className="testimonials-list">
+          <TestimonialCard
+            key={activeTestimonial.name + activeTestimonial.role}
+            testimonial={activeTestimonial}
+            index={activeIndex}
+            isActive
+          />
         </div>
       </div>
-
     </section>
   )
 }
-
 export default function App() {
   const [activeSection, setActiveSection] = useState<(typeof sectionIds)[number]>('identity')
   const [menuOpen, setMenuOpen] = useState(false)
