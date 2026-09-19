@@ -1783,217 +1783,60 @@ img { display: block; max-width: 100%; }
 }
 
 
-/* Contact picker + terms micro refinement */
-.terms-checkbox-info {
-  width: 22px;
-  height: 22px;
-  flex: 0 0 22px;
-  margin-left: 7px;
-  font-size: 11px;
-  line-height: 1;
-  border-width: 1px;
+/* Final interaction polish — contact + navigation */
+.terms-checkbox-info{
+  width:14px;height:14px;min-width:14px;min-height:14px;flex:0 0 14px;
+  margin-left:4px;padding:0;border-width:1px;font-size:8px;line-height:1;
 }
+.terms-checkbox-info:focus-visible{outline-offset:2px}
+.contact-message{min-height:96px;padding-top:12px;padding-bottom:34px}
+.contact-topic-menu{background:#111!important}
+.contact-topic-menu button{color:#fff!important;border-color:rgba(255,255,255,.12)!important}
+.contact-topic-menu button:hover,.contact-topic-menu button.is-selected{background:#111!important;color:#fff!important}
+.contact-topic-menu button.is-selected{box-shadow:inset 3px 0 0 var(--blue-strong)!important;border-color:#111!important}
+.contact-topic-menu button.is-selected::before{background:#fff!important}
+.contact-topic-menu button.is-selected span:last-child{color:#fff!important}
+.terms-checkbox-popover{width:min(210px,calc(100vw - 32px));max-width:210px;padding:8px 10px;border-radius:12px;font-size:10px;line-height:1.35;gap:6px}
+.terms-checkbox-popover-head{margin-bottom:3px}
+.terms-checkbox-popover-head strong{font-size:11px}
+.terms-checkbox-popover p{margin:0 0 4px;font-size:10px;line-height:1.35}
+.terms-checkbox-close{display:none}
+.contact-intro p:last-child,.contact-copy p:last-child{font-size:18px;line-height:1.5}
 
-.contact-topic-menu button.is-selected {
-  background: #111111;
-  color: #ffffff;
-  box-shadow: none;
-}
-
-.contact-topic-menu button.is-selected::before {
-  background: #ffffff;
-}
-
-.contact-topic-menu button.is-selected span:last-child {
-  color: #ffffff;
-}
-
-@media (max-width: 720px) {
-  .terms-checkbox-info {
-    width: 24px;
-    height: 24px;
-    flex-basis: 24px;
-    margin-left: 7px;
-    font-size: 11px;
-  }
-}
-
-
-/* Final contact micro-control sizing */
-.terms-checkbox-info {
-  width: 16px !important;
-  height: 16px !important;
-  min-width: 16px !important;
-  min-height: 16px !important;
-  flex: 0 0 16px !important;
-  margin-left: 5px !important;
-  padding: 0 !important;
-  border-width: 1px !important;
-  font-size: 9px !important;
-  line-height: 1 !important;
-}
-
-.terms-checkbox-info:focus-visible {
-  outline-offset: 2px;
-}
-
-.contact-topic-menu button.is-selected {
-  background: #111111 !important;
-  color: #ffffff !important;
-  box-shadow: none !important;
-  border-color: #111111 !important;
-}
-
-.contact-topic-menu button.is-selected::before {
-  background: #ffffff !important;
-}
-
-.contact-topic-menu button.is-selected span:last-child {
-  color: #ffffff !important;
-}
-
-@media (max-width: 720px) {
-  .terms-checkbox-info {
-    width: 16px !important;
-    height: 16px !important;
-    min-width: 16px !important;
-    min-height: 16px !important;
-    flex-basis: 16px !important;
-    margin-left: 5px !important;
-    font-size: 9px !important;
-  }
-}
-
-
-/* Contact final compact pass */
-.terms-checkbox-info {
-  width: 14px !important;
-  height: 14px !important;
-  min-width: 14px !important;
-  min-height: 14px !important;
-  flex-basis: 14px !important;
-  margin-left: 4px !important;
-  font-size: 8px !important;
-}
-
-.contact-message {
-  min-height: 96px !important;
-  padding-top: 12px !important;
-  padding-bottom: 12px !important;
-}
-
-.contact-topic-menu {
-  background: #111111 !important;
-}
-
-.contact-topic-menu button {
-  color: #ffffff !important;
-  border-color: rgba(255,255,255,.12) !important;
-}
-
-.contact-topic-menu button:hover,
-.contact-topic-menu button.is-selected {
-  background: #111111 !important;
-  color: #ffffff !important;
-}
-
-.contact-topic-menu button.is-selected {
-  box-shadow: inset 3px 0 0 var(--blue-strong) !important;
-}
-
-@media (max-width: 720px) {
-  .terms-checkbox-info {
-    width: 14px !important;
-    height: 14px !important;
-    min-width: 14px !important;
-    min-height: 14px !important;
-    flex-basis: 14px !important;
-    margin-left: 4px !important;
-    font-size: 8px !important;
-  }
-
-  .contact-message {
-    min-height: 88px !important;
-  }
-}
-
-
-/* Minimal S&K popover */
-.terms-checkbox-popover {
-  width: min(210px, calc(100vw - 32px)) !important;
-  max-width: 210px !important;
-  padding: 8px 10px !important;
-  border-radius: 12px !important;
-  font-size: 10px !important;
-  line-height: 1.35 !important;
-  gap: 6px !important;
-}
-
-.terms-checkbox-popover-head {
-  margin-bottom: 3px !important;
-}
-
-.terms-checkbox-popover-head strong {
-  font-size: 11px !important;
-}
-
-.terms-checkbox-popover p {
-  margin: 0 0 4px !important;
-  font-size: 10px !important;
-  line-height: 1.35 !important;
-}
-
-.terms-checkbox-close {
-  display: none !important;
-}
-
-
-/* Contact closing line emphasis */
-.contact-intro p:last-child,
-.contact-copy p:last-child {
-  font-size: 18px !important;
-  line-height: 1.5 !important;
-}
-@media (max-width: 720px) {
-  .contact-intro p:last-child,
-  .contact-copy p:last-child {
-    font-size: 17px !important;
-  }
-}
-
-/* Final navbar/panel safety overrides — keep panel behavior consistent across responsive rules. */
 @media (max-width:640px){
- .nav{width:calc(100% - 20px);top:8px;margin-top:8px;min-height:62px;padding:8px;border-radius:20px}
- .wordmark{padding-left:4px}
- .nav-actions{gap:4px;padding:3px}
- .music-toggle,.menu-toggle{min-width:48px;width:48px;grid-template-columns:30px;justify-content:center;padding:0 7px}
- .nav-action-label,.nav-action-meta,.wordmark>span:last-child{display:none}
- .brand-mark{width:36px;height:36px}
- .nav-actions>nav,.music-panel{position:fixed;top:50%;left:50%;right:auto;width:min(420px,calc(100vw - 20px));padding:18px;border-radius:24px;transform:translate(-50%,-46%) scale(.965)}
- .nav-actions>nav.is-open,.music-panel.is-open{transform:translate(-50%,-50%) scale(1)}
- .nav-actions>nav::before,.music-panel::before{border-radius:23px}
- .menu-panel-grid{gap:6px}
- .menu-panel-grid a{min-height:58px;grid-template-columns:28px minmax(0,1fr) 14px}
- .menu-item-index{width:28px;height:28px}
- .music-track{grid-template-columns:60px minmax(0,1fr)}
- .music-track-art{width:60px;height:60px}
+  .nav{top:10px;margin-top:10px;width:calc(100% - 20px);min-height:62px;padding:8px;border-radius:20px}
+  .wordmark{padding-left:4px}
+  .nav-actions{gap:4px;padding:3px}
+  .music-toggle,.menu-toggle{min-width:0;width:56px;grid-template-columns:1fr;place-items:center;padding:0}
+  .nav-action-label,.nav-action-meta,.wordmark>span:last-child{display:none}
+  .brand-mark{width:36px;height:36px}
+  .nav-actions>nav,.music-panel{position:fixed;top:50%;left:50%;right:auto;width:min(420px,calc(100vw - 20px));padding:18px;border-radius:24px;transform:translate(-50%,-46%) scale(.965)}
+  .nav-actions>nav.is-open,.music-panel.is-open{transform:translate(-50%,-50%) scale(1)}
+  .nav-actions>nav::before,.music-panel::before{border-radius:23px}
+  .menu-panel-grid{gap:6px}
+  .menu-panel-grid a{min-height:58px;grid-template-columns:28px minmax(0,1fr) 14px}
+  .menu-item-index{width:28px;height:28px}
+  .music-track{grid-template-columns:60px minmax(0,1fr)}
+  .music-track-art{width:60px;height:60px}
+  .terms-checkbox-info{width:14px;height:14px;min-width:14px;min-height:14px;flex-basis:14px;font-size:8px}
+  .contact-message{min-height:88px}
+  .contact-intro p:last-child,.contact-copy p:last-child{font-size:17px}
 }
 @media (max-width:390px){
- .nav{width:calc(100% - 12px);min-height:58px}
- .nav-actions>nav,.music-panel{width:calc(100vw - 12px);padding:15px}
- .menu-panel-grid{grid-template-columns:1fr}
- .menu-panel-grid a{min-height:54px}
+  .nav{width:calc(100% - 12px);min-height:58px}
+  .nav-actions>nav,.music-panel{width:calc(100vw - 12px);padding:15px}
+  .menu-panel-grid{grid-template-columns:1fr}
+  .menu-panel-grid a{min-height:54px}
 }
 
-/* Music + Menu clarity refinement */
-.music-toggle,.menu-toggle{min-height:48px;padding:0 14px 0 10px;border-radius:14px;}
-.music-toggle .nav-action-label,.menu-toggle .nav-action-label{font-size:12px;letter-spacing:.045em;font-weight:700;}
-.music-toggle .nav-action-meta,.menu-toggle .nav-action-meta{font-size:9px;letter-spacing:.14em;font-weight:700;}
-.music-toggle .nav-action-glyph,.menu-toggle .nav-menu-lines{width:32px;height:32px;border-radius:10px;}
-.nav-menu-lines{display:grid;place-content:center;gap:4px;background:#eef0f3;}
-.nav-menu-lines>span{width:15px;height:1.7px;}
-.menu-toggle.is-open .nav-menu-lines{background:#eef0f3;color:var(--ink);}
-@media (max-width:640px){.music-toggle,.menu-toggle{min-width:0;width:56px;padding:0;grid-template-columns:1fr;place-items:center}.music-toggle .nav-action-label,.music-toggle .nav-action-meta,.menu-toggle .nav-action-label,.menu-toggle .nav-action-meta{display:none}}
+/* Music + Menu clarity */
+.music-toggle,.menu-toggle{min-height:48px;padding:0 14px 0 10px;border-radius:14px}
+.music-toggle .nav-action-label,.menu-toggle .nav-action-label{font-size:12px;letter-spacing:.045em;font-weight:700}
+.music-toggle .nav-action-meta,.menu-toggle .nav-action-meta{font-size:9px;letter-spacing:.14em;font-weight:700}
+.music-toggle .nav-action-glyph,.menu-toggle .nav-menu-lines{width:32px;height:32px;border-radius:10px}
+.nav-menu-lines{gap:4px;background:#eef0f3}
+.nav-menu-lines>span{width:15px;height:1.7px}
+.menu-toggle.is-open .nav-menu-lines{background:#eef0f3;color:var(--ink)}
 
 /* JRH system-wide component polish — cohesive tactile UI */
 :root{
