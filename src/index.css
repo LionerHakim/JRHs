@@ -2444,3 +2444,27 @@ button,.hero-pill,.ghost-pill,.project-link,.media-links a{
   background:var(--paper) !important;
   color:var(--charcoal) !important;
 }
+
+
+/* Fix topic selector blue override */
+.contact-topic-trigger,
+.contact-topic-trigger:hover,
+.contact-topic-trigger:focus-visible,
+.contact-topic-trigger[aria-expanded="true"]{
+  background:var(--paper) !important;
+  color:var(--ink) !important;
+  border-color:var(--ui-border-strong) !important;
+  box-shadow:none !important;
+}
+.contact-topic-menu button{
+  background:#111 !important;
+  color:#fff !important;
+  border-color:rgba(255,255,255,.12) !important;
+}
+.contact-topic-menu button:hover,
+.contact-topic-menu button:focus-visible,
+.contact-topic-menu button.is-selected{
+  background:#111 !important;
+  color:#fff !important;
+  border-color:rgba(255,255,255,.12) !important;
+}
