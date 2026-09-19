@@ -130,8 +130,7 @@ ${name.trim()}`)
       <main>
         <section id="identity" className="hero" aria-labelledby="identity-title">
           <div className="hero-copy">
-            <p className="section-kicker">PORTFOLIO</p>
-            <h1 id="identity-title">{siteConfig.identity.name}</h1>
+            <h1 id="identity-title">PORTFOLIO</h1>
             <p className="hero-description">{siteConfig.identity.description}</p>
             <div className="hero-actions">
               <a className="hero-pill" href="#projects">Explore projects</a>
