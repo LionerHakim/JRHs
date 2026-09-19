@@ -87,6 +87,7 @@ export default function App() {
   const [purpose, setPurpose] = useState('')
   const [message, setMessage] = useState('')
   const [privacy, setPrivacy] = useState(false)
+  const [termsOpen, setTermsOpen] = useState(false)
   const [contactStatus, setContactStatus] = useState<string | null>(null)
   const [contactError, setContactError] = useState<string | null>(null)
   const [touched, setTouched] = useState({ name: false, message: false, privacy: false })
@@ -448,10 +449,21 @@ ${name.trim()}`)
               {contactStatus ? <p className="contact-feedback is-success" role="status">{contactStatus}<span>Aplikasi email kamu akan terbuka. Tinggal cek pesannya, lalu klik Kirim.</span></p> : null}
 
               <div className="contact-submit">
-                <label className="contact-privacy">
-                  <input type="checkbox" required checked={privacy} onChange={(event) => setPrivacy(event.target.checked)} onBlur={() => setTouched((current) => ({ ...current, privacy: true }))} aria-invalid={touched.privacy && !privacy} />
-                  <span>Saya menyetujui penggunaan data yang saya berikan untuk keperluan membalas pesan ini.</span>
-                </label>
+                <div className="contact-privacy">
+                  <label className="contact-consent">
+                    <input type="checkbox" required checked={privacy} onChange={(event) => setPrivacy(event.target.checked)} onBlur={() => setTouched((current) => ({ ...current, privacy: true }))} aria-invalid={touched.privacy && !privacy} />
+                    <span>Saya setuju dan memahami S&K.</span>
+                  </label>
+                  <button className="contact-terms-trigger" type="button" aria-label="Lihat S&K" title="Lihat S&K" onClick={() => setTermsOpen((open) => !open)}>i</button>
+                  {termsOpen ? (
+                    <div className="contact-terms-popover" role="dialog" aria-label="Syarat dan ketentuan">
+                      <strong>Syarat & Ketentuan</strong>
+                      <p>Dengan melanjutkan, Anda menyetujui bahwa data yang Anda isi digunakan untuk menyiapkan dan membalas pesan melalui email. Data tidak dipublikasikan melalui website.</p>
+                      <p>Gunakan informasi yang benar dan jangan kirim data sensitif atau rahasia. Isi pesan menjadi tanggung jawab pengirim.</p>
+                      <p>Website ini hanya membuka aplikasi email perangkat Anda; pengiriman pesan dilakukan oleh Anda melalui penyedia email pilihan Anda.</p>
+                    </div>
+                  ) : null}
+                </div>
                 <button type="submit">✈ <span>Buka Email Saya</span> <span aria-hidden="true">→</span></button>
               </div>
 
