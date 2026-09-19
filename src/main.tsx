@@ -428,11 +428,6 @@ ${name.trim()}`)
               <p className="contact-question">Ada yang mau dibahas?</p>
               <p className="contact-answer">Punya pertanyaan, ide, project, peluang kolaborasi, atau sekadar mau ngobrol?</p>
               <p className="contact-note">Tulis aja. Saya siapkan emailnya. Kamu tinggal cek dan klik Kirim.</p>
-              <a className="contact-destination" href={`mailto:${siteConfig.contactEmail}`}>
-                <span>EMAIL DIRECT</span>
-                <strong>{siteConfig.contactEmail}</strong>
-                <span aria-hidden="true">↗</span>
-              </a>
             </div>
 
             <form className="contact-form" onSubmit={handleContactSubmit} noValidate>
