@@ -4601,164 +4601,289 @@ body {
 }
 
 
-/* JRHs — opened navbar: immersive menu redesign */
-.site-shell:has(.menu-toggle.is-open)::after {
-  content: '';
-  position: fixed;
-  inset: 0;
-  z-index: 20;
-  background: rgba(255,255,255,.46);
-  -webkit-backdrop-filter: blur(14px) saturate(108%);
-  backdrop-filter: blur(14px) saturate(108%);
-  pointer-events: none;
+/* JRHs — final premium polish */
+:root {
+  --font-ios: -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text",
+    "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
 
-.nav {
-  z-index: 40;
+html,
+body,
+button,
+input,
+select,
+textarea,
+a,
+nav,
+section,
+footer,
+header,
+main,
+div,
+span,
+p,
+h1,
+h2,
+h3,
+strong,
+li,
+time {
+  font-family: var(--font-ios) !important;
+  font-synthesis: none;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
+/* Remove heavy black borders throughout */
+.record,
+.project,
+.project-quote,
+.contact-card,
+.site-footer-main,
+.contact-field,
+.nav-actions nav,
+.nav-actions nav a {
+  border-color: #e5e7eb !important;
+}
+
+.project:nth-child(2n),
+.project:nth-child(3n),
+.project:nth-child(4n),
+.project:nth-child(1) {
+  border-color: transparent !important;
+}
+
+/* Quotes — restrained editorial cards */
+.portrait-quote,
+.project-quote {
+  border: 1px solid #e7e7ea !important;
+  border-radius: 24px;
+  background: #fff !important;
+  box-shadow: 0 12px 34px rgba(17,17,17,.055);
+}
+
+.portrait-quote {
+  width: min(100%, 390px);
+  aspect-ratio: 1 / 1;
+  margin: 14px auto 0;
+  padding: 42px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.portrait-quote::before,
+.project-quote::before {
+  color: #2563eb !important;
+}
+
+.portrait-quote::before {
+  top: 28px;
+  left: 30px;
+  font-size: 34px;
+}
+
+.portrait-quote strong,
+.project-quote strong {
+  color: #111 !important;
+  font-family: var(--font-ios) !important;
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: .12em;
+  line-height: 1.5;
+}
+
+.portrait-quote p,
+.project-quote p {
+  color: #3f3f46 !important;
+  font-family: var(--font-ios) !important;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 1.65;
+  letter-spacing: -.012em;
+}
+
+.portrait-quote p {
+  max-width: 300px;
+  margin: 13px 0 0;
+}
+
+.project-quote {
+  padding: 38px clamp(28px,4vw,52px);
+}
+
+.project-quote p {
+  max-width: 760px;
+  margin-top: 14px;
+}
+
+/* Open menu — premium solid, no colored status dots */
 .nav-actions nav {
-  z-index: 50;
-  top: calc(100% + 14px);
-  right: 0;
   width: min(340px, calc(100vw - 32px));
-  padding: 10px;
-  display: grid;
-  gap: 6px;
-  border: 1px solid rgba(17,17,17,.10);
-  border-radius: 26px;
-  background: rgba(255,255,255,.94);
-  box-shadow: 0 24px 70px rgba(17,17,17,.16), 0 4px 16px rgba(17,17,17,.06);
-  -webkit-backdrop-filter: blur(24px) saturate(125%);
-  backdrop-filter: blur(24px) saturate(125%);
-  overflow: hidden;
-  transform-origin: top right;
-  animation: jrhs-menu-in 240ms var(--ease-ios) both;
+  padding: 9px;
+  gap: 4px;
+  border: 1px solid #e5e7eb !important;
+  border-radius: 24px;
+  background: #fff !important;
+  box-shadow: 0 24px 70px rgba(17,17,17,.14), 0 6px 18px rgba(17,17,17,.055);
+  -webkit-backdrop-filter: none;
+  backdrop-filter: none;
+  animation: jrhs-menu-premium-in 220ms var(--ease-ios) both;
 }
 
 .nav-actions nav::before {
-  content: 'JRH / NAVIGATION';
-  display: block;
-  padding: 7px 12px 9px;
-  color: #8a8a8f;
-  font-size: 9px;
-  font-weight: 600;
-  letter-spacing: .16em;
+  color: #9ca3af;
+  font-family: var(--font-ios) !important;
+  letter-spacing: .14em;
 }
 
-.nav-actions nav a {
-  position: relative;
-  min-height: 58px;
-  display: flex;
-  align-items: center;
-  gap: 13px;
-  padding: 0 14px;
-  border: 1px solid transparent;
-  border-radius: 17px;
-  color: #111;
-  font-size: 14px;
+.nav-actions nav a,
+.nav-actions nav a.is-active {
+  min-height: 56px;
+  border: 0 !important;
+  border-radius: 15px;
+  background: transparent !important;
+  color: #111 !important;
   font-weight: 600;
-  letter-spacing: -.01em;
-  transition: background 180ms var(--ease-ios), border-color 180ms var(--ease-ios), transform 180ms var(--ease-ios), color 180ms var(--ease-ios);
+  transform: none !important;
 }
 
 .nav-actions nav a::before {
-  content: '';
-  width: 7px;
-  height: 7px;
-  flex: 0 0 7px;
-  border-radius: 50%;
-  background: #d1d5db;
-  transition: background 180ms ease, transform 180ms var(--ease-ios);
+  display: none !important;
 }
 
 .nav-actions nav a::after {
-  content: '↗';
-  position: absolute;
-  right: 15px;
-  bottom: auto;
-  left: auto;
-  width: auto;
-  height: auto;
-  transform: none;
-  background: none;
-  color: #a1a1aa;
-  font-size: 15px;
-  opacity: 0;
-  transition: opacity 180ms ease, transform 180ms var(--ease-ios), color 180ms ease;
+  color: #9ca3af !important;
 }
 
 .nav-actions nav a:hover,
 .nav-actions nav a:focus-visible {
-  background: #f7f8fa;
-  border-color: #e5e7eb;
-  color: #111;
-  transform: translateX(3px);
-}
-
-.nav-actions nav a:hover::before,
-.nav-actions nav a:focus-visible::before {
-  background: #2563eb;
-  transform: scale(1.35);
+  background: #f5f5f7 !important;
+  color: #111 !important;
 }
 
 .nav-actions nav a:hover::after,
 .nav-actions nav a:focus-visible::after {
-  opacity: 1;
-  transform: translate(1px,-1px);
-  color: #2563eb;
+  color: #2563eb !important;
 }
 
 .nav-actions nav a.is-active {
-  background: #111;
-  border-color: #111;
-  color: #fff;
-}
-
-.nav-actions nav a.is-active::before {
-  background: #facc15;
-  transform: scale(1.25);
+  background: #111 !important;
+  color: #fff !important;
 }
 
 .nav-actions nav a.is-active::after {
-  opacity: 1;
-  color: #facc15;
+  color: #fff !important;
 }
 
-@keyframes jrhs-menu-in {
-  from {
-    opacity: 0;
-    transform: translateY(-7px) scale(.97);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0) scale(1);
-  }
+@keyframes jrhs-menu-premium-in {
+  from { opacity: 0; transform: translateY(-5px) scale(.985); }
+  to { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+/* Footer — quiet luxury / editorial */
+.site-footer {
+  width: min(calc(100% - (var(--page-gutter) * 2)), var(--page-max));
+  margin: 0 auto;
+  padding: 88px 0 30px;
+  border-top: 1px solid #e5e7eb !important;
+  color: #52525b;
+}
+
+.site-footer-main {
+  background: #fff !important;
+  border: 1px solid #e5e7eb !important;
+  border-radius: 26px;
+  padding: clamp(34px,5vw,58px);
+  box-shadow: 0 14px 40px rgba(17,17,17,.045);
+}
+
+.site-footer-brand strong {
+  color: #111;
+  font-family: var(--font-ios) !important;
+  font-size: 24px;
+  font-weight: 700;
+  letter-spacing: -.045em;
+}
+
+.site-footer-brand p {
+  margin-top: 18px;
+  color: #71717a;
+  font-family: var(--font-ios) !important;
+  font-size: 13px;
+  line-height: 1.8;
+  letter-spacing: -.01em;
+}
+
+.site-footer-nav {
+  gap: 10px;
+}
+
+.site-footer-nav a {
+  color: #52525b;
+  font-family: var(--font-ios) !important;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: .08em;
+  transition: color 180ms ease, transform 180ms var(--ease-ios);
+}
+
+.site-footer-nav a:hover,
+.site-footer-nav a:focus-visible {
+  color: #111;
+  transform: translateX(3px);
+}
+
+.site-footer-bottom {
+  padding-top: 22px;
+  color: #a1a1aa;
+  font-family: var(--font-ios) !important;
+  font-size: 10px;
+  letter-spacing: .04em;
+}
+
+.site-footer-bottom a {
+  color: #111;
+  transition: transform 180ms var(--ease-ios);
+}
+
+.site-footer-bottom a:hover {
+  transform: translateY(-2px);
 }
 
 @media (max-width: 760px) {
-  .site-shell:has(.menu-toggle.is-open)::after {
-    background: rgba(255,255,255,.42);
-    -webkit-backdrop-filter: blur(10px) saturate(108%);
-    backdrop-filter: blur(10px) saturate(108%);
+  .portrait-quote {
+    width: min(100%, 360px);
+    padding: 30px;
+    border-radius: 22px;
+  }
+
+  .portrait-quote::before {
+    top: 22px;
+    left: 24px;
+  }
+
+  .portrait-quote p {
+    font-size: 15px;
+  }
+
+  .project-quote {
+    padding: 30px 22px;
+    border-radius: 22px;
   }
 
   .nav-actions nav {
-    top: calc(100% + 9px);
-    right: 0;
     width: min(330px, calc(100vw - 24px));
-    padding: 9px;
-    border-radius: 23px;
+    border-radius: 22px;
   }
 
-  .nav-actions nav::before {
-    padding: 6px 11px 8px;
+  .site-footer {
+    padding-top: 64px;
   }
 
-  .nav-actions nav a {
-    min-height: 54px;
-    border-radius: 15px;
-    padding: 0 13px;
+  .site-footer-main {
+    border-radius: 22px;
+    padding: 28px 22px;
   }
 }
 
