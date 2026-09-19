@@ -2200,3 +2200,45 @@ button,.hero-pill,.ghost-pill,.project-link,.media-links a{
     margin-inline:auto;
   }
 }
+/* Navbar trigger buttons — blue menu variant */
+.menu-toggle{
+  border-color:#0a6fe8;
+  background:#0a6fe8;
+  color:#fff;
+  box-shadow:0 6px 16px rgba(0,105,224,.18);
+}
+.menu-toggle:hover,
+.menu-toggle:focus-visible,
+.menu-toggle.is-open{
+  border-color:#0a6fe8;
+  background:#0a6fe8;
+  color:#fff;
+  transform:translateY(-1px);
+  box-shadow:0 8px 20px rgba(0,105,224,.22);
+}
+.menu-toggle .nav-menu-lines{
+  background:transparent;
+}
+.menu-toggle .nav-menu-lines>span{
+  background:#fff;
+}
+
+@media (max-width:640px){
+  .music-toggle,
+  .menu-toggle{
+    width:56px;
+    min-width:56px;
+    height:48px;
+    min-height:48px;
+    padding:0 10px;
+    border-radius:18px;
+  }
+
+  .music-toggle::after{
+    display:none;
+  }
+
+  .music-toggle .nav-action-glyph{
+    margin-inline:auto;
+  }
+}
