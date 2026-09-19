@@ -1130,11 +1130,33 @@ img {
 }
 
 .contact-benefits > * {
-  padding: 7px 11px;
+  min-height: 34px;
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  padding: 7px 12px;
+  border: 1px solid rgba(0,105,224,.08);
   border-radius: var(--pill);
   background: var(--blue-soft);
   color: var(--graphite);
   font-size: 11px;
+  font-weight: 500;
+  line-height: 1;
+}
+
+.contact-benefits > * > svg {
+  width: 15px;
+  height: 15px;
+  flex: 0 0 15px;
+  fill: none;
+  stroke: var(--blue-strong);
+  stroke-width: 1.8;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.contact-benefits > * > span {
+  white-space: nowrap;
 }
 
 .contact-closing {
