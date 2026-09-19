@@ -18,7 +18,7 @@
   --line: rgba(10, 13, 18, .08);
   --ease: cubic-bezier(.2,.8,.2,1);
   --page: min(1200px, calc(100% - 48px));
-  --section: 104px;
+  --section: 112px;
   --radius: 32px;
   --pill: 9999px;
   font-family: Inter, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
@@ -123,9 +123,9 @@ img {
   gap: 20px;
   border: 1px solid rgba(10,13,18,.07);
   border-radius: var(--pill);
-  background: rgba(250,253,255,.94);
-  box-shadow: 0 8px 28px rgba(4,69,144,.06);
-  backdrop-filter: blur(14px);
+  background: rgba(250,253,255,.97);
+  box-shadow: 0 6px 24px rgba(4,69,144,.05);
+  backdrop-filter: blur(10px);
 }
 
 .wordmark {
@@ -503,7 +503,7 @@ img {
 
 .hero {
   min-height: calc(100svh - 88px);
-  padding: 76px 0 96px;
+  padding: 84px 0 112px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -531,7 +531,7 @@ img {
 
 .hero-description {
   width: min(680px, 100%);
-  margin: 24px auto 0;
+  margin: 28px auto 0;
   color: var(--graphite);
   font-size: 18px;
   line-height: 1.45;
@@ -539,7 +539,7 @@ img {
 }
 
 .hero-actions {
-  margin-top: 28px;
+  margin-top: 36px;
   display: flex;
   flex-wrap: wrap;
   align-items: center;
@@ -586,14 +586,14 @@ img {
 }
 
 .hero-portrait {
-  width: min(560px, 82vw);
-  margin: 48px 0 0;
+  width: min(540px, 80vw);
+  margin: 56px 0 0;
 }
 
 .portrait-frame {
   position: relative;
   padding: 3px;
-  border-radius: 52px;
+  border-radius: 56px;
   background: linear-gradient(135deg, rgb(71,157,255) 11.43%, rgb(0,105,224) 78.2%);
 }
 
@@ -601,7 +601,7 @@ img {
   width: 100%;
   aspect-ratio: 4 / 5;
   object-fit: cover;
-  border-radius: 49px;
+  border-radius: 53px;
   background: var(--bone);
 }
 
@@ -671,8 +671,8 @@ img {
   min-width: 0;
   display: grid;
   grid-template-columns: 150px minmax(0,1fr);
-  gap: 28px;
-  padding: 32px 36px;
+  gap: 32px;
+  padding: 36px 40px;
   border-radius: var(--radius);
   background: var(--bone);
   color: var(--ink);
@@ -688,7 +688,7 @@ img {
 .record h3 {
   margin: 0;
   color: var(--ink);
-  font-size: 24px;
+  font-size: 26px;
   font-weight: 500;
   line-height: 1.2;
   letter-spacing: -.03em;
@@ -721,9 +721,9 @@ img {
 .project {
   min-width: 0;
   display: grid;
-  grid-template-columns: 72px minmax(0,1fr);
-  gap: 24px;
-  padding: 34px 36px;
+  grid-template-columns: 80px minmax(0,1fr);
+  gap: 28px;
+  padding: 38px 40px;
   border-radius: var(--radius);
   background: var(--bone);
   transition: transform 180ms var(--ease), background-color 180ms var(--ease);
@@ -746,7 +746,7 @@ img {
 .project-name {
   margin: 0;
   color: var(--ink);
-  font-size: clamp(28px, 4vw, 48px);
+  font-size: clamp(30px, 4vw, 50px);
   font-weight: 500;
   line-height: 1.1;
   letter-spacing: -.045em;
@@ -847,7 +847,7 @@ img {
 
 .testimonial {
   width: 100%;
-  min-height: 320px;
+  min-height: 348px;
   padding: 32px;
   display: flex;
   flex-direction: column;
@@ -923,7 +923,7 @@ img {
 .testimonial blockquote {
   margin: 18px 0 24px;
   color: var(--graphite);
-  font-size: clamp(18px, 2.4vw, 24px);
+  font-size: clamp(19px, 2.5vw, 25px);
   line-height: 1.4;
   letter-spacing: -.02em;
 }
@@ -946,7 +946,7 @@ img {
 
 /* Contact */
 .contact-card {
-  padding: clamp(28px, 5vw, 48px);
+  padding: clamp(32px, 5.5vw, 56px);
   border-radius: var(--radius);
   background: var(--bone);
 }
@@ -957,7 +957,7 @@ img {
 
 .contact-question {
   margin: 0;
-  color: var(--ink) !important;
+  color: var(--ink);
   font-size: clamp(32px, 5vw, 48px);
   font-weight: 500;
   line-height: 1.1;
@@ -972,7 +972,7 @@ img {
 
 .contact-note {
   margin: 8px 0 0;
-  color: var(--fog) !important;
+  color: var(--fog);
   font-size: 14px;
 }
 
@@ -1139,7 +1139,7 @@ img {
 
 .contact-closing {
   margin: 24px 0 0;
-  color: var(--fog) !important;
+  color: var(--fog);
   font-size: 13px;
 }
 
@@ -1147,15 +1147,15 @@ img {
 .site-footer {
   width: var(--page);
   margin: 0 auto;
-  padding: 40px 0 28px;
+  padding: 56px 0 32px;
   color: var(--graphite);
 }
 
 .site-footer-main {
-  padding: 42px;
+  padding: 48px;
   display: grid;
   grid-template-columns: 1.1fr 1fr;
-  gap: 48px;
+  gap: 56px;
   border-radius: var(--radius);
   background: var(--charcoal);
   color: var(--paper);
@@ -1176,7 +1176,7 @@ img {
 
 .site-footer-brand p {
   margin: 12px 0 0;
-  color: #b8c0cb !important;
+  color: #b8c0cb;
   font-size: 14px;
 }
 
@@ -1218,7 +1218,7 @@ img {
 @media (max-width: 900px) {
   :root {
     --page: min(100% - 32px, 760px);
-    --section: 88px;
+    --section: 92px;
   }
 
   .hero {
@@ -1239,7 +1239,7 @@ img {
 @media (max-width: 640px) {
   :root {
     --page: calc(100% - 20px);
-    --section: 72px;
+    --section: 76px;
     --radius: 24px;
   }
 
@@ -1273,7 +1273,7 @@ img {
 
   .hero {
     min-height: auto;
-    padding: 64px 0 72px;
+    padding: 60px 0 76px;
   }
 
   .hero h1 {
@@ -1297,7 +1297,7 @@ img {
   }
 
   .hero-portrait {
-    width: min(480px, 88vw);
+    width: min(460px, 88vw);
     margin-top: 36px;
   }
 
@@ -1312,8 +1312,8 @@ img {
 
   .record,
   .project {
-    padding: 24px !important;
-    border-radius: 24px !important;
+    padding: 24px;
+    border-radius: 24px;
   }
 
   .record {
@@ -1342,7 +1342,7 @@ img {
   .testimonials-subtitle { font-size: 16px; }
 
   .testimonial {
-    min-height: 300px;
+    min-height: 312px;
     padding: 26px;
     border-radius: 24px;
   }
@@ -1407,8 +1407,9 @@ img {
   *,
   *::before,
   *::after {
-    animation-duration: .01ms !important;
-    animation-iteration-count: 1 !important;
-    transition-duration: .01ms !important;
+    animation-duration: .01ms;
+    animation-iteration-count: 1;
+    transition-duration: .01ms;
+    scroll-behavior: auto !important;
   }
 }
