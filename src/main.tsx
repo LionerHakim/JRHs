@@ -1,4 +1,4 @@
-import { FormEvent, useEffect, useState } from 'react'
+import { FormEvent, useEffect, useRef, useState } from 'react'
 import { createRoot } from 'react-dom/client'
 import { siteConfig } from './config/site'
 import './index.css'
@@ -54,13 +54,29 @@ function TestimonialCard({
 
 function TestimonialsSection() {
   const [activeIndex, setActiveIndex] = useState(0)
+  const touchStartX = useRef<number | null>(null)
   const testimonials = siteConfig.testimonials
   const activeTestimonial = testimonials[activeIndex]
 
-  const changeQuote = (direction: number) => {
-    setActiveIndex((current) =>
-      Math.max(0, Math.min(current + direction, testimonials.length - 1)),
-    )
+  const handleTouchStart = (event: React.TouchEvent<HTMLDivElement>) => {
+    touchStartX.current = event.touches[0]?.clientX ?? null
+  }
+
+  const handleTouchEnd = (event: React.TouchEvent<HTMLDivElement>) => {
+    const startX = touchStartX.current
+    const endX = event.changedTouches[0]?.clientX
+    touchStartX.current = null
+
+    if (startX === null || endX === undefined) return
+
+    const distance = endX - startX
+    if (Math.abs(distance) < 45) return
+
+    if (distance < 0) {
+      setActiveIndex((current) => Math.min(current + 1, testimonials.length - 1))
+    } else {
+      setActiveIndex((current) => Math.max(current - 1, 0))
+    }
   }
 
   return (
@@ -78,14 +94,17 @@ function TestimonialsSection() {
         <span className="testimonial-counter" aria-live="polite">
           QUOTE {String(activeIndex + 1).padStart(2, '0')} <span aria-hidden="true">/</span> {String(testimonials.length).padStart(2, '0')}
         </span>
-
-        <div className="testimonial-controls">
-          <button type="button" onClick={() => changeQuote(-1)} disabled={activeIndex === 0} aria-label="Quote sebelumnya">←</button>
-          <button type="button" onClick={() => changeQuote(1)} disabled={activeIndex === testimonials.length - 1} aria-label="Quote berikutnya">→</button>
-        </div>
+        <span className="testimonial-swipe-hint" aria-hidden="true">SWIPE →</span>
       </div>
 
-      <div className="testimonials-viewport">
+      <div
+        className="testimonials-viewport"
+        onTouchStart={handleTouchStart}
+        onTouchEnd={handleTouchEnd}
+        onTouchCancel={() => {
+          touchStartX.current = null
+        }}
+      >
         <div className="testimonials-list">
           <TestimonialCard
             key={activeTestimonial.name + activeTestimonial.role}
