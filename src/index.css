@@ -127,7 +127,7 @@
   --pill: var(--radius-full-2);
   --panel-mobile: min(286px, calc(100vw - 24px));
   --panel-desktop: min(300px, calc(100vw - 32px));
-  --active-blur: 60px;
+  --active-blur: 50px;
   --active-dim: rgba(235,245,255,.26);
   font-family: var(--font-geist);
   color: var(--ink);
