@@ -1,0 +1,257 @@
+/* JRHs final QA layer — additive only, no content/config changes. */
+
+:root {
+  --jrhs-focus: #2563eb;
+  --jrhs-surface: #ffffff;
+  --jrhs-surface-2: #f6f7f9;
+  --jrhs-border: #d8dde5;
+  --jrhs-text: #17181b;
+  --jrhs-muted: #69717c;
+}
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 92px;
+  text-rendering: optimizeLegibility;
+}
+
+body {
+  min-width: 320px;
+  background: #fff;
+  color: var(--jrhs-text);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+:where(a, button, input, select, textarea):focus-visible {
+  outline: 3px solid color-mix(in srgb, var(--jrhs-focus) 72%, white);
+  outline-offset: 3px;
+}
+
+a {
+  text-underline-offset: 3px;
+}
+
+img {
+  display: block;
+  height: auto;
+}
+
+button,
+a,
+select,
+input,
+textarea {
+  -webkit-tap-highlight-color: transparent;
+}
+
+.hero,
+.section,
+.site-footer {
+  contain: layout style;
+}
+
+.hero-portrait img {
+  aspect-ratio: 4 / 5;
+  object-fit: cover;
+}
+
+.contact-field input,
+.contact-field select,
+.contact-field textarea {
+  width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
+}
+
+.contact-field textarea {
+  resize: vertical;
+  min-height: 132px;
+}
+
+.contact-submit button {
+  min-height: 48px;
+}
+
+.contact-feedback {
+  overflow-wrap: anywhere;
+}
+
+.project-links a,
+.site-footer-nav a,
+.hero-actions a {
+  touch-action: manipulation;
+}
+
+.project-links a {
+  min-height: 44px;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.testimonials-viewport {
+  overscroll-behavior-x: contain;
+}
+
+.testimonial {
+  overflow-wrap: anywhere;
+}
+
+.skip-link {
+  z-index: 1000;
+}
+
+.nav {
+  isolation: isolate;
+}
+
+.nav-actions {
+  min-width: 0;
+}
+
+.nav-actions nav,
+.music-panel {
+  max-width: calc(100vw - 20px);
+}
+
+.music-panel {
+  overflow: hidden;
+}
+
+@media (max-width: 640px) {
+  html {
+    scroll-padding-top: 78px;
+  }
+
+  .hero,
+  .section {
+    width: 100%;
+    max-width: 100%;
+  }
+
+  .hero-actions {
+    flex-wrap: wrap;
+  }
+
+  .hero-actions > a {
+    min-height: 44px;
+    justify-content: center;
+  }
+
+  .contact-submit {
+    gap: 14px;
+  }
+
+  .contact-privacy {
+    min-height: 44px;
+    align-items: center;
+  }
+
+  .contact-privacy input {
+    width: 20px;
+    height: 20px;
+    flex: 0 0 auto;
+  }
+
+  .site-footer-bottom {
+    gap: 16px;
+  }
+}
+
+@media (max-width: 359px) {
+  html {
+    scroll-padding-top: 72px;
+  }
+
+  .nav-actions nav {
+    width: calc(100vw - 16px) !important;
+    right: -2px !important;
+  }
+
+  .menu-panel-grid {
+    grid-template-columns: 1fr !important;
+  }
+
+  .hero-actions > a {
+    width: 100%;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    scroll-behavior: auto !important;
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+  }
+}
+
+/* System dark mode: restrained, solid surfaces; no gradients or glass. */
+@media (prefers-color-scheme: dark) {
+  :root {
+    color-scheme: dark;
+  }
+
+  body,
+  .site-shell {
+    background: #101214 !important;
+    color: #f5f7fa !important;
+  }
+
+  .section,
+  .hero,
+  .site-footer {
+    color: #f5f7fa;
+  }
+
+  .section h2,
+  .hero h1,
+  .project-name,
+  .record h3 {
+    color: #f5f7fa !important;
+  }
+
+  .section p,
+  .record li,
+  .contact-note,
+  .contact-answer {
+    color: #b5bcc6 !important;
+  }
+
+  #education .record,
+  #projects .project,
+  .contact-card {
+    background: #171a1e !important;
+    border-color: #30353d !important;
+  }
+
+  .contact-field input,
+  .contact-field select,
+  .contact-field textarea {
+    background: #111418 !important;
+    color: #f5f7fa !important;
+    border-color: #3a414b !important;
+  }
+
+  .testimonial {
+    background: #171a1e !important;
+    border-color: #30353d !important;
+  }
+
+  .site-footer {
+    border-color: #30353d !important;
+  }
+}
+
+@media (forced-colors: active) {
+  :where(a, button, input, select, textarea):focus-visible {
+    outline: 2px solid CanvasText;
+  }
+}
