@@ -385,12 +385,12 @@ ${name.trim()}`)
           </div>
 
           <p className="media-subtitle">
-            Pinterest, YouTube, monetization, dan TikTok JRH.
+            Kanal, platform, dan ruang digital JRH.
           </p>
 
           <div className="media-list">
             {siteConfig.media.map((item) => (
-              <a className="media-card media-card-link" key={item.title + item.url} href={item.url} target="_blank" rel="noopener noreferrer">
+              <article className="media-card" key={item.number}>
                 <div className="media-card-top">
                   <span className="media-number">{item.number}</span>
                   <span className="media-status">{item.platform}</span>
@@ -398,9 +398,16 @@ ${name.trim()}`)
                 <div className="media-card-body">
                   <span className="media-category">{item.category}</span>
                   <h3>{item.title}</h3>
-                  <span className="media-open">Open ↗</span>
+                  <div className="media-links">
+                    {item.links.map((link) => (
+                      <a key={link.label} href={link.url} target="_blank" rel="noopener noreferrer">
+                        <span>{link.label}</span>
+                        <span aria-hidden="true">↗</span>
+                      </a>
+                    ))}
+                  </div>
                 </div>
-              </a>
+              </article>
             ))}
           </div>
         </section>
@@ -527,6 +534,7 @@ ${name.trim()}`)
       <footer className="site-footer">
         <div className="site-footer-main">
           <div className="site-footer-brand">
+            <span className="footer-kicker">JRH / 2026</span>
             <strong>JRH</strong>
             <p>still learning.<br />still building.<br />still curious.<br /><span className="footer-mindfulness">stay present.</span></p>
           </div>
