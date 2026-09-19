@@ -6146,7 +6146,12 @@ body { color: var(--ink); }
   }
 }
 @media (max-width: 760px) {
-  .hero > .portrait-quote { width: min(100%, 300px) !important; }
+  .hero > .portrait-quote {
+    width: 100% !important;
+    max-width: 620px !important;
+    justify-self: stretch !important;
+    margin: 0 !important;
+  }
 }
 
 
