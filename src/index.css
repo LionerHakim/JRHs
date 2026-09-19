@@ -5147,3 +5147,73 @@ time {
     backdrop-filter: blur(14px) saturate(110%);
   }
 }
+
+/* JRHs — Education color blocks */
+#education .records {
+  gap: 12px;
+  border-top: 0;
+}
+
+#education .record {
+  padding: 28px clamp(20px, 3vw, 34px);
+  border: 1px solid #e5e7eb !important;
+  border-radius: 20px;
+  background: #fff;
+  box-shadow: 0 8px 24px rgba(17,17,17,.035);
+  transition: transform 180ms var(--ease-ios), box-shadow 180ms ease, border-color 180ms ease;
+}
+
+#education .record:nth-child(1) {
+  background: #eff6ff;
+  border-color: #bfdbfe !important;
+}
+
+#education .record:nth-child(2) {
+  background: #fffbeb;
+  border-color: #fde68a !important;
+}
+
+#education .record:nth-child(3) {
+  background: #fef2f2;
+  border-color: #fecaca !important;
+}
+
+#education .record:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 14px 30px rgba(17,17,17,.07);
+}
+
+#education .record:nth-child(1):hover {
+  border-color: #93c5fd !important;
+}
+
+#education .record:nth-child(2):hover {
+  border-color: #fcd34d !important;
+}
+
+#education .record:nth-child(3):hover {
+  border-color: #fca5a5 !important;
+}
+
+#education .record time {
+  color: #2563eb;
+}
+
+#education .record:nth-child(2) time {
+  color: #a16207;
+}
+
+#education .record:nth-child(3) time {
+  color: #dc2626;
+}
+
+@media (max-width: 760px) {
+  #education .records {
+    gap: 10px;
+  }
+
+  #education .record {
+    padding: 24px 20px;
+    border-radius: 18px;
+  }
+}
