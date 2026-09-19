@@ -156,7 +156,7 @@ export default function App() {
     if (!name.trim()) return setContactError('Nama belum diisi.')
 
     if (!message.trim()) return setContactError('Pesan belum diisi.')
-    if (!privacy) return setContactError('Centang persetujuan privasi dulu.')
+    if (!privacy) return setContactError('Persetujuan penggunaan data diperlukan.')
 
     const subject = encodeURIComponent(`[Portfolio Contact] ${purpose || 'Pesan dari website'}`)
     const body = encodeURIComponent(`Halo JRH,
@@ -164,9 +164,6 @@ export default function App() {
 Saya ingin menghubungi terkait:
 
 Nama:
-${name.trim()}
-
-Email:
 ${name.trim()}
 
 Topik:
@@ -184,7 +181,7 @@ Terima kasih,
 ${name.trim()}`)
 
     window.location.href = `mailto:${siteConfig.contactEmail}?subject=${subject}&body=${body}`
-    setContactStatus('Email sudah disiapkan ✨')
+    setContactStatus('Email sudah disiapkan. Pilih aplikasi email di perangkat Anda, lalu kirim.')
   }
 
   return (
