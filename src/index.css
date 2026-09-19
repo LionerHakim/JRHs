@@ -2380,3 +2380,67 @@ button,.hero-pill,.ghost-pill,.project-link,.media-links a{
   background:#fff;
   color:var(--jrh-button-blue);
 }
+
+
+/* Scope blue styling to link buttons only */
+.hero-pill,
+.ghost-pill,
+.contact-submit button,
+.contact-topic-trigger,
+.nav-action,
+.music-controls button{
+  border-color:initial !important;
+  background:initial !important;
+  color:initial !important;
+}
+
+.hero-pill{
+  background:var(--charcoal) !important;
+  color:var(--paper) !important;
+  border-color:transparent !important;
+}
+.ghost-pill{
+  background:transparent !important;
+  color:var(--ink) !important;
+  border-color:var(--ui-border-strong) !important;
+}
+.contact-submit button{
+  background:var(--charcoal) !important;
+  color:var(--paper) !important;
+  border-color:transparent !important;
+}
+.contact-topic-trigger{
+  background:var(--paper) !important;
+  color:var(--ink) !important;
+  border-color:var(--ui-border-strong) !important;
+}
+.nav-action{
+  color:var(--graphite) !important;
+  background:transparent !important;
+  border-color:transparent !important;
+}
+.music-toggle{
+  background:#0a6fe8 !important;
+  color:#fff !important;
+  border-color:#0a6fe8 !important;
+}
+.menu-toggle{
+  background:#0a6fe8 !important;
+  color:#fff !important;
+  border-color:#0a6fe8 !important;
+}
+.music-toggle.is-open,
+.menu-toggle.is-open{
+  background:#fff !important;
+  color:#252a32 !important;
+  border-color:rgba(10,13,18,.14) !important;
+}
+.music-controls button{
+  background:rgba(255,255,255,.045) !important;
+  color:#dfe4eb !important;
+  border-color:rgba(255,255,255,.07) !important;
+}
+.music-controls .music-play{
+  background:var(--paper) !important;
+  color:var(--charcoal) !important;
+}
