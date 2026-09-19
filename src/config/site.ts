@@ -75,6 +75,6 @@ export const siteConfig = {
     { name: 'Ray Dalio', role: 'Investor & Author', category: 'Principles', quote: 'Pain + Reflection = Progress.' },
     { name: 'Leonardo da Vinci', role: 'Artist & Inventor', category: 'Curiosity', quote: 'Learning never exhausts the mind.' },
     { name: 'Khalil Gibran', role: 'Writer & Poet', category: 'Life', quote: 'Work is love made visible.' },
-    { name: 'Timothy Ronald', role: 'Indonesian Educator & Entrepreneur', category: 'Finance', quote: 'Investasi terbaik adalah investasi pada diri sendiri.' },
+    { name: 'Barack Obama', role: '44th President of the United States', category: 'Action', quote: 'Change will not come if we wait for some other person or some other time.' },
   ]
 } as const
