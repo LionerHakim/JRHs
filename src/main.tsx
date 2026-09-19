@@ -153,7 +153,7 @@ function TestimonialsSection() {
       if (resumeTimerRef.current) window.clearTimeout(resumeTimerRef.current)
       resumeTimerRef.current = window.setTimeout(() => {
         userInteractingRef.current = false
-      }, 3500)
+      }, 800)
     }
 
     const handlePointerDown = () => pauseForUser()
@@ -180,7 +180,7 @@ function TestimonialsSection() {
           }
         }, 900)
       }
-    }, 3200)
+    }, 800)
 
     return () => {
       window.clearInterval(interval)
