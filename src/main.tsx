@@ -57,7 +57,8 @@ function TestimonialsSection() {
   const [activeIndex, setActiveIndex] = useState(0)
 
   const scrollToIndex = (index: number) => {
-    const items = trackRef.current?.querySelectorAll<HTMLElement>('.testimonial')
+    const track = trackRef.current
+    const items = track?.querySelectorAll<HTMLElement>('.testimonial')
     const nextIndex = Math.max(0, Math.min(index, siteConfig.testimonials.length - 1))
     const item = items?.[nextIndex]
     if (!item) return
