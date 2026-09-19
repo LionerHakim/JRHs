@@ -15,6 +15,8 @@ const sectionItems = [
 
 const sectionIds = sectionItems.map(([id]) => id)
 
+const contactTopics = ['Pertanyaan umum', 'Kolaborasi', 'Project', 'Bisnis', 'Investasi', 'Akademik', 'Feedback', 'Relationships', 'Tambah teman'] as const
+
 const testimonialInitials = (name: string) =>
   name.split(' ').map((part) => part[0]).slice(0, 2).join('').toUpperCase()
 
@@ -88,20 +90,23 @@ export default function App() {
   const [message, setMessage] = useState('')
   const [privacy, setPrivacy] = useState(false)
   const [termsOpen, setTermsOpen] = useState(false)
+  const [topicOpen, setTopicOpen] = useState(false)
   const [contactStatus, setContactStatus] = useState<string | null>(null)
   const [contactError, setContactError] = useState<string | null>(null)
   const [touched, setTouched] = useState({ name: false, message: false, privacy: false })
   const navActionsRef = useRef<HTMLDivElement>(null)
   const contactPrivacyRef = useRef<HTMLDivElement>(null)
+  const contactTopicRef = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
-    if (!menuOpen && !musicOpen && !termsOpen) return
+    if (!menuOpen && !musicOpen && !termsOpen && !topicOpen) return
 
     const handleKeyDown = (event: KeyboardEvent) => {
       if (event.key === 'Escape') {
         setMenuOpen(false)
         setMusicOpen(false)
         setTermsOpen(false)
+        setTopicOpen(false)
       }
     }
 
@@ -115,6 +120,9 @@ export default function App() {
         if (!contactPrivacyRef.current?.contains(target)) {
           setTermsOpen(false)
         }
+        if (!contactTopicRef.current?.contains(target)) {
+          setTopicOpen(false)
+        }
       }
     }
 
@@ -125,7 +133,7 @@ export default function App() {
       document.removeEventListener('keydown', handleKeyDown)
       document.removeEventListener('pointerdown', handlePointerDown)
     }
-  }, [menuOpen, musicOpen, termsOpen])
+  }, [menuOpen, musicOpen, termsOpen, topicOpen])
 
   useEffect(() => {
     const sections = sectionIds
@@ -435,13 +443,37 @@ ${name.trim()}`)
                   <span className="contact-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="3.25" /><path d="M5.5 20a6.5 6.5 0 0 1 13 0" /></svg></span>
                   <input aria-label="Nama kamu" required value={name} onChange={(event) => setName(event.target.value)} onBlur={() => setTouched((current) => ({ ...current, name: true }))} aria-invalid={touched.name && !name.trim()} placeholder="Nama kamu" autoComplete="name" />
                 </label>
-                <label className="contact-field contact-topic">
+                <div className="contact-field contact-topic" ref={contactTopicRef}>
                   <span className="contact-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M5 7h14M5 12h14M5 17h9" /></svg></span>
-                  <select aria-label="Topik email (opsional)" value={purpose} onChange={(event) => setPurpose(event.target.value)}>
-                    <option value="" disabled>Pilih topik</option>
-                    {['Pertanyaan umum', 'Kolaborasi', 'Project', 'Bisnis', 'Investasi', 'Akademik', 'Feedback', 'Relationships', 'Tambah teman'].map((item) => <option key={item} value={item}>{item}</option>)}
-                  </select>
-                </label>
+                  <button
+                    className={`contact-topic-trigger${topicOpen ? ' is-open' : ''}`}
+                    type="button"
+                    aria-haspopup="listbox"
+                    aria-expanded={topicOpen}
+                    aria-label="Topik email (opsional)"
+                    onClick={() => setTopicOpen((open) => !open)}
+                  >
+                    <span>{purpose || 'Pilih topik'}</span>
+                    <span className="contact-topic-chevron" aria-hidden="true">⌄</span>
+                  </button>
+                  {topicOpen ? (
+                    <div className="contact-topic-menu" role="listbox" aria-label="Pilih topik email">
+                      {contactTopics.map((item) => (
+                        <button
+                          key={item}
+                          type="button"
+                          role="option"
+                          aria-selected={purpose === item}
+                          className={purpose === item ? 'is-selected' : undefined}
+                          onClick={() => { setPurpose(item); setTopicOpen(false) }}
+                        >
+                          <span>{item}</span>
+                          <span aria-hidden="true">{purpose === item ? '✓' : ''}</span>
+                        </button>
+                      ))}
+                    </div>
+                  ) : null}
+                </div>
                 <label className="contact-field contact-message">
                   <span className="contact-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M5 6.5h14a2 2 0 0 1 2 2v7a2 2 0 0 1-2 2H11l-5 3v-3.5a2 2 0 0 1-2-2v-6.5a2 2 0 0 1 2-2Z" /></svg></span>
                   <textarea aria-label="Pesan kamu" required value={message} onChange={(event) => {
