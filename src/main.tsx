@@ -7,6 +7,7 @@ const sectionItems = [
   ['identity', 'About'],
   ['education', 'Education'],
   ['projects', 'Projects'],
+  ['testimonials', 'Quotes World'],
   ['links', 'Contact'],
 ] as const
 
@@ -15,9 +16,22 @@ const sectionIds = sectionItems.map(([id]) => id)
 const testimonialInitials = (name: string) =>
   name.split(' ').map((part) => part[0]).slice(0, 2).join('').toUpperCase()
 
-function TestimonialCard({ testimonial }: { testimonial: (typeof siteConfig.testimonials)[number] }) {
+function TestimonialCard({
+  testimonial,
+  index,
+  isActive,
+}: {
+  testimonial: (typeof siteConfig.testimonials)[number]
+  index: number
+  isActive: boolean
+}) {
   return (
-    <article className="testimonial">
+    <article className={`testimonial${isActive ? ' is-active' : ''}`}>
+      <div className="testimonial-topline" aria-hidden="true">
+        <span>QUOTE</span>
+        <strong>{String(index + 1).padStart(2, '0')}</strong>
+      </div>
+
       <header className="testimonial-head">
         <div className="testimonial-avatar" aria-hidden="true">{testimonialInitials(testimonial.name)}</div>
         <div className="testimonial-meta">
@@ -25,8 +39,11 @@ function TestimonialCard({ testimonial }: { testimonial: (typeof siteConfig.test
           <span>{testimonial.role}</span>
         </div>
       </header>
+
       <span className="testimonial-disclaimer">GAGASAN TERINSPIRASI</span>
+
       <blockquote>“{testimonial.quote}”</blockquote>
+
       <footer className="testimonial-footer">
         <span>Perspektif</span>
         <strong>{testimonial.category}</strong>
@@ -44,7 +61,8 @@ function TestimonialsSection() {
     const nextIndex = Math.max(0, Math.min(index, siteConfig.testimonials.length - 1))
     const item = items?.[nextIndex]
     if (!item) return
-    trackRef.current?.scrollTo({ left: item.offsetLeft, behavior: 'smooth' })
+    const targetLeft = item.offsetLeft - track.clientWidth / 2 + item.offsetWidth / 2
+    trackRef.current?.scrollTo({ left: Math.max(0, targetLeft), behavior: 'smooth' })
     setActiveIndex(nextIndex)
   }
 
@@ -78,22 +96,27 @@ function TestimonialsSection() {
     <section id="testimonials" className="section testimonials-section" aria-labelledby="testimonials-title">
       <div className="section-head">
         <p className="section-kicker">QUOTES WORLD</p>
-        <h2 id="testimonials-title">Kutipan & Gagasan</h2>
+        <h2 id="testimonials-title">Quotes World</h2>
       </div>
       <p className="testimonials-subtitle">16 gagasan dari tokoh lintas bidang tentang karya, pembelajaran, teknologi, ekonomi, dan kehidupan.</p>
 
       <div className="testimonials-toolbar">
-        <span className="testimonial-counter" aria-live="polite">{String(activeIndex + 1).padStart(2, '0')} / 12</span>
+        <span className="testimonial-counter" aria-live="polite">QUOTE {String(activeIndex + 1).padStart(2, '0')} <span aria-hidden="true">/</span> {String(siteConfig.testimonials.length).padStart(2, '0')}</span>
         <div className="testimonial-controls">
-          <button type="button" onClick={() => scrollToIndex(activeIndex - 1)} disabled={activeIndex === 0} aria-label="Testimoni sebelumnya">←</button>
-          <button type="button" onClick={() => scrollToIndex(activeIndex + 1)} disabled={activeIndex === siteConfig.testimonials.length - 1} aria-label="Testimoni berikutnya">→</button>
+          <button type="button" onClick={() => scrollToIndex(activeIndex - 1)} disabled={activeIndex === 0} aria-label="Quote sebelumnya">←</button>
+          <button type="button" onClick={() => scrollToIndex(activeIndex + 1)} disabled={activeIndex === siteConfig.testimonials.length - 1} aria-label="Quote berikutnya">→</button>
         </div>
       </div>
 
       <div className="testimonials-viewport">
         <div className="testimonials-list" ref={trackRef}>
-          {siteConfig.testimonials.map((testimonial) => (
-            <TestimonialCard key={testimonial.name + testimonial.role} testimonial={testimonial} />
+          {siteConfig.testimonials.map((testimonial, index) => (
+            <TestimonialCard
+              key={testimonial.name + testimonial.role}
+              testimonial={testimonial}
+              index={index}
+              isActive={index === activeIndex}
+            />
           ))}
         </div>
       </div>
