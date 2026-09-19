@@ -217,7 +217,7 @@ ${name.trim()}`)
             aria-expanded={musicOpen}
             aria-controls="music-panel"
             aria-label={musicOpen ? 'Tutup music player' : 'Buka music player'}
-            onClick={() => setMusicOpen((open) => !open)}
+            onClick={() => { setMusicOpen((open) => !open); setMenuOpen(false) }}
           >
             <span className="music-toggle-icon" aria-hidden="true">♪</span>
             <span>MUSIC</span>
@@ -229,7 +229,7 @@ ${name.trim()}`)
             aria-expanded={menuOpen}
             aria-controls="primary-navigation"
             aria-label={menuOpen ? 'Tutup menu' : 'Buka menu'}
-            onClick={() => setMenuOpen((open) => !open)}
+            onClick={() => { setMenuOpen((open) => !open); setMusicOpen(false) }}
           >
             <span aria-hidden="true"></span>
             <span aria-hidden="true"></span>
