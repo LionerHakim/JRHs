@@ -2707,3 +2707,90 @@ main {
     border-radius: 13px;
   }
 }
+
+
+/* JRHs — 2045 iOS premium opened menu */
+.nav-actions nav {
+  width: 220px;
+  padding: 6px;
+  gap: 1px;
+  border: 1px solid rgba(0,0,0,.07);
+  border-radius: 20px;
+  background: rgba(255,255,255,.94);
+  box-shadow:
+    0 0 0 5px rgba(247,247,247,.92),
+    0 18px 48px rgba(0,0,0,.075);
+  -webkit-backdrop-filter: saturate(180%) blur(30px);
+  backdrop-filter: saturate(180%) blur(30px);
+  overflow: hidden;
+}
+
+.nav-actions nav::before { content: none; }
+
+.nav-actions nav a {
+  min-height: 50px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 0 13px;
+  border: 0;
+  border-radius: 14px;
+  background: transparent;
+  color: #3e3e3e;
+  font-family: var(--font-sans);
+  font-size: 14px;
+  font-weight: 500;
+  letter-spacing: -.025em;
+  transition:
+    background-color 180ms var(--ease-ios),
+    color 180ms var(--ease-ios),
+    transform 180ms var(--ease-ios);
+}
+
+.nav-actions nav a::before {
+  content: '';
+  width: 4px;
+  height: 4px;
+  flex: 0 0 4px;
+  margin: 0;
+  border-radius: 50%;
+  background: transparent;
+  box-shadow: none;
+}
+
+.nav-actions nav a::after { display: none; }
+
+.nav-actions nav a:hover,
+.nav-actions nav a:focus-visible {
+  background: rgba(247,247,247,.9);
+  color: #000;
+  border: 0;
+  box-shadow: none;
+  transform: translateX(2px);
+}
+
+.nav-actions nav a.is-active {
+  background: rgba(247,247,247,.95);
+  color: #000;
+  font-weight: 600;
+}
+
+.nav-actions nav a.is-active::before {
+  background: #007aff;
+}
+
+.nav-actions nav a:active {
+  transform: scale(.97);
+}
+
+@media (max-width: 760px) {
+  .nav-actions nav {
+    width: min(220px, calc(100vw - 28px));
+    padding: 6px;
+    border-radius: 19px;
+  }
+  .nav-actions nav a {
+    min-height: 48px;
+    border-radius: 13px;
+  }
+}
