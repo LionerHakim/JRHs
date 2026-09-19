@@ -2239,3 +2239,56 @@ img { display: block; max-width: 100%; }
     font-size: 9px !important;
   }
 }
+
+
+/* Contact final compact pass */
+.terms-checkbox-info {
+  width: 14px !important;
+  height: 14px !important;
+  min-width: 14px !important;
+  min-height: 14px !important;
+  flex-basis: 14px !important;
+  margin-left: 4px !important;
+  font-size: 8px !important;
+}
+
+.contact-message {
+  min-height: 96px !important;
+  padding-top: 12px !important;
+  padding-bottom: 12px !important;
+}
+
+.contact-topic-menu {
+  background: #111111 !important;
+}
+
+.contact-topic-menu button {
+  color: #ffffff !important;
+  border-color: rgba(255,255,255,.12) !important;
+}
+
+.contact-topic-menu button:hover,
+.contact-topic-menu button.is-selected {
+  background: #111111 !important;
+  color: #ffffff !important;
+}
+
+.contact-topic-menu button.is-selected {
+  box-shadow: inset 3px 0 0 var(--blue-strong) !important;
+}
+
+@media (max-width: 720px) {
+  .terms-checkbox-info {
+    width: 14px !important;
+    height: 14px !important;
+    min-width: 14px !important;
+    min-height: 14px !important;
+    flex-basis: 14px !important;
+    margin-left: 4px !important;
+    font-size: 8px !important;
+  }
+
+  .contact-message {
+    min-height: 88px !important;
+  }
+}
