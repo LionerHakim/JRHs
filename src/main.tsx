@@ -58,7 +58,6 @@ function TestimonialsSection() {
   const [activeIndex, setActiveIndex] = useState(0)
   const touchStartX = useRef<number | null>(null)
   const testimonials = siteConfig.testimonials
-  const activeTestimonial = testimonials[activeIndex]
 
   const handleTouchStart = (event: ReactTouchEvent<HTMLDivElement>) => {
     touchStartX.current = event.touches[0]?.clientX ?? null
@@ -68,17 +67,17 @@ function TestimonialsSection() {
     const startX = touchStartX.current
     const endX = event.changedTouches[0]?.clientX
     touchStartX.current = null
-
     if (startX === null || endX === undefined) return
-
     const distance = endX - startX
     if (Math.abs(distance) < 45) return
+    setActiveIndex((current) => distance < 0
+      ? Math.min(current + 1, testimonials.length - 1)
+      : Math.max(current - 1, 0))
+  }
 
-    if (distance < 0) {
-      setActiveIndex((current) => Math.min(current + 1, testimonials.length - 1))
-    } else {
-      setActiveIndex((current) => Math.max(current - 1, 0))
-    }
+  const getCardIndex = (offset: number) => {
+    const index = activeIndex + offset
+    return index >= 0 && index < testimonials.length ? index : null
   }
 
   return (
@@ -103,17 +102,21 @@ function TestimonialsSection() {
         className="testimonials-viewport"
         onTouchStart={handleTouchStart}
         onTouchEnd={handleTouchEnd}
-        onTouchCancel={() => {
-          touchStartX.current = null
-        }}
+        onTouchCancel={() => { touchStartX.current = null }}
       >
         <div className="testimonials-list">
-          <TestimonialCard
-            key={activeTestimonial.name + activeTestimonial.role}
-            testimonial={activeTestimonial}
-            index={activeIndex}
-            isActive
-          />
+          {[-1, 0, 1].map((offset) => {
+            const index = getCardIndex(offset)
+            if (index === null) return null
+            return (
+              <TestimonialCard
+                key={testimonials[index].name + testimonials[index].role}
+                testimonial={testimonials[index]}
+                index={index}
+                isActive={offset === 0}
+              />
+            )
+          })}
         </div>
       </div>
     </section>
@@ -212,8 +215,8 @@ export default function App() {
     if (!message.trim()) return setContactError('Pesan belum diisi.')
     if (!privacy) return setContactError('Centang persetujuan privasi dulu.')
 
-    const subject = encodeURIComponent(`[JRHs Contact] ${purpose || 'Pesan dari website'}`)
-    const body = encodeURIComponent(`Halo JRHs,
+    const subject = encodeURIComponent(`[Portfolio Contact] ${purpose || 'Pesan dari website'}`)
+    const body = encodeURIComponent(`Halo JRH,
 
 Saya ingin menghubungi terkait:
 
@@ -230,7 +233,7 @@ Pesan:
 ${message.trim()}
 
 --------------------------------
-Dikirim melalui JRHs
+Dikirim melalui JRH
 https://jrhsee.my.id
 --------------------------------
 
@@ -297,7 +300,7 @@ ${name.trim()}`)
               ))}
             </div>
             <div className="menu-panel-foot">
-              <span>JRHs</span>
+              <span>JRH</span>
               <span>Navigate your way ↗</span>
             </div>
           </nav>
