@@ -7340,3 +7340,165 @@ blockquote {
     min-height: 58px !important;
   }
 }
+
+
+/* ---------- GLOBAL UI AUDIT / SOLID SYSTEM ---------- */
+:root {
+  --jrh-text: #17181b;
+  --jrh-text-2: #3f4650;
+  --jrh-muted: #69717c;
+  --jrh-line: #d8dde5;
+  --jrh-blue: #2563eb;
+  --jrh-blue-soft: #eef5ff;
+  --jrh-yellow: #9a6700;
+  --jrh-yellow-soft: #fff8df;
+  --jrh-red: #b83232;
+  --jrh-red-soft: #fff1f1;
+}
+
+.section,
+.hero,
+.site-footer-main {
+  color: var(--jrh-text);
+}
+.section-kicker {
+  color: var(--jrh-blue) !important;
+  font-weight: 800 !important;
+  letter-spacing: .13em !important;
+}
+.section h2 {
+  color: var(--jrh-text) !important;
+}
+.section p {
+  color: var(--jrh-text-2);
+}
+
+/* Education cards: one consistent geometry, clearer typography. */
+#education .records {
+  display: grid;
+  gap: 12px !important;
+}
+#education .record {
+  min-height: 0 !important;
+  padding: 22px 24px !important;
+  border: 1px solid var(--jrh-line) !important;
+  border-radius: 16px !important;
+  background: #fff !important;
+  color: var(--jrh-text) !important;
+  box-shadow: none !important;
+  transition: border-color 160ms ease, background-color 160ms ease, transform 160ms ease !important;
+}
+#education .record:nth-child(1) {
+  background: var(--jrh-blue-soft) !important;
+  border-color: #b9d2f6 !important;
+}
+#education .record:nth-child(2) {
+  background: var(--jrh-yellow-soft) !important;
+  border-color: #ead68a !important;
+}
+#education .record:nth-child(3) {
+  background: var(--jrh-red-soft) !important;
+  border-color: #efc1c1 !important;
+}
+#education .record:hover {
+  transform: translateY(-2px);
+  border-color: #9aa4b2 !important;
+  box-shadow: none !important;
+}
+#education .record h3,
+#education .record strong {
+  color: var(--jrh-text) !important;
+}
+#education .record time {
+  color: var(--jrh-blue) !important;
+  font-weight: 800 !important;
+}
+#education .record p,
+#education .record li,
+#education .record-activities,
+#education .record-activities li {
+  color: var(--jrh-text-2) !important;
+}
+#education .record::before {
+  color: var(--jrh-blue) !important;
+}
+
+/* Projects: same visual language, stronger hierarchy. */
+#projects .project-list {
+  display: grid;
+  gap: 12px !important;
+}
+#projects .project {
+  min-height: 0 !important;
+  padding: 22px 24px !important;
+  border: 1px solid var(--jrh-line) !important;
+  border-radius: 16px !important;
+  background: #fff !important;
+  color: var(--jrh-text) !important;
+  box-shadow: none !important;
+  transition: border-color 160ms ease, background-color 160ms ease, transform 160ms ease !important;
+}
+#projects .project:nth-child(1) { background: var(--jrh-red-soft) !important; border-color: #efc1c1 !important; }
+#projects .project:nth-child(2) { background: var(--jrh-blue-soft) !important; border-color: #b9d2f6 !important; }
+#projects .project:nth-child(3) { background: var(--jrh-yellow-soft) !important; border-color: #ead68a !important; }
+#projects .project:nth-child(4) { background: #f5f6f8 !important; border-color: #d5dae1 !important; }
+#projects .project:hover {
+  transform: translateY(-2px);
+  border-color: #9aa4b2 !important;
+  box-shadow: none !important;
+}
+#projects .project h3,
+#projects .project strong {
+  color: var(--jrh-text) !important;
+}
+#projects .project p,
+#projects .project span {
+  color: var(--jrh-text-2) !important;
+}
+#projects .project-links a {
+  color: var(--jrh-blue) !important;
+  font-weight: 800 !important;
+}
+#projects .project-links a:hover,
+#projects .project-links a:focus-visible {
+  color: #1d4ed8 !important;
+}
+
+/* Typography contrast audit across secondary content. */
+.record time,
+.project-links a,
+.testimonial-counter,
+.testimonial-swipe-hint,
+.contact-counter {
+  font-variant-numeric: tabular-nums;
+}
+.contact-note,
+.contact-answer,
+.contact-closing,
+.music-track-copy span,
+.site-footer {
+  color: var(--jrh-muted) !important;
+}
+
+/* Keep all cards on the same solid/no-glow design rule. */
+#education .record,
+#projects .project,
+.testimonial,
+.contact-card,
+.portrait-quote,
+.project-quote {
+  box-shadow: none !important;
+}
+
+/* Mobile spacing audit. */
+@media (max-width: 640px) {
+  #education .record,
+  #projects .project {
+    padding: 18px !important;
+    border-radius: 14px !important;
+  }
+  #education .records,
+  #projects .project-list {
+    gap: 10px !important;
+  }
+}
