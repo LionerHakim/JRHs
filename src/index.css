@@ -2613,3 +2613,97 @@ main {
     height: 32px;
   }
 }
+
+
+/* JRHs — Portal theme menu: clean editorial dropdown */
+.nav-actions nav {
+  width: 228px;
+  padding: 8px;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 2px;
+  border: 1px solid #f0f0f0;
+  border-radius: 22px;
+  background: #fff;
+  box-shadow: 0 0 0 5px #f7f7f7;
+  -webkit-backdrop-filter: none;
+  backdrop-filter: none;
+  overflow: hidden;
+}
+
+.nav-actions nav::before {
+  content: none;
+}
+
+.nav-actions nav a {
+  min-height: 48px;
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  padding: 0 12px;
+  border: 0;
+  border-radius: 14px;
+  background: transparent;
+  color: #3e3e3e;
+  font-family: var(--font-sans);
+  font-size: 14px;
+  font-weight: 500;
+  letter-spacing: -.02em;
+  line-height: 1.2;
+  transition: background-color 160ms ease, color 160ms ease;
+}
+
+.nav-actions nav a::before {
+  content: '';
+  width: 5px;
+  height: 5px;
+  flex: 0 0 5px;
+  margin: 0;
+  border-radius: 50%;
+  background: transparent;
+  box-shadow: none;
+  font-size: 0;
+}
+
+.nav-actions nav a::after {
+  display: none;
+}
+
+.nav-actions nav a:hover,
+.nav-actions nav a:focus-visible {
+  background: #f7f7f7;
+  border: 0;
+  box-shadow: none;
+  color: #000;
+  transform: none;
+}
+
+.nav-actions nav a.is-active {
+  background: #f7f7f7;
+  border: 0;
+  color: #000;
+  font-weight: 600;
+}
+
+.nav-actions nav a.is-active::before {
+  background: #007aff;
+  box-shadow: none;
+}
+
+.nav-actions nav a:active {
+  transform: scale(.985);
+}
+
+@media (max-width: 760px) {
+  .nav-actions nav {
+    width: min(228px, calc(100vw - 28px));
+    padding: 7px;
+    border-radius: 20px;
+    gap: 2px;
+  }
+
+  .nav-actions nav a {
+    min-height: 46px;
+    border-radius: 13px;
+  }
+}
