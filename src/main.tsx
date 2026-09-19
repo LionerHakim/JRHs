@@ -242,7 +242,7 @@ ${name.trim()}`)
   }
 
   return (
-    <div className="site-shell">
+    <div className={`site-shell${menuOpen ? " menu-open" : ""}`}>
       <a className="skip-link" href="#identity">Lewati ke konten utama</a>
       <header className="nav">
         <a className="wordmark" href="#identity" aria-label="JRH home">
