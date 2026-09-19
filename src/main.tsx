@@ -321,8 +321,18 @@ ${name.trim()}`)
           </figure>
 
           <aside className="portrait-quote" aria-label="Economic thinking principle">
+            <div className="economic-quote-head">
+              <span className="economic-quote-kicker">THINKING SYSTEM</span>
+              <span className="economic-quote-mark" aria-hidden="true">01</span>
+            </div>
             <strong>BERPIKIR SEPERTI MESIN EKONOMI</strong>
-            <p>lihat dunia sebagai sistem. segala peristiwa saling berkaitan dan berulang. pahami pola, bukan hanya kejadian sesaat.</p>
+            <p>lihat dunia sebagai sistem. segala peristiwa saling berkaitan dan berulang. pahami <em>pola</em>, bukan hanya kejadian sesaat.</p>
+            <div className="economic-principles" aria-label="Economic thinking principles">
+              <span><b>01</b> SYSTEM</span>
+              <span><b>02</b> PATTERN</span>
+              <span><b>03</b> CYCLE</span>
+              <span><b>04</b> LEVERAGE</span>
+            </div>
           </aside>
         </section>
 
