@@ -418,9 +418,17 @@ ${name.trim()}`)
           </div>
         </section>
 
-        <aside className="project-quote" aria-label="Decision-making principle">
-          <strong>GABUNGKAN DATA DAN INTUISI</strong>
-          <p>gunakan data dan sistem algoritma, tapi jangan buang intuisi manusia. gabungkan keduanya untuk pengambilan keputusan terbaik.</p>
+        <aside className="thinking-quotes" aria-label="Prinsip berpikir JRH">
+          <article className="thinking-quote-card">
+            <span className="thinking-quote-kicker">01 / SYSTEMS THINKING</span>
+            <strong>BERPIKIR SEPERTI MESIN EKONOMI</strong>
+            <p>lihat dunia sebagai sistem. segala peristiwa saling berkaitan dan berulang. pahami pola, bukan hanya kejadian sesaat.</p>
+          </article>
+          <article className="thinking-quote-card">
+            <span className="thinking-quote-kicker">02 / DECISION MAKING</span>
+            <strong>GABUNGKAN DATA DAN INTUISI</strong>
+            <p>gunakan data dan sistem algoritma, tapi jangan buang intuisi manusia. gabungkan keduanya untuk pengambilan keputusan terbaik.</p>
+          </article>
         </aside>
 
 
@@ -478,7 +486,7 @@ ${name.trim()}`)
               <div className="contact-submit">
                 <label className="contact-privacy">
                   <input type="checkbox" required checked={privacy} onChange={(event) => setPrivacy(event.target.checked)} onBlur={() => setTouched((current) => ({ ...current, privacy: true }))} aria-invalid={touched.privacy && !privacy} />
-                  <span>Aku setuju data ini digunakan untuk membalas pesan</span>
+                  <span>Saya menyetujui penggunaan data yang saya berikan untuk keperluan membalas pesan ini.</span>
                 </label>
                 <button type="submit">✈ <span>Buka Email Saya</span> <span aria-hidden="true">→</span></button>
               </div>
