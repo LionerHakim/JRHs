@@ -524,7 +524,7 @@ ${name.trim()}`)
 
           <div className="contact-card">
             <div className="contact-intro">
-              <p className="contact-question">Ada yang mau dibahas?</p>
+              <p className="contact-question">Punya sesuatu yang ingin diwujudkan?</p>
               <p className="contact-answer">Ide baru? Project menarik? Mau kolaborasi? Atau cuma mau ngobrol?</p>
               <p className="contact-note">saya terbuka tentangmu, hubungi saya !</p>
             </div>
