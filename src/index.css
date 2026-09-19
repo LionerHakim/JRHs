@@ -1468,3 +1468,100 @@ main {
   .project:hover { padding-left: 18px; }
   .contact-card { padding: 24px 18px; }
 }
+
+
+/* Standard menu navigation — vertical dropdown, with room for future music control */
+.nav {
+  grid-template-columns: 1fr auto;
+  gap: 16px;
+}
+.wordmark { justify-self: start; }
+.nav-actions {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+}
+.menu-toggle {
+  width: 42px;
+  height: 42px;
+  display: grid;
+  place-content: center;
+  gap: 5px;
+  padding: 0;
+  border: 1px solid #e5e5e5;
+  border-radius: 50%;
+  background: #fff;
+  color: #000;
+  cursor: pointer;
+  transition: background-color 180ms ease, transform 180ms var(--ease-ios), border-color 180ms ease;
+}
+.menu-toggle span {
+  width: 17px;
+  height: 1.5px;
+  display: block;
+  background: currentColor;
+  transition: transform 180ms var(--ease-ios), opacity 180ms ease;
+}
+.menu-toggle:hover,
+.menu-toggle:focus-visible { background: var(--surface); border-color: #000; transform: translateY(-1px); }
+.menu-toggle.is-open span:nth-child(1) { transform: translateY(6.5px) rotate(45deg); }
+.menu-toggle.is-open span:nth-child(2) { opacity: 0; }
+.menu-toggle.is-open span:nth-child(3) { transform: translateY(-6.5px) rotate(-45deg); }
+.nav-actions nav {
+  position: absolute;
+  top: calc(100% + 12px);
+  right: 0;
+  width: min(260px, calc(100vw - 32px));
+  display: grid;
+  gap: 4px;
+  padding: 8px;
+  border: 1px solid #e7e7e7;
+  border-radius: 22px;
+  background: #fff;
+  box-shadow: 0 0 0 5px #f7f7f7;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(-6px) scale(.98);
+  transform-origin: top right;
+  pointer-events: none;
+  transition: opacity 160ms ease, transform 180ms var(--ease-ios), visibility 160ms ease;
+}
+.nav-actions nav.is-open {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0) scale(1);
+  pointer-events: auto;
+}
+.nav-actions nav a {
+  min-height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 14px;
+  border-radius: 14px;
+  color: #000;
+  font-size: 14px;
+  font-weight: 500;
+  text-decoration: none;
+}
+.nav-actions nav a:hover,
+.nav-actions nav a:focus-visible { background: #f7f7f7; opacity: 1; }
+.nav-actions nav a.is-active { background: #f7f7f7; color: #000; }
+.nav-actions nav a.is-active::after { display: none; }
+
+@media (max-width: 760px) {
+  .nav {
+    top: 10px;
+    width: calc(100% - 20px);
+    margin-top: 10px;
+    min-height: 54px;
+    grid-template-columns: 1fr auto;
+    padding: 7px 10px 7px 12px;
+  }
+  .menu-toggle { width: 40px; height: 40px; }
+  .nav-actions nav {
+    top: calc(100% + 10px);
+    width: min(240px, calc(100vw - 28px));
+  }
+}
