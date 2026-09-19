@@ -132,6 +132,64 @@ function TestimonialCard({
 
 function TestimonialsSection() {
   const testimonials = siteConfig.testimonials
+  const viewportRef = useRef<HTMLDivElement>(null)
+  const resumeTimerRef = useRef<number | null>(null)
+  const userInteractingRef = useRef(false)
+
+  useEffect(() => {
+    const viewport = viewportRef.current
+    if (!viewport || testimonials.length < 2) return
+
+    const getStep = () => {
+      const firstCard = viewport.querySelector<HTMLElement>('.testimonial')
+      if (!firstCard) return viewport.clientWidth
+      const styles = window.getComputedStyle(firstCard)
+      const gap = Number.parseFloat(window.getComputedStyle(firstCard.parentElement as Element).gap) || 0
+      return firstCard.getBoundingClientRect().width + gap
+    }
+
+    const pauseForUser = () => {
+      userInteractingRef.current = true
+      if (resumeTimerRef.current) window.clearTimeout(resumeTimerRef.current)
+      resumeTimerRef.current = window.setTimeout(() => {
+        userInteractingRef.current = false
+      }, 7000)
+    }
+
+    const handlePointerDown = () => pauseForUser()
+    const handleWheel = () => pauseForUser()
+    const handleTouchStart = () => pauseForUser()
+
+    viewport.addEventListener('pointerdown', handlePointerDown, { passive: true })
+    viewport.addEventListener('wheel', handleWheel, { passive: true })
+    viewport.addEventListener('touchstart', handleTouchStart, { passive: true })
+
+    const interval = window.setInterval(() => {
+      if (userInteractingRef.current || document.hidden) return
+
+      const maxScroll = viewport.scrollWidth - viewport.clientWidth
+      if (maxScroll <= 0) return
+
+      const next = Math.min(viewport.scrollLeft + getStep(), maxScroll)
+      viewport.scrollTo({ left: next, behavior: 'smooth' })
+
+      if (next >= maxScroll - 4) {
+        window.setTimeout(() => {
+          if (!userInteractingRef.current && !document.hidden) {
+            viewport.scrollTo({ left: 0, behavior: 'smooth' })
+          }
+        }, 900)
+      }
+    }, 4500)
+
+    return () => {
+      window.clearInterval(interval)
+      if (resumeTimerRef.current) window.clearTimeout(resumeTimerRef.current)
+      viewport.removeEventListener('pointerdown', handlePointerDown)
+      viewport.removeEventListener('wheel', handleWheel)
+      viewport.removeEventListener('touchstart', handleTouchStart)
+    }
+  }, [testimonials.length])
 
   return (
     <section id="testimonials" className="section testimonials-section" aria-labelledby="testimonials-title">
@@ -146,7 +204,7 @@ function TestimonialsSection() {
         <span className="testimonial-counter">16 PERSPEKTIF</span>
         <span className="testimonial-swipe-hint" aria-hidden="true">GESER ↔</span>
       </div>
-      <div className="testimonials-viewport" aria-label="Koleksi quotes yang dapat digeser">
+      <div ref={viewportRef} className="testimonials-viewport" aria-label="Koleksi quotes yang dapat digeser">
         <div className="testimonials-list">
           {testimonials.map((testimonial, index) => (
             <TestimonialCard
