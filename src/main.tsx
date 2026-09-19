@@ -2,6 +2,87 @@ import { useEffect, useRef, useState } from 'react'
 import type { FormEvent } from 'react'
 import { createRoot } from 'react-dom/client'
 import { siteConfig } from './config/site'
+
+type TermsCheckboxProps = {
+  checked: boolean
+  onChange: (event: React.ChangeEvent<HTMLInputElement>) => void
+  onBlur?: (event: React.FocusEvent<HTMLInputElement>) => void
+  invalid?: boolean
+  required?: boolean
+  disabled?: boolean
+  termsOpen: boolean
+  onTermsToggle: () => void
+  onTermsClose: () => void
+  id?: string
+}
+
+function TermsCheckbox({
+  checked,
+  onChange,
+  onBlur,
+  invalid = false,
+  required = false,
+  disabled = false,
+  termsOpen,
+  onTermsToggle,
+  onTermsClose,
+  id = 'terms-checkbox',
+}: TermsCheckboxProps) {
+  const popoverId = id + '-details'
+
+  return (
+    <div className={"terms-checkbox" + (disabled ? ' is-disabled' : '')}>
+      <label className="terms-checkbox-label" htmlFor={id}>
+        <input
+          id={id}
+          className="terms-checkbox-input"
+          type="checkbox"
+          required={required}
+          checked={checked}
+          disabled={disabled}
+          onChange={onChange}
+          onBlur={onBlur}
+          aria-invalid={invalid}
+          aria-describedby={termsOpen ? popoverId : undefined}
+        />
+        <span className="terms-checkbox-box" aria-hidden="true">
+          <svg viewBox="0 0 20 20">
+            <path d="m4.5 10.2 3.4 3.4 7.6-7.6" />
+          </svg>
+        </span>
+        <span className="terms-checkbox-text">Saya setuju dan memahami S&K.</span>
+      </label>
+
+      <button
+        className="terms-checkbox-info"
+        type="button"
+        aria-label="Lihat S&K"
+        aria-expanded={termsOpen}
+        aria-controls={popoverId}
+        disabled={disabled}
+        onClick={(event) => {
+          event.preventDefault()
+          event.stopPropagation()
+          onTermsToggle()
+        }}
+      >
+        i
+      </button>
+
+      {termsOpen ? (
+        <div id={popoverId} className="terms-checkbox-popover" role="dialog" aria-label="Syarat dan ketentuan">
+          <div className="terms-checkbox-popover-head">
+            <strong>Syarat & Ketentuan</strong>
+            <button type="button" className="terms-checkbox-close" aria-label="Tutup S&K" onClick={onTermsClose}>×</button>
+          </div>
+          <p>Dengan mencentang kotak ini, Anda menyetujui penggunaan data yang diberikan untuk keperluan menyiapkan dan membalas pesan melalui email. Jangan mengirim data sensitif, rahasia, atau informasi yang tidak diperlukan.</p>
+          <p>Website hanya menyiapkan draft email pada aplikasi email perangkat Anda. Pengiriman pesan tetap dilakukan oleh Anda.</p>
+        </div>
+      ) : null}
+    </div>
+  )
+}
+
 import './index.css'
 
 const sectionItems = [
@@ -489,23 +570,16 @@ ${name.trim()}`)
 
               <div className="contact-submit">
                 <div className="contact-privacy" ref={contactPrivacyRef}>
-                  <label className="contact-consent">
-                    <input type="checkbox" required checked={privacy} onChange={(event) => setPrivacy(event.target.checked)} onBlur={() => setTouched((current) => ({ ...current, privacy: true }))} aria-invalid={touched.privacy && !privacy} />
-                    <span className="contact-consent-text">
-                      Saya setuju dan memahami S&K.
-                      <button className="contact-terms-trigger" type="button" aria-label="Lihat S&K" title="Lihat S&K" onClick={(event) => { event.preventDefault(); event.stopPropagation(); setTermsOpen((open) => !open) }}>i</button>
-                    </span>
-                  </label>
-                  {termsOpen ? (
-                    <div className="contact-terms-popover" role="dialog" aria-label="Syarat dan ketentuan">
-                      <div className="contact-terms-head">
-                        <strong>Syarat & Ketentuan</strong>
-                        <button type="button" className="contact-terms-close" aria-label="Tutup S&K" title="Tutup" onClick={() => setTermsOpen(false)}>×</button>
-                      </div>
-                      <p>Dengan mencentang kotak ini, Anda menyetujui penggunaan data yang diberikan untuk keperluan menyiapkan dan membalas pesan melalui email. Jangan mengirim data sensitif, rahasia, atau informasi yang tidak diperlukan.</p>
-                      <p>Website hanya menyiapkan draft email pada aplikasi email perangkat Anda. Pengiriman pesan tetap dilakukan oleh Anda.</p>
-                    </div>
-                  ) : null}
+                  <TermsCheckbox
+                    checked={privacy}
+                    onChange={(event) => setPrivacy(event.target.checked)}
+                    onBlur={() => setTouched((current) => ({ ...current, privacy: true }))}
+                    invalid={touched.privacy && !privacy}
+                    required
+                    termsOpen={termsOpen}
+                    onTermsToggle={() => setTermsOpen((open) => !open)}
+                    onTermsClose={() => setTermsOpen(false)}
+                  />
                 </div>
                 <button type="submit">✈ <span>Buka Email Saya</span> <span aria-hidden="true">→</span></button>
               </div>
