@@ -201,11 +201,12 @@ ${name.trim()}`)
                 fetchPriority="high"
               />
             </div>
-            <figcaption className="portrait-quote">
-              <strong>BERPIKIR SEPERTI MESIN EKONOMI</strong>
-              <p>lihat dunia sebagai sistem. segala peristiwa saling berkaitan dan berulang. pahami pola, bukan hanya kejadian sesaat.</p>
-            </figcaption>
           </figure>
+
+          <aside className="portrait-quote" aria-label="Economic thinking principle">
+            <strong>BERPIKIR SEPERTI MESIN EKONOMI</strong>
+            <p>lihat dunia sebagai sistem. segala peristiwa saling berkaitan dan berulang. pahami pola, bukan hanya kejadian sesaat.</p>
+          </aside>
         </section>
 
         <section id="education" className="section" aria-labelledby="education-title">
