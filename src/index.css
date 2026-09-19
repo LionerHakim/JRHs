@@ -7841,3 +7841,24 @@ textarea {
   }
 }
 
+/* Principle quotes — ordered stack after Projects */
+.principle-quote {
+  width: min(100%, 1030px);
+  margin: 14px 0 var(--section-space) auto;
+}
+
+.project-quote + .principle-quote {
+  margin-top: 14px;
+}
+
+@media (max-width: 640px) {
+  .principle-quote {
+    margin-top: 10px;
+    margin-bottom: 82px;
+  }
+
+  .project-quote + .principle-quote {
+    margin-top: 10px;
+  }
+}
+
