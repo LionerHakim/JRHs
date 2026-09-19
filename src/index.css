@@ -2193,3 +2193,49 @@ img { display: block; max-width: 100%; }
     font-size: 11px;
   }
 }
+
+
+/* Final contact micro-control sizing */
+.terms-checkbox-info {
+  width: 16px !important;
+  height: 16px !important;
+  min-width: 16px !important;
+  min-height: 16px !important;
+  flex: 0 0 16px !important;
+  margin-left: 5px !important;
+  padding: 0 !important;
+  border-width: 1px !important;
+  font-size: 9px !important;
+  line-height: 1 !important;
+}
+
+.terms-checkbox-info:focus-visible {
+  outline-offset: 2px;
+}
+
+.contact-topic-menu button.is-selected {
+  background: #111111 !important;
+  color: #ffffff !important;
+  box-shadow: none !important;
+  border-color: #111111 !important;
+}
+
+.contact-topic-menu button.is-selected::before {
+  background: #ffffff !important;
+}
+
+.contact-topic-menu button.is-selected span:last-child {
+  color: #ffffff !important;
+}
+
+@media (max-width: 720px) {
+  .terms-checkbox-info {
+    width: 16px !important;
+    height: 16px !important;
+    min-width: 16px !important;
+    min-height: 16px !important;
+    flex-basis: 16px !important;
+    margin-left: 5px !important;
+    font-size: 9px !important;
+  }
+}
