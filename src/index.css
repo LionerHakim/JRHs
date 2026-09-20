@@ -2869,9 +2869,9 @@ button,.hero-pill,.ghost-pill,.project-link,.media-links a{
 /* Navbar logo — upgraded premium identity card */
 .wordmark{
   position:relative !important;
-  width:74px !important;
-  min-width:74px !important;
-  height:56px !important;
+  width:82px !important;
+  min-width:82px !important;
+  height:60px !important;
   padding:4px !important;
   border:1px solid rgba(10,13,18,.12) !important;
   border-radius:17px !important;
@@ -2927,7 +2927,7 @@ button,.hero-pill,.ghost-pill,.project-link,.media-links a{
   max-height:none !important;
   object-fit:contain !important;
   object-position:center !important;
-  transform:translateX(2px) scale(1.30) !important;
+  transform:translateX(2px) scale(1.34) !important;
   transform-origin:center !important;
 }
 @media(max-width:640px){
