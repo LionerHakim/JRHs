@@ -371,7 +371,7 @@ ${name.trim()}`)
     <div className={`site-shell${menuOpen ? " menu-open" : ""}${musicOpen ? " music-open" : ""}`}>
       <a className="skip-link" href="#identity">Lewati ke konten utama</a>
       <header className="nav">
-        <a className="wordmark" href="#identity" aria-label="JRH home">
+        <a className="wordmark" href="/" aria-label="JRH home" onClick={(event) => { event.preventDefault(); window.location.reload() }}>
           <img className="wordmark-logo" src="/assets/images/logo.png" alt="JRH" />
         </a>
         <div className="nav-actions" ref={navActionsRef}>
