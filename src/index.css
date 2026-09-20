@@ -1746,7 +1746,8 @@ img { display: block; max-width: 100%; }
 /* Final interaction polish — contact + navigation */
 .terms-checkbox-info{
   width:16px;height:16px;min-width:16px;min-height:16px;flex:0 0 16px;
-  margin-left:3px;padding:0;border-width:1px;font-size:8px;line-height:1;
+  margin-left:3px;padding:0;border:0;border-radius:50%;font-size:8px;line-height:1;
+  box-shadow:inset 0 0 0 1px #b9d8f4;
 }
 .terms-checkbox-info:focus-visible{outline-offset:2px}
 .contact-message{min-height:96px;padding-top:12px;padding-bottom:34px}
