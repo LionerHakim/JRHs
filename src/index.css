@@ -4585,15 +4585,19 @@ html[data-theme="dark"] .music-toggle.is-playing { box-shadow:inset 0 0 0 1px rg
   }
 }
 
-/* GENIUS MOBILE MUSIC PANEL — fill available vertical space, preserve top edge */
-@media (max-width: 640px) and (pointer: coarse) {
+/* FINAL MUSIC PANEL — same geometry as the working Menu panel */
+@media (max-width: 900px) and (pointer: coarse) {
   .site-shell.music-open .music-panel {
-    top: 84px;
-    bottom: max(12px, env(safe-area-inset-bottom));
-    height: auto;
-    max-height: none;
-    aspect-ratio: auto;
+    width: min(90vw, 352px, calc((100svh - 130px) * 0.88));
+    max-width: calc(100vw - 24px);
+    aspect-ratio: 4 / 5;
+    height: calc((min(90vw, 352px, (100svh - 130px) * 0.88)) * 1.25);
+    max-height: calc(100svh - 110px);
+    top: 94px;
+    bottom: auto;
+    padding: 12px;
     overflow: hidden;
+    transform-origin: top center;
   }
 
   .site-shell.music-open .music-panel .music-playlist {
@@ -4610,9 +4614,17 @@ html[data-theme="dark"] .music-toggle.is-playing { box-shadow:inset 0 0 0 1px rg
   }
 }
 
+@media (max-width: 640px) and (pointer: coarse) {
+  .site-shell.music-open .music-panel {
+    top: 84px;
+  }
+}
+
 @media (max-width: 390px) and (pointer: coarse) {
   .site-shell.music-open .music-panel {
     top: 76px;
-    bottom: max(10px, env(safe-area-inset-bottom));
+    width: min(90vw, 317px, calc((100svh - 120px) * 0.88));
+    height: calc((min(90vw, 317px, (100svh - 120px) * 0.88)) * 1.25);
+    max-height: calc(100svh - 96px);
   }
 }
