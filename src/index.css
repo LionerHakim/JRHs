@@ -3165,3 +3165,65 @@ button,.hero-pill,.ghost-pill,.project-link,.media-links a{
   }
 }
 
+
+
+/* Cross-device hardening — visual design locked */
+html {
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+  overscroll-behavior-x: none;
+}
+
+body {
+  -webkit-overflow-scrolling: touch;
+  overscroll-behavior-x: none;
+}
+
+button,
+a,
+label,
+[role="button"] {
+  touch-action: manipulation;
+}
+
+input,
+select,
+textarea {
+  font-size: 16px;
+  -webkit-appearance: none;
+  appearance: none;
+}
+
+textarea {
+  resize: vertical;
+}
+
+@supports (padding: max(0px)) {
+  .site-footer {
+    padding-bottom: max(24px, env(safe-area-inset-bottom));
+  }
+
+  .nav {
+    top: max(10px, env(safe-area-inset-top));
+  }
+}
+
+@supports (-webkit-touch-callout: none) {
+  .wordmark,
+  .nav-action,
+  .hero-pill,
+  .ghost-pill,
+  .media-links a,
+  .project-link,
+  .contact-submit button {
+    -webkit-user-select: none;
+    user-select: none;
+  }
+
+  input,
+  textarea,
+  select {
+    -webkit-user-select: text;
+    user-select: text;
+  }
+}
