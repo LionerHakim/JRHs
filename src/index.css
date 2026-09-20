@@ -4326,28 +4326,22 @@ img, svg, video, canvas { max-width:100%; }
   .music-toggle, .menu-toggle { min-width: 108px; }
 }
 
-/* MOBILE 9:16 PANELS — Android / iPhone */
+/* MOBILE 9:16 COMPACT PANELS — synchronized, no stray margins */
 @media (max-width: 640px) {
-  :root { --panel-medium: min(72vw, 360px); --panel-radius: 20px; }
-  .nav-actions>nav, .music-panel {
-    width: var(--panel-medium);
-    aspect-ratio: 9 / 16;
-    max-width: calc(100vw - 24px);
-    max-height: calc(100svh - 28px);
-    height: auto;
-    overflow: hidden;
-    padding: 14px;
-  }
-  .menu-panel-head, .music-panel-head { padding: 1px 1px 12px; }
-  .menu-panel-grid { gap: 6px; padding: 12px 0; }
-  .menu-panel-grid a { min-height: 44px; padding: 7px; }
-  .music-track { margin-top: 10px; padding: 9px; }
-  .music-playlist-list { max-height: none; flex: 1; }
-  .music-panel { display: flex; flex-direction: column; }
-  .music-playlist { min-height: 0; flex: 1; overflow: hidden; }
+  :root { --panel-medium: min(68vw, 320px); --panel-radius: 18px; }
+  .nav-actions>nav, .music-panel { width:var(--panel-medium); max-width:calc(100vw - 24px); aspect-ratio:9/16; height:auto; max-height:calc(100svh - 24px); margin:0; padding:12px; box-sizing:border-box; overflow:hidden; }
+  .menu-panel-head, .music-panel-head { margin:0; padding:0 0 10px; }
+  .menu-panel-grid { margin:0; padding:10px 0; gap:5px; }
+  .menu-panel-grid a { min-height:42px; padding:7px; }
+  .menu-panel-foot { margin:0; padding:8px 0 0; }
+  .music-panel { display:flex; flex-direction:column; }
+  .music-track { margin:9px 0 0; padding:8px; }
+  .music-progress { margin:9px 2px 8px; }
+  .music-controls { margin:0; }
+  .music-playlist { margin:9px 0 0; padding:8px 0 0; min-height:0; flex:1; overflow:hidden; }
+  .music-playlist-list { margin:0; padding:0 2px 0 0; max-height:none; height:100%; }
 }
-@media (max-width: 390px) {
-  :root { --panel-medium: min(76vw, 300px); }
-  .nav-actions>nav, .music-panel { padding: 12px; }
+@media (max-width:390px) {
+  :root { --panel-medium:min(72vw,288px); }
+  .nav-actions>nav, .music-panel { padding:11px; max-width:calc(100vw - 20px); max-height:calc(100svh - 20px); }
 }
-
