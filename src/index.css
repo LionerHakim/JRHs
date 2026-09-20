@@ -4200,3 +4200,53 @@ html[data-theme="dark"] .terms-checkbox-popover::after {
   border-right-color: rgba(255,255,255,.14) !important;
   border-bottom-color: rgba(255,255,255,.14) !important;
 }
+
+/* Responsive stability — scoped synchronization only */
+html, body, #root { width:100%; max-width:100%; }
+body { overflow-x:clip; }
+@supports not (overflow:clip) { body { overflow-x:hidden; } }
+button, a, input, select, textarea { touch-action:manipulation; }
+img, svg, video, canvas { max-width:100%; }
+
+@media (max-width:900px){
+  .nav{width:min(760px,calc(100% - 24px))}
+  .hero h1{max-width:100%;overflow-wrap:break-word}
+  .media-list,.projects-list{grid-template-columns:1fr}
+  .contact-card,.contact-form,.contact-field,.contact-topic-trigger,.contact-submit{min-width:0}
+  .testimonials-viewport{max-width:100vw;overflow-x:auto;overscroll-behavior-x:contain}
+}
+@media (max-width:640px){
+  :root{--page:calc(100% - 20px)}
+  .nav{width:calc(100% - 20px);max-width:none}
+  .wordmark{min-width:0;max-width:50%}
+  .wordmark-logo{max-width:100%;height:auto}
+  .nav-actions{flex:0 0 auto}
+  .hero{width:var(--page)}
+  .hero-description,.media-subtitle,.projects-subtitle,.testimonials-subtitle{max-width:100%}
+  .hero-pill,.ghost-pill{min-width:0}
+  .portrait-frame img{width:100%}
+  .record,.media-card,.project-card,.testimonial,.thinking-quote-card,.contact-card,.contact-form{min-width:0}
+  .media-card h3,.project-card h3,.record h3{overflow-wrap:anywhere}
+  .contact-card{padding:20px}
+  .contact-form{padding:16px}
+  .contact-submit button{width:100%;min-width:0}
+  .terms-checkbox-popover{left:0;right:auto;max-width:min(210px,calc(100vw - 32px))}
+  .site-footer{width:var(--page)}
+  .site-footer-main{min-width:0}
+}
+@media (max-width:390px){
+  :root{--page:calc(100% - 16px)}
+  .nav{width:calc(100% - 12px)}
+  .hero h1{font-size:clamp(52px,17vw,64px)}
+  .hero-description{font-size:15px}
+  .hero-actions{gap:8px}
+  .contact-card{padding:16px}
+  .contact-form{padding:12px}
+  .site-footer-main{padding-inline:16px}
+}
+@media (max-width:340px){
+  .nav{width:calc(100% - 8px)}
+  .nav-actions{gap:2px}
+  .music-toggle,.menu-toggle{width:50px;min-width:50px}
+  .hero h1{font-size:50px}
+}
