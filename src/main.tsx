@@ -647,10 +647,10 @@ ${name.trim()}`)
             <div className="music-playlist" aria-label="Playlist">
               <div className="music-playlist-head">
                 <span>PLAYLIST</span>
-                <strong>{musicTracks.length} TRACKS</strong>
+                <strong>3 TRACKS</strong>
               </div>
               <div className="music-playlist-list">
-                {musicTracks.map((track, index) => (
+                {musicTracks.slice(0, 3).map((track, index) => (
                   <button
                     key={track.file}
                     type="button"
