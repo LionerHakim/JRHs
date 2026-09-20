@@ -105,7 +105,7 @@ const musicTracks = [
   { title: 'PICA PICA', artist: 'Juan Reza', file: 'PICA PICA.mp3' },
   { title: 'Tak Ada Ujungnya', artist: 'Rony Parulian', file: 'Tak Ada Ujungnya.mp3' },
   { title: 'Tewas Tertimbun Masa Lalu', artist: 'NDX A.K.A.', file: 'Tewas Tertimbun Masa Lalu.mp3' },
-  { title: 'Tresno Tekan Mati', artist: '—', file: 'Tresno Tekan Mati.mp3' },
+  { title: 'Tresno Tekan Mati', artist: 'NDX A.K.A.', file: 'Tresno Tekan Mati.mp3' },
   { title: 'Who Knows', artist: 'Daniel Caesar', file: 'Who Knows.mp3' },
 ].map((track) => ({
   ...track,
