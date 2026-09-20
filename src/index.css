@@ -2866,7 +2866,7 @@ button,.hero-pill,.ghost-pill,.project-link,.media-links a{
 }
 
 
-/* Navbar logo — upgraded premium identity card */
+/* Navbar logo — synchronized premium identity card */
 .wordmark{
   position:relative !important;
   width:82px !important;
@@ -2890,34 +2890,32 @@ button,.hero-pill,.ghost-pill,.project-link,.media-links a{
 .wordmark::before{
   content:"" !important;
   position:absolute !important;
-  inset:3px !important;
-  border:1px solid rgba(10,13,18,.022) !important;
-  border-radius:14px !important;
+  inset:4px !important;
+  border:1px solid rgba(10,13,18,.032) !important;
+  border-radius:13px !important;
   pointer-events:none !important;
 }
 .wordmark::after{
   content:"" !important;
   position:absolute !important;
-  left:9px !important;
-  right:9px !important;
+  left:10px !important;
+  right:10px !important;
   top:3px !important;
   height:1px !important;
-  background:rgba(255,255,255,.9) !important;
+  background:rgba(255,255,255,.92) !important;
   pointer-events:none !important;
 }
 .wordmark:hover,
 .wordmark:focus-visible{
   transform:none !important;
   background:#fff !important;
-  border-color:rgba(10,13,18,.14) !important;
+  border-color:rgba(10,13,18,.12) !important;
   box-shadow:
-    0 6px 18px rgba(10,13,18,.09),
-    0 1px 2px rgba(10,13,18,.05),
+    0 8px 20px rgba(10,13,18,.085),
+    0 2px 4px rgba(10,13,18,.045),
     inset 0 1px 0 rgba(255,255,255,.98) !important;
 }
-.wordmark:active{
-  transform:scale(.985) !important;
-}
+.wordmark:active{transform:scale(.985) !important;}
 .wordmark-logo{
   position:relative !important;
   z-index:1 !important;
@@ -2930,19 +2928,24 @@ button,.hero-pill,.ghost-pill,.project-link,.media-links a{
   transform:translateX(1px) scale(1.12) !important;
   transform-origin:center !important;
 }
-@media(max-width:640px){
+@media (max-width:640px){
   .wordmark{
-    width:68px !important;
-    min-width:68px !important;
-    height:54px !important;
+    width:76px !important;
+    min-width:76px !important;
+    height:56px !important;
     padding:4px !important;
-    border-radius:17px !important;
+    border-radius:16px !important;
   }
   .wordmark::before{
-    inset:3px !important;
-    border-radius:14px !important;
+    inset:4px !important;
+    border-radius:12px !important;
+  }
+  .wordmark::after{
+    left:9px !important;
+    right:9px !important;
+    top:3px !important;
   }
   .wordmark-logo{
-    transform:translateX(2px) scale(1.38) !important;
+    transform:translateX(1px) scale(1.08) !important;
   }
 }
