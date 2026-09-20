@@ -3427,3 +3427,105 @@ body,
 @media (prefers-reduced-motion: reduce) {
   .back-to-top { transition: none; }
 }
+
+
+/* JRHs FULL LIGHT THEME — restore light background, layout/design locked */
+:root {
+  --color-sky-tint: #ebf5ff;
+  --color-paper-white: #ffffff;
+  --color-bone-white: #fafdff;
+  --color-mist-gray: #f6f7f8;
+  --color-ink: #0a0d12;
+  --color-charcoal: #181d27;
+  --color-graphite: #535862;
+  --color-fog: #93979f;
+  --color-lavender-wash: #f1e6ff;
+  --color-mint-wash: #d3f6e3;
+  --color-powder-blue: #cce7ff;
+  --color-peach-gradient: #ffd1b8;
+  --sky: #ebf5ff;
+  --paper: #ffffff;
+  --bone: #fafdff;
+  --mist: #f6f7f8;
+  --ink: #0a0d12;
+  --charcoal: #181d27;
+  --graphite: #535862;
+  --fog: #93979f;
+  --lavender: #f1e6ff;
+  --mint: #d3f6e3;
+  --blue-soft: #cce7ff;
+  --peach: #ffd1b8;
+  --line: rgba(10,13,18,.08);
+  --shadow-subtle: rgba(10,13,18,.8) 0 1px 2px 0, rgb(10,13,18) 0 0 0 1px;
+}
+
+html,
+body,
+.site-shell,
+.site-shell > main,
+.site-shell > footer {
+  background: #ebf5ff !important;
+  color: #0a0d12;
+}
+
+.nav {
+  background: #fff !important;
+  border-color: rgba(10,13,18,.10) !important;
+  box-shadow: 0 10px 28px rgba(10,13,18,.08), 0 1px 0 rgba(255,255,255,.98) inset !important;
+}
+
+.wordmark,
+.wordmark:hover,
+.wordmark:focus-visible {
+  background: #fff !important;
+  border-color: #0a6fe8 !important;
+  box-shadow: 0 0 0 3px #0a6fe8 !important;
+}
+
+.nav-actions { background: #f6f7f8 !important; border-color: rgba(10,13,18,.07) !important; }
+.nav-action:hover,
+.nav-action:focus-visible { background: #fff !important; color: #0a0d12 !important; }
+
+.ghost-pill { color: #0a0d12 !important; border-color: rgba(10,13,18,.10) !important; }
+.ghost-pill:hover,
+.ghost-pill:focus-visible { background: #fff !important; }
+
+.record,
+.media-card,
+.project-card {
+  background: #fafdff !important;
+  color: #0a0d12 !important;
+  border-color: transparent !important;
+}
+
+.media-card:hover,
+.project-card:hover { background: #fff !important; }
+
+.section p,
+.hero-description,
+.media-subtitle,
+.projects-subtitle,
+.testimonials-subtitle,
+.portrait-quote p,
+.project-quote p { color: #535862 !important; }
+
+.portrait-quote,
+.project-quote { background: #f1e6ff !important; }
+
+.site-footer { background: #ebf5ff !important; border-color: rgba(10,13,18,.08) !important; }
+.site-footer-bottom { color: #93979f !important; }
+
+.back-to-top {
+  background: #fff !important;
+  color: #0a0d12 !important;
+  border-color: rgba(10,13,18,.08) !important;
+  box-shadow: var(--shadow-subtle) !important;
+}
+.back-to-top:hover,
+.back-to-top:focus-visible { background: #fafdff !important; }
+
+.skip-link { background: #181d27 !important; color: #fff !important; }
+
+@media (prefers-reduced-motion: reduce) {
+  .back-to-top { transition: none; }
+}
