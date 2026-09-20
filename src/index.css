@@ -3529,3 +3529,29 @@ body,
 @media (prefers-reduced-motion: reduce) {
   .back-to-top { transition: none; }
 }
+
+
+/* JRHs BRIGHTER LIGHT — brighter background only, layout/design locked */
+:root {
+  --color-sky-tint: #f7fbff;
+  --sky: #f7fbff;
+  --bone: #ffffff;
+  --mist: #fafcff;
+  --blue-soft: #dff0ff;
+}
+html,
+body,
+.site-shell,
+.site-shell > main,
+.site-shell > footer {
+  background: #f7fbff !important;
+  color: #0a0d12;
+}
+.record,
+.media-card,
+.project-card {
+  background: #ffffff !important;
+}
+.site-footer {
+  background: #f7fbff !important;
+}
