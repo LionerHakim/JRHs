@@ -2866,14 +2866,14 @@ button,.hero-pill,.ghost-pill,.project-link,.media-links a{
 }
 
 
-/* Navbar logo — larger premium card, full logo visible */
+/* Navbar logo — upgraded premium identity card */
 .wordmark{
   position:relative !important;
-  width:58px !important;
-  min-width:58px !important;
+  width:64px !important;
+  min-width:64px !important;
   height:52px !important;
-  padding:4px !important;
-  border:1px solid rgba(10,13,18,.15) !important;
+  padding:5px !important;
+  border:1px solid rgba(10,13,18,.14) !important;
   border-radius:18px !important;
   background:#fff !important;
   display:inline-flex !important;
@@ -2881,8 +2881,9 @@ button,.hero-pill,.ghost-pill,.project-link,.media-links a{
   justify-content:center !important;
   overflow:hidden !important;
   box-shadow:
-    0 5px 14px rgba(10,13,18,.10),
-    inset 0 1px 0 rgba(255,255,255,.96) !important;
+    0 6px 18px rgba(10,13,18,.09),
+    0 1px 2px rgba(10,13,18,.05),
+    inset 0 1px 0 rgba(255,255,255,.98) !important;
   transform:none !important;
   transition:none !important;
 }
@@ -2890,18 +2891,29 @@ button,.hero-pill,.ghost-pill,.project-link,.media-links a{
   content:"" !important;
   position:absolute !important;
   inset:3px !important;
-  border:1px solid rgba(10,13,18,.07) !important;
+  border:1px solid rgba(10,13,18,.055) !important;
   border-radius:14px !important;
+  pointer-events:none !important;
+}
+.wordmark::after{
+  content:"" !important;
+  position:absolute !important;
+  left:7px !important;
+  right:7px !important;
+  top:3px !important;
+  height:1px !important;
+  background:rgba(255,255,255,.95) !important;
   pointer-events:none !important;
 }
 .wordmark:hover,
 .wordmark:focus-visible{
   transform:none !important;
   background:#fff !important;
-  border-color:rgba(10,13,18,.15) !important;
+  border-color:rgba(10,13,18,.14) !important;
   box-shadow:
-    0 5px 14px rgba(10,13,18,.10),
-    inset 0 1px 0 rgba(255,255,255,.96) !important;
+    0 6px 18px rgba(10,13,18,.09),
+    0 1px 2px rgba(10,13,18,.05),
+    inset 0 1px 0 rgba(255,255,255,.98) !important;
 }
 .wordmark:active{
   transform:scale(.985) !important;
@@ -2915,15 +2927,15 @@ button,.hero-pill,.ghost-pill,.project-link,.media-links a{
   max-height:none !important;
   object-fit:contain !important;
   object-position:center !important;
-  transform:translateX(2px) scale(1.28) !important;
+  transform:translateX(2px) scale(1.34) !important;
   transform-origin:center !important;
 }
 @media(max-width:640px){
   .wordmark{
-    width:58px !important;
-    min-width:58px !important;
+    width:64px !important;
+    min-width:64px !important;
     height:52px !important;
-    padding:4px !important;
+    padding:5px !important;
     border-radius:18px !important;
   }
   .wordmark::before{
@@ -2931,6 +2943,6 @@ button,.hero-pill,.ghost-pill,.project-link,.media-links a{
     border-radius:14px !important;
   }
   .wordmark-logo{
-    transform:translateX(2px) scale(1.28) !important;
+    transform:translateX(2px) scale(1.34) !important;
   }
 }
