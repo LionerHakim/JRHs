@@ -255,10 +255,6 @@ export default function App() {
   const contactTopicRef = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
-    const shouldLock = menuOpen || musicOpen
-    document.documentElement.dataset.overlayOpen = shouldLock ? 'true' : 'false'
-    document.body.style.overflow = shouldLock ? 'hidden' : ''
-
     if (!menuOpen && !musicOpen && !termsOpen && !topicOpen) return
 
     const handleKeyDown = (event: KeyboardEvent) => {
@@ -292,8 +288,6 @@ export default function App() {
     return () => {
       document.removeEventListener('keydown', handleKeyDown)
       document.removeEventListener('pointerdown', handlePointerDown)
-      document.documentElement.dataset.overlayOpen = 'false'
-      document.body.style.overflow = ''
     }
   }, [menuOpen, musicOpen, termsOpen, topicOpen])
 
@@ -378,7 +372,7 @@ ${name.trim()}`)
       <a className="skip-link" href="#identity">Lewati ke konten utama</a>
       <header className="nav">
         <a className="wordmark" href="/" aria-label="JRH home" onClick={(event) => { event.preventDefault(); window.location.reload() }}>
-          <img className="wordmark-logo" src="/assets/images/logo.png" alt="JRH" width="320" height="240" decoding="async" />
+          <img className="wordmark-logo" src="/assets/images/logo.png" alt="JRH" />
         </a>
         <div className="nav-actions" ref={navActionsRef}>
           <button
@@ -446,13 +440,13 @@ ${name.trim()}`)
                 <span className="music-eyebrow">JRH / SOUND</span>
                 <strong>Music Player</strong>
               </div>
-              <span className="music-status">COMING SOON</span>
+              <span className="music-status">READY</span>
             </div>
             <div className="music-track">
               <div className="music-track-art" aria-hidden="true">♪</div>
               <div className="music-track-copy">
-                <strong>Music player sedang disiapkan</strong>
-                <span>Kontrol akan aktif ketika sumber audio JRH tersedia.</span>
+                <strong>Select a track</strong>
+                <span>Music for the journey.</span>
               </div>
             </div>
             <div className="music-progress" aria-hidden="true"><span /></div>
@@ -484,7 +478,6 @@ ${name.trim()}`)
                 width="640"
                 height="800"
                 fetchPriority="high"
-                decoding="async"
               />
             </div>
           </figure>
@@ -657,9 +650,8 @@ Web app dan digital product yang sedang dibangun untuk memecahkan masalah nyata.
                 <label className="contact-field contact-message">
                   <span className="contact-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M5 6.5h14a2 2 0 0 1 2 2v7a2 2 0 0 1-2 2H11l-5 3v-3.5a2 2 0 0 1-2-2v-6.5a2 2 0 0 1 2-2Z" /></svg></span>
                   <textarea aria-label="Pesan kamu" required value={message} onChange={(event) => {
-                    const value = event.target.value
-                    const words = value.match(/\S+/g) ?? []
-                    if (words.length <= 169) setMessage(value)
+                    const words = event.target.value.trim().split(/\s+/).filter(Boolean)
+                    setMessage(words.length > 169 ? words.slice(0, 169).join(' ') : event.target.value)
                   }} onBlur={() => setTouched((current) => ({ ...current, message: true }))} aria-invalid={touched.message && !message.trim()} placeholder="Tulis pesan kamu di sini... (maksimal 169 kata)" rows={5} />
                   <span className="contact-counter">{message.trim() ? message.trim().split(/\s+/).length : 0}/169 kata</span>
                 </label>
