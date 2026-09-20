@@ -605,7 +605,7 @@ ${name.trim()}`)
               aria-valuemax={musicDuration || 0}
               aria-valuenow={musicProgress}
             >
-              <span style={{ width: musicDuration ? \`\${Math.min(100, (musicProgress / musicDuration) * 100)}%\` : '0%' }} />
+              <span style={{ width: musicDuration ? `${Math.min(100, (musicProgress / musicDuration) * 100)}%` : '0%' }} />
             </div>
             <div className="music-controls" aria-label="Music controls">
               <button type="button" aria-label="Previous track" onClick={() => changeMusicTrack(-1)}>‹‹</button>
