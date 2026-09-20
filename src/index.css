@@ -4250,3 +4250,9 @@ img, svg, video, canvas { max-width:100%; }
   .music-toggle,.menu-toggle{width:50px;min-width:50px}
   .hero h1{font-size:50px}
 }
+
+/* Footer navigation — vertical alignment */
+.site-footer-nav{
+  grid-template-columns:1fr;
+  width:min(320px,100%);
+}
