@@ -97,6 +97,21 @@ const sectionItems = [
 
 const sectionIds = sectionItems.map(([id]) => id)
 
+const musicTracks = [
+  { title: '123456', artist: 'Budi Doremi', file: '123456 Budi Doremi.mp3' },
+  { title: 'Akad', artist: 'Payung Teduh', file: 'Akad.mp3' },
+  { title: 'Bahtera Mahligai Cinta', artist: 'Ajeng Febria, Gerry Mahesa', file: 'Bahtera Mahligai Cinta.mp3' },
+  { title: 'Ngertenono Ati', artist: 'NDX A.K.A.', file: 'Ngertenono Ati.mp3' },
+  { title: 'PICA PICA', artist: 'Juan Reza', file: 'PICA PICA.mp3' },
+  { title: 'Tak Ada Ujungnya', artist: 'Rony Parulian', file: 'Tak Ada Ujungnya.mp3' },
+  { title: 'Tewas Tertimbun Masa Lalu', artist: 'NDX A.K.A.', file: 'Tewas Tertimbun Masa Lalu.mp3' },
+  { title: 'Tresno Tekan Mati', artist: 'JRH Soundtrack', file: 'Tresno Tekan Mati.mp3' },
+  { title: 'Who Knows', artist: 'Daniel Caesar', file: 'Who Knows.mp3' },
+].map((track) => ({
+  ...track,
+  src: '/assets/audio/' + encodeURIComponent(track.file),
+}));
+
 const contactTopics = ['Pertanyaan umum', 'Kolaborasi', 'Project', 'Bisnis', 'Investasi', 'Akademik', 'Feedback', 'Relationships', 'Tambah teman'] as const
 
 const testimonialInitials = (name: string) =>
@@ -254,6 +269,12 @@ export default function App() {
   const contactPrivacyRef = useRef<HTMLDivElement>(null)
   const privacyInputRef = useRef<HTMLInputElement>(null)
   const contactTopicRef = useRef<HTMLDivElement>(null)
+  const musicAudioRef = useRef<HTMLAudioElement>(null)
+  const [musicIndex, setMusicIndex] = useState(0)
+  const [musicPlaying, setMusicPlaying] = useState(false)
+  const [musicProgress, setMusicProgress] = useState(0)
+  const [musicDuration, setMusicDuration] = useState(0)
+  const [musicStatus, setMusicStatus] = useState('READY')
 
   useEffect(() => {
     document.documentElement.dataset.theme = darkMode ? 'dark' : 'light'
@@ -262,6 +283,122 @@ export default function App() {
     const meta = document.querySelector<HTMLMetaElement>('meta[name="theme-color"]')
     if (meta) meta.content = darkMode ? '#050505' : '#F7FBFF'
   }, [darkMode])
+
+  useEffect(() => {
+    const audio = musicAudioRef.current
+    if (!audio) return
+
+    audio.preload = 'none'
+
+    const handleTimeUpdate = () => {
+      setMusicProgress(audio.currentTime || 0)
+    }
+    const handleLoadedMetadata = () => {
+      setMusicDuration(Number.isFinite(audio.duration) ? audio.duration : 0)
+    }
+    const handlePlay = () => {
+      setMusicPlaying(true)
+      setMusicStatus('PLAYING')
+    }
+    const handlePause = () => {
+      setMusicPlaying(false)
+      setMusicStatus(audio.ended ? 'ENDED' : 'PAUSED')
+    }
+    const handleEnded = () => {
+      setMusicPlaying(false)
+      setMusicStatus('READY')
+      setMusicIndex((currentIndex) => (currentIndex + 1) % musicTracks.length)
+    }
+    const handleError = () => {
+      setMusicPlaying(false)
+      setMusicStatus('ERROR')
+    }
+
+    audio.addEventListener('timeupdate', handleTimeUpdate)
+    audio.addEventListener('loadedmetadata', handleLoadedMetadata)
+    audio.addEventListener('play', handlePlay)
+    audio.addEventListener('pause', handlePause)
+    audio.addEventListener('ended', handleEnded)
+    audio.addEventListener('error', handleError)
+
+    return () => {
+      audio.removeEventListener('timeupdate', handleTimeUpdate)
+      audio.removeEventListener('loadedmetadata', handleLoadedMetadata)
+      audio.removeEventListener('play', handlePlay)
+      audio.removeEventListener('pause', handlePause)
+      audio.removeEventListener('ended', handleEnded)
+      audio.removeEventListener('error', handleError)
+      audio.pause()
+    }
+  }, [])
+
+  useEffect(() => {
+    const audio = musicAudioRef.current
+    if (!audio || !musicPlaying) return
+
+    const nextTrack = musicTracks[musicIndex]
+    if (audio.src !== new URL(nextTrack.src, window.location.href).href) {
+      audio.src = nextTrack.src
+      audio.load()
+      void audio.play().catch(() => {
+        setMusicPlaying(false)
+        setMusicStatus('READY')
+      })
+    }
+  }, [musicIndex, musicPlaying])
+
+  const loadAndPlayMusic = (index: number) => {
+    const audio = musicAudioRef.current
+    if (!audio) return
+
+    const nextTrack = musicTracks[index]
+    setMusicIndex(index)
+    setMusicStatus('LOADING')
+
+    if (audio.src !== new URL(nextTrack.src, window.location.href).href) {
+      audio.src = nextTrack.src
+      audio.currentTime = 0
+      audio.load()
+    } else if (audio.ended) {
+      audio.currentTime = 0
+    }
+
+    void audio.play().catch(() => {
+      setMusicPlaying(false)
+      setMusicStatus('READY')
+    })
+  }
+
+  const toggleMusicPlayback = () => {
+    const audio = musicAudioRef.current
+    if (!audio) return
+
+    if (musicPlaying) {
+      audio.pause()
+      return
+    }
+
+    loadAndPlayMusic(musicIndex)
+  }
+
+  const changeMusicTrack = (direction: number) => {
+    const nextIndex = (musicIndex + direction + musicTracks.length) % musicTracks.length
+    if (musicPlaying) {
+      loadAndPlayMusic(nextIndex)
+      return
+    }
+
+    const audio = musicAudioRef.current
+    if (audio) {
+      audio.pause()
+      audio.removeAttribute('src')
+      audio.load()
+    }
+    setMusicIndex(nextIndex)
+    setMusicProgress(0)
+    setMusicDuration(0)
+    setMusicStatus('READY')
+  }
 
   useEffect(() => {
     const shouldLockScroll = menuOpen || musicOpen
@@ -460,21 +597,39 @@ ${name.trim()}`)
                 <span className="music-eyebrow">JRH / SOUND</span>
                 <strong>Music Player</strong>
               </div>
-              <span className="music-status">READY</span>
+              <span className="music-status">{musicStatus}</span>
             </div>
             <div className="music-track">
               <div className="music-track-art" aria-hidden="true">♪</div>
               <div className="music-track-copy">
-                <strong>Select a track</strong>
-                <span>Music for the journey.</span>
+                <strong>{musicTracks[musicIndex].title}</strong>
+                <span>{musicTracks[musicIndex].artist}</span>
               </div>
             </div>
-            <div className="music-progress" aria-hidden="true"><span /></div>
-            <div className="music-controls" aria-label="Music controls">
-              <button type="button" disabled aria-label="Previous track">‹‹</button>
-              <button className="music-play" type="button" disabled aria-label="Play">▶</button>
-              <button type="button" disabled aria-label="Next track">››</button>
+            <div
+              className="music-progress"
+              role="progressbar"
+              aria-label="Track progress"
+              aria-valuemin={0}
+              aria-valuemax={musicDuration || 0}
+              aria-valuenow={musicProgress}
+            >
+              <span style={{ width: musicDuration ? \`\${Math.min(100, (musicProgress / musicDuration) * 100)}%\` : '0%' }} />
             </div>
+            <div className="music-controls" aria-label="Music controls">
+              <button type="button" aria-label="Previous track" onClick={() => changeMusicTrack(-1)}>‹‹</button>
+              <button
+                className="music-play"
+                type="button"
+                aria-label={musicPlaying ? 'Pause' : 'Play'}
+                aria-pressed={musicPlaying}
+                onClick={toggleMusicPlayback}
+              >
+                {musicPlaying ? 'Ⅱ' : '▶'}
+              </button>
+              <button type="button" aria-label="Next track" onClick={() => changeMusicTrack(1)}>››</button>
+            </div>
+            <audio ref={musicAudioRef} preload="none" aria-hidden="true" />
           </aside>
         </div>
       </header>
