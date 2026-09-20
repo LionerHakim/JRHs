@@ -4048,3 +4048,155 @@ html[data-theme] .project-link[href] span,
 html[data-theme] .hero-pill[href] span {
   color: inherit !important;
 }
+
+
+/* CONTACT DARK MODE — scoped repair only; layout/geometry unchanged */
+html[data-theme="dark"] .contact-card {
+  background: #0D0D0D !important;
+  color: #F5F5F5 !important;
+}
+html[data-theme="dark"] .contact-intro {
+  border-bottom-color: rgba(255,255,255,.14) !important;
+}
+html[data-theme="dark"] .contact-question,
+html[data-theme="dark"] .contact-answer {
+  color: #F5F5F5 !important;
+}
+html[data-theme="dark"] .contact-note {
+  color: #8B95A7 !important;
+}
+html[data-theme="dark"] .contact-form {
+  background: #0B0B0B !important;
+  border-color: rgba(255,255,255,.14) !important;
+  box-shadow: 0 18px 50px rgba(0,0,0,.28), inset 0 1px 0 rgba(255,255,255,.04) !important;
+}
+html[data-theme="dark"] .contact-field {
+  background: #111111 !important;
+  color: #F5F5F5 !important;
+}
+html[data-theme="dark"] .contact-field:focus-within {
+  background: #171717 !important;
+}
+html[data-theme="dark"] .contact-field input,
+html[data-theme="dark"] .contact-field select,
+html[data-theme="dark"] .contact-field textarea {
+  color: #F5F5F5 !important;
+  caret-color: #4DA0FF !important;
+}
+html[data-theme="dark"] .contact-field input::placeholder,
+html[data-theme="dark"] .contact-field textarea::placeholder {
+  color: #8B95A7 !important;
+}
+html[data-theme="dark"] .contact-icon {
+  color: #4DA0FF !important;
+}
+html[data-theme="dark"] .contact-topic {
+  background: #111111 !important;
+  border-color: rgba(255,255,255,.14) !important;
+  box-shadow: inset 0 0 0 1px rgba(255,255,255,.04) !important;
+}
+html[data-theme="dark"] .contact-topic:focus-within,
+html[data-theme="dark"] .contact-topic:has(.contact-topic-trigger.is-open) {
+  background: #171717 !important;
+  border-color: rgba(77,160,255,.45) !important;
+  box-shadow: 0 10px 28px rgba(0,0,0,.22), inset 0 0 0 1px rgba(255,255,255,.05) !important;
+}
+html[data-theme="dark"] .contact-topic-trigger,
+html[data-theme="dark"] .contact-topic-trigger.is-open {
+  color: #CBD5E1 !important;
+}
+html[data-theme="dark"] .contact-topic-trigger.is-open {
+  color: #F5F5F5 !important;
+}
+html[data-theme="dark"] .contact-topic-chevron {
+  background: #10243A !important;
+  color: #4DA0FF !important;
+}
+html[data-theme="dark"] .contact-topic-trigger.is-open .contact-topic-chevron {
+  background: #4DA0FF !important;
+  color: #FFFFFF !important;
+}
+html[data-theme="dark"] .contact-topic-menu {
+  background: #0D0D0D !important;
+  border-color: rgba(255,255,255,.14) !important;
+  box-shadow: 0 24px 60px rgba(0,0,0,.42), 0 0 0 3px rgba(77,160,255,.07) !important;
+}
+html[data-theme="dark"] .contact-topic-menu button {
+  color: #CBD5E1 !important;
+  border-bottom-color: rgba(255,255,255,.08) !important;
+}
+html[data-theme="dark"] .contact-topic-menu button:hover,
+html[data-theme="dark"] .contact-topic-menu button:focus-visible {
+  background: #171717 !important;
+  color: #4DA0FF !important;
+}
+html[data-theme="dark"] .contact-topic-menu button.is-selected {
+  background: #163F7D !important;
+  color: #FFFFFF !important;
+  border-color: transparent !important;
+}
+html[data-theme="dark"] .contact-topic-menu button span:first-child::before {
+  background: #4DA0FF !important;
+}
+html[data-theme="dark"] .contact-topic-menu button.is-selected span:first-child::before {
+  background: #FFFFFF !important;
+}
+html[data-theme="dark"] .contact-feedback.is-error {
+  background: #321F17 !important;
+  color: #F2C8B5 !important;
+}
+html[data-theme="dark"] .contact-feedback.is-success {
+  background: #10243A !important;
+  color: #D7E3F4 !important;
+}
+html[data-theme="dark"] .contact-counter {
+  color: #8B95A7 !important;
+}
+html[data-theme="dark"] .contact-submit button {
+  background: #163F7D !important;
+  color: #FFFFFF !important;
+  border-color: #163F7D !important;
+}
+html[data-theme="dark"] .contact-submit button:hover:not(:disabled),
+html[data-theme="dark"] .contact-submit button:focus-visible:not(:disabled) {
+  background: #4DA0FF !important;
+  color: #FFFFFF !important;
+  border-color: #4DA0FF !important;
+}
+html[data-theme="dark"] .terms-checkbox-label {
+  color: #CBD5E1 !important;
+}
+html[data-theme="dark"] .terms-checkbox-box {
+  background: #111111 !important;
+  border-color: #8B95A7 !important;
+}
+html[data-theme="dark"] .terms-checkbox-input:checked + .terms-checkbox-box {
+  background: #4DA0FF !important;
+  border-color: #4DA0FF !important;
+}
+html[data-theme="dark"] .terms-checkbox-input:hover + .terms-checkbox-box {
+  border-color: #4DA0FF !important;
+}
+html[data-theme="dark"] .terms-checkbox-info {
+  background: #10243A !important;
+  border-color: rgba(77,160,255,.35) !important;
+  color: #4DA0FF !important;
+}
+html[data-theme="dark"] .terms-checkbox-info:hover,
+html[data-theme="dark"] .terms-checkbox-info:focus-visible {
+  background: #171717 !important;
+  border-color: #4DA0FF !important;
+}
+html[data-theme="dark"] .terms-checkbox-popover,
+html[data-theme="dark"] .terms-checkbox-popover::after {
+  background: #0D0D0D !important;
+}
+html[data-theme="dark"] .terms-checkbox-popover {
+  border-color: rgba(255,255,255,.14) !important;
+  color: #CBD5E1 !important;
+  box-shadow: 0 20px 48px rgba(0,0,0,.42) !important;
+}
+html[data-theme="dark"] .terms-checkbox-popover::after {
+  border-right-color: rgba(255,255,255,.14) !important;
+  border-bottom-color: rgba(255,255,255,.14) !important;
+}
