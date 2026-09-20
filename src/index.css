@@ -2891,7 +2891,7 @@ button,.hero-pill,.ghost-pill,.project-link,.media-links a{
   content:"" !important;
   position:absolute !important;
   inset:4px !important;
-  border:1px solid rgba(10,13,18,.045) !important;
+  border:1.5px solid rgba(10,13,18,.12) !important;
   border-radius:13px !important;
   pointer-events:none !important;
 }
