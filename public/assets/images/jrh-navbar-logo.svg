@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 420 150" role="img" aria-label="JRH">
+<defs>
+ <linearGradient id="navy" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#071426"/><stop offset=".55" stop-color="#102b49"/><stop offset="1" stop-color="#020914"/></linearGradient>
+ <linearGradient id="gold" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#8f5b08"/><stop offset=".28" stop-color="#f7c84b"/><stop offset=".55" stop-color="#fff0a1"/><stop offset=".8" stop-color="#c98a18"/><stop offset="1" stop-color="#6e4304"/></linearGradient>
+</defs>
+<g fill="url(#navy)" stroke="url(#gold)" stroke-width="3" stroke-linejoin="round">
+ <text x="30" y="112" font-family="Georgia,Times New Roman,serif" font-size="118" font-weight="700" letter-spacing="-12">JRH</text>
+</g>
+<path d="M155 91 C205 118 245 117 292 82 C325 57 351 59 378 78" fill="none" stroke="url(#gold)" stroke-width="7" stroke-linecap="round"/>
+<path d="M153 91 C198 109 231 112 270 89" fill="none" stroke="#fff0a1" stroke-opacity=".65" stroke-width="2" stroke-linecap="round"/>
+<path d="M391 35 l5 12 12 5-12 5-5 12-5-12-12-5 12-5z" fill="url(#gold)" stroke="none"/>
+</svg>
