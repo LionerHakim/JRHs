@@ -256,16 +256,15 @@ export default function App() {
   const contactTopicRef = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
-    const savedTheme = window.localStorage.getItem('jrhs-theme')
-    const systemDark = window.matchMedia('(prefers-color-scheme: dark)').matches
-    setDarkMode(savedTheme ? savedTheme === 'dark' : systemDark)
+    const saved = window.localStorage.getItem('jrhs-theme')
+    setDarkMode(saved === 'dark')
   }, [])
 
   useEffect(() => {
     document.documentElement.dataset.theme = darkMode ? 'dark' : 'light'
-    const themeMeta = document.querySelector<HTMLMetaElement>('meta[name="theme-color"]')
-    if (themeMeta) themeMeta.content = darkMode ? '#050505' : '#F7FBFF'
     window.localStorage.setItem('jrhs-theme', darkMode ? 'dark' : 'light')
+    const meta = document.querySelector<HTMLMetaElement>('meta[name="theme-color"]')
+    if (meta) meta.content = darkMode ? '#050505' : '#F7FBFF'
   }, [darkMode])
 
   useEffect(() => {
@@ -722,14 +721,7 @@ Web app dan digital product yang sedang dibangun untuk memecahkan masalah nyata.
       </main>
 
       <div className="floating-utilities" aria-label="Pengaturan tampilan">
-        <button
-          className="theme-toggle-floating"
-          type="button"
-          aria-label={darkMode ? 'Aktifkan light mode' : 'Aktifkan dark mode'}
-          title={darkMode ? 'Light mode' : 'Dark mode'}
-          aria-pressed={darkMode}
-          onClick={() => setDarkMode((current) => !current)}
-        >
+        <button className="theme-toggle-floating" type="button" aria-label={darkMode ? 'Aktifkan light mode' : 'Aktifkan dark mode'} aria-pressed={darkMode} title={darkMode ? 'Light mode' : 'Dark mode'} onClick={() => setDarkMode((value) => !value)}>
           <span aria-hidden="true">{darkMode ? '☀' : '☾'}</span>
         </button>
         <a className="back-to-top" href="#identity" aria-label="Kembali ke atas" title="Kembali ke atas">↑<span>TOP</span></a>
