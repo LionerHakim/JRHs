@@ -3315,6 +3315,7 @@ html[data-theme="light"] {
   --theme-border: rgba(10,111,232,.12);
   --theme-blue: #0A6FE8;
   --theme-blue-soft: #DCEEFF;
+  --theme-deep-blue: #163F7D;
   --theme-quote: #EEF5FF;
   --theme-status: #E6F4FF;
   --theme-status-text: #163F7D;
@@ -3351,6 +3352,7 @@ html[data-theme="dark"] {
   --theme-border: rgba(255,255,255,.14);
   --theme-blue: #4DA0FF;
   --theme-blue-soft: #10243A;
+  --theme-deep-blue: #163F7D;
   --theme-quote: #171222;
   --theme-status: #10243A;
   --theme-status-text: #D7E3F4;
@@ -3857,4 +3859,149 @@ html[data-theme="light"] .nav-action-glyph {
 html[data-theme="dark"] .nav-menu-lines,
 html[data-theme="dark"] .nav-action-glyph {
   background: var(--theme-blue-soft) !important;
+}
+
+
+/* FINAL COMPONENT AUDIT — theme correctness for previously hard-coded surfaces.
+   Layout, spacing, typography and component geometry remain unchanged. */
+html[data-theme] .thinking-quotes {
+  background: var(--theme-quote) !important;
+}
+html[data-theme] .thinking-quote-card {
+  background: var(--theme-panel) !important;
+  color: var(--theme-text) !important;
+  border: 1px solid var(--theme-border) !important;
+  box-shadow: var(--shadow-subtle) !important;
+}
+html[data-theme] .thinking-quote-kicker {
+  color: var(--theme-blue) !important;
+}
+html[data-theme] .thinking-quote-card strong {
+  color: var(--theme-text) !important;
+}
+html[data-theme] .thinking-quote-card p {
+  color: var(--theme-text-2) !important;
+}
+
+html[data-theme] .contact-topic-trigger,
+html[data-theme] .contact-topic-trigger:hover,
+html[data-theme] .contact-topic-trigger:focus-visible,
+html[data-theme] .contact-topic-trigger[aria-expanded="true"] {
+  background: var(--theme-surface) !important;
+  color: var(--theme-text) !important;
+  border-color: var(--theme-border) !important;
+  box-shadow: none !important;
+}
+html[data-theme] .contact-topic-trigger > span:first-child {
+  color: var(--theme-text-2) !important;
+}
+html[data-theme] .contact-topic-trigger.is-open > span:first-child {
+  color: var(--theme-text) !important;
+}
+html[data-theme] .contact-topic-chevron {
+  background: var(--theme-blue-soft) !important;
+  color: var(--theme-blue) !important;
+}
+html[data-theme] .contact-topic-trigger.is-open .contact-topic-chevron {
+  background: var(--theme-blue) !important;
+  color: #FFFFFF !important;
+}
+html[data-theme] .contact-topic-menu {
+  background: var(--theme-panel) !important;
+  color: var(--theme-text) !important;
+  border-color: var(--theme-border) !important;
+}
+html[data-theme] .contact-topic-menu button,
+html[data-theme] .contact-topic-menu button:hover,
+html[data-theme] .contact-topic-menu button:focus-visible {
+  background: transparent !important;
+  color: var(--theme-text-2) !important;
+  border-color: var(--theme-border) !important;
+}
+html[data-theme] .contact-topic-menu button:hover,
+html[data-theme] .contact-topic-menu button:focus-visible {
+  background: var(--theme-hover) !important;
+  color: var(--theme-text) !important;
+}
+html[data-theme] .contact-topic-menu button.is-selected {
+  background: var(--theme-blue) !important;
+  color: #FFFFFF !important;
+  border-color: var(--theme-blue) !important;
+}
+html[data-theme] .contact-topic-menu button.is-selected span:first-child::before,
+html[data-theme] .contact-topic-menu button:hover span:first-child::before,
+html[data-theme] .contact-topic-menu button:focus-visible span:first-child::before {
+  background: var(--theme-blue) !important;
+}
+html[data-theme] .contact-topic-menu button.is-selected span:first-child::before {
+  background: #FFFFFF !important;
+}
+html[data-theme] .contact-topic-menu button.is-selected span:last-child {
+  color: #FFFFFF !important;
+}
+
+html[data-theme] .media-section .media-links a {
+  background: var(--theme-surface) !important;
+  color: var(--theme-text) !important;
+  border-color: var(--theme-border) !important;
+}
+html[data-theme] .media-section .media-links a:hover,
+html[data-theme] .media-section .media-links a:focus-visible {
+  background: var(--theme-hover) !important;
+  color: var(--theme-blue) !important;
+}
+html[data-theme] .project-link.is-disabled {
+  background: var(--theme-surface-2) !important;
+  color: var(--theme-muted) !important;
+}
+
+html[data-theme] .contact-benefits > * {
+  background: var(--theme-blue-soft) !important;
+  color: var(--theme-text-2) !important;
+}
+html[data-theme] .contact-benefits > * > svg {
+  stroke: var(--theme-blue) !important;
+}
+html[data-theme] .contact-field input,
+html[data-theme] .contact-field select,
+html[data-theme] .contact-field textarea {
+  background: transparent !important;
+  color: var(--theme-text) !important;
+}
+html[data-theme] .contact-field select {
+  color-scheme: inherit;
+}
+html[data-theme] .contact-field input::placeholder,
+html[data-theme] .contact-field textarea::placeholder {
+  color: var(--theme-muted) !important;
+}
+
+html[data-theme] .nav-action,
+html[data-theme] .music-toggle,
+html[data-theme] .menu-toggle {
+  -webkit-tap-highlight-color: transparent;
+}
+html[data-theme] .music-toggle,
+html[data-theme] .menu-toggle {
+  background: var(--theme-blue) !important;
+  border-color: var(--theme-blue) !important;
+  color: #FFFFFF !important;
+}
+html[data-theme] .music-toggle:hover,
+html[data-theme] .music-toggle:focus-visible,
+html[data-theme] .menu-toggle:hover,
+html[data-theme] .menu-toggle:focus-visible,
+html[data-theme] .music-toggle.is-open,
+html[data-theme] .menu-toggle.is-open {
+  background: var(--theme-blue) !important;
+  border-color: var(--theme-blue) !important;
+  color: #FFFFFF !important;
+}
+html[data-theme] .music-toggle .nav-action-glyph,
+html[data-theme] .menu-toggle .nav-menu-lines {
+  background: transparent !important;
+  color: #FFFFFF !important;
+}
+html[data-theme] .menu-toggle .nav-menu-lines > span {
+  background: #FFFFFF !important;
 }
