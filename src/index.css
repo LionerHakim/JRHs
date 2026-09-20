@@ -4328,7 +4328,7 @@ img, svg, video, canvas { max-width:100%; }
 
 /* MOBILE FINAL PANEL SCALE — Android / iPhone */
 @media (max-width: 640px) {
-  :root { --panel-medium: min(110px, calc(100vw - 24px)); --panel-radius: 16px; }
+  :root { --panel-medium: min(55px, calc(100vw - 24px)); --panel-radius: 16px; }
   .nav-actions>nav, .music-panel { max-width: 100%; max-height: min(90svh, 728px); overflow: hidden; }
   .nav-actions>nav, .music-panel { padding: 13px; }
   .menu-panel-head, .music-panel-head { padding: 1px 1px 12px; gap: 10px; }
@@ -4360,7 +4360,7 @@ img, svg, video, canvas { max-width:100%; }
   .music-playlist-state { font-size: 7px; }
 }
 @media (max-width: 390px) {
-  :root { --panel-medium: min(100px, calc(100vw - 24px)); }
+  :root { --panel-medium: min(50px, calc(100vw - 24px)); }
   .nav-actions>nav, .music-panel { padding: 12px; max-height: 90svh; }
 }
 
