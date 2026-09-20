@@ -2693,37 +2693,9 @@ button,.hero-pill,.ghost-pill,.project-link,.media-links a{
 }
 
 
-/* Navbar wordmark — JRH only, minimal */
-.wordmark{
-  gap:8px !important;
-  padding:4px 10px 4px 4px !important;
-  border-radius:14px !important;
-  font-size:16px !important;
-  font-weight:700 !important;
-  letter-spacing:-.045em !important;
-}
-.brand-mark{
-  width:auto !important;
-  height:auto !important;
-  flex:0 0 auto !important;
-  display:inline !important;
-  overflow:visible !important;
-  border:0 !important;
-  border-radius:0 !important;
-  background:transparent !important;
-  color:var(--ink) !important;
-  font-size:inherit !important;
-  font-weight:800 !important;
-  line-height:inherit !important;
-  letter-spacing:inherit !important;
-  box-shadow:none !important;
-  text-shadow:none !important;
-}
-.brand-mark::before,.brand-mark::after{display:none !important;content:none !important;}
-.wordmark:hover .brand-mark,.wordmark:focus-visible .brand-mark{transform:none !important;box-shadow:none !important;border-radius:0 !important;}
-@media (max-width:640px){
-  .wordmark{gap:0 !important;padding:4px 8px 4px 4px !important;font-size:17px !important;}
-}
+/* Navbar wordmark — JRH only */
+.wordmark{gap:0 !important;padding:4px 8px 4px 4px !important;border-radius:14px !important;font-size:16px !important;font-weight:700 !important;letter-spacing:-.045em !important;}
+@media (max-width:640px){.wordmark{padding:4px 8px 4px 4px !important;font-size:17px !important;}}
 
 
 /* Hero portrait — slightly larger */
