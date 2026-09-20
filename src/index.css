@@ -1745,8 +1745,8 @@ img { display: block; max-width: 100%; }
 
 /* Final interaction polish — contact + navigation */
 .terms-checkbox-info{
-  width:9px;height:9px;min-width:9px;min-height:9px;flex:0 0 9px;
-  margin-left:3px;padding:0;border-width:1px;font-size:5px;line-height:1;
+  width:16px;height:16px;min-width:16px;min-height:16px;flex:0 0 16px;
+  margin-left:3px;padding:0;border-width:1px;font-size:8px;line-height:1;
 }
 .terms-checkbox-info:focus-visible{outline-offset:2px}
 .contact-message{min-height:96px;padding-top:12px;padding-bottom:34px}
@@ -1778,7 +1778,7 @@ img { display: block; max-width: 100%; }
   .menu-item-index{width:28px;height:28px}
   .music-track{grid-template-columns:60px minmax(0,1fr)}
   .music-track-art{width:60px;height:60px}
-  .terms-checkbox-info{width:9px;height:9px;min-width:9px;min-height:9px;flex-basis:9px;font-size:5px}
+  .terms-checkbox-info{width:16px;height:16px;min-width:16px;min-height:16px;flex-basis:16px;font-size:8px}
   .contact-message{min-height:88px}
   .contact-intro p:last-child,.contact-copy p:last-child{font-size:17px}
 }
