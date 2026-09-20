@@ -2950,3 +2950,197 @@ button,.hero-pill,.ghost-pill,.project-link,.media-links a{
     transform:translateX(1px) scale(1.08) !important;
   }
 }
+
+/* NAVBAR — final unified premium polish */
+.nav{
+  width:min(820px,calc(100% - 28px)) !important;
+  min-height:72px !important;
+  padding:8px !important;
+  gap:10px !important;
+  border:1px solid rgba(10,13,18,.10) !important;
+  border-radius:24px !important;
+  background:#fff !important;
+  box-shadow:0 10px 28px rgba(10,13,18,.08),0 1px 0 rgba(255,255,255,.98) inset !important;
+  backdrop-filter:none !important;
+  -webkit-backdrop-filter:none !important;
+}
+
+/* JRH card — fixed, bright, no hover movement */
+.wordmark,
+.wordmark:hover,
+.wordmark:focus-visible{
+  width:88px !important;
+  min-width:88px !important;
+  height:64px !important;
+  min-height:64px !important;
+  padding:4px !important;
+  border:1px solid #0a6fe8 !important;
+  border-radius:17px !important;
+  background:#fff !important;
+  transform:none !important;
+  transition:none !important;
+  outline:none !important;
+  box-shadow:
+    0 0 0 3px #0a6fe8,
+    0 7px 18px rgba(10,111,232,.20),
+    inset 0 1px 0 rgba(255,255,255,.98) !important;
+}
+.wordmark-logo{
+  width:100% !important;
+  height:100% !important;
+  object-fit:contain !important;
+  object-position:center !important;
+  transform:translateX(1px) scale(1.12) !important;
+}
+.wordmark::before{
+  inset:4px !important;
+  border:1.5px solid rgba(10,13,18,.12) !important;
+  border-radius:13px !important;
+}
+.wordmark::after{
+  left:10px !important;
+  right:10px !important;
+  top:3px !important;
+  height:1px !important;
+}
+
+/* Music + Menu — same visual weight */
+.nav-actions{
+  gap:6px !important;
+  padding:4px !important;
+  border:1px solid rgba(10,13,18,.07) !important;
+  border-radius:18px !important;
+  background:#f6f7f8 !important;
+}
+.music-toggle,
+.menu-toggle,
+.music-toggle:hover,
+.music-toggle:focus-visible,
+.menu-toggle:hover,
+.menu-toggle:focus-visible{
+  width:118px !important;
+  min-width:118px !important;
+  height:48px !important;
+  min-height:48px !important;
+  border-radius:18px !important;
+  transform:none !important;
+  transition:none !important;
+  background:#0a6fe8 !important;
+  border-color:#0a6fe8 !important;
+  color:#fff !important;
+  box-shadow:0 5px 14px rgba(10,111,232,.16) !important;
+}
+.music-toggle .nav-action-glyph{
+  width:30px !important;
+  height:30px !important;
+  flex:0 0 30px !important;
+  color:#fff !important;
+  background:transparent !important;
+}
+.menu-toggle .nav-menu-lines{
+  width:30px !important;
+  height:30px !important;
+  background:transparent !important;
+}
+.menu-toggle .nav-menu-lines>span{background:#fff !important;}
+
+/* Active Music state remains clearly distinct */
+.music-toggle.is-open{
+  background:#22c55e !important;
+  border-color:#22c55e !important;
+  color:#fff !important;
+  box-shadow:0 6px 16px rgba(34,197,94,.20) !important;
+}
+
+/* Yellow active outline — stable, no animation */
+.nav-action.is-open::after,
+.music-toggle.is-open::after{
+  animation:none !important;
+  inset:-2px !important;
+  border:4px solid #f5c542 !important;
+  border-radius:inherit !important;
+}
+
+/* Desktop */
+@media (min-width:641px){
+  .nav{top:14px;margin:14px auto 0;}
+}
+
+/* Mobile — compact, readable, synchronized */
+@media (max-width:640px){
+  .nav{
+    top:10px !important;
+    margin:10px auto 0 !important;
+    width:calc(100% - 20px) !important;
+    min-height:64px !important;
+    padding:8px !important;
+    grid-template-columns:minmax(0,1fr) auto !important;
+    gap:8px !important;
+    border-radius:20px !important;
+  }
+  .wordmark,
+  .wordmark:hover,
+  .wordmark:focus-visible{
+    width:80px !important;
+    min-width:80px !important;
+    height:60px !important;
+    min-height:60px !important;
+    border-radius:16px !important;
+  }
+  .wordmark-logo{transform:translateX(1px) scale(1.08) !important;}
+  .nav-actions{
+    gap:4px !important;
+    padding:3px !important;
+    border-radius:16px !important;
+  }
+  .music-toggle,
+  .menu-toggle,
+  .music-toggle:hover,
+  .music-toggle:focus-visible,
+  .menu-toggle:hover,
+  .menu-toggle:focus-visible{
+    width:56px !important;
+    min-width:56px !important;
+    height:48px !important;
+    min-height:48px !important;
+    padding:0 10px !important;
+    border-radius:16px !important;
+  }
+  .music-toggle{
+    width:88px !important;
+    min-width:88px !important;
+    gap:6px !important;
+    justify-content:center !important;
+  }
+  .music-toggle .nav-action-label{
+    display:block !important;
+    font-size:10px !important;
+    font-weight:700 !important;
+    letter-spacing:.05em !important;
+  }
+  .music-toggle .nav-action-glyph{
+    width:28px !important;
+    height:28px !important;
+    flex-basis:28px !important;
+    font-size:19px !important;
+  }
+  .menu-toggle .nav-menu-lines{
+    width:28px !important;
+    height:28px !important;
+  }
+}
+@media (max-width:420px){
+  .nav{width:calc(100% - 16px) !important;min-height:62px !important;padding:7px !important;}
+  .wordmark,
+  .wordmark:hover,
+  .wordmark:focus-visible{
+    width:76px !important;
+    min-width:76px !important;
+    height:56px !important;
+    min-height:56px !important;
+  }
+  .music-toggle{
+    width:82px !important;
+    min-width:82px !important;
+  }
+}
