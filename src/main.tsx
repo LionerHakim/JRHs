@@ -270,6 +270,7 @@ export default function App() {
   const privacyInputRef = useRef<HTMLInputElement>(null)
   const contactTopicRef = useRef<HTMLDivElement>(null)
   const musicAudioRef = useRef<HTMLAudioElement>(null)
+  const musicIndexRef = useRef(0)
   const [musicIndex, setMusicIndex] = useState(0)
   const [musicPlaying, setMusicPlaying] = useState(false)
   const [musicProgress, setMusicProgress] = useState(0)
@@ -305,7 +306,7 @@ export default function App() {
       setMusicStatus(audio.ended ? 'ENDED' : 'PAUSED')
     }
     const handleEnded = () => {
-      const nextIndex = (musicIndex + 1) % musicTracks.length
+      const nextIndex = (musicIndexRef.current + 1) % musicTracks.length
       setMusicPlaying(false)
       setMusicStatus('READY')
       setMusicIndex(nextIndex)
@@ -341,6 +342,7 @@ export default function App() {
     if (!audio) return
 
     const nextTrack = musicTracks[index]
+    musicIndexRef.current = index
     setMusicIndex(index)
     setMusicStatus('LOADING')
 
@@ -383,6 +385,7 @@ export default function App() {
       audio.removeAttribute('src')
       audio.load()
     }
+    musicIndexRef.current = nextIndex
     setMusicIndex(nextIndex)
     setMusicProgress(0)
     setMusicDuration(0)
