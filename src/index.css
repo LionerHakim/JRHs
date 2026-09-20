@@ -2630,3 +2630,64 @@ button,.hero-pill,.ghost-pill,.project-link,.media-links a{
     max-height:110px !important;
   }
 }
+
+
+/* JRH navbar monogram — refined J mark */
+.brand-mark{
+  position:relative;
+  width:42px !important;
+  height:42px !important;
+  flex:0 0 42px;
+  display:grid !important;
+  place-items:center;
+  overflow:hidden;
+  border:1px solid rgba(255,255,255,.22) !important;
+  border-radius:14px !important;
+  background:#0a6fe8 !important;
+  color:#fff !important;
+  font-family:var(--font-aeonik);
+  font-size:21px !important;
+  font-weight:800 !important;
+  line-height:1;
+  letter-spacing:-.08em !important;
+  box-shadow:0 8px 18px rgba(0,105,224,.22),inset 0 1px 0 rgba(255,255,255,.24) !important;
+  text-shadow:0 1px 1px rgba(0,0,0,.12);
+  transition:transform 220ms var(--ease),box-shadow 220ms var(--ease),border-radius 220ms var(--ease);
+}
+.brand-mark::before{
+  content:"";
+  position:absolute;
+  inset:4px;
+  border:1px solid rgba(255,255,255,.16);
+  border-radius:10px;
+  pointer-events:none;
+}
+.brand-mark::after{
+  content:"";
+  position:absolute;
+  right:6px;
+  bottom:6px;
+  width:5px;
+  height:5px;
+  border-radius:50%;
+  background:#f5c542;
+  box-shadow:0 0 0 2px rgba(245,197,66,.14);
+  pointer-events:none;
+}
+.wordmark:hover .brand-mark,
+.wordmark:focus-visible .brand-mark{
+  transform:translateY(-1px) rotate(-2deg);
+  border-radius:12px !important;
+  box-shadow:0 11px 24px rgba(0,105,224,.28),inset 0 1px 0 rgba(255,255,255,.28) !important;
+}
+@media (max-width:640px){
+  .brand-mark{
+    width:38px !important;
+    height:38px !important;
+    flex-basis:38px;
+    border-radius:12px !important;
+    font-size:19px !important;
+  }
+  .brand-mark::before{inset:3px;border-radius:9px;}
+  .brand-mark::after{right:5px;bottom:5px;width:4px;height:4px;}
+}
