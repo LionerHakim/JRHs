@@ -4007,44 +4007,44 @@ html[data-theme] .menu-toggle .nav-menu-lines > span {
 }
 
 
-/* PROFESSIONAL LINK HIERARCHY — theme-safe, responsive, layout locked */
-html[data-theme] .media-links a,
-html[data-theme] .project-link,
-html[data-theme] .hero-pill {
+
+
+/* PROFESSIONAL LINK STATE — only real links get CTA blue */
+html[data-theme] .media-links a[href],
+html[data-theme] .project-link[href],
+html[data-theme] .hero-pill[href] {
   background: var(--theme-blue) !important;
   color: #FFFFFF !important;
   border-color: var(--theme-blue) !important;
   text-decoration: none;
 }
-html[data-theme] .media-links a:hover,
-html[data-theme] .media-links a:focus-visible,
-html[data-theme] .project-link:hover:not(.is-disabled),
-html[data-theme] .project-link:focus-visible:not(.is-disabled),
-html[data-theme] .hero-pill:hover,
-html[data-theme] .hero-pill:focus-visible {
+html[data-theme] .media-links a[href]:hover,
+html[data-theme] .media-links a[href]:focus-visible,
+html[data-theme] .project-link[href]:hover:not(.is-disabled),
+html[data-theme] .project-link[href]:focus-visible:not(.is-disabled),
+html[data-theme] .hero-pill[href]:hover,
+html[data-theme] .hero-pill[href]:focus-visible {
   background: var(--theme-deep-blue) !important;
   color: #FFFFFF !important;
   border-color: var(--theme-deep-blue) !important;
 }
-html[data-theme] .media-links a:active,
-html[data-theme] .project-link:active:not(.is-disabled),
-html[data-theme] .hero-pill:active {
+html[data-theme] .media-links a[href]:active,
+html[data-theme] .project-link[href]:active:not(.is-disabled),
+html[data-theme] .hero-pill[href]:active {
   background: var(--theme-deep-blue) !important;
   color: #FFFFFF !important;
 }
-html[data-theme] .media-links a span,
-html[data-theme] .project-link span,
-html[data-theme] .hero-pill span {
+html[data-theme] .media-links a:not([href]),
+html[data-theme] .project-link:not([href]),
+html[data-theme] .hero-pill:not([href]),
+html[data-theme] .project-link.is-disabled {
+  background: var(--theme-surface-2) !important;
+  color: var(--theme-muted) !important;
+  border-color: var(--theme-border) !important;
+  cursor: default;
+}
+html[data-theme] .media-links a[href] span,
+html[data-theme] .project-link[href] span,
+html[data-theme] .hero-pill[href] span {
   color: inherit !important;
-}
-html[data-theme] .site-footer-nav a {
-  color: var(--theme-text) !important;
-}
-html[data-theme] .site-footer-nav a:hover,
-html[data-theme] .site-footer-nav a:focus-visible {
-  color: var(--theme-blue) !important;
-  background: var(--theme-hover) !important;
-}
-html[data-theme] .wordmark {
-  text-decoration: none;
 }
