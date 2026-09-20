@@ -2700,3 +2700,35 @@ button,.hero-pill,.ghost-pill,.project-link,.media-links a{
 
 /* Hero portrait — slightly larger */
 .portrait-frame img{transform:scale(1.04);transform-origin:center;}
+
+
+/* JRH navbar logo — elegant premium */
+.wordmark{
+  display:inline-flex !important;
+  align-items:center !important;
+  width:auto !important;
+  min-width:0 !important;
+  padding:5px 8px 5px 3px !important;
+  border-radius:12px !important;
+  color:#111827 !important;
+  background:transparent !important;
+  font-family:Georgia,"Times New Roman",serif !important;
+  font-size:21px !important;
+  font-weight:700 !important;
+  letter-spacing:-.075em !important;
+  line-height:1 !important;
+  white-space:nowrap !important;
+  text-decoration:none !important;
+  text-shadow:0 1px 0 rgba(255,255,255,.8) !important;
+}
+.wordmark:hover,
+.wordmark:focus-visible{
+  color:#0b1f3a !important;
+  background:transparent !important;
+}
+@media (max-width:640px){
+  .wordmark{
+    font-size:20px !important;
+    padding:5px 6px 5px 2px !important;
+  }
+}
