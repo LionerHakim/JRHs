@@ -4372,3 +4372,41 @@ html[data-theme="dark"] .menu-panel-grid a, html[data-theme="dark"] .music-track
 html[data-theme="dark"] .menu-panel-grid a:hover, html[data-theme="dark"] .menu-panel-grid a:focus-visible, html[data-theme="dark"] .music-playlist-item:hover, html[data-theme="dark"] .music-playlist-item:focus-visible { background:#1a2533 !important; border-color:rgba(77,160,255,.25) !important; }
 html[data-theme="dark"] .menu-panel-grid a.is-active, html[data-theme="dark"] .music-playlist-item.is-active { background:#122c4d !important; border-color:rgba(77,160,255,.30) !important; box-shadow:inset 3px 0 0 #4da0ff !important; }
 html[data-theme="dark"] .music-status { background:#10243a !important; border-color:rgba(77,160,255,.30) !important; color:#8ec7ff !important; }
+
+/* FINAL MOBILE PANEL POSITION + VISIBLE MUSIC ON INDICATOR */
+@media (max-width:640px) {
+  .site-shell.menu-open .nav-actions>nav,
+  .site-shell.music-open .music-panel {
+    top:calc(50% + 34px);
+    bottom:auto;
+    transform:translate(-50%,-50%) scale(1);
+  }
+  .site-shell.menu-open .nav-actions>nav:not(.is-open),
+  .site-shell.music-open .music-panel:not(.is-open) { transform:translate(-50%,-50%) scale(.965); }
+}
+.music-playing-badge {
+  position:absolute;
+  top:4px;
+  right:5px;
+  width:7px;
+  height:7px;
+  display:grid;
+  place-items:center;
+  border-radius:50%;
+  color:#22c55e;
+  font-size:7px;
+  line-height:1;
+  opacity:0;
+  transform:scale(.6);
+  transition:opacity 180ms var(--ease),transform 180ms var(--ease);
+  pointer-events:none;
+}
+.music-toggle.is-playing .music-playing-badge {
+  opacity:1;
+  transform:scale(1);
+  animation:musicIndicatorPulse 1.15s ease-in-out infinite;
+  text-shadow:0 0 7px rgba(34,197,94,.8);
+}
+.music-toggle.is-playing { box-shadow:inset 0 0 0 1px rgba(34,197,94,.35),0 0 12px rgba(34,197,94,.12); }
+@keyframes musicIndicatorPulse { 0%,100%{opacity:.65;transform:scale(.85)} 50%{opacity:1;transform:scale(1.2)} }
+html[data-theme="light"] .music-toggle.is-playing { box-shadow:inset 0 0 0 1px rgba(22,163,74,.35),0 0 12px rgba(22,163,74,.10); }
