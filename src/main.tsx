@@ -240,7 +240,7 @@ export default function App() {
   const [activeSection, setActiveSection] = useState<(typeof sectionIds)[number]>('identity')
   const [menuOpen, setMenuOpen] = useState(false)
   const [musicOpen, setMusicOpen] = useState(false)
-  const [darkMode, setDarkMode] = useState(() => window.localStorage.getItem('jrhs-theme') === 'dark')
+  const [darkMode, setDarkMode] = useState(() => window.localStorage.getItem('jrhs-theme') !== 'light')
   const [name, setName] = useState('')
   const [purpose, setPurpose] = useState('')
   const [message, setMessage] = useState('')
@@ -254,11 +254,6 @@ export default function App() {
   const contactPrivacyRef = useRef<HTMLDivElement>(null)
   const privacyInputRef = useRef<HTMLInputElement>(null)
   const contactTopicRef = useRef<HTMLDivElement>(null)
-
-  useEffect(() => {
-    const saved = window.localStorage.getItem('jrhs-theme')
-    setDarkMode(saved === 'dark')
-  }, [])
 
   useEffect(() => {
     document.documentElement.dataset.theme = darkMode ? 'dark' : 'light'
@@ -393,7 +388,7 @@ ${name.trim()}`)
   }
 
   return (
-    <div className={`site-shell${menuOpen ? " menu-open" : ""}${musicOpen ? " music-open" : ""}${darkMode ? " theme-dark" : ""}`}>
+    <div className={`site-shell${menuOpen ? " menu-open" : ""}${musicOpen ? " music-open" : ""}`}>
       <a className="skip-link" href="#identity">Lewati ke konten utama</a>
       <header className="nav">
         <a className="wordmark" href="/" aria-label="JRH home" onClick={(event) => { event.preventDefault(); window.location.reload() }}>
