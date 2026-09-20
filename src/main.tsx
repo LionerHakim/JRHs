@@ -556,7 +556,7 @@ ${name.trim()}`)
           >
             <span className="nav-action-glyph music-toggle-icon" aria-hidden="true">♪</span>
             <span className="nav-action-label">Music</span>
-            <span className={`nav-action-meta${musicPlaying ? ' is-live' : ''}`} aria-hidden="true"><i className="music-live-dot" />{musicPlaying ? 'ON AIR' : 'PLAY'}</span>
+            <span className={`nav-action-meta${musicPlaying ? ' is-live' : ''}`} aria-hidden="true"><i className="music-live-dot" />{musicPlaying ? 'ON AIR' : 'PLAY'}</span><span className="music-playing-badge" aria-hidden="true">{musicPlaying ? '●' : ''}</span>
           </button>
 
           <button
