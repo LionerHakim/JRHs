@@ -137,6 +137,8 @@ function TestimonialsSection() {
   const viewportRef = useRef<HTMLDivElement>(null)
   const resumeTimerRef = useRef<number | null>(null)
   const userInteractingRef = useRef(false)
+  const activeInViewRef = useRef(false)
+  const autoSlideTimerRef = useRef<number | null>(null)
 
   useEffect(() => {
     const viewport = viewportRef.current
@@ -149,43 +151,57 @@ function TestimonialsSection() {
       return firstCard.getBoundingClientRect().width + gap
     }
 
+    const clearAutoSlide = () => {
+      if (autoSlideTimerRef.current) {
+        window.clearTimeout(autoSlideTimerRef.current)
+        autoSlideTimerRef.current = null
+      }
+    }
+
+    const scheduleAutoSlide = () => {
+      clearAutoSlide()
+      if (!activeInViewRef.current || userInteractingRef.current || document.hidden) return
+      autoSlideTimerRef.current = window.setTimeout(() => {
+        autoSlideTimerRef.current = null
+        if (!activeInViewRef.current || userInteractingRef.current || document.hidden) return
+
+        const maxScroll = viewport.scrollWidth - viewport.clientWidth
+        if (maxScroll <= 0) return
+        const next = Math.min(viewport.scrollLeft + getStep(), maxScroll)
+        viewport.scrollTo({ left: next >= maxScroll - 4 ? 0 : next, behavior: 'smooth' })
+        scheduleAutoSlide()
+      }, 1500)
+    }
+
     const pauseForUser = () => {
       userInteractingRef.current = true
+      clearAutoSlide()
       if (resumeTimerRef.current) window.clearTimeout(resumeTimerRef.current)
       resumeTimerRef.current = window.setTimeout(() => {
         userInteractingRef.current = false
-      }, 3500)
+        scheduleAutoSlide()
+      }, 1500)
     }
 
     const handlePointerDown = () => pauseForUser()
     const handleWheel = () => pauseForUser()
     const handleTouchStart = () => pauseForUser()
 
+    const observer = new IntersectionObserver(([entry]) => {
+      activeInViewRef.current = entry.isIntersecting
+      if (entry.isIntersecting) scheduleAutoSlide()
+      else clearAutoSlide()
+    }, { threshold: 0.25 })
+
+    observer.observe(viewport)
     viewport.addEventListener('pointerdown', handlePointerDown, { passive: true })
     viewport.addEventListener('wheel', handleWheel, { passive: true })
     viewport.addEventListener('touchstart', handleTouchStart, { passive: true })
 
-    const interval = window.setInterval(() => {
-      if (userInteractingRef.current || document.hidden) return
-
-      const maxScroll = viewport.scrollWidth - viewport.clientWidth
-      if (maxScroll <= 0) return
-
-      const next = Math.min(viewport.scrollLeft + getStep(), maxScroll)
-      viewport.scrollTo({ left: next, behavior: 'smooth' })
-
-      if (next >= maxScroll - 4) {
-        window.setTimeout(() => {
-          if (!userInteractingRef.current && !document.hidden) {
-            viewport.scrollTo({ left: 0, behavior: 'smooth' })
-          }
-        }, 900)
-      }
-    }, 3200)
-
     return () => {
-      window.clearInterval(interval)
+      clearAutoSlide()
       if (resumeTimerRef.current) window.clearTimeout(resumeTimerRef.current)
+      observer.disconnect()
       viewport.removeEventListener('pointerdown', handlePointerDown)
       viewport.removeEventListener('wheel', handleWheel)
       viewport.removeEventListener('touchstart', handleTouchStart)
