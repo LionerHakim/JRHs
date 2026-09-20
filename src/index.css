@@ -3727,3 +3727,8 @@ body,
 .music-panel::before {
   border-color: rgba(10,153,255,.16) !important;
 }
+
+
+/* JRHs BLACK CANVAS — preserve all light components */
+html, body, .site-shell, .site-shell > main, .site-shell > footer { background: #000 !important; }
+.site-footer { background: #000 !important; }
