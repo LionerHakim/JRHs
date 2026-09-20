@@ -1745,11 +1745,23 @@ img { display: block; max-width: 100%; }
 
 /* Final interaction polish — contact + navigation */
 .terms-checkbox-info{
-  width:16px;height:16px;min-width:16px;min-height:16px;flex:0 0 16px;
-  margin-left:3px;padding:0;border:0;border-radius:50%;font-size:8px;line-height:1;
-  box-shadow:inset 0 0 0 1px #b9d8f4;
+  width:10px;height:10px;min-width:10px;min-height:10px;flex:0 0 10px;
+  margin-left:1px;padding:0;border:0;border-radius:50%;
+  display:inline-grid;place-items:center;
+  background:transparent;
+  color:#2563EB;
+  font-size:7px;font-weight:700;line-height:1;
+  box-shadow:inset 0 0 0 .5px #2563EB;
 }
-.terms-checkbox-info:focus-visible{outline-offset:2px}
+.terms-checkbox-info::before{display:none}
+.terms-checkbox-info:hover,
+.terms-checkbox-info:focus-visible{
+  background:transparent;
+  color:#2563EB;
+  box-shadow:inset 0 0 0 .5px #2563EB;
+}
+.terms-checkbox-info:focus-visible{outline:none}
+
 .contact-message{min-height:96px;padding-top:12px;padding-bottom:34px}
 .contact-topic-menu{background:#111!important}
 .contact-topic-menu button{color:#fff!important;border-color:rgba(255,255,255,.12)!important}
@@ -1779,7 +1791,7 @@ img { display: block; max-width: 100%; }
   .menu-item-index{width:28px;height:28px}
   .music-track{grid-template-columns:60px minmax(0,1fr)}
   .music-track-art{width:60px;height:60px}
-  .terms-checkbox-info{width:16px;height:16px;min-width:16px;min-height:16px;flex-basis:16px;font-size:8px}
+  .terms-checkbox-info{width:10px;height:10px;min-width:10px;min-height:10px;flex-basis:10px;font-size:7px;margin-left:1px}
   .contact-message{min-height:88px}
   .contact-intro p:last-child,.contact-copy p:last-child{font-size:17px}
 }
