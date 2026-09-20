@@ -4475,7 +4475,7 @@ html[data-theme="light"] .music-toggle.is-playing { box-shadow:inset 0 0 0 1px r
   }
 
   .site-shell.menu-open .nav-actions > nav {
-    height: calc((min(90vw, 352px, (100svh - 130px) * 0.88)) * 1.25 * 1.02);
+    height: calc((min(90vw, 352px, (100svh - 130px) * 0.88)) * 1.25 * 1.01);
     aspect-ratio: auto;
   }
 
@@ -4499,3 +4499,20 @@ html[data-theme="light"] .music-toggle.is-playing { box-shadow:inset 0 0 0 1px r
     width: min(90vw, 317px, calc((100svh - 120px) * 0.88));
   }
 }
+
+
+/* MUSIC ACTIVE INDICATOR — readable across touch devices */
+.music-live-state { display:inline-flex; align-items:center; justify-content:flex-end; gap:5px; font-weight:700; letter-spacing:.04em; }
+.music-live-bars { display:inline-flex; align-items:flex-end; justify-content:center; gap:2px; width:11px; height:11px; }
+.music-live-bars b { display:block; width:2px; height:4px; border-radius:2px; background:currentColor; opacity:.55; }
+.music-toggle.is-playing .music-live-state { color:#16a34a !important; }
+.music-toggle.is-playing .music-live-bars b { opacity:1; animation:musicLiveBars 900ms ease-in-out infinite; }
+.music-toggle.is-playing .music-live-bars b:nth-child(2) { animation-delay:150ms; }
+.music-toggle.is-playing .music-live-bars b:nth-child(3) { animation-delay:300ms; }
+.music-toggle.is-playing .music-playing-badge { opacity:1; transform:none; width:auto; height:auto; top:3px; right:5px; padding:2px 4px; border-radius:5px; background:#16a34a; color:#fff; font-size:6px; font-weight:800; letter-spacing:.04em; line-height:1; }
+@keyframes musicLiveBars { 0%,100%{height:4px;transform:scaleY(.8)} 50%{height:11px;transform:scaleY(1)} }
+@media (prefers-reduced-motion: reduce) {
+  .music-toggle.is-playing .music-live-bars b { animation:none; height:8px; }
+}
+html[data-theme="light"] .music-toggle.is-playing { box-shadow:inset 0 0 0 1px rgba(22,163,74,.35),0 0 12px rgba(22,163,74,.12) !important; }
+html[data-theme="dark"] .music-toggle.is-playing { box-shadow:inset 0 0 0 1px rgba(34,197,94,.45),0 0 16px rgba(34,197,94,.18) !important; }
