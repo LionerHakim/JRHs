@@ -372,7 +372,6 @@ ${name.trim()}`)
       <a className="skip-link" href="#identity">Lewati ke konten utama</a>
       <header className="nav">
         <a className="wordmark" href="#identity" aria-label="JRH home">
-          <span className="brand-mark" aria-hidden="true">J</span>
           <span>JRH</span>
         </a>
 
