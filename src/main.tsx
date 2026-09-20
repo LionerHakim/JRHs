@@ -722,7 +722,7 @@ Web app dan digital product yang sedang dibangun untuk memecahkan masalah nyata.
 
         <div className="site-footer-bottom">
           <span>© 2026 JRH</span>
-          <a href="#identity" aria-label="Back to top">↗</a>
+          <a className="back-to-top" href="#identity" aria-label="Kembali ke atas" title="Kembali ke atas">↑<span>TOP</span></a>
         </div>
       </footer>
     </div>
