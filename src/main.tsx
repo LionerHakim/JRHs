@@ -347,14 +347,22 @@ export default function App() {
     const audio = musicAudioRef.current
     if (!audio) return
 
-    // Keep the initial page lightweight, but pre-buffer the selected track
-    // as soon as the Music panel is opened so Play responds immediately.
-    audio.preload = musicOpen ? 'auto' : 'none'
-
-    if (musicOpen && !audio.src) {
-      audio.src = musicTracks[musicIndexRef.current].src
-      audio.load()
+    // Pre-buffer only when the player is opened. Closing the panel must NOT
+    // stop playback: the audio element lives independently of the UI panel.
+    if (musicOpen) {
+      audio.preload = 'auto'
+      if (!audio.src) {
+        audio.src = musicTracks[musicIndexRef.current].src
+        audio.load()
+      }
+    } else if (!audio.src) {
+      audio.preload = 'none'
     }
+  }, [musicOpen])
+
+  useEffect(() => {
+    const audio = musicAudioRef.current
+    if (!audio) return
 
     const handleTimeUpdate = () => {
       setMusicProgress(audio.currentTime || 0)
@@ -403,7 +411,7 @@ export default function App() {
       audio.removeAttribute('src')
       audio.load()
     }
-  }, [musicOpen])
+  }, [])
 
 
   useEffect(() => {
