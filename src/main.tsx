@@ -554,7 +554,7 @@ ${name.trim()}`)
             aria-label={musicPlaying ? 'Music sedang diputar' : (musicOpen ? 'Tutup music player' : 'Buka music player')}
             onClick={() => { setMusicOpen((open) => !open); setMenuOpen(false) }}
           >
-            <span className="nav-action-glyph music-toggle-icon" aria-hidden="true">♪</span>
+            <span className="nav-action-glyph music-toggle-icon" aria-hidden="true">{musicPlaying ? <i className="music-icon-bars"><b /><b /><b /></i> : '♪'}</span>
             <span className="nav-action-label">Music</span>
             <span className="nav-action-meta music-live-state" aria-hidden="true"><i className="music-live-bars"><b /><b /><b /></i><span>{musicPlaying ? 'PLAYING' : 'PLAY'}</span></span><span className="music-playing-badge" aria-hidden="true">{musicPlaying ? 'LIVE' : ''}</span>
           </button>
