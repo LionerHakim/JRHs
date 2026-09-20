@@ -4328,7 +4328,13 @@ img, svg, video, canvas { max-width:100%; }
 
 /* MOBILE COMPACT PANELS — Android / iPhone: 50% smaller than the medium panel scale. */
 @media (max-width: 640px) {
-  :root { --panel-medium: min(220px, calc(100vw - 28px)); --panel-radius: 16px; }
+  :root { --panel-medium: min(220px, calc(100vw - 24px)); --panel-radius: 16px; }
+  .nav-actions>nav, .music-panel { max-width: 100%; max-height: min(78svh, 560px); overflow: hidden; }
+  .menu-panel-grid, .music-playlist-list { min-width: 0; }
+  .music-track-copy, .music-playlist-copy { min-width: 0; }
+  .menu-panel-head, .music-panel-head { min-width: 0; }
+  .menu-panel-head strong, .music-panel-head strong { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .music-playlist-list { overscroll-behavior: contain; scrollbar-width: thin; }
   .nav-actions>nav, .music-panel { padding: 10px; }
   .menu-panel-head, .music-panel-head { padding: 1px 1px 9px; gap: 8px; }
   .menu-panel-head span, .menu-panel-foot, .music-eyebrow, .music-status { font-size: 7px; }
