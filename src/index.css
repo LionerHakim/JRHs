@@ -4325,3 +4325,40 @@ img, svg, video, canvas { max-width:100%; }
   .nav-actions { gap: 3px; }
   .music-toggle, .menu-toggle { min-width: 108px; }
 }
+
+/* MOBILE COMPACT PANELS — Android / iPhone: 50% smaller than the medium panel scale. */
+@media (max-width: 640px) {
+  :root { --panel-medium: min(220px, calc(100vw - 28px)); --panel-radius: 16px; }
+  .nav-actions>nav, .music-panel { padding: 10px; }
+  .menu-panel-head, .music-panel-head { padding: 1px 1px 9px; gap: 8px; }
+  .menu-panel-head span, .menu-panel-foot, .music-eyebrow, .music-status { font-size: 7px; }
+  .menu-panel-head strong, .music-panel-head strong { margin-top: 2px; font-size: 14px; }
+  .menu-panel-count, .music-status { padding: 4px 6px; }
+  .menu-panel-grid { gap: 4px; padding: 8px 0; }
+  .menu-panel-grid a { min-height: 38px; grid-template-columns: 20px minmax(0,1fr) 10px; gap: 5px; padding: 6px; border-radius: 9px; }
+  .menu-item-index { width: 20px; height: 20px; border-radius: 6px; font-size: 7px; }
+  .menu-item-label { font-size: 8px; }
+  .menu-item-arrow { font-size: 9px; }
+  .menu-panel-foot { padding: 8px 1px 0; }
+  .music-track { grid-template-columns: 34px minmax(0,1fr); gap: 7px; margin-top: 8px; padding: 7px; border-radius: 11px; }
+  .music-track-art { width: 34px; height: 34px; border-radius: 9px; font-size: 15px; }
+  .music-track-copy strong { font-size: 9px; }
+  .music-track-copy span { margin-top: 2px; font-size: 7px; }
+  .music-progress { height: 2px; margin: 9px 2px 8px; }
+  .music-controls { gap: 6px; }
+  .music-controls button { width: 25px; height: 25px; font-size: 10px; }
+  .music-controls .music-play { width: 30px; height: 30px; }
+  .music-playlist { margin-top: 8px; padding-top: 7px; }
+  .music-playlist-head { margin: 0 1px 4px; font-size: 6px; }
+  .music-playlist-head strong { font-size: 6px; }
+  .music-playlist-list { max-height: 110px; gap: 3px; }
+  .music-playlist-item { grid-template-columns: 16px minmax(0,1fr) 12px; gap: 4px; padding: 4px 5px; border-radius: 7px; }
+  .music-playlist-number { font-size: 6px; }
+  .music-playlist-copy strong { font-size: 7px; }
+  .music-playlist-copy span { margin-top: 0; font-size: 6px; }
+  .music-playlist-state { font-size: 7px; }
+}
+@media (max-width: 390px) {
+  :root { --panel-medium: min(200px, calc(100vw - 24px)); }
+  .nav-actions>nav, .music-panel { padding: 9px; }
+}
