@@ -297,6 +297,8 @@ export default function App() {
     return () => {
       document.removeEventListener('keydown', handleKeyDown)
       document.removeEventListener('pointerdown', handlePointerDown)
+      document.documentElement.dataset.overlayOpen = 'false'
+      document.body.style.overflow = ''
     }
   }, [menuOpen, musicOpen, termsOpen, topicOpen])
 
