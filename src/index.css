@@ -2732,3 +2732,68 @@ button,.hero-pill,.ghost-pill,.project-link,.media-links a{
     padding:5px 6px 5px 2px !important;
   }
 }
+
+
+/* JRH navbar logo — same refined treatment as the former J mark */
+.wordmark{
+  position:relative !important;
+  width:auto !important;
+  min-width:72px !important;
+  height:42px !important;
+  padding:0 13px !important;
+  display:inline-flex !important;
+  align-items:center !important;
+  justify-content:center !important;
+  overflow:hidden !important;
+  border:1px solid rgba(255,255,255,.22) !important;
+  border-radius:14px !important;
+  background:#0a6fe8 !important;
+  color:#fff !important;
+  font-family:var(--font-aeonik) !important;
+  font-size:17px !important;
+  font-weight:800 !important;
+  line-height:1 !important;
+  letter-spacing:-.055em !important;
+  box-shadow:0 8px 18px rgba(0,105,224,.22),inset 0 1px 0 rgba(255,255,255,.24) !important;
+  text-shadow:0 1px 1px rgba(0,0,0,.12) !important;
+  transition:transform 220ms var(--ease),box-shadow 220ms var(--ease),border-radius 220ms var(--ease) !important;
+}
+.wordmark::before{
+  content:"" !important;
+  position:absolute !important;
+  inset:4px !important;
+  border:1px solid rgba(255,255,255,.16) !important;
+  border-radius:10px !important;
+  pointer-events:none !important;
+}
+.wordmark::after{
+  content:"" !important;
+  position:absolute !important;
+  right:6px !important;
+  bottom:6px !important;
+  width:5px !important;
+  height:5px !important;
+  border-radius:50% !important;
+  background:#f5c542 !important;
+  box-shadow:0 0 0 2px rgba(245,197,66,.14) !important;
+  pointer-events:none !important;
+}
+.wordmark:hover,
+.wordmark:focus-visible{
+  color:#fff !important;
+  background:#0a6fe8 !important;
+  transform:translateY(-1px) rotate(-1deg) !important;
+  border-radius:12px !important;
+  box-shadow:0 11px 24px rgba(0,105,224,.28),inset 0 1px 0 rgba(255,255,255,.28) !important;
+}
+@media (max-width:640px){
+  .wordmark{
+    min-width:68px !important;
+    height:38px !important;
+    padding:0 11px !important;
+    border-radius:12px !important;
+    font-size:16px !important;
+  }
+  .wordmark::before{inset:3px !important;border-radius:9px !important;}
+  .wordmark::after{right:5px !important;bottom:5px !important;width:4px !important;height:4px !important;}
+}
