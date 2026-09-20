@@ -2866,28 +2866,28 @@ button,.hero-pill,.ghost-pill,.project-link,.media-links a{
 }
 
 
-/* Navbar logo — same visual language as Music/Menu */
+/* Navbar logo — white version, same visual language as Music/Menu */
 .wordmark{
   width:48px !important;
   min-width:48px !important;
   height:48px !important;
   padding:5px !important;
-  border:1px solid #0a6fe8 !important;
+  border:1px solid rgba(10,13,18,.12) !important;
   border-radius:18px !important;
-  background:#0a6fe8 !important;
+  background:#fff !important;
   display:inline-flex !important;
   align-items:center !important;
   justify-content:center !important;
   overflow:hidden !important;
-  box-shadow:0 6px 16px rgba(0,105,224,.18) !important;
+  box-shadow:0 6px 16px rgba(10,13,18,.10) !important;
   transform:none !important;
 }
 .wordmark:hover,.wordmark:focus-visible{
   transform:translateY(-1px) !important;
-  background:#0a6fe8 !important;
-  border-color:#0a6fe8 !important;
+  background:#fff !important;
+  border-color:rgba(10,13,18,.16) !important;
   border-radius:18px !important;
-  box-shadow:0 8px 20px rgba(0,105,224,.22) !important;
+  box-shadow:0 8px 20px rgba(10,13,18,.14) !important;
 }
 .wordmark-logo{
   width:100% !important;
