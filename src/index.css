@@ -2824,29 +2824,3 @@ button,.hero-pill,.ghost-pill,.project-link,.media-links a{
 .wordmark-logo{display:block;width:76px;height:34px;object-fit:contain;object-position:center;}
 @media (max-width:640px){.wordmark-logo{width:68px;height:32px;}}
 
-
-/* JRH image logo — navbar */
-.wordmark-logo{
-  display:block !important;
-  width:78px !important;
-  height:34px !important;
-  object-fit:contain !important;
-  object-position:center !important;
-}
-.wordmark:has(.wordmark-logo){
-  min-width:0 !important;
-  width:84px !important;
-  height:40px !important;
-  padding:2px 3px !important;
-  overflow:hidden !important;
-}
-.wordmark:has(.wordmark-logo)::before,
-.wordmark:has(.wordmark-logo)::after{display:none !important;}
-@media(max-width:640px){
-  .wordmark-logo{width:76px !important;height:32px !important;}
-  .wordmark:has(.wordmark-logo){
-    width:82px !important;
-    height:38px !important;
-    padding:2px !important;
-  }
-}
