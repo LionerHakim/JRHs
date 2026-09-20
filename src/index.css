@@ -2866,8 +2866,9 @@ button,.hero-pill,.ghost-pill,.project-link,.media-links a{
 }
 
 
-/* Navbar logo — final clean button, no hover */
+/* Navbar logo — upgraded premium action button */
 .wordmark{
+  position:relative !important;
   width:48px !important;
   min-width:48px !important;
   height:48px !important;
@@ -2879,27 +2880,43 @@ button,.hero-pill,.ghost-pill,.project-link,.media-links a{
   align-items:center !important;
   justify-content:center !important;
   overflow:hidden !important;
-  box-shadow:0 6px 16px rgba(0,105,224,.16) !important;
+  box-shadow:
+    0 6px 16px rgba(0,105,224,.16),
+    inset 0 1px 0 rgba(255,255,255,.95) !important;
   transform:none !important;
   transition:none !important;
 }
+.wordmark::before{
+  content:"" !important;
+  position:absolute !important;
+  inset:3px !important;
+  border:1px solid rgba(10,111,232,.12) !important;
+  border-radius:14px !important;
+  pointer-events:none !important;
+}
 .wordmark:hover,
-.wordmark:focus-visible,
-.wordmark:active{
+.wordmark:focus-visible{
   transform:none !important;
   background:#fff !important;
   border-color:#0a6fe8 !important;
   border-radius:18px !important;
-  box-shadow:0 6px 16px rgba(0,105,224,.16) !important;
+  box-shadow:
+    0 6px 16px rgba(0,105,224,.16),
+    inset 0 1px 0 rgba(255,255,255,.95) !important;
+}
+.wordmark:active{
+  transform:scale(.98) !important;
 }
 .wordmark-logo{
+  position:relative !important;
+  z-index:1 !important;
   width:100% !important;
   height:100% !important;
   max-width:none !important;
   max-height:none !important;
   object-fit:contain !important;
   object-position:center !important;
-  transform:scale(1.34) !important;
+  transform:scale(1.42) !important;
   transform-origin:center !important;
 }
 @media(max-width:640px){
@@ -2910,7 +2927,11 @@ button,.hero-pill,.ghost-pill,.project-link,.media-links a{
     padding:4px !important;
     border-radius:18px !important;
   }
+  .wordmark::before{
+    inset:3px !important;
+    border-radius:14px !important;
+  }
   .wordmark-logo{
-    transform:scale(1.34) !important;
+    transform:scale(1.42) !important;
   }
 }
