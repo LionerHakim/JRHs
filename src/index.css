@@ -4500,7 +4500,7 @@ html[data-theme="light"] .music-toggle.is-playing { box-shadow:inset 0 0 0 1px r
 @media (max-width: 900px) and (pointer: coarse) {
   .site-shell.menu-open .nav-actions > nav,
   .site-shell.music-open .music-panel {
-    width: min(82vw, 320px, calc((100svh - 130px) * 0.8));
+    width: min(90vw, 352px, calc((100svh - 130px) * 0.88));
     max-width: calc(100vw - 24px);
     aspect-ratio: 4 / 5;
     height: auto;
@@ -4528,6 +4528,6 @@ html[data-theme="light"] .music-toggle.is-playing { box-shadow:inset 0 0 0 1px r
   .site-shell.menu-open .nav-actions > nav,
   .site-shell.music-open .music-panel {
     top: 76px;
-    width: min(82vw, 288px, calc((100svh - 120px) * 0.8));
+    width: min(90vw, 317px, calc((100svh - 120px) * 0.88));
   }
 }
