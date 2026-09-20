@@ -305,9 +305,13 @@ export default function App() {
       setMusicStatus(audio.ended ? 'ENDED' : 'PAUSED')
     }
     const handleEnded = () => {
+      const nextIndex = (musicIndex + 1) % musicTracks.length
       setMusicPlaying(false)
       setMusicStatus('READY')
-      setMusicIndex((currentIndex) => (currentIndex + 1) % musicTracks.length)
+      setMusicIndex(nextIndex)
+      setMusicProgress(0)
+      setMusicDuration(0)
+      window.setTimeout(() => loadAndPlayMusic(nextIndex), 0)
     }
     const handleError = () => {
       setMusicPlaying(false)
@@ -331,21 +335,6 @@ export default function App() {
       audio.pause()
     }
   }, [])
-
-  useEffect(() => {
-    const audio = musicAudioRef.current
-    if (!audio || !musicPlaying) return
-
-    const nextTrack = musicTracks[musicIndex]
-    if (audio.src !== new URL(nextTrack.src, window.location.href).href) {
-      audio.src = nextTrack.src
-      audio.load()
-      void audio.play().catch(() => {
-        setMusicPlaying(false)
-        setMusicStatus('READY')
-      })
-    }
-  }, [musicIndex, musicPlaying])
 
   const loadAndPlayMusic = (index: number) => {
     const audio = musicAudioRef.current
