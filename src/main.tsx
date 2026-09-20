@@ -240,6 +240,7 @@ export default function App() {
   const [activeSection, setActiveSection] = useState<(typeof sectionIds)[number]>('identity')
   const [menuOpen, setMenuOpen] = useState(false)
   const [musicOpen, setMusicOpen] = useState(false)
+  const [darkMode, setDarkMode] = useState(false)
   const [name, setName] = useState('')
   const [purpose, setPurpose] = useState('')
   const [message, setMessage] = useState('')
@@ -253,6 +254,17 @@ export default function App() {
   const contactPrivacyRef = useRef<HTMLDivElement>(null)
   const privacyInputRef = useRef<HTMLInputElement>(null)
   const contactTopicRef = useRef<HTMLDivElement>(null)
+
+  useEffect(() => {
+    const savedTheme = window.localStorage.getItem('jrhs-theme')
+    const systemDark = window.matchMedia('(prefers-color-scheme: dark)').matches
+    setDarkMode(savedTheme ? savedTheme === 'dark' : systemDark)
+  }, [])
+
+  useEffect(() => {
+    document.documentElement.dataset.theme = darkMode ? 'dark' : 'light'
+    window.localStorage.setItem('jrhs-theme', darkMode ? 'dark' : 'light')
+  }, [darkMode])
 
   useEffect(() => {
     const shouldLockScroll = menuOpen || musicOpen
@@ -379,7 +391,7 @@ ${name.trim()}`)
   }
 
   return (
-    <div className={`site-shell${menuOpen ? " menu-open" : ""}${musicOpen ? " music-open" : ""}`}>
+    <div className={`site-shell${menuOpen ? " menu-open" : ""}${musicOpen ? " music-open" : ""}${darkMode ? " theme-dark" : ""}`}>
       <a className="skip-link" href="#identity">Lewati ke konten utama</a>
       <header className="nav">
         <a className="wordmark" href="/" aria-label="JRH home" onClick={(event) => { event.preventDefault(); window.location.reload() }}>
@@ -707,6 +719,20 @@ Web app dan digital product yang sedang dibangun untuk memecahkan masalah nyata.
         </section>
       </main>
 
+      <div className="floating-utilities" aria-label="Pengaturan tampilan">
+        <button
+          className="theme-toggle-floating"
+          type="button"
+          aria-label={darkMode ? 'Aktifkan light mode' : 'Aktifkan dark mode'}
+          title={darkMode ? 'Light mode' : 'Dark mode'}
+          aria-pressed={darkMode}
+          onClick={() => setDarkMode((current) => !current)}
+        >
+          <span aria-hidden="true">{darkMode ? '☀' : '☾'}</span>
+        </button>
+        <a className="back-to-top" href="#identity" aria-label="Kembali ke atas" title="Kembali ke atas">↑<span>TOP</span></a>
+      </div>
+
       <footer className="site-footer">
         <div className="site-footer-main">
           <div className="site-footer-brand">
@@ -722,7 +748,6 @@ Web app dan digital product yang sedang dibangun untuk memecahkan masalah nyata.
 
         <div className="site-footer-bottom">
           <span>© 2026 JRH</span>
-          <a className="back-to-top" href="#identity" aria-label="Kembali ke atas" title="Kembali ke atas">↑<span>TOP</span></a>
         </div>
       </footer>
     </div>
