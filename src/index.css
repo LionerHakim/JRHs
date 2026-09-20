@@ -3742,3 +3742,119 @@ html[data-theme="light"] select,
 html[data-theme="light"] button {
   color-scheme: light;
 }
+/* FINAL AUDIT PATCH — semantic surfaces that must also follow the active theme.
+   No layout/spacing/typography changes. */
+html[data-theme] .contact-topic {
+  background: var(--theme-surface) !important;
+  border-color: var(--theme-border) !important;
+  box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--theme-text) 5%, transparent) !important;
+}
+html[data-theme] .contact-topic:focus-within,
+html[data-theme] .contact-topic:has(.contact-topic-trigger.is-open) {
+  background: var(--theme-surface) !important;
+  border-color: color-mix(in srgb, var(--theme-blue) 45%, var(--theme-border)) !important;
+  box-shadow: 0 10px 28px rgba(0,0,0,.10), inset 0 0 0 1px color-mix(in srgb, var(--theme-text) 7%, transparent) !important;
+}
+html[data-theme] .contact-topic-menu {
+  background: var(--theme-panel) !important;
+  border-color: var(--theme-border) !important;
+  box-shadow: 0 24px 60px rgba(0,0,0,.22), 0 0 0 3px color-mix(in srgb, var(--theme-blue) 7%, transparent) !important;
+}
+html[data-theme] .contact-topic-menu button {
+  color: var(--theme-text-2) !important;
+  border-color: var(--theme-border) !important;
+}
+html[data-theme] .contact-topic-menu button:hover,
+html[data-theme] .contact-topic-menu button:focus-visible {
+  background: var(--theme-blue-soft) !important;
+  color: var(--theme-blue) !important;
+}
+html[data-theme] .contact-topic-menu button.is-selected {
+  background: var(--theme-deep-blue) !important;
+  color: #FFFFFF !important;
+}
+html[data-theme="dark"] .contact-topic-menu button span:first-child::before {
+  background: var(--theme-blue) !important;
+}
+html[data-theme] .terms-checkbox-label {
+  color: var(--theme-text-2) !important;
+}
+html[data-theme] .terms-checkbox-box {
+  background: var(--theme-input) !important;
+  border-color: var(--theme-muted) !important;
+}
+html[data-theme] .terms-checkbox-info {
+  background: var(--theme-blue-soft) !important;
+  border-color: var(--theme-border) !important;
+  color: var(--theme-blue) !important;
+}
+html[data-theme] .terms-checkbox-info:hover,
+html[data-theme] .terms-checkbox-info:focus-visible {
+  background: var(--theme-hover) !important;
+  border-color: var(--theme-blue) !important;
+}
+html[data-theme] .terms-checkbox-popover,
+html[data-theme] .terms-checkbox-popover::after {
+  background: var(--theme-panel) !important;
+}
+html[data-theme] .terms-checkbox-popover::after {
+  border-color: var(--theme-border) !important;
+}
+html[data-theme] .contact-feedback.is-error {
+  background: var(--theme-quote) !important;
+  color: var(--theme-text) !important;
+}
+html[data-theme] .contact-feedback.is-success {
+  background: var(--theme-status) !important;
+  color: var(--theme-status-text) !important;
+}
+html[data-theme] .site-footer-main {
+  background: var(--theme-panel) !important;
+  color: var(--theme-text) !important;
+  border: 1px solid var(--theme-border) !important;
+}
+html[data-theme] .footer-kicker {
+  color: var(--theme-blue) !important;
+}
+html[data-theme] .site-footer-brand strong,
+html[data-theme] .site-footer-brand p,
+html[data-theme] .site-footer-nav a {
+  color: var(--theme-text) !important;
+}
+html[data-theme] .site-footer-nav a:hover,
+html[data-theme] .site-footer-nav a:focus-visible {
+  background: var(--theme-hover) !important;
+  color: var(--theme-text) !important;
+}
+html[data-theme] .contact-submit button {
+  background: var(--theme-deep-blue) !important;
+  color: #FFFFFF !important;
+}
+html[data-theme] .contact-submit button:hover:not(:disabled),
+html[data-theme] .contact-submit button:focus-visible:not(:disabled) {
+  background: var(--theme-blue) !important;
+}
+html[data-theme="dark"] .brand-mark {
+  background: #FFFFFF !important;
+  color: #0A0D12 !important;
+}
+html[data-theme="dark"] .music-toggle,
+html[data-theme="dark"] .menu-toggle {
+  background: var(--theme-blue) !important;
+  border-color: var(--theme-blue) !important;
+}
+html[data-theme="dark"] .music-toggle.is-open {
+  background: #22C55E !important;
+  border-color: #22C55E !important;
+}
+html[data-theme="dark"] .nav-action.is-open .nav-action-glyph {
+  background: var(--theme-blue) !important;
+}
+html[data-theme="light"] .nav-menu-lines,
+html[data-theme="light"] .nav-action-glyph {
+  background: var(--theme-blue-soft) !important;
+}
+html[data-theme="dark"] .nav-menu-lines,
+html[data-theme="dark"] .nav-action-glyph {
+  background: var(--theme-blue-soft) !important;
+}
