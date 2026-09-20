@@ -17,7 +17,7 @@ The portfolio currently uses `images/s.jpg`. Keep the path synchronized with `pr
 
 ### Music
 
-The navbar player reads local tracks from `audio/` through `src/config/site.ts`. Use only audio you own or are licensed to publish.
+The navbar player reads the nine local tracks from `audio/` through the Music Player in `src/main.tsx`. Playback uses one HTML audio element with on-demand loading; tracks are not preloaded on initial page load. Use only audio you own or are licensed to publish.
 
 ### Add media
 
