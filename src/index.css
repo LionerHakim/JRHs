@@ -3555,3 +3555,175 @@ body,
 .site-footer {
   background: #f7fbff !important;
 }
+
+
+/* JRHs COMPLETE LIGHT THEME SYNC — one visual language, layout locked */
+:root {
+  --color-sky-tint: #F7FBFF;
+  --color-paper-white: #FFFFFF;
+  --color-bone-white: #FFFFFF;
+  --color-mist-gray: #F7F9FC;
+  --color-ink: #0A0D12;
+  --color-charcoal: #163F7D;
+  --color-graphite: #344054;
+  --color-fog: #667085;
+  --color-iris-blue: #0A6FE8;
+  --color-sky-blue: #0A6FE8;
+  --color-lavender-wash: #EEF5FF;
+  --color-mint-wash: #E6F4FF;
+  --color-powder-blue: #DCEEFF;
+  --color-peach-gradient: #F2F6FA;
+  --sky: #F7FBFF;
+  --paper: #FFFFFF;
+  --bone: #FFFFFF;
+  --mist: #F7F9FC;
+  --ink: #0A0D12;
+  --charcoal: #163F7D;
+  --graphite: #344054;
+  --fog: #667085;
+  --blue: #0A6FE8;
+  --blue-strong: #0A6FE8;
+  --blue-soft: #DCEEFF;
+  --lavender: #EEF5FF;
+  --mint: #E6F4FF;
+  --peach: #F2F6FA;
+  --line: rgba(10,111,232,.12);
+}
+html,
+body,
+.site-shell,
+.site-shell > main,
+.site-shell > footer {
+  background: #F7FBFF !important;
+  color: #0A0D12 !important;
+}
+.nav {
+  background: #FFFFFF !important;
+  border-color: rgba(10,111,232,.14) !important;
+  box-shadow: 0 10px 28px rgba(10,111,232,.08), 0 1px 0 rgba(255,255,255,.98) inset !important;
+}
+.nav-actions {
+  background: #F7F9FC !important;
+  border-color: rgba(10,111,232,.10) !important;
+}
+.nav-action-glyph {
+  background: #EAF4FF !important;
+  color: #0A6FE8 !important;
+}
+.nav-menu-lines {
+  background: #EAF4FF !important;
+}
+.nav-action.is-open .nav-action-glyph {
+  background: #0A6FE8 !important;
+  color: #FFFFFF !important;
+}
+.nav-action.is-open::after,
+.music-toggle.is-open::after {
+  border-color: #F5C542 !important;
+}
+.music-toggle,
+.menu-toggle {
+  background: #0A6FE8 !important;
+  border-color: #0A6FE8 !important;
+  color: #FFFFFF !important;
+  box-shadow: 0 6px 16px rgba(10,111,232,.18) !important;
+}
+.music-toggle:hover,
+.music-toggle:focus-visible,
+.menu-toggle:hover,
+.menu-toggle:focus-visible {
+  background: #0A6FE8 !important;
+  border-color: #0A6FE8 !important;
+}
+.music-toggle.is-open {
+  background: #22C55E !important;
+  border-color: #22C55E !important;
+}
+.hero-pill,
+.media-links a,
+.project-link {
+  background: #163F7D !important;
+  color: #FFFFFF !important;
+}
+.hero-pill:hover,
+.hero-pill:focus-visible,
+.media-links a:hover,
+.media-links a:focus-visible,
+.project-link:hover,
+.project-link:focus-visible {
+  background: #0A6FE8 !important;
+}
+.ghost-pill {
+  border-color: rgba(10,111,232,.18) !important;
+  color: #0A0D12 !important;
+}
+.ghost-pill:hover,
+.ghost-pill:focus-visible {
+  background: #FFFFFF !important;
+}
+.record,
+.media-card,
+.project-card {
+  background: #FFFFFF !important;
+  color: #0A0D12 !important;
+}
+.record-activities li {
+  background: #DCEEFF !important;
+  color: #163F7D !important;
+}
+.media-status,
+.project-status {
+  background: #E6F4FF !important;
+  color: #163F7D !important;
+}
+.portrait-quote,
+.project-quote {
+  background: #EEF5FF !important;
+}
+.section-kicker,
+.record time,
+.media-number,
+.project-number,
+.media-category,
+.project-category {
+  color: #0A6FE8 !important;
+}
+.section p,
+.hero-description,
+.media-subtitle,
+.projects-subtitle,
+.testimonials-subtitle,
+.portrait-quote p,
+.project-quote p {
+  color: #344054 !important;
+}
+.site-footer {
+  background: #F7FBFF !important;
+  border-color: rgba(10,111,232,.10) !important;
+}
+.back-to-top {
+  background: #FFFFFF !important;
+  color: #0A0D12 !important;
+  border-color: rgba(10,111,232,.14) !important;
+}
+.back-to-top:hover,
+.back-to-top:focus-visible {
+  background: #F7F9FC !important;
+}
+.skip-link {
+  background: #163F7D !important;
+  color: #FFFFFF !important;
+}
+:focus-visible {
+  outline-color: rgba(10,111,232,.36) !important;
+}
+/* Panels stay structurally identical but inherit the same blue identity */
+.nav-actions > nav,
+.music-panel {
+  border-color: rgba(10,111,232,.20) !important;
+  box-shadow: 0 28px 90px rgba(10,111,232,.16), inset 0 1px 0 rgba(255,255,255,.08) !important;
+}
+.nav-actions > nav::before,
+.music-panel::before {
+  border-color: rgba(10,153,255,.16) !important;
+}
