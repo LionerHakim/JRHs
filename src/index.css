@@ -4590,9 +4590,9 @@ html[data-theme="dark"] .music-toggle.is-playing { box-shadow:inset 0 0 0 1px rg
   .site-shell.music-open .music-panel {
     width: min(90vw, 352px, calc((100svh - 130px) * 0.88));
     max-width: calc(100vw - 24px);
-    aspect-ratio: 4 / 5;
-    height: auto;
-    max-height: none;
+    aspect-ratio: auto;
+    height: min(calc((min(90vw, 352px, (100svh - 130px) * 0.88)) * 1.875), calc(100svh - 96px));
+    max-height: calc(100svh - 96px);
     top: 94px;
     bottom: auto;
     padding: 12px;
