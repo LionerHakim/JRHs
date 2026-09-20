@@ -3282,3 +3282,111 @@ button,.hero-pill,.ghost-pill,.project-link,.media-links a{
     padding:0 18px !important;
   }
 }
+
+/* Footer — JRH minimal editorial */
+.site-footer{
+  width:var(--page) !important;
+  margin:64px auto 28px !important;
+  padding:0 !important;
+  border:0 !important;
+  border-top:1px solid rgba(10,13,18,.10) !important;
+  border-radius:0 !important;
+  background:transparent !important;
+  overflow:visible !important;
+  box-shadow:none !important;
+}
+.site-footer-main{
+  min-height:0 !important;
+  padding:22px 0 18px !important;
+  display:flex !important;
+  align-items:center !important;
+  justify-content:space-between !important;
+  gap:24px !important;
+}
+.site-footer-brand strong{
+  color:#0a0d12 !important;
+  font-family:var(--font-aeonik) !important;
+  font-size:22px !important;
+  font-weight:800 !important;
+  letter-spacing:-.06em !important;
+}
+.site-footer-nav{
+  display:flex !important;
+  align-items:center !important;
+  justify-content:flex-end !important;
+  flex-wrap:wrap !important;
+  gap:18px !important;
+}
+.site-footer-nav a{
+  min-height:auto !important;
+  padding:0 !important;
+  border:0 !important;
+  border-radius:0 !important;
+  background:transparent !important;
+  color:#535862 !important;
+  font-size:9px !important;
+  font-weight:700 !important;
+  letter-spacing:.08em !important;
+  transition:none !important;
+}
+.site-footer-nav a:hover,
+.site-footer-nav a:focus-visible{
+  color:#0a0d12 !important;
+  background:transparent !important;
+  border:0 !important;
+  transform:none !important;
+}
+.site-footer-bottom{
+  min-height:42px !important;
+  padding:0 !important;
+  display:flex !important;
+  align-items:center !important;
+  justify-content:space-between !important;
+  gap:16px !important;
+  border-top:1px solid rgba(10,13,18,.06) !important;
+  color:#93979f !important;
+  font-size:9px !important;
+  letter-spacing:.04em !important;
+}
+.site-footer-bottom a{
+  width:28px !important;
+  height:28px !important;
+  display:grid !important;
+  place-items:center !important;
+  padding:0 !important;
+  border:1px solid rgba(10,13,18,.12) !important;
+  border-radius:50% !important;
+  background:transparent !important;
+  color:#0a6fe8 !important;
+  transition:none !important;
+}
+.site-footer-bottom a:hover,
+.site-footer-bottom a:focus-visible{
+  transform:none !important;
+  background:transparent !important;
+  color:#0a6fe8 !important;
+  border-color:rgba(10,13,18,.12) !important;
+}
+@media (max-width:640px){
+  .site-footer{
+    width:calc(100% - 20px) !important;
+    margin:48px auto 20px !important;
+  }
+  .site-footer-main{
+    padding:18px 0 16px !important;
+    display:flex !important;
+    align-items:flex-start !important;
+    flex-direction:column !important;
+    gap:16px !important;
+  }
+  .site-footer-brand strong{font-size:20px !important;}
+  .site-footer-nav{
+    width:100% !important;
+    justify-content:flex-start !important;
+    gap:14px !important;
+  }
+  .site-footer-nav a{font-size:8px !important;}
+  .site-footer-bottom{
+    min-height:40px !important;
+  }
+}
