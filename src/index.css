@@ -3732,3 +3732,100 @@ body,
 /* JRHs BLACK CANVAS — preserve all light components */
 html, body, .site-shell, .site-shell > main, .site-shell > footer { background: #000 !important; }
 .site-footer { background: #000 !important; }
+
+
+/* JRHs FINAL BLACK CANVAS SYNC — canvas black, light UI components preserved */
+html,
+body,
+.site-shell,
+.site-shell > main,
+.site-shell > footer {
+  background: #000000 !important;
+}
+
+.site-shell > main {
+  color: #FFFFFF !important;
+}
+
+.site-footer {
+  background: #000000 !important;
+}
+
+/* Text that sits directly on the black canvas */
+.site-shell > main .section h2,
+.site-shell > main .hero-title,
+.site-shell > main .hero-description,
+.site-shell > main .section > p,
+.site-shell > main .testimonials-subtitle,
+.site-footer,
+.site-footer a,
+.site-footer-brand,
+.site-footer-bottom {
+  color: #FFFFFF !important;
+}
+
+.site-shell > main .hero-description,
+.site-shell > main .section > p,
+.site-shell > main .testimonials-subtitle,
+.site-footer-bottom {
+  color: #CBD5E1 !important;
+}
+
+/* Keep all cards and light UI surfaces exactly in the synchronized light palette */
+.record,
+.media-card,
+.project-card,
+.portrait-quote,
+.project-quote {
+  color: #0A0D12 !important;
+}
+
+.record,
+.media-card,
+.project-card {
+  background: #FFFFFF !important;
+}
+
+.portrait-quote,
+.project-quote {
+  background: #EEF5FF !important;
+}
+
+.nav,
+.wordmark,
+.wordmark:hover,
+.wordmark:focus-visible {
+  background: #FFFFFF !important;
+}
+
+.back-to-top {
+  background: #FFFFFF !important;
+  color: #0A0D12 !important;
+}
+
+.section-kicker,
+.record time,
+.media-number,
+.project-number,
+.media-category,
+.project-category {
+  color: #0A6FE8 !important;
+}
+
+.hero-pill,
+.media-links a,
+.project-link {
+  background: #163F7D !important;
+  color: #FFFFFF !important;
+}
+
+.record-activities li {
+  background: #DCEEFF !important;
+  color: #163F7D !important;
+}
+
+.media-status,
+.project-status {
+  background: #E6F4FF !important;
+  color: #163F7D !important;
+}
