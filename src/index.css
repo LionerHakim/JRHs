@@ -3284,3 +3284,146 @@ textarea {
 @media (prefers-reduced-motion: reduce) {
   .back-to-top { transition: none; }
 }
+
+
+/* JRHs FULL DARK THEME — color-only override, layout/design locked */
+:root {
+  --color-sky-tint: #050505;
+  --color-paper-white: #ffffff;
+  --color-bone-white: #0d0d0d;
+  --color-mist-gray: #111111;
+  --color-ink: #f5f5f5;
+  --color-charcoal: #181818;
+  --color-graphite: #b8bcc4;
+  --color-fog: #858b95;
+  --color-lavender-wash: #171222;
+  --color-mint-wash: #0d2117;
+  --color-powder-blue: #10243a;
+  --color-peach-gradient: #321f17;
+  --sky: #050505;
+  --paper: #ffffff;
+  --bone: #0d0d0d;
+  --mist: #111111;
+  --ink: #f5f5f5;
+  --charcoal: #181818;
+  --graphite: #b8bcc4;
+  --fog: #858b95;
+  --lavender: #171222;
+  --mint: #0d2117;
+  --blue-soft: #10243a;
+  --peach: #321f17;
+  --line: rgba(255,255,255,.10);
+  --shadow-subtle: 0 1px 2px rgba(0,0,0,.45), 0 0 0 1px rgba(255,255,255,.06);
+}
+
+html,
+body,
+.site-shell,
+.site-shell > main,
+.site-shell > footer {
+  background: #050505 !important;
+  color: #f5f5f5;
+}
+
+.nav {
+  background: #0b0b0b !important;
+  border-color: rgba(255,255,255,.10) !important;
+  box-shadow: 0 10px 28px rgba(0,0,0,.42), 0 1px 0 rgba(255,255,255,.05) inset !important;
+}
+
+.wordmark,
+.wordmark:hover,
+.wordmark:focus-visible {
+  background: #101010 !important;
+  border-color: #0a6fe8 !important;
+  box-shadow: 0 0 0 3px #0a6fe8 !important;
+}
+
+.nav-actions {
+  background: #151515 !important;
+  border-color: rgba(255,255,255,.09) !important;
+}
+
+.nav-action:hover,
+.nav-action:focus-visible {
+  background: #1c1c1c !important;
+  border-color: rgba(255,255,255,.12) !important;
+  color: #fff !important;
+}
+
+.ghost-pill {
+  color: #f5f5f5 !important;
+  border-color: rgba(255,255,255,.14) !important;
+}
+
+.ghost-pill:hover,
+.ghost-pill:focus-visible {
+  background: #151515 !important;
+}
+
+.portrait-frame {
+  background: #0d0d0d !important;
+}
+
+.record,
+.media-card,
+.project-card {
+  background: #0d0d0d !important;
+  color: #f5f5f5 !important;
+  border: 1px solid rgba(255,255,255,.06) !important;
+}
+
+.media-card:hover,
+.project-card:hover {
+  background: #141414 !important;
+}
+
+.media-links a,
+.project-link {
+  color: #fff !important;
+}
+
+.section p,
+.hero-description,
+.media-subtitle,
+.projects-subtitle,
+.testimonials-subtitle,
+.portrait-quote p,
+.project-quote p {
+  color: #b8bcc4 !important;
+}
+
+.portrait-quote,
+.project-quote {
+  background: #171222 !important;
+}
+
+.site-footer {
+  background: #050505 !important;
+  border-color: rgba(255,255,255,.08) !important;
+}
+
+.site-footer-bottom {
+  color: #858b95 !important;
+}
+
+.back-to-top {
+  background: #111111 !important;
+  color: #f5f5f5 !important;
+  border-color: rgba(255,255,255,.12) !important;
+  box-shadow: 0 8px 20px rgba(0,0,0,.35) !important;
+}
+
+.back-to-top:hover,
+.back-to-top:focus-visible {
+  background: #1a1a1a !important;
+}
+
+.skip-link {
+  background: #fff !important;
+  color: #050505 !important;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .back-to-top { transition: none; }
+}
