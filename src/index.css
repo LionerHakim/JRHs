@@ -4496,16 +4496,19 @@ html[data-theme="light"] .music-toggle.is-playing { box-shadow:inset 0 0 0 1px r
   }
 }
 
-/* MOBILE PANEL FINAL POSITION — 4:5, lowered 30% from navbar */
+/* MOBILE PANELS — deterministic 4:5 docking under the navbar */
 @media (max-width: 900px) and (pointer: coarse) {
   .site-shell.menu-open .nav-actions > nav,
   .site-shell.music-open .music-panel {
+    width: min(82vw, 320px, calc((100svh - 130px) * 0.8));
+    max-width: calc(100vw - 24px);
     aspect-ratio: 4 / 5;
-    top: 0;
-    bottom: auto;
-    margin-top: calc(14px + 68px + 10px + 25px + 25vh);
     height: auto;
+    top: 94px;
+    bottom: auto;
+    margin: 0;
     transform: translateX(-50%) scale(.965);
+    transform-origin: top center;
   }
 
   .site-shell.menu-open .nav-actions > nav.is-open,
@@ -4517,13 +4520,14 @@ html[data-theme="light"] .music-toggle.is-playing { box-shadow:inset 0 0 0 1px r
 @media (max-width: 640px) and (pointer: coarse) {
   .site-shell.menu-open .nav-actions > nav,
   .site-shell.music-open .music-panel {
-    margin-top: calc(82px + 22.5vh);
+    top: 84px;
   }
 }
 
 @media (max-width: 390px) and (pointer: coarse) {
   .site-shell.menu-open .nav-actions > nav,
   .site-shell.music-open .music-panel {
-    margin-top: calc(76px + 22.5vh);
+    top: 76px;
+    width: min(82vw, 288px, calc((100svh - 120px) * 0.8));
   }
 }
