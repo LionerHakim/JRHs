@@ -4345,3 +4345,30 @@ img, svg, video, canvas { max-width:100%; }
   :root { --panel-medium:min(72vw,288px); }
   .nav-actions>nav, .music-panel { padding:11px; max-width:calc(100vw - 20px); max-height:calc(100svh - 20px); }
 }
+
+/* PREMIUM MOBILE PANELS + LIVE MUSIC INDICATOR */
+.music-toggle .nav-action-meta { display:inline-flex; align-items:center; justify-content:flex-end; gap:4px; }
+.music-live-dot { width:5px; height:5px; display:inline-block; border-radius:50%; background:currentColor; opacity:.45; }
+.music-toggle .nav-action-meta.is-live { color:#16a34a !important; }
+.music-toggle .nav-action-meta.is-live .music-live-dot { opacity:1; animation:musicLiveDot 1.2s ease-in-out infinite; box-shadow:0 0 0 3px rgba(22,163,74,.12); }
+@keyframes musicLiveDot { 0%,100%{transform:scale(.85);opacity:.7} 50%{transform:scale(1.15);opacity:1} }
+@media (max-width:640px) {
+  .site-shell.menu-open .nav-actions>nav,
+  .site-shell.music-open .music-panel { bottom:calc(max(20px, env(safe-area-inset-bottom)) + 107px); top:auto; transform:translateX(-50%) scale(1); }
+  .site-shell.menu-open .nav-actions>nav:not(.is-open),
+  .site-shell.music-open .music-panel:not(.is-open) { transform:translateX(-50%) scale(.965); }
+  .nav-actions>nav, .music-panel { box-shadow:0 24px 70px rgba(0,0,0,.34), 0 0 0 1px rgba(255,255,255,.035), inset 0 1px 0 rgba(255,255,255,.08); }
+  .menu-panel-head, .music-panel-head { align-items:center; }
+}
+html[data-theme="light"] .nav-actions>nav, html[data-theme="light"] .music-panel { background:#ffffff !important; color:#0a0d12 !important; border-color:rgba(10,13,18,.10) !important; box-shadow:0 24px 70px rgba(10,13,18,.14), 0 0 0 1px rgba(10,13,18,.035) !important; }
+html[data-theme="light"] .menu-panel-grid a, html[data-theme="light"] .music-track, html[data-theme="light"] .music-controls button, html[data-theme="light"] .music-playlist-item { background:#f7f9fc !important; border-color:rgba(10,13,18,.08) !important; color:#18202b !important; }
+html[data-theme="light"] .menu-panel-grid a:hover, html[data-theme="light"] .menu-panel-grid a:focus-visible, html[data-theme="light"] .music-playlist-item:hover, html[data-theme="light"] .music-playlist-item:focus-visible { background:#eef6ff !important; border-color:rgba(0,105,224,.20) !important; }
+html[data-theme="light"] .menu-panel-grid a.is-active, html[data-theme="light"] .music-playlist-item.is-active { background:#e8f3ff !important; border-color:rgba(0,105,224,.28) !important; box-shadow:inset 3px 0 0 #0069e0 !important; }
+html[data-theme="light"] .menu-panel-head strong, html[data-theme="light"] .music-panel-head strong, html[data-theme="light"] .music-track-copy strong, html[data-theme="light"] .music-playlist-copy strong { color:#0a0d12 !important; }
+html[data-theme="light"] .menu-panel-head span, html[data-theme="light"] .menu-panel-foot, html[data-theme="light"] .music-eyebrow, html[data-theme="light"] .music-track-copy span, html[data-theme="light"] .music-playlist-copy span { color:#687386 !important; }
+html[data-theme="light"] .music-status { background:#eef6ff !important; border-color:rgba(0,105,224,.18) !important; color:#0069e0 !important; }
+html[data-theme="dark"] .nav-actions>nav, html[data-theme="dark"] .music-panel { background:#0d1118 !important; border-color:rgba(255,255,255,.10) !important; }
+html[data-theme="dark"] .menu-panel-grid a, html[data-theme="dark"] .music-track, html[data-theme="dark"] .music-controls button, html[data-theme="dark"] .music-playlist-item { background:#151b24 !important; border-color:rgba(255,255,255,.075) !important; }
+html[data-theme="dark"] .menu-panel-grid a:hover, html[data-theme="dark"] .menu-panel-grid a:focus-visible, html[data-theme="dark"] .music-playlist-item:hover, html[data-theme="dark"] .music-playlist-item:focus-visible { background:#1a2533 !important; border-color:rgba(77,160,255,.25) !important; }
+html[data-theme="dark"] .menu-panel-grid a.is-active, html[data-theme="dark"] .music-playlist-item.is-active { background:#122c4d !important; border-color:rgba(77,160,255,.30) !important; box-shadow:inset 3px 0 0 #4da0ff !important; }
+html[data-theme="dark"] .music-status { background:#10243a !important; border-color:rgba(77,160,255,.30) !important; color:#8ec7ff !important; }
