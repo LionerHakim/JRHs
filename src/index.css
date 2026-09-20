@@ -1215,41 +1215,36 @@ img { display: block; max-width: 100%; }
 
 .terms-checkbox-info {
   position: relative;
-  width: 44px;
-  height: 44px;
-  flex: 0 0 44px;
-  margin-left: 2px;
+  width: 22px;
+  height: 22px;
+  flex: 0 0 22px;
+  margin-left: 5px;
   padding: 0;
-  display: grid;
+  display: inline-grid;
   place-items: center;
-  border: 0;
+  border: 1px solid #b9d8f4;
   border-radius: 50%;
-  background: transparent;
+  background: #f4f9ff;
   color: var(--blue-strong);
-  font-size: 13px;
-  font-weight: 600;
+  font-size: 10px;
+  font-weight: 700;
   line-height: 1;
   cursor: pointer;
-  transition: transform 180ms var(--ease);
 }
 
 .terms-checkbox-info::before {
-  content: "";
-  position: absolute;
-  width: 22px;
-  height: 22px;
-  border: 1.5px solid #9cc8f2;
-  border-radius: 50%;
-  background: #f4f9ff;
-  transition: background-color 180ms var(--ease), border-color 180ms var(--ease), transform 180ms var(--ease);
-  z-index: -1;
+  display: none;
 }
 
-.terms-checkbox-info:hover::before,
-.terms-checkbox-info:focus-visible::before {
-  background: #e8f3ff;
-  border-color: #72ace4;
-  transform: scale(1.04);
+.terms-checkbox-info:hover,
+.terms-checkbox-info:focus-visible {
+  background: #eef7ff;
+  border-color: #9cc8f2;
+}
+
+.terms-checkbox-info:focus-visible {
+  outline: 1px solid rgba(0,105,224,.18);
+  outline-offset: 1px;
 }
 
 .terms-checkbox-info:focus-visible {
