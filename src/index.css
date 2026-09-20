@@ -2819,3 +2819,7 @@ button,.hero-pill,.ghost-pill,.project-link,.media-links a{
     font-size:15px !important;
   }
 }
+
+/* Image logo asset — navbar */
+.wordmark-logo{display:block;width:76px;height:34px;object-fit:contain;object-position:center;}
+@media (max-width:640px){.wordmark-logo{width:68px;height:32px;}}
