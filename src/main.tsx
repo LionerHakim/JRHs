@@ -348,7 +348,6 @@ export default function App() {
 
     if (audio.src !== new URL(nextTrack.src, window.location.href).href) {
       audio.src = nextTrack.src
-      audio.currentTime = 0
       audio.load()
     } else if (audio.ended) {
       audio.currentTime = 0
