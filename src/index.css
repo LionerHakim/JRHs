@@ -2797,3 +2797,25 @@ button,.hero-pill,.ghost-pill,.project-link,.media-links a{
   .wordmark::before{inset:3px !important;border-radius:9px !important;}
   .wordmark::after{right:5px !important;bottom:5px !important;width:4px !important;height:4px !important;}
 }
+
+
+/* JRH logo — compact box follows the wordmark */
+.wordmark{
+  min-width:0 !important;
+  width:auto !important;
+  height:38px !important;
+  padding:0 10px !important;
+  border-radius:11px !important;
+  font-size:16px !important;
+  letter-spacing:-.055em !important;
+}
+@media (max-width:640px){
+  .wordmark{
+    width:auto !important;
+    min-width:0 !important;
+    height:36px !important;
+    padding:0 9px !important;
+    border-radius:10px !important;
+    font-size:15px !important;
+  }
+}
