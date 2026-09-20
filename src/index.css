@@ -239,6 +239,14 @@ img { display: block; max-width: 100%; }
 .music-playlist-state{justify-self:end;color:#7f8b99;font-size:9px}
 .music-playlist-item.is-active .music-playlist-state{color:#4da0ff}
 .music-toggle.is-playing .music-toggle-icon{animation:musicPulse 1.15s ease-in-out infinite}
+.music-icon-bars{width:12px;height:12px;display:inline-flex;align-items:flex-end;justify-content:center;gap:2px}
+.music-icon-bars b{display:block;width:2px;height:4px;border-radius:2px;background:currentColor;animation:musicIconBars 700ms ease-in-out infinite}
+.music-icon-bars b:nth-child(2){height:9px;animation-delay:120ms}
+.music-icon-bars b:nth-child(3){height:6px;animation-delay:240ms}
+.music-toggle.is-playing .music-toggle-icon{animation:none}
+@keyframes musicIconBars{0%,100%{transform:scaleY(.65);opacity:.7}50%{transform:scaleY(1);opacity:1}}
+@media (prefers-reduced-motion: reduce){.music-icon-bars b{animation:none;transform:none}}
+
 .music-toggle.is-playing .nav-action-meta{color:#b7e0ff}
 @keyframes musicPulse{0%,100%{transform:scale(1);opacity:1}50%{transform:scale(1.16);opacity:.72}}
 @media (max-width:640px){.music-playlist{margin-top:14px;padding-top:12px}.music-playlist-list{max-height:176px}.music-playlist-item{padding:9px 8px;grid-template-columns:24px minmax(0,1fr) 20px;gap:8px}}
