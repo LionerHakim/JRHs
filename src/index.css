@@ -3010,22 +3010,26 @@ button,.hero-pill,.ghost-pill,.project-link,.media-links a{
   background:#f6f7f8 !important;
 }
 .music-toggle,
-.menu-toggle,
-.music-toggle:hover,
-.music-toggle:focus-visible,
-.menu-toggle:hover,
-.menu-toggle:focus-visible{
+.menu-toggle{
   width:118px !important;
   min-width:118px !important;
   height:48px !important;
   min-height:48px !important;
   border-radius:18px !important;
-  transform:none !important;
-  transition:none !important;
   background:#0a6fe8 !important;
   border-color:#0a6fe8 !important;
   color:#fff !important;
-  box-shadow:0 5px 14px rgba(10,111,232,.16) !important;
+  box-shadow:0 6px 16px rgba(0,105,224,.18) !important;
+}
+.music-toggle:hover,
+.music-toggle:focus-visible,
+.menu-toggle:hover,
+.menu-toggle:focus-visible{
+  background:#0a6fe8 !important;
+  border-color:#0a6fe8 !important;
+  color:#fff !important;
+  transform:translateY(-1px) !important;
+  box-shadow:0 8px 20px rgba(0,105,224,.22) !important;
 }
 .music-toggle .nav-action-glyph{
   width:30px !important;
@@ -3091,11 +3095,7 @@ button,.hero-pill,.ghost-pill,.project-link,.media-links a{
     border-radius:16px !important;
   }
   .music-toggle,
-  .menu-toggle,
-  .music-toggle:hover,
-  .music-toggle:focus-visible,
-  .menu-toggle:hover,
-  .menu-toggle:focus-visible{
+  .menu-toggle{
     width:56px !important;
     min-width:56px !important;
     height:48px !important;
