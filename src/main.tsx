@@ -386,7 +386,6 @@ ${name.trim()}`)
           >
             <span className="nav-action-glyph music-toggle-icon" aria-hidden="true">♪</span>
             <span className="nav-action-label">Music</span>
-            <span className="music-equalizer" aria-hidden="true"><i></i><i></i><i></i></span>
             <span className="nav-action-meta" aria-hidden="true">PLAY</span>
           </button>
 
