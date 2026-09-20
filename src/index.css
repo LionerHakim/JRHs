@@ -4585,18 +4585,20 @@ html[data-theme="dark"] .music-toggle.is-playing { box-shadow:inset 0 0 0 1px rg
   }
 }
 
-/* FINAL MUSIC PANEL — same geometry as the working Menu panel */
+/* FINAL MUSIC PANEL — same outer geometry as Menu, playlist owns the remaining height */
 @media (max-width: 900px) and (pointer: coarse) {
   .site-shell.music-open .music-panel {
     width: min(90vw, 352px, calc((100svh - 130px) * 0.88));
     max-width: calc(100vw - 24px);
     aspect-ratio: 4 / 5;
-    height: min(calc((min(90vw, 352px, (100svh - 130px) * 0.88)) * 1.25), calc(100svh - 96px));
-    max-height: calc(100svh - 96px);
+    height: auto;
+    max-height: none;
     top: 94px;
     bottom: auto;
     padding: 12px;
     overflow: hidden;
+    display: flex;
+    flex-direction: column;
     transform-origin: top center;
   }
 
@@ -4608,9 +4610,12 @@ html[data-theme="dark"] .music-toggle.is-playing { box-shadow:inset 0 0 0 1px rg
 
   .site-shell.music-open .music-panel .music-playlist-list {
     height: 100%;
-    max-height: none;
     min-height: 0;
+    max-height: none;
     overflow-y: auto;
+    padding-bottom: 10px;
+    -webkit-overflow-scrolling: touch;
+    overscroll-behavior: contain;
   }
 }
 
@@ -4624,7 +4629,5 @@ html[data-theme="dark"] .music-toggle.is-playing { box-shadow:inset 0 0 0 1px rg
   .site-shell.music-open .music-panel {
     top: 76px;
     width: min(90vw, 317px, calc((100svh - 120px) * 0.88));
-    height: calc((min(90vw, 317px, (100svh - 120px) * 0.88)) * 1.25);
-    max-height: calc(100svh - 96px);
   }
 }
