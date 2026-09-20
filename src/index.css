@@ -4475,7 +4475,7 @@ html[data-theme="light"] .music-toggle.is-playing { box-shadow:inset 0 0 0 1px r
   }
 
   .site-shell.menu-open .nav-actions > nav {
-    height: calc((min(90vw, 352px, (100svh - 130px) * 0.88)) * 1.25 * 1.03);
+    height: calc((min(90vw, 352px, (100svh - 130px) * 0.88)) * 1.25 * 1.02);
     aspect-ratio: auto;
   }
 
