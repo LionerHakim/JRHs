@@ -2515,3 +2515,17 @@ button,.hero-pill,.ghost-pill,.project-link,.media-links a{
     border-radius:31px;
   }
 }
+
+
+/* Music active state — clean green, no equalizer */
+.music-toggle::after{content:none !important;display:none !important;}
+.music-toggle.is-open{
+  background:#22c55e !important;
+  border-color:#22c55e !important;
+  color:#fff !important;
+  box-shadow:0 8px 20px rgba(34,197,94,.24) !important;
+}
+.music-toggle.is-open .nav-action-glyph{
+  background:transparent !important;
+  color:#fff !important;
+}
