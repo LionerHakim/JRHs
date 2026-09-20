@@ -2546,3 +2546,23 @@ button,.hero-pill,.ghost-pill,.project-link,.media-links a{
     font-size:19px !important;
   }
 }
+
+
+/* Media/project links — blue buttons */
+.media-section .media-links a,
+.project-link,
+.media-links a{
+  color:#0a6fe8 !important;
+  background:#fff !important;
+  border-color:rgba(10,111,232,.22) !important;
+}
+.media-section .media-links a:hover,
+.media-section .media-links a:focus-visible,
+.project-link:hover,
+.project-link:focus-visible,
+.media-links a:hover,
+.media-links a:focus-visible{
+  color:#fff !important;
+  background:#0a6fe8 !important;
+  border-color:#0a6fe8 !important;
+}
