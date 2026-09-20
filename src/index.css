@@ -2724,3 +2724,7 @@ button,.hero-pill,.ghost-pill,.project-link,.media-links a{
 @media (max-width:640px){
   .wordmark{gap:0 !important;padding:4px 8px 4px 4px !important;font-size:17px !important;}
 }
+
+
+/* Hero portrait — slightly larger */
+.portrait-frame img{transform:scale(1.04);transform-origin:center;}
