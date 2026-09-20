@@ -4482,6 +4482,12 @@ html[data-theme="light"] .music-toggle.is-playing { box-shadow:inset 0 0 0 1px r
     transform-origin: top center;
   }
 
+  /* Music panel: give the playlist more vertical room without changing its layout. */
+  .site-shell.music-open .music-panel {
+    height: min(85svh, 640px);
+    aspect-ratio: auto;
+  }
+
   .site-shell.menu-open .nav-actions > nav {
     height: calc((min(90vw, 352px, (100svh - 130px) * 0.88)) * 1.25 * 1.01);
     aspect-ratio: auto;
