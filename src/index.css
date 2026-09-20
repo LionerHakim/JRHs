@@ -2866,14 +2866,14 @@ button,.hero-pill,.ghost-pill,.project-link,.media-links a{
 }
 
 
-/* Navbar logo — upgraded premium action button */
+/* Navbar logo — elegant premium neutral */
 .wordmark{
   position:relative !important;
-  width:48px !important;
-  min-width:48px !important;
+  width:52px !important;
+  min-width:52px !important;
   height:48px !important;
-  padding:4px !important;
-  border:1px solid #0a6fe8 !important;
+  padding:3px !important;
+  border:1px solid rgba(10,13,18,.16) !important;
   border-radius:18px !important;
   background:#fff !important;
   display:inline-flex !important;
@@ -2881,8 +2881,8 @@ button,.hero-pill,.ghost-pill,.project-link,.media-links a{
   justify-content:center !important;
   overflow:hidden !important;
   box-shadow:
-    0 6px 16px rgba(0,105,224,.16),
-    inset 0 1px 0 rgba(255,255,255,.95) !important;
+    0 5px 14px rgba(10,13,18,.10),
+    inset 0 1px 0 rgba(255,255,255,.96) !important;
   transform:none !important;
   transition:none !important;
 }
@@ -2890,7 +2890,7 @@ button,.hero-pill,.ghost-pill,.project-link,.media-links a{
   content:"" !important;
   position:absolute !important;
   inset:3px !important;
-  border:1px solid rgba(10,111,232,.12) !important;
+  border:1px solid rgba(10,13,18,.07) !important;
   border-radius:14px !important;
   pointer-events:none !important;
 }
@@ -2898,14 +2898,13 @@ button,.hero-pill,.ghost-pill,.project-link,.media-links a{
 .wordmark:focus-visible{
   transform:none !important;
   background:#fff !important;
-  border-color:#0a6fe8 !important;
-  border-radius:18px !important;
+  border-color:rgba(10,13,18,.16) !important;
   box-shadow:
-    0 6px 16px rgba(0,105,224,.16),
-    inset 0 1px 0 rgba(255,255,255,.95) !important;
+    0 5px 14px rgba(10,13,18,.10),
+    inset 0 1px 0 rgba(255,255,255,.96) !important;
 }
 .wordmark:active{
-  transform:scale(.98) !important;
+  transform:scale(.985) !important;
 }
 .wordmark-logo{
   position:relative !important;
@@ -2916,15 +2915,15 @@ button,.hero-pill,.ghost-pill,.project-link,.media-links a{
   max-height:none !important;
   object-fit:contain !important;
   object-position:center !important;
-  transform:scale(1.42) !important;
+  transform:translateX(2px) scale(1.52) !important;
   transform-origin:center !important;
 }
 @media(max-width:640px){
   .wordmark{
-    width:48px !important;
-    min-width:48px !important;
+    width:52px !important;
+    min-width:52px !important;
     height:48px !important;
-    padding:4px !important;
+    padding:3px !important;
     border-radius:18px !important;
   }
   .wordmark::before{
@@ -2932,6 +2931,6 @@ button,.hero-pill,.ghost-pill,.project-link,.media-links a{
     border-radius:14px !important;
   }
   .wordmark-logo{
-    transform:scale(1.42) !important;
+    transform:translateX(2px) scale(1.52) !important;
   }
 }
