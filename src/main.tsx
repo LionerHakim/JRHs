@@ -271,11 +271,13 @@ export default function App() {
   const contactTopicRef = useRef<HTMLDivElement>(null)
   const musicAudioRef = useRef<HTMLAudioElement>(null)
   const musicIndexRef = useRef(0)
+  const musicRequestRef = useRef(0)
   const [musicIndex, setMusicIndex] = useState(0)
   const [musicPlaying, setMusicPlaying] = useState(false)
   const [musicProgress, setMusicProgress] = useState(0)
   const [musicDuration, setMusicDuration] = useState(0)
   const [musicStatus, setMusicStatus] = useState('READY')
+
 
   useEffect(() => {
     document.documentElement.dataset.theme = darkMode ? 'dark' : 'light'
@@ -284,6 +286,62 @@ export default function App() {
     const meta = document.querySelector<HTMLMetaElement>('meta[name="theme-color"]')
     if (meta) meta.content = darkMode ? '#050505' : '#F7FBFF'
   }, [darkMode])
+
+  const loadAndPlayMusic = (index: number) => {
+    const audio = musicAudioRef.current
+    if (!audio) return
+
+    const safeIndex = (index + musicTracks.length) % musicTracks.length
+    const nextTrack = musicTracks[safeIndex]
+    const requestId = ++musicRequestRef.current
+    const nextSrc = new URL(nextTrack.src, window.location.href).href
+
+    musicIndexRef.current = safeIndex
+    setMusicIndex(safeIndex)
+    setMusicProgress(0)
+    setMusicDuration(0)
+    setMusicStatus('LOADING')
+    setMusicPlaying(false)
+
+    audio.pause()
+    audio.removeAttribute('src')
+    audio.load()
+    audio.src = nextTrack.src
+    audio.load()
+
+    void audio.play().catch(() => {
+      if (musicRequestRef.current !== requestId) return
+      setMusicPlaying(false)
+      setMusicStatus('READY')
+    })
+
+    return nextSrc
+  }
+
+  const toggleMusicPlayback = () => {
+    const audio = musicAudioRef.current
+    if (!audio) return
+
+    if (musicPlaying) {
+      audio.pause()
+      return
+    }
+
+    if (!audio.src || audio.currentSrc === '') {
+      loadAndPlayMusic(musicIndexRef.current)
+      return
+    }
+
+    void audio.play().catch(() => {
+      setMusicPlaying(false)
+      setMusicStatus('READY')
+    })
+  }
+
+  const changeMusicTrack = (direction: number) => {
+    const nextIndex = (musicIndexRef.current + direction + musicTracks.length) % musicTracks.length
+    loadAndPlayMusic(nextIndex)
+  }
 
   useEffect(() => {
     const audio = musicAudioRef.current
@@ -294,26 +352,26 @@ export default function App() {
     const handleTimeUpdate = () => {
       setMusicProgress(audio.currentTime || 0)
     }
+
     const handleLoadedMetadata = () => {
       setMusicDuration(Number.isFinite(audio.duration) ? audio.duration : 0)
     }
+
     const handlePlay = () => {
       setMusicPlaying(true)
       setMusicStatus('PLAYING')
     }
+
     const handlePause = () => {
       setMusicPlaying(false)
       setMusicStatus(audio.ended ? 'ENDED' : 'PAUSED')
     }
+
     const handleEnded = () => {
       const nextIndex = (musicIndexRef.current + 1) % musicTracks.length
-      setMusicPlaying(false)
-      setMusicStatus('READY')
-      setMusicIndex(nextIndex)
-      setMusicProgress(0)
-      setMusicDuration(0)
-      window.setTimeout(() => loadAndPlayMusic(nextIndex), 0)
+      loadAndPlayMusic(nextIndex)
     }
+
     const handleError = () => {
       setMusicPlaying(false)
       setMusicStatus('ERROR')
@@ -327,6 +385,7 @@ export default function App() {
     audio.addEventListener('error', handleError)
 
     return () => {
+      musicRequestRef.current += 1
       audio.removeEventListener('timeupdate', handleTimeUpdate)
       audio.removeEventListener('loadedmetadata', handleLoadedMetadata)
       audio.removeEventListener('play', handlePlay)
@@ -334,62 +393,11 @@ export default function App() {
       audio.removeEventListener('ended', handleEnded)
       audio.removeEventListener('error', handleError)
       audio.pause()
-    }
-  }, [])
-
-  const loadAndPlayMusic = (index: number) => {
-    const audio = musicAudioRef.current
-    if (!audio) return
-
-    const nextTrack = musicTracks[index]
-    musicIndexRef.current = index
-    setMusicIndex(index)
-    setMusicStatus('LOADING')
-
-    if (audio.src !== new URL(nextTrack.src, window.location.href).href) {
-      audio.src = nextTrack.src
-      audio.load()
-    } else if (audio.ended) {
-      audio.currentTime = 0
-    }
-
-    void audio.play().catch(() => {
-      setMusicPlaying(false)
-      setMusicStatus('READY')
-    })
-  }
-
-  const toggleMusicPlayback = () => {
-    const audio = musicAudioRef.current
-    if (!audio) return
-
-    if (musicPlaying) {
-      audio.pause()
-      return
-    }
-
-    loadAndPlayMusic(musicIndex)
-  }
-
-  const changeMusicTrack = (direction: number) => {
-    const nextIndex = (musicIndex + direction + musicTracks.length) % musicTracks.length
-    if (musicPlaying) {
-      loadAndPlayMusic(nextIndex)
-      return
-    }
-
-    const audio = musicAudioRef.current
-    if (audio) {
-      audio.pause()
       audio.removeAttribute('src')
       audio.load()
     }
-    musicIndexRef.current = nextIndex
-    setMusicIndex(nextIndex)
-    setMusicProgress(0)
-    setMusicDuration(0)
-    setMusicStatus('READY')
-  }
+  }, [])
+
 
   useEffect(() => {
     const shouldLockScroll = menuOpen || musicOpen
