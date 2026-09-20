@@ -109,7 +109,7 @@ const musicTracks = [
   { title: 'Who Knows', artist: 'Daniel Caesar', file: 'Who Knows.mp3' },
 ].map((track) => ({
   ...track,
-  src: '/assets/audio/' + encodeURIComponent(track.file),
+  src: '/assets/music/' + encodeURIComponent(track.file),
 }));
 
 const contactTopics = ['Pertanyaan umum', 'Kolaborasi', 'Project', 'Bisnis', 'Investasi', 'Akademik', 'Feedback', 'Relationships', 'Tambah teman'] as const
