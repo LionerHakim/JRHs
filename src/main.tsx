@@ -726,18 +726,30 @@ Web app dan digital product yang sedang dibangun untuk memecahkan masalah nyata.
       <footer className="site-footer">
         <div className="site-footer-main">
           <div className="site-footer-brand">
+            <span className="footer-kicker">JRH / PORTFOLIO</span>
             <strong>JRH</strong>
+            <p>Independent work · Economics · Technology · Digital</p>
           </div>
 
           <nav className="site-footer-nav" aria-label="Footer navigation">
-            {sectionItems.map(([id, label]) => (
-              <a key={id} href={`#${id}`}>{label.toUpperCase()}</a>
-            ))}
+            <span className="footer-nav-label">EXPLORE</span>
+            <div className="site-footer-nav-grid">
+              {sectionItems.map(([id, label]) => (
+                <a key={id} href={`#${id}`}>{label}</a>
+              ))}
+            </div>
           </nav>
+
+          <div className="site-footer-statement">
+            <span>JRH / 2026</span>
+            <p>Building ideas,<br />one project at a time.</p>
+          </div>
         </div>
 
         <div className="site-footer-bottom">
           <span>© 2026 JRH</span>
+          <span>Independent digital portfolio</span>
+          <a href="#identity">↑ BACK TO TOP</a>
         </div>
       </footer>
     </div>
