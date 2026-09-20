@@ -372,7 +372,7 @@ ${name.trim()}`)
       <a className="skip-link" href="#identity">Lewati ke konten utama</a>
       <header className="nav">
         <a className="wordmark" href="#identity" aria-label="JRH home">
-          <span>JRH</span>
+          <img className="wordmark-logo" src="/assets/images/jrh-navbar-logo.svg" alt="JRH" />
         </a>
 
         <div className="nav-actions" ref={navActionsRef}>
