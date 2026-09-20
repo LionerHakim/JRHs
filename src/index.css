@@ -3047,10 +3047,33 @@ button,.hero-pill,.ghost-pill,.project-link,.media-links a{
 
 /* Active Music state remains clearly distinct */
 .music-toggle.is-open{
+  width:118px !important;
+  min-width:118px !important;
+  height:48px !important;
+  min-height:48px !important;
+  transform:none !important;
   background:#22c55e !important;
   border-color:#22c55e !important;
   color:#fff !important;
   box-shadow:0 6px 16px rgba(34,197,94,.20) !important;
+}
+@media (max-width:640px){
+  .music-toggle.is-open{
+    width:88px !important;
+    min-width:88px !important;
+    height:48px !important;
+    min-height:48px !important;
+    transform:none !important;
+  }
+}
+@media (max-width:420px){
+  .music-toggle.is-open{
+    width:82px !important;
+    min-width:82px !important;
+    height:48px !important;
+    min-height:48px !important;
+    transform:none !important;
+  }
 }
 
 /* Yellow active outline — stable, no animation */
