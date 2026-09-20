@@ -255,7 +255,16 @@ export default function App() {
   const contactTopicRef = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
-    if (!menuOpen && !musicOpen && !termsOpen && !topicOpen) return
+    const shouldLockScroll = menuOpen || musicOpen
+    document.documentElement.dataset.overlayOpen = shouldLockScroll ? 'true' : 'false'
+    document.body.style.overflow = shouldLockScroll ? 'hidden' : ''
+
+    if (!menuOpen && !musicOpen && !termsOpen && !topicOpen) {
+      return () => {
+        document.documentElement.dataset.overlayOpen = 'false'
+        document.body.style.overflow = ''
+      }
+    }
 
     const handleKeyDown = (event: KeyboardEvent) => {
       if (event.key === 'Escape') {
@@ -288,6 +297,8 @@ export default function App() {
     return () => {
       document.removeEventListener('keydown', handleKeyDown)
       document.removeEventListener('pointerdown', handlePointerDown)
+      document.documentElement.dataset.overlayOpen = 'false'
+      document.body.style.overflow = ''
     }
   }, [menuOpen, musicOpen, termsOpen, topicOpen])
 
