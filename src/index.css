@@ -2866,12 +2866,12 @@ button,.hero-pill,.ghost-pill,.project-link,.media-links a{
 }
 
 
-/* Navbar logo — white action button, reloads page on click */
+/* Navbar logo — final clean button, no hover */
 .wordmark{
   width:48px !important;
   min-width:48px !important;
   height:48px !important;
-  padding:5px !important;
+  padding:4px !important;
   border:1px solid #0a6fe8 !important;
   border-radius:18px !important;
   background:#fff !important;
@@ -2879,31 +2879,38 @@ button,.hero-pill,.ghost-pill,.project-link,.media-links a{
   align-items:center !important;
   justify-content:center !important;
   overflow:hidden !important;
-  box-shadow:0 6px 16px rgba(0,105,224,.18) !important;
+  box-shadow:0 6px 16px rgba(0,105,224,.16) !important;
   transform:none !important;
-  transition:transform 220ms var(--ease),box-shadow 220ms var(--ease),border-color 220ms var(--ease) !important;
+  transition:none !important;
 }
-.wordmark:hover,.wordmark:focus-visible{
-  transform:translateY(-1px) !important;
+.wordmark:hover,
+.wordmark:focus-visible,
+.wordmark:active{
+  transform:none !important;
   background:#fff !important;
   border-color:#0a6fe8 !important;
   border-radius:18px !important;
-  box-shadow:0 8px 20px rgba(0,105,224,.22) !important;
+  box-shadow:0 6px 16px rgba(0,105,224,.16) !important;
 }
 .wordmark-logo{
   width:100% !important;
   height:100% !important;
-  max-width:100% !important;
-  max-height:100% !important;
+  max-width:none !important;
+  max-height:none !important;
   object-fit:contain !important;
   object-position:center !important;
+  transform:scale(1.34) !important;
+  transform-origin:center !important;
 }
 @media(max-width:640px){
   .wordmark{
     width:48px !important;
     min-width:48px !important;
     height:48px !important;
-    padding:5px !important;
+    padding:4px !important;
     border-radius:18px !important;
+  }
+  .wordmark-logo{
+    transform:scale(1.34) !important;
   }
 }
