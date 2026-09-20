@@ -240,7 +240,7 @@ export default function App() {
   const [activeSection, setActiveSection] = useState<(typeof sectionIds)[number]>('identity')
   const [menuOpen, setMenuOpen] = useState(false)
   const [musicOpen, setMusicOpen] = useState(false)
-  const [darkMode, setDarkMode] = useState(() => window.localStorage.getItem('jrhs-theme') === 'dark')
+  const [darkMode, setDarkMode] = useState(false)
   const [name, setName] = useState('')
   const [purpose, setPurpose] = useState('')
   const [message, setMessage] = useState('')
@@ -258,7 +258,6 @@ export default function App() {
   useEffect(() => {
     document.documentElement.dataset.theme = darkMode ? 'dark' : 'light'
     document.documentElement.style.colorScheme = darkMode ? 'dark' : 'light'
-    window.localStorage.setItem('jrhs-theme', darkMode ? 'dark' : 'light')
     const meta = document.querySelector<HTMLMetaElement>('meta[name="theme-color"]')
     if (meta) meta.content = darkMode ? '#050505' : '#F7FBFF'
   }, [darkMode])
