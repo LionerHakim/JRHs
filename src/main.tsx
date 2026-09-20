@@ -547,16 +547,16 @@ ${name.trim()}`)
         </a>
         <div className="nav-actions" ref={navActionsRef}>
           <button
-            className={`nav-action music-toggle${musicOpen ? ' is-open' : ''}`}
+            className={`nav-action music-toggle${musicOpen ? ' is-open' : ''}${musicPlaying ? ' is-playing' : ''}`}
             type="button"
             aria-expanded={musicOpen}
             aria-controls="music-panel"
-            aria-label={musicOpen ? 'Tutup music player' : 'Buka music player'}
+            aria-label={musicPlaying ? 'Music sedang diputar' : (musicOpen ? 'Tutup music player' : 'Buka music player')}
             onClick={() => { setMusicOpen((open) => !open); setMenuOpen(false) }}
           >
             <span className="nav-action-glyph music-toggle-icon" aria-hidden="true">♪</span>
             <span className="nav-action-label">Music</span>
-            <span className="nav-action-meta" aria-hidden="true">PLAY</span>
+            <span className="nav-action-meta" aria-hidden="true">{musicPlaying ? 'ON AIR' : 'PLAY'}</span>
           </button>
 
           <button
@@ -643,6 +643,34 @@ ${name.trim()}`)
               </button>
               <button type="button" aria-label="Next track" onClick={() => changeMusicTrack(1)}>››</button>
             </div>
+
+            <div className="music-playlist" aria-label="Playlist">
+              <div className="music-playlist-head">
+                <span>PLAYLIST</span>
+                <strong>{musicTracks.length} TRACKS</strong>
+              </div>
+              <div className="music-playlist-list">
+                {musicTracks.map((track, index) => (
+                  <button
+                    key={track.file}
+                    type="button"
+                    className={`music-playlist-item${musicIndex === index ? ' is-active' : ''}`}
+                    aria-current={musicIndex === index ? 'true' : undefined}
+                    onClick={() => loadAndPlayMusic(index)}
+                  >
+                    <span className="music-playlist-number">{String(index + 1).padStart(2, '0')}</span>
+                    <span className="music-playlist-copy">
+                      <strong>{track.title}</strong>
+                      <span>{track.artist}</span>
+                    </span>
+                    <span className="music-playlist-state" aria-hidden="true">
+                      {musicIndex === index && musicPlaying ? '♪' : '▶'}
+                    </span>
+                  </button>
+                ))}
+              </div>
+            </div>
+
             <audio ref={musicAudioRef} preload="none" aria-hidden="true" />
           </aside>
         </div>
