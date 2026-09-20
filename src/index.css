@@ -2881,8 +2881,8 @@ button,.hero-pill,.ghost-pill,.project-link,.media-links a{
   justify-content:center !important;
   overflow:hidden !important;
   box-shadow:
-    0 8px 20px rgba(10,13,18,.085),
-    0 2px 4px rgba(10,13,18,.045),
+    0 0 0 3px #0a6fe8,
+    0 7px 18px rgba(10,111,232,.22),
     inset 0 1px 0 rgba(255,255,255,.98) !important;
   transform:none !important;
   transition:none !important;
@@ -2891,7 +2891,7 @@ button,.hero-pill,.ghost-pill,.project-link,.media-links a{
   content:"" !important;
   position:absolute !important;
   inset:4px !important;
-  border:1px solid rgba(10,13,18,.032) !important;
+  border:1px solid rgba(10,13,18,.045) !important;
   border-radius:13px !important;
   pointer-events:none !important;
 }
