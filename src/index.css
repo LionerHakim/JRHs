@@ -2866,27 +2866,28 @@ button,.hero-pill,.ghost-pill,.project-link,.media-links a{
 }
 
 
-/* Navbar logo — square cube card, aligned with action buttons */
+/* Navbar logo — dominant JRH identity */
 .wordmark{
   width:48px !important;
   min-width:48px !important;
   height:48px !important;
   padding:4px !important;
-  border:1px solid rgba(10,13,18,.12) !important;
+  border:1px solid #0a0d12 !important;
   border-radius:11px !important;
-  background:#fff !important;
+  background:#0a0d12 !important;
   display:inline-flex !important;
   align-items:center !important;
   justify-content:center !important;
   overflow:hidden !important;
-  box-shadow:0 4px 12px rgba(10,13,18,.09) !important;
+  box-shadow:0 5px 14px rgba(10,13,18,.18) !important;
   transform:none !important;
 }
 .wordmark:hover,.wordmark:focus-visible{
   transform:none !important;
-  background:#fff !important;
+  background:#0a0d12 !important;
+  border-color:#0a0d12 !important;
   border-radius:11px !important;
-  box-shadow:0 5px 14px rgba(10,13,18,.11) !important;
+  box-shadow:0 6px 16px rgba(10,13,18,.22) !important;
 }
 .wordmark-logo{
   width:100% !important;
