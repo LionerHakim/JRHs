@@ -263,6 +263,8 @@ export default function App() {
 
   useEffect(() => {
     document.documentElement.dataset.theme = darkMode ? 'dark' : 'light'
+    const themeMeta = document.querySelector<HTMLMetaElement>('meta[name="theme-color"]')
+    if (themeMeta) themeMeta.content = darkMode ? '#050505' : '#F7FBFF'
     window.localStorage.setItem('jrhs-theme', darkMode ? 'dark' : 'light')
   }, [darkMode])
 
