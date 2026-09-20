@@ -2500,3 +2500,18 @@ button,.hero-pill,.ghost-pill,.project-link,.media-links a{
 .menu-toggle .nav-action-meta{
   display:none !important;
 }
+
+
+/* Desktop active panels — larger; Android/iPhone unchanged */
+@media (min-width:641px){
+  .nav-actions>nav,
+  .music-panel{
+    width:min(620px,calc(100vw - 48px));
+    padding:28px;
+    border-radius:32px;
+  }
+  .nav-actions>nav::before,
+  .music-panel::before{
+    border-radius:31px;
+  }
+}
