@@ -6085,3 +6085,56 @@ html[data-theme="light"] .wordmark:focus-visible {
   border-color: #3b9cff !important;
   box-shadow: 0 0 0 3px #3b9cff !important;
 }
+
+/* Accessibility controls: keep the existing carousel geometry unchanged. */
+.testimonials-toolbar {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.testimonial-controls {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  margin-left: auto;
+}
+.testimonial-controls button {
+  width: 34px;
+  height: 34px;
+  display: inline-grid;
+  place-items: center;
+  border: 1px solid var(--ui-border, rgba(10,13,18,.12));
+  border-radius: 999px;
+  background: var(--ui-surface, rgba(255,255,255,.82));
+  color: inherit;
+  font: inherit;
+  font-weight: 700;
+  cursor: pointer;
+  transition: border-color 180ms ease, background-color 180ms ease, transform 180ms ease;
+}
+.testimonial-controls button:hover {
+  border-color: var(--ui-border-strong, rgba(10,13,18,.18));
+  transform: translateY(-1px);
+}
+.testimonial-controls button:focus-visible {
+  outline: 3px solid rgba(0,105,224,.20);
+  outline-offset: 3px;
+}
+html[data-theme="dark"] .testimonial-controls button {
+  background: #11161e;
+  border-color: rgba(255,255,255,.12);
+}
+@media (max-width: 640px) {
+  .testimonial-controls {
+    margin-left: 0;
+  }
+  .testimonial-controls button {
+    width: 32px;
+    height: 32px;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .testimonial-controls button {
+    transition: none;
+  }
+}
