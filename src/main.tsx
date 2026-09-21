@@ -259,7 +259,7 @@ function TestimonialsSection() {
         <span className="testimonial-counter">{String(testimonialActiveIndex + 1).padStart(2, '0')} / {String(testimonials.length).padStart(2, '0')} PERSPEKTIF</span>
         <span className="testimonial-swipe-hint" aria-hidden="true">GESER ↔</span>
       </div>
-      <div ref={viewportRef} className="testimonials-viewport" aria-label="Koleksi quotes yang dapat digeser">
+      <div ref={viewportRef} className="testimonials-viewport" role="region" aria-roledescription="carousel" aria-label="Koleksi quotes yang dapat digeser">
         <div className="testimonials-list">
           {testimonials.map((testimonial, index) => (
             <TestimonialCard
