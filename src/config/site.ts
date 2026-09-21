@@ -28,7 +28,10 @@ export type Testimonial = {
 export const siteConfig = {
   identity: {
     name: 'JRH',
-    description: 'Projects, publishing, and independent work.',
+    headline: 'SAYA SIBUK BEKERJA,\nINI YANG BARU.',
+    description: 'Ruang personal untuk karya, project, media, dan jejak yang sedang saya bangun.',
+    statusLabel: 'CURRENTLY WORKING',
+    locationLabel: 'INDONESIA',
     profileImage: '/assets/images/s.jpg',
   },
   contactEmail: 'contact@jrhsee.my.id',
