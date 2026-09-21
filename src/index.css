@@ -5756,3 +5756,44 @@ main > .section:last-child {
     transition: none;
   }
 }
+
+/* =========================================================
+   JRH SECURITY LEVEL 1 — CLIENT-SIDE HARDENING
+   Protection without breaking normal reading, copying or accessibility.
+   ========================================================= */
+
+/* Image assets are treated as visual content, not draggable UI controls. */
+img {
+  -webkit-user-drag: none;
+  user-drag: none;
+}
+
+/* Honeypot remains invisible to people but available to simple bots. */
+.contact-honeypot {
+  position: absolute !important;
+  width: 1px !important;
+  height: 1px !important;
+  padding: 0 !important;
+  margin: -1px !important;
+  overflow: hidden !important;
+  clip: rect(0 0 0 0) !important;
+  white-space: nowrap !important;
+  border: 0 !important;
+  opacity: 0 !important;
+  pointer-events: none !important;
+}
+
+.contact-honeypot input {
+  position: absolute !important;
+  width: 1px !important;
+  height: 1px !important;
+  opacity: 0 !important;
+}
+
+/* Keep image presentation stable while the protection layer is active. */
+.portrait-frame img,
+.media-card img,
+.project-card img {
+  -webkit-user-select: none;
+  user-select: none;
+}
