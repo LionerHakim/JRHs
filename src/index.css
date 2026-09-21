@@ -285,36 +285,37 @@ img { display: block; max-width: 100%; }
 
 .hero {
   min-height: calc(100svh - 88px);
-  padding: 88px 0 120px;
+  padding: 96px 0 128px;
   display: flex;
   flex-direction: column;
-  align-items: center;
+  align-items: flex-start;
   justify-content: center;
-  text-align: center;
+  text-align: left;
 }
 
 .hero-copy {
   width: 100%;
   display: flex;
   flex-direction: column;
-  align-items: center;
+  align-items: flex-start;
 }
 
 .hero h1 {
-  max-width: 1200px;
+  max-width: 1120px;
   margin: 0;
   color: var(--ink);
   font-family: var(--font-aeonik);
-  font-size: clamp(72px, 12.3vw, 148px);
-  font-weight: 500;
-  line-height: var(--leading-hero);
-  letter-spacing: -.02em;
-  overflow-wrap: anywhere;
+  font-size: clamp(58px, 8.2vw, 112px);
+  font-weight: 450;
+  line-height: .94;
+  letter-spacing: -.055em;
+  text-wrap: balance;
+  overflow-wrap: normal;
 }
 
 .hero-description {
-  width: min(680px, 100%);
-  margin: 32px auto 0;
+  width: min(620px, 100%);
+  margin: 30px 0 0;
   color: var(--graphite);
   font-size: var(--text-body-lg);
   line-height: var(--leading-body-lg);
@@ -326,7 +327,7 @@ img { display: block; max-width: 100%; }
   display: flex;
   flex-wrap: wrap;
   align-items: center;
-  justify-content: center;
+  justify-content: flex-start;
   gap: 12px;
 }
 
@@ -6160,4 +6161,34 @@ html[data-theme="dark"] .testimonial-controls button {
     line-height: .98;
     letter-spacing: -.045em;
   }
+}
+
+
+/* Premium editorial hero — restrained scale, optical spacing, quiet confidence */
+.hero h1::selection { background: var(--ink); color: var(--paper); }
+
+@media (max-width: 640px) {
+  .hero {
+    padding: 58px 0 82px;
+    align-items: flex-start;
+    text-align: left;
+  }
+
+  .hero-copy { align-items: flex-start; }
+
+  .hero h1 {
+    max-width: 100%;
+    font-size: clamp(48px, 14.8vw, 72px);
+    line-height: .97;
+    letter-spacing: -.05em;
+  }
+
+  .hero-description {
+    max-width: 34rem;
+    margin-top: 22px;
+    font-size: 15px;
+    line-height: 1.55;
+  }
+
+  .hero-actions { justify-content: flex-start; }
 }
