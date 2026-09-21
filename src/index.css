@@ -7807,3 +7807,53 @@ main[data-ui-level="20"] .terms-checkbox-popover {
     overflow: visible !important;
   }
 }
+
+
+/* =========================================================
+   JRH AUDIT PATCH — POST LEVEL 100 STABILITY
+   Targeted fixes only. No content or layout redesign.
+   ========================================================= */
+
+/* Prevent viewport-width utilities from creating horizontal
+   scrollbars when the browser includes a scrollbar gutter. */
+@media (max-width: 430px) {
+  main[data-ui-level="20"] .testimonials-viewport {
+    max-width: 100%;
+  }
+}
+
+/* Keyboard users: preserve a visible focus ring even where
+   older interaction rules remove hover/tap decoration. */
+@media (any-hover: none) {
+  :where(a, button, input, textarea, select, [tabindex]):focus-visible {
+    outline: 2px solid currentColor;
+    outline-offset: 3px;
+  }
+}
+
+/* Keep native form controls usable on iOS while preventing
+   accidental horizontal expansion from long values. */
+main[data-ui-level="20"] input,
+main[data-ui-level="20"] textarea,
+main[data-ui-level="20"] select,
+main[data-ui-level="20"] button {
+  min-width: 0;
+}
+
+/* Dynamic viewport fallback: do not let a transient Safari
+   toolbar create a zero/negative hero on very short screens. */
+@media (max-height: 420px) {
+  main[data-ui-level="20"] .hero {
+    min-height: auto;
+  }
+}
+
+/* If a browser disables backdrop-filter, retain a solid layer
+   rather than exposing unreadable content beneath overlays. */
+@supports not ((backdrop-filter: blur(1px))) {
+  .nav,
+  .menu-panel,
+  .music-panel {
+    background: var(--paper, #ffffff);
+  }
+}
