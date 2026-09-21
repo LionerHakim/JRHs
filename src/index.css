@@ -6710,3 +6710,175 @@ main {
     transition: none;
   }
 }
+
+
+/* =========================================================
+   JRH UI/UX LEVEL 4 — SIGNATURE EXPERIENCE
+   New interaction layer, stronger wayfinding, richer hierarchy.
+   ========================================================= */
+
+main[data-ui-level="4"] {
+  --experience-accent: var(--blue-strong);
+}
+
+/* Persistent reading rhythm */
+main[data-ui-level="4"] .experience-section {
+  position: relative;
+  isolation: isolate;
+}
+
+main[data-ui-level="4"] .experience-section::before {
+  content: attr(data-section);
+  position: absolute;
+  top: clamp(52px, 6vw, 92px);
+  right: 0;
+  z-index: -1;
+  color: rgba(10,13,18,.025);
+  font-family: var(--font-editorial);
+  font-size: clamp(72px, 12vw, 150px);
+  font-weight: 600;
+  line-height: .72;
+  letter-spacing: -.06em;
+  text-transform: uppercase;
+  pointer-events: none;
+}
+
+/* Section heads now act as navigation anchors */
+main[data-ui-level="4"] .section-head {
+  display: grid;
+  grid-template-columns: minmax(0,1fr) auto;
+  align-items: end;
+  gap: 24px;
+}
+
+main[data-ui-level="4"] .section-head::after {
+  grid-column: 2;
+  grid-row: 1;
+  align-self: end;
+  margin: 0;
+  padding-bottom: 4px;
+  font-variant-numeric: tabular-nums;
+}
+
+/* Hero gets a restrained signature line */
+main[data-ui-level="4"] .hero-copy::before {
+  content: "JRH / PERSONAL WORKSPACE";
+  display: block;
+  margin-bottom: 20px;
+  color: var(--fog);
+  font-family: var(--font-geist);
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: .18em;
+}
+
+/* Better CTA hierarchy */
+main[data-ui-level="4"] .hero-actions {
+  align-items: stretch;
+}
+
+main[data-ui-level="4"] .hero-pill {
+  min-width: 156px;
+}
+
+main[data-ui-level="4"] .ghost-pill {
+  min-width: 128px;
+}
+
+/* Cards reveal intent rather than just hover */
+main[data-ui-level="4"] .project-card,
+main[data-ui-level="4"] .media-card {
+  cursor: default;
+}
+
+main[data-ui-level="4"] .project-card-body p,
+main[data-ui-level="4"] .media-card-body p {
+  text-wrap: pretty;
+}
+
+main[data-ui-level="4"] .project-link,
+main[data-ui-level="4"] .media-links a {
+  font-weight: 600;
+}
+
+/* Contact gets a clearer conversion moment */
+main[data-ui-level="4"] .contact-card {
+  position: relative;
+}
+
+main[data-ui-level="4"] .contact-card::after {
+  content: "LET'S BUILD";
+  position: absolute;
+  right: clamp(20px, 4vw, 56px);
+  top: clamp(20px, 4vw, 56px);
+  color: rgba(10,13,18,.055);
+  font-family: var(--font-editorial);
+  font-size: clamp(42px, 7vw, 88px);
+  font-weight: 600;
+  line-height: .8;
+  letter-spacing: -.05em;
+  pointer-events: none;
+}
+
+/* Utility states feel intentional */
+main[data-ui-level="4"] .availability-dot {
+  animation-duration: 3s;
+}
+
+main[data-ui-level="4"] .jrh-reveal {
+  transition:
+    opacity 700ms var(--ease),
+    transform 700ms var(--ease),
+    filter 700ms ease;
+  filter: blur(1px);
+}
+
+main[data-ui-level="4"] .jrh-reveal.is-visible {
+  filter: blur(0);
+}
+
+/* Keep the signature subtle on small screens */
+@media (max-width: 640px) {
+  main[data-ui-level="4"] .hero-copy::before {
+    margin-bottom: 16px;
+    font-size: 8px;
+  }
+
+  main[data-ui-level="4"] .experience-section::before {
+    top: 46px;
+    right: -4px;
+    font-size: 22vw;
+  }
+
+  main[data-ui-level="4"] .section-head {
+    grid-template-columns: minmax(0,1fr) auto;
+    gap: 12px;
+  }
+
+  main[data-ui-level="4"] .section-head::after {
+    padding-bottom: 2px;
+  }
+
+  main[data-ui-level="4"] .hero-pill,
+  main[data-ui-level="4"] .ghost-pill {
+    min-width: 0;
+  }
+
+  main[data-ui-level="4"] .contact-card::after {
+    right: 18px;
+    top: 18px;
+    font-size: 38px;
+  }
+
+  main[data-ui-level="4"] .jrh-reveal {
+    filter: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  main[data-ui-level="4"] .jrh-reveal,
+  main[data-ui-level="4"] .jrh-reveal.is-visible {
+    filter: none;
+    transition: none;
+  }
+}
