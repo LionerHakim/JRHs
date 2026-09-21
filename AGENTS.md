@@ -1,6 +1,6 @@
 # JRHs project guidance
 
-Keep the portfolio specific, restrained, and content-led.
+Keep JRHs specific, restrained, and content-led. The core identity is: “Saya sibuk bekerja, ini yang baru.”
 
 For UI work:
 - Follow the current white, editorial portfolio implementation.
@@ -8,17 +8,20 @@ For UI work:
 - Do not invent portfolio facts, projects, testimonials, dates, or claims.
 - Keep interactions functional and keyboard accessible.
 - Respect `prefers-reduced-motion`.
-- Avoid gradients, decorative sci-fi effects, generic SaaS patterns, and unnecessary animation.
+- Do not introduce decorative sci-fi effects, generic SaaS patterns, or unnecessary animation. Preserve the restrained editorial language.
 - Keep the React + TypeScript + Vite stack unless a concrete compatibility issue requires otherwise.
 
 Current structure:
 - About
 - Education
+- Media
 - Projects
+- Quotes
 - Contact
 - Contact is email-only via `contact@jrhsee.my.id`.
-- Footer contains only the JRH wordmark.
-- No command palette, project modal, social contact list, or music player.
+- Music Player is an optional utility in the navigation.
+- Footer contains the JRH wordmark plus section navigation.
+- No command palette, project modal, or separate social-contact section.
 
 Before release:
 - Run `npm run typecheck`.
