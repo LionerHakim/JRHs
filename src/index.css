@@ -1799,7 +1799,7 @@ img { display: block; max-width: 100%; }
   .menu-panel-grid { grid-template-columns: 1fr; }
   .menu-panel-grid a { min-height: 56px; }
 
-  .hero h1 { font-size: 60px; }
+  .hero h1 { font-size: clamp(52px, 15vw, 76px); line-height: .88; letter-spacing: -.035em; }
 
   .hero-actions { flex-direction: column; }
 
@@ -4322,7 +4322,7 @@ img, svg, video, canvas { max-width:100%; }
 @media (max-width:390px){
   :root{--page:calc(100% - 16px)}
   .nav{width:calc(100% - 12px)}
-  .hero h1{font-size:clamp(52px,17vw,64px)}
+  .hero h1{font-family:var(--font-editorial);font-size:clamp(52px,15vw,76px);font-weight:600;line-height:.88;letter-spacing:-.035em}
   .hero-description{font-size:15px}
   .hero-actions{gap:8px}
   .contact-card{padding:16px}
@@ -4333,7 +4333,7 @@ img, svg, video, canvas { max-width:100%; }
   .nav{width:calc(100% - 8px)}
   .nav-actions{gap:2px}
   .music-toggle,.menu-toggle{width:50px;min-width:50px}
-  .hero h1{font-size:50px}
+  .hero h1{font-family:var(--font-editorial);font-size:52px;font-weight:600;line-height:.88;letter-spacing:-.035em}
 }
 
 /* Footer navigation — vertical alignment */
