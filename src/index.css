@@ -6717,17 +6717,17 @@ main {
    New interaction layer, stronger wayfinding, richer hierarchy.
    ========================================================= */
 
-main[data-ui-level="4"] {
+main[data-ui-level="10"] {
   --experience-accent: var(--blue-strong);
 }
 
 /* Persistent reading rhythm */
-main[data-ui-level="4"] .experience-section {
+main[data-ui-level="10"] .experience-section {
   position: relative;
   isolation: isolate;
 }
 
-main[data-ui-level="4"] .experience-section::before {
+main[data-ui-level="10"] .experience-section::before {
   content: attr(data-section);
   position: absolute;
   top: clamp(52px, 6vw, 92px);
@@ -6744,14 +6744,14 @@ main[data-ui-level="4"] .experience-section::before {
 }
 
 /* Section heads now act as navigation anchors */
-main[data-ui-level="4"] .section-head {
+main[data-ui-level="10"] .section-head {
   display: grid;
   grid-template-columns: minmax(0,1fr) auto;
   align-items: end;
   gap: 24px;
 }
 
-main[data-ui-level="4"] .section-head::after {
+main[data-ui-level="10"] .section-head::after {
   grid-column: 2;
   grid-row: 1;
   align-self: end;
@@ -6761,7 +6761,7 @@ main[data-ui-level="4"] .section-head::after {
 }
 
 /* Hero gets a restrained signature line */
-main[data-ui-level="4"] .hero-copy::before {
+main[data-ui-level="10"] .hero-copy::before {
   content: "JRH / PERSONAL WORKSPACE";
   display: block;
   margin-bottom: 20px;
@@ -6773,40 +6773,40 @@ main[data-ui-level="4"] .hero-copy::before {
 }
 
 /* Better CTA hierarchy */
-main[data-ui-level="4"] .hero-actions {
+main[data-ui-level="10"] .hero-actions {
   align-items: stretch;
 }
 
-main[data-ui-level="4"] .hero-pill {
+main[data-ui-level="10"] .hero-pill {
   min-width: 156px;
 }
 
-main[data-ui-level="4"] .ghost-pill {
+main[data-ui-level="10"] .ghost-pill {
   min-width: 128px;
 }
 
 /* Cards reveal intent rather than just hover */
-main[data-ui-level="4"] .project-card,
-main[data-ui-level="4"] .media-card {
+main[data-ui-level="10"] .project-card,
+main[data-ui-level="10"] .media-card {
   cursor: default;
 }
 
-main[data-ui-level="4"] .project-card-body p,
-main[data-ui-level="4"] .media-card-body p {
+main[data-ui-level="10"] .project-card-body p,
+main[data-ui-level="10"] .media-card-body p {
   text-wrap: pretty;
 }
 
-main[data-ui-level="4"] .project-link,
-main[data-ui-level="4"] .media-links a {
+main[data-ui-level="10"] .project-link,
+main[data-ui-level="10"] .media-links a {
   font-weight: 600;
 }
 
 /* Contact gets a clearer conversion moment */
-main[data-ui-level="4"] .contact-card {
+main[data-ui-level="10"] .contact-card {
   position: relative;
 }
 
-main[data-ui-level="4"] .contact-card::after {
+main[data-ui-level="10"] .contact-card::after {
   content: "LET'S BUILD";
   position: absolute;
   right: clamp(20px, 4vw, 56px);
@@ -6821,11 +6821,11 @@ main[data-ui-level="4"] .contact-card::after {
 }
 
 /* Utility states feel intentional */
-main[data-ui-level="4"] .availability-dot {
+main[data-ui-level="10"] .availability-dot {
   animation-duration: 3s;
 }
 
-main[data-ui-level="4"] .jrh-reveal {
+main[data-ui-level="10"] .jrh-reveal {
   transition:
     opacity 700ms var(--ease),
     transform 700ms var(--ease),
@@ -6833,51 +6833,51 @@ main[data-ui-level="4"] .jrh-reveal {
   filter: blur(1px);
 }
 
-main[data-ui-level="4"] .jrh-reveal.is-visible {
+main[data-ui-level="10"] .jrh-reveal.is-visible {
   filter: blur(0);
 }
 
 /* Keep the signature subtle on small screens */
 @media (max-width: 640px) {
-  main[data-ui-level="4"] .hero-copy::before {
+  main[data-ui-level="10"] .hero-copy::before {
     margin-bottom: 16px;
     font-size: 8px;
   }
 
-  main[data-ui-level="4"] .experience-section::before {
+  main[data-ui-level="10"] .experience-section::before {
     top: 46px;
     right: -4px;
     font-size: 22vw;
   }
 
-  main[data-ui-level="4"] .section-head {
+  main[data-ui-level="10"] .section-head {
     grid-template-columns: minmax(0,1fr) auto;
     gap: 12px;
   }
 
-  main[data-ui-level="4"] .section-head::after {
+  main[data-ui-level="10"] .section-head::after {
     padding-bottom: 2px;
   }
 
-  main[data-ui-level="4"] .hero-pill,
-  main[data-ui-level="4"] .ghost-pill {
+  main[data-ui-level="10"] .hero-pill,
+  main[data-ui-level="10"] .ghost-pill {
     min-width: 0;
   }
 
-  main[data-ui-level="4"] .contact-card::after {
+  main[data-ui-level="10"] .contact-card::after {
     right: 18px;
     top: 18px;
     font-size: 38px;
   }
 
-  main[data-ui-level="4"] .jrh-reveal {
+  main[data-ui-level="10"] .jrh-reveal {
     filter: none;
   }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  main[data-ui-level="4"] .jrh-reveal,
-  main[data-ui-level="4"] .jrh-reveal.is-visible {
+  main[data-ui-level="10"] .jrh-reveal,
+  main[data-ui-level="10"] .jrh-reveal.is-visible {
     filter: none;
     transition: none;
   }
@@ -6890,7 +6890,7 @@ main[data-ui-level="4"] .jrh-reveal.is-visible {
    motion hierarchy. No structural/content redesign.
    ========================================================= */
 
-main[data-ui-level="4"]::before {
+main[data-ui-level="10"]::before {
   content: "";
   position: fixed;
   z-index: 1000;
@@ -6954,23 +6954,23 @@ main[data-ui-level="4"]::before {
 }
 
 /* Sequential card choreography */
-main[data-ui-level="4"] .media-list > .media-card,
-main[data-ui-level="4"] .projects-list > .project-card,
-main[data-ui-level="4"] .records > .record {
+main[data-ui-level="10"] .media-list > .media-card,
+main[data-ui-level="10"] .projects-list > .project-card,
+main[data-ui-level="10"] .records > .record {
   animation: jrh-level5-enter 700ms var(--ease) both;
 }
 
-main[data-ui-level="4"] .media-list > :nth-child(2),
-main[data-ui-level="4"] .projects-list > :nth-child(2),
-main[data-ui-level="4"] .records > :nth-child(2) { animation-delay: 50ms; }
+main[data-ui-level="10"] .media-list > :nth-child(2),
+main[data-ui-level="10"] .projects-list > :nth-child(2),
+main[data-ui-level="10"] .records > :nth-child(2) { animation-delay: 50ms; }
 
-main[data-ui-level="4"] .media-list > :nth-child(3),
-main[data-ui-level="4"] .projects-list > :nth-child(3),
-main[data-ui-level="4"] .records > :nth-child(3) { animation-delay: 100ms; }
+main[data-ui-level="10"] .media-list > :nth-child(3),
+main[data-ui-level="10"] .projects-list > :nth-child(3),
+main[data-ui-level="10"] .records > :nth-child(3) { animation-delay: 100ms; }
 
-main[data-ui-level="4"] .media-list > :nth-child(4),
-main[data-ui-level="4"] .projects-list > :nth-child(4),
-main[data-ui-level="4"] .records > :nth-child(4) { animation-delay: 150ms; }
+main[data-ui-level="10"] .media-list > :nth-child(4),
+main[data-ui-level="10"] .projects-list > :nth-child(4),
+main[data-ui-level="10"] .records > :nth-child(4) { animation-delay: 150ms; }
 
 @keyframes jrh-level5-enter {
   from { opacity: 0; transform: translateY(10px); }
@@ -7006,21 +7006,21 @@ main[data-ui-level="4"] .records > :nth-child(4) { animation-delay: 150ms; }
 
 /* Desktop-only art direction */
 @media (min-width: 901px) {
-  main[data-ui-level="4"] .hero-portrait {
+  main[data-ui-level="10"] .hero-portrait {
     transition: transform 700ms var(--ease);
   }
 
-  main[data-ui-level="4"] .hero-portrait:hover {
+  main[data-ui-level="10"] .hero-portrait:hover {
     transform: translateY(-5px);
   }
 }
 
 /* Touch devices should feel immediate, not hover-driven */
 @media (pointer: coarse) {
-  main[data-ui-level="4"] .media-card,
-  main[data-ui-level="4"] .project-card,
-  main[data-ui-level="4"] .record,
-  main[data-ui-level="4"] .testimonial {
+  main[data-ui-level="10"] .media-card,
+  main[data-ui-level="10"] .project-card,
+  main[data-ui-level="10"] .record,
+  main[data-ui-level="10"] .testimonial {
     -webkit-tap-highlight-color: transparent;
   }
 
@@ -7032,13 +7032,372 @@ main[data-ui-level="4"] .records > :nth-child(4) { animation-delay: 150ms; }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  main[data-ui-level="4"] .media-list > .media-card,
-  main[data-ui-level="4"] .projects-list > .project-card,
-  main[data-ui-level="4"] .records > .record {
+  main[data-ui-level="10"] .media-list > .media-card,
+  main[data-ui-level="10"] .projects-list > .project-card,
+  main[data-ui-level="10"] .records > .record {
     animation: none;
   }
 
   .scroll-progress span {
     transition: none;
+  }
+}
+
+
+/* =========================================================
+   JRH UI/UX LEVEL 10 — COMPACT ALL DEVICE
+   Density, clarity, touch ergonomics, and responsive stability.
+   Content/layout structure intentionally preserved.
+   ========================================================= */
+
+main[data-ui-level="10"] {
+  --compact-gutter: clamp(16px, 3vw, 36px);
+  --compact-section: clamp(56px, 8vw, 104px);
+}
+
+main[data-ui-level="10"] .section,
+main[data-ui-level="10"] .hero {
+  width: min(100% - (var(--compact-gutter) * 2), 1240px);
+  margin-inline: auto;
+}
+
+main[data-ui-level="10"] .section {
+  padding-block: var(--compact-section);
+}
+
+main[data-ui-level="10"] .hero {
+  min-height: min(780px, calc(100svh - 72px));
+  padding-block: clamp(42px, 7vw, 88px);
+  gap: clamp(28px, 5vw, 72px);
+}
+
+main[data-ui-level="10"] .hero-copy {
+  min-width: 0;
+}
+
+main[data-ui-level="10"] .hero h1 {
+  max-width: 8.5ch;
+  text-wrap: balance;
+}
+
+main[data-ui-level="10"] .hero-description {
+  max-width: 54ch;
+  margin-top: clamp(18px, 2.5vw, 28px);
+}
+
+main[data-ui-level="10"] .hero-actions {
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+main[data-ui-level="10"] .hero-pill,
+main[data-ui-level="10"] .ghost-pill {
+  min-height: 42px;
+  padding: 10px 16px;
+}
+
+main[data-ui-level="10"] .hero-meta {
+  margin-top: 22px;
+  padding-top: 10px;
+}
+
+main[data-ui-level="10"] .section-head {
+  margin-bottom: clamp(20px, 3vw, 34px);
+  padding-bottom: 12px;
+}
+
+main[data-ui-level="10"] .section-head h2 {
+  font-size: clamp(34px, 5vw, 58px);
+  line-height: .92;
+}
+
+main[data-ui-level="10"] .media-list,
+main[data-ui-level="10"] .projects-list,
+main[data-ui-level="10"] .records {
+  gap: clamp(10px, 1.5vw, 18px);
+}
+
+main[data-ui-level="10"] .media-card,
+main[data-ui-level="10"] .project-card,
+main[data-ui-level="10"] .record,
+main[data-ui-level="10"] .testimonial,
+main[data-ui-level="10"] .thinking-quote-card,
+main[data-ui-level="10"] .contact-card {
+  border-radius: clamp(14px, 1.6vw, 22px);
+}
+
+main[data-ui-level="10"] .media-card,
+main[data-ui-level="10"] .project-card,
+main[data-ui-level="10"] .record {
+  padding: clamp(18px, 2.2vw, 28px);
+}
+
+main[data-ui-level="10"] .project-card h3,
+main[data-ui-level="10"] .media-card h3,
+main[data-ui-level="10"] .record h3 {
+  margin-block: 7px;
+}
+
+main[data-ui-level="10"] .project-card-body p,
+main[data-ui-level="10"] .media-card-body p,
+main[data-ui-level="10"] .media-subtitle,
+main[data-ui-level="10"] .projects-subtitle,
+main[data-ui-level="10"] .testimonials-subtitle {
+  max-width: 62ch;
+}
+
+main[data-ui-level="10"] .testimonials-section {
+  overflow: clip;
+}
+
+main[data-ui-level="10"] .testimonials-viewport {
+  overflow-x: auto;
+  overscroll-behavior-inline: contain;
+  scroll-snap-type: x mandatory;
+  scrollbar-width: none;
+}
+
+main[data-ui-level="10"] .testimonials-viewport::-webkit-scrollbar {
+  display: none;
+}
+
+main[data-ui-level="10"] .testimonial {
+  scroll-snap-align: start;
+}
+
+main[data-ui-level="10"] .contact-card {
+  gap: clamp(24px, 4vw, 52px);
+}
+
+main[data-ui-level="10"] .contact-field input,
+main[data-ui-level="10"] .contact-field textarea,
+main[data-ui-level="10"] .contact-topic-trigger {
+  min-height: 46px;
+}
+
+main[data-ui-level="10"] .contact-field textarea {
+  min-height: 132px;
+}
+
+main[data-ui-level="10"] .contact-submit {
+  gap: 12px;
+}
+
+main[data-ui-level="10"] .site-footer-main,
+main[data-ui-level="10"] .site-footer-bottom {
+  width: min(100% - (var(--compact-gutter) * 2), 1240px);
+  margin-inline: auto;
+}
+
+main[data-ui-level="10"] ~ .site-footer {
+  padding-inline: 0;
+}
+
+/* Tablet: reduce empty space before reducing type. */
+@media (max-width: 900px) {
+  main[data-ui-level="10"] .hero {
+    min-height: auto;
+    padding-block: 48px 56px;
+    gap: 30px;
+  }
+
+  main[data-ui-level="10"] .hero h1 {
+    max-width: 9ch;
+  }
+
+  main[data-ui-level="10"] .section {
+    padding-block: 58px;
+  }
+
+  main[data-ui-level="10"] .experience-section::before {
+    opacity: .55;
+  }
+
+  main[data-ui-level="10"] .media-list,
+  main[data-ui-level="10"] .projects-list {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  main[data-ui-level="10"] .records {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Phone: one clean rhythm, no horizontal overflow, comfortable tap targets. */
+@media (max-width: 640px) {
+  main[data-ui-level="10"] {
+    --compact-gutter: 16px;
+  }
+
+  main[data-ui-level="10"] .section,
+  main[data-ui-level="10"] .hero {
+    width: calc(100% - 32px);
+  }
+
+  main[data-ui-level="10"] .hero {
+    padding-block: 34px 46px;
+    gap: 26px;
+  }
+
+  main[data-ui-level="10"] .hero h1 {
+    max-width: 10ch;
+    font-size: clamp(48px, 15vw, 72px);
+    line-height: .86;
+  }
+
+  main[data-ui-level="10"] .hero-description {
+    max-width: 38ch;
+    margin-top: 16px;
+  }
+
+  main[data-ui-level="10"] .hero-actions {
+    width: 100%;
+  }
+
+  main[data-ui-level="10"] .hero-pill,
+  main[data-ui-level="10"] .ghost-pill {
+    flex: 1 1 140px;
+    min-height: 44px;
+    padding-inline: 14px;
+  }
+
+  main[data-ui-level="10"] .hero-meta {
+    margin-top: 18px;
+  }
+
+  main[data-ui-level="10"] .section {
+    padding-block: 48px;
+  }
+
+  main[data-ui-level="10"] .section-head {
+    margin-bottom: 22px;
+  }
+
+  main[data-ui-level="10"] .section-head h2 {
+    font-size: clamp(32px, 10vw, 46px);
+  }
+
+  main[data-ui-level="10"] .media-list,
+  main[data-ui-level="10"] .projects-list {
+    grid-template-columns: 1fr;
+  }
+
+  main[data-ui-level="10"] .media-card,
+  main[data-ui-level="10"] .project-card,
+  main[data-ui-level="10"] .record {
+    padding: 17px;
+  }
+
+  main[data-ui-level="10"] .testimonial {
+    min-width: min(86vw, 360px);
+    padding: 18px;
+  }
+
+  main[data-ui-level="10"] .testimonials-toolbar {
+    gap: 8px;
+  }
+
+  main[data-ui-level="10"] .testimonial-controls button {
+    width: 36px;
+    height: 36px;
+  }
+
+  main[data-ui-level="10"] .contact-card {
+    padding: 18px;
+  }
+
+  main[data-ui-level="10"] .contact-question {
+    font-size: clamp(30px, 9.5vw, 42px);
+  }
+
+  main[data-ui-level="10"] .contact-form {
+    min-width: 0;
+  }
+
+  main[data-ui-level="10"] .contact-submit {
+    align-items: stretch;
+    flex-direction: column;
+  }
+
+  main[data-ui-level="10"] .contact-submit > button {
+    width: 100%;
+    min-height: 46px;
+  }
+
+  main[data-ui-level="10"] .terms-checkbox {
+    min-height: 44px;
+  }
+
+  main[data-ui-level="10"] .contact-topic-menu {
+    max-height: min(52svh, 360px);
+    overflow-y: auto;
+  }
+
+  main[data-ui-level="10"] .experience-section::before {
+    top: 38px;
+    right: 0;
+    font-size: 18vw;
+  }
+}
+
+/* Narrow phones: prevent cramped controls and oversized editorial type. */
+@media (max-width: 390px) {
+  main[data-ui-level="10"] .section,
+  main[data-ui-level="10"] .hero {
+    width: calc(100% - 24px);
+  }
+
+  main[data-ui-level="10"] .hero {
+    padding-block: 28px 40px;
+  }
+
+  main[data-ui-level="10"] .hero h1 {
+    font-size: clamp(44px, 14vw, 60px);
+  }
+
+  main[data-ui-level="10"] .hero-actions {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+  }
+
+  main[data-ui-level="10"] .hero-pill,
+  main[data-ui-level="10"] .ghost-pill {
+    width: 100%;
+  }
+
+  main[data-ui-level="10"] .section {
+    padding-block: 42px;
+  }
+
+  main[data-ui-level="10"] .media-card,
+  main[data-ui-level="10"] .project-card,
+  main[data-ui-level="10"] .record,
+  main[data-ui-level="10"] .testimonial,
+  main[data-ui-level="10"] .contact-card {
+    border-radius: 14px;
+  }
+
+  main[data-ui-level="10"] .testimonial {
+    min-width: calc(100vw - 48px);
+  }
+}
+
+/* Ultra-wide: cap the reading field instead of stretching content. */
+@media (min-width: 1440px) {
+  main[data-ui-level="10"] .section,
+  main[data-ui-level="10"] .hero {
+    width: min(100% - 72px, 1280px);
+  }
+}
+
+/* Reduced motion remains a hard accessibility boundary. */
+@media (prefers-reduced-motion: reduce) {
+  main[data-ui-level="10"] *,
+  main[data-ui-level="10"] *::before,
+  main[data-ui-level="10"] *::after {
+    scroll-behavior: auto !important;
+    animation-duration: .01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: .01ms !important;
   }
 }
