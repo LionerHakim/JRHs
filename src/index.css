@@ -5797,3 +5797,24 @@ img {
   -webkit-user-select: none;
   user-select: none;
 }
+
+/* =========================================================
+   JRH ANTI-COPY — VISUAL SELECTION LOCK
+   Editable controls remain selectable and usable.
+   ========================================================= */
+
+.site-shell {
+  -webkit-user-select: none;
+  user-select: none;
+  -webkit-touch-callout: none;
+}
+
+.site-shell input,
+.site-shell textarea,
+.site-shell select,
+.site-shell [contenteditable="true"],
+.site-shell [contenteditable=""] {
+  -webkit-user-select: text;
+  user-select: text;
+  -webkit-touch-callout: default;
+}
