@@ -236,7 +236,6 @@ function TestimonialsSection() {
   return (
     <section id="testimonials" className="section testimonials-section" aria-labelledby="testimonials-title">
       <div className="section-head">
-        <p className="section-kicker">QUOTES</p>
         <h2 id="testimonials-title">Quotes</h2>
       </div>
       <p className="testimonials-subtitle">
@@ -841,7 +840,6 @@ ${name.trim()}`)
 
         <section id="education" className="section" aria-labelledby="education-title">
           <div className="section-head">
-            <p className="section-kicker">EDUCATION</p>
             <h2 id="education-title">Education</h2>
           </div>
 
@@ -867,7 +865,6 @@ ${name.trim()}`)
 
         <section id="media" className="section media-section" aria-labelledby="media-title">
           <div className="section-head">
-            <p className="section-kicker">MEDIA</p>
             <h2 id="media-title">Media</h2>
           </div>
 
@@ -901,7 +898,6 @@ ${name.trim()}`)
 
         <section id="projects" className="section projects-section" aria-labelledby="projects-title">
           <div className="section-head">
-            <p className="section-kicker">PROJECTS</p>
             <h2 id="projects-title">Projects</h2>
           </div>
 
@@ -954,7 +950,6 @@ Web app dan digital product yang sedang dibangun untuk memecahkan masalah nyata.
 
         <section id="links" className="section contact-section" aria-labelledby="links-title">
           <div className="section-head">
-            <p className="section-kicker">CONTACT</p>
             <h2 id="links-title">Contact</h2>
           </div>
 
