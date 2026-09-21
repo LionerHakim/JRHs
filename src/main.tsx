@@ -137,7 +137,21 @@ function TestimonialCard({
           <span>{testimonial.role}</span>
         </div>
       </header>
-      <span className="testimonial-disclaimer">GAGASAN TERINSPIRASI</span>
+      <div className="testimonial-source-row">
+        <span className="testimonial-disclaimer">GAGASAN TERINSPIRASI</span>
+        {testimonial.sourceUrl ? (
+          <a
+            className="testimonial-source-link"
+            href={testimonial.sourceUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            {testimonial.sourceStatus === 'verified' ? 'SUMBER TERVERIFIKASI ↗' : 'SUMBER TERATRIBUSI ↗'}
+          </a>
+        ) : (
+          <span className="testimonial-source-link is-attributed">SUMBER TERATRIBUSI</span>
+        )}
+      </div>
       <blockquote>“{testimonial.quote}”</blockquote>
       <footer className="testimonial-footer">
         <span>Perspektif</span>
@@ -265,7 +279,14 @@ export default function App() {
   const [scrollProgress, setScrollProgress] = useState(0)
   const [menuOpen, setMenuOpen] = useState(false)
   const [musicOpen, setMusicOpen] = useState(false)
-  const [darkMode, setDarkMode] = useState(() => window.sessionStorage.getItem('jrhs-theme') === 'dark')
+  const [darkMode, setDarkMode] = useState(() => {
+    try {
+      return window.localStorage.getItem('jrhs-theme') === 'dark' ||
+        window.sessionStorage.getItem('jrhs-theme') === 'dark'
+    } catch {
+      return false
+    }
+  })
   const [name, setName] = useState('')
   const [purpose, setPurpose] = useState('')
   const [message, setMessage] = useState('')
@@ -294,7 +315,12 @@ export default function App() {
   useEffect(() => {
     document.documentElement.dataset.theme = darkMode ? 'dark' : 'light'
     document.documentElement.style.colorScheme = darkMode ? 'dark' : 'light'
-    window.sessionStorage.setItem('jrhs-theme', darkMode ? 'dark' : 'light')
+    try {
+      window.localStorage.setItem('jrhs-theme', darkMode ? 'dark' : 'light')
+      window.sessionStorage.setItem('jrhs-theme', darkMode ? 'dark' : 'light')
+    } catch {
+      // Storage can be unavailable in restrictive browser modes.
+    }
     const meta = document.querySelector<HTMLMetaElement>('meta[name="theme-color"]')
     if (meta) meta.content = darkMode ? '#050505' : '#F7FBFF'
   }, [darkMode])
@@ -674,7 +700,7 @@ ${name.trim()}`)
       <a className="skip-link" href="#identity">Lewati ke konten utama</a>
       <header className="nav">
         <a className="wordmark" href="/" aria-label="JRH home" onClick={(event) => { event.preventDefault(); window.location.reload() }}>
-          <img className="wordmark-logo" src="/assets/images/logo.png" alt="JRH" />
+          <img className="wordmark-logo" src="/assets/images/logo.png" alt="JRH" decoding="async" />
         </a>
         <div className="nav-actions" ref={navActionsRef}>
           <button
@@ -832,6 +858,7 @@ ${name.trim()}`)
                 width="640"
                 height="800"
                 fetchPriority="high"
+                decoding="async"
               />
             </div>
           </figure>
@@ -986,14 +1013,29 @@ Web app dan digital product yang sedang dibangun untuk memecahkan masalah nyata.
                     type="button"
                     aria-haspopup="listbox"
                     aria-expanded={topicOpen}
+                    aria-controls="contact-topic-options"
                     aria-label="Topik email (wajib)"
                     onClick={() => setTopicOpen((open) => !open)}
+                    onKeyDown={(event) => {
+                      if (event.key === 'ArrowDown') {
+                        event.preventDefault()
+                        setTopicOpen(true)
+                        requestAnimationFrame(() => {
+                          contactTopicRef.current
+                            ?.querySelector<HTMLButtonElement>('[role="option"]')
+                            ?.focus()
+                        })
+                      } else if (event.key === 'Escape' && topicOpen) {
+                        event.preventDefault()
+                        setTopicOpen(false)
+                      }
+                    }}
                   >
                     <span>{purpose || 'Pilih topik'}</span>
                     <span className="contact-topic-chevron" aria-hidden="true">⌄</span>
                   </button>
                   {topicOpen ? (
-                    <div className="contact-topic-menu" role="listbox" aria-label="Pilih topik email">
+                    <div id="contact-topic-options" className="contact-topic-menu" role="listbox" aria-label="Pilih topik email">
                       {contactTopics.map((item) => (
                         <button
                           key={item}
@@ -1002,6 +1044,38 @@ Web app dan digital product yang sedang dibangun untuk memecahkan masalah nyata.
                           aria-selected={purpose === item}
                           className={purpose === item ? 'is-selected' : undefined}
                           onClick={() => { setPurpose(item); setTopicOpen(false) }}
+                          onKeyDown={(event) => {
+                            const options = Array.from(
+                              event.currentTarget.parentElement?.querySelectorAll<HTMLButtonElement>('[role="option"]') ?? [],
+                            )
+                            const currentIndex = options.indexOf(event.currentTarget)
+                            const focusOption = (nextIndex: number) => {
+                              options[(nextIndex + options.length) % options.length]?.focus()
+                            }
+
+                            if (event.key === 'ArrowDown') {
+                              event.preventDefault()
+                              focusOption(currentIndex + 1)
+                            } else if (event.key === 'ArrowUp') {
+                              event.preventDefault()
+                              focusOption(currentIndex - 1)
+                            } else if (event.key === 'Home') {
+                              event.preventDefault()
+                              focusOption(0)
+                            } else if (event.key === 'End') {
+                              event.preventDefault()
+                              focusOption(options.length - 1)
+                            } else if (event.key === 'Escape') {
+                              event.preventDefault()
+                              setTopicOpen(false)
+                              contactTopicRef.current?.querySelector<HTMLButtonElement>('.contact-topic-trigger')?.focus()
+                            } else if (event.key === 'Enter' || event.key === ' ') {
+                              event.preventDefault()
+                              setPurpose(item)
+                              setTopicOpen(false)
+                              contactTopicRef.current?.querySelector<HTMLButtonElement>('.contact-topic-trigger')?.focus()
+                            }
+                          }}
                         >
                           <span>{item}</span>
                           <span aria-hidden="true">{purpose === item ? '✓' : ''}</span>
@@ -1043,7 +1117,7 @@ Web app dan digital product yang sedang dibangun untuk memecahkan masalah nyata.
                 <span aria-label="Cepat" title="Cepat">
                   <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M13 2 4.5 13h6l-.5 9L19.5 11h-6L13 2Z" /></svg>
                 </span>
-                <span aria-label="Aman" title="Aman">
+                <span aria-label="Privat" title="Privat">
                   <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="5" y="10" width="14" height="11" rx="2" /><path d="M8 10V7a4 4 0 0 1 8 0v3" /></svg>
                 </span>
                 <span aria-label="Langsung ke email" title="Langsung ke email">
