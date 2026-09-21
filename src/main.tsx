@@ -761,7 +761,7 @@ ${name.trim()}`)
             <div className="menu-panel-head">
               <div>
                 <span>JRH / NAVIGATION</span>
-                <strong>Explore JRH</strong>
+                <strong>{sectionItems.find(([id]) => id === activeSection)?.[1] ?? 'Explore JRH'}</strong>
               </div>
               <span className="menu-panel-count">{String(sectionItems.length).padStart(2, '0')} SECTIONS</span>
             </div>
@@ -783,7 +783,7 @@ ${name.trim()}`)
             </div>
             <div className="menu-panel-foot">
               <span>JRH</span>
-              <span>Navigate your way ↗</span>
+              <span>Currently viewing · {activeSection.toUpperCase()}</span>
             </div>
           </nav>
 
