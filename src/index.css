@@ -8077,3 +8077,51 @@ main[data-ui-level="20"] .thinking-quote-card p {
     transition: none;
   }
 }
+
+
+/* =========================================================
+   JRH SYNC POLISH — FINAL VISUAL CONSISTENCY
+   Keep navigation, quotes, spacing, and responsive behavior
+   visually synchronized without changing content or logic.
+   ========================================================= */
+
+/* No horizontal rule/underline remains inside the navbar state.
+   Active state is communicated by color only. */
+.nav,
+.nav-action,
+.nav-action.is-open {
+  border-bottom-color: transparent !important;
+}
+.nav-action.is-open::after {
+  display: none !important;
+}
+
+/* Keep the quote system aligned with the same page rhythm on
+   desktop and mobile, with one clean separator per item. */
+main[data-ui-level="20"] .thinking-quotes {
+  align-items: start;
+}
+main[data-ui-level="20"] .thinking-quote-card {
+  border-top-color: rgba(9,10,11,.12);
+}
+main[data-ui-level="20"] .thinking-quote-card + .thinking-quote-card {
+  border-top-color: rgba(9,10,11,.12);
+}
+
+@media (max-width: 760px) {
+  main[data-ui-level="20"] .thinking-quotes {
+    margin-inline: 0;
+  }
+
+  main[data-ui-level="20"] .thinking-quote-card {
+    width: 100%;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .nav-action.is-open::after,
+  main[data-ui-level="20"] .thinking-quote-card::before {
+    animation: none !important;
+    transition: none !important;
+  }
+}
