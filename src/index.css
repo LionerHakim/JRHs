@@ -5318,3 +5318,223 @@ textarea:disabled {
     transform: none;
   }
 }
+
+/* =========================================================
+   JRH UI/UX LEVEL 7 — SPACING + VISUAL RHYTHM PASS
+   Refinement only. Existing layout language and navigation remain intact.
+   ========================================================= */
+
+/* 1. Establish a clearer vertical rhythm between major sections */
+:root {
+  --section-gap: clamp(72px, 7vw, 104px);
+  --section-head-gap: clamp(24px, 3vw, 36px);
+  --content-gap: clamp(16px, 2vw, 24px);
+}
+
+.section {
+  padding-block: var(--section-gap);
+}
+
+/* Prevent the first/last section from feeling artificially padded */
+main > .section:first-child {
+  padding-top: clamp(56px, 6vw, 88px);
+}
+
+main > .section:last-child {
+  padding-bottom: clamp(64px, 7vw, 104px);
+}
+
+/* 2. Section headers get a consistent breathing zone */
+.section-head {
+  margin-bottom: var(--section-head-gap);
+}
+
+.section-kicker {
+  margin-bottom: 10px;
+}
+
+.section h2 {
+  margin-bottom: 12px;
+}
+
+/* 3. Keep supporting copy comfortably separated from content */
+.media-subtitle,
+.projects-subtitle,
+.testimonials-subtitle {
+  margin-bottom: var(--content-gap);
+}
+
+/* 4. Lists use deliberate rhythm rather than compressed stacking */
+.media-list,
+.projects-list {
+  gap: clamp(18px, 2.4vw, 28px);
+}
+
+.record {
+  margin-bottom: clamp(14px, 1.8vw, 22px);
+}
+
+.record:last-child {
+  margin-bottom: 0;
+}
+
+/* 5. Cards breathe without changing their established proportions */
+.media-card,
+.project-card,
+.testimonial,
+.thinking-quote-card {
+  border-radius: 22px;
+}
+
+.media-card-body,
+.project-card-body {
+  gap: clamp(14px, 1.7vw, 20px);
+}
+
+/* 6. Stronger hierarchy inside cards */
+.media-card-top,
+.project-card-top {
+  margin-bottom: 4px;
+}
+
+.media-card h3,
+.project-card h3 {
+  line-height: 1.18;
+}
+
+.media-links,
+.project-links {
+  margin-top: 4px;
+}
+
+/* 7. Education timeline gets clearer separation */
+.education-list,
+.education-records {
+  row-gap: clamp(18px, 2.2vw, 28px);
+}
+
+/* 8. Quote section gets room to feel editorial */
+.testimonials-toolbar {
+  margin-bottom: clamp(18px, 2.4vw, 28px);
+}
+
+.testimonials-viewport {
+  padding-block: 6px 12px;
+}
+
+/* 9. Contact section becomes a calmer final destination */
+.contact-card {
+  margin-top: 4px;
+}
+
+.contact-intro {
+  margin-bottom: clamp(22px, 3vw, 34px);
+}
+
+.contact-fields {
+  gap: clamp(14px, 1.8vw, 20px);
+}
+
+.contact-submit {
+  margin-top: clamp(6px, 1vw, 12px);
+}
+
+.contact-closing {
+  margin-top: clamp(22px, 3vw, 32px);
+}
+
+/* 10. Footer separation: clear ending, not another crowded section */
+.site-footer {
+  margin-top: clamp(24px, 4vw, 48px);
+}
+
+.site-footer-main {
+  gap: clamp(18px, 3vw, 32px);
+}
+
+.site-footer-bottom {
+  margin-top: clamp(20px, 3vw, 30px);
+}
+
+/* 11. Desktop reading width: preserve existing grid, improve text density */
+@media (min-width: 901px) {
+  .section-head {
+    max-width: 760px;
+  }
+
+  .media-subtitle,
+  .projects-subtitle,
+  .testimonials-subtitle {
+    max-width: 680px;
+  }
+}
+
+/* 12. Tablet/mobile rhythm */
+@media (max-width: 900px) {
+  :root {
+    --section-gap: 68px;
+    --section-head-gap: 24px;
+  }
+
+  .section {
+    padding-block: var(--section-gap);
+  }
+}
+
+@media (max-width: 640px) {
+  :root {
+    --section-gap: 56px;
+    --section-head-gap: 20px;
+  }
+
+  main > .section:first-child {
+    padding-top: 44px;
+  }
+
+  main > .section:last-child {
+    padding-bottom: 64px;
+  }
+
+  .section-head {
+    margin-bottom: 20px;
+  }
+
+  .media-list,
+  .projects-list {
+    gap: 16px;
+  }
+
+  .record {
+    margin-bottom: 14px;
+  }
+
+  .contact-fields {
+    gap: 14px;
+  }
+
+  .site-footer {
+    margin-top: 20px;
+  }
+}
+
+/* 13. Very small phones: compact without becoming cramped */
+@media (max-width: 390px) {
+  :root {
+    --section-gap: 48px;
+  }
+
+  main > .section:first-child {
+    padding-top: 36px;
+  }
+
+  main > .section:last-child {
+    padding-bottom: 56px;
+  }
+}
+
+/* 14. Reduced motion keeps the new rhythm fully static */
+@media (prefers-reduced-motion: reduce) {
+  .section {
+    transition: none;
+  }
+}
