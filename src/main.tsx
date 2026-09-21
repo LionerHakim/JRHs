@@ -863,8 +863,8 @@ ${name.trim()}`)
       <main>
         <section id="identity" className="hero" aria-labelledby="identity-title">
           <div className="hero-copy">
-            <h1 id="identity-title">PORTFOLIO</h1>
-            <p className="hero-description">{siteConfig.identity.description}</p>
+            <h1 id="identity-title">SAYA SIBUK BEKERJA,<br />INI YANG BARU.</h1>
+            <p className="hero-description">Saya sibuk bekerja. Ini adalah ruang untuk melihat apa yang sedang saya bangun, kerjakan, dan kembangkan.</p>
             <div className="hero-actions">
               <a className="hero-pill" href="#media">Explore media</a>
               <a className="ghost-pill" href="#links">Contact</a>
