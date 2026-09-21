@@ -408,10 +408,11 @@ export default function App() {
     const audio = musicAudioRef.current
     if (!audio) return
 
-    // Pre-buffer only when the player is opened. Closing the panel must NOT
-    // stop playback: the audio element lives independently of the UI panel.
+    // Load only lightweight metadata when the panel opens. Full audio
+    // buffering starts when the user actually presses play or changes track.
+    // Closing the panel must NOT stop playback: the audio element lives independently of the UI panel.
     if (musicOpen) {
-      audio.preload = 'auto'
+      audio.preload = 'metadata'
       if (!audio.src) {
         audio.src = musicTracks[musicIndexRef.current].src
         audio.load()
