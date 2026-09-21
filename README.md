@@ -1,6 +1,6 @@
 # JRHs — Personal Digital Portfolio
 
-Personal portfolio for Jefri Rahman Hakim.
+Personal digital portfolio for JRH.
 
 ## Stack
 
