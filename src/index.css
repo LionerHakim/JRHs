@@ -5538,3 +5538,221 @@ main > .section:last-child {
     transition: none;
   }
 }
+
+/* =========================================================
+   JRH UI/UX LEVEL 9 — DESIGN SYSTEM FINISHING PASS
+   High-end polish without redesigning the existing composition.
+   ========================================================= */
+
+/* 1. Consistent visual language across surfaces */
+.media-card,
+.project-card,
+.record,
+.testimonial,
+.thinking-quote-card,
+.contact-card,
+.contact-form {
+  border-color: rgba(10,13,18,.095);
+  box-shadow:
+    0 10px 30px rgba(10,13,18,.035),
+    0 1px 0 rgba(255,255,255,.72) inset;
+}
+
+/* 2. Stronger typography hierarchy without changing type scale */
+.section h2 {
+  letter-spacing: -.025em;
+  text-wrap: balance;
+}
+
+.section-kicker {
+  font-weight: 700;
+}
+
+.media-card h3,
+.project-card h3 {
+  letter-spacing: -.012em;
+  text-wrap: balance;
+}
+
+/* 3. Improve long-form reading texture */
+.section p,
+.contact-copy p,
+.contact-intro p {
+  text-wrap: pretty;
+}
+
+/* 4. Cards feel layered rather than boxed */
+.media-card,
+.project-card,
+.record,
+.testimonial,
+.thinking-quote-card {
+  background:
+    linear-gradient(
+      180deg,
+      rgba(255,255,255,.72),
+      rgba(255,255,255,.98)
+    );
+}
+
+/* 5. Quiet top-edge highlight */
+.media-card::after,
+.project-card::after,
+.record::after,
+.thinking-quote-card::after,
+.contact-card::after {
+  content: "";
+  position: absolute;
+  inset: 0 10% auto;
+  height: 1px;
+  pointer-events: none;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(0,105,224,.10),
+    transparent
+  );
+}
+
+/* 6. Interactive cards have clearer intent */
+.media-card:hover,
+.project-card:hover,
+.record:hover,
+.thinking-quote-card:hover {
+  border-color: rgba(0,105,224,.13);
+  box-shadow:
+    0 22px 52px rgba(10,13,18,.065),
+    0 1px 0 rgba(255,255,255,.9) inset;
+}
+
+/* 7. Buttons share one premium physical language */
+.hero-pill,
+.ghost-pill,
+.project-link,
+.media-links a,
+.contact-submit button {
+  box-shadow:
+    0 4px 14px rgba(10,13,18,.045),
+    0 1px 0 rgba(255,255,255,.65) inset;
+}
+
+.hero-pill:hover,
+.ghost-pill:hover,
+.project-link:hover,
+.media-links a:hover,
+.contact-submit button:hover:not(:disabled) {
+  box-shadow:
+    0 12px 28px rgba(10,13,18,.09),
+    0 1px 0 rgba(255,255,255,.75) inset;
+}
+
+/* 8. Form feels like one coherent system */
+.contact-field {
+  background: rgba(255,255,255,.68);
+  border-color: rgba(10,13,18,.10);
+}
+
+.contact-field:hover {
+  border-color: rgba(10,13,18,.16);
+}
+
+.contact-field:focus-within {
+  background: rgba(255,255,255,.96);
+  border-color: rgba(0,105,224,.22);
+}
+
+/* 9. Navigation gets a refined glass edge */
+.nav {
+  border-color: rgba(10,13,18,.13);
+  box-shadow:
+    0 14px 38px rgba(10,13,18,.075),
+    0 1px 0 rgba(255,255,255,.92) inset;
+}
+
+/* 10. Footer becomes a deliberate visual endpoint */
+.site-footer {
+  border-top-color: rgba(10,13,18,.10);
+}
+
+.site-footer-bottom {
+  opacity: .78;
+}
+
+/* 11. Dark mode: preserve the same hierarchy */
+.dark .media-card,
+.dark .project-card,
+.dark .record,
+.dark .testimonial,
+.dark .thinking-quote-card,
+.dark .contact-card,
+.dark .contact-form {
+  box-shadow:
+    0 14px 38px rgba(0,0,0,.20),
+    0 1px 0 rgba(255,255,255,.045) inset;
+}
+
+.dark .media-card,
+.dark .project-card,
+.dark .record,
+.dark .testimonial,
+.dark .thinking-quote-card {
+  background:
+    linear-gradient(
+      180deg,
+      rgba(255,255,255,.025),
+      rgba(255,255,255,.012)
+    );
+}
+
+.dark .contact-field {
+  background: rgba(255,255,255,.025);
+  border-color: rgba(255,255,255,.11);
+}
+
+.dark .contact-field:hover {
+  border-color: rgba(255,255,255,.18);
+}
+
+.dark .contact-field:focus-within {
+  background: rgba(255,255,255,.045);
+  border-color: rgba(110,190,255,.28);
+}
+
+.dark .nav {
+  box-shadow:
+    0 16px 42px rgba(0,0,0,.25),
+    0 1px 0 rgba(255,255,255,.06) inset;
+}
+
+/* 12. Mobile: retain the same visual hierarchy */
+@media (max-width: 640px) {
+  .media-card,
+  .project-card,
+  .record,
+  .testimonial,
+  .thinking-quote-card,
+  .contact-card,
+  .contact-form {
+    box-shadow:
+      0 8px 24px rgba(10,13,18,.035),
+      0 1px 0 rgba(255,255,255,.7) inset;
+  }
+
+  .section h2 {
+    letter-spacing: -.02em;
+  }
+}
+
+/* 13. Motion remains optional */
+@media (prefers-reduced-motion: reduce) {
+  .media-card,
+  .project-card,
+  .record,
+  .testimonial,
+  .thinking-quote-card,
+  .contact-card,
+  .contact-form,
+  .nav {
+    transition: none;
+  }
+}
