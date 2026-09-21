@@ -1,0 +1,18 @@
+{
+  "name": "JRH — Personal Digital Portfolio",
+  "short_name": "JRH",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#F7FBFF",
+  "theme_color": "#F7FBFF",
+  "lang": "id",
+  "description": "JRH. Projects, publishing, media, education, and independent digital work.",
+  "icons": [
+    {
+      "src": "/assets/images/s.jpg",
+      "sizes": "any",
+      "type": "image/jpeg",
+      "purpose": "any"
+    }
+  ]
+}
