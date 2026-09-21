@@ -264,12 +264,14 @@ export default function App() {
   const [termsOpen, setTermsOpen] = useState(false)
   const [topicOpen, setTopicOpen] = useState(false)
   const [contactStatus, setContactStatus] = useState<string | null>(null)
+  const [contactHoneypot, setContactHoneypot] = useState('')
   const [contactError, setContactError] = useState<string | null>(null)
   const [touched, setTouched] = useState({ name: false, message: false, privacy: false })
   const navActionsRef = useRef<HTMLDivElement>(null)
   const contactPrivacyRef = useRef<HTMLDivElement>(null)
   const privacyInputRef = useRef<HTMLInputElement>(null)
   const contactTopicRef = useRef<HTMLDivElement>(null)
+  const contactStartedAtRef = useRef(Date.now())
   const musicAudioRef = useRef<HTMLAudioElement>(null)
   const musicIndexRef = useRef(0)
   const musicRequestRef = useRef(0)
@@ -487,6 +489,23 @@ export default function App() {
   }, [menuOpen, musicOpen, termsOpen, topicOpen])
 
   useEffect(() => {
+    const handleImageProtection = (event: Event) => {
+      const target = event.target
+      if (target instanceof HTMLImageElement) {
+        event.preventDefault()
+      }
+    }
+
+    document.addEventListener('contextmenu', handleImageProtection)
+    document.addEventListener('dragstart', handleImageProtection)
+
+    return () => {
+      document.removeEventListener('contextmenu', handleImageProtection)
+      document.removeEventListener('dragstart', handleImageProtection)
+    }
+  }, [])
+
+  useEffect(() => {
     const sections = sectionIds
       .map((id) => document.getElementById(id))
       .filter((section): section is HTMLElement => Boolean(section))
@@ -517,6 +536,12 @@ export default function App() {
   const handleContactSubmit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault()
     setContactError(null)
+
+    const elapsed = Date.now() - contactStartedAtRef.current
+    if (contactHoneypot.trim() || elapsed < 1500) {
+      setContactError('Permintaan tidak dapat diproses. Silakan coba lagi secara normal.')
+      return
+    }
     setContactStatus(null)
     setTouched({ name: true, message: true, privacy: true })
 
@@ -558,6 +583,8 @@ ${name.trim()}`)
     window.location.href = `mailto:${siteConfig.contactEmail}?subject=${subject}&body=${body}`
     setContactStatus('Email sudah disiapkan. Pilih aplikasi email di perangkat Anda, lalu kirim.')
     setPrivacy(false)
+    setContactHoneypot('')
+    contactStartedAtRef.current = Date.now()
     setTermsOpen(false)
     setTouched((current) => ({ ...current, privacy: false }))
   }
@@ -853,10 +880,23 @@ Web app dan digital product yang sedang dibangun untuk memecahkan masalah nyata.
             </div>
 
             <form className="contact-form" onSubmit={handleContactSubmit} noValidate>
+              <div className="contact-honeypot" aria-hidden="true">
+                <label htmlFor="website">Website</label>
+                <input
+                  id="website"
+                  name="website"
+                  type="text"
+                  tabIndex={-1}
+                  autoComplete="off"
+                  value={contactHoneypot}
+                  onChange={(event) => setContactHoneypot(event.target.value)}
+                />
+              </div>
+
               <div className="contact-fields">
                 <label className="contact-field">
                   <span className="contact-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="3.25" /><path d="M5.5 20a6.5 6.5 0 0 1 13 0" /></svg></span>
-                  <input aria-label="Nama kamu" required value={name} onChange={(event) => setName(event.target.value)} onBlur={() => setTouched((current) => ({ ...current, name: true }))} aria-invalid={touched.name && !name.trim()} placeholder="Nama kamu" autoComplete="name" />
+                  <input aria-label="Nama kamu" required maxLength={120} value={name} onChange={(event) => setName(event.target.value)} onBlur={() => setTouched((current) => ({ ...current, name: true }))} aria-invalid={touched.name && !name.trim()} placeholder="Nama kamu" autoComplete="name" />
                 </label>
                 <div className="contact-field contact-topic" ref={contactTopicRef}>
                   <span className="contact-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M5 7h14M5 12h14M5 17h9" /></svg></span>
