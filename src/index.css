@@ -831,6 +831,36 @@ img { display: block; max-width: 100%; }
   letter-spacing: .04em;
 }
 
+.testimonial-source-row {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 24px;
+}
+
+.testimonial-source-row .testimonial-disclaimer {
+  margin-top: 0;
+}
+
+.testimonial-source-link {
+  color: var(--blue-strong);
+  font-size: var(--text-caption);
+  font-weight: 700;
+  letter-spacing: .04em;
+}
+
+.testimonial-source-link:hover,
+.testimonial-source-link:focus-visible {
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.testimonial-source-link.is-attributed {
+  color: var(--fog);
+  cursor: default;
+}
+
 .testimonial blockquote {
   position: relative;
   margin: 20px 0 24px;
@@ -5827,9 +5857,6 @@ img {
 /* 01–03 / Hero */
 .hero-meta{display:flex;align-items:center;flex-wrap:wrap;gap:8px;margin-top:18px;font-size:.68rem;font-weight:750;letter-spacing:.12em;opacity:.68}
 .availability-dot{width:7px;height:7px;border-radius:999px;background:#2fb36f;box-shadow:0 0 0 4px rgba(47,179,111,.10);animation:jrh-pulse 2.2s ease-in-out infinite}
-.hero-scroll-cue{display:inline-flex;align-items:center;gap:10px;margin-top:24px;color:inherit;text-decoration:none;font-size:.68rem;font-weight:750;letter-spacing:.12em;opacity:.52;transition:opacity 180ms ease,transform 180ms ease}
-.hero-scroll-cue:hover{opacity:.9;transform:translateY(2px)}
-.hero-scroll-cue span:last-child{font-size:1rem}
 
 /* 04–06 / Navigation and touch feedback */
 .site-footer-nav a[aria-current="location"]{font-weight:800;opacity:1}
@@ -5898,10 +5925,9 @@ button,a,input,textarea,select{-webkit-tap-highlight-color:transparent}
 @media (prefers-reduced-motion:reduce){
   .availability-dot,.jrh-reveal,.contact-feedback.is-success,.contact-feedback.is-error{animation:none;transition:none}
   .jrh-reveal{opacity:1;transform:none}
-  .hero-scroll-cue,.record,.back-to-top{transition:none}
+  .record,.back-to-top{transition:none}
 }
 @media (max-width:640px){
   .hero-meta{margin-top:14px;font-size:.61rem}
-  .hero-scroll-cue{margin-top:18px}
   main > .section .section-head::after{margin-top:9px}
 }
