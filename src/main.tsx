@@ -154,6 +154,7 @@ function TestimonialsSection() {
   const userInteractingRef = useRef(false)
   const activeInViewRef = useRef(false)
   const autoSlideTimerRef = useRef<number | null>(null)
+  const [testimonialActiveIndex, setTestimonialActiveIndex] = useState(0)
 
   useEffect(() => {
     const viewport = viewportRef.current
@@ -198,6 +199,12 @@ function TestimonialsSection() {
       }, 1500)
     }
 
+    const updateActiveIndex = () => {
+      const step = getStep()
+      const nextIndex = step > 0 ? Math.round(viewport.scrollLeft / step) : 0
+      setTestimonialActiveIndex(Math.min(testimonials.length - 1, Math.max(0, nextIndex)))
+    }
+
     const handlePointerDown = () => pauseForUser()
     const handleWheel = () => pauseForUser()
     const handleTouchStart = () => pauseForUser()
@@ -212,6 +219,8 @@ function TestimonialsSection() {
     viewport.addEventListener('pointerdown', handlePointerDown, { passive: true })
     viewport.addEventListener('wheel', handleWheel, { passive: true })
     viewport.addEventListener('touchstart', handleTouchStart, { passive: true })
+    viewport.addEventListener('scroll', updateActiveIndex, { passive: true })
+    updateActiveIndex()
 
     return () => {
       clearAutoSlide()
@@ -220,6 +229,7 @@ function TestimonialsSection() {
       viewport.removeEventListener('pointerdown', handlePointerDown)
       viewport.removeEventListener('wheel', handleWheel)
       viewport.removeEventListener('touchstart', handleTouchStart)
+      viewport.removeEventListener('scroll', updateActiveIndex)
     }
   }, [testimonials.length])
 
@@ -788,6 +798,15 @@ ${name.trim()}`)
               <a className="hero-pill" href="#media">Explore media</a>
               <a className="ghost-pill" href="#links">Contact</a>
             </div>
+            <div className="hero-meta" aria-label="JRH availability">
+              <span className="availability-dot" aria-hidden="true"></span>
+              <span>AVAILABLE FOR PROJECTS</span>
+              <span aria-hidden="true">·</span>
+              <span>INDONESIA</span>
+            </div>
+            <a className="hero-scroll-cue" href="#education" aria-label="Lanjut ke Education">
+              <span>SCROLL TO EXPLORE</span><span aria-hidden="true">↓</span>
+            </a>
           </div>
 
           <figure className="hero-portrait">
@@ -1060,3 +1079,201 @@ Web app dan digital product yang sedang dibangun untuk memecahkan masalah nyata.
 const rootElement = document.getElementById('root')
 if (!rootElement) throw new Error('JRH root element not found')
 createRoot(rootElement).render(<App />)
+
+
+/* =========================================================
+   JRH UI/UX MICRO-POLISH — ADDITIVE ONLY
+   No structural redesign. Existing Menu/Music geometry stays locked.
+   ========================================================= */
+
+/* 01–03 / Hero: availability, entrance hierarchy and scroll cue */
+.hero-meta {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 18px;
+  font-size: .68rem;
+  font-weight: 750;
+  letter-spacing: .12em;
+  opacity: .68;
+}
+.availability-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 999px;
+  background: #2fb36f;
+  box-shadow: 0 0 0 4px rgba(47,179,111,.10);
+  animation: jrh-pulse 2.2s ease-in-out infinite;
+}
+.hero-scroll-cue {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 24px;
+  color: inherit;
+  text-decoration: none;
+  font-size: .68rem;
+  font-weight: 750;
+  letter-spacing: .12em;
+  opacity: .52;
+  transition: opacity 180ms ease, transform 180ms ease;
+}
+.hero-scroll-cue:hover { opacity: .9; transform: translateY(2px); }
+.hero-scroll-cue span:last-child { font-size: 1rem; }
+
+/* 04 / Active navigation */
+.site-footer-nav a[aria-current="location"] {
+  font-weight: 800;
+  opacity: 1;
+}
+
+/* 05–06 / Navigation feedback without changing geometry */
+.nav-action:active,
+.theme-toggle-floating:active,
+.back-to-top:active,
+.hero-pill:active,
+.ghost-pill:active,
+.project-link:active,
+.media-links a:active,
+.contact-submit button:active {
+  transform: translateY(1px) scale(.985);
+}
+.nav-action:focus-visible,
+.theme-toggle-floating:focus-visible,
+.back-to-top:focus-visible,
+.hero-pill:focus-visible,
+.ghost-pill:focus-visible,
+.project-link:focus-visible,
+.media-links a:focus-visible,
+.contact-submit button:focus-visible,
+.site-footer-nav a:focus-visible {
+  outline: 3px solid rgba(0,105,224,.20);
+  outline-offset: 3px;
+}
+
+/* 08 / Editorial section numbering */
+main > .section { counter-increment: jrh-section; position: relative; }
+main { counter-reset: jrh-section; }
+main > .section .section-head::after {
+  content: "0" counter(jrh-section);
+  display: block;
+  margin-top: 12px;
+  font-size: .62rem;
+  font-weight: 800;
+  letter-spacing: .16em;
+  opacity: .38;
+}
+
+/* 09 / Very light viewport reveal; content remains visible if JS is unavailable */
+.jrh-reveal {
+  opacity: .94;
+  transform: translateY(6px);
+  transition: opacity 500ms ease, transform 500ms cubic-bezier(.2,.7,.2,1);
+}
+.jrh-reveal.is-visible { opacity: 1; transform: none; }
+
+/* 10 / Identity metadata texture */
+.hero-meta + .hero-scroll-cue { opacity: .52; }
+
+/* 11–12 / Education scanability */
+.record { transition: border-color 180ms ease, box-shadow 220ms ease, transform 220ms ease; }
+.record:hover { transform: translateX(2px); }
+
+/* 13 / Platform accents */
+.media-card:nth-child(1) .media-status { color: #e60023; }
+.media-card:nth-child(2) .media-status { color: #ff0033; }
+.media-card:nth-child(3) .media-status { color: #ee4d2d; }
+.media-card:nth-child(4) .media-status { color: #5b2cff; }
+.media-card:nth-child(5) .media-status { color: #111; }
+.dark .media-card:nth-child(5) .media-status { color: #fff; }
+
+/* 14–15 / Link affordance */
+.media-links a span:last-child,
+.project-link span:last-child {
+  transition: transform 180ms ease;
+}
+.media-links a:hover span:last-child,
+.project-link:hover span:last-child { transform: translate(2px,-2px); }
+
+/* 16–17 / Project status and indexing */
+.project-status {
+  border-radius: 999px;
+  padding: 5px 9px;
+  font-size: .62rem;
+  font-weight: 800;
+  letter-spacing: .08em;
+  background: rgba(0,105,224,.055);
+}
+.project-number,
+.media-number { font-variant-numeric: tabular-nums; }
+
+/* 18 / Existing image zoom, kept subtle */
+.media-card img,
+.project-card img { transition: transform 500ms cubic-bezier(.2,.7,.2,1); }
+.media-card:hover img,
+.project-card:hover img { transform: scale(1.018); }
+
+/* 20–23 / Quotes navigation clarity */
+.testimonial-counter {
+  font-variant-numeric: tabular-nums;
+  letter-spacing: .08em;
+}
+.testimonial-swipe-hint { transition: opacity 180ms ease; }
+.testimonials-viewport:hover + * { opacity: 1; }
+
+/* 24–25 / Contact feedback */
+.contact-field {
+  transition: border-color 180ms ease, background-color 180ms ease, box-shadow 180ms ease;
+}
+.contact-field:focus-within .contact-icon { transform: scale(1.04); }
+.contact-icon { transition: transform 180ms ease; }
+.contact-counter { font-variant-numeric: tabular-nums; }
+
+/* 26–27 / Submit + success completion */
+.contact-submit button:not(:disabled) {
+  transition: transform 180ms ease, box-shadow 220ms ease, opacity 180ms ease;
+}
+.contact-feedback.is-success {
+  animation: jrh-feedback-in 360ms ease both;
+}
+.contact-feedback.is-error {
+  animation: jrh-feedback-in 260ms ease both;
+}
+
+/* 28 / Back-to-top visibility polish */
+.back-to-top {
+  transition: opacity 180ms ease, transform 180ms ease, box-shadow 180ms ease;
+}
+.back-to-top:hover { transform: translateY(-2px); }
+
+/* 29–30 / Global accessibility + touch refinement */
+button, a, input, textarea, select { -webkit-tap-highlight-color: transparent; }
+@media (hover: none) {
+  .record:hover,
+  .media-card:hover,
+  .project-card:hover { transform: none; }
+}
+@keyframes jrh-pulse {
+  0%,100% { box-shadow: 0 0 0 4px rgba(47,179,111,.10); }
+  50% { box-shadow: 0 0 0 7px rgba(47,179,111,.04); }
+}
+@keyframes jrh-feedback-in {
+  from { opacity: 0; transform: translateY(4px); }
+  to { opacity: 1; transform: none; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .availability-dot,
+  .jrh-reveal,
+  .contact-feedback.is-success,
+  .contact-feedback.is-error { animation: none; transition: none; }
+  .jrh-reveal { opacity: 1; transform: none; }
+  .hero-scroll-cue,
+  .record,
+  .back-to-top { transition: none; }
+}
+@media (max-width: 640px) {
+  .hero-meta { margin-top: 14px; font-size: .61rem; }
+  .hero-scroll-cue { margin-top: 18px; }
+  main > .section .section-head::after { margin-top: 9px; }
+}
