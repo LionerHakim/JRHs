@@ -7957,3 +7957,123 @@ main[data-ui-level="20"] input:focus,main[data-ui-level="20"] textarea:focus,mai
 @media(max-width:430px){
  main[data-ui-level="20"] .hero h1{font-size:clamp(48px,15vw,68px)}
  .nav{min-height:56px}.brand-mark{width:32px;height:32px}}
+
+
+/* =========================================================
+   JRH FINAL POLISH — QUOTES + NAV CLEANUP
+   Existing copy and markup remain unchanged.
+   ========================================================= */
+
+/* Navbar: remove the visible lower rule/edge. */
+.nav {
+  border-color: transparent !important;
+  box-shadow: 0 10px 32px rgba(9,10,11,.045), inset 0 1px 0 rgba(255,255,255,.55);
+}
+
+/* Thinking quotes: turn the existing two principles into a
+   calmer editorial statement instead of generic cards. */
+main[data-ui-level="20"] .thinking-quotes {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0,1fr));
+  gap: clamp(18px, 4vw, 64px);
+  margin-block: clamp(64px, 9vw, 128px);
+}
+
+main[data-ui-level="20"] .thinking-quote-card {
+  position: relative;
+  min-width: 0;
+  padding: clamp(28px, 4vw, 52px) 0;
+  border: 0;
+  border-top: 1px solid rgba(9,10,11,.14);
+  border-radius: 0;
+  background: transparent;
+  box-shadow: none;
+  overflow: visible;
+  transition: border-color 260ms var(--ease), transform 420ms var(--ease);
+}
+
+main[data-ui-level="20"] .thinking-quote-card::before {
+  content: "";
+  position: absolute;
+  inset: 0 auto auto 0;
+  width: 34px;
+  height: 2px;
+  border: 0;
+  background: var(--blue-strong);
+  opacity: 1;
+  transform-origin: left;
+  transition: width 420ms var(--ease);
+}
+
+main[data-ui-level="20"] .thinking-quote-card::after {
+  display: none;
+}
+
+main[data-ui-level="20"] .thinking-quote-card:hover {
+  transform: translateY(-3px);
+  border-color: rgba(9,10,11,.24);
+  box-shadow: none;
+}
+
+main[data-ui-level="20"] .thinking-quote-card:hover::before {
+  width: 72px;
+}
+
+main[data-ui-level="20"] .thinking-quote-kicker {
+  display: block;
+  margin-bottom: clamp(18px, 2vw, 28px);
+  color: var(--graphite);
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: .14em;
+  line-height: 1.2;
+  text-transform: uppercase;
+}
+
+main[data-ui-level="20"] .thinking-quote-card strong {
+  display: block;
+  max-width: 15ch;
+  color: var(--ink);
+  font-family: var(--font-aeonik);
+  font-size: clamp(28px, 3.2vw, 48px);
+  font-weight: 600;
+  line-height: .94;
+  letter-spacing: -.065em;
+  text-wrap: balance;
+}
+
+main[data-ui-level="20"] .thinking-quote-card p {
+  max-width: 42ch;
+  margin: clamp(18px, 2.4vw, 28px) 0 0;
+  color: var(--graphite);
+  font-size: clamp(14px, 1.2vw, 17px);
+  line-height: 1.48;
+  letter-spacing: -.012em;
+}
+
+@media (max-width: 760px) {
+  main[data-ui-level="20"] .thinking-quotes {
+    grid-template-columns: 1fr;
+    gap: 0;
+    margin-block: 64px 88px;
+  }
+
+  main[data-ui-level="20"] .thinking-quote-card {
+    padding-block: 30px 36px;
+  }
+
+  main[data-ui-level="20"] .thinking-quote-card strong {
+    max-width: 14ch;
+    font-size: clamp(30px, 9vw, 44px);
+  }
+
+  main[data-ui-level="20"] .thinking-quote-card p {
+    max-width: 48ch;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  main[data-ui-level="20"] .thinking-quote-card {
+    transition: none;
+  }
+}
