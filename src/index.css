@@ -6082,8 +6082,13 @@ html[data-theme="dark"] .contact-submit button {
 html[data-theme="light"] .wordmark,
 html[data-theme="light"] .wordmark:hover,
 html[data-theme="light"] .wordmark:focus-visible {
+  background: #11161e !important;
   border-color: #3b9cff !important;
   box-shadow: 0 0 0 3px #3b9cff !important;
+}
+
+html[data-theme="light"] .wordmark-logo {
+  filter: brightness(0) invert(1) !important;
 }
 
 /* Accessibility controls: keep the existing carousel geometry unchanged. */
