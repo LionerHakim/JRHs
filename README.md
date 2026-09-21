@@ -1,6 +1,6 @@
-# JRHs — Personal Digital Portfolio
+# JRHs — Saya Sibuk Bekerja, Ini yang Baru.
 
-Personal digital portfolio for JRH.
+Ruang personal JRH untuk karya, project, media, dan jejak yang sedang dibangun.
 
 ## Stack
 
@@ -27,6 +27,6 @@ Build command: `npm run build`
 Output: `dist`  
 Node.js: 22
 
-Portfolio content is centralized in `src/config/site.ts`.
+Brand identity and portfolio content are centralized in `src/config/site.ts`.
 
 Production site: https://jrhsee.my.id/
