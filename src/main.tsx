@@ -744,6 +744,7 @@ ${name.trim()}`)
                 key={id}
                 href={`#${id}`}
                 aria-current={activeSection === id ? 'location' : undefined}
+                tabIndex={menuOpen ? 0 : -1}
                 className={activeSection === id ? 'is-active' : undefined}
                 onClick={() => setMenuOpen(false)}
               >
@@ -779,23 +780,24 @@ ${name.trim()}`)
               role="progressbar"
               aria-label="Track progress"
               aria-valuemin={0}
-              aria-valuemax={musicDuration || 0}
-              aria-valuenow={musicProgress}
+              aria-valuemax={100}
+              aria-valuenow={musicDuration ? Math.min(100, (musicProgress / musicDuration) * 100) : 0}
             >
               <span style={{ width: musicDuration ? `${Math.min(100, (musicProgress / musicDuration) * 100)}%` : '0%' }} />
             </div>
             <div className="music-controls" aria-label="Music controls">
-              <button type="button" aria-label="Previous track" onClick={() => changeMusicTrack(-1)}>‹‹</button>
+              <button type="button" tabIndex={musicOpen ? 0 : -1} aria-label="Previous track" onClick={() => changeMusicTrack(-1)}>‹‹</button>
               <button
                 className="music-play"
                 type="button"
+                tabIndex={musicOpen ? 0 : -1}
                 aria-label={musicPlaying ? 'Pause' : 'Play'}
                 aria-pressed={musicPlaying}
                 onClick={toggleMusicPlayback}
               >
                 {musicPlaying ? 'Ⅱ' : '▶'}
               </button>
-              <button type="button" aria-label="Next track" onClick={() => changeMusicTrack(1)}>››</button>
+              <button type="button" tabIndex={musicOpen ? 0 : -1} aria-label="Next track" onClick={() => changeMusicTrack(1)}>››</button>
             </div>
 
             <div className="music-playlist" aria-label="Playlist">
@@ -808,6 +810,7 @@ ${name.trim()}`)
                   <button
                     key={track.file}
                     type="button"
+                    tabIndex={musicOpen ? 0 : -1}
                     className={`music-playlist-item${musicIndex === index ? ' is-active' : ''}`}
                     aria-current={musicIndex === index ? 'true' : undefined}
                     onClick={() => loadAndPlayMusic(index)}
