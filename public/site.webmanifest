@@ -1,17 +1,17 @@
 {
-  "name": "JRH — Personal Digital Portfolio",
+  "name": "JRH — Saya Sibuk Bekerja, Ini yang Baru.",
   "short_name": "JRH",
   "start_url": "/",
   "display": "standalone",
   "background_color": "#F7FBFF",
   "theme_color": "#F7FBFF",
   "lang": "id",
-  "description": "JRH. Projects, publishing, media, education, and independent digital work.",
+  "description": "JRH — Saya sibuk bekerja, ini yang baru. Ruang personal untuk karya, project, media, dan jejak yang sedang saya bangun.",
   "icons": [
     {
       "src": "/assets/images/logo.png",
       "sizes": "any",
-      "type": "image/jpeg",
+      "type": "image/png",
       "purpose": "any"
     }
   ]
