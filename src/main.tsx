@@ -243,7 +243,7 @@ function TestimonialsSection() {
         16 gagasan dari tokoh lintas bidang tentang karya, pembelajaran, teknologi, ekonomi, dan kehidupan.
       </p>
       <div className="testimonials-toolbar">
-        <span className="testimonial-counter">16 PERSPEKTIF</span>
+        <span className="testimonial-counter">{String(testimonialActiveIndex + 1).padStart(2, '0')} / {String(testimonials.length).padStart(2, '0')} PERSPEKTIF</span>
         <span className="testimonial-swipe-hint" aria-hidden="true">GESER ↔</span>
       </div>
       <div ref={viewportRef} className="testimonials-viewport" aria-label="Koleksi quotes yang dapat digeser">
@@ -497,6 +497,25 @@ export default function App() {
       document.body.style.overflow = ''
     }
   }, [menuOpen, musicOpen, termsOpen, topicOpen])
+
+  useEffect(() => {
+    const targets = Array.from(document.querySelectorAll<HTMLElement>('main > .section, .thinking-quote-card, .contact-card'))
+    if (!targets.length || !('IntersectionObserver' in window)) return
+
+    targets.forEach((target) => target.classList.add('jrh-reveal'))
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('is-visible')
+          observer.unobserve(entry.target)
+        }
+      })
+    }, { threshold: 0.08 })
+
+    targets.forEach((target) => observer.observe(target))
+    return () => observer.disconnect()
+  }, [])
 
   useEffect(() => {
     const isEditableTarget = (target: EventTarget | null) => {
