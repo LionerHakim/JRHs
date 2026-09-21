@@ -860,7 +860,7 @@ ${name.trim()}`)
         </div>
       </header>
 
-      <main data-ui-level="4">
+      <main data-ui-level="10">
         <section id="identity" className="hero" data-experience="anchor" aria-labelledby="identity-title">
           <div className="hero-copy">
             <h1 id="identity-title">{siteConfig.identity.headline}</h1>
