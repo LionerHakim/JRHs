@@ -823,9 +823,6 @@ ${name.trim()}`)
               <span aria-hidden="true">·</span>
               <span>INDONESIA</span>
             </div>
-            <a className="hero-scroll-cue" href="#education" aria-label="Lanjut ke Education">
-              <span>SCROLL TO EXPLORE</span><span aria-hidden="true">↓</span>
-            </a>
           </div>
 
           <figure className="hero-portrait">
