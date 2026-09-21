@@ -4984,3 +4984,133 @@ textarea:disabled {
     transform: none;
   }
 }
+
+/* =========================================================
+   JRH UI/UX LEVEL 4 — LIVING INTERFACE
+   Ambient motion only. No layout, position or component redesign.
+   ========================================================= */
+
+/* Soft ambient atmosphere on the page */
+.site-shell {
+  position: relative;
+  isolation: isolate;
+}
+
+.site-shell::before {
+  content: "";
+  position: fixed;
+  inset: -20%;
+  z-index: -1;
+  pointer-events: none;
+  opacity: .34;
+  background:
+    radial-gradient(circle at 12% 18%, rgba(0,153,255,.055), transparent 28%),
+    radial-gradient(circle at 86% 42%, rgba(116,82,255,.045), transparent 30%),
+    radial-gradient(circle at 48% 92%, rgba(245,197,66,.035), transparent 26%);
+  animation: jrh-ambient-drift 18s ease-in-out infinite alternate;
+}
+
+@keyframes jrh-ambient-drift {
+  0% { transform: translate3d(-1%, -1%, 0) scale(1); }
+  100% { transform: translate3d(1%, 1%, 0) scale(1.025); }
+}
+
+/* Gentle entrance for content already in the document flow */
+.hero-copy,
+.hero-visual,
+.record,
+.media-card,
+.project-card,
+.testimonial,
+.contact-card {
+  animation: jrh-soft-enter 650ms var(--ease) both;
+}
+
+.hero-copy { animation-delay: 40ms; }
+.hero-visual { animation-delay: 90ms; }
+.record:nth-child(2) { animation-delay: 60ms; }
+.record:nth-child(3) { animation-delay: 100ms; }
+.record:nth-child(4) { animation-delay: 140ms; }
+
+@keyframes jrh-soft-enter {
+  from {
+    opacity: .72;
+    transform: translateY(7px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Subtle live pulse for active music state — existing indicator stays intact */
+.music-toggle.is-playing .music-toggle-icon {
+  animation: jrh-music-breathe 1.8s ease-in-out infinite;
+}
+
+@keyframes jrh-music-breathe {
+  0%, 100% { filter: brightness(1); }
+  50% { filter: brightness(1.18); }
+}
+
+/* Give the page a little "alive" feedback when hovering major surfaces */
+.media-card::before,
+.project-card::before,
+.record::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  pointer-events: none;
+  opacity: 0;
+  background: linear-gradient(
+    120deg,
+    transparent 25%,
+    rgba(255,255,255,.22) 50%,
+    transparent 75%
+  );
+  transform: translateX(-110%);
+}
+
+.media-card:hover::before,
+.project-card:hover::before,
+.record:hover::before {
+  opacity: 1;
+  animation: jrh-card-glint 850ms var(--ease) both;
+}
+
+@keyframes jrh-card-glint {
+  to { transform: translateX(110%); }
+}
+
+/* Footer becomes subtly responsive to pointer movement */
+.site-footer-brand strong {
+  display: inline-block;
+  transition: transform 240ms var(--ease), letter-spacing 240ms var(--ease);
+}
+
+.site-footer-brand strong:hover {
+  transform: translateY(-1px);
+  letter-spacing: .035em;
+}
+
+/* Keep all ambient effects disabled for reduced-motion users */
+@media (prefers-reduced-motion: reduce) {
+  .site-shell::before,
+  .hero-copy,
+  .hero-visual,
+  .record,
+  .media-card,
+  .project-card,
+  .testimonial,
+  .contact-card,
+  .music-toggle.is-playing .music-toggle-icon {
+    animation: none;
+  }
+
+  .media-card::before,
+  .project-card::before,
+  .record::before {
+    display: none;
+  }
+}
