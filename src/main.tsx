@@ -253,6 +253,7 @@ function TestimonialsSection() {
 
 export default function App() {
   const [activeSection, setActiveSection] = useState<(typeof sectionIds)[number]>('identity')
+  const [scrollProgress, setScrollProgress] = useState(0)
   const [menuOpen, setMenuOpen] = useState(false)
   const [musicOpen, setMusicOpen] = useState(false)
   const [darkMode, setDarkMode] = useState(() => window.sessionStorage.getItem('jrhs-theme') === 'dark')
@@ -415,6 +416,29 @@ export default function App() {
 
 
   useEffect(() => {
+    let frame = 0
+    const updateScrollProgress = () => {
+      if (frame) return
+      frame = window.requestAnimationFrame(() => {
+        frame = 0
+        const maxScroll = document.documentElement.scrollHeight - window.innerHeight
+        const progress = maxScroll > 0 ? Math.min(100, Math.max(0, (window.scrollY / maxScroll) * 100)) : 0
+        setScrollProgress(progress)
+      })
+    }
+
+    updateScrollProgress()
+    window.addEventListener('scroll', updateScrollProgress, { passive: true })
+    window.addEventListener('resize', updateScrollProgress)
+
+    return () => {
+      window.removeEventListener('scroll', updateScrollProgress)
+      window.removeEventListener('resize', updateScrollProgress)
+      if (frame) window.cancelAnimationFrame(frame)
+    }
+  }, [])
+
+  useEffect(() => {
     const shouldLockScroll = menuOpen || musicOpen
     document.documentElement.dataset.overlayOpen = shouldLockScroll ? 'true' : 'false'
     document.body.style.overflow = shouldLockScroll ? 'hidden' : ''
@@ -540,6 +564,7 @@ ${name.trim()}`)
 
   return (
     <div className={`site-shell${menuOpen ? " menu-open" : ""}${musicOpen ? " music-open" : ""}`}>
+      <div className="scroll-progress" aria-hidden="true"><span style={{ width: `${scrollProgress}%` }} /></div>
       <a className="skip-link" href="#identity">Lewati ke konten utama</a>
       <header className="nav">
         <a className="wordmark" href="/" aria-label="JRH home" onClick={(event) => { event.preventDefault(); window.location.reload() }}>
@@ -928,7 +953,7 @@ Web app dan digital product yang sedang dibangun untuk memecahkan masalah nyata.
 
           <nav className="site-footer-nav" aria-label="Footer navigation">
             {sectionItems.map(([id, label]) => (
-              <a key={id} href={`#${id}`}>{label.toUpperCase()}</a>
+              <a key={id} href={`#${id}`} aria-current={activeSection === id ? 'location' : undefined}>{label.toUpperCase()}</a>
             ))}
           </nav>
         </div>
