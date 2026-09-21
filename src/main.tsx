@@ -765,7 +765,7 @@ ${name.trim()}`)
                 <span className="music-eyebrow">JRH / SOUND</span>
                 <strong>Music Player</strong>
               </div>
-              <span className="music-status">{musicStatus}</span>
+              <span className="music-status" aria-live="polite" aria-atomic="true">{musicStatus}</span>
             </div>
             <div className="music-track">
               <div className="music-track-art" aria-hidden="true">♪</div>
