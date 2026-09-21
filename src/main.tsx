@@ -498,18 +498,6 @@ export default function App() {
   }, [menuOpen, musicOpen, termsOpen, topicOpen])
 
   useEffect(() => {
-    const root = document.documentElement
-    const updatePointerGlow = (event: PointerEvent) => {
-      if (event.pointerType && event.pointerType !== 'mouse') return
-      root.style.setProperty('--jrh-pointer-x', event.clientX + 'px')
-      root.style.setProperty('--jrh-pointer-y', event.clientY + 'px')
-    }
-
-    window.addEventListener('pointermove', updatePointerGlow, { passive: true })
-    return () => window.removeEventListener('pointermove', updatePointerGlow)
-  }, [])
-
-  useEffect(() => {
     const targets = Array.from(document.querySelectorAll<HTMLElement>('main > .section, .thinking-quote-card, .contact-card'))
     if (!targets.length || !('IntersectionObserver' in window)) return
 
