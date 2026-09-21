@@ -332,9 +332,7 @@ export default function App() {
     const safeIndex = (index + musicTracks.length) % musicTracks.length
     const nextTrack = musicTracks[safeIndex]
     const requestId = ++musicRequestRef.current
-    const nextSrc = new URL(nextTrack.src, window.location.href).href
-
-    musicIndexRef.current = safeIndex
+      musicIndexRef.current = safeIndex
     setMusicIndex(safeIndex)
     setMusicProgress(0)
     setMusicDuration(0)
@@ -353,7 +351,6 @@ export default function App() {
       setMusicStatus('READY')
     })
 
-    return nextSrc
   }
 
   const toggleMusicPlayback = () => {
@@ -733,7 +730,7 @@ ${name.trim()}`)
             <span className="nav-action-meta" aria-hidden="true">{menuOpen ? 'CLOSE' : 'OPEN'}</span>
           </button>
 
-          <nav id="primary-navigation" className={menuOpen ? 'is-open' : undefined} aria-label="Primary navigation">
+          <nav id="primary-navigation" className={menuOpen ? 'is-open' : undefined} aria-label="Primary navigation" aria-hidden={!menuOpen}>
             <div className="menu-panel-head">
               <div>
                 <span>JRH / NAVIGATION</span>
