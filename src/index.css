@@ -6423,3 +6423,290 @@ html {
     transition: none;
   }
 }
+
+
+/* =========================================================
+   JRH UI/UX LEVEL 3 — ART-DIRECTION & PRODUCT POLISH
+   Visual sophistication without changing content or structure.
+   ========================================================= */
+
+/* 01 — Quiet canvas */
+body {
+  background:
+    radial-gradient(circle at 50% -18%, rgba(10,111,232,.035), transparent 34%),
+    var(--sky);
+}
+
+main {
+  isolation: isolate;
+}
+
+/* 02 — Hero becomes the visual anchor */
+.hero {
+  position: relative;
+}
+
+.hero::before {
+  content: "JRH";
+  position: absolute;
+  z-index: -1;
+  top: 7%;
+  right: -1%;
+  color: rgba(10,13,18,.018);
+  font-family: var(--font-editorial);
+  font-size: clamp(180px, 27vw, 390px);
+  font-weight: 600;
+  line-height: .7;
+  letter-spacing: -.07em;
+  pointer-events: none;
+  user-select: none;
+}
+
+.hero-meta {
+  position: relative;
+  padding-top: 13px;
+  border-top: 1px solid var(--line);
+  width: min(680px, 100%);
+}
+
+/* 03 — Section rhythm */
+.section {
+  position: relative;
+}
+
+.section + .section {
+  border-top: 1px solid rgba(10,13,18,.035);
+}
+
+.section-head {
+  margin-bottom: clamp(28px, 4vw, 48px);
+}
+
+.section-head::after {
+  color: var(--fog);
+}
+
+/* 04 — Cards: premium material language */
+.media-card,
+.project-card,
+.record,
+.testimonial,
+.thinking-quote-card,
+.contact-card {
+  position: relative;
+  overflow: hidden;
+  background:
+    linear-gradient(145deg, rgba(255,255,255,.98), rgba(246,247,248,.82));
+}
+
+.media-card::before,
+.project-card::before,
+.record::before,
+.testimonial::before,
+.thinking-quote-card::before,
+.contact-card::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: linear-gradient(
+    120deg,
+    rgba(255,255,255,.42),
+    transparent 35%
+  );
+  opacity: .8;
+}
+
+.media-card::after,
+.project-card::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 0;
+  height: 2px;
+  background: var(--blue-strong);
+  transition: width 420ms var(--ease);
+}
+
+.media-card:hover::after,
+.project-card:hover::after {
+  width: 100%;
+}
+
+/* 05 — Better information hierarchy */
+.project-card-top,
+.media-card-top {
+  position: relative;
+  z-index: 1;
+}
+
+.project-card-body,
+.media-card-body {
+  position: relative;
+  z-index: 1;
+}
+
+.project-category,
+.media-category,
+.project-status,
+.media-status,
+.project-number,
+.media-number {
+  letter-spacing: .055em;
+}
+
+.project-card h3,
+.media-card h3,
+.record h3 {
+  text-wrap: balance;
+}
+
+/* 06 — Images feel curated, not boxed */
+.media-card img,
+.project-card img,
+.portrait-frame img {
+  transition:
+    transform 700ms var(--ease),
+    filter 500ms ease;
+}
+
+.media-card:hover img,
+.project-card:hover img {
+  transform: scale(1.025);
+}
+
+.portrait-frame {
+  position: relative;
+  overflow: hidden;
+}
+
+.portrait-frame::after {
+  content: "";
+  position: absolute;
+  inset: 6px;
+  pointer-events: none;
+  border: 1px solid rgba(255,255,255,.55);
+  border-radius: calc(var(--radius-images) - 2px);
+}
+
+/* 07 — Editorial link behavior */
+.project-link,
+.media-links a {
+  position: relative;
+}
+
+.project-link::after,
+.media-links a::after {
+  content: "↗";
+  display: inline-block;
+  margin-left: 7px;
+  transition: transform 220ms var(--ease);
+}
+
+.project-link:hover::after,
+.media-links a:hover::after {
+  transform: translate(2px, -2px);
+}
+
+/* 08 — Contact feels like a destination */
+.contact-card {
+  box-shadow:
+    0 1px 0 rgba(255,255,255,.8) inset,
+    0 18px 55px rgba(10,13,18,.065);
+}
+
+.contact-question {
+  font-family: var(--font-editorial);
+  font-size: clamp(32px, 4vw, 52px);
+  line-height: .95;
+  letter-spacing: -.025em;
+}
+
+/* 09 — Navigation becomes a premium control surface */
+.nav {
+  border: 1px solid rgba(10,13,18,.07);
+  background: rgba(255,255,255,.82);
+}
+
+.nav::after {
+  content: "";
+  position: absolute;
+  left: 18px;
+  right: 18px;
+  bottom: -1px;
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(10,13,18,.10),
+    transparent
+  );
+  pointer-events: none;
+}
+
+/* 10 — Scrollbar is part of the identity */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(10,13,18,.22) transparent;
+}
+
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(10,13,18,.18);
+  border: 2px solid transparent;
+  background-clip: padding-box;
+  border-radius: 999px;
+}
+
+/* 11 — Mobile keeps the restraint */
+@media (max-width: 640px) {
+  body {
+    background: var(--sky);
+  }
+
+  .hero::before {
+    top: 3%;
+    right: -8%;
+    font-size: 42vw;
+    opacity: .7;
+  }
+
+  .hero-meta {
+    width: 100%;
+  }
+
+  .section + .section {
+    border-top-color: rgba(10,13,18,.025);
+  }
+
+  .media-card:hover img,
+  .project-card:hover img {
+    transform: none;
+  }
+
+  .contact-question {
+    font-size: clamp(32px, 10vw, 46px);
+  }
+}
+
+/* 12 — Motion discipline */
+@media (prefers-reduced-motion: reduce) {
+  .hero::before,
+  .media-card img,
+  .project-card img,
+  .media-card::after,
+  .project-card::after,
+  .project-link::after,
+  .media-links a::after {
+    transition: none;
+  }
+}
