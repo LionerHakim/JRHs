@@ -6164,3 +6164,262 @@ html[data-theme="dark"] .testimonial-controls button {
     letter-spacing: -.035em;
   }
 }
+
+
+/* =========================================================
+   JRH UI/UX LEVEL 2 — SYSTEM-WIDE REFINEMENT
+   Preserve existing structure and content; elevate hierarchy,
+   interaction quality, accessibility, and perceived craft.
+   ========================================================= */
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 104px;
+}
+
+::selection {
+  background: var(--ink);
+  color: var(--paper);
+}
+
+:focus-visible {
+  outline: 2px solid var(--blue-strong);
+  outline-offset: 4px;
+}
+
+.section,
+.hero {
+  scroll-margin-top: 104px;
+}
+
+.section-head {
+  position: relative;
+  padding-bottom: 18px;
+  border-bottom: 1px solid var(--line);
+}
+
+.section-head::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -1px;
+  width: 44px;
+  height: 2px;
+  background: var(--ink);
+  transform-origin: left;
+  transition: width 320ms var(--ease);
+}
+
+.section-head:hover::before {
+  width: 84px;
+}
+
+.section-head p,
+.hero-description,
+.media-subtitle,
+.projects-subtitle,
+.testimonials-subtitle {
+  text-wrap: pretty;
+}
+
+.nav {
+  backdrop-filter: blur(18px) saturate(1.15);
+  -webkit-backdrop-filter: blur(18px) saturate(1.15);
+  box-shadow:
+    0 1px 0 rgba(10,13,18,.04),
+    0 12px 40px rgba(10,13,18,.045);
+}
+
+.nav-action,
+.hero-pill,
+.ghost-pill,
+.project-link,
+.media-links a,
+.contact-submit button,
+.theme-toggle-floating,
+.back-to-top {
+  -webkit-tap-highlight-color: transparent;
+  user-select: none;
+}
+
+.nav-action,
+.hero-pill,
+.ghost-pill,
+.project-link,
+.media-links a,
+.contact-submit button {
+  transition:
+    transform 220ms var(--ease),
+    background-color 220ms var(--ease),
+    border-color 220ms var(--ease),
+    color 220ms var(--ease),
+    box-shadow 220ms var(--ease);
+}
+
+.hero-pill:hover,
+.hero-pill:focus-visible {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 24px rgba(10,13,18,.12);
+}
+
+.ghost-pill:hover,
+.ghost-pill:focus-visible {
+  transform: translateY(-2px);
+  border-color: rgba(10,13,18,.22);
+  box-shadow: 0 8px 20px rgba(10,13,18,.06);
+}
+
+.media-card,
+.project-card,
+.record,
+.testimonial,
+.thinking-quote-card,
+.contact-card {
+  border: 1px solid rgba(10,13,18,.07);
+  box-shadow:
+    0 1px 1px rgba(10,13,18,.025),
+    0 12px 34px rgba(10,13,18,.035);
+  transition:
+    transform 300ms var(--ease),
+    border-color 220ms var(--ease),
+    box-shadow 300ms var(--ease),
+    background-color 220ms var(--ease);
+}
+
+.media-card:hover,
+.project-card:hover,
+.record:hover,
+.testimonial:hover,
+.thinking-quote-card:hover {
+  transform: translateY(-4px);
+  border-color: rgba(10,13,18,.13);
+  box-shadow:
+    0 2px 2px rgba(10,13,18,.025),
+    0 20px 48px rgba(10,13,18,.075);
+}
+
+.project-status,
+.media-status {
+  transition: border-color 220ms var(--ease), background-color 220ms var(--ease);
+}
+
+.project-card:hover .project-status,
+.media-card:hover .media-status {
+  border-color: rgba(10,111,232,.24);
+  background: var(--blue-soft);
+}
+
+.project-link:hover,
+.project-link:focus-visible,
+.media-links a:hover,
+.media-links a:focus-visible {
+  transform: translateY(-2px);
+}
+
+.record-activities li::marker {
+  color: var(--blue-strong);
+}
+
+.contact-card {
+  overflow: clip;
+}
+
+.contact-field input,
+.contact-field textarea,
+.contact-topic-trigger {
+  transition:
+    border-color 180ms ease,
+    box-shadow 180ms ease,
+    background-color 180ms ease;
+}
+
+.contact-field input:focus,
+.contact-field textarea:focus,
+.contact-topic-trigger:focus-visible {
+  border-color: rgba(10,111,232,.42);
+  box-shadow: 0 0 0 4px rgba(10,111,232,.08);
+  outline: none;
+}
+
+.contact-submit button:hover,
+.contact-submit button:focus-visible {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 28px rgba(10,13,18,.14);
+}
+
+.site-footer-main {
+  box-shadow:
+    0 1px 0 rgba(255,255,255,.04) inset,
+    0 20px 60px rgba(10,13,18,.08);
+}
+
+.site-footer-nav a {
+  transition: color 180ms ease, opacity 180ms ease, transform 180ms var(--ease);
+}
+
+.site-footer-nav a:hover,
+.site-footer-nav a:focus-visible {
+  transform: translateX(2px);
+}
+
+@media (max-width: 640px) {
+  html {
+    scroll-padding-top: 88px;
+  }
+
+  .section,
+  .hero {
+    scroll-margin-top: 88px;
+  }
+
+  .section-head {
+    padding-bottom: 14px;
+  }
+
+  .section-head::before {
+    width: 32px;
+  }
+
+  .media-card:hover,
+  .project-card:hover,
+  .record:hover,
+  .testimonial:hover,
+  .thinking-quote-card:hover {
+    transform: translateY(-2px);
+  }
+
+  .hero-pill:hover,
+  .hero-pill:focus-visible,
+  .ghost-pill:hover,
+  .ghost-pill:focus-visible,
+  .project-link:hover,
+  .project-link:focus-visible,
+  .media-links a:hover,
+  .media-links a:focus-visible,
+  .contact-submit button:hover,
+  .contact-submit button:focus-visible {
+    transform: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  .section-head::before,
+  .nav-action,
+  .hero-pill,
+  .ghost-pill,
+  .project-link,
+  .media-links a,
+  .contact-submit button,
+  .media-card,
+  .project-card,
+  .record,
+  .testimonial,
+  .thinking-quote-card,
+  .site-footer-nav a {
+    transition: none;
+  }
+}
