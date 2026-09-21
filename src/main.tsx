@@ -71,7 +71,7 @@ function TermsCheckbox({
       </button>
 
       {termsOpen ? (
-        <div id={popoverId} className="terms-checkbox-popover" role="dialog" aria-label="Syarat dan ketentuan">
+        <div id={popoverId} className="terms-checkbox-popover" role="dialog" aria-modal="true" aria-label="Syarat dan ketentuan">
           <div className="terms-checkbox-popover-head">
             <strong>Syarat & Ketentuan</strong>
             <button className="terms-checkbox-close" type="button" aria-label="Tutup syarat dan ketentuan" onClick={onTermsToggle}>×</button>
@@ -222,6 +222,8 @@ function TestimonialsSection() {
     const handlePointerDown = () => pauseForUser()
     const handleWheel = () => pauseForUser()
     const handleTouchStart = () => pauseForUser()
+    const handleMouseEnter = () => pauseForUser()
+    const handleFocusIn = () => pauseForUser()
 
     const observer = new IntersectionObserver(([entry]) => {
       activeInViewRef.current = entry.isIntersecting
@@ -233,6 +235,8 @@ function TestimonialsSection() {
     viewport.addEventListener('pointerdown', handlePointerDown, { passive: true })
     viewport.addEventListener('wheel', handleWheel, { passive: true })
     viewport.addEventListener('touchstart', handleTouchStart, { passive: true })
+    viewport.addEventListener('mouseenter', handleMouseEnter, { passive: true })
+    viewport.addEventListener('focusin', handleFocusIn)
     viewport.addEventListener('scroll', updateActiveIndex, { passive: true })
     updateActiveIndex()
 
@@ -243,9 +247,27 @@ function TestimonialsSection() {
       viewport.removeEventListener('pointerdown', handlePointerDown)
       viewport.removeEventListener('wheel', handleWheel)
       viewport.removeEventListener('touchstart', handleTouchStart)
+      viewport.removeEventListener('mouseenter', handleMouseEnter)
+      viewport.removeEventListener('focusin', handleFocusIn)
       viewport.removeEventListener('scroll', updateActiveIndex)
     }
   }, [testimonials.length])
+
+  const moveTestimonial = (direction: number) => {
+    const viewport = viewportRef.current
+    if (!viewport) return
+    const card = viewport.querySelector<HTMLElement>('.testimonial')
+    if (!card) return
+    const gap = Number.parseFloat(window.getComputedStyle(card.parentElement as Element).gap) || 0
+    const step = card.getBoundingClientRect().width + gap
+    const maxScroll = viewport.scrollWidth - viewport.clientWidth
+    const currentIndex = Math.round(viewport.scrollLeft / Math.max(step, 1))
+    const nextIndex = (currentIndex + direction + testimonials.length) % testimonials.length
+    const nextLeft = nextIndex === testimonials.length - 1 && direction > 0
+      ? Math.min(nextIndex * step, maxScroll)
+      : nextIndex * step
+    viewport.scrollTo({ left: Math.min(Math.max(nextLeft, 0), maxScroll), behavior: 'smooth' })
+  }
 
   return (
     <section id="testimonials" className="section testimonials-section" aria-labelledby="testimonials-title">
@@ -257,6 +279,10 @@ function TestimonialsSection() {
       </p>
       <div className="testimonials-toolbar">
         <span className="testimonial-counter">{String(testimonialActiveIndex + 1).padStart(2, '0')} / {String(testimonials.length).padStart(2, '0')} PERSPEKTIF</span>
+        <div className="testimonial-controls" aria-label="Kontrol quotes">
+          <button type="button" aria-label="Quote sebelumnya" onClick={() => moveTestimonial(-1)}>←</button>
+          <button type="button" aria-label="Quote berikutnya" onClick={() => moveTestimonial(1)}>→</button>
+        </div>
         <span className="testimonial-swipe-hint" aria-hidden="true">GESER ↔</span>
       </div>
       <div ref={viewportRef} className="testimonials-viewport" role="region" aria-roledescription="carousel" aria-label="Koleksi quotes yang dapat digeser">
