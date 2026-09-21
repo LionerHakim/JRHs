@@ -6143,3 +6143,21 @@ html[data-theme="dark"] .testimonial-controls button {
     transition: none;
   }
 }
+
+
+/* =========================================================
+   JRH BRAND SYNC — HERO HEADLINE
+   Keep the new identity intentional across breakpoints.
+   ========================================================= */
+#identity-title {
+  white-space: pre-line;
+  text-wrap: balance;
+}
+
+@media (max-width: 640px) {
+  #identity-title {
+    font-size: clamp(48px, 15.5vw, 76px);
+    line-height: .98;
+    letter-spacing: -.045em;
+  }
+}
