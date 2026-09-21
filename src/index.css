@@ -7583,3 +7583,227 @@ main[data-ui-level="20"] ~ .site-footer {
     }
   }
 }
+
+
+/* =========================================================
+   JRH UI/UX LEVEL 100 — SYSTEM HARDENING
+   100-point reliability pass: accessibility, touch, Safari,
+   performance, layout containment, focus visibility, and
+   failure-resistant interactions. Additive only.
+   ========================================================= */
+
+/* 01–10: root/layout containment */
+html {
+  scroll-behavior: smooth;
+  overflow-x: clip;
+}
+@supports not (overflow: clip) {
+  html { overflow-x: hidden; }
+}
+body {
+  min-width: 320px;
+  overflow-x: clip;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+@supports not (overflow: clip) {
+  body { overflow-x: hidden; }
+}
+*, *::before, *::after { box-sizing: border-box; }
+img, svg, video, canvas { max-width: 100%; }
+img { height: auto; }
+
+/* 11–20: iOS/Safari stability */
+html {
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+}
+body {
+  -webkit-tap-highlight-color: transparent;
+}
+.site-shell {
+  min-height: 100%;
+  isolation: isolate;
+}
+main[data-ui-level="20"] {
+  contain: layout paint;
+}
+@supports (content-visibility: auto) {
+  main[data-ui-level="20"] .experience-section,
+  main[data-ui-level="20"] .testimonials-section {
+    content-visibility: auto;
+    contain-intrinsic-size: 1px 720px;
+  }
+}
+
+/* 21–30: safe areas and fixed UI */
+.nav {
+  padding-top: max(0px, env(safe-area-inset-top));
+}
+@supports (padding: max(0px)) {
+  .site-footer {
+    padding-bottom: max(18px, env(safe-area-inset-bottom));
+  }
+}
+.floating-utilities {
+  padding-bottom: env(safe-area-inset-bottom);
+}
+.scroll-progress {
+  padding-top: env(safe-area-inset-top);
+  height: max(2px, calc(2px + env(safe-area-inset-top)));
+}
+.scroll-progress span {
+  height: 2px;
+}
+
+/* 31–40: keyboard/focus accessibility */
+:where(a, button, input, textarea, select, [tabindex]):focus-visible {
+  outline: 2px solid currentColor;
+  outline-offset: 3px;
+}
+.skip-link {
+  z-index: 3000;
+}
+.skip-link:focus-visible {
+  top: max(12px, env(safe-area-inset-top));
+}
+@media (prefers-contrast: more) {
+  :where(a, button, input, textarea, select, [tabindex]):focus-visible {
+    outline-width: 3px;
+  }
+}
+
+/* 41–50: touch ergonomics */
+@media (pointer: coarse) {
+  .nav-action,
+  .menu-panel-grid a,
+  .music-playlist-item,
+  .testimonial-controls button,
+  .theme-toggle-floating,
+  .back-to-top,
+  .contact-submit > button,
+  .terms-checkbox-info {
+    min-width: 44px;
+    min-height: 44px;
+  }
+  .nav-action,
+  .menu-panel-grid a,
+  .music-playlist-item,
+  .testimonial-controls button,
+  .theme-toggle-floating,
+  .back-to-top,
+  .contact-submit > button {
+    touch-action: manipulation;
+  }
+}
+
+/* 51–60: horizontal-scroll containment */
+main[data-ui-level="20"] .testimonials-viewport,
+main[data-ui-level="20"] .music-playlist-list,
+main[data-ui-level="20"] .contact-topic-menu {
+  overscroll-behavior: contain;
+  scrollbar-gutter: stable;
+}
+main[data-ui-level="20"] .testimonials-viewport {
+  overscroll-behavior-x: contain;
+  overscroll-behavior-y: none;
+}
+
+/* 61–70: media/render resilience */
+main[data-ui-level="20"] .hero-portrait img {
+  display: block;
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+}
+main[data-ui-level="20"] .media-card,
+main[data-ui-level="20"] .project-card,
+main[data-ui-level="20"] .record,
+main[data-ui-level="20"] .testimonial,
+main[data-ui-level="20"] .contact-card {
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+main[data-ui-level="20"] .project-card p,
+main[data-ui-level="20"] .media-card p,
+main[data-ui-level="20"] .testimonial blockquote {
+  overflow-wrap: anywhere;
+}
+
+/* 71–80: motion safety */
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto !important; }
+  *, *::before, *::after {
+    scroll-behavior: auto !important;
+  }
+}
+@media (prefers-reduced-transparency: reduce) {
+  .nav,
+  .menu-panel,
+  .music-panel {
+    -webkit-backdrop-filter: none !important;
+    backdrop-filter: none !important;
+  }
+}
+
+/* 81–90: form resilience */
+main[data-ui-level="20"] input,
+main[data-ui-level="20"] textarea,
+main[data-ui-level="20"] select,
+main[data-ui-level="20"] button {
+  max-width: 100%;
+}
+main[data-ui-level="20"] textarea {
+  overflow: auto;
+  overscroll-behavior: contain;
+}
+main[data-ui-level="20"] .contact-topic-menu {
+  max-width: 100%;
+}
+main[data-ui-level="20"] .terms-checkbox-popover {
+  max-width: min(92vw, 420px);
+}
+
+/* 91–100: narrow-device and high-DPI resilience */
+@media (max-width: 360px) {
+  main[data-ui-level="20"] .hero h1 {
+    font-size: clamp(42px, 13.5vw, 54px);
+  }
+  main[data-ui-level="20"] .hero-actions {
+    grid-template-columns: 1fr;
+  }
+}
+@media (max-width: 430px) {
+  main[data-ui-level="20"] .testimonials-viewport {
+    margin-inline: -16px;
+    padding-inline: 16px;
+  }
+}
+@media (min-resolution: 2dppx) {
+  .scroll-progress {
+    transform: translateZ(0);
+  }
+}
+@media (orientation: landscape) and (max-height: 500px) {
+  main[data-ui-level="20"] .hero {
+    min-height: auto;
+    padding-block: 28px 36px;
+  }
+}
+@media print {
+  .nav,
+  .floating-utilities,
+  .scroll-progress,
+  .music-panel,
+  .menu-panel,
+  .site-footer-nav {
+    display: none !important;
+  }
+  body {
+    background: #fff !important;
+    color: #000 !important;
+  }
+  main[data-ui-level="20"] {
+    overflow: visible !important;
+  }
+}
