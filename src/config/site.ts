@@ -79,5 +79,5 @@ export const siteConfig = {
     { name: 'Leonardo da Vinci', role: 'Artist & Inventor', category: 'Curiosity', quote: 'Learning never exhausts the mind.', sourceStatus: 'attributed' },
     { name: 'Khalil Gibran', role: 'Writer & Poet', category: 'Life', quote: 'Work is love made visible.', sourceUrl: 'https://poets.org/poem/work-4', sourceStatus: 'verified' },
     { name: 'Barack Obama', role: '44th President of the United States', category: 'Action', quote: 'Change will not come if we wait for some other person or some other time.', sourceStatus: 'attributed' },
-  ]
+  ] as readonly Testimonial[]
 } as const
