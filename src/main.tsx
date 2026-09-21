@@ -687,7 +687,7 @@ export default function App() {
       return
     }
 
-    const subject = encodeURIComponent(`[Portfolio Contact] ${purpose || 'Pesan dari website'}`)
+    const subject = encodeURIComponent(`[JRH] ${purpose || 'Pesan dari website'}`)
     const body = encodeURIComponent(`Halo JRH,
 
 Saya ingin menghubungi terkait:
@@ -863,17 +863,17 @@ ${name.trim()}`)
       <main>
         <section id="identity" className="hero" aria-labelledby="identity-title">
           <div className="hero-copy">
-            <h1 id="identity-title">SAYA SIBUK BEKERJA,<br />INI YANG BARU.</h1>
-            <p className="hero-description">Saya sibuk bekerja. Ini adalah ruang untuk melihat apa yang sedang saya bangun, kerjakan, dan kembangkan.</p>
+            <h1 id="identity-title">{siteConfig.identity.headline}</h1>
+            <p className="hero-description">{siteConfig.identity.description}</p>
             <div className="hero-actions">
               <a className="hero-pill" href="#media">Explore media</a>
               <a className="ghost-pill" href="#links">Contact</a>
             </div>
             <div className="hero-meta" aria-label="JRH availability">
               <span className="availability-dot" aria-hidden="true"></span>
-              <span>AVAILABLE FOR PROJECTS</span>
+              <span>{siteConfig.identity.statusLabel}</span>
               <span aria-hidden="true">·</span>
-              <span>INDONESIA</span>
+              <span>{siteConfig.identity.locationLabel}</span>
             </div>
           </div>
 
