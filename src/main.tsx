@@ -489,6 +489,57 @@ export default function App() {
   }, [menuOpen, musicOpen, termsOpen, topicOpen])
 
   useEffect(() => {
+    const isEditableTarget = (target: EventTarget | null) => {
+      if (!(target instanceof HTMLElement)) return false
+      return Boolean(target.closest('input, textarea, select, [contenteditable="true"], [contenteditable=""]'))
+    }
+
+    const handleContextMenu = (event: MouseEvent) => {
+      if (!isEditableTarget(event.target)) event.preventDefault()
+    }
+
+    const handleCopy = (event: ClipboardEvent) => {
+      if (!isEditableTarget(event.target)) event.preventDefault()
+    }
+
+    const handleCut = (event: ClipboardEvent) => {
+      if (!isEditableTarget(event.target)) event.preventDefault()
+    }
+
+    const handleDragStart = (event: DragEvent) => {
+      if (!isEditableTarget(event.target)) event.preventDefault()
+    }
+
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if (isEditableTarget(event.target)) return
+      const key = event.key.toLowerCase()
+      const blockedShortcut =
+        (event.ctrlKey || event.metaKey) &&
+        ['c', 'x', 'a'].includes(key)
+
+      if (blockedShortcut) event.preventDefault()
+    }
+
+    document.addEventListener('contextmenu', handleContextMenu)
+    document.addEventListener('copy', handleCopy)
+    document.addEventListener('cut', handleCut)
+    document.addEventListener('dragstart', handleDragStart)
+    document.addEventListener('keydown', handleKeyDown)
+
+    return () => {
+      document.removeEventListener('contextmenu', handleContextMenu)
+      document.removeEventListener('copy', handleCopy)
+      document.removeEventListener('cut', handleCut)
+      document.removeEventListener('dragstart', handleDragStart)
+      document.removeEventListener('keydown', handleKeyDown)
+    }
+  }, [])
+
+  /* =========================================================
+     JRH ANTI-COPY — PUBLIC CONTENT PROTECTION
+     ========================================================= */
+
+  useEffect(() => {
     const handleImageProtection = (event: Event) => {
       const target = event.target
       if (target instanceof HTMLImageElement) {
