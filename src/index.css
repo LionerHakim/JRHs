@@ -5114,3 +5114,69 @@ textarea:disabled {
     display: none;
   }
 }
+
+/* =========================================================
+   JRH UI/UX LEVEL 5 — CONTEXTUAL SCROLL EXPERIENCE
+   Scroll-aware visual feedback only. No layout or position changes.
+   ========================================================= */
+
+/* Sections gently reveal as they become active in the viewport.
+   Existing JS/section state remains untouched. */
+.section {
+  transition:
+    opacity 420ms var(--ease),
+    filter 420ms var(--ease);
+}
+
+/* Keep the current section visually crisp while neighboring content
+   naturally settles into the page. */
+.section:not(:hover) {
+  filter: saturate(.995);
+}
+
+/* Scroll-driven cards gain a subtle depth response through existing
+   hover/focus states — no transform or geometry changes here. */
+.section-title {
+  transition:
+    color 260ms var(--ease),
+    opacity 260ms var(--ease);
+}
+
+/* Active footer destination gets a quiet visual cue. */
+.site-footer-nav a[aria-current="location"] {
+  text-decoration-thickness: 2px;
+  text-underline-offset: 5px;
+}
+
+/* Back-to-top feels like a persistent navigation control. */
+.back-to-top {
+  will-change: transform;
+}
+
+/* Make links feel directional without changing their dimensions. */
+.site-footer-nav a {
+  transition:
+    color 220ms var(--ease),
+    opacity 220ms var(--ease),
+    text-decoration-color 220ms var(--ease);
+}
+
+.site-footer-nav a:hover {
+  opacity: .72;
+}
+
+/* Preserve readability and avoid motion overload on touch devices. */
+@media (pointer: coarse) {
+  .site-footer-nav a:hover {
+    opacity: 1;
+  }
+}
+
+/* Reduced-motion users receive the same hierarchy without animation. */
+@media (prefers-reduced-motion: reduce) {
+  .section,
+  .section-title,
+  .site-footer-nav a {
+    transition: none;
+  }
+}
