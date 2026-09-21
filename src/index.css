@@ -4900,3 +4900,87 @@ html[data-theme="dark"] .music-toggle.is-playing { box-shadow:inset 0 0 0 1px rg
     opacity: 0;
   }
 }
+
+/* =========================================================
+   JRH UI/UX LEVEL 3 — ACCESSIBILITY + FEEL
+   Additive only. Existing layout, positions and component geometry stay locked.
+   ========================================================= */
+
+/* Clear keyboard navigation across the entire interface */
+.nav-action:focus-visible,
+.nav-menu-link:focus-visible,
+.music-track:focus-visible,
+.site-footer-nav a:focus-visible,
+.contact-field input:focus-visible,
+.contact-field textarea:focus-visible,
+.contact-field button:focus-visible {
+  outline: 0;
+  box-shadow:
+    0 0 0 3px rgba(255,255,255,.96),
+    0 0 0 6px rgba(0,105,224,.28);
+}
+
+/* Navigation feels responsive without changing its footprint */
+.nav-action,
+.nav-menu-link,
+.music-track {
+  -webkit-tap-highlight-color: transparent;
+}
+
+.nav-action:active,
+.hero-pill:active,
+.ghost-pill:active,
+.media-links a:active,
+.project-link:active,
+.contact-submit > button:active,
+.theme-toggle-floating:active,
+.back-to-top:active {
+  transform: scale(.985);
+}
+
+/* Small screens: improve touch confidence, not dimensions */
+@media (pointer: coarse) {
+  .nav-action,
+  .nav-menu-link,
+  .music-track,
+  .site-footer-nav a,
+  .theme-toggle-floating,
+  .back-to-top {
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  .media-card:hover,
+  .project-card:hover,
+  .record:hover,
+  .testimonial:hover,
+  .portrait-frame:hover {
+    box-shadow: inherit;
+  }
+}
+
+/* Better text selection feedback */
+::selection {
+  background: rgba(0,105,224,.16);
+  color: inherit;
+}
+
+/* Keep interactive controls visually crisp during loading/disabled states */
+button:disabled,
+input:disabled,
+textarea:disabled {
+  cursor: not-allowed;
+}
+
+/* Level 3 reduced-motion guard */
+@media (prefers-reduced-motion: reduce) {
+  .nav-action:active,
+  .hero-pill:active,
+  .ghost-pill:active,
+  .media-links a:active,
+  .project-link:active,
+  .contact-submit > button:active,
+  .theme-toggle-floating:active,
+  .back-to-top:active {
+    transform: none;
+  }
+}
