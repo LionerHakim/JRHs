@@ -27,7 +27,7 @@ export type Testimonial = {
 
 export const siteConfig = {
   identity: {
-    name: 'Jefri Rahman Hakim',
+    name: 'JRH',
     description: 'Projects, publishing, and independent work.',
     profileImage: '/assets/images/s.jpg',
   },
