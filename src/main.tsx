@@ -332,7 +332,7 @@ export default function App() {
     const safeIndex = (index + musicTracks.length) % musicTracks.length
     const nextTrack = musicTracks[safeIndex]
     const requestId = ++musicRequestRef.current
-      musicIndexRef.current = safeIndex
+    musicIndexRef.current = safeIndex
     setMusicIndex(safeIndex)
     setMusicProgress(0)
     setMusicDuration(0)
@@ -759,7 +759,7 @@ ${name.trim()}`)
             </div>
           </nav>
 
-          <aside id="music-panel" className={musicOpen ? 'music-panel is-open' : 'music-panel'} aria-label="Music player">
+          <aside id="music-panel" className={musicOpen ? 'music-panel is-open' : 'music-panel'} aria-label="Music player" aria-hidden={!musicOpen}>
             <div className="music-panel-head">
               <div>
                 <span className="music-eyebrow">JRH / SOUND</span>
