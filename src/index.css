@@ -8125,3 +8125,202 @@ main[data-ui-level="20"] .thinking-quote-card + .thinking-quote-card {
     transition: none !important;
   }
 }
+
+
+/* =========================================================
+   JRHSEE FINAL SYSTEM SYNC — CLEAN / LUXURY / RESPONSIVE
+   One final cascade layer for visual consistency.
+   Content, markup and interaction logic remain untouched.
+   ========================================================= */
+
+/* 01 — Global rhythm + overflow */
+html,
+body,
+.site-shell {
+  max-width: 100%;
+  overflow-x: clip;
+}
+@supports not (overflow: clip) {
+  html,
+  body,
+  .site-shell { overflow-x: hidden; }
+}
+main[data-ui-level="20"] {
+  width: 100%;
+  max-width: 100%;
+}
+
+/* 02 — Navigation: one clean surface, no accidental rules */
+.nav {
+  width: min(1240px, calc(100% - 40px));
+  min-height: 60px;
+  border: 0 !important;
+  border-bottom: 0 !important;
+  border-radius: 8px;
+  box-shadow: 0 12px 34px rgba(9,10,11,.055), inset 0 1px 0 rgba(255,255,255,.68) !important;
+}
+.nav-action,
+.nav-action:hover,
+.nav-action:focus-visible,
+.nav-action.is-open {
+  border-bottom-color: transparent !important;
+}
+.nav-action.is-open::after { display: none !important; }
+
+/* 03 — Consistent content measure */
+main[data-ui-level="20"] .section,
+main[data-ui-level="20"] .hero {
+  max-width: 1240px;
+}
+main[data-ui-level="20"] .section-head {
+  max-width: 760px;
+  margin-inline: auto;
+}
+
+/* 04 — Quiet luxury surfaces */
+main[data-ui-level="20"] .media-card,
+main[data-ui-level="20"] .project-card,
+main[data-ui-level="20"] .record,
+main[data-ui-level="20"] .testimonial,
+main[data-ui-level="20"] .contact-card {
+  background: color-mix(in srgb, var(--paper) 92%, var(--sky));
+  border-color: rgba(9,10,11,.09);
+  box-shadow: 0 1px 0 rgba(255,255,255,.72) inset;
+}
+@supports not (background: color-mix(in srgb, white 90%, black)) {
+  main[data-ui-level="20"] .media-card,
+  main[data-ui-level="20"] .project-card,
+  main[data-ui-level="20"] .record,
+  main[data-ui-level="20"] .testimonial,
+  main[data-ui-level="20"] .contact-card {
+    background: var(--paper);
+  }
+}
+
+/* 05 — Quotes: align exactly with the site's editorial grid */
+main[data-ui-level="20"] .thinking-quotes {
+  width: 100%;
+  max-width: 1240px;
+  margin-inline: auto;
+}
+main[data-ui-level="20"] .thinking-quote-card {
+  border-top: 1px solid rgba(9,10,11,.11);
+}
+main[data-ui-level="20"] .thinking-quote-card::before {
+  width: 28px;
+  height: 1px;
+}
+@media (hover:hover) {
+  main[data-ui-level="20"] .thinking-quote-card:hover::before { width: 56px; }
+}
+
+/* 06 — Media and project imagery: shared optical treatment */
+main[data-ui-level="20"] .media-card img,
+main[data-ui-level="20"] .project-card img,
+main[data-ui-level="20"] .hero-portrait img {
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+}
+
+/* 07 — Controls share one visual language */
+main[data-ui-level="20"] .hero-pill,
+main[data-ui-level="20"] .ghost-pill,
+main[data-ui-level="20"] .contact-submit > button {
+  min-height: 46px;
+  border-radius: 4px;
+}
+main[data-ui-level="20"] .ghost-pill {
+  border-color: rgba(9,10,11,.12);
+}
+
+/* 08 — Forms stay aligned at every width */
+main[data-ui-level="20"] .contact-card,
+main[data-ui-level="20"] .contact-form,
+main[data-ui-level="20"] .contact-topic-menu {
+  min-width: 0;
+  max-width: 100%;
+}
+main[data-ui-level="20"] input,
+main[data-ui-level="20"] textarea,
+main[data-ui-level="20"] select {
+  width: 100%;
+  max-width: 100%;
+}
+
+/* 09 — Mobile: remove visual compression, keep hierarchy */
+@media (max-width: 760px) {
+  .nav {
+    width: calc(100% - 24px);
+    min-height: 56px;
+    top: 8px;
+    margin-top: 8px;
+  }
+  main[data-ui-level="20"] .section {
+    padding-block: 72px;
+  }
+  main[data-ui-level="20"] .section-head {
+    margin-bottom: 28px;
+  }
+  main[data-ui-level="20"] .thinking-quotes {
+    margin-block: 56px 72px;
+  }
+}
+
+/* 10 — Small phones: prevent cramped horizontal controls */
+@media (max-width: 430px) {
+  .nav-actions { gap: 1px; }
+  .music-toggle,
+  .menu-toggle {
+    min-width: 0;
+  }
+  main[data-ui-level="20"] .hero-actions {
+    width: 100%;
+  }
+  main[data-ui-level="20"] .hero-actions > a {
+    min-width: min(100%, 180px);
+  }
+}
+
+/* 11 — Dark mode: preserve the same geometry, contrast and depth */
+:root[data-theme="dark"] .nav,
+[data-theme="dark"] .nav {
+  border: 0 !important;
+  background: rgba(16,17,20,.9) !important;
+  box-shadow: 0 14px 38px rgba(0,0,0,.24), inset 0 1px 0 rgba(255,255,255,.05) !important;
+}
+:root[data-theme="dark"] main[data-ui-level="20"] .thinking-quote-card,
+[data-theme="dark"] main[data-ui-level="20"] .thinking-quote-card {
+  border-top-color: rgba(242,240,234,.14);
+}
+:root[data-theme="dark"] main[data-ui-level="20"] .media-card,
+:root[data-theme="dark"] main[data-ui-level="20"] .project-card,
+:root[data-theme="dark"] main[data-ui-level="20"] .record,
+:root[data-theme="dark"] main[data-ui-level="20"] .testimonial,
+:root[data-theme="dark"] main[data-ui-level="20"] .contact-card,
+[data-theme="dark"] main[data-ui-level="20"] .media-card,
+[data-theme="dark"] main[data-ui-level="20"] .project-card,
+[data-theme="dark"] main[data-ui-level="20"] .record,
+[data-theme="dark"] main[data-ui-level="20"] .testimonial,
+[data-theme="dark"] main[data-ui-level="20"] .contact-card {
+  background: #15171a;
+  border-color: rgba(242,240,234,.11);
+  box-shadow: inset 0 1px 0 rgba(255,255,255,.04);
+}
+
+/* 12 — Accessibility and motion: never trade usability for polish */
+@media (prefers-reduced-motion: reduce) {
+  main[data-ui-level="20"] .media-card,
+  main[data-ui-level="20"] .project-card,
+  main[data-ui-level="20"] .record,
+  main[data-ui-level="20"] .testimonial,
+  main[data-ui-level="20"] .contact-card,
+  main[data-ui-level="20"] .thinking-quote-card {
+    transform: none !important;
+    transition: none !important;
+  }
+}
+
+/* 13 — Print remains intentionally clean */
+@media print {
+  .nav { box-shadow: none !important; background: #fff !important; }
+}
