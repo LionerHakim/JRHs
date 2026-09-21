@@ -53,7 +53,8 @@ export const siteConfig = {
       { label: 'Nusantara', url: 'https://lynk.id/nusantara9' },
     ] },
     { number: '05', title: 'TIKTOK', category: 'Short Video', platform: 'TIKTOK', links: [
-      { label: 'allshorts369', url: 'https://www.tiktok.com/@allshorts369' },
+      { label: 'Tikv 01', url: 'https://www.tiktok.com/@allshorts369' },
+      { label: 'Tikv 02', url: 'https://www.tiktok.com/@beranikonten?_r=1&_t=ZS-99tyiFl2dMb' },
     ] },
   ] satisfies readonly MediaItem[],
   projects: [
