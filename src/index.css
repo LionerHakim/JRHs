@@ -5180,3 +5180,141 @@ textarea:disabled {
     transition: none;
   }
 }
+
+/* =========================================================
+   JRH UI/UX LEVEL 6 — PREMIUM MICRO-INTERACTION SYSTEM
+   Additive visual polish. Existing layout and component geometry locked.
+   ========================================================= */
+
+/* Shared tactile language for interactive elements */
+.nav-action,
+.nav-menu-link,
+.music-track,
+.site-footer-nav a,
+.hero-pill,
+.ghost-pill,
+.media-links a,
+.project-link,
+.contact-submit > button,
+.theme-toggle-floating,
+.back-to-top {
+  position: relative;
+  overflow: hidden;
+}
+
+/* Very soft interaction sheen — appears only during direct interaction */
+.hero-pill::after,
+.ghost-pill::after,
+.media-links a::after,
+.project-link::after,
+.contact-submit > button::after,
+.theme-toggle-floating::after,
+.back-to-top::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: linear-gradient(
+    105deg,
+    transparent 25%,
+    rgba(255,255,255,.16) 50%,
+    transparent 75%
+  );
+  transform: translateX(-120%);
+  opacity: 0;
+}
+
+.hero-pill:hover::after,
+.ghost-pill:hover::after,
+.media-links a:hover::after,
+.project-link:hover::after,
+.contact-submit > button:hover::after,
+.theme-toggle-floating:hover::after,
+.back-to-top:hover::after {
+  opacity: 1;
+  animation: jrh-control-sheen 650ms var(--ease) both;
+}
+
+@keyframes jrh-control-sheen {
+  to { transform: translateX(120%); }
+}
+
+/* Music tracks get a stronger "currently usable" affordance */
+.music-track {
+  transition:
+    background-color 200ms var(--ease),
+    border-color 200ms var(--ease),
+    box-shadow 200ms var(--ease);
+}
+
+.music-track:hover {
+  box-shadow: inset 0 0 0 1px rgba(0,105,224,.07);
+}
+
+.music-track:active {
+  box-shadow: inset 0 0 0 2px rgba(0,105,224,.10);
+}
+
+/* Active navigation gets a tiny visual anchor without moving it */
+.nav-action.is-open {
+  box-shadow:
+    0 8px 22px rgba(10,13,18,.06),
+    0 0 0 1px rgba(0,105,224,.035);
+}
+
+/* Image surfaces feel slightly more tactile */
+.media-card img,
+.project-card img {
+  transition:
+    filter 350ms var(--ease),
+    transform 500ms var(--ease);
+}
+
+.media-card:hover img,
+.project-card:hover img {
+  filter: saturate(1.02) contrast(1.008);
+  transform: scale(1.006);
+}
+
+/* Contact state has a clearer completion signal */
+.contact-benefits span {
+  transition:
+    transform 220ms var(--ease),
+    opacity 220ms var(--ease);
+}
+
+.contact-benefits span:hover {
+  transform: translateY(-2px);
+  opacity: .86;
+}
+
+/* Quote cards respond like physical paper */
+.testimonial:focus-within {
+  box-shadow:
+    0 18px 42px rgba(10,13,18,.06),
+    0 0 0 3px rgba(0,105,224,.045);
+}
+
+/* Avoid sheen / image motion for users who prefer less motion */
+@media (prefers-reduced-motion: reduce) {
+  .hero-pill::after,
+  .ghost-pill::after,
+  .media-links a::after,
+  .project-link::after,
+  .contact-submit > button::after,
+  .theme-toggle-floating::after,
+  .back-to-top::after {
+    display: none;
+  }
+
+  .media-card img,
+  .project-card img,
+  .contact-benefits span {
+    transition: none;
+  }
+
+  .media-card:hover img,
+  .project-card:hover img {
+    transform: none;
+  }
+}
