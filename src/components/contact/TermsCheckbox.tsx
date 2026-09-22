@@ -13,7 +13,7 @@ type TermsCheckboxProps = {
   inputRef?: RefObject<HTMLInputElement | null>
 }
 
-function TermsCheckbox({
+export function TermsCheckbox({
   checked,
   onChange,
   onBlur,
