@@ -8324,3 +8324,91 @@ main[data-ui-level="20"] select {
 @media print {
   .nav { box-shadow: none !important; background: #fff !important; }
 }
+
+
+/* =========================================================
+   JRH FINAL QUOTE AUDIT — CLEAN EDITORIAL
+   Remove decorative horizontal rules from section heads and
+   let the thinking principles read as premium editorial copy.
+   ========================================================= */
+
+/* Section heads: typography only. No horizontal rule, no bar. */
+main[data-ui-level="20"] .section-head {
+  border-bottom: 0 !important;
+  padding-bottom: 0 !important;
+}
+main[data-ui-level="20"] .section-head::before,
+main[data-ui-level="20"] .section-head::after {
+  display: none !important;
+}
+
+/* Remove the faint divider between major sections as well;
+   spacing becomes the separator. */
+main[data-ui-level="20"] .section + .section {
+  border-top: 0 !important;
+}
+
+/* Thinking quotes: no card border, no decorative line.
+   Keep hierarchy through type, spacing and the small kicker. */
+main[data-ui-level="20"] .thinking-quotes {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: clamp(32px, 7vw, 112px);
+  margin-block: clamp(72px, 10vw, 144px);
+}
+main[data-ui-level="20"] .thinking-quote-card,
+main[data-ui-level="20"] .thinking-quote-card:hover {
+  padding: clamp(18px, 2vw, 28px) 0;
+  border: 0 !important;
+  border-top: 0 !important;
+  border-bottom: 0 !important;
+  border-radius: 0;
+  background: transparent !important;
+  box-shadow: none !important;
+  transform: none;
+}
+main[data-ui-level="20"] .thinking-quote-card::before,
+main[data-ui-level="20"] .thinking-quote-card::after {
+  display: none !important;
+}
+main[data-ui-level="20"] .thinking-quote-kicker {
+  margin-bottom: clamp(16px, 2vw, 24px);
+  color: var(--fog);
+  font-size: 8px;
+  letter-spacing: .18em;
+}
+main[data-ui-level="20"] .thinking-quote-card strong {
+  max-width: 13ch;
+  font-size: clamp(30px, 3.4vw, 52px);
+  line-height: .92;
+  letter-spacing: -.07em;
+}
+main[data-ui-level="20"] .thinking-quote-card p {
+  max-width: 40ch;
+  margin-top: clamp(20px, 2.4vw, 30px);
+  color: var(--graphite);
+  font-size: clamp(14px, 1.15vw, 16px);
+  line-height: 1.55;
+}
+
+@media (max-width: 760px) {
+  main[data-ui-level="20"] .thinking-quotes {
+    grid-template-columns: 1fr;
+    gap: 18px;
+    margin-block: 64px 80px;
+  }
+  main[data-ui-level="20"] .thinking-quote-card,
+  main[data-ui-level="20"] .thinking-quote-card:hover {
+    padding-block: 24px;
+  }
+  main[data-ui-level="20"] .thinking-quote-card strong {
+    max-width: 14ch;
+    font-size: clamp(30px, 9vw, 46px);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  main[data-ui-level="20"] .thinking-quote-card,
+  main[data-ui-level="20"] .thinking-quote-card:hover {
+    transform: none !important;
+  }
+}
