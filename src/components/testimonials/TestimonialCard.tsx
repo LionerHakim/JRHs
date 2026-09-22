@@ -1,3 +1,6 @@
+import { siteConfig } from '../../config/site'
+import { testimonialInitials } from '../../config/site'
+
 export function TestimonialCard({
   testimonial,
   index,
