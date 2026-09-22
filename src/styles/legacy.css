@@ -3347,8 +3347,8 @@ textarea {
 .back-to-top:hover,
 .back-to-top:focus-visible {
   transform: translateY(-2px);
-  box-shadow: var(--shadow-soft);
-  background: var(--surface);
+  box-shadow: var(--shadow-subtle);
+  background: var(--paper);
 }
 
 .back-to-top:focus-visible {
@@ -8498,7 +8498,8 @@ main[data-ui-level="20"] .testimonial {
    ========================================================= */
 
 /* 01 — Page geometry */
-:root {
+ :root {
+  --page-max-width: 1240px;
   --jrh-nav-height: 64px;
   --jrh-nav-gap: 14px;
   --jrh-section-clearance: 92px;
