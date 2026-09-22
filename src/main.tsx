@@ -36,20 +36,6 @@ export default function App() {
   const contactStartedAtRef = useRef(Date.now())
 
 
-  useEffect(() => {
-    document.documentElement.dataset.theme = darkMode ? 'dark' : 'light'
-    document.documentElement.style.colorScheme = darkMode ? 'dark' : 'light'
-    try {
-      window.localStorage.setItem('jrhs-theme', darkMode ? 'dark' : 'light')
-      window.sessionStorage.setItem('jrhs-theme', darkMode ? 'dark' : 'light')
-    } catch {
-      // Storage can be unavailable in restrictive browser modes.
-    }
-    const meta = document.querySelector<HTMLMetaElement>('meta[name="theme-color"]')
-    if (meta) meta.content = darkMode ? '#050505' : '#F7FBFF'
-  }, [darkMode])
-
-
 
   const {
     musicAudioRef,
