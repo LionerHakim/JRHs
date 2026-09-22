@@ -27,8 +27,11 @@ export type Testimonial = {
 
 export const siteConfig = {
   identity: {
-    name: 'Jefri Rahman Hakim',
-    description: 'Ruang digital untuk eksperimen, karya, media, dan project yang sedang saya bangun.',
+    name: 'JRH',
+    headline: 'SAYA SIBUK BEKERJA,\nINI YANG BARU.',
+    description: 'Ruang personal untuk karya, project, media, dan jejak yang sedang saya bangun.',
+    statusLabel: 'CURRENTLY WORKING',
+    locationLabel: 'INDONESIA',
     profileImage: '/assets/images/s.jpg',
   },
   contactEmail: 'contact@jrhsee.my.id',
@@ -53,7 +56,8 @@ export const siteConfig = {
       { label: 'Nusantara', url: 'https://lynk.id/nusantara9' },
     ] },
     { number: '05', title: 'TIKTOK', category: 'Short Video', platform: 'TIKTOK', links: [
-      { label: 'allshorts369', url: 'https://www.tiktok.com/@allshorts369' },
+      { label: 'Tikv 01', url: 'https://www.tiktok.com/@allshorts369' },
+      { label: 'Tikv 02', url: 'https://www.tiktok.com/@beranikonten?_r=1&_t=ZS-99tyiFl2dMb' },
     ] },
   ] satisfies readonly MediaItem[],
   projects: [
@@ -78,5 +82,5 @@ export const siteConfig = {
     { name: 'Leonardo da Vinci', role: 'Artist & Inventor', category: 'Curiosity', quote: 'Learning never exhausts the mind.', sourceStatus: 'attributed' },
     { name: 'Khalil Gibran', role: 'Writer & Poet', category: 'Life', quote: 'Work is love made visible.', sourceUrl: 'https://poets.org/poem/work-4', sourceStatus: 'verified' },
     { name: 'Barack Obama', role: '44th President of the United States', category: 'Action', quote: 'Change will not come if we wait for some other person or some other time.', sourceStatus: 'attributed' },
-  ]
+  ] as readonly Testimonial[]
 } as const
