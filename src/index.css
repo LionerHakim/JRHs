@@ -798,3 +798,72 @@ html[data-theme='dark'] .back-to-top {
     transition: none !important;
   }
 }
+
+
+/* =========================================================
+   HOTFIX — QUOTES / HEADER
+   Visual-only override. Structure remains untouched.
+   ========================================================= */
+
+/* Header: remove every visible divider/line treatment */
+.nav,
+.nav-actions,
+.nav-action,
+.nav-action:hover,
+.nav-action:focus-visible {
+  border-color: transparent !important;
+}
+
+.nav {
+  box-shadow: 0 18px 50px rgba(16,16,14,.07) !important;
+}
+
+html[data-theme='dark'] .nav,
+html[data-theme='dark'] .nav-action:hover,
+html[data-theme='dark'] .nav-action:focus-visible {
+  border-color: transparent !important;
+}
+
+html[data-theme='dark'] .nav {
+  box-shadow: 0 18px 54px rgba(0,0,0,.24) !important;
+}
+
+/* Quotes/testimonials: horizontal scrolling must remain available.
+   Do not hide overflow on the scrolling track or its viewport. */
+.testimonials-section,
+.testimonials-section .section,
+.testimonials-section .section-inner,
+.testimonials-section .testimonials,
+.testimonials-section .testimonials-track,
+.testimonials-section .testimonial-list,
+.testimonials-section .testimonial-grid,
+.testimonials-section .testimonials-scroll {
+  overflow-x: auto !important;
+  overflow-y: visible !important;
+  scrollbar-width: thin !important;
+  -webkit-overflow-scrolling: touch !important;
+}
+
+/* Keep individual quote cards from being clipped by visual polish. */
+.testimonial {
+  overflow: visible !important;
+}
+
+/* If the legacy implementation uses a named viewport, preserve its
+   horizontal scroll interaction instead of allowing a parent to clip it. */
+.testimonials-viewport,
+.testimonial-viewport,
+.testimonials-slider,
+.testimonial-slider,
+.testimonials-carousel,
+.testimonial-carousel {
+  overflow-x: auto !important;
+  overflow-y: hidden !important;
+  scrollbar-width: thin !important;
+  -webkit-overflow-scrolling: touch !important;
+}
+
+/* Never let the page-level visual layer suppress horizontal gestures. */
+.testimonials-section * {
+  scrollbar-color: rgba(119,114,105,.45) transparent;
+}
