@@ -69,3 +69,99 @@ html[data-theme="dark"] .testimonial-footer{border-color:#37342c!important}
 
 /* Quotes — remove the black top rule; keep card otherwise unchanged */
 .testimonial{border-top:1px solid var(--jrh-line)!important}
+
+
+/* =========================================================
+   JRHs UI REDESIGN — SYNCHRONIZED VISUAL LAYER
+   UI only. Existing markup, data, order and functionality remain untouched.
+   ========================================================= */
+
+:root{
+  --jrh-bg:#09090f;
+  --jrh-surface:#11111a;
+  --jrh-surface-2:#171521;
+  --jrh-text:#f7f5fb;
+  --jrh-muted:#a8a3b5;
+  --jrh-border:rgba(255,255,255,.10);
+  --jrh-purple:#8b5cf6;
+  --jrh-violet:#a855f7;
+  --jrh-red:#df3b31;
+  --jrh-yellow:#d9ad35;
+  --jrh-serif:'Instrument Serif',Georgia,serif;
+  --jrh-sans:'Manrope',system-ui,-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
+  --jrh-mono:'DM Mono',ui-monospace,SFMono-Regular,Menlo,monospace;
+}
+
+html,body{background:var(--jrh-bg)!important;color:var(--jrh-text)!important}
+body{font-family:var(--jrh-sans)!important}
+.site-shell{background:
+  radial-gradient(700px 420px at 85% 8%,rgba(139,92,246,.10),transparent 60%),
+  radial-gradient(560px 360px at 10% 46%,rgba(223,59,49,.045),transparent 62%),
+  var(--jrh-bg)!important}
+
+.nav{
+  background:rgba(9,9,15,.74)!important;
+  border:1px solid var(--jrh-border)!important;
+  box-shadow:none!important;
+  backdrop-filter:blur(20px) saturate(1.12)!important;
+  -webkit-backdrop-filter:blur(20px) saturate(1.12)!important;
+}
+.nav-action{color:var(--jrh-muted)!important}
+.nav-action:hover,.nav-action:focus-visible{color:var(--jrh-text)!important;background:rgba(255,255,255,.045)!important}
+.nav-action.is-open{color:#fff!important;background:rgba(139,92,246,.14)!important}
+.brand-mark{background:#fff!important;color:#09090f!important;box-shadow:none!important}
+.wordmark{color:#fff!important}
+
+.section h2{font-family:var(--jrh-serif)!important;color:#fff!important;font-weight:400!important}
+.section-kicker,.media-category,.project-category{font-family:var(--jrh-mono)!important;color:#c4a8ff!important}
+.media-subtitle,.projects-subtitle,.testimonials-subtitle{color:var(--jrh-muted)!important}
+
+.media-card,.project-card,.record,.contact-card,.testimonial{
+  background:linear-gradient(180deg,rgba(255,255,255,.055),rgba(255,255,255,.025))!important;
+  border:1px solid var(--jrh-border)!important;
+  color:var(--jrh-text)!important;
+  box-shadow:none!important;
+}
+.media-card:hover,.project-card:hover,.record:hover{
+  border-color:rgba(139,92,246,.36)!important;
+  box-shadow:0 0 0 1px rgba(139,92,246,.12),0 18px 42px rgba(0,0,0,.22)!important;
+}
+.media-card::before,.media-card::after,.project-card::before,.project-card::after,.record::before,.record::after,.contact-card::before,.contact-card::after{
+  opacity:.08!important;
+}
+
+.testimonials-section{background:transparent!important}
+.testimonials-section .section-head h2::after{content:"."!important;color:var(--jrh-red)!important}
+.testimonials-toolbar{background:transparent!important;border:0!important}
+.testimonial-counter{color:var(--jrh-muted)!important}
+.testimonial-swipe-hint{color:#c4a8ff!important}
+.testimonial-controls button{
+  border:1px solid var(--jrh-border)!important;
+  background:rgba(255,255,255,.035)!important;
+  color:#fff!important;
+  box-shadow:none!important;
+}
+.testimonial-controls button:hover,.testimonial-controls button:focus-visible{
+  border-color:rgba(139,92,246,.55)!important;
+  background:rgba(139,92,246,.15)!important;
+  color:#fff!important;
+}
+.testimonial{
+  border-top:1px solid var(--jrh-border)!important;
+  border-radius:20px!important;
+  background:linear-gradient(180deg,rgba(255,255,255,.065),rgba(255,255,255,.028))!important;
+  color:#fff!important;
+}
+.testimonial blockquote{font-family:var(--jrh-serif)!important;color:#fff!important}
+.testimonial-topline strong{color:#c4a8ff!important}
+.testimonial-avatar{background:#fff!important;color:#09090f!important}
+.testimonial-footer{border-color:var(--jrh-border)!important}
+.testimonial-meta span,.testimonial-disclaimer{color:var(--jrh-muted)!important}
+.testimonial-source-link{color:#c4a8ff!important;border-color:rgba(139,92,246,.28)!important}
+
+.contact-card{background:linear-gradient(180deg,rgba(255,255,255,.06),rgba(255,255,255,.025))!important}
+button,a{transition:color .2s ease,background-color .2s ease,border-color .2s ease,box-shadow .2s ease,opacity .2s ease!important}
+
+html[data-theme="dark"] body,html[data-theme="dark"] .site-shell{background:var(--jrh-bg)!important}
+html[data-theme="dark"] .testimonial{background:linear-gradient(180deg,rgba(255,255,255,.065),rgba(255,255,255,.028))!important;border-color:var(--jrh-border)!important;color:#fff!important}
+html[data-theme="dark"] .testimonial blockquote{color:#fff!important}
