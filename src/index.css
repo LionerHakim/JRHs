@@ -98,6 +98,7 @@ body{
 .wordmark-logo{
   filter:none!important;
   opacity:1!important;
+  mix-blend-mode:normal!important;
 }
 
 .nav-actions{
