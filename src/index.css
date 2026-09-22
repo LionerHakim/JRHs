@@ -1027,6 +1027,139 @@ html[data-theme="light"] .back-to-top:focus-visible{
   border-color:rgba(109,40,217,.18)!important;
 }
 
+/* ---------- LIGHT THEME TOKENS ---------- */
+/* Keep the light theme as a complete token system. The dark palette above is
+   intentionally scoped to the default root; these values prevent inherited
+   dark tokens from leaking into legacy structural styles. */
+html[data-theme="light"]{
+  --color-sky-tint:#f3f0f5;
+  --color-paper-white:#ffffff;
+  --color-bone-white:#f7f4f9;
+  --color-mist-gray:#eee9f1;
+  --color-ink:#211c27;
+  --color-charcoal:#2a2530;
+  --color-graphite:#625c69;
+  --color-fog:#817987;
+  --color-iris-blue:#6d28d9;
+  --color-sky-blue:#7c3aed;
+  --color-lavender-wash:#f2ecfa;
+  --color-mint-wash:#edf8f3;
+  --color-powder-blue:#edf3fb;
+  --color-peach-gradient:#fff0f1;
+  --ink:#211c27;
+  --paper:#ffffff;
+  --bone:#f7f4f9;
+  --mist:#eee9f1;
+  --charcoal:#2a2530;
+  --graphite:#625c69;
+  --fog:#817987;
+  --blue:#7c3aed;
+  --blue-strong:#6d28d9;
+  --blue-soft:#f0e9fa;
+  --lavender:#f2ecfa;
+  --mint:#edf8f3;
+  --peach:#fff0f1;
+  --line:rgba(29,23,37,.10);
+  --shadow-subtle:0 18px 44px rgba(29,23,37,.10),0 1px 0 rgba(255,255,255,.96) inset;
+}
+
+html[data-theme="light"] .nav::before{
+  background:linear-gradient(90deg,transparent,rgba(109,40,217,.30),rgba(29,23,37,.10),rgba(255,82,106,.16),transparent)!important;
+  box-shadow:none!important;
+}
+
+html[data-theme="light"] .wordmark-logo{
+  filter:drop-shadow(0 0 10px rgba(109,40,217,.10))!important;
+}
+
+html[data-theme="light"] .nav-action-glyph,
+html[data-theme="light"] .nav-menu-lines{
+  background:rgba(109,40,217,.08)!important;
+  color:#6d28d9!important;
+}
+
+html[data-theme="light"] .nav-action.is-open .nav-action-glyph,
+html[data-theme="light"] .menu-toggle.is-open .nav-menu-lines{
+  background:#6d28d9!important;
+  color:#fff!important;
+}
+
+html[data-theme="light"] .record time,
+html[data-theme="light"] .media-category,
+html[data-theme="light"] .project-category,
+html[data-theme="light"] .thinking-quote-kicker,
+html[data-theme="light"] .testimonial-swipe-hint,
+html[data-theme="light"] .footer-kicker{
+  color:#6d28d9!important;
+}
+
+html[data-theme="light"] .record-activities li,
+html[data-theme="light"] .media-status,
+html[data-theme="light"] .project-status,
+html[data-theme="light"] .testimonial-disclaimer,
+html[data-theme="light"] .contact-benefits>*{
+  background:rgba(109,40,217,.065)!important;
+  border-color:rgba(109,40,217,.13)!important;
+  color:#5e536c!important;
+}
+
+html[data-theme="light"] .testimonial-topline strong,
+html[data-theme="light"] .testimonial-source-link,
+html[data-theme="light"] .contact-icon,
+html[data-theme="light"] .terms-checkbox-info{
+  color:#6d28d9!important;
+}
+
+html[data-theme="light"] .testimonial-avatar{
+  background:linear-gradient(145deg,#e8e1ef,#a78bfa,#7dd3fc)!important;
+  color:#211c27!important;
+  box-shadow:0 0 20px rgba(109,40,217,.10)!important;
+}
+
+html[data-theme="light"] .contact-field input::placeholder,
+html[data-theme="light"] .contact-field textarea::placeholder{
+  color:#938b99!important;
+}
+
+html[data-theme="light"] .contact-topic-menu,
+html[data-theme="light"] .terms-checkbox-popover{
+  background:#fff!important;
+  border-color:rgba(29,23,37,.12)!important;
+  color:#625c69!important;
+  box-shadow:0 24px 58px rgba(29,23,37,.16)!important;
+}
+
+html[data-theme="light"] .contact-topic-menu button,
+html[data-theme="light"] .terms-checkbox-label{
+  color:#625c69!important;
+}
+
+html[data-theme="light"] .contact-topic-menu button:hover,
+html[data-theme="light"] .contact-topic-menu button:focus-visible,
+html[data-theme="light"] .contact-topic-menu button.is-selected{
+  background:rgba(109,40,217,.07)!important;
+  color:#211c27!important;
+}
+
+html[data-theme="light"] .terms-checkbox-box{
+  background:#fff!important;
+  border-color:#8b8490!important;
+}
+
+html[data-theme="light"] .terms-checkbox-input:checked + .terms-checkbox-box{
+  background:#6d28d9!important;
+  border-color:#6d28d9!important;
+}
+
+html[data-theme="light"] .contact-submit button{
+  background:linear-gradient(135deg,#6d28d9,#7c3aed)!important;
+  color:#fff!important;
+}
+
+html[data-theme="light"] .site-footer-nav a{
+  color:#cfc8d5!important;
+}
+
 /* Controlled transitions — purely visual state. */
 .nav,
 .nav-action,
