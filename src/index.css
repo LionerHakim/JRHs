@@ -165,3 +165,111 @@ button,a{transition:color .2s ease,background-color .2s ease,border-color .2s ea
 html[data-theme="dark"] body,html[data-theme="dark"] .site-shell{background:var(--jrh-bg)!important}
 html[data-theme="dark"] .testimonial{background:linear-gradient(180deg,rgba(255,255,255,.065),rgba(255,255,255,.028))!important;border-color:var(--jrh-border)!important;color:#fff!important}
 html[data-theme="dark"] .testimonial blockquote{color:#fff!important}
+
+/* =========================================================
+   JRHs UI REDESIGN — HIGH-SPECIFICITY SYNC
+   Visual overrides only; baseline structure/data untouched.
+   ========================================================= */
+main[data-ui-level="20"],
+main[data-ui-level="20"] .section,
+main[data-ui-level="20"] .hero{
+  color:#f7f5fb!important;
+}
+main[data-ui-level="20"] .hero,
+main[data-ui-level="20"] .section{
+  background:transparent!important;
+}
+main[data-ui-level="20"] .hero::before,
+main[data-ui-level="20"] .hero::after{
+  opacity:.18!important;
+}
+main[data-ui-level="20"] .section-head h2,
+main[data-ui-level="20"] .hero h1{
+  color:#f7f5fb!important;
+}
+main[data-ui-level="20"] .hero h1{
+  font-family:var(--jrh-serif)!important;
+}
+main[data-ui-level="20"] .hero-description,
+main[data-ui-level="20"] .media-subtitle,
+main[data-ui-level="20"] .projects-subtitle,
+main[data-ui-level="20"] .testimonials-subtitle,
+main[data-ui-level="20"] .record p,
+main[data-ui-level="20"] .project-card-body p,
+main[data-ui-level="20"] .media-card-body p{
+  color:#a8a3b5!important;
+}
+main[data-ui-level="20"] .media-card,
+main[data-ui-level="20"] .project-card,
+main[data-ui-level="20"] .record,
+main[data-ui-level="20"] .contact-card,
+main[data-ui-level="20"] .testimonial{
+  background:linear-gradient(145deg,rgba(255,255,255,.075),rgba(255,255,255,.025))!important;
+  border-color:rgba(255,255,255,.10)!important;
+  box-shadow:none!important;
+  color:#f7f5fb!important;
+}
+main[data-ui-level="20"] .media-card:hover,
+main[data-ui-level="20"] .project-card:hover,
+main[data-ui-level="20"] .record:hover,
+main[data-ui-level="20"] .contact-card:hover{
+  border-color:rgba(139,92,246,.42)!important;
+  box-shadow:0 18px 48px rgba(0,0,0,.24),0 0 0 1px rgba(139,92,246,.10)!important;
+}
+main[data-ui-level="20"] .project-card::after,
+main[data-ui-level="20"] .media-card::after{
+  background:linear-gradient(90deg,#8b5cf6,#a855f7)!important;
+}
+main[data-ui-level="20"] .section-kicker,
+main[data-ui-level="20"] .media-category,
+main[data-ui-level="20"] .project-category{
+  color:#c4a8ff!important;
+}
+main[data-ui-level="20"] .testimonials-section{
+  background:transparent!important;
+}
+main[data-ui-level="20"] .testimonials-section .section-head{
+  border:0!important;
+  background:transparent!important;
+}
+main[data-ui-level="20"] .testimonial{
+  border-top:1px solid rgba(255,255,255,.10)!important;
+  border-radius:20px!important;
+}
+main[data-ui-level="20"] .testimonial blockquote{
+  color:#fff!important;
+  font-family:var(--jrh-serif)!important;
+}
+main[data-ui-level="20"] .testimonial-topline strong,
+main[data-ui-level="20"] .testimonial-source-link{
+  color:#c4a8ff!important;
+}
+main[data-ui-level="20"] .testimonial-footer{
+  border-color:rgba(255,255,255,.10)!important;
+}
+main[data-ui-level="20"] .testimonial-meta span,
+main[data-ui-level="20"] .testimonial-disclaimer,
+main[data-ui-level="20"] .testimonial-counter{
+  color:#a8a3b5!important;
+}
+main[data-ui-level="20"] .testimonial-controls button{
+  background:rgba(255,255,255,.04)!important;
+  border-color:rgba(255,255,255,.12)!important;
+  color:#fff!important;
+  box-shadow:none!important;
+}
+main[data-ui-level="20"] .testimonial-controls button:hover,
+main[data-ui-level="20"] .testimonial-controls button:focus-visible{
+  background:rgba(139,92,246,.16)!important;
+  border-color:rgba(139,92,246,.55)!important;
+}
+main[data-ui-level="20"] .contact-card strong,
+main[data-ui-level="20"] .project-card h3,
+main[data-ui-level="20"] .media-card h3,
+main[data-ui-level="20"] .record strong{
+  color:#f7f5fb!important;
+}
+main[data-ui-level="20"] .testimonial-avatar{
+  background:#fff!important;
+  color:#09090f!important;
+}
