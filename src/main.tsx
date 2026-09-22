@@ -8,7 +8,6 @@ import { TestimonialsSection } from './components/testimonials/TestimonialsSecti
 import { useTheme } from './hooks/useTheme'
 import { useMusicPlayer } from './hooks/useMusicPlayer'
 
-import './styles/tokens.css'
 import './index.css'
 
 import { sectionItems, sectionIds, musicTracks, contactTopics } from './config/ui'
