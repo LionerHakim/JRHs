@@ -1,29 +1,12 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 360 96" role="img" aria-labelledby="title">
   <title id="title">JRH</title>
-  <defs>
-    <linearGradient id="edge" x1="0" y1="0" x2="1" y2="0">
-      <stop offset="0" stop-color="#111318"/>
-      <stop offset=".5" stop-color="#111318"/>
-      <stop offset="1" stop-color="#111318"/>
-    </linearGradient>
-  </defs>
-
-  <!-- Minimal JRH wordmark: one continuous visual system, no decorative effects. -->
-  <g fill="#111318" stroke="#f7f7fa" stroke-width="2.2" paint-order="stroke">
+  <g fill="#f5f3fa" stroke="#111318" stroke-width="2.4" paint-order="stroke" stroke-linejoin="round">
     <text x="10" y="72"
       font-family="Georgia, 'Times New Roman', serif"
       font-size="70"
       font-weight="700"
       letter-spacing="-8">JRH</text>
   </g>
-
-  <!-- Signature cut: a precise forward slash through the mark. -->
-  <path d="M252 17 L292 78"
-    fill="none"
-    stroke="#8a5cf6"
-    stroke-width="2.5"
-    stroke-linecap="round"/>
-
-  <!-- Tiny terminal point, intentionally restrained. -->
+  <path d="M252 17 L292 78" fill="none" stroke="#8a5cf6" stroke-width="2.5" stroke-linecap="round"/>
   <circle cx="302" cy="80" r="2.8" fill="#ff526a"/>
 </svg>
