@@ -310,15 +310,6 @@ function TestimonialsSection() {
     const nextIndex = (currentIndex + direction + cards.length) % cards.length
     viewport.scrollTo({ left: getTargetLeft(cards[nextIndex]), behavior: 'smooth' })
   }
-    })
-
-    const nextIndex = (currentIndex + direction + cards.length) % cards.length
-    const maxScroll = Math.max(0, viewport.scrollWidth - viewport.clientWidth)
-    const targetLeft = Math.min(Math.max(cards[nextIndex].offsetLeft, 0), maxScroll)
-
-    viewport.scrollTo({ left: targetLeft, behavior: 'smooth' })
-  }
-
   return (
     <section id="testimonials" className="section testimonials-section" aria-labelledby="testimonials-title">
       <div className="section-head">
