@@ -9,9 +9,9 @@
   "description": "JRH — Saya sibuk bekerja, ini yang baru. Ruang personal untuk karya, project, media, dan jejak yang sedang saya bangun.",
   "icons": [
     {
-      "src": "/assets/images/jrh-logo.svg",
+      "src": "/assets/images/logo.png",
       "sizes": "any",
-      "type": "image/svg+xml",
+      "type": "image/png",
       "purpose": "any"
     }
   ]
