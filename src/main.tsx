@@ -334,7 +334,7 @@ export default function App() {
         <section id='identity' className='hero hydra-hero' aria-labelledby='identity-title'>
           <div className='hero-copy'>
             <p className='hero-eyebrow'>{siteConfig.identity.statusLabel} · {siteConfig.identity.locationLabel}</p>
-            <h1 id='identity-title'>{siteConfig.identity.headline.split('\n').map((line, index) => <span key={line}>{line}{index < siteConfig.identity.headline.split('\n').length - 1 ? <br /> : null}</span>)}</h1>
+            <h1 id='identity-title'>{siteConfig.identity.headline.split('\n').map((line, index) => <span key={line} className='headline-line'>{line}{index < siteConfig.identity.headline.split('\n').length - 1 ? <br /> : null}</span>)}</h1>
             <p className='hero-description'>{siteConfig.identity.description}</p>
             <div className='hero-actions'><a className='hero-pill' href='#projects'>Explore projects <span>→</span></a><a className='ghost-pill' href='#links'>Contact <span>↗</span></a></div>
             <div className='hero-stats'><span><b>05</b><small>MEDIA CHANNELS</small></span><span><b>03</b><small>PRODUCTS IN BUILD</small></span><span><b>∞</b><small>IDEAS IN MOTION</small></span></div>
