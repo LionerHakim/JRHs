@@ -1244,3 +1244,59 @@ html[data-theme="dark"] .testimonial-controls button {
   border-color: #37342c !important;
   color: #f5f1e8 !important;
 }
+
+
+/* =========================================================
+   QUOTES — CONTINUOUS PAGE SCROLL + PREVIEW CAROUSEL
+   ========================================================= */
+
+.testimonials-section {
+  overflow: visible !important;
+}
+
+.testimonials-viewport,
+main[data-ui-level="20"] .testimonials-viewport {
+  overflow-x: auto !important;
+  overflow-y: hidden !important;
+  touch-action: pan-x pan-y !important;
+  overscroll-behavior-x: contain !important;
+  overscroll-behavior-y: auto !important;
+  scroll-snap-type: x mandatory !important;
+  scroll-padding-inline: 50% !important;
+  scrollbar-width: none !important;
+}
+
+.testimonials-list,
+main[data-ui-level="20"] .testimonials-list {
+  gap: 20px !important;
+  padding-inline: 10vw !important;
+}
+
+.testimonial,
+main[data-ui-level="20"] .testimonial {
+  flex: 0 0 min(560px, 72vw) !important;
+  width: min(560px, 72vw) !important;
+  scroll-snap-align: center !important;
+}
+
+@media (max-width: 760px) {
+  .testimonials-viewport,
+  main[data-ui-level="20"] .testimonials-viewport {
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+    touch-action: pan-x pan-y !important;
+    scroll-padding-inline: 50% !important;
+  }
+
+  .testimonials-list,
+  main[data-ui-level="20"] .testimonials-list {
+    gap: 14px !important;
+    padding-inline: 11vw !important;
+  }
+
+  .testimonial,
+  main[data-ui-level="20"] .testimonial {
+    flex: 0 0 76vw !important;
+    width: 76vw !important;
+  }
+}
