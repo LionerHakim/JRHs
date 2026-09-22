@@ -321,7 +321,7 @@ export default function App() {
             <div className='menu-panel-grid'>
               {sectionItems.map(([id, label], index) => <a key={id} href={'#' + id} aria-current={activeSection === id ? 'location' : undefined} onClick={() => setMenuOpen(false)}><span className='menu-item-index'>{String(index + 1).padStart(2, '0')}</span><span className='menu-item-label'>{label}</span><span className='menu-item-arrow'>↗</span></a>)}
             </div>
-            <div className='menu-panel-foot'><span>JRH</span><span>Build quietly. Ship boldly.</span></div>
+            <div className='menu-panel-foot'><span>{siteConfig.identity.name}</span><span>{siteConfig.identity.statusLabel} · {siteConfig.identity.locationLabel}</span></div>
           </nav>
           <aside id='music-panel' className={musicOpen ? 'music-panel is-open' : 'music-panel'} aria-label='Music player'>
             <div className='music-panel-head'><div><span className='music-eyebrow'>JRH / SOUND</span><strong>Soundtrack</strong></div><span className='music-status'>READY</span></div>
@@ -333,13 +333,13 @@ export default function App() {
       <main data-ui-level='hydra'>
         <section id='identity' className='hero hydra-hero' aria-labelledby='identity-title'>
           <div className='hero-copy'>
-            <p className='hero-eyebrow'>EXPLORE · LEARN · BUILD · REPEAT</p>
-            <h1 id='identity-title'>BUILD.<br /><span>THINK.</span><br />CREATE.</h1>
-            <p className='hero-description'>{siteConfig.identity.description} Saya menggabungkan ekonomi, teknologi, investasi, media, dan eksperimen digital ke dalam satu ruang.</p>
+            <p className='hero-eyebrow'>{siteConfig.identity.statusLabel} · {siteConfig.identity.locationLabel}</p>
+            <h1 id='identity-title'>{siteConfig.identity.headline.split('\n').map((line, index) => <span key={line}>{line}{index < siteConfig.identity.headline.split('\n').length - 1 ? <br /> : null}</span>)}</h1>
+            <p className='hero-description'>{siteConfig.identity.description}</p>
             <div className='hero-actions'><a className='hero-pill' href='#projects'>Explore projects <span>→</span></a><a className='ghost-pill' href='#links'>Contact <span>↗</span></a></div>
             <div className='hero-stats'><span><b>05</b><small>MEDIA CHANNELS</small></span><span><b>03</b><small>PRODUCTS IN BUILD</small></span><span><b>∞</b><small>IDEAS IN MOTION</small></span></div>
           </div>
-          <figure className='hero-portrait'><div className='portrait-orbit' /><div className='portrait-frame'><img src={siteConfig.identity.profileImage} alt={siteConfig.identity.name} width='640' height='800' fetchPriority='high' /></div><figcaption><span>JRH / 2026</span><strong>Independent digital builder</strong></figcaption></figure>
+          <figure className='hero-portrait'><div className='portrait-orbit' /><div className='portrait-frame'><img src={siteConfig.identity.profileImage} alt={siteConfig.identity.name} width='640' height='800' fetchPriority='high' /></div><figcaption><span>{siteConfig.identity.name}</span><strong>{siteConfig.identity.statusLabel} · {siteConfig.identity.locationLabel}</strong></figcaption></figure>
         </section>
 
         <section id='education' className='section hydra-section' aria-labelledby='education-title'>
@@ -357,7 +357,6 @@ export default function App() {
           <div className='projects-list hydra-projects'>{siteConfig.projects.map((item) => <article className='project-card' key={item.number}><div className='project-visual'><span>{item.number}</span><i /></div><div className='project-card-body'><span className='project-category'>{item.category}</span><h3>{item.title}</h3><p>{item.description}</p><span className='project-status'>{item.status}</span></div><span className='project-link'>↗</span></article>)}</div>
         </section>
 
-        <aside className='thinking-quotes hydra-thinking' aria-label='Prinsip berpikir JRH'><article className='thinking-quote-card'><span className='thinking-quote-kicker'>SYSTEMS THINKING</span><strong>SEE THE SYSTEM,<br />NOT JUST THE EVENT.</strong><p>Gunakan data, pola, dan konteks untuk memahami apa yang sebenarnya bergerak di balik sebuah keputusan.</p></article><article className='thinking-quote-card'><span className='thinking-quote-kicker'>DECISION MAKING</span><strong>DATA FIRST.<br />HUMAN ALWAYS.</strong><p>Algoritma membantu membaca sinyal. Manusia tetap menentukan makna, arah, dan konsekuensinya.</p></article></aside>
         <TestimonialsSection />
 
         <section id='links' className='section hydra-section contact-section' aria-labelledby='links-title'>
@@ -378,7 +377,7 @@ export default function App() {
       </main>
 
       <div className='floating-utilities'><button className='theme-toggle-floating' type='button' aria-label='Toggle theme' onClick={() => setDarkMode((v) => !v)}>{darkMode ? '☀' : '☾'}</button><a className='back-to-top' href='#identity' aria-label='Kembali ke atas'>↑</a></div>
-      <footer className='site-footer hydra-footer'><div className='site-footer-main'><div className='site-footer-brand'><img src='/assets/images/logo.png' alt='' /><strong>JRH</strong><span>INDEPENDENT DIGITAL BUILDER</span></div><nav className='site-footer-nav'>{sectionItems.map(([id, label]) => <a key={id} href={'#' + id}>{label.toUpperCase()}</a>)}</nav><div className='footer-orbit'>JRH / 2026</div></div><div className='site-footer-bottom'><span>© 2026 JRH</span><span>EXPLORE · LEARN · BUILD</span></div></footer>
+      <footer className='site-footer hydra-footer'><div className='site-footer-main'><div className='site-footer-brand'><img src='/assets/images/logo.png' alt='' /><strong>{siteConfig.identity.name}</strong><span>{siteConfig.identity.statusLabel} · {siteConfig.identity.locationLabel}</span></div><nav className='site-footer-nav'>{sectionItems.map(([id, label]) => <a key={id} href={'#' + id}>{label.toUpperCase()}</a>)}</nav><div className='footer-orbit'>JRH / 2026</div></div><div className='site-footer-bottom'><span>© 2026 {siteConfig.identity.name}</span><span>{siteConfig.identity.statusLabel}</span></div></footer>
     </div>
   )
 }
