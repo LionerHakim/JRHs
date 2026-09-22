@@ -66,3 +66,6 @@ html[data-theme="dark"] .nav{background:rgba(22,22,19,.9)!important;box-shadow:0
 html[data-theme="dark"] .testimonial{background:#1b1b18!important;border-color:#37342c!important;color:#f5f1e8!important}
 html[data-theme="dark"] .testimonial blockquote{color:#f5f1e8!important}
 html[data-theme="dark"] .testimonial-footer{border-color:#37342c!important}
+
+/* Quotes — remove the black top rule; keep card otherwise unchanged */
+.testimonial{border-top:1px solid var(--jrh-line)!important}
