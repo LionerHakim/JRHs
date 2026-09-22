@@ -249,501 +249,139 @@ export default function App() {
   const [topicOpen, setTopicOpen] = useState(false)
   const [contactStatus, setContactStatus] = useState<string | null>(null)
   const [contactError, setContactError] = useState<string | null>(null)
-  const [touched, setTouched] = useState({ name: false, message: false, privacy: false })
-  const navActionsRef = useRef<HTMLDivElement>(null)
-  const contactPrivacyRef = useRef<HTMLDivElement>(null)
   const privacyInputRef = useRef<HTMLInputElement>(null)
+  const contactPrivacyRef = useRef<HTMLDivElement>(null)
   const contactTopicRef = useRef<HTMLDivElement>(null)
+  const navActionsRef = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
     document.documentElement.dataset.theme = darkMode ? 'dark' : 'light'
     document.documentElement.style.colorScheme = darkMode ? 'dark' : 'light'
     window.sessionStorage.setItem('jrhs-theme', darkMode ? 'dark' : 'light')
-    const meta = document.querySelector<HTMLMetaElement>('meta[name="theme-color"]')
-    if (meta) meta.content = darkMode ? '#050505' : '#F7FBFF'
   }, [darkMode])
 
   useEffect(() => {
-    const shouldLockScroll = menuOpen || musicOpen
-    document.documentElement.dataset.overlayOpen = shouldLockScroll ? 'true' : 'false'
-    document.body.style.overflow = shouldLockScroll ? 'hidden' : ''
-
-    if (!menuOpen && !musicOpen && !termsOpen && !topicOpen) {
-      return () => {
-        document.documentElement.dataset.overlayOpen = 'false'
-        document.body.style.overflow = ''
-      }
-    }
-
-    const handleKeyDown = (event: KeyboardEvent) => {
-      if (event.key === 'Escape') {
-        setMenuOpen(false)
-        setMusicOpen(false)
-        setTermsOpen(false)
-        setTopicOpen(false)
-      }
-    }
-
-    const handlePointerDown = (event: PointerEvent) => {
-      const target = event.target
-      if (target instanceof Node) {
-        if (!navActionsRef.current?.contains(target)) {
-          setMenuOpen(false)
-          setMusicOpen(false)
-        }
-        if (!contactPrivacyRef.current?.contains(target)) {
-          setTermsOpen(false)
-        }
-        if (!contactTopicRef.current?.contains(target)) {
-          setTopicOpen(false)
-        }
-      }
-    }
-
-    document.addEventListener('keydown', handleKeyDown)
-    document.addEventListener('pointerdown', handlePointerDown)
-
-    return () => {
-      document.removeEventListener('keydown', handleKeyDown)
-      document.removeEventListener('pointerdown', handlePointerDown)
-      document.documentElement.dataset.overlayOpen = 'false'
-      document.body.style.overflow = ''
-    }
-  }, [menuOpen, musicOpen, termsOpen, topicOpen])
+    const sections = sectionIds.map((id) => document.getElementById(id)).filter((el): el is HTMLElement => Boolean(el))
+    if (!sections.length) return
+    const observer = new IntersectionObserver((entries) => {
+      const visible = entries.filter((entry) => entry.isIntersecting).sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0]
+      if (visible) setActiveSection(visible.target.id as (typeof sectionIds)[number])
+    }, { rootMargin: '-18% 0px -62% 0px', threshold: [0.1, 0.35, 0.6] })
+    sections.forEach((section) => observer.observe(section))
+    return () => observer.disconnect()
+  }, [])
 
   useEffect(() => {
-    const sections = sectionIds
-      .map((id) => document.getElementById(id))
-      .filter((section): section is HTMLElement => Boolean(section))
-
-    if (!sections.length) return
-
-    const observer = new IntersectionObserver(
-      (entries) => {
-        const visibleEntries = entries
-          .filter((entry) => entry.isIntersecting)
-          .sort((a, b) => b.intersectionRatio - a.intersectionRatio)
-
-        if (visibleEntries[0]) {
-          setActiveSection(visibleEntries[0].target.id as (typeof sectionIds)[number])
-        }
-      },
-      {
-        rootMargin: '-20% 0px -60% 0px',
-        threshold: [0.1, 0.35, 0.6],
-      },
-    )
-
-    sections.forEach((section) => observer.observe(section))
-
-    return () => observer.disconnect()
+    const onKey = (event: KeyboardEvent) => {
+      if (event.key === 'Escape') { setMenuOpen(false); setMusicOpen(false); setTermsOpen(false); setTopicOpen(false) }
+    }
+    const onPointer = (event: PointerEvent) => {
+      const target = event.target
+      if (!(target instanceof Node)) return
+      if (!navActionsRef.current?.contains(target)) { setMenuOpen(false); setMusicOpen(false) }
+      if (!contactPrivacyRef.current?.contains(target)) setTermsOpen(false)
+      if (!contactTopicRef.current?.contains(target)) setTopicOpen(false)
+    }
+    document.addEventListener('keydown', onKey)
+    document.addEventListener('pointerdown', onPointer)
+    return () => { document.removeEventListener('keydown', onKey); document.removeEventListener('pointerdown', onPointer) }
   }, [])
 
   const handleContactSubmit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault()
-    setContactError(null)
-    setContactStatus(null)
-    setTouched({ name: true, message: true, privacy: true })
-
+    setContactError(null); setContactStatus(null)
     if (!name.trim()) return setContactError('Nama belum diisi.')
-    if (!purpose) {
-      setTopicOpen(true)
-      return setContactError('Silakan pilih topik terlebih dahulu.')
-    }
-
+    if (!purpose) { setTopicOpen(true); return setContactError('Silakan pilih topik terlebih dahulu.') }
     if (!message.trim()) return setContactError('Pesan belum diisi.')
-    if (!privacy) {
-      setContactError('Centang persetujuan S&K untuk melanjutkan.')
-      privacyInputRef.current?.focus()
-      return
-    }
-
-    const subject = encodeURIComponent(`[Portfolio Contact] ${purpose || 'Pesan dari website'}`)
-    const body = encodeURIComponent(`Halo JRH,
-
-Saya ingin menghubungi terkait:
-
-Nama:
-${name.trim()}
-
-Topik:
-${purpose || 'Tidak ditentukan'}
-
-Pesan:
-${message.trim()}
-
---------------------------------
-Dikirim melalui JRH
-https://jrhsee.my.id
---------------------------------
-
-Terima kasih,
-${name.trim()}`)
-
-    window.location.href = `mailto:${siteConfig.contactEmail}?subject=${subject}&body=${body}`
-    setContactStatus('Email sudah disiapkan. Pilih aplikasi email di perangkat Anda, lalu kirim.')
-    setPrivacy(false)
-    setTermsOpen(false)
-    setTouched((current) => ({ ...current, privacy: false }))
+    if (!privacy) { setContactError('Centang persetujuan S&K untuk melanjutkan.'); privacyInputRef.current?.focus(); return }
+    const subject = encodeURIComponent('[JRH] ' + purpose)
+    const body = encodeURIComponent('Halo JRH,\n\nNama: ' + name.trim() + '\n\nTopik: ' + purpose + '\n\nPesan:\n' + message.trim() + '\n\nDikirim melalui https://jrhsee.my.id\n\nTerima kasih,\n' + name.trim())
+    window.location.href = 'mailto:' + siteConfig.contactEmail + '?subject=' + subject + '&body=' + body
+    setContactStatus('Draft email sudah disiapkan. Tinggal klik Kirim di aplikasi email Anda.')
   }
 
   return (
-    <div className={`site-shell${menuOpen ? " menu-open" : ""}${musicOpen ? " music-open" : ""}`}>
-      <a className="skip-link" href="#identity">Lewati ke konten utama</a>
-      <header className="nav">
-        <a className="wordmark" href="/" aria-label="JRH home" onClick={(event) => { event.preventDefault(); window.location.reload() }}>
-          <img className="wordmark-logo" src="/assets/images/logo.png" alt="JRH" />
+    <div className={'site-shell' + (menuOpen ? ' menu-open' : '') + (musicOpen ? ' music-open' : '')}>
+      <div className='jrh-ambient' aria-hidden='true' />
+      <a className='skip-link' href='#identity'>Lewati ke konten utama</a>
+      <header className='nav'>
+        <a className='wordmark' href='#identity' aria-label='JRH home'>
+          <img className='wordmark-logo' src='/assets/images/logo.png' alt='JRH' />
+          <span className='wordmark-copy'><strong>JRH</strong><small>PORTFOLIO</small></span>
         </a>
-        <div className="nav-actions" ref={navActionsRef}>
-          <button
-            className={`nav-action music-toggle${musicOpen ? ' is-open' : ''}`}
-            type="button"
-            aria-expanded={musicOpen}
-            aria-controls="music-panel"
-            aria-label={musicOpen ? 'Tutup music player' : 'Buka music player'}
-            onClick={() => { setMusicOpen((open) => !open); setMenuOpen(false) }}
-          >
-            <span className="nav-action-glyph music-toggle-icon" aria-hidden="true">♪</span>
-            <span className="nav-action-label">Music</span>
-            <span className="nav-action-meta" aria-hidden="true">PLAY</span>
+        <div className='nav-actions' ref={navActionsRef}>
+          <button className={'nav-action music-toggle' + (musicOpen ? ' is-open' : '')} type='button' aria-expanded={musicOpen} onClick={() => { setMusicOpen((v) => !v); setMenuOpen(false) }}>
+            <span className='nav-action-glyph'>♪</span><span className='nav-action-label'>Sound</span><span className='nav-action-meta'>PLAY</span>
           </button>
-
-          <button
-            className={`nav-action menu-toggle${menuOpen ? ' is-open' : ''}`}
-            type="button"
-            aria-expanded={menuOpen}
-            aria-controls="primary-navigation"
-            aria-label={menuOpen ? 'Tutup menu' : 'Buka menu'}
-            onClick={() => { setMenuOpen((open) => !open); setMusicOpen(false) }}
-          >
-            <span className="nav-menu-lines" aria-hidden="true">
-              <span></span>
-              <span></span>
-              <span></span>
-            </span>
-            <span className="nav-action-label">Menu</span>
-            <span className="nav-action-meta" aria-hidden="true">{menuOpen ? 'CLOSE' : 'OPEN'}</span>
+          <button className={'nav-action menu-toggle' + (menuOpen ? ' is-open' : '')} type='button' aria-expanded={menuOpen} onClick={() => { setMenuOpen((v) => !v); setMusicOpen(false) }}>
+            <span className='nav-menu-lines'><span /><span /><span /></span><span className='nav-action-label'>Explore</span><span className='nav-action-meta'>{menuOpen ? 'CLOSE' : 'MENU'}</span>
           </button>
-
-          <nav id="primary-navigation" className={menuOpen ? 'is-open' : undefined} aria-label="Primary navigation">
-            <div className="menu-panel-head">
-              <div>
-                <span>JRH / NAVIGATION</span>
-                <strong>Explore JRH</strong>
-              </div>
-              <span className="menu-panel-count">{String(sectionItems.length).padStart(2, '0')} SECTIONS</span>
+          <nav id='primary-navigation' className={menuOpen ? 'is-open' : undefined} aria-label='Primary navigation'>
+            <div className='menu-panel-head'><div><span>JRH / EXPLORE</span><strong>{sectionItems.find(([id]) => id === activeSection)?.[1] ?? 'About'}</strong></div><span className='menu-panel-count'>{String(sectionItems.length).padStart(2, '0')} AREAS</span></div>
+            <div className='menu-panel-grid'>
+              {sectionItems.map(([id, label], index) => <a key={id} href={'#' + id} aria-current={activeSection === id ? 'location' : undefined} onClick={() => setMenuOpen(false)}><span className='menu-item-index'>{String(index + 1).padStart(2, '0')}</span><span className='menu-item-label'>{label}</span><span className='menu-item-arrow'>↗</span></a>)}
             </div>
-            <div className="menu-panel-grid">
-              {sectionItems.map(([id, label], index) => (
-              <a
-                key={id}
-                href={`#${id}`}
-                aria-current={activeSection === id ? 'location' : undefined}
-                className={activeSection === id ? 'is-active' : undefined}
-                onClick={() => setMenuOpen(false)}
-              >
-                <span className="menu-item-index" aria-hidden="true">{String(index + 1).padStart(2, '0')}</span>
-                <span className="menu-item-label">{label}</span>
-                <span className="menu-item-arrow" aria-hidden="true">↗</span>
-              </a>
-              ))}
-            </div>
-            <div className="menu-panel-foot">
-              <span>JRH</span>
-              <span>Navigate your way ↗</span>
-            </div>
+            <div className='menu-panel-foot'><span>JRH</span><span>Build quietly. Ship boldly.</span></div>
           </nav>
-
-          <aside id="music-panel" className={musicOpen ? 'music-panel is-open' : 'music-panel'} aria-label="Music player">
-            <div className="music-panel-head">
-              <div>
-                <span className="music-eyebrow">JRH / SOUND</span>
-                <strong>Music Player</strong>
-              </div>
-              <span className="music-status">READY</span>
-            </div>
-            <div className="music-track">
-              <div className="music-track-art" aria-hidden="true">♪</div>
-              <div className="music-track-copy">
-                <strong>Select a track</strong>
-                <span>Music for the journey.</span>
-              </div>
-            </div>
-            <div className="music-progress" aria-hidden="true"><span /></div>
-            <div className="music-controls" aria-label="Music controls">
-              <button type="button" disabled aria-label="Previous track">‹‹</button>
-              <button className="music-play" type="button" disabled aria-label="Play">▶</button>
-              <button type="button" disabled aria-label="Next track">››</button>
-            </div>
+          <aside id='music-panel' className={musicOpen ? 'music-panel is-open' : 'music-panel'} aria-label='Music player'>
+            <div className='music-panel-head'><div><span className='music-eyebrow'>JRH / SOUND</span><strong>Soundtrack</strong></div><span className='music-status'>READY</span></div>
+            <div className='music-track'><div className='music-track-art'>♪</div><div className='music-track-copy'><strong>JRH playlist</strong><span>Use the current player experience.</span></div></div>
           </aside>
         </div>
       </header>
 
-      <main>
-        <section id="identity" className="hero" aria-labelledby="identity-title">
-          <div className="hero-copy">
-            <h1 id="identity-title">PORTFOLIO</h1>
-            <p className="hero-description">{siteConfig.identity.description}</p>
-            <div className="hero-actions">
-              <a className="hero-pill" href="#media">Explore media</a>
-              <a className="ghost-pill" href="#links">Contact</a>
-            </div>
+      <main data-ui-level='hydra'>
+        <section id='identity' className='hero hydra-hero' aria-labelledby='identity-title'>
+          <div className='hero-copy'>
+            <p className='hero-eyebrow'>EXPLORE · LEARN · BUILD · REPEAT</p>
+            <h1 id='identity-title'>BUILD.<br /><span>THINK.</span><br />CREATE.</h1>
+            <p className='hero-description'>{siteConfig.identity.description} Saya menggabungkan ekonomi, teknologi, investasi, media, dan eksperimen digital ke dalam satu ruang.</p>
+            <div className='hero-actions'><a className='hero-pill' href='#projects'>Explore projects <span>→</span></a><a className='ghost-pill' href='#links'>Contact <span>↗</span></a></div>
+            <div className='hero-stats'><span><b>05</b><small>MEDIA CHANNELS</small></span><span><b>03</b><small>PRODUCTS IN BUILD</small></span><span><b>∞</b><small>IDEAS IN MOTION</small></span></div>
           </div>
-
-          <figure className="hero-portrait">
-            <div className="portrait-frame">
-              <img
-                src={siteConfig.identity.profileImage}
-                alt={siteConfig.identity.name}
-                width="640"
-                height="800"
-                fetchPriority="high"
-              />
-            </div>
-          </figure>
-
+          <figure className='hero-portrait'><div className='portrait-orbit' /><div className='portrait-frame'><img src={siteConfig.identity.profileImage} alt={siteConfig.identity.name} width='640' height='800' fetchPriority='high' /></div><figcaption><span>JRH / 2026</span><strong>Independent digital builder</strong></figcaption></figure>
         </section>
 
-        <section id="education" className="section" aria-labelledby="education-title">
-          <div className="section-head">
-            <p className="section-kicker">EDUCATION</p>
-            <h2 id="education-title">Education</h2>
-          </div>
-
-          <div className="records">
-            {siteConfig.education.map((item) => (
-              <article className="record" key={item.period + item.institution}>
-                <time>{item.period}</time>
-                <div>
-                  <h3>{item.institution}</h3>
-                  {item.program !== 'SMA' && item.program !== 'SMP' || item.activities?.length ? (
-                    <ul className="record-activities" aria-label="Activities and roles">
-                      {item.program !== 'SMA' && item.program !== 'SMP' ? <li key={item.program}>{item.program}</li> : null}
-                      {item.activities?.map((activity) => (
-                        <li key={activity}>{activity}</li>
-                      ))}
-                    </ul>
-                  ) : null}
-                </div>
-              </article>
-            ))}
-          </div>
+        <section id='education' className='section hydra-section' aria-labelledby='education-title'>
+          <div className='section-head'><p className='section-kicker'>01 / FOUNDATION</p><h2 id='education-title'>Education<br /><em>&amp; experience</em></h2><p>Fondasi akademik dan organisasi yang membentuk cara kerja JRH.</p></div>
+          <div className='records hydra-records'>{siteConfig.education.map((item) => <article className='record' key={item.period + item.institution}><time>{item.period}</time><div><h3>{item.institution}</h3><ul className='record-activities'>{item.program !== 'SMA' && item.program !== 'SMP' ? <li>{item.program}</li> : null}{item.activities?.map((activity) => <li key={activity}>{activity}</li>)}</ul></div><span className='record-arrow'>↗</span></article>)}</div>
         </section>
 
-        <section id="media" className="section media-section" aria-labelledby="media-title">
-          <div className="section-head">
-            <p className="section-kicker">MEDIA</p>
-            <h2 id="media-title">Media</h2>
-          </div>
-
-          <p className="media-subtitle">
-            Kanal, platform, dan ruang digital JRH.
-          </p>
-
-          <div className="media-list">
-            {siteConfig.media.map((item) => (
-              <article className="media-card" key={item.number}>
-                <div className="media-card-top">
-                  <span className="media-number">{item.number}</span>
-                  <span className="media-status">{item.platform}</span>
-                </div>
-                <div className="media-card-body">
-                  <span className="media-category">{item.category}</span>
-                  <h3>{item.title}</h3>
-                  <div className="media-links">
-                    {item.links.map((link) => (
-                      <a key={link.label} href={link.url} target="_blank" rel="noopener noreferrer">
-                        <span>{link.label}</span>
-                        <span aria-hidden="true">↗</span>
-                      </a>
-                    ))}
-                  </div>
-                </div>
-              </article>
-            ))}
-          </div>
+        <section id='media' className='section hydra-section media-section' aria-labelledby='media-title'>
+          <div className='section-head split-head'><div><p className='section-kicker'>02 / PRESENCE</p><h2 id='media-title'>Media<br /><em>in motion.</em></h2></div><p>Kanal digital tempat ide, visual, video, dan eksperimen JRH berjalan.</p></div>
+          <div className='media-list hydra-media'>{siteConfig.media.map((item) => <article className='media-card' key={item.number}><div className='media-card-top'><span className='media-number'>{item.number}</span><span className='media-status'>{item.platform}</span></div><div className='media-card-body'><span className='media-category'>{item.category}</span><h3>{item.title}</h3><div className='media-links'>{item.links.map((link) => <a key={link.label} href={link.url} target='_blank' rel='noopener noreferrer'><span>{link.label}</span><span>↗</span></a>)}</div></div></article>)}</div>
         </section>
 
-        <section id="projects" className="section projects-section" aria-labelledby="projects-title">
-          <div className="section-head">
-            <p className="section-kicker">PROJECTS</p>
-            <h2 id="projects-title">Projects</h2>
-          </div>
-
-          <p className="projects-subtitle">
-Web app dan digital product yang sedang dibangun untuk memecahkan masalah nyata.
-          </p>
-
-          <div className="projects-list">
-            {siteConfig.projects.map((item) => (
-              <article className="project-card" key={item.number}>
-                <div className="project-card-top">
-                  <span className="project-number">{item.number}</span>
-                  <span className="project-status">{item.status}</span>
-                </div>
-                <div className="project-card-body">
-                  <span className="project-category">{item.category}</span>
-                  <h3>{item.title}</h3>
-                  <p>{item.description}</p>
-                </div>
-                {'url' in item && item.url ? (
-                  <a className="project-link" href={item.url} target="_blank" rel="noopener noreferrer">
-                    <span>Open web app</span><span aria-hidden="true">↗</span>
-                  </a>
-                ) : (
-                  <span className="project-link is-disabled">
-                    <span>Coming soon</span><span aria-hidden="true">→</span>
-                  </span>
-                )}
-              </article>
-            ))}
-          </div>
+        <section id='projects' className='section hydra-section projects-section' aria-labelledby='projects-title'>
+          <div className='section-head split-head'><div><p className='section-kicker'>03 / PRODUCTS</p><h2 id='projects-title'>Things<br /><em>being built.</em></h2></div><p>Produk digital yang dikembangkan dari masalah nyata menjadi pengalaman yang sederhana.</p></div>
+          <div className='projects-list hydra-projects'>{siteConfig.projects.map((item) => <article className='project-card' key={item.number}><div className='project-visual'><span>{item.number}</span><i /></div><div className='project-card-body'><span className='project-category'>{item.category}</span><h3>{item.title}</h3><p>{item.description}</p><span className='project-status'>{item.status}</span></div><span className='project-link'>↗</span></article>)}</div>
         </section>
 
-        <aside className="thinking-quotes" aria-label="Prinsip berpikir JRH">
-          <article className="thinking-quote-card">
-            <span className="thinking-quote-kicker">01 / SYSTEMS THINKING</span>
-            <strong>BERPIKIR SEPERTI MESIN EKONOMI</strong>
-            <p>lihat dunia sebagai sistem. segala peristiwa saling berkaitan dan berulang. pahami pola, bukan hanya kejadian sesaat.</p>
-          </article>
-          <article className="thinking-quote-card">
-            <span className="thinking-quote-kicker">02 / DECISION MAKING</span>
-            <strong>GABUNGKAN DATA DAN INTUISI</strong>
-            <p>gunakan data dan sistem algoritma, tapi jangan buang intuisi manusia. gabungkan keduanya untuk pengambilan keputusan terbaik.</p>
-          </article>
-        </aside>
-
-
-
+        <aside className='thinking-quotes hydra-thinking' aria-label='Prinsip berpikir JRH'><article className='thinking-quote-card'><span className='thinking-quote-kicker'>SYSTEMS THINKING</span><strong>SEE THE SYSTEM,<br />NOT JUST THE EVENT.</strong><p>Gunakan data, pola, dan konteks untuk memahami apa yang sebenarnya bergerak di balik sebuah keputusan.</p></article><article className='thinking-quote-card'><span className='thinking-quote-kicker'>DECISION MAKING</span><strong>DATA FIRST.<br />HUMAN ALWAYS.</strong><p>Algoritma membantu membaca sinyal. Manusia tetap menentukan makna, arah, dan konsekuensinya.</p></article></aside>
         <TestimonialsSection />
 
-        <section id="links" className="section contact-section" aria-labelledby="links-title">
-          <div className="section-head">
-            <p className="section-kicker">CONTACT</p>
-            <h2 id="links-title">Contact</h2>
-          </div>
-
-          <div className="contact-card">
-            <div className="contact-intro">
-              <p className="contact-question">Punya sesuatu yang ingin diwujudkan?</p>
-              <p className="contact-answer">Ide baru? Project menarik? Mau kolaborasi? Atau cuma mau ngobrol?</p>
-              <p className="contact-note">Terbuka untuk ide, kolaborasi, dan percakapan baru.</p>
-            </div>
-
-            <form className="contact-form" onSubmit={handleContactSubmit} noValidate>
-              <div className="contact-fields">
-                <label className="contact-field">
-                  <span className="contact-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="3.25" /><path d="M5.5 20a6.5 6.5 0 0 1 13 0" /></svg></span>
-                  <input aria-label="Nama kamu" required value={name} onChange={(event) => setName(event.target.value)} onBlur={() => setTouched((current) => ({ ...current, name: true }))} aria-invalid={touched.name && !name.trim()} placeholder="Nama kamu" autoComplete="name" />
-                </label>
-                <div className="contact-field contact-topic" ref={contactTopicRef}>
-                  <span className="contact-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M5 7h14M5 12h14M5 17h9" /></svg></span>
-                  <button
-                    className={`contact-topic-trigger${topicOpen ? ' is-open' : ''}`}
-                    type="button"
-                    aria-haspopup="listbox"
-                    aria-expanded={topicOpen}
-                    aria-label="Topik email (wajib)"
-                    onClick={() => setTopicOpen((open) => !open)}
-                  >
-                    <span>{purpose || 'Pilih topik'}</span>
-                    <span className="contact-topic-chevron" aria-hidden="true">⌄</span>
-                  </button>
-                  {topicOpen ? (
-                    <div className="contact-topic-menu" role="listbox" aria-label="Pilih topik email">
-                      {contactTopics.map((item) => (
-                        <button
-                          key={item}
-                          type="button"
-                          role="option"
-                          aria-selected={purpose === item}
-                          className={purpose === item ? 'is-selected' : undefined}
-                          onClick={() => { setPurpose(item); setTopicOpen(false) }}
-                        >
-                          <span>{item}</span>
-                          <span aria-hidden="true">{purpose === item ? '✓' : ''}</span>
-                        </button>
-                      ))}
-                    </div>
-                  ) : null}
-                </div>
-                <label className="contact-field contact-message">
-                  <span className="contact-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M5 6.5h14a2 2 0 0 1 2 2v7a2 2 0 0 1-2 2H11l-5 3v-3.5a2 2 0 0 1-2-2v-6.5a2 2 0 0 1 2-2Z" /></svg></span>
-                  <textarea aria-label="Pesan kamu" required value={message} onChange={(event) => {
-                    const words = event.target.value.trim().split(/\s+/).filter(Boolean)
-                    setMessage(words.length > 169 ? words.slice(0, 169).join(' ') : event.target.value)
-                  }} onBlur={() => setTouched((current) => ({ ...current, message: true }))} aria-invalid={touched.message && !message.trim()} placeholder="Tulis pesan kamu di sini... (maksimal 169 kata)" rows={5} />
-                  <span className="contact-counter">{message.trim() ? message.trim().split(/\s+/).length : 0}/169 kata</span>
-                </label>
+        <section id='links' className='section hydra-section contact-section' aria-labelledby='links-title'>
+          <div className='section-head split-head'><div><p className='section-kicker'>04 / CONNECTION</p><h2 id='links-title'>Let’s build<br /><em>something real.</em></h2></div><p>Untuk project, kolaborasi, bisnis, atau sekadar percakapan baru.</p></div>
+          <div className='contact-card hydra-contact'>
+            <div className='contact-intro'><p className='contact-question'>Tell me what you are building.</p><p className='contact-answer'>Ide yang jelas, pesan yang ringkas, lalu kita lihat ke mana arahnya.</p><p className='contact-note'>contact@jrhsee.my.id</p></div>
+            <form className='contact-form' onSubmit={handleContactSubmit} noValidate>
+              <div className='contact-fields'>
+                <label className='contact-field'><span className='contact-icon'>01</span><input aria-label='Nama kamu' required value={name} onChange={(e) => setName(e.target.value)} placeholder='Nama kamu' /></label>
+                <div className='contact-field contact-topic' ref={contactTopicRef}><span className='contact-icon'>02</span><button className='contact-topic-trigger' type='button' aria-expanded={topicOpen} onClick={() => setTopicOpen((v) => !v)}><span>{purpose || 'Pilih topik'}</span><span>⌄</span></button>{topicOpen ? <div className='contact-topic-menu' role='listbox'>{contactTopics.map((item) => <button key={item} type='button' role='option' onClick={() => { setPurpose(item); setTopicOpen(false) }}><span>{item}</span><span>{purpose === item ? '✓' : ''}</span></button>)}</div> : null}</div>
+                <label className='contact-field contact-message'><span className='contact-icon'>03</span><textarea required value={message} onChange={(e) => setMessage(e.target.value)} placeholder='Tulis pesan kamu...' rows={6} /><span className='contact-counter'>{message.trim() ? message.trim().split(/\s+/).length : 0}/169</span></label>
               </div>
-
-              {contactError ? <p className="contact-feedback is-error" role="alert">{contactError}</p> : null}
-              {contactStatus ? <p className="contact-feedback is-success" role="status">{contactStatus}<span>Aplikasi email kamu akan terbuka. Tinggal cek pesannya, lalu klik Kirim.</span></p> : null}
-
-              <div className="contact-submit">
-                <div className="contact-privacy" ref={contactPrivacyRef}>
-                  <TermsCheckbox
-                    checked={privacy}
-                    onChange={(event) => setPrivacy(event.target.checked)}
-                    onBlur={() => setTouched((current) => ({ ...current, privacy: true }))}
-                    invalid={touched.privacy && !privacy}
-                    required
-                    termsOpen={termsOpen}
-                    onTermsToggle={() => setTermsOpen((open) => !open)}
-                    inputRef={privacyInputRef}
-                  />
-                </div>
-                <button type="submit">✈ <span>Buka Email Saya</span> <span aria-hidden="true">→</span></button>
-              </div>
-
-              <div className="contact-benefits" aria-label="Contact benefits">
-                <span aria-label="Cepat" title="Cepat">
-                  <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M13 2 4.5 13h6l-.5 9L19.5 11h-6L13 2Z" /></svg>
-                </span>
-                <span aria-label="Aman" title="Aman">
-                  <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="5" y="10" width="14" height="11" rx="2" /><path d="M8 10V7a4 4 0 0 1 8 0v3" /></svg>
-                </span>
-                <span aria-label="Langsung ke email" title="Langsung ke email">
-                  <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3.5" y="5.5" width="17" height="13" rx="2" /><path d="m4.5 7 7.5 6 7.5-6" /></svg>
-                </span>
-              </div>
-
-              <div className="contact-closing">
-                <p>Terima kasih sudah berkunjung.</p>
-              </div>
+              {contactError ? <p className='contact-feedback is-error'>{contactError}</p> : null}{contactStatus ? <p className='contact-feedback is-success'>{contactStatus}</p> : null}
+              <div className='contact-submit'><div className='contact-privacy' ref={contactPrivacyRef}><TermsCheckbox checked={privacy} onChange={(e) => setPrivacy(e.target.checked)} required termsOpen={termsOpen} onTermsToggle={() => setTermsOpen((v) => !v)} inputRef={privacyInputRef} /></div><button type='submit'><span>Open email</span> →</button></div>
             </form>
           </div>
         </section>
       </main>
 
-      <div className="floating-utilities" aria-label="Pengaturan tampilan">
-        <button className="theme-toggle-floating" type="button" aria-label={darkMode ? 'Aktifkan light mode' : 'Aktifkan dark mode'} aria-pressed={darkMode} title={darkMode ? 'Light mode' : 'Dark mode'} onClick={() => setDarkMode((value) => !value)}>
-          <span aria-hidden="true">{darkMode ? '☀' : '☾'}</span>
-        </button>
-        <a className="back-to-top" href="#identity" aria-label="Kembali ke atas" title="Kembali ke atas">↑<span>TOP</span></a>
-      </div>
-
-      <footer className="site-footer">
-        <div className="site-footer-main">
-          <div className="site-footer-brand">
-            <strong>JRH</strong>
-          </div>
-
-          <nav className="site-footer-nav" aria-label="Footer navigation">
-            {sectionItems.map(([id, label]) => (
-              <a key={id} href={`#${id}`}>{label.toUpperCase()}</a>
-            ))}
-          </nav>
-        </div>
-
-        <div className="site-footer-bottom">
-          <span>© 2026 JRH</span>
-        </div>
-      </footer>
+      <div className='floating-utilities'><button className='theme-toggle-floating' type='button' aria-label='Toggle theme' onClick={() => setDarkMode((v) => !v)}>{darkMode ? '☀' : '☾'}</button><a className='back-to-top' href='#identity' aria-label='Kembali ke atas'>↑</a></div>
+      <footer className='site-footer hydra-footer'><div className='site-footer-main'><div className='site-footer-brand'><img src='/assets/images/logo.png' alt='' /><strong>JRH</strong><span>INDEPENDENT DIGITAL BUILDER</span></div><nav className='site-footer-nav'>{sectionItems.map(([id, label]) => <a key={id} href={'#' + id}>{label.toUpperCase()}</a>)}</nav><div className='footer-orbit'>JRH / 2026</div></div><div className='site-footer-bottom'><span>© 2026 JRH</span><span>EXPLORE · LEARN · BUILD</span></div></footer>
     </div>
   )
 }
-
 const rootElement = document.getElementById('root')
 if (!rootElement) throw new Error('JRH root element not found')
 createRoot(rootElement).render(<App />)
