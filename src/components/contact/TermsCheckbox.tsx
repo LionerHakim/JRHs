@@ -81,9 +81,6 @@ export function TermsCheckbox({
   )
 }
 
-import './styles/tokens.css'
-import './index.css'
-
 const sectionItems = [
   ['identity', 'About'],
   ['education', 'Education'],
