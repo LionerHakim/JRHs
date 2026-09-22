@@ -1,20 +1,43 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 520 150" role="img" aria-labelledby="title desc">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 420 120" role="img" aria-labelledby="title desc">
   <title id="title">JRH</title>
-  <desc id="desc">JRH personal brand mark</desc>
+  <desc id="desc">JRH monogram</desc>
   <defs>
-    <linearGradient id="jrh" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" stop-color="#17141c"/>
-      <stop offset="42%" stop-color="#6d28d9"/>
-      <stop offset="72%" stop-color="#ff526a"/>
-      <stop offset="100%" stop-color="#17141c"/>
+    <linearGradient id="chrome" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#ffffff"/>
+      <stop offset=".34" stop-color="#d9d4e8"/>
+      <stop offset=".57" stop-color="#8a5cf6"/>
+      <stop offset=".78" stop-color="#ff526a"/>
+      <stop offset="1" stop-color="#ffffff"/>
     </linearGradient>
-    <filter id="soft" x="-8%" y="-15%" width="116%" height="130%">
-      <feDropShadow dx="0" dy="5" stdDeviation="5" flood-color="#6d28d9" flood-opacity=".14"/>
+    <linearGradient id="orbit" x1="0" y1=".5" x2="1" y2=".5">
+      <stop offset="0" stop-color="#ffffff" stop-opacity=".15"/>
+      <stop offset=".45" stop-color="#a78bfa"/>
+      <stop offset=".72" stop-color="#ff526a"/>
+      <stop offset="1" stop-color="#ffffff" stop-opacity=".2"/>
+    </linearGradient>
+    <filter id="glow" x="-20%" y="-30%" width="140%" height="160%">
+      <feGaussianBlur stdDeviation="2.2" result="b"/>
+      <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
     </filter>
   </defs>
-  <g filter="url(#soft)">
-    <text x="20" y="111" fill="url(#jrh)" font-family="Georgia, 'Times New Roman', serif" font-size="112" font-weight="700" letter-spacing="-15">JRH</text>
-    <path d="M30 127H330" fill="none" stroke="url(#jrh)" stroke-width="3" stroke-linecap="round"/>
-    <path d="M370 54l4 10 10 4-10 4-4 10-4-10-10-4 10-4z" fill="#ff526a"/>
+
+  <!-- Interlocking serif monogram -->
+  <g fill="url(#chrome)" font-family="Georgia, 'Times New Roman', serif" font-weight="700" filter="url(#glow)">
+    <text x="18" y="91" font-size="96" letter-spacing="-13">J</text>
+    <text x="105" y="91" font-size="91" letter-spacing="-12">R</text>
+    <text x="198" y="91" font-size="91" letter-spacing="-10">H</text>
   </g>
+
+  <!-- Orbit: journey / continuity / forward motion -->
+  <path d="M8 82 C72 25 205 15 342 55 C373 64 389 76 398 88"
+        fill="none" stroke="url(#orbit)" stroke-width="3.2" stroke-linecap="round" filter="url(#glow)"/>
+  <path d="M12 87 C92 106 235 108 346 79"
+        fill="none" stroke="url(#orbit)" stroke-width="1.4" stroke-linecap="round" opacity=".7"/>
+
+  <!-- Signature spark -->
+  <path d="M365 27 l4.2 10.8 10.8 4.2-10.8 4.2L365 57l-4.2-10.8L350 42l10.8-4.2z"
+        fill="#ff6b7c" stroke="#ffd5db" stroke-width=".7"/>
+
+  <!-- Precision baseline -->
+  <path d="M24 103 H310" stroke="#ffffff" stroke-opacity=".28" stroke-width="1"/>
 </svg>
