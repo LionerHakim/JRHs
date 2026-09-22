@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from 'react'
 import { TestimonialCard } from './TestimonialCard'
-import type { siteConfig } from '../../config/site'
+import { siteConfig } from '../../config/site'
 
 export function TestimonialsSection() {
   const testimonials = siteConfig.testimonials
