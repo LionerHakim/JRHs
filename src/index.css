@@ -94,8 +94,10 @@ body{
   color:#fff!important;
 }
 
+/* Brand mark is theme-invariant: identical artwork in light and dark modes. */
 .wordmark-logo{
-  filter:drop-shadow(0 0 14px rgba(138,92,246,.18)) drop-shadow(0 0 2px rgba(255,255,255,.22))!important;
+  filter:none!important;
+  opacity:1!important;
 }
 
 .nav-actions{
