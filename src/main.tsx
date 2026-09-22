@@ -4,22 +4,21 @@ import { createRoot } from 'react-dom/client'
 import { siteConfig } from './config/site'
 import './index.css'
 
-const navItems = [
+const menu = [
   ['about', 'About'],
-  ['projects', 'Projects'],
-  ['experience', 'Experience'],
+  ['work', 'Work'],
+  ['record', 'Record'],
   ['contact', 'Contact'],
 ] as const
 
 function App() {
   const [menuOpen, setMenuOpen] = useState(false)
   const [dark, setDark] = useState(() => localStorage.getItem('jrhs-theme') === 'dark')
-  const [soundOpen, setSoundOpen] = useState(false)
   const [name, setName] = useState('')
   const [topic, setTopic] = useState('')
   const [message, setMessage] = useState('')
-  const [agreed, setAgreed] = useState(false)
-  const [status, setStatus] = useState('')
+  const [agree, setAgree] = useState(false)
+  const [notice, setNotice] = useState('')
   const [error, setError] = useState('')
 
   useEffect(() => {
@@ -28,20 +27,19 @@ function App() {
     localStorage.setItem('jrhs-theme', dark ? 'dark' : 'light')
   }, [dark])
 
-  const go = (id: string) => {
+  const scrollTo = (id: string) => {
     setMenuOpen(false)
-    setSoundOpen(false)
     document.getElementById(id)?.scrollIntoView({ behavior: 'smooth', block: 'start' })
   }
 
   const submit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault()
+    setNotice('')
     setError('')
-    setStatus('')
     if (!name.trim()) return setError('Nama belum diisi.')
-    if (!topic) return setError('Pilih topik terlebih dahulu.')
+    if (!topic) return setError('Pilih topik.')
     if (!message.trim()) return setError('Pesan belum diisi.')
-    if (!agreed) return setError('Centang persetujuan sebelum mengirim.')
+    if (!agree) return setError('Centang persetujuan terlebih dahulu.')
 
     const subject = encodeURIComponent('[JRH] ' + topic)
     const body = encodeURIComponent(
@@ -51,168 +49,168 @@ function App() {
       '\n\nDikirim melalui https://jrhsee.my.id'
     )
     window.location.href = 'mailto:' + siteConfig.contactEmail + '?subject=' + subject + '&body=' + body
-    setStatus('Draft email sudah disiapkan. Tinggal klik Kirim di aplikasi email Anda.')
+    setNotice('Draft email sudah disiapkan di aplikasi email Anda.')
   }
 
   return (
-    <div className="site">
-      <header className="navbar">
-        <button className="brand" onClick={() => go('about')} aria-label="JRH home">
+    <div className="jrhs-app">
+      <header className="topbar">
+        <button className="brand" onClick={() => scrollTo('about')} aria-label="JRH home">
           <img src="/assets/images/logo.png" alt="JRH" />
-          <span>JRH<span className="brand-dot">.</span></span>
+          <span>JRH<em>/</em>SEE</span>
         </button>
 
-        <nav className={menuOpen ? 'nav-links open' : 'nav-links'} aria-label="Main navigation">
-          {navItems.map(([id, label]) => (
-            <button key={id} onClick={() => go(id)}>{label}</button>
-          ))}
-        </nav>
+        <div className="topbar-center">PERSONAL PORTFOLIO / 2026</div>
 
-        <div className="nav-tools">
-          <button className="tool-button" onClick={() => setSoundOpen(v => !v)} aria-expanded={soundOpen}>♫ <span>Sound</span></button>
-          <button className="tool-button" onClick={() => setDark(v => !v)} aria-label="Toggle theme">{dark ? '☀' : '◐'}</button>
-          <button className="menu-button" onClick={() => setMenuOpen(v => !v)} aria-label="Toggle menu">
-            <span /><span />
+        <div className="topbar-actions">
+          <button className="theme" onClick={() => setDark(v => !v)} aria-label="Ganti tema">{dark ? 'LIGHT' : 'DARK'}</button>
+          <button className="menu-trigger" onClick={() => setMenuOpen(v => !v)} aria-expanded={menuOpen}>
+            <span>{menuOpen ? 'CLOSE' : 'MENU'}</span><i><b /><b /></i>
           </button>
         </div>
 
-        {soundOpen && (
-          <div className="sound-popover">
-            <span className="eyebrow">JRH / SOUND</span>
-            <strong>Sound is optional.</strong>
-            <p>Website tetap fokus pada karya dan informasi. Audio player dapat ditambahkan saat track final sudah siap.</p>
-          </div>
+        {menuOpen && (
+          <nav className="menu-drawer" aria-label="Navigation">
+            {menu.map(([id, label], index) => (
+              <button key={id} onClick={() => scrollTo(id)}>
+                <small>0{index + 1}</small><strong>{label}</strong><span>↗</span>
+              </button>
+            ))}
+          </nav>
         )}
       </header>
 
+      <aside className="side-rail" aria-hidden="true">
+        <span>JRH / 2026</span><i /><span>INDONESIA</span>
+      </aside>
+
       <main>
-        <section id="about" className="hero section-wrap">
-          <div className="hero-copy">
-            <span className="eyebrow">JEFri RAHMAN HAKIM · 2026</span>
-            <h1>Ideas into<br /><i>things.</i></h1>
-            <p className="hero-lead">
-              Ruang digital untuk eksperimen, karya, media, dan project yang sedang saya bangun.
-              Saya menggabungkan ekonomi, teknologi, investasi, dan kreativitas ke dalam satu proses.
-            </p>
-            <div className="hero-actions">
-              <button className="primary-button" onClick={() => go('projects')}>View projects <span>↗</span></button>
-              <button className="text-button" onClick={() => go('contact')}>Get in touch <span>→</span></button>
-            </div>
-            <div className="hero-meta">
-              <span><b>01</b> Economics</span>
-              <span><b>02</b> Digital projects</span>
-              <span><b>03</b> Media & research</span>
-            </div>
-          </div>
-          <div className="hero-visual">
-            <div className="portrait-card">
-              <img src={siteConfig.identity.profileImage} alt={siteConfig.identity.name} />
-              <div className="portrait-caption">
-                <span>JRH / PROFILE</span>
-                <strong>Independent builder</strong>
+        <section id="about" className="hero">
+          <div className="hero-index">00 — INTRODUCTION</div>
+          <div className="hero-main">
+            <p className="overline">JEFri RAHMAN HAKIM · ECONOMICS · DIGITAL WORK</p>
+            <h1>Making<br /><span>ideas</span><br />visible<span className="mark">.</span></h1>
+            <div className="hero-bottom">
+              <p>{siteConfig.identity.description} Sebuah ruang personal untuk karya, eksperimen digital, media, pembelajaran, dan project yang sedang dibangun.</p>
+              <div className="hero-links">
+                <button onClick={() => scrollTo('work')}>Explore work <span>↓</span></button>
+                <a href="mailto:contact@jrhsee.my.id">contact@jrhsee.my.id ↗</a>
               </div>
             </div>
-            <div className="visual-note">BUILD<br />QUIETLY.</div>
           </div>
+          <div className="hero-photo">
+            <div className="photo-frame"><img src={siteConfig.identity.profileImage} alt={siteConfig.identity.name} /></div>
+            <div className="photo-label"><span>JRH — PROFILE</span><b>BUILD / LEARN / REPEAT</b></div>
+          </div>
+          <div className="hero-scroll">SCROLL TO EXPLORE ↓</div>
         </section>
 
-        <section className="intro section-wrap">
-          <span className="eyebrow">ABOUT</span>
-          <div className="intro-grid">
-            <h2>A personal<br /><i>working space.</i></h2>
-            <div>
-              <p>JRH adalah ruang untuk mendokumentasikan proses: apa yang dipelajari, apa yang dibuat, dan apa yang sedang diuji.</p>
-              <div className="link-row">
-                <a href="https://github.com/LionerHakim" target="_blank" rel="noreferrer">GitHub ↗</a>
-                <a href="mailto:contact@jrhsee.my.id">Email ↗</a>
-                <a href="https://jrhsee.my.id" target="_blank" rel="noreferrer">jrhsee.my.id ↗</a>
+        <section className="statement section" aria-label="About JRH">
+          <div className="section-no">01</div>
+          <div className="statement-content">
+            <p className="overline">A LITTLE CONTEXT</p>
+            <h2>Not a finished story.<br /><i>A work in progress.</i></h2>
+            <div className="statement-copy">
+              <p>JRH menggabungkan latar ekonomi dengan ketertarikan pada teknologi, investasi, media, dan produk digital. Website ini berfungsi sebagai arsip hidup—tempat proses lebih penting daripada sekadar hasil akhir.</p>
+              <div className="mini-facts">
+                <div><strong>ECONOMICS</strong><span>Academic foundation</span></div>
+                <div><strong>PRODUCT</strong><span>Digital experiments</span></div>
+                <div><strong>MEDIA</strong><span>Publishing & channels</span></div>
               </div>
             </div>
           </div>
         </section>
 
-        <section id="projects" className="section-wrap section-block">
-          <div className="section-heading">
-            <div><span className="eyebrow">01 / PROJECTS</span><h2>What I'm<br /><i>building.</i></h2></div>
-            <p>Beberapa produk dan eksperimen digital yang sedang dikembangkan.</p>
-          </div>
-          <div className="project-grid">
-            {siteConfig.projects.map((project) => (
-              <article className="project" key={project.number}>
-                <div className="project-index">{project.number}</div>
-                <div className="project-body">
-                  <span>{project.category}</span>
-                  <h3>{project.title}</h3>
-                  <p>{project.description}</p>
-                  <small>{project.status}</small>
-                </div>
-                <span className="project-arrow">↗</span>
-              </article>
-            ))}
-          </div>
-        </section>
-
-        <section id="experience" className="section-wrap section-block">
-          <div className="section-heading">
-            <div><span className="eyebrow">02 / EXPERIENCE</span><h2>Where it<br /><i>started.</i></h2></div>
-            <p>Fondasi akademik, organisasi, dan kanal digital yang membentuk perjalanan JRH.</p>
-          </div>
-
-          <div className="timeline">
-            {siteConfig.education.map((item) => (
-              <article className="timeline-item" key={item.period + item.institution}>
-                <time>{item.period}</time>
-                <div>
-                  <h3>{item.institution}</h3>
-                  <strong>{item.program}</strong>
-                  {item.activities?.length ? <ul>{item.activities.map(activity => <li key={activity}>{activity}</li>)}</ul> : null}
-                </div>
-              </article>
-            ))}
-          </div>
-
-          <div className="media-strip">
-            <div className="media-strip-head"><span className="eyebrow">MEDIA</span><span>05 CHANNELS</span></div>
-            <div className="media-grid">
-              {siteConfig.media.map(item => (
-                <article key={item.number}>
-                  <span>{item.number}</span>
-                  <h3>{item.title}</h3>
-                  <small>{item.category}</small>
-                  <div>{item.links.map(link => <a key={link.label} href={link.url} target="_blank" rel="noreferrer">{link.label} ↗</a>)}</div>
+        <section id="work" className="work section">
+          <div className="section-no">02</div>
+          <div className="work-content">
+            <div className="section-title">
+              <div><p className="overline">SELECTED WORK</p><h2>Things<br /><i>in motion.</i></h2></div>
+              <p>Produk yang lahir dari kebutuhan sederhana: membuat sesuatu lebih berguna, lebih mudah, atau lebih jelas.</p>
+            </div>
+            <div className="work-list">
+              {siteConfig.projects.map((project, index) => (
+                <article className="work-item" key={project.number}>
+                  <div className="work-number">0{index + 1}</div>
+                  <div className="work-info">
+                    <span>{project.category}</span>
+                    <h3>{project.title}</h3>
+                    <p>{project.description}</p>
+                  </div>
+                  <div className="work-status">{project.status}<b>↗</b></div>
                 </article>
               ))}
             </div>
           </div>
         </section>
 
-        <section className="principles section-wrap">
-          <div><span className="eyebrow">WORKING PRINCIPLES</span><h2>Think clearly.<br /><i>Make simply.</i></h2></div>
-          <p>Data helps me understand the system. Design helps me communicate it. Building turns an idea into something people can actually use.</p>
+        <section id="record" className="record section">
+          <div className="section-no">03</div>
+          <div className="record-content">
+            <div className="section-title">
+              <div><p className="overline">RECORD / EDUCATION</p><h2>Where the<br /><i>work began.</i></h2></div>
+              <p>Perjalanan akademik dan organisasi yang menjadi fondasi cara berpikir dan cara bekerja.</p>
+            </div>
+            <div className="record-list">
+              {siteConfig.education.map((item) => (
+                <article key={item.period + item.institution}>
+                  <time>{item.period}</time>
+                  <div><h3>{item.institution}</h3><strong>{item.program}</strong>{item.activities?.map(activity => <span key={activity}>{activity}</span>)}</div>
+                  <b>↗</b>
+                </article>
+              ))}
+            </div>
+
+            <div className="channels">
+              <div className="channels-head"><p className="overline">04 / CHANNELS</p><span>PUBLIC PRESENCE</span></div>
+              <div className="channel-list">
+                {siteConfig.media.map(item => (
+                  <article key={item.number}>
+                    <small>{item.number}</small>
+                    <div><h3>{item.title}</h3><span>{item.category}</span></div>
+                    <div className="channel-links">{item.links.map(link => <a key={link.label} href={link.url} target="_blank" rel="noreferrer">{link.label} ↗</a>)}</div>
+                  </article>
+                ))}
+              </div>
+            </div>
+          </div>
         </section>
 
-        <section id="contact" className="section-wrap contact-section">
-          <div className="contact-copy">
-            <span className="eyebrow">03 / CONTACT</span>
-            <h2>Have something<br /><i>in mind?</i></h2>
-            <p>Untuk pertanyaan, kolaborasi, project, bisnis, akademik, atau sekadar ingin terhubung.</p>
-            <a href="mailto:contact@jrhsee.my.id">contact@jrhsee.my.id ↗</a>
+        <section className="quote-section">
+          <div className="quote-mark">“</div>
+          <p>Build things that make the next step easier.</p>
+          <span>JRH / WORKING NOTE</span>
+        </section>
+
+        <section id="contact" className="contact section">
+          <div className="section-no">05</div>
+          <div className="contact-grid">
+            <div>
+              <p className="overline">LET'S TALK</p>
+              <h2>Have an idea?<br /><i>Let's make it real.</i></h2>
+              <p className="contact-text">Terbuka untuk kolaborasi, project, bisnis, akademik, feedback, atau percakapan yang relevan.</p>
+              <a className="email-link" href="mailto:contact@jrhsee.my.id">contact@jrhsee.my.id ↗</a>
+            </div>
+            <form onSubmit={submit}>
+              <label><span>01 / NAME</span><input value={name} onChange={e => setName(e.target.value)} placeholder="Nama kamu" /></label>
+              <label><span>02 / TOPIC</span><select value={topic} onChange={e => setTopic(e.target.value)}><option value="">Pilih topik</option><option>Kolaborasi</option><option>Project</option><option>Bisnis</option><option>Akademik</option><option>Pertanyaan umum</option><option>Feedback</option></select></label>
+              <label><span>03 / MESSAGE</span><textarea value={message} onChange={e => setMessage(e.target.value)} placeholder="Ceritakan sedikit..." rows={5} /></label>
+              <label className="consent"><input type="checkbox" checked={agree} onChange={e => setAgree(e.target.checked)} /><span>Saya setuju data ini digunakan untuk menyiapkan balasan email.</span></label>
+              {error && <p className="form-alert error">{error}</p>}
+              {notice && <p className="form-alert success">{notice}</p>}
+              <button className="send" type="submit">PREPARE EMAIL <span>↗</span></button>
+            </form>
           </div>
-          <form className="contact-form" onSubmit={submit}>
-            <label>Name<input value={name} onChange={e => setName(e.target.value)} placeholder="Your name" /></label>
-            <label>Topic<select value={topic} onChange={e => setTopic(e.target.value)}><option value="">Choose a topic</option><option>Kolaborasi</option><option>Project</option><option>Bisnis</option><option>Akademik</option><option>Pertanyaan umum</option><option>Feedback</option></select></label>
-            <label>Message<textarea value={message} onChange={e => setMessage(e.target.value)} placeholder="Tell me a little about it..." rows={5} /></label>
-            <label className="check"><input type="checkbox" checked={agreed} onChange={e => setAgreed(e.target.checked)} /><span>Saya setuju data ini digunakan untuk menyiapkan balasan email.</span></label>
-            {error && <p className="form-message error">{error}</p>}
-            {status && <p className="form-message success">{status}</p>}
-            <button className="primary-button submit" type="submit">Prepare email <span>↗</span></button>
-          </form>
         </section>
       </main>
 
-      <footer className="footer section-wrap">
-        <div><strong>JRH<span className="brand-dot">.</span></strong><span>Independent digital portfolio</span></div>
-        <nav>{navItems.map(([id, label]) => <button key={id} onClick={() => go(id)}>{label}</button>)}</nav>
+      <footer className="footer">
+        <div><strong>JRH<span>.</span></strong><small>PERSONAL DIGITAL ARCHIVE</small></div>
+        <div className="footer-links">
+          <a href="https://github.com/LionerHakim" target="_blank" rel="noreferrer">GitHub ↗</a>
+          <a href="mailto:contact@jrhsee.my.id">Email ↗</a>
+          <a href="https://jrhsee.my.id" target="_blank" rel="noreferrer">Website ↗</a>
+        </div>
         <small>© 2026 Jefri Rahman Hakim</small>
       </footer>
     </div>
