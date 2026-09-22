@@ -68,7 +68,7 @@ export function TermsCheckbox({
       </button>
 
       {termsOpen ? (
-        <div id={popoverId} className="terms-checkbox-popover" role="dialog" aria-modal="true" aria-label="Syarat dan ketentuan">
+        <div id={popoverId} className="terms-checkbox-popover" role="dialog" aria-label="Syarat dan ketentuan">
           <div className="terms-checkbox-popover-head">
             <strong>Syarat & Ketentuan</strong>
             <button className="terms-checkbox-close" type="button" aria-label="Tutup syarat dan ketentuan" onClick={onTermsToggle}>×</button>
