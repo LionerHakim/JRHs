@@ -869,7 +869,7 @@ Web app dan digital product yang sedang dibangun untuk memecahkan masalah nyata.
                 <div className="contact-privacy" ref={contactPrivacyRef}>
                   <TermsCheckbox
                     checked={privacy}
-                    onChange={(event) => setPrivacy(event.target.checked)}
+                    onChange={(event: ChangeEvent<HTMLInputElement>) => setPrivacy(event.target.checked)}
                     onBlur={() => setTouched((current) => ({ ...current, privacy: true }))}
                     invalid={touched.privacy && !privacy}
                     required
