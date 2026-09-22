@@ -28,7 +28,7 @@ export type Testimonial = {
 export const siteConfig = {
   identity: {
     name: 'Jefri Rahman Hakim',
-    description: 'Projects, publishing, and independent work.',
+    description: 'Ruang digital untuk eksperimen, karya, media, dan project yang sedang saya bangun.',
     profileImage: '/assets/images/s.jpg',
   },
   contactEmail: 'contact@jrhsee.my.id',
