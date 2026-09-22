@@ -1,43 +1,29 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 420 120" role="img" aria-labelledby="title desc">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 360 96" role="img" aria-labelledby="title">
   <title id="title">JRH</title>
-  <desc id="desc">JRH monogram</desc>
   <defs>
-    <linearGradient id="chrome" x1="0" y1="0" x2="1" y2="1">
-      <stop offset="0" stop-color="#ffffff"/>
-      <stop offset=".34" stop-color="#d9d4e8"/>
-      <stop offset=".57" stop-color="#8a5cf6"/>
-      <stop offset=".78" stop-color="#ff526a"/>
-      <stop offset="1" stop-color="#ffffff"/>
+    <linearGradient id="edge" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#111318"/>
+      <stop offset=".5" stop-color="#111318"/>
+      <stop offset="1" stop-color="#111318"/>
     </linearGradient>
-    <linearGradient id="orbit" x1="0" y1=".5" x2="1" y2=".5">
-      <stop offset="0" stop-color="#ffffff" stop-opacity=".15"/>
-      <stop offset=".45" stop-color="#a78bfa"/>
-      <stop offset=".72" stop-color="#ff526a"/>
-      <stop offset="1" stop-color="#ffffff" stop-opacity=".2"/>
-    </linearGradient>
-    <filter id="glow" x="-20%" y="-30%" width="140%" height="160%">
-      <feGaussianBlur stdDeviation="2.2" result="b"/>
-      <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
-    </filter>
   </defs>
 
-  <!-- Interlocking serif monogram -->
-  <g fill="url(#chrome)" font-family="Georgia, 'Times New Roman', serif" font-weight="700" filter="url(#glow)">
-    <text x="18" y="91" font-size="96" letter-spacing="-13">J</text>
-    <text x="105" y="91" font-size="91" letter-spacing="-12">R</text>
-    <text x="198" y="91" font-size="91" letter-spacing="-10">H</text>
+  <!-- Minimal JRH wordmark: one continuous visual system, no decorative effects. -->
+  <g fill="#111318" stroke="#f7f7fa" stroke-width="2.2" paint-order="stroke">
+    <text x="10" y="72"
+      font-family="Georgia, 'Times New Roman', serif"
+      font-size="70"
+      font-weight="700"
+      letter-spacing="-8">JRH</text>
   </g>
 
-  <!-- Orbit: journey / continuity / forward motion -->
-  <path d="M8 82 C72 25 205 15 342 55 C373 64 389 76 398 88"
-        fill="none" stroke="url(#orbit)" stroke-width="3.2" stroke-linecap="round" filter="url(#glow)"/>
-  <path d="M12 87 C92 106 235 108 346 79"
-        fill="none" stroke="url(#orbit)" stroke-width="1.4" stroke-linecap="round" opacity=".7"/>
+  <!-- Signature cut: a precise forward slash through the mark. -->
+  <path d="M252 17 L292 78"
+    fill="none"
+    stroke="#8a5cf6"
+    stroke-width="2.5"
+    stroke-linecap="round"/>
 
-  <!-- Signature spark -->
-  <path d="M365 27 l4.2 10.8 10.8 4.2-10.8 4.2L365 57l-4.2-10.8L350 42l10.8-4.2z"
-        fill="#ff6b7c" stroke="#ffd5db" stroke-width=".7"/>
-
-  <!-- Precision baseline -->
-  <path d="M24 103 H310" stroke="#ffffff" stroke-opacity=".28" stroke-width="1"/>
+  <!-- Tiny terminal point, intentionally restrained. -->
+  <circle cx="302" cy="80" r="2.8" fill="#ff526a"/>
 </svg>
