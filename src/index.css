@@ -8700,7 +8700,7 @@ main[data-ui-level="20"] .testimonials-viewport {
   scroll-snap-stop: normal;
   scroll-padding-inline: max(24px, 5vw);
   overscroll-behavior-inline: contain;
-  touch-action: pan-x;
+  touch-action: auto;
 }
 
 main[data-ui-level="20"] .testimonials-list {
