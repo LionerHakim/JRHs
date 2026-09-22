@@ -94,13 +94,6 @@ body{
   color:#fff!important;
 }
 
-/* Brand mark is theme-invariant: identical artwork in light and dark modes. */
-.wordmark-logo{
-  filter:none!important;
-  opacity:1!important;
-  mix-blend-mode:normal!important;
-}
-
 .nav-actions{
   background:rgba(255,255,255,.025)!important;
   border-color:rgba(255,255,255,.085)!important;
@@ -1069,10 +1062,6 @@ html[data-theme="light"]{
 html[data-theme="light"] .nav::before{
   background:linear-gradient(90deg,transparent,rgba(109,40,217,.30),rgba(29,23,37,.10),rgba(255,82,106,.16),transparent)!important;
   box-shadow:none!important;
-}
-
-html[data-theme="light"] .wordmark-logo{
-  filter:drop-shadow(0 0 10px rgba(109,40,217,.10))!important;
 }
 
 html[data-theme="light"] .nav-action-glyph,
