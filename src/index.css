@@ -37,7 +37,7 @@ body{background:var(--jrh-surface)!important;-webkit-font-smoothing:antialiased}
 .media-card:hover,.project-card:hover,.record:hover{box-shadow:0 22px 52px rgba(17,17,15,.09)!important}
 
 /* QUOTES — preview / active / preview */
-.testimonials-section{overflow:visible!important;background:radial-gradient(circle at 8% 12%,rgba(112,87,230,.06),transparent 24%),radial-gradient(circle at 92% 88%,rgba(223,59,49,.05),transparent 24%),var(--jrh-surface)!important}
+.testimonials-section{overflow:visible!important;background:var(--jrh-surface)!important}
 .testimonials-section .section-head{border:0!important;box-shadow:none!important}
 .testimonials-section .section-head::before,.testimonials-section .section-head::after{display:none!important;content:none!important}
 .testimonials-section .section-head h2{font-family:var(--jrh-display)!important;font-weight:400!important}
