@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from 'react'
 import type { ChangeEvent, FocusEvent, FormEvent, RefObject } from 'react'
 import { createRoot } from 'react-dom/client'
 import { siteConfig } from './config/site'
+import { ecosystemConfig } from './config/ecosystem'
 
 type TermsCheckboxProps = {
   checked: boolean
@@ -84,6 +85,7 @@ function TermsCheckbox({
   )
 }
 
+import './styles/tokens.css'
 import './index.css'
 
 const sectionItems = [
@@ -901,7 +903,7 @@ ${name.trim()}`)
         </div>
       </header>
 
-      <main data-ui-level="20">
+      <main data-ui-level="20" data-ecosystem="foundation" data-ecosystem-version={ecosystemConfig.version}>
         <section id="identity" className="hero" data-experience="anchor" aria-labelledby="identity-title">
           <div className="hero-copy">
             <h1 id="identity-title">{siteConfig.identity.headline}</h1>
