@@ -1,33 +1,26 @@
 # JRHs project guidance
 
-Keep JRHs specific, restrained, and content-led. The core identity is: “Saya sibuk bekerja, ini yang baru.”
+JRHs is a personal editorial portfolio: “Saya sibuk bekerja, ini yang baru.”
 
-For UI work:
-- Follow the current white, editorial portfolio implementation.
-- Keep the palette minimal: white, black, graphite, muted gray, and signal blue.
-- Do not invent portfolio facts, projects, testimonials, dates, or claims.
-- Keep interactions functional and keyboard accessible.
-- Respect `prefers-reduced-motion`.
-- Do not introduce decorative sci-fi effects, generic SaaS patterns, or unnecessary animation. Preserve the restrained editorial language.
-- Keep the React + TypeScript + Vite stack unless a concrete compatibility issue requires otherwise.
+## Source of truth
+- `4e5b0be` defines the protected content and page structure.
+- Visual redesign belongs in `src/index.css`.
+- Do not invent, remove, reorder, or rewrite portfolio facts unless explicitly requested.
+- Keep the React + TypeScript + Vite stack.
+- Keep the existing section flow: About, Education, Media, Projects, Quotes, Contact.
+- Music Player remains an optional navigation utility.
+- Contact remains email-only via `contact@jrhsee.my.id`.
 
-Current structure:
-- About
-- Education
-- Media
-- Projects
-- Quotes
-- Contact
-- Contact is email-only via `contact@jrhsee.my.id`.
-- Music Player is an optional utility in the navigation.
-- Footer contains the JRH wordmark plus section navigation.
-- No command palette, project modal, or separate social-contact section.
+## UI
+- Current visual direction: premium 3009 / post-digital editorial.
+- Prefer controlled contrast, refined surfaces, restrained spectral accents, and strong typography.
+- Avoid generic SaaS styling, excessive glow, noisy decoration, and layout changes disguised as CSS polish.
+- Preserve the responsive geometry already defined by the baseline stylesheet.
+- Keep keyboard accessibility and `prefers-reduced-motion`.
 
-Before release:
+## Release audit
 - Run `npm run typecheck`.
 - Run `npm run build`.
-- Check mobile, tablet, and desktop layouts.
-- Check keyboard navigation and reduced-motion behavior.
-- Verify metadata and active asset paths.
-
-Note: `design.md` is not present in the current repository, so there is no legacy design document available to reconcile against.
+- Check desktop, tablet, and Android/mobile.
+- Check keyboard navigation, reduced motion, theme switching, music player, contact form, and quote carousel.
+- Verify metadata and asset paths.
