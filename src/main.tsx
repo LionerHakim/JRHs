@@ -187,26 +187,6 @@ export default function App() {
     }
   }, [])
 
-  /* =========================================================
-     JRH ANTI-COPY — PUBLIC CONTENT PROTECTION
-     ========================================================= */
-
-  useEffect(() => {
-    const handleImageProtection = (event: Event) => {
-      const target = event.target
-      if (target instanceof HTMLImageElement) {
-        event.preventDefault()
-      }
-    }
-
-    document.addEventListener('contextmenu', handleImageProtection)
-    document.addEventListener('dragstart', handleImageProtection)
-
-    return () => {
-      document.removeEventListener('contextmenu', handleImageProtection)
-      document.removeEventListener('dragstart', handleImageProtection)
-    }
-  }, [])
 
   useEffect(() => {
     const sections = sectionIds
