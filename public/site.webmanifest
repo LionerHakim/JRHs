@@ -3,8 +3,8 @@
   "short_name": "JRH",
   "start_url": "/",
   "display": "standalone",
-  "background_color": "#F7FBFF",
-  "theme_color": "#F7FBFF",
+  "background_color": "#06070A",
+  "theme_color": "#06070A",
   "lang": "id",
   "description": "JRH — Saya sibuk bekerja, ini yang baru. Ruang personal untuk karya, project, media, dan jejak yang sedang saya bangun.",
   "icons": [
