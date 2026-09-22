@@ -2,7 +2,6 @@ import { useEffect, useRef, useState } from 'react'
 import type { ChangeEvent, FormEvent } from 'react'
 import { createRoot } from 'react-dom/client'
 import { siteConfig } from './config/site'
-import { ecosystemConfig } from './config/ecosystem'
 import { TermsCheckbox } from './components/contact/TermsCheckbox'
 import { TestimonialsSection } from './components/testimonials/TestimonialsSection'
 import { useTheme } from './hooks/useTheme'
@@ -414,7 +413,7 @@ ${name.trim()}`)
         </div>
       </header>
 
-      <main data-ui-level="20" data-ecosystem="foundation" data-ecosystem-version={ecosystemConfig.version}>
+      <main>
         <section id="identity" className="hero" data-experience="anchor" aria-labelledby="identity-title">
           <div className="hero-copy">
             <h1 id="identity-title">{siteConfig.identity.headline}</h1>
