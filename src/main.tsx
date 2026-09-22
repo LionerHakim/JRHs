@@ -167,7 +167,7 @@ export default function App() {
       const key = event.key.toLowerCase()
       const blockedShortcut =
         (event.ctrlKey || event.metaKey) &&
-        ['c', 'x', 'a'].includes(key)
+        ['c', 'x'].includes(key)
 
       if (blockedShortcut) event.preventDefault()
     }
