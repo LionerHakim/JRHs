@@ -176,29 +176,29 @@ function TestimonialsSection() {
 
     const getCards = () => Array.from(viewport.querySelectorAll<HTMLElement>('.testimonial'))
 
+    const getTargetLeft = (card: HTMLElement) => {
+      const viewportRect = viewport.getBoundingClientRect()
+      const cardRect = card.getBoundingClientRect()
+      const paddingLeft = Number.parseFloat(window.getComputedStyle(viewport).paddingLeft) || 0
+      const maxScroll = Math.max(0, viewport.scrollWidth - viewport.clientWidth)
+      const target = viewport.scrollLeft + cardRect.left - viewportRect.left - paddingLeft
+      return Math.min(Math.max(target, 0), maxScroll)
+    }
+
     const getNearestIndex = () => {
       const cards = getCards()
       if (!cards.length) return 0
+
       let nearestIndex = 0
       let nearestDistance = Number.POSITIVE_INFINITY
-
       cards.forEach((card, index) => {
-        const distance = Math.abs(viewport.scrollLeft - card.offsetLeft)
+        const distance = Math.abs(viewport.scrollLeft - getTargetLeft(card))
         if (distance < nearestDistance) {
           nearestDistance = distance
           nearestIndex = index
         }
       })
-
       return nearestIndex
-    }
-
-    const getTargetLeft = (index: number) => {
-      const cards = getCards()
-      const card = cards[Math.min(cards.length - 1, Math.max(0, index))]
-      if (!card) return 0
-      const maxScroll = Math.max(0, viewport.scrollWidth - viewport.clientWidth)
-      return Math.min(Math.max(card.offsetLeft, 0), maxScroll)
     }
 
     const clearAutoSlide = () => {
@@ -216,9 +216,13 @@ function TestimonialsSection() {
         autoSlideTimerRef.current = null
         if (!activeInViewRef.current || userInteractingRef.current || document.hidden) return
 
+        const cards = getCards()
         const currentIndex = getNearestIndex()
-        const nextIndex = currentIndex >= testimonials.length - 1 ? 0 : currentIndex + 1
-        viewport.scrollTo({ left: getTargetLeft(nextIndex), behavior: 'smooth' })
+        const nextIndex = currentIndex >= cards.length - 1 ? 0 : currentIndex + 1
+        const targetCard = cards[nextIndex]
+        if (targetCard) {
+          viewport.scrollTo({ left: getTargetLeft(targetCard), behavior: 'smooth' })
+        }
         scheduleAutoSlide()
       }, 3500)
     }
@@ -283,15 +287,29 @@ function TestimonialsSection() {
     const cards = Array.from(viewport.querySelectorAll<HTMLElement>('.testimonial'))
     if (!cards.length) return
 
+    const viewportRect = viewport.getBoundingClientRect()
+    const paddingLeft = Number.parseFloat(window.getComputedStyle(viewport).paddingLeft) || 0
+    const maxScroll = Math.max(0, viewport.scrollWidth - viewport.clientWidth)
+
+    const getTargetLeft = (card: HTMLElement) => {
+      const cardRect = card.getBoundingClientRect()
+      const target = viewport.scrollLeft + cardRect.left - viewportRect.left - paddingLeft
+      return Math.min(Math.max(target, 0), maxScroll)
+    }
+
     let currentIndex = 0
     let nearestDistance = Number.POSITIVE_INFINITY
-
     cards.forEach((card, index) => {
-      const distance = Math.abs(viewport.scrollLeft - card.offsetLeft)
+      const distance = Math.abs(viewport.scrollLeft - getTargetLeft(card))
       if (distance < nearestDistance) {
         nearestDistance = distance
         currentIndex = index
       }
+    })
+
+    const nextIndex = (currentIndex + direction + cards.length) % cards.length
+    viewport.scrollTo({ left: getTargetLeft(cards[nextIndex]), behavior: 'smooth' })
+  }
     })
 
     const nextIndex = (currentIndex + direction + cards.length) % cards.length
