@@ -20,9 +20,8 @@ export function TestimonialsSection() {
     const getTargetLeft = (card: HTMLElement) => {
       const viewportRect = viewport.getBoundingClientRect()
       const cardRect = card.getBoundingClientRect()
-      const paddingLeft = Number.parseFloat(window.getComputedStyle(viewport).paddingLeft) || 0
       const maxScroll = Math.max(0, viewport.scrollWidth - viewport.clientWidth)
-      const target = viewport.scrollLeft + cardRect.left - viewportRect.left - paddingLeft
+      const target = viewport.scrollLeft + cardRect.left - viewportRect.left - (viewport.clientWidth - cardRect.width) / 2
       return Math.min(Math.max(target, 0), maxScroll)
     }
 
@@ -129,12 +128,11 @@ export function TestimonialsSection() {
     if (!cards.length) return
 
     const viewportRect = viewport.getBoundingClientRect()
-    const paddingLeft = Number.parseFloat(window.getComputedStyle(viewport).paddingLeft) || 0
     const maxScroll = Math.max(0, viewport.scrollWidth - viewport.clientWidth)
 
     const getTargetLeft = (card: HTMLElement) => {
       const cardRect = card.getBoundingClientRect()
-      const target = viewport.scrollLeft + cardRect.left - viewportRect.left - paddingLeft
+      const target = viewport.scrollLeft + cardRect.left - viewportRect.left - (viewport.clientWidth - cardRect.width) / 2
       return Math.min(Math.max(target, 0), maxScroll)
     }
 
