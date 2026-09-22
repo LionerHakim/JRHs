@@ -174,11 +174,31 @@ function TestimonialsSection() {
     const viewport = viewportRef.current
     if (!viewport || testimonials.length < 2) return
 
-    const getStep = () => {
-      const firstCard = viewport.querySelector<HTMLElement>('.testimonial')
-      if (!firstCard) return viewport.clientWidth
-      const gap = Number.parseFloat(window.getComputedStyle(firstCard.parentElement as Element).gap) || 0
-      return firstCard.getBoundingClientRect().width + gap
+    const getCards = () => Array.from(viewport.querySelectorAll<HTMLElement>('.testimonial'))
+
+    const getNearestIndex = () => {
+      const cards = getCards()
+      if (!cards.length) return 0
+      let nearestIndex = 0
+      let nearestDistance = Number.POSITIVE_INFINITY
+
+      cards.forEach((card, index) => {
+        const distance = Math.abs(viewport.scrollLeft - card.offsetLeft)
+        if (distance < nearestDistance) {
+          nearestDistance = distance
+          nearestIndex = index
+        }
+      })
+
+      return nearestIndex
+    }
+
+    const getTargetLeft = (index: number) => {
+      const cards = getCards()
+      const card = cards[Math.min(cards.length - 1, Math.max(0, index))]
+      if (!card) return 0
+      const maxScroll = Math.max(0, viewport.scrollWidth - viewport.clientWidth)
+      return Math.min(Math.max(card.offsetLeft, 0), maxScroll)
     }
 
     const clearAutoSlide = () => {
@@ -191,16 +211,16 @@ function TestimonialsSection() {
     const scheduleAutoSlide = () => {
       clearAutoSlide()
       if (!activeInViewRef.current || userInteractingRef.current || document.hidden) return
+
       autoSlideTimerRef.current = window.setTimeout(() => {
         autoSlideTimerRef.current = null
         if (!activeInViewRef.current || userInteractingRef.current || document.hidden) return
 
-        const maxScroll = viewport.scrollWidth - viewport.clientWidth
-        if (maxScroll <= 0) return
-        const next = Math.min(viewport.scrollLeft + getStep(), maxScroll)
-        viewport.scrollTo({ left: next >= maxScroll - 4 ? 0 : next, behavior: 'smooth' })
+        const currentIndex = getNearestIndex()
+        const nextIndex = currentIndex >= testimonials.length - 1 ? 0 : currentIndex + 1
+        viewport.scrollTo({ left: getTargetLeft(nextIndex), behavior: 'smooth' })
         scheduleAutoSlide()
-      }, 1500)
+      }, 3500)
     }
 
     const pauseForUser = () => {
@@ -210,13 +230,11 @@ function TestimonialsSection() {
       resumeTimerRef.current = window.setTimeout(() => {
         userInteractingRef.current = false
         scheduleAutoSlide()
-      }, 1500)
+      }, 1800)
     }
 
     const updateActiveIndex = () => {
-      const step = getStep()
-      const nextIndex = step > 0 ? Math.round(viewport.scrollLeft / step) : 0
-      setTestimonialActiveIndex(Math.min(testimonials.length - 1, Math.max(0, nextIndex)))
+      setTestimonialActiveIndex(getNearestIndex())
     }
 
     const handlePointerDown = () => pauseForUser()
@@ -224,6 +242,10 @@ function TestimonialsSection() {
     const handleTouchStart = () => pauseForUser()
     const handleMouseEnter = () => pauseForUser()
     const handleFocusIn = () => pauseForUser()
+    const handleVisibilityChange = () => {
+      if (document.hidden) clearAutoSlide()
+      else scheduleAutoSlide()
+    }
 
     const observer = new IntersectionObserver(([entry]) => {
       activeInViewRef.current = entry.isIntersecting
@@ -238,6 +260,7 @@ function TestimonialsSection() {
     viewport.addEventListener('mouseenter', handleMouseEnter, { passive: true })
     viewport.addEventListener('focusin', handleFocusIn)
     viewport.addEventListener('scroll', updateActiveIndex, { passive: true })
+    document.addEventListener('visibilitychange', handleVisibilityChange)
     updateActiveIndex()
 
     return () => {
@@ -250,23 +273,32 @@ function TestimonialsSection() {
       viewport.removeEventListener('mouseenter', handleMouseEnter)
       viewport.removeEventListener('focusin', handleFocusIn)
       viewport.removeEventListener('scroll', updateActiveIndex)
+      document.removeEventListener('visibilitychange', handleVisibilityChange)
     }
   }, [testimonials.length])
 
   const moveTestimonial = (direction: number) => {
     const viewport = viewportRef.current
     if (!viewport) return
-    const card = viewport.querySelector<HTMLElement>('.testimonial')
-    if (!card) return
-    const gap = Number.parseFloat(window.getComputedStyle(card.parentElement as Element).gap) || 0
-    const step = card.getBoundingClientRect().width + gap
-    const maxScroll = viewport.scrollWidth - viewport.clientWidth
-    const currentIndex = Math.round(viewport.scrollLeft / Math.max(step, 1))
-    const nextIndex = (currentIndex + direction + testimonials.length) % testimonials.length
-    const nextLeft = nextIndex === testimonials.length - 1 && direction > 0
-      ? Math.min(nextIndex * step, maxScroll)
-      : nextIndex * step
-    viewport.scrollTo({ left: Math.min(Math.max(nextLeft, 0), maxScroll), behavior: 'smooth' })
+    const cards = Array.from(viewport.querySelectorAll<HTMLElement>('.testimonial'))
+    if (!cards.length) return
+
+    let currentIndex = 0
+    let nearestDistance = Number.POSITIVE_INFINITY
+
+    cards.forEach((card, index) => {
+      const distance = Math.abs(viewport.scrollLeft - card.offsetLeft)
+      if (distance < nearestDistance) {
+        nearestDistance = distance
+        currentIndex = index
+      }
+    })
+
+    const nextIndex = (currentIndex + direction + cards.length) % cards.length
+    const maxScroll = Math.max(0, viewport.scrollWidth - viewport.clientWidth)
+    const targetLeft = Math.min(Math.max(cards[nextIndex].offsetLeft, 0), maxScroll)
+
+    viewport.scrollTo({ left: targetLeft, behavior: 'smooth' })
   }
 
   return (
