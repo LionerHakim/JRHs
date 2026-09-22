@@ -5,6 +5,7 @@ import { siteConfig } from './config/site'
 import { ecosystemConfig } from './config/ecosystem'
 import { TermsCheckbox } from './components/contact/TermsCheckbox'
 import { TestimonialsSection } from './components/testimonials/TestimonialsSection'
+import { useTheme } from './hooks/useTheme'
 
 import './styles/tokens.css'
 import './index.css'
@@ -16,51 +17,8 @@ export default function App() {
   const [scrollProgress, setScrollProgress] = useState(0)
   const [menuOpen, setMenuOpen] = useState(false)
   const [musicOpen, setMusicOpen] = useState(false)
-  const [darkMode, setDarkMode] = useState(() => {
-    try {
-      return window.localStorage.getItem('jrhs-theme') === 'dark' ||
-        window.sessionStorage.getItem('jrhs-theme') === 'dark'
-    } catch {
-      return false
-    }
-  })
-  const [name, setName] = useState('')
-  const [purpose, setPurpose] = useState('')
-  const [message, setMessage] = useState('')
-  const [privacy, setPrivacy] = useState(false)
-  const [termsOpen, setTermsOpen] = useState(false)
-  const [topicOpen, setTopicOpen] = useState(false)
-  const [contactStatus, setContactStatus] = useState<string | null>(null)
-  const [contactHoneypot, setContactHoneypot] = useState('')
-  const [contactError, setContactError] = useState<string | null>(null)
-  const [touched, setTouched] = useState({ name: false, message: false, privacy: false })
-  const navActionsRef = useRef<HTMLDivElement>(null)
-  const contactPrivacyRef = useRef<HTMLDivElement>(null)
-  const privacyInputRef = useRef<HTMLInputElement>(null)
-  const contactTopicRef = useRef<HTMLDivElement>(null)
-  const contactStartedAtRef = useRef(Date.now())
-  const musicAudioRef = useRef<HTMLAudioElement>(null)
-  const musicIndexRef = useRef(0)
-  const musicRequestRef = useRef(0)
-  const [musicIndex, setMusicIndex] = useState(0)
-  const [musicPlaying, setMusicPlaying] = useState(false)
-  const [musicProgress, setMusicProgress] = useState(0)
-  const [musicDuration, setMusicDuration] = useState(0)
-  const [musicStatus, setMusicStatus] = useState('READY')
+  const { darkMode, setDarkMode } = useTheme()
 
-
-  useEffect(() => {
-    document.documentElement.dataset.theme = darkMode ? 'dark' : 'light'
-    document.documentElement.style.colorScheme = darkMode ? 'dark' : 'light'
-    try {
-      window.localStorage.setItem('jrhs-theme', darkMode ? 'dark' : 'light')
-      window.sessionStorage.setItem('jrhs-theme', darkMode ? 'dark' : 'light')
-    } catch {
-      // Storage can be unavailable in restrictive browser modes.
-    }
-    const meta = document.querySelector<HTMLMetaElement>('meta[name="theme-color"]')
-    if (meta) meta.content = darkMode ? '#050505' : '#F7FBFF'
-  }, [darkMode])
 
   const loadAndPlayMusic = (index: number) => {
     const audio = musicAudioRef.current
