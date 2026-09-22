@@ -20,7 +20,7 @@ export function useTheme() {
       // Storage can be unavailable in restrictive browser modes.
     }
     const meta = document.querySelector<HTMLMetaElement>('meta[name="theme-color"]')
-    if (meta) meta.content = darkMode ? '#050505' : '#F7FBFF'
+    if (meta) meta.content = darkMode ? '#06070A' : '#F3F0F5'
   }, [darkMode])
 
   return { darkMode, setDarkMode }
