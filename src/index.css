@@ -896,3 +896,310 @@ main[data-ui-level="20"] .ghost-pill{
     transition:none!important;
   }
 }
+
+
+/* =========================================================
+   JRHs 3009 — POST-DIGITAL INTERFACE LAYER
+   VISUAL PROPERTIES ONLY. Baseline geometry remains untouched.
+   ========================================================= */
+
+:root{
+  --jrh-void:#050509;
+  --jrh-ice:#f4f7ff;
+  --jrh-ultra:#7c3cff;
+  --jrh-ultra-bright:#c59aff;
+  --jrh-signal:#ff4055;
+  --jrh-cyan:#62eaff;
+  --jrh-glass:rgba(255,255,255,.035);
+  --jrh-hairline:rgba(255,255,255,.075);
+}
+
+/* A deeper material language: obsidian + spectral light. */
+html,body{
+  background:
+    radial-gradient(900px 500px at 50% -12%,rgba(124,60,255,.11),transparent 68%),
+    radial-gradient(600px 400px at 100% 36%,rgba(98,234,255,.035),transparent 70%),
+    var(--jrh-void)!important;
+}
+
+.site-shell{
+  background:
+    radial-gradient(700px 500px at 7% 12%,rgba(255,64,85,.035),transparent 70%),
+    radial-gradient(850px 520px at 92% 8%,rgba(124,60,255,.10),transparent 68%),
+    linear-gradient(180deg,rgba(255,255,255,.012),transparent 32%),
+    var(--jrh-void)!important;
+}
+
+/* Navigation becomes a floating command instrument. */
+.nav{
+  background:linear-gradient(180deg,rgba(19,18,29,.72),rgba(5,5,9,.64))!important;
+  border-color:rgba(255,255,255,.12)!important;
+  box-shadow:
+    0 22px 70px rgba(0,0,0,.42),
+    0 0 0 1px rgba(124,60,255,.035),
+    inset 0 1px 0 rgba(255,255,255,.12),
+    inset 0 -1px 0 rgba(98,234,255,.025)!important;
+  backdrop-filter:blur(30px) saturate(1.45)!important;
+  -webkit-backdrop-filter:blur(30px) saturate(1.45)!important;
+}
+
+.nav::before{
+  background:linear-gradient(90deg,transparent,rgba(98,234,255,.18),rgba(197,154,255,.20),transparent)!important;
+  height:1px!important;
+  opacity:.8!important;
+}
+
+.brand-mark{
+  background:conic-gradient(from 210deg,#fff,#c59aff,#62eaff,#fff)!important;
+  box-shadow:
+    0 0 0 1px rgba(255,255,255,.25),
+    0 8px 26px rgba(0,0,0,.32),
+    0 0 34px rgba(124,60,255,.26)!important;
+}
+
+.nav-action:hover,
+.nav-action:focus-visible{
+  background:linear-gradient(135deg,rgba(124,60,255,.18),rgba(98,234,255,.045))!important;
+  border-color:rgba(197,154,255,.28)!important;
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.07),
+    0 0 28px rgba(124,60,255,.11)!important;
+}
+
+.nav-action.is-open{
+  background:linear-gradient(135deg,rgba(124,60,255,.22),rgba(255,64,85,.055))!important;
+  box-shadow:
+    inset 0 0 0 1px rgba(197,154,255,.23),
+    0 0 34px rgba(124,60,255,.14)!important;
+}
+
+/* Hero: quiet black space with spectral typography. */
+main[data-ui-level="20"] .hero h1{
+  color:var(--jrh-ice)!important;
+  text-shadow:
+    0 0 70px rgba(124,60,255,.09),
+    0 1px 0 rgba(255,255,255,.08)!important;
+}
+
+main[data-ui-level="20"] .hero-description{
+  color:#a8a7b6!important;
+}
+
+main[data-ui-level="20"] .hero-pill{
+  background:
+    linear-gradient(135deg,rgba(124,60,255,.30),rgba(25,20,39,.72))!important;
+  border-color:rgba(197,154,255,.40)!important;
+  box-shadow:
+    0 16px 38px rgba(0,0,0,.32),
+    0 0 34px rgba(124,60,255,.13),
+    inset 0 1px 0 rgba(255,255,255,.13)!important;
+}
+
+main[data-ui-level="20"] .hero-pill:hover,
+main[data-ui-level="20"] .hero-pill:focus-visible{
+  background:
+    linear-gradient(135deg,rgba(157,92,255,.42),rgba(37,27,57,.80))!important;
+  border-color:rgba(197,154,255,.62)!important;
+  box-shadow:
+    0 18px 44px rgba(0,0,0,.36),
+    0 0 48px rgba(124,60,255,.22),
+    inset 0 1px 0 rgba(255,255,255,.17)!important;
+}
+
+main[data-ui-level="20"] .ghost-pill{
+  background:rgba(255,255,255,.018)!important;
+  border-color:rgba(255,255,255,.14)!important;
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.04)!important;
+}
+
+main[data-ui-level="20"] .ghost-pill:hover{
+  background:rgba(98,234,255,.055)!important;
+  border-color:rgba(98,234,255,.22)!important;
+}
+
+/* Every major surface gets a translucent "material" edge. */
+main[data-ui-level="20"] .media-card,
+main[data-ui-level="20"] .project-card,
+main[data-ui-level="20"] .record,
+main[data-ui-level="20"] .contact-card,
+main[data-ui-level="20"] .testimonial{
+  background:
+    linear-gradient(145deg,rgba(255,255,255,.065),rgba(255,255,255,.018) 55%,rgba(124,60,255,.025))!important;
+  border-color:rgba(255,255,255,.085)!important;
+  box-shadow:
+    0 20px 60px rgba(0,0,0,.24),
+    inset 0 1px 0 rgba(255,255,255,.07),
+    inset 0 0 0 1px rgba(124,60,255,.018)!important;
+  backdrop-filter:blur(14px) saturate(1.12)!important;
+  -webkit-backdrop-filter:blur(14px) saturate(1.12)!important;
+}
+
+main[data-ui-level="20"] .media-card:hover,
+main[data-ui-level="20"] .project-card:hover,
+main[data-ui-level="20"] .record:hover,
+main[data-ui-level="20"] .contact-card:hover,
+main[data-ui-level="20"] .testimonial:hover{
+  background:
+    linear-gradient(145deg,rgba(255,255,255,.085),rgba(124,60,255,.045))!important;
+  border-color:rgba(197,154,255,.34)!important;
+  box-shadow:
+    0 28px 76px rgba(0,0,0,.31),
+    0 0 0 1px rgba(124,60,255,.07),
+    0 0 46px rgba(124,60,255,.075),
+    inset 0 1px 0 rgba(255,255,255,.09)!important;
+}
+
+/* Card metadata: micro-instrument language. */
+main[data-ui-level="20"] .media-number,
+main[data-ui-level="20"] .project-number,
+main[data-ui-level="20"] .testimonial-counter{
+  font-family:var(--jrh-mono)!important;
+  letter-spacing:.13em!important;
+  color:#777486!important;
+}
+
+main[data-ui-level="20"] .media-status,
+main[data-ui-level="20"] .project-status{
+  color:#d1c1ff!important;
+  background:rgba(124,60,255,.07)!important;
+  border-color:rgba(197,154,255,.20)!important;
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.045)!important;
+}
+
+/* Accent rails become spectral rather than conventional. */
+main[data-ui-level="20"] .media-card::after,
+main[data-ui-level="20"] .project-card::after{
+  background:linear-gradient(90deg,var(--jrh-signal),var(--jrh-ultra),var(--jrh-cyan))!important;
+  box-shadow:0 0 16px rgba(124,60,255,.26)!important;
+}
+
+/* Quotes: museum-grade reading surface. */
+main[data-ui-level="20"] .testimonial{
+  background:
+    radial-gradient(420px 260px at 100% 0%,rgba(124,60,255,.11),transparent 68%),
+    linear-gradient(145deg,rgba(255,255,255,.07),rgba(255,255,255,.018))!important;
+}
+
+main[data-ui-level="20"] .testimonial blockquote{
+  color:#fbfaff!important;
+  text-shadow:0 0 45px rgba(197,154,255,.075)!important;
+}
+
+main[data-ui-level="20"] .testimonial-topline strong{
+  color:#d0b9ff!important;
+}
+
+main[data-ui-level="20"] .testimonial-controls button{
+  background:linear-gradient(145deg,rgba(255,255,255,.07),rgba(255,255,255,.02))!important;
+  border-color:rgba(255,255,255,.11)!important;
+}
+
+main[data-ui-level="20"] .testimonial-controls button:hover{
+  background:linear-gradient(145deg,rgba(124,60,255,.22),rgba(98,234,255,.06))!important;
+  border-color:rgba(197,154,255,.42)!important;
+  box-shadow:0 0 30px rgba(124,60,255,.13)!important;
+}
+
+/* Contact: futuristic instrument panel, without altering the form. */
+main[data-ui-level="20"] .contact-card{
+  background:
+    radial-gradient(500px 320px at 100% 0%,rgba(124,60,255,.075),transparent 70%),
+    linear-gradient(145deg,rgba(255,255,255,.065),rgba(255,255,255,.018))!important;
+}
+
+main[data-ui-level="20"] input,
+main[data-ui-level="20"] textarea,
+main[data-ui-level="20"] select{
+  background:
+    linear-gradient(180deg,rgba(255,255,255,.035),rgba(255,255,255,.018))!important;
+  border-color:rgba(255,255,255,.095)!important;
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.035),
+    inset 0 0 20px rgba(124,60,255,.018)!important;
+}
+
+main[data-ui-level="20"] input:focus,
+main[data-ui-level="20"] textarea:focus,
+main[data-ui-level="20"] select:focus{
+  background:rgba(124,60,255,.045)!important;
+  border-color:rgba(197,154,255,.62)!important;
+  box-shadow:
+    0 0 0 3px rgba(124,60,255,.10),
+    0 0 36px rgba(124,60,255,.10),
+    inset 0 1px 0 rgba(255,255,255,.055)!important;
+}
+
+main[data-ui-level="20"] .contact-submit{
+  background:
+    linear-gradient(135deg,#8c4cff,#6125d1)!important;
+  border-color:rgba(197,154,255,.48)!important;
+  box-shadow:
+    0 14px 34px rgba(124,60,255,.22),
+    0 0 34px rgba(124,60,255,.11),
+    inset 0 1px 0 rgba(255,255,255,.16)!important;
+}
+
+main[data-ui-level="20"] .contact-submit:hover,
+main[data-ui-level="20"] .contact-submit:focus-visible{
+  background:
+    linear-gradient(135deg,#aa6cff,#7135e7)!important;
+  box-shadow:
+    0 18px 42px rgba(124,60,255,.28),
+    0 0 44px rgba(124,60,255,.18),
+    inset 0 1px 0 rgba(255,255,255,.20)!important;
+}
+
+/* Footer: black mirror, not a conventional footer. */
+.site-footer{
+  background:
+    radial-gradient(600px 260px at 50% 0%,rgba(124,60,255,.07),transparent 70%),
+    linear-gradient(180deg,#07070b,#030306)!important;
+  border-color:rgba(255,255,255,.065)!important;
+}
+
+.site-footer-brand strong{
+  color:#fff!important;
+  text-shadow:0 0 30px rgba(197,154,255,.08)!important;
+}
+
+/* Light theme keeps the same future-material vocabulary. */
+html[data-theme="light"]{
+  --jrh-bg:#f3f1f7;
+  --jrh-panel:#ffffff;
+  --jrh-text:#111018;
+  --jrh-muted:#686371;
+  --jrh-line:rgba(17,16,24,.11);
+}
+
+html[data-theme="light"] body,
+html[data-theme="light"] .site-shell{
+  background:
+    radial-gradient(760px 460px at 90% 0%,rgba(124,60,255,.10),transparent 68%),
+    radial-gradient(650px 420px at 0% 40%,rgba(255,64,85,.035),transparent 70%),
+    var(--jrh-bg)!important;
+}
+
+html[data-theme="light"] .nav{
+  background:rgba(255,255,255,.72)!important;
+  border-color:rgba(17,16,24,.10)!important;
+  box-shadow:0 20px 60px rgba(17,16,24,.10),inset 0 1px 0 rgba(255,255,255,.92)!important;
+}
+
+html[data-theme="light"] main[data-ui-level="20"] .media-card,
+html[data-theme="light"] main[data-ui-level="20"] .project-card,
+html[data-theme="light"] main[data-ui-level="20"] .record,
+html[data-theme="light"] main[data-ui-level="20"] .contact-card,
+html[data-theme="light"] main[data-ui-level="20"] .testimonial{
+  background:linear-gradient(145deg,rgba(255,255,255,.92),rgba(246,242,251,.74))!important;
+  border-color:rgba(17,16,24,.10)!important;
+  box-shadow:0 20px 56px rgba(17,16,24,.10),inset 0 1px 0 rgba(255,255,255,.92)!important;
+}
+
+html[data-theme="light"] main[data-ui-level="20"] .media-card:hover,
+html[data-theme="light"] main[data-ui-level="20"] .project-card:hover,
+html[data-theme="light"] main[data-ui-level="20"] .record:hover,
+html[data-theme="light"] main[data-ui-level="20"] .contact-card:hover,
+html[data-theme="light"] main[data-ui-level="20"] .testimonial:hover{
+  border-color:rgba(124,60,255,.30)!important;
+  box-shadow:0 28px 70px rgba(17,16,24,.13),0 0 0 1px rgba(124,60,255,.06)!important;
+}
