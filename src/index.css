@@ -8489,3 +8489,465 @@ main[data-ui-level="20"] .testimonial {
     padding-inline: 24px;
   }
 }
+
+
+/* =========================================================
+   JRH SYSTEM REBUILD — FINAL GEOMETRY / RESPONSIVE / A11Y
+   This layer supersedes historical cascade patches above.
+   No content rewrite. No decorative section rules.
+   ========================================================= */
+
+/* 01 — Page geometry */
+:root {
+  --jrh-nav-height: 64px;
+  --jrh-nav-gap: 14px;
+  --jrh-section-clearance: 92px;
+  --jrh-page-gutter: 24px;
+}
+
+html {
+  scroll-padding-top: var(--jrh-section-clearance);
+  overflow-x: clip;
+}
+
+body,
+.site-shell {
+  width: 100%;
+  max-width: 100%;
+  overflow-x: clip;
+}
+
+@supports not (overflow: clip) {
+  html,
+  body,
+  .site-shell {
+    overflow-x: hidden;
+  }
+}
+
+main[data-ui-level="20"] {
+  width: 100%;
+  max-width: 100%;
+  overflow: visible;
+}
+
+/* 02 — Sticky navigation: compact, stable, borderless */
+.nav {
+  position: sticky;
+  top: var(--jrh-nav-gap);
+  width: min(760px, calc(100% - 24px));
+  min-height: var(--jrh-nav-height);
+  margin: var(--jrh-nav-gap) auto 0;
+  border: 0 !important;
+  border-bottom: 0 !important;
+  border-radius: 20px;
+  background: rgba(255,255,255,.94);
+  box-shadow: 0 12px 34px rgba(9,10,11,.075), inset 0 1px 0 rgba(255,255,255,.82);
+  isolation: isolate;
+}
+
+.nav::after {
+  display: none !important;
+}
+
+.nav-action,
+.nav-action:hover,
+.nav-action:focus-visible,
+.nav-action.is-open {
+  border: 0 !important;
+  border-bottom: 0 !important;
+}
+
+.nav-action.is-open::after {
+  display: none !important;
+}
+
+.nav-actions {
+  border: 0 !important;
+}
+
+.wordmark {
+  min-width: 44px;
+}
+
+.wordmark-logo {
+  display: block;
+  width: 38px;
+  height: 38px;
+  object-fit: contain;
+}
+
+/* 03 — One consistent section rhythm.
+   Do not compensate for sticky navigation with huge per-section padding. */
+main[data-ui-level="20"] .hero,
+main[data-ui-level="20"] .section {
+  width: min(var(--page-max-width), calc(100% - 48px));
+  max-width: var(--page-max-width);
+  scroll-margin-top: var(--jrh-section-clearance);
+}
+
+main[data-ui-level="20"] .section {
+  padding-block: clamp(72px, 8vw, 112px);
+}
+
+main[data-ui-level="20"] .section:not(:first-child) {
+  padding-top: clamp(72px, 8vw, 112px) !important;
+}
+
+main[data-ui-level="20"] .section-head {
+  max-width: 760px;
+  margin: 0 auto 30px;
+  padding: 0 !important;
+  border: 0 !important;
+  text-align: center;
+}
+
+main[data-ui-level="20"] .section-head::before,
+main[data-ui-level="20"] .section-head::after {
+  content: none !important;
+  display: none !important;
+}
+
+main[data-ui-level="20"] .section h2 {
+  margin: 0;
+  font-size: clamp(46px, 6vw, 70px);
+  line-height: .9;
+  text-wrap: balance;
+}
+
+main[data-ui-level="20"] .media-subtitle,
+main[data-ui-level="20"] .projects-subtitle,
+main[data-ui-level="20"] .testimonials-subtitle {
+  margin: -6px auto 30px;
+}
+
+/* 04 — Quote principles: editorial, not card-within-card */
+main[data-ui-level="20"] .thinking-quotes {
+  width: min(var(--page-max-width), calc(100% - 48px));
+  max-width: var(--page-max-width);
+  margin: clamp(28px, 5vw, 64px) auto;
+  padding: 0;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: clamp(36px, 8vw, 112px);
+  background: transparent !important;
+  border: 0 !important;
+}
+
+main[data-ui-level="20"] .thinking-quote-card,
+main[data-ui-level="20"] .thinking-quote-card:hover {
+  min-height: 0;
+  padding: 20px 0;
+  border: 0 !important;
+  border-radius: 0;
+  background: transparent !important;
+  box-shadow: none !important;
+  transform: none !important;
+}
+
+main[data-ui-level="20"] .thinking-quote-card::before,
+main[data-ui-level="20"] .thinking-quote-card::after {
+  content: none !important;
+  display: none !important;
+}
+
+main[data-ui-level="20"] .thinking-quote-kicker {
+  margin: 0 0 18px;
+  color: var(--fog);
+  font-size: 9px;
+  letter-spacing: .16em;
+}
+
+main[data-ui-level="20"] .thinking-quote-card strong {
+  max-width: 14ch;
+  font-size: clamp(30px, 3.4vw, 52px);
+  line-height: .94;
+  letter-spacing: -.065em;
+  text-wrap: balance;
+}
+
+main[data-ui-level="20"] .thinking-quote-card p {
+  max-width: 44ch;
+  margin: 20px 0 0;
+  font-size: clamp(14px, 1.15vw, 16px);
+  line-height: 1.55;
+}
+
+/* 05 — Testimonials carousel: true edge-safe horizontal system */
+main[data-ui-level="20"] .testimonials-section {
+  width: 100%;
+  max-width: none;
+  overflow: hidden;
+}
+
+main[data-ui-level="20"] .testimonials-section > .section-head,
+main[data-ui-level="20"] .testimonials-section > .testimonials-subtitle,
+main[data-ui-level="20"] .testimonials-section > .testimonials-toolbar {
+  width: min(var(--page-max-width), calc(100% - 48px));
+  max-width: var(--page-max-width);
+  margin-inline: auto;
+}
+
+main[data-ui-level="20"] .testimonials-viewport {
+  width: 100vw;
+  max-width: 100vw;
+  margin-left: 50%;
+  margin-right: 0;
+  transform: translateX(-50%);
+  padding: 8px max(24px, 5vw) 28px;
+  overflow-x: auto;
+  overflow-y: hidden;
+  scroll-snap-type: x mandatory;
+  scroll-snap-stop: normal;
+  scroll-padding-inline: max(24px, 5vw);
+  overscroll-behavior-inline: contain;
+  touch-action: pan-x;
+}
+
+main[data-ui-level="20"] .testimonials-list {
+  width: max-content;
+  min-width: 100%;
+  display: flex;
+  gap: 24px;
+}
+
+main[data-ui-level="20"] .testimonial {
+  flex: 0 0 min(620px, 62vw);
+  width: min(620px, 62vw);
+  max-width: none;
+  min-height: 338px;
+  scroll-snap-align: start;
+  scroll-snap-stop: always;
+  overflow: hidden;
+}
+
+main[data-ui-level="20"] .testimonial blockquote {
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+
+main[data-ui-level="20"] .testimonial-source-row,
+main[data-ui-level="20"] .testimonial-footer {
+  min-width: 0;
+}
+
+main[data-ui-level="20"] .testimonial-source-link {
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+
+/* 06 — Contact / cards: prevent flex/grid overflow */
+main[data-ui-level="20"] .record,
+main[data-ui-level="20"] .media-card,
+main[data-ui-level="20"] .project-card,
+main[data-ui-level="20"] .testimonial,
+main[data-ui-level="20"] .contact-card {
+  min-width: 0;
+}
+
+main[data-ui-level="20"] .contact-card,
+main[data-ui-level="20"] .contact-form,
+main[data-ui-level="20"] .contact-fields,
+main[data-ui-level="20"] .contact-submit {
+  min-width: 0;
+  max-width: 100%;
+}
+
+main[data-ui-level="20"] input,
+main[data-ui-level="20"] textarea,
+main[data-ui-level="20"] select,
+main[data-ui-level="20"] button {
+  max-width: 100%;
+}
+
+/* 07 — No accidental section dividers */
+main[data-ui-level="20"] .section + .section {
+  border-top: 0 !important;
+}
+
+/* 08 — Dark mode keeps identical geometry */
+:root[data-theme="dark"] .nav,
+[data-theme="dark"] .nav {
+  background: rgba(16,17,20,.94) !important;
+  border: 0 !important;
+  box-shadow: 0 14px 38px rgba(0,0,0,.26), inset 0 1px 0 rgba(255,255,255,.05) !important;
+}
+
+:root[data-theme="dark"] main[data-ui-level="20"] .thinking-quotes,
+[data-theme="dark"] main[data-ui-level="20"] .thinking-quotes,
+:root[data-theme="dark"] main[data-ui-level="20"] .thinking-quote-card,
+[data-theme="dark"] main[data-ui-level="20"] .thinking-quote-card {
+  background: transparent !important;
+  border: 0 !important;
+  box-shadow: none !important;
+}
+
+:root[data-theme="dark"] main[data-ui-level="20"] .section-head,
+[data-theme="dark"] main[data-ui-level="20"] .section-head {
+  border: 0 !important;
+}
+
+/* 09 — Mobile: use clearance, not oversized section padding */
+@media (max-width: 760px) {
+  :root {
+    --jrh-nav-height: 56px;
+    --jrh-nav-gap: 8px;
+    --jrh-section-clearance: 82px;
+  }
+
+  html {
+    scroll-padding-top: var(--jrh-section-clearance);
+  }
+
+  .nav {
+    width: calc(100% - 16px);
+    min-height: var(--jrh-nav-height);
+    margin-top: var(--jrh-nav-gap);
+    top: var(--jrh-nav-gap);
+    border-radius: 18px;
+  }
+
+  main[data-ui-level="20"] .hero,
+  main[data-ui-level="20"] .section {
+    width: calc(100% - 32px);
+    scroll-margin-top: var(--jrh-section-clearance);
+  }
+
+  main[data-ui-level="20"] .section,
+  main[data-ui-level="20"] .section:not(:first-child) {
+    padding-block: 68px !important;
+  }
+
+  main[data-ui-level="20"] .section-head {
+    margin-bottom: 24px;
+  }
+
+  main[data-ui-level="20"] .section h2 {
+    font-size: clamp(42px, 13vw, 58px);
+  }
+
+  main[data-ui-level="20"] .testimonials-section > .section-head,
+  main[data-ui-level="20"] .testimonials-section > .testimonials-subtitle,
+  main[data-ui-level="20"] .testimonials-section > .testimonials-toolbar {
+    width: calc(100% - 32px);
+  }
+
+  main[data-ui-level="20"] .testimonials-subtitle {
+    margin-bottom: 24px;
+    font-size: 15px;
+    line-height: 1.45;
+  }
+
+  main[data-ui-level="20"] .testimonials-toolbar {
+    gap: 10px;
+    margin-bottom: 12px;
+  }
+
+  main[data-ui-level="20"] .testimonial-swipe-hint {
+    display: inline;
+  }
+
+  main[data-ui-level="20"] .testimonials-viewport {
+    margin-left: 50%;
+    margin-right: 0;
+    transform: translateX(-50%);
+    padding-inline: 16px;
+    scroll-padding-inline: 16px;
+  }
+
+  main[data-ui-level="20"] .testimonials-list {
+    gap: 16px;
+  }
+
+  main[data-ui-level="20"] .testimonial {
+    flex-basis: calc(100vw - 32px);
+    width: calc(100vw - 32px);
+    min-height: 0;
+    padding: 28px 24px 24px;
+    border-radius: 24px;
+  }
+
+  main[data-ui-level="20"] .testimonial-head {
+    margin-top: 24px;
+  }
+
+  main[data-ui-level="20"] .testimonial blockquote {
+    font-size: clamp(20px, 5.4vw, 26px);
+    line-height: 1.22;
+  }
+
+  main[data-ui-level="20"] .thinking-quotes {
+    width: calc(100% - 32px);
+    grid-template-columns: 1fr;
+    gap: 8px;
+    margin-block: 24px 52px;
+  }
+
+  main[data-ui-level="20"] .thinking-quote-card,
+  main[data-ui-level="20"] .thinking-quote-card:hover {
+    padding-block: 20px;
+  }
+
+  main[data-ui-level="20"] .thinking-quote-card strong {
+    max-width: 14ch;
+    font-size: clamp(30px, 9vw, 46px);
+  }
+
+  main[data-ui-level="20"] .thinking-quote-card p {
+    max-width: none;
+  }
+}
+
+@media (max-width: 430px) {
+  .wordmark-logo {
+    width: 34px;
+    height: 34px;
+  }
+
+  .music-toggle,
+  .menu-toggle {
+    min-width: 0;
+    width: 46px;
+    grid-template-columns: 24px;
+    justify-content: center;
+    padding-inline: 6px;
+  }
+
+  .nav-action-label,
+  .nav-action-meta {
+    display: none;
+  }
+
+  .nav-actions {
+    gap: 2px;
+    padding: 2px;
+  }
+
+  main[data-ui-level="20"] .testimonials-viewport {
+    margin-left: 50%;
+    transform: translateX(-50%);
+    padding-inline: 16px;
+    scroll-padding-inline: 16px;
+  }
+
+  main[data-ui-level="20"] .testimonial {
+    flex-basis: calc(100vw - 32px);
+    width: calc(100vw - 32px);
+  }
+}
+
+/* 10 — Reduced motion: disable movement, preserve layout */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  main[data-ui-level="20"] .testimonial,
+  main[data-ui-level="20"] .thinking-quote-card,
+  main[data-ui-level="20"] .media-card,
+  main[data-ui-level="20"] .project-card,
+  main[data-ui-level="20"] .record {
+    transition: none !important;
+    animation: none !important;
+    transform: none !important;
+  }
+}
