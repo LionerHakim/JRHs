@@ -277,7 +277,17 @@ ${name.trim()}`)
       <a className="skip-link" href="#identity">Lewati ke konten utama</a>
       <header className="nav">
         <a className="wordmark" href="/" aria-label="JRH home" onClick={(event) => { event.preventDefault(); window.location.reload() }}>
-          <img className="wordmark-logo" src="/assets/images/logo.png" alt="JRH" decoding="async" />
+          <svg className="wordmark-logo" viewBox="0 0 112 40" role="img" aria-label="JRH" focusable="false">
+            <defs>
+              <linearGradient id="jrh-logo-gradient" x1="0" y1="0" x2="1" y2="1">
+                <stop offset="0" stopColor="#8B6CFF" />
+                <stop offset="1" stopColor="#5EE7FF" />
+              </linearGradient>
+            </defs>
+            <rect x="1" y="1" width="38" height="38" rx="12" fill="url(#jrh-logo-gradient)" />
+            <path d="M12 11v12.5c0 3.2 2 5 5.5 5 3.5 0 5.5-1.8 5.5-5V11" fill="none" stroke="#fff" strokeWidth="2.7" strokeLinecap="round" />
+            <text x="46" y="27" fill="currentColor" fontFamily="Inter, Arial, sans-serif" fontSize="23" fontWeight="800" letterSpacing="-1.8">JRH</text>
+          </svg>
         </a>
         <div className="nav-actions" ref={navActionsRef}>
           <button
