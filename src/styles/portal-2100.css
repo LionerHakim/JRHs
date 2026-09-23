@@ -916,3 +916,41 @@ html[data-theme] :is(
 .section::after{
   background-image:none !important;
 }
+
+/* =========================
+   11 / PERFORMANCE HARDENING
+   ========================= */
+
+.scroll-progress span{
+  transform:scaleX(0);
+  transform-origin:left center;
+  transition:none !important;
+  will-change:transform;
+}
+
+.site-shell.menu-open::before,
+.site-shell.music-open::before{
+  background:rgba(8,9,11,.72) !important;
+  backdrop-filter:none !important;
+  -webkit-backdrop-filter:none !important;
+}
+
+.site-shell.menu-open>main,
+.site-shell.menu-open>footer,
+.site-shell.music-open>main,
+.site-shell.music-open>footer{
+  filter:none !important;
+  transition:none !important;
+}
+
+.nav-actions>nav,
+.music-panel{
+  will-change:opacity,transform;
+}
+
+@media (prefers-reduced-motion:reduce){
+  .nav-actions>nav,
+  .music-panel{
+    will-change:auto;
+  }
+}
