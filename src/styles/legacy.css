@@ -200,16 +200,7 @@ img { display: block; max-width: 100%; }
 .menu-toggle.is-open .nav-menu-lines{background:#2b313c}
 .menu-toggle.is-open .nav-menu-lines>span:nth-child(1),.menu-toggle.is-open .nav-menu-lines>span:nth-child(2),.menu-toggle.is-open .nav-menu-lines>span:nth-child(3){transform:none;opacity:1}
 
-:root{--panel-medium:min(500px,calc(100vw - 32px));--panel-radius:28px;--panel-active-blur:60px;--panel-backdrop:rgba(235,245,255,.32)}
-.site-shell.menu-open::before,.site-shell.music-open::before{
- content:"";position:fixed;inset:0;z-index:270;background:var(--panel-backdrop);
- backdrop-filter:blur(var(--panel-active-blur)) saturate(.86);-webkit-backdrop-filter:blur(var(--panel-active-blur)) saturate(.86);
- pointer-events:auto
-}
-.site-shell.menu-open>main,.site-shell.menu-open>footer,.site-shell.music-open>main,.site-shell.music-open>footer{
- filter:blur(10px);pointer-events:none;user-select:none;transition:filter 260ms var(--ease)
-}
-.site-shell>main,.site-shell>footer{transition:filter 260ms var(--ease)}
+:root{--panel-medium:min(500px,calc(100vw - 32px));--panel-radius:28px}
 .site-shell.menu-open .nav,.site-shell.music-open .nav{z-index:340}
 
 .nav-actions>nav,.music-panel{
@@ -6713,125 +6704,49 @@ main {
    New interaction layer, stronger wayfinding, richer hierarchy.
    ========================================================= */
 
-main[data-ui-level="20"] {
-  --experience-accent: var(--blue-strong);
-}
+
 
 /* Persistent reading rhythm */
-main[data-ui-level="20"] .experience-section {
-  position: relative;
-  isolation: isolate;
-}
 
-main[data-ui-level="20"] .experience-section::before {
-  content: attr(data-section);
-  position: absolute;
-  top: clamp(52px, 6vw, 92px);
-  right: 0;
-  z-index: -1;
-  color: rgba(10,13,18,.025);
-  font-family: var(--font-editorial);
-  font-size: clamp(72px, 12vw, 150px);
-  font-weight: 600;
-  line-height: .72;
-  letter-spacing: -.06em;
-  text-transform: uppercase;
-  pointer-events: none;
-}
+
+
 
 /* Section heads now act as navigation anchors */
-main[data-ui-level="20"] .section-head {
-  display: grid;
-  grid-template-columns: minmax(0,1fr) auto;
-  align-items: end;
-  gap: 24px;
-}
 
-main[data-ui-level="20"] .section-head::after {
-  grid-column: 2;
-  grid-row: 1;
-  align-self: end;
-  margin: 0;
-  padding-bottom: 4px;
-  font-variant-numeric: tabular-nums;
-}
+
+
 
 /* Hero gets a restrained signature line */
-main[data-ui-level="20"] .hero-copy::before {
-  content: "JRH / PERSONAL WORKSPACE";
-  display: block;
-  margin-bottom: 20px;
-  color: var(--fog);
-  font-family: var(--font-geist);
-  font-size: 9px;
-  font-weight: 700;
-  letter-spacing: .18em;
-}
+
 
 /* Better CTA hierarchy */
-main[data-ui-level="20"] .hero-actions {
-  align-items: stretch;
-}
 
-main[data-ui-level="20"] .hero-pill {
-  min-width: 156px;
-}
 
-main[data-ui-level="20"] .ghost-pill {
-  min-width: 128px;
-}
+
+
+
 
 /* Cards reveal intent rather than just hover */
 main[data-ui-level="20"] .project-card,
-main[data-ui-level="20"] .media-card {
-  cursor: default;
-}
+
 
 main[data-ui-level="20"] .project-card-body p,
-main[data-ui-level="20"] .media-card-body p {
-  text-wrap: pretty;
-}
+
 
 main[data-ui-level="20"] .project-link,
-main[data-ui-level="20"] .media-links a {
-  font-weight: 600;
-}
+
 
 /* Contact gets a clearer conversion moment */
-main[data-ui-level="20"] .contact-card {
-  position: relative;
-}
 
-main[data-ui-level="20"] .contact-card::after {
-  content: "LET'S BUILD";
-  position: absolute;
-  right: clamp(20px, 4vw, 56px);
-  top: clamp(20px, 4vw, 56px);
-  color: rgba(10,13,18,.055);
-  font-family: var(--font-editorial);
-  font-size: clamp(42px, 7vw, 88px);
-  font-weight: 600;
-  line-height: .8;
-  letter-spacing: -.05em;
-  pointer-events: none;
-}
+
+
 
 /* Utility states feel intentional */
-main[data-ui-level="20"] .availability-dot {
-  animation-duration: 3s;
-}
 
-main[data-ui-level="20"] .jrh-reveal {
-  transition:
-    opacity 700ms var(--ease),
-    transform 700ms var(--ease),
-    filter 700ms ease;
-  filter: blur(1px);
-}
 
-main[data-ui-level="20"] .jrh-reveal.is-visible {
-  filter: blur(0);
-}
+
+
+
 
 /* Keep the signature subtle on small screens */
 @media (max-width: 640px) {
@@ -6886,19 +6801,7 @@ main[data-ui-level="20"] .jrh-reveal.is-visible {
    motion hierarchy. No structural/content redesign.
    ========================================================= */
 
-main[data-ui-level="20"]::before {
-  content: "";
-  position: fixed;
-  z-index: 1000;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 2px;
-  background: var(--ink);
-  transform-origin: left center;
-  pointer-events: none;
-  opacity: .92;
-}
+
 
 /* Scroll progress is now a deliberate brand instrument */
 .scroll-progress {
@@ -6952,21 +6855,19 @@ main[data-ui-level="20"]::before {
 /* Sequential card choreography */
 main[data-ui-level="20"] .media-list > .media-card,
 main[data-ui-level="20"] .projects-list > .project-card,
-main[data-ui-level="20"] .records > .record {
-  animation: jrh-level5-enter 700ms var(--ease) both;
-}
+
 
 main[data-ui-level="20"] .media-list > :nth-child(2),
 main[data-ui-level="20"] .projects-list > :nth-child(2),
-main[data-ui-level="20"] .records > :nth-child(2) { animation-delay: 50ms; }
+
 
 main[data-ui-level="20"] .media-list > :nth-child(3),
 main[data-ui-level="20"] .projects-list > :nth-child(3),
-main[data-ui-level="20"] .records > :nth-child(3) { animation-delay: 100ms; }
+
 
 main[data-ui-level="20"] .media-list > :nth-child(4),
 main[data-ui-level="20"] .projects-list > :nth-child(4),
-main[data-ui-level="20"] .records > :nth-child(4) { animation-delay: 150ms; }
+
 
 @keyframes jrh-level5-enter {
   from { opacity: 0; transform: translateY(10px); }
@@ -7046,148 +6947,79 @@ main[data-ui-level="20"] .records > :nth-child(4) { animation-delay: 150ms; }
    Content/layout structure intentionally preserved.
    ========================================================= */
 
-main[data-ui-level="20"] {
-  --compact-gutter: clamp(16px, 3vw, 36px);
-  --compact-section: clamp(56px, 8vw, 104px);
-}
+
 
 main[data-ui-level="20"] .section,
-main[data-ui-level="20"] .hero {
-  width: min(100% - (var(--compact-gutter) * 2), 1240px);
-  margin-inline: auto;
-}
 
-main[data-ui-level="20"] .section {
-  padding-block: var(--compact-section);
-}
 
-main[data-ui-level="20"] .hero {
-  min-height: min(780px, calc(100svh - 72px));
-  padding-block: clamp(42px, 7vw, 88px);
-  gap: clamp(28px, 5vw, 72px);
-}
 
-main[data-ui-level="20"] .hero-copy {
-  min-width: 0;
-}
 
-main[data-ui-level="20"] .hero h1 {
-  max-width: 8.5ch;
-  text-wrap: balance;
-}
 
-main[data-ui-level="20"] .hero-description {
-  max-width: 54ch;
-  margin-top: clamp(18px, 2.5vw, 28px);
-}
 
-main[data-ui-level="20"] .hero-actions {
-  gap: 8px;
-  flex-wrap: wrap;
-}
+
+
+
+
+
+
+
 
 main[data-ui-level="20"] .hero-pill,
-main[data-ui-level="20"] .ghost-pill {
-  min-height: 42px;
-  padding: 10px 16px;
-}
 
-main[data-ui-level="20"] .hero-meta {
-  margin-top: 22px;
-  padding-top: 10px;
-}
 
-main[data-ui-level="20"] .section-head {
-  margin-bottom: clamp(20px, 3vw, 34px);
-  padding-bottom: 12px;
-}
 
-main[data-ui-level="20"] .section-head h2 {
-  font-size: clamp(34px, 5vw, 58px);
-  line-height: .92;
-}
+
+
+
+
 
 main[data-ui-level="20"] .media-list,
 main[data-ui-level="20"] .projects-list,
-main[data-ui-level="20"] .records {
-  gap: clamp(10px, 1.5vw, 18px);
-}
+
 
 main[data-ui-level="20"] .media-card,
 main[data-ui-level="20"] .project-card,
 main[data-ui-level="20"] .record,
 main[data-ui-level="20"] .testimonial,
 main[data-ui-level="20"] .thinking-quote-card,
-main[data-ui-level="20"] .contact-card {
-  border-radius: clamp(14px, 1.6vw, 22px);
-}
+
 
 main[data-ui-level="20"] .media-card,
 main[data-ui-level="20"] .project-card,
-main[data-ui-level="20"] .record {
-  padding: clamp(18px, 2.2vw, 28px);
-}
+
 
 main[data-ui-level="20"] .project-card h3,
 main[data-ui-level="20"] .media-card h3,
-main[data-ui-level="20"] .record h3 {
-  margin-block: 7px;
-}
+
 
 main[data-ui-level="20"] .project-card-body p,
 main[data-ui-level="20"] .media-card-body p,
 main[data-ui-level="20"] .media-subtitle,
 main[data-ui-level="20"] .projects-subtitle,
-main[data-ui-level="20"] .testimonials-subtitle {
-  max-width: 62ch;
-}
 
-main[data-ui-level="20"] .testimonials-section {
-  overflow: clip;
-}
 
-main[data-ui-level="20"] .testimonials-viewport {
-  overflow-x: auto;
-  overscroll-behavior-inline: contain;
-  scroll-snap-type: x mandatory;
-  scrollbar-width: none;
-}
 
-main[data-ui-level="20"] .testimonials-viewport::-webkit-scrollbar {
-  display: none;
-}
 
-main[data-ui-level="20"] .testimonial {
-  scroll-snap-align: start;
-}
 
-main[data-ui-level="20"] .contact-card {
-  gap: clamp(24px, 4vw, 52px);
-}
+
+
+
+
+
+
 
 main[data-ui-level="20"] .contact-field input,
 main[data-ui-level="20"] .contact-field textarea,
-main[data-ui-level="20"] .contact-topic-trigger {
-  min-height: 46px;
-}
 
-main[data-ui-level="20"] .contact-field textarea {
-  min-height: 132px;
-}
 
-main[data-ui-level="20"] .contact-submit {
-  gap: 12px;
-}
+
+
+
 
 main[data-ui-level="20"] .site-footer-main,
-main[data-ui-level="20"] .site-footer-bottom {
-  width: min(100% - (var(--compact-gutter) * 2), 1240px);
-  margin-inline: auto;
-}
 
-main[data-ui-level="20"] ~ .site-footer {
-  padding-inline: 0;
-}
+
+
 
 /* Tablet: reduce empty space before reducing type. */
 @media (max-width: 900px) {
@@ -7405,11 +7237,7 @@ main[data-ui-level="20"] ~ .site-footer {
    overlays, form controls, and Safari rendering resilience.
    ========================================================= */
 
-main[data-ui-level="20"] {
-  --ios-gutter: clamp(16px, 3vw, 36px);
-  min-width: 0;
-  overflow-x: clip;
-}
+
 
 @supports not (overflow: clip) {
   main[data-ui-level="20"] {
@@ -7419,9 +7247,7 @@ main[data-ui-level="20"] {
 
 /* Safari's dynamic toolbar: svh keeps initial geometry stable;
    dvh is used only where supported for live viewport changes. */
-main[data-ui-level="20"] .hero {
-  min-height: min(780px, calc(100svh - 72px));
-}
+
 
 @supports (height: 100dvh) {
   main[data-ui-level="20"] .hero {
@@ -7446,62 +7272,37 @@ main[data-ui-level="20"] .hero {
 main[data-ui-level="20"] input,
 main[data-ui-level="20"] textarea,
 main[data-ui-level="20"] select,
-main[data-ui-level="20"] button {
-  font: inherit;
-}
+
 
 main[data-ui-level="20"] input,
 main[data-ui-level="20"] textarea,
-main[data-ui-level="20"] select {
-  font-size: 16px;
-  -webkit-text-size-adjust: 100%;
-  text-size-adjust: 100%;
-}
 
-main[data-ui-level="20"] textarea {
-  resize: vertical;
-  -webkit-overflow-scrolling: touch;
-}
+
+
 
 /* Prevent iOS from turning email/phone-looking text into unexpected links. */
-main[data-ui-level="20"] {
-  -webkit-text-size-adjust: 100%;
-}
+
 
 main[data-ui-level="20"] a,
 main[data-ui-level="20"] button,
 main[data-ui-level="20"] input,
 main[data-ui-level="20"] textarea,
-main[data-ui-level="20"] select {
-  -webkit-tap-highlight-color: transparent;
-}
+
 
 /* Native-feeling controls without overriding accessibility. */
 main[data-ui-level="20"] button,
 main[data-ui-level="20"] a,
-main[data-ui-level="20"] [role="button"] {
-  touch-action: manipulation;
-}
 
-main[data-ui-level="20"] .testimonials-viewport {
-  -webkit-overflow-scrolling: touch;
-  overscroll-behavior-x: contain;
-  scroll-snap-type: x mandatory;
-}
+
+
 
 main[data-ui-level="20"] .music-playlist-list,
-main[data-ui-level="20"] .contact-topic-menu {
-  -webkit-overflow-scrolling: touch;
-}
+
 
 /* Fixed/floating UI stays above the home indicator. */
-main[data-ui-level="20"] ~ .floating-utilities {
-  bottom: max(18px, calc(18px + env(safe-area-inset-bottom)));
-}
 
-main[data-ui-level="20"] ~ .site-footer {
-  padding-bottom: max(18px, env(safe-area-inset-bottom));
-}
+
+
 
 /* iOS Safari compositing: avoid unnecessary blur/transform layers on touch. */
 @media (pointer: coarse) {
@@ -7621,9 +7422,7 @@ body {
   min-height: 100%;
   isolation: isolate;
 }
-main[data-ui-level="20"] {
-  contain: layout paint;
-}
+
 @supports (content-visibility: auto) {
   main[data-ui-level="20"] .experience-section,
   main[data-ui-level="20"] .testimonials-section {
@@ -7696,35 +7495,19 @@ main[data-ui-level="20"] {
 /* 51–60: horizontal-scroll containment */
 main[data-ui-level="20"] .testimonials-viewport,
 main[data-ui-level="20"] .music-playlist-list,
-main[data-ui-level="20"] .contact-topic-menu {
-  overscroll-behavior: contain;
-  scrollbar-gutter: stable;
-}
-main[data-ui-level="20"] .testimonials-viewport {
-  overscroll-behavior-x: contain;
-  overscroll-behavior-y: none;
-}
+
+
 
 /* 61–70: media/render resilience */
-main[data-ui-level="20"] .hero-portrait img {
-  display: block;
-  width: 100%;
-  height: auto;
-  object-fit: cover;
-}
+
 main[data-ui-level="20"] .media-card,
 main[data-ui-level="20"] .project-card,
 main[data-ui-level="20"] .record,
 main[data-ui-level="20"] .testimonial,
-main[data-ui-level="20"] .contact-card {
-  min-width: 0;
-  overflow-wrap: anywhere;
-}
+
 main[data-ui-level="20"] .project-card p,
 main[data-ui-level="20"] .media-card p,
-main[data-ui-level="20"] .testimonial blockquote {
-  overflow-wrap: anywhere;
-}
+
 
 /* 71–80: motion safety */
 @media (prefers-reduced-motion: reduce) {
@@ -7746,19 +7529,10 @@ main[data-ui-level="20"] .testimonial blockquote {
 main[data-ui-level="20"] input,
 main[data-ui-level="20"] textarea,
 main[data-ui-level="20"] select,
-main[data-ui-level="20"] button {
-  max-width: 100%;
-}
-main[data-ui-level="20"] textarea {
-  overflow: auto;
-  overscroll-behavior: contain;
-}
-main[data-ui-level="20"] .contact-topic-menu {
-  max-width: 100%;
-}
-main[data-ui-level="20"] .terms-checkbox-popover {
-  max-width: min(92vw, 420px);
-}
+
+
+
+
 
 /* 91–100: narrow-device and high-DPI resilience */
 @media (max-width: 360px) {
@@ -7832,9 +7606,7 @@ main[data-ui-level="20"] .terms-checkbox-popover {
 main[data-ui-level="20"] input,
 main[data-ui-level="20"] textarea,
 main[data-ui-level="20"] select,
-main[data-ui-level="20"] button {
-  min-width: 0;
-}
+
 
 /* Dynamic viewport fallback: do not let a transient Safari
    toolbar create a zero/negative hero on very short screens. */
@@ -7898,41 +7670,35 @@ body{color:var(--ink);letter-spacing:-.012em}
 .nav-menu-lines{border-radius:4px;background:var(--mist)}
 
 /* Hero: same content, stronger editorial scale and optical tension. */
-main[data-ui-level="20"] .hero{min-height:min(860px,calc(100svh - 78px));padding-top:clamp(72px,10vw,150px);padding-bottom:clamp(84px,11vw,150px)}
-main[data-ui-level="20"] .hero h1{max-width:9.5ch;font-size:clamp(58px,8.7vw,128px);line-height:.86;letter-spacing:-.075em;font-weight:600;text-wrap:balance}
-main[data-ui-level="20"] .hero-portrait{border-radius:6px;overflow:hidden;box-shadow:0 24px 80px rgba(9,10,11,.12)}
-main[data-ui-level="20"] .hero-portrait img{filter:saturate(.88) contrast(1.03);transition:transform 900ms var(--ease),filter 700ms var(--ease)}
+
+
+
+
 @media(hover:hover){main[data-ui-level="20"] .hero-portrait:hover img{transform:scale(1.018);filter:saturate(1) contrast(1.04)}}
 
 /* Section typography: hierarchy without additional UI. */
-main[data-ui-level="20"] .section-heading,main[data-ui-level="20"] .section-title{letter-spacing:-.045em}
-main[data-ui-level="20"] .section-heading h2,main[data-ui-level="20"] .section-title{font-size:clamp(34px,4.8vw,68px);line-height:.94;letter-spacing:-.065em}
+
+
 
 /* Existing cards become quiet surfaces. */
 main[data-ui-level="20"] .media-card,main[data-ui-level="20"] .project-card,main[data-ui-level="20"] .record,
-main[data-ui-level="20"] .testimonial,main[data-ui-level="20"] .contact-card{
- border-radius:6px;border-color:rgba(9,10,11,.1);box-shadow:0 1px 0 rgba(255,255,255,.8) inset;
- transition:transform 420ms var(--ease),border-color 300ms var(--ease),background-color 300ms var(--ease),box-shadow 420ms var(--ease)}
+
 @media(hover:hover){
  main[data-ui-level="20"] .media-card:hover,main[data-ui-level="20"] .project-card:hover,main[data-ui-level="20"] .record:hover,
  main[data-ui-level="20"] .testimonial:hover,main[data-ui-level="20"] .contact-card:hover{
   transform:translateY(-3px);border-color:rgba(9,10,11,.18);box-shadow:0 18px 50px rgba(9,10,11,.07)}
 }
-main[data-ui-level="20"] .project-card{position:relative;overflow:hidden}
-main[data-ui-level="20"] .project-card::after,main[data-ui-level="20"] .media-card::after{
- content:"";position:absolute;left:0;bottom:0;width:0;height:2px;background:var(--blue-strong);transition:width 420ms var(--ease)}
+
+
 @media(hover:hover){main[data-ui-level="20"] .project-card:hover::after,main[data-ui-level="20"] .media-card:hover::after{width:100%}}
-main[data-ui-level="20"] .project-card img,main[data-ui-level="20"] .media-card img{transition:transform 650ms var(--ease),filter 500ms var(--ease)}
+
 @media(hover:hover){main[data-ui-level="20"] .project-card:hover img,main[data-ui-level="20"] .media-card:hover img{transform:scale(1.025);filter:saturate(.92) contrast(1.025)}}
 
 /* Controls and forms: precision, not decoration. */
-main[data-ui-level="20"] .hero-actions a,main[data-ui-level="20"] .contact-submit>button{border-radius:4px;transition:transform 240ms var(--ease),background-color 240ms var(--ease),color 240ms var(--ease),border-color 240ms var(--ease)}
+
 @media(hover:hover){main[data-ui-level="20"] .hero-actions a:hover,main[data-ui-level="20"] .contact-submit>button:hover{transform:translateY(-2px)}}
-main[data-ui-level="20"] input,main[data-ui-level="20"] textarea,main[data-ui-level="20"] select{
- border-radius:4px;border-color:rgba(9,10,11,.16);background:rgba(255,255,255,.35);
- transition:border-color 220ms var(--ease),box-shadow 220ms var(--ease),background-color 220ms var(--ease)}
-main[data-ui-level="20"] input:focus,main[data-ui-level="20"] textarea:focus,main[data-ui-level="20"] select:focus{
- border-color:var(--blue-strong);background:var(--paper);box-shadow:0 0 0 3px rgba(102,87,255,.14)}
+
+
 .scroll-progress span{height:2px;border-radius:0;background:linear-gradient(90deg,var(--blue-strong),var(--blue));box-shadow:none}
 
 /* Dark mode: same system, deeper material. */
@@ -7968,84 +7734,23 @@ main[data-ui-level="20"] input:focus,main[data-ui-level="20"] textarea:focus,mai
 
 /* Thinking quotes: turn the existing two principles into a
    calmer editorial statement instead of generic cards. */
-main[data-ui-level="20"] .thinking-quotes {
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0,1fr));
-  gap: clamp(18px, 4vw, 64px);
-  margin-block: clamp(64px, 9vw, 128px);
-}
 
-main[data-ui-level="20"] .thinking-quote-card {
-  position: relative;
-  min-width: 0;
-  padding: clamp(28px, 4vw, 52px) 0;
-  border: 0;
-  border-top: 1px solid rgba(9,10,11,.14);
-  border-radius: 0;
-  background: transparent;
-  box-shadow: none;
-  overflow: visible;
-  transition: border-color 260ms var(--ease), transform 420ms var(--ease);
-}
 
-main[data-ui-level="20"] .thinking-quote-card::before {
-  content: "";
-  position: absolute;
-  inset: 0 auto auto 0;
-  width: 34px;
-  height: 2px;
-  border: 0;
-  background: var(--blue-strong);
-  opacity: 1;
-  transform-origin: left;
-  transition: width 420ms var(--ease);
-}
 
-main[data-ui-level="20"] .thinking-quote-card::after {
-  display: none;
-}
 
-main[data-ui-level="20"] .thinking-quote-card:hover {
-  transform: translateY(-3px);
-  border-color: rgba(9,10,11,.24);
-  box-shadow: none;
-}
 
-main[data-ui-level="20"] .thinking-quote-card:hover::before {
-  width: 72px;
-}
 
-main[data-ui-level="20"] .thinking-quote-kicker {
-  display: block;
-  margin-bottom: clamp(18px, 2vw, 28px);
-  color: var(--graphite);
-  font-size: 9px;
-  font-weight: 700;
-  letter-spacing: .14em;
-  line-height: 1.2;
-  text-transform: uppercase;
-}
 
-main[data-ui-level="20"] .thinking-quote-card strong {
-  display: block;
-  max-width: 15ch;
-  color: var(--ink);
-  font-family: var(--font-aeonik);
-  font-size: clamp(28px, 3.2vw, 48px);
-  font-weight: 600;
-  line-height: .94;
-  letter-spacing: -.065em;
-  text-wrap: balance;
-}
 
-main[data-ui-level="20"] .thinking-quote-card p {
-  max-width: 42ch;
-  margin: clamp(18px, 2.4vw, 28px) 0 0;
-  color: var(--graphite);
-  font-size: clamp(14px, 1.2vw, 17px);
-  line-height: 1.48;
-  letter-spacing: -.012em;
-}
+
+
+
+
+
+
+
+
+
 
 @media (max-width: 760px) {
   main[data-ui-level="20"] .thinking-quotes {
@@ -8094,15 +7799,9 @@ main[data-ui-level="20"] .thinking-quote-card p {
 
 /* Keep the quote system aligned with the same page rhythm on
    desktop and mobile, with one clean separator per item. */
-main[data-ui-level="20"] .thinking-quotes {
-  align-items: start;
-}
-main[data-ui-level="20"] .thinking-quote-card {
-  border-top-color: rgba(9,10,11,.12);
-}
-main[data-ui-level="20"] .thinking-quote-card + .thinking-quote-card {
-  border-top-color: rgba(9,10,11,.12);
-}
+
+
+
 
 @media (max-width: 760px) {
   main[data-ui-level="20"] .thinking-quotes {
@@ -8141,10 +7840,7 @@ body,
   body,
   .site-shell { overflow-x: hidden; }
 }
-main[data-ui-level="20"] {
-  width: 100%;
-  max-width: 100%;
-}
+
 
 /* 02 — Navigation: one clean surface, no accidental rules */
 .nav {
@@ -8165,24 +7861,15 @@ main[data-ui-level="20"] {
 
 /* 03 — Consistent content measure */
 main[data-ui-level="20"] .section,
-main[data-ui-level="20"] .hero {
-  max-width: 1240px;
-}
-main[data-ui-level="20"] .section-head {
-  max-width: 760px;
-  margin-inline: auto;
-}
+
+
 
 /* 04 — Quiet luxury surfaces */
 main[data-ui-level="20"] .media-card,
 main[data-ui-level="20"] .project-card,
 main[data-ui-level="20"] .record,
 main[data-ui-level="20"] .testimonial,
-main[data-ui-level="20"] .contact-card {
-  background: color-mix(in srgb, var(--paper) 92%, var(--sky));
-  border-color: rgba(9,10,11,.09);
-  box-shadow: 0 1px 0 rgba(255,255,255,.72) inset;
-}
+
 @supports not (background: color-mix(in srgb, white 90%, black)) {
   main[data-ui-level="20"] .media-card,
   main[data-ui-level="20"] .project-card,
@@ -8194,18 +7881,9 @@ main[data-ui-level="20"] .contact-card {
 }
 
 /* 05 — Quotes: align exactly with the site's editorial grid */
-main[data-ui-level="20"] .thinking-quotes {
-  width: 100%;
-  max-width: 1240px;
-  margin-inline: auto;
-}
-main[data-ui-level="20"] .thinking-quote-card {
-  border-top: 1px solid rgba(9,10,11,.11);
-}
-main[data-ui-level="20"] .thinking-quote-card::before {
-  width: 28px;
-  height: 1px;
-}
+
+
+
 @media (hover:hover) {
   main[data-ui-level="20"] .thinking-quote-card:hover::before { width: 56px; }
 }
@@ -8213,35 +7891,21 @@ main[data-ui-level="20"] .thinking-quote-card::before {
 /* 06 — Media and project imagery: shared optical treatment */
 main[data-ui-level="20"] .media-card img,
 main[data-ui-level="20"] .project-card img,
-main[data-ui-level="20"] .hero-portrait img {
-  backface-visibility: hidden;
-  -webkit-backface-visibility: hidden;
-}
+
 
 /* 07 — Controls share one visual language */
 main[data-ui-level="20"] .hero-pill,
 main[data-ui-level="20"] .ghost-pill,
-main[data-ui-level="20"] .contact-submit > button {
-  min-height: 46px;
-  border-radius: 4px;
-}
-main[data-ui-level="20"] .ghost-pill {
-  border-color: rgba(9,10,11,.12);
-}
+
+
 
 /* 08 — Forms stay aligned at every width */
 main[data-ui-level="20"] .contact-card,
 main[data-ui-level="20"] .contact-form,
-main[data-ui-level="20"] .contact-topic-menu {
-  min-width: 0;
-  max-width: 100%;
-}
+
 main[data-ui-level="20"] input,
 main[data-ui-level="20"] textarea,
-main[data-ui-level="20"] select {
-  width: 100%;
-  max-width: 100%;
-}
+
 
 /* 09 — Mobile: remove visual compression, keep hierarchy */
 @media (max-width: 760px) {
@@ -8285,9 +7949,7 @@ main[data-ui-level="20"] select {
   box-shadow: 0 14px 38px rgba(0,0,0,.24), inset 0 1px 0 rgba(255,255,255,.05) !important;
 }
 :root[data-theme="dark"] main[data-ui-level="20"] .thinking-quote-card,
-[data-theme="dark"] main[data-ui-level="20"] .thinking-quote-card {
-  border-top-color: rgba(242,240,234,.14);
-}
+
 :root[data-theme="dark"] main[data-ui-level="20"] .media-card,
 :root[data-theme="dark"] main[data-ui-level="20"] .project-card,
 :root[data-theme="dark"] main[data-ui-level="20"] .record,
@@ -8297,11 +7959,7 @@ main[data-ui-level="20"] select {
 [data-theme="dark"] main[data-ui-level="20"] .project-card,
 [data-theme="dark"] main[data-ui-level="20"] .record,
 [data-theme="dark"] main[data-ui-level="20"] .testimonial,
-[data-theme="dark"] main[data-ui-level="20"] .contact-card {
-  background: #15171a;
-  border-color: rgba(242,240,234,.11);
-  box-shadow: inset 0 1px 0 rgba(255,255,255,.04);
-}
+
 
 /* 12 — Accessibility and motion: never trade usability for polish */
 @media (prefers-reduced-motion: reduce) {
@@ -8329,62 +7987,24 @@ main[data-ui-level="20"] select {
    ========================================================= */
 
 /* Section heads: typography only. No horizontal rule, no bar. */
-main[data-ui-level="20"] .section-head {
-  border-bottom: 0 !important;
-  padding-bottom: 0 !important;
-}
+
 main[data-ui-level="20"] .section-head::before,
-main[data-ui-level="20"] .section-head::after {
-  display: none !important;
-}
+
 
 /* Remove the faint divider between major sections as well;
    spacing becomes the separator. */
-main[data-ui-level="20"] .section + .section {
-  border-top: 0 !important;
-}
+
 
 /* Thinking quotes: no card border, no decorative line.
    Keep hierarchy through type, spacing and the small kicker. */
-main[data-ui-level="20"] .thinking-quotes {
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: clamp(32px, 7vw, 112px);
-  margin-block: clamp(72px, 10vw, 144px);
-}
+
 main[data-ui-level="20"] .thinking-quote-card,
-main[data-ui-level="20"] .thinking-quote-card:hover {
-  padding: clamp(18px, 2vw, 28px) 0;
-  border: 0 !important;
-  border-top: 0 !important;
-  border-bottom: 0 !important;
-  border-radius: 0;
-  background: transparent !important;
-  box-shadow: none !important;
-  transform: none;
-}
+
 main[data-ui-level="20"] .thinking-quote-card::before,
-main[data-ui-level="20"] .thinking-quote-card::after {
-  display: none !important;
-}
-main[data-ui-level="20"] .thinking-quote-kicker {
-  margin-bottom: clamp(16px, 2vw, 24px);
-  color: var(--fog);
-  font-size: 8px;
-  letter-spacing: .18em;
-}
-main[data-ui-level="20"] .thinking-quote-card strong {
-  max-width: 13ch;
-  font-size: clamp(30px, 3.4vw, 52px);
-  line-height: .92;
-  letter-spacing: -.07em;
-}
-main[data-ui-level="20"] .thinking-quote-card p {
-  max-width: 40ch;
-  margin-top: clamp(20px, 2.4vw, 30px);
-  color: var(--graphite);
-  font-size: clamp(14px, 1.15vw, 16px);
-  line-height: 1.55;
-}
+
+
+
+
 
 @media (max-width: 760px) {
   main[data-ui-level="20"] .thinking-quotes {
@@ -8416,18 +8036,9 @@ main[data-ui-level="20"] .thinking-quote-card p {
    ========================================================= */
 main[data-ui-level="20"] .thinking-quotes,
 main[data-ui-level="20"] .thinking-quote-card,
-main[data-ui-level="20"] .thinking-quote-card:hover {
-  background: transparent !important;
-  background-image: none !important;
-  box-shadow: none !important;
-  border: 0 !important;
-  transform: none !important;
-}
+
 main[data-ui-level="20"] .thinking-quote-card::before,
-main[data-ui-level="20"] .thinking-quote-card::after {
-  content: none !important;
-  display: none !important;
-}
+
 
 
 /* =========================================================
@@ -8439,13 +8050,8 @@ main[data-ui-level="20"] .thinking-quote-card::after {
 /* Carousel: JS advances by card width + gap, so snap to the
    card's start rather than its center. This keeps every card
    fully readable on narrow screens. */
-main[data-ui-level="20"] .testimonials-viewport {
-  scroll-snap-type: x mandatory;
-  scroll-padding-inline: 0;
-}
-main[data-ui-level="20"] .testimonial {
-  scroll-snap-align: start;
-}
+
+
 
 /* Keep a deliberate breathing zone below the sticky navbar on
    mobile. Anchor navigation also respects this offset. */
@@ -8522,11 +8128,7 @@ body,
   }
 }
 
-main[data-ui-level="20"] {
-  width: 100%;
-  max-width: 100%;
-  overflow: visible;
-}
+
 
 /* 02 — Sticky navigation: compact, stable, borderless */
 .nav {
@@ -8577,189 +8179,77 @@ main[data-ui-level="20"] {
 /* 03 — One consistent section rhythm.
    Do not compensate for sticky navigation with huge per-section padding. */
 main[data-ui-level="20"] .hero,
-main[data-ui-level="20"] .section {
-  width: min(var(--page-max-width), calc(100% - 48px));
-  max-width: var(--page-max-width);
-  scroll-margin-top: var(--jrh-section-clearance);
-}
 
-main[data-ui-level="20"] .section {
-  padding-block: clamp(72px, 8vw, 112px);
-}
 
-main[data-ui-level="20"] .section:not(:first-child) {
-  padding-top: clamp(72px, 8vw, 112px) !important;
-}
 
-main[data-ui-level="20"] .section-head {
-  max-width: 760px;
-  margin: 0 auto 30px;
-  padding: 0 !important;
-  border: 0 !important;
-  text-align: center;
-}
+
+
+
+
 
 main[data-ui-level="20"] .section-head::before,
-main[data-ui-level="20"] .section-head::after {
-  content: none !important;
-  display: none !important;
-}
 
-main[data-ui-level="20"] .section h2 {
-  margin: 0;
-  font-size: clamp(46px, 6vw, 70px);
-  line-height: .9;
-  text-wrap: balance;
-}
+
+
 
 main[data-ui-level="20"] .media-subtitle,
 main[data-ui-level="20"] .projects-subtitle,
-main[data-ui-level="20"] .testimonials-subtitle {
-  margin: -6px auto 30px;
-}
+
 
 /* 04 — Quote principles: editorial, not card-within-card */
-main[data-ui-level="20"] .thinking-quotes {
-  width: min(var(--page-max-width), calc(100% - 48px));
-  max-width: var(--page-max-width);
-  margin: clamp(28px, 5vw, 64px) auto;
-  padding: 0;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: clamp(36px, 8vw, 112px);
-  background: transparent !important;
-  border: 0 !important;
-}
+
 
 main[data-ui-level="20"] .thinking-quote-card,
-main[data-ui-level="20"] .thinking-quote-card:hover {
-  min-height: 0;
-  padding: 20px 0;
-  border: 0 !important;
-  border-radius: 0;
-  background: transparent !important;
-  box-shadow: none !important;
-  transform: none !important;
-}
+
 
 main[data-ui-level="20"] .thinking-quote-card::before,
-main[data-ui-level="20"] .thinking-quote-card::after {
-  content: none !important;
-  display: none !important;
-}
 
-main[data-ui-level="20"] .thinking-quote-kicker {
-  margin: 0 0 18px;
-  color: var(--fog);
-  font-size: 9px;
-  letter-spacing: .16em;
-}
 
-main[data-ui-level="20"] .thinking-quote-card strong {
-  max-width: 14ch;
-  font-size: clamp(30px, 3.4vw, 52px);
-  line-height: .94;
-  letter-spacing: -.065em;
-  text-wrap: balance;
-}
 
-main[data-ui-level="20"] .thinking-quote-card p {
-  max-width: 44ch;
-  margin: 20px 0 0;
-  font-size: clamp(14px, 1.15vw, 16px);
-  line-height: 1.55;
-}
+
+
+
+
 
 /* 05 — Testimonials carousel: true edge-safe horizontal system */
-main[data-ui-level="20"] .testimonials-section {
-  width: 100%;
-  max-width: none;
-  overflow: hidden;
-}
+
 
 main[data-ui-level="20"] .testimonials-section > .section-head,
 main[data-ui-level="20"] .testimonials-section > .testimonials-subtitle,
-main[data-ui-level="20"] .testimonials-section > .testimonials-toolbar {
-  width: min(var(--page-max-width), calc(100% - 48px));
-  max-width: var(--page-max-width);
-  margin-inline: auto;
-}
 
-main[data-ui-level="20"] .testimonials-viewport {
-  width: 100vw;
-  max-width: 100vw;
-  margin-left: 50%;
-  margin-right: 0;
-  transform: translateX(-50%);
-  padding: 8px max(24px, 5vw) 28px;
-  overflow-x: auto;
-  overflow-y: hidden;
-  scroll-snap-type: x mandatory;
-  scroll-snap-stop: normal;
-  scroll-padding-inline: max(24px, 5vw);
-  overscroll-behavior-inline: contain;
-  touch-action: auto;
-}
 
-main[data-ui-level="20"] .testimonials-list {
-  width: max-content;
-  min-width: 100%;
-  display: flex;
-  gap: 24px;
-}
 
-main[data-ui-level="20"] .testimonial {
-  flex: 0 0 min(620px, 62vw);
-  width: min(620px, 62vw);
-  max-width: none;
-  min-height: 338px;
-  scroll-snap-align: start;
-  scroll-snap-stop: always;
-  overflow: hidden;
-}
 
-main[data-ui-level="20"] .testimonial blockquote {
-  min-width: 0;
-  overflow-wrap: anywhere;
-}
+
+
+
+
+
 
 main[data-ui-level="20"] .testimonial-source-row,
-main[data-ui-level="20"] .testimonial-footer {
-  min-width: 0;
-}
 
-main[data-ui-level="20"] .testimonial-source-link {
-  min-width: 0;
-  overflow-wrap: anywhere;
-}
+
+
 
 /* 06 — Contact / cards: prevent flex/grid overflow */
 main[data-ui-level="20"] .record,
 main[data-ui-level="20"] .media-card,
 main[data-ui-level="20"] .project-card,
 main[data-ui-level="20"] .testimonial,
-main[data-ui-level="20"] .contact-card {
-  min-width: 0;
-}
+
 
 main[data-ui-level="20"] .contact-card,
 main[data-ui-level="20"] .contact-form,
 main[data-ui-level="20"] .contact-fields,
-main[data-ui-level="20"] .contact-submit {
-  min-width: 0;
-  max-width: 100%;
-}
+
 
 main[data-ui-level="20"] input,
 main[data-ui-level="20"] textarea,
 main[data-ui-level="20"] select,
-main[data-ui-level="20"] button {
-  max-width: 100%;
-}
+
 
 /* 07 — No accidental section dividers */
-main[data-ui-level="20"] .section + .section {
-  border-top: 0 !important;
-}
+
 
 /* 08 — Dark mode keeps identical geometry */
 :root[data-theme="dark"] .nav,
@@ -8772,16 +8262,10 @@ main[data-ui-level="20"] .section + .section {
 :root[data-theme="dark"] main[data-ui-level="20"] .thinking-quotes,
 [data-theme="dark"] main[data-ui-level="20"] .thinking-quotes,
 :root[data-theme="dark"] main[data-ui-level="20"] .thinking-quote-card,
-[data-theme="dark"] main[data-ui-level="20"] .thinking-quote-card {
-  background: transparent !important;
-  border: 0 !important;
-  box-shadow: none !important;
-}
+
 
 :root[data-theme="dark"] main[data-ui-level="20"] .section-head,
-[data-theme="dark"] main[data-ui-level="20"] .section-head {
-  border: 0 !important;
-}
+
 
 /* 09 — Mobile: use clearance, not oversized section padding */
 @media (max-width: 760px) {
