@@ -10,6 +10,7 @@ export function useMusicPlayer({ musicOpen }: UseMusicPlayerOptions) {
     const [musicIndex, setMusicIndex] = useState(0)
     const [musicPlaying, setMusicPlaying] = useState(false)
     const [musicProgress, setMusicProgress] = useState(0)
+    const lastProgressUpdateRef = useRef(0)
     const [musicDuration, setMusicDuration] = useState(0)
     const [musicStatus, setMusicStatus] = useState('READY')
 
@@ -23,6 +24,7 @@ export function useMusicPlayer({ musicOpen }: UseMusicPlayerOptions) {
       musicIndexRef.current = safeIndex
       setMusicIndex(safeIndex)
       setMusicProgress(0)
+      lastProgressUpdateRef.current = 0
       setMusicDuration(0)
       setMusicStatus('LOADING')
       setMusicPlaying(false)
@@ -89,7 +91,11 @@ export function useMusicPlayer({ musicOpen }: UseMusicPlayerOptions) {
       if (!audio) return
   
       const handleTimeUpdate = () => {
-        setMusicProgress(audio.currentTime || 0)
+        const currentTime = audio.currentTime || 0
+      const now = performance.now()
+      if (now - lastProgressUpdateRef.current < 500 && currentTime > 0) return
+      lastProgressUpdateRef.current = now
+      setMusicProgress(currentTime)
       }
   
       const handleLoadedMetadata = () => {
