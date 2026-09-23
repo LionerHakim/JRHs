@@ -1528,3 +1528,306 @@ html[data-theme="light"] .wordmark-logo{
     height:32px;
   }
 }
+
+
+/* ==========================================================================
+   JRH FINAL THEME SYNC
+   Visual-only override layer. Layout geometry remains inherited from legacy.css.
+   One semantic palette per mode; navbar, menu and music share the same tokens.
+   ========================================================================== */
+
+html[data-theme="light"]{
+  --jrh-ui-bg:#f7f7fb;
+  --jrh-ui-panel:rgba(255,255,255,.94);
+  --jrh-ui-panel-solid:#ffffff;
+  --jrh-ui-surface:rgba(28,27,38,.045);
+  --jrh-ui-surface-hover:rgba(98,70,207,.085);
+  --jrh-ui-border:rgba(28,27,38,.105);
+  --jrh-ui-border-strong:rgba(98,70,207,.28);
+  --jrh-ui-text:#171820;
+  --jrh-ui-text-2:#5f5d69;
+  --jrh-ui-muted:#8d8996;
+  --jrh-ui-accent:#6246cf;
+  --jrh-ui-accent-soft:rgba(98,70,207,.10);
+  --jrh-ui-accent-strong:#5135bb;
+  --jrh-ui-shadow:0 24px 70px rgba(45,40,70,.15);
+}
+
+html[data-theme="dark"]{
+  --jrh-ui-bg:#0b0d17;
+  --jrh-ui-panel:rgba(17,19,32,.96);
+  --jrh-ui-panel-solid:#111320;
+  --jrh-ui-surface:rgba(255,255,255,.045);
+  --jrh-ui-surface-hover:rgba(139,108,255,.13);
+  --jrh-ui-border:rgba(255,255,255,.105);
+  --jrh-ui-border-strong:rgba(155,132,255,.38);
+  --jrh-ui-text:#f7f7fb;
+  --jrh-ui-text-2:#c2bfcc;
+  --jrh-ui-muted:#8b8897;
+  --jrh-ui-accent:#9b84ff;
+  --jrh-ui-accent-soft:rgba(155,132,255,.13);
+  --jrh-ui-accent-strong:#b2a0ff;
+  --jrh-ui-shadow:0 28px 90px rgba(0,0,0,.42);
+}
+
+/* Root surfaces */
+html[data-theme="light"],
+html[data-theme="dark"],
+html[data-theme="light"] body,
+html[data-theme="dark"] body{
+  color:var(--jrh-ui-text);
+}
+
+html[data-theme="light"] body{
+  background:
+    radial-gradient(circle at 84% 4%,rgba(126,101,235,.11),transparent 27%),
+    radial-gradient(circle at 10% 38%,rgba(94,210,255,.07),transparent 23%),
+    linear-gradient(180deg,#fbfbfd 0%,#f3f2f7 54%,#faf9fc 100%) !important;
+}
+
+html[data-theme="dark"] body{
+  background:
+    radial-gradient(circle at 86% 4%,rgba(139,108,255,.16),transparent 28%),
+    radial-gradient(circle at 10% 38%,rgba(94,231,255,.045),transparent 24%),
+    linear-gradient(180deg,#070914 0%,#0a0c17 54%,#060811 100%) !important;
+}
+
+/* Navbar + action controls: identical behavior in both themes */
+html[data-theme] .nav{
+  border-color:var(--jrh-ui-border) !important;
+}
+
+html[data-theme] .wordmark{
+  color:var(--jrh-ui-text) !important;
+}
+
+html[data-theme] .wordmark-logo{
+  display:block !important;
+  width:76px !important;
+  height:34px !important;
+  object-fit:contain !important;
+  object-position:center !important;
+  opacity:1 !important;
+  filter:none !important;
+  mix-blend-mode:normal !important;
+}
+
+html[data-theme] .nav-actions{
+  background:var(--jrh-ui-surface) !important;
+  border-color:var(--jrh-ui-border) !important;
+}
+
+html[data-theme] .nav-action,
+html[data-theme] .music-toggle,
+html[data-theme] .menu-toggle{
+  background:var(--jrh-ui-surface) !important;
+  border-color:var(--jrh-ui-border) !important;
+  color:var(--jrh-ui-text-2) !important;
+  -webkit-tap-highlight-color:transparent;
+}
+
+html[data-theme] .nav-action:hover,
+html[data-theme] .nav-action:focus-visible,
+html[data-theme] .nav-action.is-open,
+html[data-theme] .music-toggle:hover,
+html[data-theme] .music-toggle:focus-visible,
+html[data-theme] .music-toggle.is-open,
+html[data-theme] .menu-toggle:hover,
+html[data-theme] .menu-toggle:focus-visible,
+html[data-theme] .menu-toggle.is-open{
+  background:var(--jrh-ui-accent-soft) !important;
+  border-color:var(--jrh-ui-border-strong) !important;
+  color:var(--jrh-ui-text) !important;
+  box-shadow:0 10px 28px rgba(0,0,0,.08) !important;
+}
+
+html[data-theme] .nav-action-glyph,
+html[data-theme] .nav-menu-lines{
+  background:var(--jrh-ui-accent-soft) !important;
+  color:var(--jrh-ui-accent) !important;
+}
+
+html[data-theme] .nav-action.is-open .nav-action-glyph,
+html[data-theme] .menu-toggle.is-open .nav-menu-lines{
+  background:var(--jrh-ui-accent) !important;
+  color:#fff !important;
+}
+
+html[data-theme] .menu-toggle.is-open .nav-menu-lines > span{
+  background:#fff !important;
+}
+
+/* Menu panel */
+html[data-theme] #primary-navigation{
+  background:var(--jrh-ui-panel) !important;
+  border-color:var(--jrh-ui-border) !important;
+  box-shadow:var(--jrh-ui-shadow),inset 0 1px 0 rgba(255,255,255,.08) !important;
+  color:var(--jrh-ui-text) !important;
+  -webkit-backdrop-filter:blur(28px) saturate(1.2);
+  backdrop-filter:blur(28px) saturate(1.2);
+}
+
+html[data-theme] .menu-panel-head,
+html[data-theme] .menu-panel-foot{
+  border-color:var(--jrh-ui-border) !important;
+  color:var(--jrh-ui-muted) !important;
+}
+
+html[data-theme] .menu-panel-head strong{
+  color:var(--jrh-ui-text) !important;
+}
+
+html[data-theme] .menu-panel-count,
+html[data-theme] .menu-panel-foot{
+  color:var(--jrh-ui-muted) !important;
+}
+
+html[data-theme] .menu-panel-grid a{
+  background:var(--jrh-ui-surface) !important;
+  border-color:var(--jrh-ui-border) !important;
+  color:var(--jrh-ui-text-2) !important;
+}
+
+html[data-theme] .menu-panel-grid a:hover,
+html[data-theme] .menu-panel-grid a:focus-visible,
+html[data-theme] .menu-panel-grid a.is-active{
+  background:var(--jrh-ui-surface-hover) !important;
+  border-color:var(--jrh-ui-border-strong) !important;
+  color:var(--jrh-ui-text) !important;
+  box-shadow:inset 3px 0 0 var(--jrh-ui-accent) !important;
+}
+
+html[data-theme] .menu-item-index{
+  background:var(--jrh-ui-accent-soft) !important;
+  color:var(--jrh-ui-accent) !important;
+}
+
+html[data-theme] .menu-panel-grid a.is-active .menu-item-index{
+  background:var(--jrh-ui-accent) !important;
+  color:#fff !important;
+}
+
+/* Music panel */
+html[data-theme] .music-panel{
+  background:var(--jrh-ui-panel) !important;
+  border-color:var(--jrh-ui-border) !important;
+  box-shadow:var(--jrh-ui-shadow),inset 0 1px 0 rgba(255,255,255,.08) !important;
+  color:var(--jrh-ui-text) !important;
+  -webkit-backdrop-filter:blur(28px) saturate(1.2);
+  backdrop-filter:blur(28px) saturate(1.2);
+}
+
+html[data-theme] .music-panel-head,
+html[data-theme] .music-playlist{
+  border-color:var(--jrh-ui-border) !important;
+}
+
+html[data-theme] .music-panel-head strong,
+html[data-theme] .music-track-copy strong,
+html[data-theme] .music-playlist-head strong{
+  color:var(--jrh-ui-text) !important;
+}
+
+html[data-theme] .music-eyebrow,
+html[data-theme] .music-status,
+html[data-theme] .music-playlist-head,
+html[data-theme] .music-track-copy span,
+html[data-theme] .music-playlist-copy span,
+html[data-theme] .music-playlist-number{
+  color:var(--jrh-ui-muted) !important;
+}
+
+html[data-theme] .music-track{
+  background:var(--jrh-ui-surface) !important;
+  border-color:var(--jrh-ui-border) !important;
+}
+
+html[data-theme] .music-track-art{
+  background:linear-gradient(135deg,var(--jrh-ui-accent),var(--jrh-violet-soft)) !important;
+  color:#fff !important;
+}
+
+html[data-theme] .music-progress{
+  background:var(--jrh-ui-surface) !important;
+}
+
+html[data-theme] .music-progress > span{
+  background:var(--jrh-ui-accent) !important;
+}
+
+html[data-theme] .music-controls button,
+html[data-theme] .music-playlist-item{
+  background:var(--jrh-ui-surface) !important;
+  border-color:var(--jrh-ui-border) !important;
+  color:var(--jrh-ui-text-2) !important;
+}
+
+html[data-theme] .music-controls button:hover,
+html[data-theme] .music-controls button:focus-visible,
+html[data-theme] .music-playlist-item:hover,
+html[data-theme] .music-playlist-item:focus-visible,
+html[data-theme] .music-playlist-item.is-active{
+  background:var(--jrh-ui-surface-hover) !important;
+  border-color:var(--jrh-ui-border-strong) !important;
+  color:var(--jrh-ui-text) !important;
+}
+
+html[data-theme] .music-controls .music-play{
+  background:var(--jrh-ui-accent) !important;
+  border-color:var(--jrh-ui-accent) !important;
+  color:#fff !important;
+  box-shadow:0 12px 30px color-mix(in srgb,var(--jrh-ui-accent) 30%,transparent) !important;
+}
+
+html[data-theme] .music-controls .music-play:hover,
+html[data-theme] .music-controls .music-play:focus-visible{
+  background:var(--jrh-ui-accent-strong) !important;
+  border-color:var(--jrh-ui-accent-strong) !important;
+  color:#fff !important;
+}
+
+html[data-theme] .music-playlist-item.is-active .music-playlist-number,
+html[data-theme] .music-playlist-item.is-active .music-playlist-state{
+  color:var(--jrh-ui-accent) !important;
+}
+
+html[data-theme] .music-playlist-item.is-active .music-playlist-copy strong{
+  color:var(--jrh-ui-text) !important;
+}
+
+/* Kill accidental black dividers / theme leakage in these surfaces */
+html[data-theme] .nav::before{
+  opacity:.7 !important;
+}
+
+html[data-theme] .section-head,
+html[data-theme] .thinking-quotes,
+html[data-theme] .thinking-quote-card{
+  border-color:transparent !important;
+}
+
+html[data-theme] .thinking-quotes{
+  background:transparent !important;
+}
+
+html[data-theme] .thinking-quote-card{
+  background:transparent !important;
+  box-shadow:none !important;
+}
+
+@media (max-width:430px){
+  html[data-theme] .wordmark-logo{
+    width:68px !important;
+    height:32px !important;
+  }
+}
+
+@media (prefers-reduced-motion:reduce){
+  html[data-theme] .nav,
+  html[data-theme] .nav-action,
+  html[data-theme] .music-panel,
+  html[data-theme] .music-toggle,
+  html[data-theme] .menu-toggle{
+    transition:none !important;
+  }
+}
