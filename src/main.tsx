@@ -389,7 +389,7 @@ ${name.trim()}`)
             <p className="hero-description">{siteConfig.identity.description}</p>
             <div className="hero-actions">
               <a className="hero-pill" href="#media">Explore media</a>
-              <a className="ghost-pill" href="#links">Contact</a>
+              <a className="ghost-pill" href="#contact">Contact</a>
             </div>
             <div className="hero-meta" aria-label="JRH availability">
               <span className="availability-dot" aria-hidden="true"></span>
@@ -524,9 +524,9 @@ Web app dan digital product yang sedang dibangun untuk memecahkan masalah nyata.
 
         <TestimonialsSection />
 
-        <section id="links" className="section contact-section experience-section" data-section="contact" aria-labelledby="links-title">
+        <section id="contact" className="section contact-section experience-section" data-section="contact" aria-labelledby="contact-title">
           <div className="section-head">
-            <h2 id="links-title">Contact</h2>
+            <h2 id="contact-title">Contact</h2>
           </div>
 
           <div className="contact-card">
