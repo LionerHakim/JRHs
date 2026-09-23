@@ -1478,6 +1478,21 @@ body{
   }
 }
 
+
+/* =========================================================
+   21 / CONTACT FINAL HARDENING
+   Canonical email visibility + dropdown/popover escape.
+   ========================================================= */
+.contact-card{overflow:visible !important}
+.contact-topic{z-index:20 !important}
+.contact-topic-menu{z-index:100 !important}
+.terms-checkbox-popover{z-index:110 !important}
+.contact-email-link{display:inline-flex;align-items:center;gap:7px;margin-top:14px;padding:8px 12px;border:1px solid var(--p-line) !important;border-radius:999px;background:var(--p-control-surface) !important;color:var(--p-ink) !important;font-size:var(--text-body-sm);font-weight:600;line-height:1.2;transition:transform 180ms var(--p-ease),border-color 180ms var(--p-ease),background 180ms var(--p-ease)}
+.contact-email-link:hover,.contact-email-link:focus-visible{transform:translateY(-1px);border-color:var(--p-blue-line) !important;background:var(--p-control-hover) !important}
+@media (max-width:767px){
+  .contact-email-link{max-width:100%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+  .contact-topic-menu{max-height:min(280px,45vh);overflow-y:auto;overscroll-behavior:contain}
+}
 /* =========================================================
    20 / FINAL CONTACT · FOOTER · LOGO · BACK-TO-TOP SYNC
    Single source of truth for shared navigation behaviour.
