@@ -1788,3 +1788,23 @@ html[data-theme] .thinking-quote-card{
     transition:none !important;
   }
 }
+
+
+/* JRH LOGO — baseline asset, identical rendering in every theme */
+html[data-theme="light"] .wordmark-logo,
+html[data-theme="dark"] .wordmark-logo,
+.wordmark-logo{
+  display:block !important;
+  width:100% !important;
+  height:100% !important;
+  object-fit:contain !important;
+  object-position:center !important;
+  opacity:1 !important;
+  filter:none !important;
+  mix-blend-mode:normal !important;
+}
+
+html[data-theme="light"] .wordmark,
+html[data-theme="dark"] .wordmark{
+  color:inherit !important;
+}
