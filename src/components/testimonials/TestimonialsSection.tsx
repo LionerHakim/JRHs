@@ -9,6 +9,8 @@ export function TestimonialsSection() {
   const userInteractingRef = useRef(false)
   const activeInViewRef = useRef(false)
   const autoSlideTimerRef = useRef<number | null>(null)
+  const activeIndexRef = useRef(0)
+  const activeIndexFrameRef = useRef<number | null>(null)
   const [testimonialActiveIndex, setTestimonialActiveIndex] = useState(0)
 
   useEffect(() => {
@@ -79,7 +81,15 @@ export function TestimonialsSection() {
     }
 
     const updateActiveIndex = () => {
-      setTestimonialActiveIndex(getNearestIndex())
+      if (activeIndexFrameRef.current) return
+      activeIndexFrameRef.current = window.requestAnimationFrame(() => {
+        activeIndexFrameRef.current = null
+        const nextIndex = getNearestIndex()
+        if (nextIndex !== activeIndexRef.current) {
+          activeIndexRef.current = nextIndex
+          setTestimonialActiveIndex(nextIndex)
+        }
+      })
     }
 
     const handlePointerDown = () => pauseForUser()
@@ -111,6 +121,8 @@ export function TestimonialsSection() {
     return () => {
       clearAutoSlide()
       if (resumeTimerRef.current) window.clearTimeout(resumeTimerRef.current)
+      if (activeIndexFrameRef.current) window.cancelAnimationFrame(activeIndexFrameRef.current)
+      activeIndexFrameRef.current = null
       observer.disconnect()
       viewport.removeEventListener('pointerdown', handlePointerDown)
       viewport.removeEventListener('wheel', handleWheel)
