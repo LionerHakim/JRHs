@@ -1102,3 +1102,141 @@ html[data-theme] .nav-action.is-open{
     font-size:9px !important;
   }
 }
+
+
+
+/* =========================
+   13 / GLOBAL CONTROL SYNC
+   Every interactive surface now shares one app-control language.
+   Visual layer only — DOM, content and layout structure preserved.
+   ========================= */
+
+:root{
+  --p-control-surface:linear-gradient(180deg,rgba(255,255,255,.065),rgba(255,255,255,.022));
+  --p-control-hover:linear-gradient(180deg,rgba(255,255,255,.105),rgba(255,255,255,.04));
+  --p-control-border:rgba(255,255,255,.10);
+  --p-control-active:linear-gradient(180deg,#4da3ff,#318fe9);
+  --p-control-radius:14px;
+  --p-control-shadow:0 7px 20px rgba(0,0,0,.20),inset 0 1px 0 rgba(255,255,255,.045);
+  --p-control-shadow-hover:0 10px 26px rgba(0,0,0,.28),0 0 0 1px rgba(77,163,255,.08);
+}
+
+/* Menu, playlist and form triggers */
+.menu-panel-grid a,
+.music-playlist-item,
+.contact-topic-trigger,
+.contact-topic-menu button,
+.topic-options button,
+.terms-checkbox-box,
+.back-to-top{
+  background:var(--p-control-surface) !important;
+  border:1px solid var(--p-control-border) !important;
+  border-radius:var(--p-control-radius) !important;
+  box-shadow:var(--p-control-shadow) !important;
+}
+
+.menu-panel-grid a:hover,
+.menu-panel-grid a:focus-visible,
+.menu-panel-grid a.is-active,
+.music-playlist-item:hover,
+.music-playlist-item:focus-visible,
+.music-playlist-item.is-active,
+.contact-topic-trigger:hover,
+.contact-topic-trigger:focus-visible,
+.contact-topic-trigger.is-open,
+.contact-topic-menu button:hover,
+.contact-topic-menu button:focus-visible,
+.topic-options button:hover,
+.topic-options button:focus-visible,
+.back-to-top:hover,
+.back-to-top:focus-visible{
+  background:var(--p-control-hover) !important;
+  border-color:rgba(77,163,255,.38) !important;
+  box-shadow:var(--p-control-shadow-hover) !important;
+  transform:translateY(-1px) !important;
+}
+
+/* Primary actions share the same tactile geometry. */
+.hero-pill,
+.ghost-pill,
+.media-links a,
+.project-link,
+.contact-submit button,
+.music-play{
+  border-radius:var(--p-control-radius) !important;
+  box-shadow:var(--p-control-shadow) !important;
+}
+
+.hero-pill:hover,
+.hero-pill:focus-visible,
+.ghost-pill:hover,
+.ghost-pill:focus-visible,
+.media-links a:hover,
+.media-links a:focus-visible,
+.project-link:hover,
+.project-link:focus-visible,
+.contact-submit button:hover:not(:disabled),
+.contact-submit button:focus-visible:not(:disabled),
+.music-play:hover,
+.music-play:focus-visible{
+  box-shadow:var(--p-control-shadow-hover) !important;
+}
+
+/* Keep disabled states unmistakably inactive. */
+.project-link.is-disabled{
+  transform:none !important;
+  box-shadow:none !important;
+}
+
+/* Contact fields use the same inset app-surface language without becoming buttons. */
+.contact-field,
+.contact-topic{
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.025) !important;
+}
+
+.contact-field:focus-within,
+.contact-topic:focus-within,
+.contact-topic:has(.contact-topic-trigger.is-open){
+  box-shadow:0 0 0 3px var(--p-blue-soft),inset 0 1px 0 rgba(255,255,255,.04) !important;
+}
+
+/* Small screens: preserve the existing geometry while tightening the tactile scale. */
+@media (max-width:767px){
+  .menu-panel-grid a,
+  .music-playlist-item,
+  .contact-topic-trigger,
+  .contact-topic-menu button,
+  .topic-options button,
+  .back-to-top{
+    border-radius:13px !important;
+  }
+
+  .hero-pill,
+  .ghost-pill,
+  .media-links a,
+  .project-link,
+  .contact-submit button,
+  .music-play{
+    border-radius:13px !important;
+  }
+}
+
+@media (prefers-reduced-motion:reduce){
+  .menu-panel-grid a:hover,
+  .menu-panel-grid a:focus-visible,
+  .menu-panel-grid a.is-active,
+  .music-playlist-item:hover,
+  .music-playlist-item:focus-visible,
+  .music-playlist-item.is-active,
+  .contact-topic-trigger:hover,
+  .contact-topic-trigger:focus-visible,
+  .contact-topic-trigger.is-open,
+  .contact-topic-menu button:hover,
+  .contact-topic-menu button:focus-visible,
+  .topic-options button:hover,
+  .topic-options button:focus-visible,
+  .back-to-top:hover,
+  .back-to-top:focus-visible{
+    transform:none !important;
+  }
+}
