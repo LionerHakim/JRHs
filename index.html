@@ -38,9 +38,48 @@
   <meta name="twitter:image:alt" content="JRH" />
   <title>JRH — Saya Sibuk Bekerja, Ini yang Baru.</title>
   <script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"Person","@id":"https://jrhsee.my.id/#person","name":"JRH — Saya Sibuk Bekerja, Ini yang Baru.","url":"https://jrhsee.my.id/","image":"https://jrhsee.my.id/assets/images/s.jpg","sameAs":["https://youtube.com/@jrhs369","https://www.tiktok.com/@allshorts369"]},{"@type":"WebSite","@id":"https://jrhsee.my.id/#website","url":"https://jrhsee.my.id/","name":"JRH","publisher":{"@id":"https://jrhsee.my.id/#person"},"inLanguage":"id-ID"}]}</script>
+  <style>
+    :root { color-scheme: dark; background: #08090b; }
+    html, body { min-height: 100%; background: #08090b; }
+    body { margin: 0; }
+    #root { min-height: 100vh; }
+    .jrh-boot {
+      min-height: 100vh;
+      display: grid;
+      place-items: center;
+      padding: 24px;
+      box-sizing: border-box;
+      color: #fff;
+      background: #08090b;
+      font: 600 14px/1.4 system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+      letter-spacing: .02em;
+      text-align: center;
+    }
+    .jrh-boot small {
+      display: block;
+      margin-top: 8px;
+      color: #9ca4b0;
+      font-weight: 500;
+    }
+  </style>
 </head>
 <body>
-  <div id="root"></div>
+  <div id="root">
+    <div class="jrh-boot" role="status" aria-live="polite">
+      <div>
+        JRH
+        <small>Memuat halaman…</small>
+      </div>
+    </div>
+  </div>
+  <noscript>
+    <div class="jrh-boot">
+      <div>
+        JRH
+        <small>Aktifkan JavaScript untuk membuka halaman ini.</small>
+      </div>
+    </div>
+  </noscript>
   <script type="module" src="/src/main.tsx"></script>
 </body>
 </html>
