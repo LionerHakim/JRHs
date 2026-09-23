@@ -1310,3 +1310,221 @@ html[data-theme="light"] .back-to-top:focus-visible{
     transition:none!important;
   }
 }
+
+
+/* ── final visual contract: deterministic light/dark surfaces ─────────── */
+html[data-theme="dark"]{
+  color-scheme:dark;
+  --jrh-bg:#070914;
+  --jrh-bg-2:#0d1020;
+  --jrh-text:#f7f7fb;
+  --jrh-muted:#aaa8b7;
+  --jrh-faint:#747181;
+  --jrh-line:rgba(255,255,255,.12);
+  --jrh-line-soft:rgba(255,255,255,.07);
+  --jrh-surface:rgba(255,255,255,.055);
+  --jrh-surface-strong:rgba(255,255,255,.085);
+  --ink:#f7f7fb;
+  --paper:#ffffff;
+  --charcoal:#171a26;
+  --graphite:#aaa8b7;
+  --fog:#747181;
+  --blue:#8b6cff;
+  --blue-strong:#6f52e8;
+}
+
+html[data-theme="dark"] body{
+  background:
+    radial-gradient(circle at 88% 5%,rgba(139,108,255,.17),transparent 28%),
+    radial-gradient(circle at 12% 38%,rgba(94,231,255,.055),transparent 25%),
+    radial-gradient(circle at 82% 78%,rgba(255,102,121,.045),transparent 28%),
+    linear-gradient(180deg,#070914 0%,#090b18 52%,#060811 100%) !important;
+  color:#f7f7fb !important;
+}
+
+html[data-theme="dark"] .nav{
+  background:rgba(10,12,24,.78) !important;
+  border-color:rgba(255,255,255,.12) !important;
+  box-shadow:0 18px 60px rgba(0,0,0,.30),inset 0 1px 0 rgba(255,255,255,.07) !important;
+}
+
+html[data-theme="dark"] .wordmark{
+  color:#f7f7fb !important;
+}
+
+html[data-theme="dark"] .wordmark-logo{
+  display:block;
+  width:76px;
+  height:34px;
+  overflow:visible;
+  opacity:1;
+  filter:none;
+}
+
+html[data-theme="dark"] .nav-actions{
+  background:rgba(255,255,255,.035) !important;
+  border-color:rgba(255,255,255,.08) !important;
+}
+
+html[data-theme="dark"] .nav-action{
+  color:#aaa8b7 !important;
+}
+
+html[data-theme="dark"] .nav-action:hover,
+html[data-theme="dark"] .nav-action:focus-visible,
+html[data-theme="dark"] .nav-action.is-open{
+  color:#fff !important;
+  background:rgba(139,108,255,.10) !important;
+  border-color:rgba(139,108,255,.24) !important;
+}
+
+html[data-theme="dark"] .hero h1,
+html[data-theme="dark"] .section h2{
+  color:#f8f8fb !important;
+}
+
+html[data-theme="dark"] .hero-description,
+html[data-theme="dark"] .media-subtitle,
+html[data-theme="dark"] .projects-subtitle,
+html[data-theme="dark"] .testimonials-subtitle,
+html[data-theme="dark"] .contact-answer,
+html[data-theme="dark"] .contact-note{
+  color:#aaa8b7 !important;
+}
+
+html[data-theme="dark"] .record,
+html[data-theme="dark"] .media-card,
+html[data-theme="dark"] .project-card,
+html[data-theme="dark"] .testimonial,
+html[data-theme="dark"] .contact-card{
+  background:linear-gradient(145deg,rgba(255,255,255,.075),rgba(255,255,255,.035)) !important;
+  border-color:rgba(255,255,255,.10) !important;
+  box-shadow:0 24px 70px rgba(0,0,0,.25),inset 0 1px 0 rgba(255,255,255,.055) !important;
+}
+
+html[data-theme="dark"] .record:hover,
+html[data-theme="dark"] .media-card:hover,
+html[data-theme="dark"] .project-card:hover,
+html[data-theme="dark"] .testimonial:hover,
+html[data-theme="dark"] .contact-card:hover{
+  border-color:rgba(139,108,255,.26) !important;
+  box-shadow:0 28px 80px rgba(0,0,0,.32),0 0 34px rgba(139,108,255,.08),inset 0 1px 0 rgba(255,255,255,.07) !important;
+}
+
+html[data-theme="dark"] .record h3,
+html[data-theme="dark"] .media-card h3,
+html[data-theme="dark"] .project-card h3,
+html[data-theme="dark"] .testimonial blockquote,
+html[data-theme="dark"] .contact-question{
+  color:#f4f3f8 !important;
+}
+
+html[data-theme="dark"] .record time,
+html[data-theme="dark"] .record-activities,
+html[data-theme="dark"] .media-category,
+html[data-theme="dark"] .media-status,
+html[data-theme="dark"] .project-category,
+html[data-theme="dark"] .project-status,
+html[data-theme="dark"] .thinking-quote-kicker,
+html[data-theme="dark"] .testimonial-meta,
+html[data-theme="dark"] .testimonial-source-row{
+  color:#8f8c9c !important;
+}
+
+html[data-theme="dark"] .media-links a,
+html[data-theme="dark"] .project-link{
+  color:#d9d7e2 !important;
+  border-color:rgba(255,255,255,.10) !important;
+  background:rgba(255,255,255,.035) !important;
+}
+
+html[data-theme="dark"] .media-links a:hover,
+html[data-theme="dark"] .project-link:hover{
+  color:#fff !important;
+  border-color:rgba(139,108,255,.30) !important;
+  background:rgba(139,108,255,.09) !important;
+}
+
+html[data-theme="dark"] .contact-field{
+  background:rgba(255,255,255,.045) !important;
+  border-color:rgba(255,255,255,.10) !important;
+  color:#f7f7fb !important;
+}
+
+html[data-theme="dark"] .contact-field:focus-within{
+  background:rgba(255,255,255,.065) !important;
+  border-color:rgba(139,108,255,.42) !important;
+  box-shadow:0 0 0 4px rgba(139,108,255,.08) !important;
+}
+
+html[data-theme="dark"] .contact-field input,
+html[data-theme="dark"] .contact-field textarea,
+html[data-theme="dark"] .contact-topic-trigger{
+  color:#f7f7fb !important;
+}
+
+html[data-theme="dark"] .contact-field input::placeholder,
+html[data-theme="dark"] .contact-field textarea::placeholder{
+  color:#777483 !important;
+}
+
+html[data-theme="dark"] .contact-topic-menu,
+html[data-theme="dark"] .menu-panel-grid,
+html[data-theme="dark"] .music-panel{
+  background:rgba(12,14,27,.96) !important;
+  border-color:rgba(255,255,255,.11) !important;
+  box-shadow:0 30px 90px rgba(0,0,0,.42) !important;
+}
+
+html[data-theme="dark"] .menu-panel-grid a,
+html[data-theme="dark"] .music-playlist-item{
+  background:rgba(255,255,255,.035) !important;
+  border-color:rgba(255,255,255,.07) !important;
+  color:#c9c6d3 !important;
+}
+
+html[data-theme="dark"] .menu-panel-grid a:hover,
+html[data-theme="dark"] .menu-panel-grid a:focus-visible,
+html[data-theme="dark"] .menu-panel-grid a.is-active,
+html[data-theme="dark"] .music-playlist-item:hover,
+html[data-theme="dark"] .music-playlist-item.is-active{
+  background:rgba(139,108,255,.10) !important;
+  border-color:rgba(139,108,255,.24) !important;
+  color:#fff !important;
+}
+
+html[data-theme="dark"] .theme-toggle-floating,
+html[data-theme="dark"] .back-to-top{
+  color:#f3f2f8 !important;
+  background:rgba(18,20,34,.82) !important;
+  border-color:rgba(255,255,255,.11) !important;
+  box-shadow:0 16px 42px rgba(0,0,0,.30) !important;
+}
+
+html[data-theme="dark"] .theme-toggle-floating:hover,
+html[data-theme="dark"] .theme-toggle-floating:focus-visible,
+html[data-theme="dark"] .back-to-top:hover,
+html[data-theme="dark"] .back-to-top:focus-visible{
+  background:rgba(139,108,255,.14) !important;
+  border-color:rgba(139,108,255,.30) !important;
+}
+
+html[data-theme="light"] .wordmark{
+  color:#171820 !important;
+}
+
+html[data-theme="light"] .wordmark-logo{
+  display:block;
+  width:76px;
+  height:34px;
+  overflow:visible;
+  opacity:1;
+  filter:none;
+}
+
+@media (max-width:430px){
+  .wordmark-logo{
+    width:68px;
+    height:32px;
+  }
+}
