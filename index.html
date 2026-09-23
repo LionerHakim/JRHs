@@ -8,17 +8,10 @@
   <meta name="mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-status-bar-style" content="default" />
-  <meta name="color-scheme" content="light dark" />
+  <meta name="color-scheme" content="dark" />
   <script>
-    try {
-      const storedTheme = localStorage.getItem('jrhs-theme')
-      const theme = storedTheme === 'dark' || storedTheme === 'light' ? storedTheme : 'light'
-      document.documentElement.dataset.theme = theme
-      document.documentElement.style.colorScheme = theme
-    } catch {
-      document.documentElement.dataset.theme = 'light'
-      document.documentElement.style.colorScheme = 'light'
-    }
+    document.documentElement.dataset.theme = 'dark'
+    document.documentElement.style.colorScheme = 'dark'
   </script>
   <meta name="referrer" content="strict-origin-when-cross-origin" />
   <meta name="description" content="JRH — Saya sibuk bekerja, ini yang baru. Ruang personal untuk karya, project, media, dan jejak yang sedang saya bangun." />
