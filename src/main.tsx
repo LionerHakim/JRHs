@@ -8,6 +8,7 @@ import { useTheme } from './hooks/useTheme'
 import { useMusicPlayer } from './hooks/useMusicPlayer'
 
 import './index.css'
+import './styles/portal-2100.css'
 
 import { sectionItems, sectionIds, musicTracks, contactTopics } from './config/ui'
 
