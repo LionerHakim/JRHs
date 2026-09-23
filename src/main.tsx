@@ -534,6 +534,9 @@ Web app dan digital product yang sedang dibangun untuk memecahkan masalah nyata.
               <p className="contact-question">Punya sesuatu yang ingin diwujudkan?</p>
               <p className="contact-answer">Ide baru? Project menarik? Mau kolaborasi? Atau cuma mau ngobrol?</p>
               <p className="contact-note">Terbuka untuk ide, kolaborasi, dan percakapan baru.</p>
+              <a className="contact-email-link" href={`mailto:${siteConfig.contactEmail}`} aria-label={`Kirim email langsung ke ${siteConfig.contactEmail}`}>
+                {siteConfig.contactEmail}
+              </a>
             </div>
 
             <form className="contact-form" onSubmit={handleContactSubmit} noValidate>
@@ -553,7 +556,7 @@ Web app dan digital product yang sedang dibangun untuk memecahkan masalah nyata.
               <div className="contact-fields">
                 <label className="contact-field">
                   <span className="contact-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="3.25" /><path d="M5.5 20a6.5 6.5 0 0 1 13 0" /></svg></span>
-                  <input aria-label="Nama kamu" required maxLength={120} value={name} onChange={(event) => setName(event.target.value)} onBlur={() => setTouched((current) => ({ ...current, name: true }))} aria-invalid={touched.name && !name.trim()} placeholder="Nama kamu" autoComplete="name" />
+                  <input id="contact-name" name="name" aria-label="Nama kamu" required maxLength={120} value={name} onChange={(event) => setName(event.target.value)} onBlur={() => setTouched((current) => ({ ...current, name: true }))} aria-invalid={touched.name && !name.trim()} placeholder="Nama kamu" autoComplete="name" />
                 </label>
                 <div className="contact-field contact-topic" ref={contactTopicRef}>
                   <span className="contact-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M5 7h14M5 12h14M5 17h9" /></svg></span>
@@ -635,7 +638,7 @@ Web app dan digital product yang sedang dibangun untuk memecahkan masalah nyata.
                 </div>
                 <label className="contact-field contact-message">
                   <span className="contact-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M5 6.5h14a2 2 0 0 1 2 2v7a2 2 0 0 1-2 2H11l-5 3v-3.5a2 2 0 0 1-2-2v-6.5a2 2 0 0 1 2-2Z" /></svg></span>
-                  <textarea aria-label="Pesan kamu" required value={message} onChange={(event) => {
+                  <textarea id="contact-message" name="message" aria-label="Pesan kamu" required value={message} onChange={(event) => {
                     const words = event.target.value.trim().split(/\s+/).filter(Boolean)
                     setMessage(words.length > 169 ? words.slice(0, 169).join(' ') : event.target.value)
                   }} onBlur={() => setTouched((current) => ({ ...current, message: true }))} aria-invalid={touched.message && !message.trim()} placeholder="Tulis pesan kamu di sini... (maksimal 169 kata)" rows={5} />
