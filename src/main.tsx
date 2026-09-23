@@ -17,6 +17,7 @@ export default function App() {
   const scrollProgressRef = useRef<HTMLSpanElement>(null)
   const [menuOpen, setMenuOpen] = useState(false)
   const [musicOpen, setMusicOpen] = useState(false)
+  const [showBackToTop, setShowBackToTop] = useState(false)
   useTheme()
   const [name, setName] = useState('')
   const [purpose, setPurpose] = useState('')
@@ -52,24 +53,38 @@ export default function App() {
 
   useEffect(() => {
     let frame = 0
-    const updateScrollProgress = () => {
+
+    const updateScrollState = () => {
       if (frame) return
+
       frame = window.requestAnimationFrame(() => {
         frame = 0
+
+        const { scrollY } = window
         const maxScroll = document.documentElement.scrollHeight - window.innerHeight
-        const progress = maxScroll > 0 ? Math.min(100, Math.max(0, (window.scrollY / maxScroll) * 100)) : 0
+        const progress = maxScroll > 0
+          ? Math.min(100, Math.max(0, (scrollY / maxScroll) * 100))
+          : 0
+
         const progressBar = scrollProgressRef.current
-        if (progressBar) progressBar.style.transform = 'scaleX(' + (progress / 100) + ')'
+        if (progressBar) {
+          progressBar.style.transform = `scaleX(${progress / 100})`
+        }
+
+        setShowBackToTop((visible) => {
+          const nextVisible = scrollY > Math.max(480, window.innerHeight * 0.65)
+          return visible === nextVisible ? visible : nextVisible
+        })
       })
     }
 
-    updateScrollProgress()
-    window.addEventListener('scroll', updateScrollProgress, { passive: true })
-    window.addEventListener('resize', updateScrollProgress)
+    updateScrollState()
+    window.addEventListener('scroll', updateScrollState, { passive: true })
+    window.addEventListener('resize', updateScrollState)
 
     return () => {
-      window.removeEventListener('scroll', updateScrollProgress)
-      window.removeEventListener('resize', updateScrollProgress)
+      window.removeEventListener('scroll', updateScrollState)
+      window.removeEventListener('resize', updateScrollState)
       if (frame) window.cancelAnimationFrame(frame)
     }
   }, [])
@@ -668,24 +683,55 @@ Web app dan digital product yang sedang dibangun untuk memecahkan masalah nyata.
       </main>
 
       <div className="floating-utilities" aria-label="Pengaturan tampilan">
-        <a className="back-to-top" href="#identity" aria-label="Kembali ke atas" title="Kembali ke atas">↑<span>TOP</span></a>
+        <a
+          className={`back-to-top${showBackToTop ? ' is-visible' : ''}`}
+          href="#identity"
+          aria-label="Kembali ke atas"
+          title="Kembali ke atas"
+          tabIndex={showBackToTop ? 0 : -1}
+          aria-hidden={!showBackToTop}
+          onClick={(event) => {
+            event.preventDefault()
+            window.scrollTo({ top: 0, behavior: 'smooth' })
+          }}
+        >
+          <span aria-hidden="true">↑</span><span>TOP</span>
+        </a>
       </div>
 
-      <footer className="site-footer">
+      <footer className="site-footer" id="site-footer">
         <div className="site-footer-main">
           <div className="site-footer-brand">
+            <a className="site-footer-logo-link" href="#identity" aria-label="Kembali ke JRH home">
+              <img className="site-footer-logo" src="/assets/images/logo.png" alt="JRH" decoding="async" />
+            </a>
             <strong>JRH</strong>
+            <a className="site-footer-email" href={`mailto:${siteConfig.contactEmail}`}>
+              {siteConfig.contactEmail}
+            </a>
           </div>
 
           <nav className="site-footer-nav" aria-label="Footer navigation">
             {sectionItems.map(([id, label]) => (
-              <a key={id} href={`#${id}`} aria-current={activeSection === id ? 'location' : undefined}>{label.toUpperCase()}</a>
+              <a
+                key={id}
+                href={`#${id}`}
+                aria-current={activeSection === id ? 'location' : undefined}
+              >
+                {label}
+              </a>
             ))}
           </nav>
         </div>
 
         <div className="site-footer-bottom">
           <span>© 2026 JRH</span>
+          <a
+            href={`mailto:${siteConfig.contactEmail}`}
+            aria-label={`Kirim email ke ${siteConfig.contactEmail}`}
+          >
+            {siteConfig.contactEmail}
+          </a>
         </div>
       </footer>
     </div>
