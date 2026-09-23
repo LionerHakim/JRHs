@@ -200,6 +200,10 @@ button:disabled{cursor:not-allowed;opacity:.45}
 .contact-field textarea{min-height:140px;resize:vertical;line-height:1.45}
 .contact-message{grid-column:1 / -1;padding-top:16px;padding-bottom:34px}
 .contact-counter{position:absolute;right:16px;bottom:11px;font-size:var(--text-caption)}
+.contact-honeypot{position:absolute !important;width:1px !important;height:1px !important;margin:-1px !important;padding:0 !important;overflow:hidden !important;clip:rect(0 0 0 0) !important;clip-path:inset(50%) !important;white-space:nowrap !important;border:0 !important}
+.contact-feedback.is-error{border-color:rgba(255,92,92,.28)}
+.contact-feedback.is-success{border-color:rgba(77,163,255,.28)}
+.music-toggle-icon{flex:0 0 24px}
 .contact-feedback{margin:16px 0 0;padding:12px 16px;font-size:var(--text-body-sm)}
 .contact-feedback span{display:block;margin-top:4px}
 .contact-submit{margin-top:24px;display:flex;align-items:center;justify-content:space-between;gap:18px}
