@@ -823,7 +823,6 @@ html[data-theme="dark"] .contact-submit button:focus-visible:not(:disabled){
   filter:none !important;
 }
 
-html[data-theme] .theme-toggle-floating,
 html[data-theme] .back-to-top{
   background:var(--p-surface) !important;
   color:var(--p-ink) !important;
@@ -832,13 +831,6 @@ html[data-theme] .back-to-top{
   box-shadow:var(--p-shadow) !important;
 }
 
-html[data-theme] .theme-toggle-floating{
-  border-color:var(--p-blue) !important;
-  color:var(--p-blue) !important;
-}
-
-html[data-theme] .theme-toggle-floating:hover,
-html[data-theme] .theme-toggle-floating:focus-visible,
 html[data-theme] .back-to-top:hover,
 html[data-theme] .back-to-top:focus-visible{
   background:var(--p-blue-soft) !important;
@@ -868,7 +860,6 @@ html[data-theme] :is(
   .contact-topic,
   .contact-topic-trigger,
   .contact-submit button,
-  .theme-toggle-floating,
   .back-to-top
 ){
   transition:
@@ -889,7 +880,6 @@ html[data-theme] :is(
   .project-link,
   .contact-topic-trigger,
   .contact-submit button,
-  .theme-toggle-floating,
   .back-to-top
 ):focus-visible{
   outline:2px solid var(--p-blue) !important;
@@ -908,8 +898,7 @@ html[data-theme] :is(
     .contact-field,
     .contact-topic,
     .contact-submit button,
-    .theme-toggle-floating,
-    .back-to-top
+        .back-to-top
   ){
     transition:none !important;
   }
