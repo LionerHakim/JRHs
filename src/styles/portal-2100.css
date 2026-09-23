@@ -2136,3 +2136,65 @@ html{
     padding:0 10px 10px !important;
   }
 }
+
+
+/* =========================
+   17 / PANEL VISIBILITY FIX
+   Never clip Menu or Music on short/mobile viewports.
+   ========================= */
+
+.nav-actions>nav,
+.music-panel{
+  box-sizing:border-box !important;
+  width:min(500px,calc(100vw - 32px)) !important;
+  max-height:calc(100dvh - 32px) !important;
+  overflow-y:auto !important;
+  overflow-x:hidden !important;
+  overscroll-behavior:contain !important;
+  scrollbar-width:thin !important;
+  scrollbar-color:var(--p-surface-3) transparent !important;
+}
+
+.nav-actions>nav::-webkit-scrollbar,
+.music-panel::-webkit-scrollbar{
+  width:5px !important;
+}
+
+.nav-actions>nav::-webkit-scrollbar-track,
+.music-panel::-webkit-scrollbar-track{
+  background:transparent !important;
+}
+
+.nav-actions>nav::-webkit-scrollbar-thumb,
+.music-panel::-webkit-scrollbar-thumb{
+  background:var(--p-surface-3) !important;
+  border-radius:99px !important;
+}
+
+/* Keep panel internals fully visible while scrolling the panel itself. */
+.menu-panel-grid,
+.music-playlist{
+  min-height:0 !important;
+}
+
+@media (max-width:767px){
+  .nav-actions>nav,
+  .music-panel{
+    width:calc(100vw - 24px) !important;
+    max-width:calc(100vw - 24px) !important;
+    max-height:calc(100dvh - 24px) !important;
+  }
+}
+
+@media (max-height:620px){
+  .nav-actions>nav,
+  .music-panel{
+    max-height:calc(100dvh - 16px) !important;
+  }
+
+  .menu-panel-head,
+  .music-panel-head{
+    min-height:58px !important;
+    padding:12px 14px !important;
+  }
+}
