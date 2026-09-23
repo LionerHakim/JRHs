@@ -1780,3 +1780,359 @@ html{
     transition:none !important;
   }
 }
+
+
+/* =========================
+   16 / MENU + MUSIC — PERFECT SYNC
+   Shared panel geometry, hierarchy and interaction language.
+   ========================= */
+
+:root{
+  --p-panel-bg:#111419;
+  --p-panel-bg-2:#171b21;
+  --p-panel-border:rgba(255,255,255,.12);
+  --p-panel-radius:20px;
+  --p-panel-padding:18px;
+  --p-panel-shadow:0 24px 70px rgba(0,0,0,.46),0 1px 0 rgba(255,255,255,.045);
+}
+
+/* Both panels are siblings in one control family. */
+.nav-actions>nav,
+.music-panel{
+  background:var(--p-panel-bg) !important;
+  color:var(--p-ink) !important;
+  border:1px solid var(--p-panel-border) !important;
+  border-radius:var(--p-panel-radius) !important;
+  box-shadow:var(--p-panel-shadow) !important;
+  overflow:hidden !important;
+  padding:0 !important;
+}
+
+/* Remove visual differences caused by old pseudo surfaces. */
+.nav-actions>nav::before,
+.music-panel::before{
+  display:none !important;
+}
+
+/* Identical header rhythm. */
+.menu-panel-head,
+.music-panel-head{
+  min-height:72px !important;
+  padding:16px 18px !important;
+  display:flex !important;
+  align-items:center !important;
+  justify-content:space-between !important;
+  gap:14px !important;
+  border-bottom:1px solid var(--p-line) !important;
+}
+
+.menu-panel-head > div,
+.music-panel-head > div{
+  min-width:0;
+}
+
+.menu-panel-head strong,
+.music-panel-head strong{
+  display:block !important;
+  margin-top:4px !important;
+  font-size:18px !important;
+  line-height:1.05 !important;
+  letter-spacing:-.035em !important;
+}
+
+/* Header metadata is intentionally identical. */
+.menu-panel-head span,
+.music-eyebrow,
+.music-status,
+.menu-panel-count{
+  font-size:9px !important;
+  line-height:1 !important;
+  letter-spacing:.11em !important;
+  text-transform:uppercase !important;
+}
+
+/* Menu section count + music state use one status-chip geometry. */
+.menu-panel-count,
+.music-status{
+  min-height:26px !important;
+  padding:7px 9px !important;
+  display:inline-flex !important;
+  align-items:center !important;
+  justify-content:center !important;
+  border-radius:9px !important;
+  white-space:nowrap !important;
+}
+
+/* Menu navigation cards. */
+.menu-panel-grid{
+  padding:12px !important;
+  gap:8px !important;
+}
+
+.menu-panel-grid a{
+  min-height:58px !important;
+  padding:10px 12px !important;
+  border-radius:13px !important;
+  display:grid !important;
+  grid-template-columns:32px minmax(0,1fr) 24px !important;
+  align-items:center !important;
+  gap:10px !important;
+  background:var(--p-panel-bg-2) !important;
+  border:1px solid var(--p-line-soft) !important;
+  box-shadow:0 5px 16px rgba(0,0,0,.16) !important;
+}
+
+.menu-panel-grid a:hover,
+.menu-panel-grid a:focus-visible,
+.menu-panel-grid a.is-active{
+  background:var(--p-blue-soft) !important;
+  border-color:var(--p-blue-line) !important;
+  box-shadow:var(--p-glow) !important;
+  transform:translateY(-1px) !important;
+}
+
+.menu-item-index{
+  width:28px !important;
+  height:28px !important;
+  display:grid !important;
+  place-items:center !important;
+  border-radius:8px !important;
+  background:rgba(255,255,255,.055) !important;
+  color:var(--p-muted) !important;
+}
+
+.menu-panel-grid a.is-active .menu-item-index{
+  background:var(--p-blue) !important;
+  color:#fff !important;
+}
+
+.menu-item-label{
+  min-width:0 !important;
+  font-size:14px !important;
+  font-weight:700 !important;
+  letter-spacing:-.01em !important;
+}
+
+.menu-item-arrow{
+  width:24px !important;
+  height:24px !important;
+  display:grid !important;
+  place-items:center !important;
+  border-radius:7px !important;
+  background:rgba(255,255,255,.045) !important;
+  color:var(--p-muted) !important;
+}
+
+.menu-panel-foot{
+  min-height:42px !important;
+  padding:10px 16px !important;
+  display:flex !important;
+  align-items:center !important;
+  justify-content:space-between !important;
+  gap:10px !important;
+  border-top:1px solid var(--p-line-soft) !important;
+  font-size:9px !important;
+}
+
+/* Music track card mirrors the Menu navigation cards. */
+.music-track{
+  margin:12px !important;
+  min-height:72px !important;
+  padding:10px !important;
+  display:flex !important;
+  align-items:center !important;
+  gap:12px !important;
+  background:var(--p-panel-bg-2) !important;
+  border:1px solid var(--p-line-soft) !important;
+  border-radius:13px !important;
+  box-shadow:0 5px 16px rgba(0,0,0,.16) !important;
+}
+
+.music-track-art{
+  width:48px !important;
+  height:48px !important;
+  flex:0 0 48px !important;
+  display:grid !important;
+  place-items:center !important;
+  border-radius:10px !important;
+  background:var(--p-blue) !important;
+  color:#fff !important;
+  font-size:21px !important;
+}
+
+.music-track-copy{
+  min-width:0 !important;
+}
+
+.music-track-copy strong{
+  display:block !important;
+  overflow:hidden !important;
+  text-overflow:ellipsis !important;
+  white-space:nowrap !important;
+  font-size:15px !important;
+  line-height:1.1 !important;
+  letter-spacing:-.02em !important;
+}
+
+.music-track-copy span{
+  display:block !important;
+  margin-top:5px !important;
+  font-size:11px !important;
+}
+
+/* Player progress is a panel divider, not a decorative element. */
+.music-progress{
+  margin:0 12px !important;
+  height:4px !important;
+  border-radius:99px !important;
+  overflow:hidden !important;
+}
+
+.music-progress span{
+  height:100% !important;
+  display:block !important;
+}
+
+/* Transport controls share the same button family as Menu controls. */
+.music-controls{
+  padding:12px !important;
+  display:flex !important;
+  align-items:center !important;
+  justify-content:center !important;
+  gap:8px !important;
+}
+
+.music-controls > button{
+  width:44px !important;
+  height:44px !important;
+  min-width:44px !important;
+  min-height:44px !important;
+  border-radius:12px !important;
+}
+
+.music-controls > button:not(.music-play){
+  background:var(--p-panel-bg-2) !important;
+  border:1px solid var(--p-line-soft) !important;
+}
+
+.music-controls > button:not(.music-play):hover,
+.music-controls > button:not(.music-play):focus-visible{
+  background:var(--p-blue-soft) !important;
+  border-color:var(--p-blue-line) !important;
+  color:var(--p-blue) !important;
+}
+
+.music-play{
+  width:50px !important;
+  height:50px !important;
+  min-width:50px !important;
+  min-height:50px !important;
+  border-radius:14px !important;
+}
+
+/* Playlist header and rows use exactly the Menu list rhythm. */
+.music-playlist{
+  padding:0 12px 12px !important;
+}
+
+.music-playlist-head{
+  min-height:34px !important;
+  padding:0 2px 8px !important;
+  display:flex !important;
+  align-items:center !important;
+  justify-content:space-between !important;
+  border-bottom:1px solid var(--p-line-soft) !important;
+}
+
+.music-playlist-head span,
+.music-playlist-head strong{
+  font-size:9px !important;
+  letter-spacing:.1em !important;
+}
+
+.music-playlist-item{
+  min-height:52px !important;
+  margin-top:6px !important;
+  padding:8px 9px !important;
+  display:grid !important;
+  grid-template-columns:28px minmax(0,1fr) 24px !important;
+  align-items:center !important;
+  gap:9px !important;
+  border-radius:11px !important;
+  background:var(--p-panel-bg-2) !important;
+  border:1px solid var(--p-line-soft) !important;
+}
+
+.music-playlist-number{
+  font-size:9px !important;
+  text-align:center !important;
+}
+
+.music-playlist-copy{
+  min-width:0 !important;
+}
+
+.music-playlist-copy strong{
+  display:block !important;
+  overflow:hidden !important;
+  text-overflow:ellipsis !important;
+  white-space:nowrap !important;
+  font-size:12px !important;
+  line-height:1.15 !important;
+}
+
+.music-playlist-copy span{
+  display:block !important;
+  margin-top:3px !important;
+  overflow:hidden !important;
+  text-overflow:ellipsis !important;
+  white-space:nowrap !important;
+  color:var(--p-muted) !important;
+  font-size:10px !important;
+}
+
+.music-playlist-state{
+  width:24px !important;
+  height:24px !important;
+  display:grid !important;
+  place-items:center !important;
+  border-radius:7px !important;
+  background:rgba(255,255,255,.045) !important;
+}
+
+.music-playlist-item.is-active .music-playlist-state{
+  background:var(--p-blue) !important;
+  color:#fff !important;
+}
+
+/* Panel opening/closing remains subtle and identical. */
+.nav-actions>nav,
+.music-panel{
+  transform-origin:top right !important;
+}
+
+/* Mobile: panels become full-width, keeping identical internal rhythm. */
+@media (max-width:767px){
+  .nav-actions>nav,
+  .music-panel{
+    border-radius:16px !important;
+  }
+
+  .menu-panel-head,
+  .music-panel-head{
+    min-height:64px !important;
+    padding:14px !important;
+  }
+
+  .menu-panel-grid{
+    padding:10px !important;
+  }
+
+  .music-track{
+    margin:10px !important;
+  }
+
+  .music-playlist{
+    padding:0 10px 10px !important;
+  }
+}
