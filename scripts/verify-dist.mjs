@@ -1,7 +1,7 @@
 import { existsSync, readFileSync, statSync } from 'node:fs'
 import { join } from 'node:path'
 
-const root = new URL('../dist/', import.meta.url).pathname.replace(/\\/$/, '')
+const root = new URL('../dist/', import.meta.url).pathname.replace(/\/$/, '')
 const requiredFiles = [
   'index.html',
   'site.webmanifest',
