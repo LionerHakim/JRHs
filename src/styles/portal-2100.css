@@ -954,3 +954,151 @@ html[data-theme] :is(
     will-change:auto;
   }
 }
+
+
+/* =========================
+   12 / APP BUTTONS — 2100 TILE
+   Inspired by the supplied rounded app-control reference.
+   Visual-only: existing markup and layout remain intact.
+   ========================= */
+
+.nav-actions{
+  gap:8px !important;
+  padding:6px !important;
+  background:rgba(16,18,22,.88) !important;
+  border:1px solid rgba(255,255,255,.10) !important;
+  border-radius:20px !important;
+  box-shadow:0 10px 28px rgba(0,0,0,.24), inset 0 1px 0 rgba(255,255,255,.045) !important;
+}
+
+html[data-theme] .nav-action{
+  min-width:92px !important;
+  min-height:64px !important;
+  padding:9px 12px !important;
+  display:inline-flex !important;
+  flex-direction:column !important;
+  justify-content:center !important;
+  align-items:center !important;
+  gap:5px !important;
+  background:linear-gradient(180deg,rgba(255,255,255,.065),rgba(255,255,255,.025)) !important;
+  color:var(--p-ink) !important;
+  border:1px solid rgba(255,255,255,.10) !important;
+  border-radius:16px !important;
+  box-shadow:0 6px 18px rgba(0,0,0,.20), inset 0 1px 0 rgba(255,255,255,.045) !important;
+  transform:translateY(0) !important;
+}
+
+html[data-theme] .nav-action:hover,
+html[data-theme] .nav-action:focus-visible{
+  background:linear-gradient(180deg,rgba(255,255,255,.10),rgba(255,255,255,.04)) !important;
+  color:#fff !important;
+  border-color:rgba(77,163,255,.38) !important;
+  box-shadow:0 10px 24px rgba(0,0,0,.28),0 0 0 1px rgba(77,163,255,.08) !important;
+  transform:translateY(-1px) !important;
+}
+
+html[data-theme] .nav-action.is-open{
+  background:linear-gradient(180deg,#4da3ff,#318fe9) !important;
+  color:#fff !important;
+  border-color:#4da3ff !important;
+  box-shadow:0 10px 24px rgba(77,163,255,.24),inset 0 1px 0 rgba(255,255,255,.22) !important;
+}
+
+.nav-action-glyph{
+  width:28px !important;
+  height:28px !important;
+  display:grid !important;
+  place-items:center !important;
+  font-size:20px !important;
+  line-height:1 !important;
+  color:currentColor !important;
+  border-radius:9px !important;
+}
+
+.nav-action-label{
+  font-size:11px !important;
+  line-height:1 !important;
+  font-weight:750 !important;
+  letter-spacing:.01em !important;
+}
+
+.nav-action-meta{
+  display:none !important;
+}
+
+.nav-menu-lines{
+  width:28px !important;
+  height:28px !important;
+  display:flex !important;
+  flex-direction:column !important;
+  justify-content:center !important;
+  gap:4px !important;
+  padding:6px !important;
+  border-radius:9px !important;
+}
+
+.nav-menu-lines > span{
+  width:100% !important;
+  height:2px !important;
+  border-radius:99px !important;
+}
+
+.hero-pill,
+.ghost-pill,
+.media-links a,
+.project-link,
+.contact-submit button{
+  min-height:48px !important;
+  padding:12px 18px !important;
+  border-radius:14px !important;
+  box-shadow:0 7px 20px rgba(0,0,0,.18),inset 0 1px 0 rgba(255,255,255,.06) !important;
+}
+
+.hero-pill:hover,
+.hero-pill:focus-visible,
+.ghost-pill:hover,
+.ghost-pill:focus-visible,
+.media-links a:hover,
+.media-links a:focus-visible,
+.project-link:hover,
+.project-link:focus-visible,
+.contact-submit button:hover:not(:disabled),
+.contact-submit button:focus-visible:not(:disabled){
+  transform:translateY(-1px) !important;
+}
+
+@media (max-width:767px){
+  .nav-actions{
+    gap:6px !important;
+    padding:5px !important;
+    border-radius:18px !important;
+  }
+
+  html[data-theme] .nav-action{
+    min-width:72px !important;
+    min-height:58px !important;
+    padding:7px 9px !important;
+    border-radius:14px !important;
+  }
+
+  .nav-action-glyph,
+  .nav-menu-lines{
+    width:25px !important;
+    height:25px !important;
+  }
+
+  .nav-action-label{
+    font-size:10px !important;
+  }
+}
+
+@media (max-width:390px){
+  html[data-theme] .nav-action{
+    min-width:66px !important;
+    min-height:54px !important;
+  }
+
+  .nav-action-label{
+    font-size:9px !important;
+  }
+}
