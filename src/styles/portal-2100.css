@@ -1,3 +1,5 @@
+/* JRHs / PORTAL 2100 — CANONICAL VISUAL SYSTEM
+   Current DOM/data/geometry only. Historical UI rules removed. Logo untouched. */
 /* =========================================================
    JRHs / PORTAL 2100
    FINAL ART DIRECTION — visual layer only
@@ -9,145 +11,36 @@
    - logo markup + logo asset
    ========================================================= */
 
-:root{
-  color-scheme:dark;
-  --p-bg:#08090b;
-  --p-surface:#101216;
-  --p-surface-2:#15181e;
-  --p-surface-3:#1c2027;
-  --p-ink:#ffffff;
-  --p-ink-2:#d9dee6;
-  --p-muted:#9ca4b0;
-  --p-faint:#727b88;
-  --p-line:rgba(255,255,255,.14);
-  --p-line-soft:rgba(255,255,255,.08);
-  --p-blue:#4da3ff;
-  --p-blue-soft:rgba(77,163,255,.095);
-  --p-blue-line:rgba(77,163,255,.34);
-  --p-shadow:0 1px 0 rgba(255,255,255,.035),0 14px 40px rgba(0,0,0,.30);
-  --p-shadow-hover:0 1px 0 rgba(255,255,255,.045),0 20px 52px rgba(0,0,0,.42);
-  --p-ease:cubic-bezier(.16,1,.3,1);
-  --p-radius-sm:8px;
-  --p-radius-md:12px;
-  --p-radius-lg:16px;
-  --p-radius-xl:20px;
-  --p-pill:999px;
-
-  /* legacy aliases — dark Portal token bridge */
-  --sky:var(--p-bg) !important;
-  --paper:var(--p-surface) !important;
-  --bone:var(--p-surface-2) !important;
-  --mist:var(--p-surface-2) !important;
-  --ink:var(--p-ink) !important;
-  --charcoal:var(--p-ink) !important;
-  --graphite:var(--p-muted) !important;
-  --fog:var(--p-faint) !important;
-  --blue:var(--p-blue) !important;
-  --blue-strong:var(--p-blue) !important;
-  --blue-soft:var(--p-blue-soft) !important;
-  --lavender:var(--p-blue-soft) !important;
-  --mint:var(--p-surface-2) !important;
-  --peach:var(--p-surface-2) !important;
-  --line:var(--p-line) !important;
-  --shadow-subtle:var(--p-shadow) !important;
-  --font-aeonik:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif !important;
-  --font-geist:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif !important;
-  --font-editorial:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif !important;
-}
-
-html,body,.site-shell{
-  background:var(--p-bg) !important;
-  color:var(--p-ink) !important;
-}
-
+:root{color-scheme:dark;--p-bg:#08090b;--p-surface:#101216;--p-surface-2:#15181e;--p-surface-3:#1c2027;--p-ink:#ffffff;--p-ink-2:#d9dee6;--p-muted:#9ca4b0;--p-faint:#727b88;--p-line:rgba(255,255,255,.14);--p-line-soft:rgba(255,255,255,.08);--p-blue:#4da3ff;--p-blue-soft:rgba(77,163,255,.095);--p-blue-line:rgba(77,163,255,.34);--p-shadow:0 1px 0 rgba(255,255,255,.035),0 14px 40px rgba(0,0,0,.30);--p-shadow-hover:0 1px 0 rgba(255,255,255,.045),0 20px 52px rgba(0,0,0,.42);--p-ease:cubic-bezier(.16,1,.3,1);--p-radius-sm:8px;--p-radius-md:12px;--p-radius-lg:16px;--p-radius-xl:20px;--p-pill:999px;/* legacy aliases — dark Portal token bridge */
+  --sky:var(--p-bg) !important;--paper:var(--p-surface) !important;--bone:var(--p-surface-2) !important;--mist:var(--p-surface-2) !important;--ink:var(--p-ink) !important;--charcoal:var(--p-ink) !important;--graphite:var(--p-muted) !important;--fog:var(--p-faint) !important;--blue:var(--p-blue) !important;--blue-strong:var(--p-blue) !important;--blue-soft:var(--p-blue-soft) !important;--lavender:var(--p-blue-soft) !important;--mint:var(--p-surface-2) !important;--peach:var(--p-surface-2) !important;--line:var(--p-line) !important;--shadow-subtle:var(--p-shadow) !important;--font-aeonik:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif !important;--font-geist:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif !important;--font-editorial:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif !important}
+html,
+body,
+.site-shell{background:var(--p-bg) !important;color:var(--p-ink) !important}
 html,
 body,
 button,
 input,
 select,
-textarea{
-  font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif !important;
-  -webkit-font-smoothing:antialiased;
-  text-rendering:optimizeLegibility;
-}
-
-::selection{
-  background:var(--p-blue) !important;
-  color:#fff !important;
-}
-
+textarea{font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif !important;-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility}
+::selection{background:var(--p-blue) !important;color:#fff !important}
 /* =========================
    01 / NAVIGATION CONSOLE
    ========================= */
 
-.nav{
-  background:var(--p-surface) !important;
-  border:1px solid var(--p-line) !important;
-  border-radius:var(--p-radius-lg) !important;
-  box-shadow:var(--p-shadow) !important;
-  backdrop-filter:none !important;
-  -webkit-backdrop-filter:none !important;
-}
-
-.nav-actions{
-  background:var(--p-surface-2) !important;
-  border:1px solid var(--p-line-soft) !important;
-  border-radius:var(--p-radius-md) !important;
-}
-
-html[data-theme] .nav-action{
-  background:transparent !important;
-  color:var(--p-muted) !important;
-  border:1px solid transparent !important;
-  border-radius:var(--p-radius-sm) !important;
-  box-shadow:none !important;
-}
-
+.nav{background:var(--p-surface) !important;border:1px solid var(--p-line) !important;border-radius:var(--p-radius-lg) !important;box-shadow:var(--p-shadow) !important;backdrop-filter:none !important;-webkit-backdrop-filter:none !important}
+.nav-actions{background:var(--p-surface-2) !important;border:1px solid var(--p-line-soft) !important;border-radius:var(--p-radius-md) !important}
+html[data-theme] .nav-action{background:linear-gradient(180deg,rgba(255,255,255,.065),rgba(255,255,255,.025)) !important;color:var(--p-ink) !important;border:1px solid rgba(255,255,255,.10) !important;border-radius:16px !important;box-shadow:0 6px 18px rgba(0,0,0,.20), inset 0 1px 0 rgba(255,255,255,.045) !important;min-width:92px !important;min-height:64px !important;padding:9px 12px !important;display:inline-flex !important;flex-direction:column !important;justify-content:center !important;align-items:center !important;gap:5px !important;transform:translateY(0) !important}
 html[data-theme] .nav-action:hover,
-html[data-theme] .nav-action:focus-visible{
-  background:var(--p-surface) !important;
-  color:var(--p-ink) !important;
-  border-color:var(--p-line) !important;
-  box-shadow:0 1px 0 rgba(8,9,11,.035) !important;
-  transform:none !important;
-}
-
-html[data-theme] .nav-action.is-open{
-  background:var(--p-blue) !important;
-  color:#fff !important;
-  border-color:var(--p-blue) !important;
-}
-
-html[data-theme] .nav-action.is-open::after{
-  display:none !important;
-}
-
+html[data-theme] .nav-action:focus-visible{background:linear-gradient(180deg,rgba(255,255,255,.10),rgba(255,255,255,.04)) !important;color:#fff !important;border-color:rgba(77,163,255,.38) !important;box-shadow:0 10px 24px rgba(0,0,0,.28),0 0 0 1px rgba(77,163,255,.08) !important;transform:translateY(-1px) !important}
+html[data-theme] .nav-action.is-open{background:linear-gradient(180deg,#4da3ff,#318fe9) !important;color:#fff !important;border-color:#4da3ff !important;box-shadow:0 10px 24px rgba(77,163,255,.24),inset 0 1px 0 rgba(255,255,255,.22) !important}
+html[data-theme] .nav-action.is-open::after{display:none !important}
 .nav-action-glyph,
-.nav-menu-lines{
-  background:transparent !important;
-  color:currentColor !important;
-  box-shadow:none !important;
-}
-
-.nav-action.is-open .nav-action-glyph{
-  background:transparent !important;
-  color:#fff !important;
-}
-
-.nav-menu-lines > span{
-  background:currentColor !important;
-}
-
+.nav-menu-lines{background:transparent !important;color:currentColor !important;box-shadow:none !important}
+.nav-action.is-open .nav-action-glyph{background:transparent !important;color:#fff !important}
+.nav-menu-lines > span{background:currentColor !important;width:100% !important;height:2px !important;border-radius:99px !important}
 .nav-action-label,
-.nav-action-meta{
-  color:inherit !important;
-}
-
-html[data-theme] .nav-action-meta{
-  font-family:ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,monospace !important;
-  letter-spacing:.08em !important;
-}
-
+.nav-action-meta{color:inherit !important}
+html[data-theme] .nav-action-meta{font-family:ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,monospace !important;letter-spacing:.08em !important}
 /* Logo deliberately untouched. */
 
 /* =========================
@@ -155,299 +48,85 @@ html[data-theme] .nav-action-meta{
    ========================= */
 
 .nav-actions>nav,
-.music-panel{
-  background:var(--p-surface) !important;
-  color:var(--p-ink) !important;
-  border:1px solid var(--p-line) !important;
-  border-radius:var(--p-radius-xl) !important;
-  box-shadow:var(--p-shadow-hover) !important;
-  backdrop-filter:none !important;
-  -webkit-backdrop-filter:none !important;
-}
-
+.music-panel{background:var(--p-surface) !important;color:var(--p-ink) !important;border:1px solid var(--p-line) !important;border-radius:var(--p-radius-xl) !important;box-shadow:var(--p-shadow-hover) !important;backdrop-filter:none !important;-webkit-backdrop-filter:none !important}
 .nav-actions>nav::before,
-.music-panel::before{
-  border:1px solid var(--p-line-soft) !important;
-  border-radius:calc(var(--p-radius-xl) - 1px) !important;
-}
-
+.music-panel::before{border:1px solid var(--p-line-soft) !important;border-radius:calc(var(--p-radius-xl) - 1px) !important}
 .menu-panel-head,
-.music-panel-head{
-  border-bottom:1px solid var(--p-line) !important;
-}
-
+.music-panel-head{border-bottom:1px solid var(--p-line) !important}
 .menu-panel-head span,
 .menu-panel-foot,
 .music-eyebrow,
 .music-status,
 .music-track-copy span,
 .menu-item-index,
-.menu-item-arrow{
-  color:var(--p-muted) !important;
-}
-
+.menu-item-arrow{color:var(--p-muted) !important}
 .menu-panel-head span,
 .music-eyebrow,
 .music-status,
 .menu-panel-foot,
-.menu-item-index{
-  font-family:ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,monospace !important;
-  letter-spacing:.1em !important;
-}
-
+.menu-item-index{font-family:ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,monospace !important;letter-spacing:.1em !important}
 .menu-panel-head strong,
-.music-panel-head strong{
-  color:var(--p-ink) !important;
-  font-family:Inter,ui-sans-serif,system-ui,sans-serif !important;
-  letter-spacing:-.035em !important;
-}
-
-.menu-panel-count{
-  background:var(--p-blue-soft) !important;
-  color:var(--p-blue) !important;
-  border:1px solid var(--p-blue-line) !important;
-  border-radius:var(--p-pill) !important;
-}
-
-.menu-panel-grid a{
-  background:var(--p-surface-2) !important;
-  color:var(--p-ink) !important;
-  border:1px solid var(--p-line-soft) !important;
-  border-radius:var(--p-radius-md) !important;
-  box-shadow:none !important;
-}
-
+.music-panel-head strong{color:var(--p-ink) !important;font-family:Inter,ui-sans-serif,system-ui,sans-serif !important;letter-spacing:-.035em !important;display:block !important;margin-top:4px !important;font-size:18px !important;line-height:1.05 !important}
+.menu-panel-count{background:var(--p-blue-soft) !important;color:var(--p-blue) !important;border:1px solid var(--p-blue-line) !important;border-radius:var(--p-pill) !important}
+.menu-panel-grid a{background:var(--p-panel-bg-2) !important;color:var(--p-ink) !important;border:1px solid var(--p-line-soft) !important;border-radius:13px !important;box-shadow:0 5px 16px rgba(0,0,0,.16) !important;min-height:58px !important;padding:10px 12px !important;display:grid !important;grid-template-columns:32px minmax(0,1fr) 24px !important;align-items:center !important;gap:10px !important}
 .menu-panel-grid a:hover,
 .menu-panel-grid a:focus-visible,
-.menu-panel-grid a.is-active{
-  background:var(--p-blue-soft) !important;
-  color:var(--p-ink) !important;
-  border-color:var(--p-blue-line) !important;
-  box-shadow:none !important;
-  transform:none !important;
-}
-
-.menu-panel-grid a.is-active{
-  box-shadow:inset 2px 0 0 var(--p-blue) !important;
-}
-
-.menu-panel-grid a.is-active .menu-item-index{
-  background:var(--p-blue) !important;
-  color:#fff !important;
-}
-
-.menu-item-arrow:hover{
-  color:var(--p-blue) !important;
-}
-
+.menu-panel-grid a.is-active{background:var(--p-blue-soft) !important;color:var(--p-ink) !important;border-color:var(--p-blue-line) !important;box-shadow:var(--p-glow) !important;transform:translateY(-1px) !important}
+.menu-panel-grid a.is-active{box-shadow:inset 2px 0 0 var(--p-blue) !important}
+.menu-panel-grid a.is-active .menu-item-index{background:var(--p-blue) !important;color:#fff !important}
+.menu-item-arrow:hover{color:var(--p-blue) !important}
 .music-track,
-.music-playlist-item{
-  background:var(--p-surface-2) !important;
-  color:var(--p-ink) !important;
-  border:1px solid var(--p-line-soft) !important;
-  border-radius:var(--p-radius-md) !important;
-  box-shadow:none !important;
-}
-
-.music-track-art{
-  background:var(--p-ink) !important;
-  color:var(--p-surface) !important;
-  box-shadow:none !important;
-  border-radius:var(--p-radius-sm) !important;
-}
-
-.music-progress{
-  background:var(--p-surface-3) !important;
-  border-radius:var(--p-pill) !important;
-}
-
-.music-progress span{
-  background:var(--p-blue) !important;
-  border-radius:inherit !important;
-}
-
-.music-controls{
-  gap:8px !important;
-}
-
-.music-play{
-  background:var(--p-blue) !important;
-  color:#fff !important;
-  border:1px solid var(--p-blue) !important;
-  border-radius:var(--p-radius-sm) !important;
-  box-shadow:none !important;
-}
-
-.music-controls > button:not(.music-play){
-  color:var(--p-muted) !important;
-  background:transparent !important;
-  border:1px solid transparent !important;
-  box-shadow:none !important;
-}
-
+.music-playlist-item{background:var(--p-surface-2) !important;color:var(--p-ink) !important;border:1px solid var(--p-line-soft) !important;border-radius:var(--p-radius-md) !important;box-shadow:none !important}
+.music-track-art{background:linear-gradient(135deg,#596bff,#50bfff 62%,#57e0d8) !important;color:#fff !important;box-shadow:none !important;border-radius:10px !important;width:48px !important;height:48px !important;flex:0 0 48px !important;display:grid !important;place-items:center !important;font-size:21px !important}
+.music-progress{background:var(--p-surface-3) !important;border-radius:var(--p-pill) !important}
+.music-progress span{background:var(--p-blue) !important;border-radius:inherit !important;height:100% !important;display:block !important}
+.music-controls{gap:8px !important}
+.music-play{background:var(--p-blue) !important;color:#fff !important;border:1px solid var(--p-blue) !important;border-radius:14px !important;box-shadow:none !important;width:50px !important;height:50px !important;min-width:50px !important;min-height:50px !important}
+.music-controls > button:not(.music-play){color:var(--p-muted) !important;background:var(--p-panel-bg-2) !important;border:1px solid var(--p-line-soft) !important;box-shadow:none !important}
 .music-controls > button:not(.music-play):hover,
-.music-controls > button:not(.music-play):focus-visible{
-  color:var(--p-ink) !important;
-  background:var(--p-surface-2) !important;
-  border-color:var(--p-line) !important;
-}
-
-.music-playlist-head{
-  border-bottom:1px solid var(--p-line-soft) !important;
-}
-
+.music-controls > button:not(.music-play):focus-visible{color:var(--p-blue) !important;background:var(--p-blue-soft) !important;border-color:var(--p-blue-line) !important;transform:translateY(-1px) !important}
+.music-playlist-head{border-bottom:1px solid var(--p-line-soft) !important;min-height:34px !important;padding:0 2px 8px !important;display:flex !important;align-items:center !important;justify-content:space-between !important}
 .music-playlist-number,
-.music-playlist-state{
-  color:var(--p-blue) !important;
-  font-family:ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,monospace !important;
-}
-
+.music-playlist-state{color:var(--p-blue) !important;font-family:ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,monospace !important}
 .music-playlist-item:hover,
 .music-playlist-item:focus-visible,
-.music-playlist-item.is-active{
-  background:var(--p-blue-soft) !important;
-  border-color:var(--p-blue-line) !important;
-}
-
+.music-playlist-item.is-active{background:var(--p-blue-soft) !important;border-color:var(--p-blue-line) !important}
 /* =========================
    03 / HERO — PORTAL SIGNAL
    ========================= */
 
-.hero{
-  background:var(--p-bg) !important;
-}
-
-.hero h1{
-  color:var(--p-ink) !important;
-  font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif !important;
-  font-size:clamp(72px,9.25vw,124px) !important;
-  font-weight:800 !important;
-  line-height:.86 !important;
-  letter-spacing:-.072em !important;
-  text-wrap:balance;
-}
-
-.hero-description{
-  color:var(--p-muted) !important;
-  font-size:clamp(16px,1.5vw,19px) !important;
-  letter-spacing:-.015em !important;
-}
-
-.hero-actions{
-  gap:10px !important;
-}
-
+.hero{background:var(--p-bg) !important}
+.hero h1{color:var(--p-ink) !important;font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif !important;font-size:clamp(72px,9.25vw,124px) !important;font-weight:800 !important;line-height:.86 !important;letter-spacing:-.072em !important;text-wrap:balance}
+.hero-description{color:var(--p-muted) !important;font-size:clamp(16px,1.5vw,19px) !important;letter-spacing:-.015em !important}
+.hero-actions{gap:10px !important}
 .hero-pill,
-.ghost-pill{
-  border-radius:var(--p-radius-sm) !important;
-  font-family:Inter,ui-sans-serif,system-ui,sans-serif !important;
-  font-size:14px !important;
-  font-weight:700 !important;
-  letter-spacing:.01em !important;
-  box-shadow:none !important;
-}
-
-.hero-pill{
-  background:var(--p-blue) !important;
-  color:#fff !important;
-  border:1px solid var(--p-blue) !important;
-}
-
+.ghost-pill{border-radius:var(--p-radius-sm) !important;font-family:Inter,ui-sans-serif,system-ui,sans-serif !important;font-size:14px !important;font-weight:700 !important;letter-spacing:.01em !important;box-shadow:none !important}
+.hero-pill{background:var(--p-blue) !important;color:#fff !important;border:1px solid var(--p-blue) !important}
 .hero-pill:hover,
-.hero-pill:focus-visible{
-  background:var(--p-ink) !important;
-  border-color:var(--p-ink) !important;
-  color:var(--p-bg) !important;
-  box-shadow:none !important;
-}
-
+.hero-pill:focus-visible{background:var(--p-ink) !important;border-color:var(--p-ink) !important;color:var(--p-bg) !important;box-shadow:none !important}
 html[data-theme="dark"] .hero-pill:hover,
-html[data-theme="dark"] .hero-pill:focus-visible{
-  background:#fff !important;
-  border-color:#fff !important;
-  color:#08090b !important;
-}
-
-.ghost-pill{
-  background:transparent !important;
-  color:var(--p-ink) !important;
-  border:1px solid var(--p-line) !important;
-}
-
+html[data-theme="dark"] .hero-pill:focus-visible{background:#fff !important;border-color:#fff !important;color:#08090b !important}
+.ghost-pill{background:transparent !important;color:var(--p-ink) !important;border:1px solid var(--p-line) !important}
 .ghost-pill:hover,
-.ghost-pill:focus-visible{
-  background:var(--p-surface-2) !important;
-  color:var(--p-blue) !important;
-  border-color:var(--p-blue-line) !important;
-}
-
-.hero-meta{
-  color:var(--p-muted) !important;
-  border-top:1px solid var(--p-line-soft) !important;
-  border-bottom:0 !important;
-  font-family:ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,monospace !important;
-  letter-spacing:.075em !important;
-}
-
-.availability-dot{
-  background:var(--p-blue) !important;
-  box-shadow:none !important;
-}
-
-.portrait-frame{
-  background:var(--p-surface-2) !important;
-  border:1px solid var(--p-line) !important;
-  border-radius:var(--p-radius-lg) !important;
-  box-shadow:var(--p-shadow) !important;
-}
-
-.portrait-frame img{
-  border-radius:calc(var(--p-radius-lg) - 1px) !important;
-}
-
+.ghost-pill:focus-visible{background:var(--p-surface-2) !important;color:var(--p-blue) !important;border-color:var(--p-blue-line) !important}
+.hero-meta{color:var(--p-muted) !important;border-top:1px solid var(--p-line-soft) !important;border-bottom:0 !important;font-family:ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,monospace !important;letter-spacing:.075em !important}
+.availability-dot{background:var(--p-blue) !important;box-shadow:none !important}
+.portrait-frame{background:var(--p-surface-2) !important;border:1px solid var(--p-line) !important;border-radius:var(--p-radius-lg) !important;box-shadow:var(--p-shadow) !important}
+.portrait-frame img{border-radius:calc(var(--p-radius-lg) - 1px) !important}
 /* =========================
    04 / SECTION SIGNAL
    ========================= */
 
-.section-head{
-  border-bottom:1px solid var(--p-line) !important;
-  padding-bottom:14px !important;
-}
-
-.section-kicker,
+.section-head{border-bottom:1px solid var(--p-line) !important;padding-bottom:14px !important}
 .media-category,
 .project-category,
-.thinking-quote-kicker{
-  color:var(--p-blue) !important;
-  font-family:ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,monospace !important;
-  font-size:10px !important;
-  font-weight:700 !important;
-  letter-spacing:.13em !important;
-  text-transform:uppercase;
-}
-
-.section h2{
-  color:var(--p-ink) !important;
-  font-family:Inter,ui-sans-serif,system-ui,sans-serif !important;
-  font-size:clamp(46px,6vw,72px) !important;
-  font-weight:800 !important;
-  line-height:.92 !important;
-  letter-spacing:-.065em !important;
-}
-
+.thinking-quote-kicker{color:var(--p-blue) !important;font-family:ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,monospace !important;font-size:10px !important;font-weight:700 !important;letter-spacing:.13em !important;text-transform:uppercase}
+.section h2{color:var(--p-ink) !important;font-family:Inter,ui-sans-serif,system-ui,sans-serif !important;font-size:clamp(46px,6vw,72px) !important;font-weight:800 !important;line-height:.92 !important;letter-spacing:-.065em !important}
 .section p,
 .media-subtitle,
 .projects-subtitle,
-.testimonials-subtitle{
-  color:var(--p-muted) !important;
-}
-
-main > .section .section-head::after{
-  color:var(--p-faint) !important;
-  opacity:.55 !important;
-  font-family:ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,monospace !important;
-}
-
+.testimonials-subtitle{color:var(--p-muted) !important}
+main > .section .section-head::after{color:var(--p-faint) !important;opacity:.55 !important;font-family:ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,monospace !important}
 /* =========================
    05 / CONTENT MODULES
    ========================= */
@@ -456,427 +135,167 @@ main > .section .section-head::after{
 .media-card,
 .project-card,
 .testimonial,
-.contact-card{
-  background:var(--p-surface) !important;
-  color:var(--p-ink) !important;
-  border:1px solid var(--p-line) !important;
-  border-radius:var(--p-radius-lg) !important;
-  box-shadow:var(--p-shadow) !important;
-  background-image:none !important;
-}
-
+.contact-card{background:var(--p-surface) !important;color:var(--p-ink) !important;border:1px solid var(--p-line) !important;border-radius:var(--p-radius-lg) !important;box-shadow:var(--p-shadow) !important;background-image:none !important}
 .record:hover,
 .media-card:hover,
 .project-card:hover,
 .testimonial:hover,
-.contact-card:hover{
-  border-color:var(--p-blue-line) !important;
-  box-shadow:var(--p-shadow-hover) !important;
-  transform:none !important;
-}
-
+.contact-card:hover{border-color:var(--p-blue-line) !important;box-shadow:var(--p-shadow-hover) !important;transform:none !important}
 .record time,
 .media-number,
-.project-number{
-  color:var(--p-blue) !important;
-  font-family:ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,monospace !important;
-  font-variant-numeric:tabular-nums !important;
-  letter-spacing:.04em !important;
-}
-
+.project-number{color:var(--p-blue) !important;font-family:ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,monospace !important;font-variant-numeric:tabular-nums !important;letter-spacing:.04em !important}
 .record h3,
 .media-card h3,
 .project-card h3,
 .thinking-quote-card strong,
-.contact-question{
-  color:var(--p-ink) !important;
-  font-family:Inter,ui-sans-serif,system-ui,sans-serif !important;
-  font-weight:750 !important;
-  letter-spacing:-.045em !important;
-}
-
-.record h3{
-  font-size:clamp(25px,3.1vw,36px) !important;
-}
-
+.contact-question{color:var(--p-ink) !important;font-family:Inter,ui-sans-serif,system-ui,sans-serif !important;font-weight:750 !important;letter-spacing:-.045em !important}
+.record h3{font-size:clamp(25px,3.1vw,36px) !important}
 .media-card h3,
-.project-card h3{
-  font-size:clamp(24px,2.8vw,36px) !important;
-}
-
+.project-card h3{font-size:clamp(24px,2.8vw,36px) !important}
 .record-activities li,
 .media-status,
-.project-status{
-  background:var(--p-blue-soft) !important;
-  color:var(--p-blue) !important;
-  border:1px solid var(--p-blue-line) !important;
-  border-radius:var(--p-pill) !important;
-  box-shadow:none !important;
-}
-
+.project-status{background:var(--p-blue-soft) !important;color:var(--p-blue) !important;border:1px solid var(--p-blue-line) !important;border-radius:var(--p-pill) !important;box-shadow:none !important}
 .media-status,
-.project-status{
-  font-family:ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,monospace !important;
-  letter-spacing:.08em !important;
-}
-
+.project-status{font-family:ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,monospace !important;letter-spacing:.08em !important}
 .media-links a,
-.project-link{
-  background:var(--p-ink) !important;
-  color:var(--p-bg) !important;
-  border:1px solid var(--p-ink) !important;
-  border-radius:var(--p-radius-sm) !important;
-  box-shadow:none !important;
-  font-weight:700 !important;
-}
-
+.project-link{background:var(--p-ink) !important;color:var(--p-bg) !important;border:1px solid var(--p-ink) !important;border-radius:var(--p-radius-sm) !important;box-shadow:none !important;font-weight:700 !important}
 .media-links a:hover,
 .media-links a:focus-visible,
 .project-link:hover,
-.project-link:focus-visible{
-  background:var(--p-blue) !important;
-  color:#fff !important;
-  border-color:var(--p-blue) !important;
-  box-shadow:none !important;
-  transform:none !important;
-}
-
-.project-link.is-disabled{
-  background:var(--p-surface-3) !important;
-  color:var(--p-faint) !important;
-  border-color:var(--p-line-soft) !important;
-}
-
+.project-link:focus-visible{background:var(--p-blue) !important;color:#fff !important;border-color:var(--p-blue) !important;box-shadow:none !important;transform:none !important}
+.project-link.is-disabled{background:var(--p-surface-3) !important;color:var(--p-faint) !important;border-color:var(--p-line-soft) !important}
 /* =========================
    06 / THINKING + TESTIMONIALS
    ========================= */
 
-.thinking-quotes{
-  background:transparent !important;
-  border:1px solid var(--p-line) !important;
-  border-radius:var(--p-radius-lg) !important;
-}
-
-.thinking-quote-card{
-  background:var(--p-surface) !important;
-  border:0 !important;
-  box-shadow:none !important;
-}
-
-.thinking-quote-card strong{
-  font-size:clamp(25px,3vw,42px) !important;
-}
-
-.thinking-quote-card p{
-  color:var(--p-muted) !important;
-}
-
-.testimonials-toolbar{
-  border-bottom:1px solid var(--p-line-soft) !important;
-}
-
-.testimonial blockquote::before{
-  color:var(--p-blue) !important;
-}
-
-.testimonial-avatar{
-  background:var(--p-ink) !important;
-  color:var(--p-bg) !important;
-  border:1px solid var(--p-ink) !important;
-  box-shadow:none !important;
-}
-
+.thinking-quotes{background:transparent !important;border:1px solid var(--p-line) !important;border-radius:var(--p-radius-lg) !important}
+.thinking-quote-card{background:transparent !important;border:0 !important;box-shadow:none !important}
+.thinking-quote-card strong{font-size:clamp(25px,3vw,42px) !important}
+.thinking-quote-card p{color:var(--p-muted) !important}
+.testimonials-toolbar{border-bottom:1px solid var(--p-line-soft) !important}
+.testimonial blockquote::before{color:var(--p-blue) !important}
+.testimonial-avatar{background:var(--p-ink) !important;color:var(--p-bg) !important;border:1px solid var(--p-ink) !important;box-shadow:none !important}
 .testimonial-meta,
 .testimonial-meta span,
-.testimonial-footer{
-  color:var(--p-muted) !important;
-}
-
-.testimonial-footer{
-  border-top:1px solid var(--p-line-soft) !important;
-}
-
-.testimonial-source-link{
-  color:var(--p-blue) !important;
-}
-
+.testimonial-footer{color:var(--p-muted) !important}
+.testimonial-footer{border-top:1px solid var(--p-line-soft) !important}
+.testimonial-source-link{color:var(--p-blue) !important}
 /* =========================
    07 / CONTACT — TERMINAL FORM
    ========================= */
 
-.contact-card{
-  background:var(--p-surface) !important;
-}
-
-.contact-intro{
-  border-bottom:1px solid var(--p-line) !important;
-}
-
-.contact-question{
-  font-size:clamp(32px,4.8vw,54px) !important;
-}
-
-.contact-answer{
-  color:var(--p-muted) !important;
-}
-
+.contact-card{background:var(--p-surface) !important}
+.contact-intro{border-bottom:1px solid var(--p-line) !important}
+.contact-question{font-size:clamp(32px,4.8vw,54px) !important}
+.contact-answer{color:var(--p-muted) !important}
 .contact-note,
 .contact-closing,
 .contact-benefits,
-.terms-checkbox-text{
-  color:var(--p-muted) !important;
-}
-
-.contact-form{
-  background:var(--p-surface-2) !important;
-  border:1px solid var(--p-line) !important;
-  border-radius:var(--p-radius-lg) !important;
-  box-shadow:none !important;
-}
-
+.terms-checkbox-text{color:var(--p-muted) !important}
+.contact-form{background:var(--p-surface-2) !important;border:1px solid var(--p-line) !important;border-radius:var(--p-radius-lg) !important;box-shadow:none !important}
 .contact-field,
-.contact-topic{
-  background:var(--p-surface) !important;
-  color:var(--p-ink) !important;
-  border:1px solid var(--p-line-soft) !important;
-  border-radius:var(--p-radius-sm) !important;
-  box-shadow:none !important;
-}
-
+.contact-topic{background:var(--p-surface) !important;color:var(--p-ink) !important;border:1px solid var(--p-line-soft) !important;border-radius:var(--p-radius-sm) !important;box-shadow:none !important}
 .contact-field:focus-within,
 .contact-topic:focus-within,
-.contact-topic:has(.contact-topic-trigger.is-open){
-  background:var(--p-surface) !important;
-  border-color:var(--p-blue-line) !important;
-  box-shadow:0 0 0 3px var(--p-blue-soft) !important;
-}
-
+.contact-topic:has(.contact-topic-trigger.is-open){background:var(--p-surface) !important;border-color:var(--p-blue-line) !important;box-shadow:var(--p-focus) !important}
 .contact-field input,
 .contact-field textarea,
 .contact-field select,
-.contact-topic-trigger{
-  color:var(--p-ink) !important;
-}
-
+.contact-topic-trigger{color:var(--p-ink) !important}
 .contact-field input::placeholder,
-.contact-field textarea::placeholder{
-  color:var(--p-faint) !important;
-}
-
-.contact-icon{
-  color:var(--p-blue) !important;
-}
-
-.contact-counter{
-  color:var(--p-faint) !important;
-  font-family:ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,monospace !important;
-}
-
+.contact-field textarea::placeholder{color:var(--p-faint) !important}
+.contact-icon{color:var(--p-blue) !important}
+.contact-counter{color:var(--p-faint) !important;font-family:ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,monospace !important}
 .contact-topic-menu,
 .topic-options,
-.terms-checkbox-popover{
-  background:var(--p-surface) !important;
-  color:var(--p-ink) !important;
-  border:1px solid var(--p-line) !important;
-  border-radius:var(--p-radius-md) !important;
-  box-shadow:var(--p-shadow-hover) !important;
-}
-
+.terms-checkbox-popover{background:var(--p-surface) !important;color:var(--p-ink) !important;border:1px solid var(--p-line) !important;border-radius:16px !important;box-shadow:var(--p-card-shadow-hover) !important}
 .contact-topic-menu button,
-.topic-options button{
-  background:transparent !important;
-  color:var(--p-muted) !important;
-  border-color:transparent !important;
-}
-
+.topic-options button{background:transparent !important;color:var(--p-muted) !important;border-color:transparent !important}
 .contact-topic-menu button:hover,
 .contact-topic-menu button:focus-visible,
 .topic-options button:hover,
-.topic-options button:focus-visible{
-  background:var(--p-blue-soft) !important;
-  color:var(--p-blue) !important;
-}
-
-.contact-topic-menu button.is-selected{
-  background:var(--p-blue) !important;
-  color:#fff !important;
-}
-
-.contact-submit{
-  border-top:1px solid var(--p-line) !important;
-}
-
-.contact-submit button{
-  background:var(--p-blue) !important;
-  color:#fff !important;
-  border:1px solid var(--p-blue) !important;
-  border-radius:var(--p-radius-sm) !important;
-  box-shadow:none !important;
-  font-weight:750 !important;
-}
-
+.topic-options button:focus-visible{background:var(--p-blue-soft) !important;color:var(--p-blue) !important}
+.contact-topic-menu button.is-selected{background:var(--p-blue) !important;color:#fff !important}
+.contact-submit{border-top:1px solid var(--p-line) !important}
+.contact-submit button{background:var(--p-blue) !important;color:#fff !important;border:1px solid var(--p-blue) !important;border-radius:var(--p-radius-sm) !important;box-shadow:none !important;font-weight:750 !important}
 .contact-submit button:hover:not(:disabled),
-.contact-submit button:focus-visible:not(:disabled){
-  background:var(--p-ink) !important;
-  color:var(--p-bg) !important;
-  border-color:var(--p-ink) !important;
-  box-shadow:none !important;
-  transform:none !important;
-}
-
+.contact-submit button:focus-visible:not(:disabled){background:var(--p-ink) !important;color:var(--p-bg) !important;border-color:var(--p-ink) !important;box-shadow:none !important;transform:none !important}
 html[data-theme="dark"] .contact-submit button:hover:not(:disabled),
-html[data-theme="dark"] .contact-submit button:focus-visible:not(:disabled){
-  background:#fff !important;
-  color:#08090b !important;
-  border-color:#fff !important;
-}
-
-.contact-benefits>*{
-  background:var(--p-surface) !important;
-  color:var(--p-muted) !important;
-  border:1px solid var(--p-line-soft) !important;
-  border-radius:var(--p-radius-sm) !important;
-  box-shadow:none !important;
-}
-
-.contact-benefits>* > svg{
-  stroke:var(--p-blue) !important;
-}
-
-.terms-checkbox-box{
-  background:var(--p-surface) !important;
-  border-color:var(--p-line) !important;
-}
-
-.terms-checkbox-input:checked + .terms-checkbox-box{
-  background:var(--p-blue) !important;
-  border-color:var(--p-blue) !important;
-}
-
+html[data-theme="dark"] .contact-submit button:focus-visible:not(:disabled){background:#fff !important;color:#08090b !important;border-color:#fff !important}
+.contact-benefits>*{background:var(--p-surface) !important;color:var(--p-muted) !important;border:1px solid var(--p-line-soft) !important;border-radius:var(--p-radius-sm) !important;box-shadow:none !important}
+.contact-benefits>* > svg{stroke:var(--p-blue) !important}
+.terms-checkbox-box{background:var(--p-surface) !important;border-color:var(--p-line) !important}
+.terms-checkbox-input:checked + .terms-checkbox-box{background:var(--p-blue) !important;border-color:var(--p-blue) !important}
 /* =========================
    08 / FOOTER + UTILITIES
    ========================= */
 
-.site-footer{
-  color:var(--p-muted) !important;
-}
-
-.site-footer-main{
-  background:var(--p-ink) !important;
-  color:var(--p-bg) !important;
-  border:1px solid var(--p-line) !important;
-  border-top:2px solid var(--p-blue) !important;
-  border-radius:var(--p-radius-lg) !important;
-  box-shadow:none !important;
-}
-
+.site-footer{color:var(--p-muted) !important}
+.site-footer-main{background:var(--p-ink) !important;color:var(--p-bg) !important;border:1px solid var(--p-line) !important;border-top:2px solid var(--p-blue) !important;border-radius:var(--p-radius-lg) !important;box-shadow:none !important}
 .site-footer-brand strong,
-.site-footer-nav a{
-  color:#fff !important;
-}
-
+.site-footer-nav a{color:#fff !important}
 .site-footer-brand p,
-.site-footer-bottom{
-  color:rgba(255,255,255,.58) !important;
-}
-
+.site-footer-bottom{color:rgba(255,255,255,.58) !important}
 .site-footer-nav a:hover,
-.site-footer-nav a:focus-visible{
-  background:rgba(255,255,255,.08) !important;
-  color:#fff !important;
-}
-
-.floating-utilities{
-  filter:none !important;
-}
-
-html[data-theme] .back-to-top{
-  background:var(--p-surface) !important;
-  color:var(--p-ink) !important;
-  border:1px solid var(--p-line) !important;
-  border-radius:var(--p-radius-sm) !important;
-  box-shadow:var(--p-shadow) !important;
-}
-
+.site-footer-nav a:focus-visible{background:rgba(255,255,255,.08) !important;color:#fff !important;border-color:rgba(255,255,255,.10) !important;transform:translateY(-1px) !important}
+.floating-utilities{filter:none !important}
+html[data-theme] .back-to-top{background:var(--p-surface) !important;color:var(--p-ink) !important;border:1px solid var(--p-line) !important;border-radius:var(--p-radius-sm) !important;box-shadow:var(--p-shadow) !important}
 html[data-theme] .back-to-top:hover,
-html[data-theme] .back-to-top:focus-visible{
-  background:var(--p-blue-soft) !important;
-  color:var(--p-blue) !important;
-  border-color:var(--p-blue-line) !important;
-  box-shadow:none !important;
-}
-
+html[data-theme] .back-to-top:focus-visible{background:var(--p-blue-soft) !important;color:var(--p-blue) !important;border-color:var(--p-blue-line) !important;box-shadow:none !important}
 /* =========================
    09 / UNIVERSAL MOTION + FOCUS
    ========================= */
 
 html[data-theme] a,
-html[data-theme] button{
-  -webkit-tap-highlight-color:transparent;
-}
-
+html[data-theme] button{-webkit-tap-highlight-color:transparent}
 html[data-theme] :is(
   .nav-action,
-  .menu-panel-grid a,
-  .music-playlist-item,
-  .hero-pill,
-  .ghost-pill,
-  .media-links a,
-  .project-link,
-  .contact-field,
-  .contact-topic,
-  .contact-topic-trigger,
-  .contact-submit button,
-  .back-to-top
-){
-  transition:
-    background-color 180ms var(--p-ease),
+.menu-panel-grid a,
+.music-playlist-item,
+.hero-pill,
+.ghost-pill,
+.media-links a,
+.project-link,
+.contact-field,
+.contact-topic,
+.contact-topic-trigger,
+.contact-submit button,
+.back-to-top
+){transition:background-color 180ms var(--p-ease),
     border-color 180ms var(--p-ease),
     color 180ms var(--p-ease),
     box-shadow 180ms var(--p-ease),
-    opacity 180ms var(--p-ease) !important;
-}
-
+    opacity 180ms var(--p-ease) !important}
 html[data-theme] :is(
   .nav-action,
-  .menu-panel-grid a,
-  .music-playlist-item,
-  .hero-pill,
-  .ghost-pill,
-  .media-links a,
-  .project-link,
-  .contact-topic-trigger,
-  .contact-submit button,
-  .back-to-top
-):focus-visible{
-  outline:2px solid var(--p-blue) !important;
-  outline-offset:3px !important;
-}
-
-@media (prefers-reduced-motion:reduce){
-  html[data-theme] :is(
+.menu-panel-grid a,
+.music-playlist-item,
+.hero-pill,
+.ghost-pill,
+.media-links a,
+.project-link,
+.contact-topic-trigger,
+.contact-submit button,
+.back-to-top
+):focus-visible{outline:2px solid var(--p-blue) !important;outline-offset:3px !important}
+@media (prefers-reduced-motion:reduce){html[data-theme] :is(
     .nav-action,
-    .menu-panel-grid a,
-    .music-playlist-item,
-    .hero-pill,
-    .ghost-pill,
-    .media-links a,
-    .project-link,
-    .contact-field,
-    .contact-topic,
-    .contact-submit button,
-        .back-to-top
-  ){
-    transition:none !important;
-  }
-}
-
+.menu-panel-grid a,
+.music-playlist-item,
+.hero-pill,
+.ghost-pill,
+.media-links a,
+.project-link,
+.contact-field,
+.contact-topic,
+.contact-submit button,
+.back-to-top
+  ){transition:none !important}}
 /* =========================
    10 / DEVICE PARITY
    ========================= */
 
-@media (max-width:767px){
-  .nav,
+@media (max-width:767px){.nav,
   .nav-actions>nav,
   .music-panel,
   .record,
@@ -885,175 +304,58 @@ html[data-theme] :is(
   .testimonial,
   .contact-card,
   .contact-form{
-    border-radius:var(--p-radius-md) !important;
-  }
+    border-radius:var(--p-radius-md) !important;}
 
   .hero h1{
-    font-size:clamp(58px,14vw,82px) !important;
-    letter-spacing:-.064em !important;
-  }
+    font-size:clamp(58px,14vw,82px) !important;letter-spacing:-.064em !important;}
 
   .section h2{
-    letter-spacing:-.055em !important;
-  }
-}
-
-@media (max-width:390px){
-  .hero h1,
-  .section h2,
-  .record h3,
-  .media-card h3,
-  .project-card h3,
-  .contact-question{
-    overflow-wrap:anywhere;
-  }
-}
-
-/* 2100 rule: dark-only system, no decorative gradients, no frosted-glass dependence, no logo overrides. */
+    letter-spacing:-.055em !important}
+@media (max-width:390px){.hero h1,
+.section h2,
+.record h3,
+.media-card h3,
+.project-card h3,
+.contact-question{overflow-wrap:anywhere}}
+/* 2100 rule: dark-only system,
+no decorative gradients,
+no frosted-glass dependence,
+no logo overrides. */
 .hero::before,
 .hero::after,
 .section::before,
-.section::after{
-  background-image:none !important;
-}
-
+.section::after{background-image:none !important}
 /* =========================
    11 / PERFORMANCE HARDENING
    ========================= */
 
-.scroll-progress span{
-  transform:scaleX(0);
-  transform-origin:left center;
-  transition:none !important;
-  will-change:transform;
-}
-
+.scroll-progress span{transform:scaleX(0);transform-origin:left center;transition:none !important;will-change:transform}
 .site-shell.menu-open::before,
-.site-shell.music-open::before{
-  background:rgba(8,9,11,.72) !important;
-  backdrop-filter:none !important;
-  -webkit-backdrop-filter:none !important;
-}
-
+.site-shell.music-open::before{background:rgba(8,9,11,.72) !important;backdrop-filter:none !important;-webkit-backdrop-filter:none !important}
 .site-shell.menu-open>main,
 .site-shell.menu-open>footer,
 .site-shell.music-open>main,
-.site-shell.music-open>footer{
-  filter:none !important;
-  transition:none !important;
-}
-
+.site-shell.music-open>footer{filter:none !important;transition:none !important}
 .nav-actions>nav,
-.music-panel{
-  will-change:opacity,transform;
-}
-
-@media (prefers-reduced-motion:reduce){
-  .nav-actions>nav,
-  .music-panel{
-    will-change:auto;
-  }
-}
-
-
+.music-panel{will-change:opacity,transform;border-radius:20px !important}
+@media (prefers-reduced-motion:reduce){.nav-actions>nav,
+.music-panel{will-change:auto}}
 /* =========================
    12 / APP BUTTONS — 2100 TILE
    Inspired by the supplied rounded app-control reference.
    Visual-only: existing markup and layout remain intact.
    ========================= */
 
-.nav-actions{
-  gap:8px !important;
-  padding:6px !important;
-  background:rgba(16,18,22,.88) !important;
-  border:1px solid rgba(255,255,255,.10) !important;
-  border-radius:20px !important;
-  box-shadow:0 10px 28px rgba(0,0,0,.24), inset 0 1px 0 rgba(255,255,255,.045) !important;
-}
-
-html[data-theme] .nav-action{
-  min-width:92px !important;
-  min-height:64px !important;
-  padding:9px 12px !important;
-  display:inline-flex !important;
-  flex-direction:column !important;
-  justify-content:center !important;
-  align-items:center !important;
-  gap:5px !important;
-  background:linear-gradient(180deg,rgba(255,255,255,.065),rgba(255,255,255,.025)) !important;
-  color:var(--p-ink) !important;
-  border:1px solid rgba(255,255,255,.10) !important;
-  border-radius:16px !important;
-  box-shadow:0 6px 18px rgba(0,0,0,.20), inset 0 1px 0 rgba(255,255,255,.045) !important;
-  transform:translateY(0) !important;
-}
-
-html[data-theme] .nav-action:hover,
-html[data-theme] .nav-action:focus-visible{
-  background:linear-gradient(180deg,rgba(255,255,255,.10),rgba(255,255,255,.04)) !important;
-  color:#fff !important;
-  border-color:rgba(77,163,255,.38) !important;
-  box-shadow:0 10px 24px rgba(0,0,0,.28),0 0 0 1px rgba(77,163,255,.08) !important;
-  transform:translateY(-1px) !important;
-}
-
-html[data-theme] .nav-action.is-open{
-  background:linear-gradient(180deg,#4da3ff,#318fe9) !important;
-  color:#fff !important;
-  border-color:#4da3ff !important;
-  box-shadow:0 10px 24px rgba(77,163,255,.24),inset 0 1px 0 rgba(255,255,255,.22) !important;
-}
-
-.nav-action-glyph{
-  width:28px !important;
-  height:28px !important;
-  display:grid !important;
-  place-items:center !important;
-  font-size:20px !important;
-  line-height:1 !important;
-  color:currentColor !important;
-  border-radius:9px !important;
-}
-
-.nav-action-label{
-  font-size:11px !important;
-  line-height:1 !important;
-  font-weight:750 !important;
-  letter-spacing:.01em !important;
-}
-
-.nav-action-meta{
-  display:none !important;
-}
-
-.nav-menu-lines{
-  width:28px !important;
-  height:28px !important;
-  display:flex !important;
-  flex-direction:column !important;
-  justify-content:center !important;
-  gap:4px !important;
-  padding:6px !important;
-  border-radius:9px !important;
-}
-
-.nav-menu-lines > span{
-  width:100% !important;
-  height:2px !important;
-  border-radius:99px !important;
-}
-
+.nav-actions{gap:8px !important;padding:6px !important;background:rgba(16,18,22,.88) !important;border:1px solid rgba(255,255,255,.10) !important;border-radius:20px !important;box-shadow:0 10px 28px rgba(0,0,0,.24), inset 0 1px 0 rgba(255,255,255,.045) !important}
+.nav-action-glyph{width:28px !important;height:28px !important;display:grid !important;place-items:center !important;font-size:20px !important;line-height:1 !important;color:currentColor !important;border-radius:9px !important}
+.nav-action-label{font-size:11px !important;line-height:1 !important;font-weight:750 !important;letter-spacing:.01em !important}
+.nav-action-meta{display:none !important}
+.nav-menu-lines{width:28px !important;height:28px !important;display:flex !important;flex-direction:column !important;justify-content:center !important;gap:4px !important;padding:6px !important;border-radius:9px !important}
 .hero-pill,
 .ghost-pill,
 .media-links a,
 .project-link,
-.contact-submit button{
-  min-height:48px !important;
-  padding:12px 18px !important;
-  border-radius:14px !important;
-  box-shadow:0 7px 20px rgba(0,0,0,.18),inset 0 1px 0 rgba(255,255,255,.06) !important;
-}
-
+.contact-submit button{min-height:48px !important;padding:12px 18px !important;border-radius:14px !important;box-shadow:0 7px 20px rgba(0,0,0,.18),inset 0 1px 0 rgba(255,255,255,.06) !important}
 .hero-pill:hover,
 .hero-pill:focus-visible,
 .ghost-pill:hover,
@@ -1063,78 +365,31 @@ html[data-theme] .nav-action.is-open{
 .project-link:hover,
 .project-link:focus-visible,
 .contact-submit button:hover:not(:disabled),
-.contact-submit button:focus-visible:not(:disabled){
-  transform:translateY(-1px) !important;
-}
-
-@media (max-width:767px){
-  .nav-actions{
-    gap:6px !important;
-    padding:5px !important;
-    border-radius:18px !important;
-  }
-
-  html[data-theme] .nav-action{
-    min-width:72px !important;
-    min-height:58px !important;
-    padding:7px 9px !important;
-    border-radius:14px !important;
-  }
-
-  .nav-action-glyph,
-  .nav-menu-lines{
-    width:25px !important;
-    height:25px !important;
-  }
-
-  .nav-action-label{
-    font-size:10px !important;
-  }
-}
-
-@media (max-width:390px){
-  html[data-theme] .nav-action{
-    min-width:66px !important;
-    min-height:54px !important;
-  }
-
-  .nav-action-label{
-    font-size:9px !important;
-  }
-}
-
-
-
+.contact-submit button:focus-visible:not(:disabled){transform:translateY(-1px) !important}
+@media (max-width:767px){.nav-actions{gap:6px !important;padding:5px !important;border-radius:18px !important}
+html[data-theme] .nav-action{min-width:72px !important;min-height:58px !important;padding:7px 9px !important;border-radius:14px !important}
+.nav-action-glyph,
+.nav-menu-lines{width:25px !important;height:25px !important}
+.nav-action-label{font-size:10px !important}}
+@media (max-width:390px){html[data-theme] .nav-action{min-width:66px !important;min-height:54px !important}
+.nav-action-label{font-size:9px !important}}
 /* =========================
    13 / GLOBAL CONTROL SYNC
    Every interactive surface now shares one app-control language.
-   Visual layer only — DOM, content and layout structure preserved.
+   Visual layer only — DOM,
+content and layout structure preserved.
    ========================= */
 
-:root{
-  --p-control-surface:linear-gradient(180deg,rgba(255,255,255,.065),rgba(255,255,255,.022));
-  --p-control-hover:linear-gradient(180deg,rgba(255,255,255,.105),rgba(255,255,255,.04));
-  --p-control-border:rgba(255,255,255,.10);
-  --p-control-active:linear-gradient(180deg,#4da3ff,#318fe9);
-  --p-control-radius:14px;
-  --p-control-shadow:0 7px 20px rgba(0,0,0,.20),inset 0 1px 0 rgba(255,255,255,.045);
-  --p-control-shadow-hover:0 10px 26px rgba(0,0,0,.28),0 0 0 1px rgba(77,163,255,.08);
-}
-
-/* Menu, playlist and form triggers */
+:root{--p-control-surface:linear-gradient(180deg,rgba(255,255,255,.065),rgba(255,255,255,.022));--p-control-hover:linear-gradient(180deg,rgba(255,255,255,.105),rgba(255,255,255,.04));--p-control-border:rgba(255,255,255,.10);--p-control-active:linear-gradient(180deg,#4da3ff,#318fe9);--p-control-radius:14px;--p-control-shadow:0 7px 20px rgba(0,0,0,.20),inset 0 1px 0 rgba(255,255,255,.045);--p-control-shadow-hover:0 10px 26px rgba(0,0,0,.28),0 0 0 1px rgba(77,163,255,.08)}
+/* Menu,
+playlist and form triggers */
 .menu-panel-grid a,
 .music-playlist-item,
 .contact-topic-trigger,
 .contact-topic-menu button,
 .topic-options button,
 .terms-checkbox-box,
-.back-to-top{
-  background:var(--p-control-surface) !important;
-  border:1px solid var(--p-control-border) !important;
-  border-radius:var(--p-control-radius) !important;
-  box-shadow:var(--p-control-shadow) !important;
-}
-
+.back-to-top{background:var(--p-control-surface) !important;border:1px solid var(--p-control-border) !important;border-radius:var(--p-control-radius) !important;box-shadow:var(--p-control-shadow) !important}
 .menu-panel-grid a:hover,
 .menu-panel-grid a:focus-visible,
 .menu-panel-grid a.is-active,
@@ -1149,24 +404,14 @@ html[data-theme] .nav-action.is-open{
 .topic-options button:hover,
 .topic-options button:focus-visible,
 .back-to-top:hover,
-.back-to-top:focus-visible{
-  background:var(--p-control-hover) !important;
-  border-color:rgba(77,163,255,.38) !important;
-  box-shadow:var(--p-control-shadow-hover) !important;
-  transform:translateY(-1px) !important;
-}
-
+.back-to-top:focus-visible{background:var(--p-control-hover) !important;border-color:rgba(77,163,255,.38) !important;box-shadow:var(--p-control-shadow-hover) !important;transform:translateY(-1px) !important}
 /* Primary actions share the same tactile geometry. */
 .hero-pill,
 .ghost-pill,
 .media-links a,
 .project-link,
 .contact-submit button,
-.music-play{
-  border-radius:var(--p-control-radius) !important;
-  box-shadow:var(--p-control-shadow) !important;
-}
-
+.music-play{border-radius:var(--p-control-radius) !important;box-shadow:var(--p-control-shadow) !important}
 .hero-pill:hover,
 .hero-pill:focus-visible,
 .ghost-pill:hover,
@@ -1178,38 +423,20 @@ html[data-theme] .nav-action.is-open{
 .contact-submit button:hover:not(:disabled),
 .contact-submit button:focus-visible:not(:disabled),
 .music-play:hover,
-.music-play:focus-visible{
-  box-shadow:var(--p-control-shadow-hover) !important;
-}
-
+.music-play:focus-visible{box-shadow:var(--p-control-shadow-hover) !important}
 /* Keep disabled states unmistakably inactive. */
-.project-link.is-disabled{
-  transform:none !important;
-  box-shadow:none !important;
-}
-
+.project-link.is-disabled{transform:none !important;box-shadow:none !important}
 /* Contact fields use the same inset app-surface language without becoming buttons. */
 .contact-field,
-.contact-topic{
-  box-shadow:inset 0 1px 0 rgba(255,255,255,.025) !important;
-}
-
-.contact-field:focus-within,
-.contact-topic:focus-within,
-.contact-topic:has(.contact-topic-trigger.is-open){
-  box-shadow:0 0 0 3px var(--p-blue-soft),inset 0 1px 0 rgba(255,255,255,.04) !important;
-}
-
+.contact-topic{box-shadow:inset 0 1px 0 rgba(255,255,255,.025) !important}
 /* Small screens: preserve the existing geometry while tightening the tactile scale. */
-@media (max-width:767px){
-  .menu-panel-grid a,
+@media (max-width:767px){.menu-panel-grid a,
   .music-playlist-item,
   .contact-topic-trigger,
   .contact-topic-menu button,
   .topic-options button,
   .back-to-top{
-    border-radius:13px !important;
-  }
+    border-radius:13px !important;}
 
   .hero-pill,
   .ghost-pill,
@@ -1217,47 +444,31 @@ html[data-theme] .nav-action.is-open{
   .project-link,
   .contact-submit button,
   .music-play{
-    border-radius:13px !important;
-  }
-}
-
-@media (prefers-reduced-motion:reduce){
-  .menu-panel-grid a:hover,
-  .menu-panel-grid a:focus-visible,
-  .menu-panel-grid a.is-active,
-  .music-playlist-item:hover,
-  .music-playlist-item:focus-visible,
-  .music-playlist-item.is-active,
-  .contact-topic-trigger:hover,
-  .contact-topic-trigger:focus-visible,
-  .contact-topic-trigger.is-open,
-  .contact-topic-menu button:hover,
-  .contact-topic-menu button:focus-visible,
-  .topic-options button:hover,
-  .topic-options button:focus-visible,
-  .back-to-top:hover,
-  .back-to-top:focus-visible{
-    transform:none !important;
-  }
-}
-
-
+    border-radius:13px !important}
+@media (prefers-reduced-motion:reduce){.menu-panel-grid a:hover,
+.menu-panel-grid a:focus-visible,
+.menu-panel-grid a.is-active,
+.music-playlist-item:hover,
+.music-playlist-item:focus-visible,
+.music-playlist-item.is-active,
+.contact-topic-trigger:hover,
+.contact-topic-trigger:focus-visible,
+.contact-topic-trigger.is-open,
+.contact-topic-menu button:hover,
+.contact-topic-menu button:focus-visible,
+.topic-options button:hover,
+.topic-options button:focus-visible,
+.back-to-top:hover,
+.back-to-top:focus-visible{transform:none !important}}
 /* =========================
    14 / PORTAL 2100 — FULL SYSTEM SYNC
    Final visual coherence layer.
-   Existing DOM, content, geometry and logo remain protected.
+   Existing DOM,
+content,
+geometry and logo remain protected.
    ========================= */
 
-:root{
-  --p-surface-elevated:#181c23;
-  --p-control-radius:14px;
-  --p-card-radius:18px;
-  --p-control-shadow:0 8px 24px rgba(0,0,0,.22),inset 0 1px 0 rgba(255,255,255,.045);
-  --p-card-shadow:0 1px 0 rgba(255,255,255,.035),0 16px 44px rgba(0,0,0,.28);
-  --p-card-shadow-hover:0 1px 0 rgba(255,255,255,.045),0 22px 54px rgba(0,0,0,.38);
-  --p-blue-glow:0 0 0 1px rgba(77,163,255,.08),0 10px 28px rgba(77,163,255,.10);
-}
-
+:root{--p-surface-elevated:#181c23;--p-control-radius:14px;--p-card-radius:18px;--p-control-shadow:0 8px 24px rgba(0,0,0,.22),inset 0 1px 0 rgba(255,255,255,.045);--p-card-shadow:0 1px 0 rgba(255,255,255,.035),0 16px 44px rgba(0,0,0,.28);--p-card-shadow-hover:0 1px 0 rgba(255,255,255,.045),0 22px 54px rgba(0,0,0,.38);--p-blue-glow:0 0 0 1px rgba(77,163,255,.08),0 10px 28px rgba(77,163,255,.10)}
 /* One surface hierarchy: shell → card → control. */
 .nav,
 .nav-actions>nav,
@@ -1266,53 +477,25 @@ html[data-theme] .nav-action.is-open{
 .media-card,
 .project-card,
 .testimonial,
-.contact-card{
-  background:var(--p-surface) !important;
-  border:1px solid var(--p-line) !important;
-  box-shadow:var(--p-card-shadow) !important;
-}
-
+.contact-card{background:var(--p-surface) !important;border:1px solid var(--p-line) !important;box-shadow:var(--p-card-shadow) !important}
 .record,
 .media-card,
 .project-card,
 .testimonial,
-.contact-card{
-  border-radius:var(--p-card-radius) !important;
-  overflow:hidden;
-}
-
-.nav-actions>nav,
-.music-panel{
-  border-radius:20px !important;
-}
-
+.contact-card{border-radius:var(--p-card-radius) !important;overflow:hidden;transition:border-color 180ms var(--p-ease),
+    box-shadow 180ms var(--p-ease),
+    transform 180ms var(--p-ease) !important}
 /* Consistent card interaction language. */
 .record:hover,
 .media-card:hover,
 .project-card:hover,
 .testimonial:hover,
-.contact-card:hover{
-  border-color:var(--p-blue-line) !important;
-  box-shadow:var(--p-card-shadow-hover) !important;
-  transform:translateY(-2px) !important;
-}
-
-.record,
-.media-card,
-.project-card,
-.testimonial,
-.contact-card{
-  transition:
-    border-color 180ms var(--p-ease),
-    box-shadow 180ms var(--p-ease),
-    transform 180ms var(--p-ease) !important;
-}
-
-/* Numbers, labels and metadata form one system. */
+.contact-card:hover{border-color:var(--p-blue-line) !important;box-shadow:var(--p-card-shadow-hover) !important;transform:translateY(-2px) !important}
+/* Numbers,
+labels and metadata form one system. */
 .record time,
 .media-number,
 .project-number,
-.section-kicker,
 .media-category,
 .project-category,
 .thinking-quote-kicker,
@@ -1321,63 +504,34 @@ html[data-theme] .nav-action.is-open{
 .menu-item-index,
 .music-eyebrow,
 .music-status,
-.contact-counter{
-  font-variant-numeric:tabular-nums !important;
-}
-
+.contact-counter{font-variant-numeric:tabular-nums !important}
 /* Badges become compact system chips rather than decorative pills. */
 .record-activities li,
 .media-status,
 .project-status,
-.menu-panel-count{
-  min-height:28px !important;
-  padding:5px 9px !important;
-  display:inline-flex !important;
-  align-items:center !important;
-  line-height:1 !important;
-}
-
+.menu-panel-count{min-height:28px !important;padding:5px 9px !important;display:inline-flex !important;align-items:center !important;line-height:1 !important}
 /* Menu and playlist become the same family as the main cards. */
 .menu-panel-grid a,
-.music-playlist-item{
-  min-height:58px !important;
-  border-radius:14px !important;
-  box-shadow:var(--p-control-shadow) !important;
-}
-
+.music-playlist-item{min-height:58px !important;border-radius:14px !important;box-shadow:var(--p-control-shadow) !important}
 .menu-panel-grid a:hover,
 .menu-panel-grid a:focus-visible,
 .music-playlist-item:hover,
-.music-playlist-item:focus-visible{
-  transform:translateY(-1px) !important;
-  box-shadow:var(--p-control-shadow-hover) !important;
-}
-
+.music-playlist-item:focus-visible{transform:translateY(-2px) !important;box-shadow:0 14px 28px rgba(0,0,0,.25),
+    0 0 24px rgba(85,230,224,.06),
+    inset 0 1px 0 rgba(255,255,255,.15) !important;border-color:rgba(85,230,224,.30) !important}
 .menu-panel-grid a.is-active,
-.music-playlist-item.is-active{
-  border-color:var(--p-blue-line) !important;
-  box-shadow:var(--p-blue-glow) !important;
-}
-
+.music-playlist-item.is-active{border-color:var(--p-blue-line) !important;box-shadow:var(--p-blue-glow) !important}
 /* Media/project links and primary actions share one physical button. */
 .hero-pill,
 .ghost-pill,
 .media-links a,
 .project-link,
 .contact-submit button,
-.music-play{
-  min-height:48px !important;
-  border-radius:14px !important;
-  font-weight:750 !important;
-  letter-spacing:-.01em !important;
-  transition:
-    background-color 180ms var(--p-ease),
+.music-play{min-height:48px !important;border-radius:14px !important;font-weight:750 !important;letter-spacing:-.01em !important;transition:background-color 180ms var(--p-ease),
     border-color 180ms var(--p-ease),
     color 180ms var(--p-ease),
     box-shadow 180ms var(--p-ease),
-    transform 180ms var(--p-ease) !important;
-}
-
+    transform 180ms var(--p-ease) !important}
 .hero-pill:hover,
 .ghost-pill:hover,
 .media-links a:hover,
@@ -1389,322 +543,167 @@ html[data-theme] .nav-action.is-open{
 .media-links a:focus-visible,
 .project-link:focus-visible,
 .contact-submit button:focus-visible:not(:disabled),
-.music-play:focus-visible{
-  transform:translateY(-2px) !important;
-  box-shadow:var(--p-control-shadow-hover) !important;
-}
-
-/* Form controls: same system, quieter treatment. */
+.music-play:focus-visible{transform:translateY(-2px) !important;box-shadow:var(--p-control-shadow-hover) !important}
+/* Form controls: same system,
+quieter treatment. */
 .contact-field,
-.contact-topic{
-  border-radius:14px !important;
-  background:var(--p-surface) !important;
-  border-color:var(--p-line-soft) !important;
-}
-
+.contact-topic{border-radius:14px !important;background:var(--p-surface) !important;border-color:var(--p-line-soft) !important}
 .contact-field input,
 .contact-field textarea,
-.contact-topic-trigger{
-  min-height:48px !important;
-}
-
-.contact-topic-menu,
-.topic-options,
-.terms-checkbox-popover{
-  border-radius:16px !important;
-  box-shadow:var(--p-card-shadow-hover) !important;
-}
-
+.contact-topic-trigger{min-height:48px !important}
 /* Hero portrait belongs to the same elevation system. */
-.portrait-frame{
-  border-radius:20px !important;
-  box-shadow:var(--p-card-shadow) !important;
-}
-
-.portrait-frame:hover{
-  border-color:var(--p-blue-line) !important;
-}
-
+.portrait-frame{border-radius:20px !important;box-shadow:var(--p-card-shadow) !important}
+.portrait-frame:hover{border-color:var(--p-blue-line) !important}
 /* Thinking module gets the same quiet elevated surface. */
-.thinking-quotes{
-  background:var(--p-surface) !important;
-  border:1px solid var(--p-line) !important;
-  box-shadow:var(--p-card-shadow) !important;
-  overflow:hidden;
-}
-
-.thinking-quote-card{
-  background:transparent !important;
-}
-
+.thinking-quotes{background:var(--p-surface) !important;border:1px solid var(--p-line) !important;box-shadow:var(--p-card-shadow) !important;overflow:hidden}
 /* Footer is intentionally inverted but uses the same geometry. */
-.site-footer-main{
-  border-radius:var(--p-card-radius) !important;
-  box-shadow:var(--p-card-shadow) !important;
-}
-
+.site-footer-main{border-radius:var(--p-card-radius) !important;box-shadow:var(--p-card-shadow) !important}
 /* Universal keyboard language. */
 html[data-theme] :is(
   .nav-action,
-  .menu-panel-grid a,
-  .music-playlist-item,
-  .hero-pill,
-  .ghost-pill,
-  .media-links a,
-  .project-link,
-  .contact-topic-trigger,
-  .contact-topic-menu button,
-  .topic-options button,
-  .contact-submit button,
-  .music-play,
-  .back-to-top
-):focus-visible{
-  outline:2px solid var(--p-blue) !important;
-  outline-offset:3px !important;
-}
-
+.menu-panel-grid a,
+.music-playlist-item,
+.hero-pill,
+.ghost-pill,
+.media-links a,
+.project-link,
+.contact-topic-trigger,
+.contact-topic-menu button,
+.topic-options button,
+.contact-submit button,
+.music-play,
+.back-to-top
+):focus-visible{outline:2px solid var(--p-blue) !important;outline-offset:3px !important}
 /* Prevent accidental horizontal overflow from tactile controls. */
 .nav,
 .nav-actions,
 .nav-actions>nav,
 .music-panel,
 .contact-card,
-.contact-form{
-  max-width:100%;
-}
-
-/* Mobile: same design language, tighter physical scale. */
-@media (max-width:767px){
-  .record,
+.contact-form{max-width:100%}
+/* Mobile: same design language,
+tighter physical scale. */
+@media (max-width:767px){.record,
   .media-card,
   .project-card,
   .testimonial,
   .contact-card,
   .thinking-quotes,
   .site-footer-main{
-    border-radius:16px !important;
-  }
+    border-radius:16px !important;}
 
   .nav-actions>nav,
   .music-panel{
-    border-radius:16px !important;
-  }
+    border-radius:16px !important;}
 
   .record:hover,
   .media-card:hover,
   .project-card:hover,
   .testimonial:hover,
   .contact-card:hover{
-    transform:none !important;
-  }
-}
-
-@media (prefers-reduced-motion:reduce){
-  .record,
-  .media-card,
-  .project-card,
-  .testimonial,
-  .contact-card,
-  .hero-pill,
-  .ghost-pill,
-  .media-links a,
-  .project-link,
-  .contact-submit button,
-  .music-play{
-    transition:none !important;
-  }
-
-  .record:hover,
-  .media-card:hover,
-  .project-card:hover,
-  .testimonial:hover,
-  .contact-card:hover,
-  .hero-pill:hover,
-  .ghost-pill:hover,
-  .media-links a:hover,
-  .project-link:hover,
-  .contact-submit button:hover:not(:disabled),
-  .music-play:hover{
-    transform:none !important;
-  }
-}
-
-
+    transform:none !important}
+@media (prefers-reduced-motion:reduce){.record,
+.media-card,
+.project-card,
+.testimonial,
+.contact-card,
+.hero-pill,
+.ghost-pill,
+.media-links a,
+.project-link,
+.contact-submit button,
+.music-play{transition:none !important}
+.record:hover,
+.media-card:hover,
+.project-card:hover,
+.testimonial:hover,
+.contact-card:hover,
+.hero-pill:hover,
+.ghost-pill:hover,
+.media-links a:hover,
+.project-link:hover,
+.contact-submit button:hover:not(:disabled),
+.music-play:hover{transform:none !important}}
 /* =========================
    15 / FINAL SYNC — JRHs PORTAL 2100
    Canonical interaction + surface language.
    ========================= */
 
-:root{
-  --p-control-height:48px;
-  --p-control-radius:14px;
-  --p-control-gap:8px;
-  --p-focus:0 0 0 3px var(--p-blue-soft);
-  --p-hairline:rgba(255,255,255,.10);
-  --p-glow:0 10px 30px rgba(77,163,255,.10);
-}
-
+:root{--p-control-height:48px;--p-control-radius:14px;--p-control-gap:8px;--p-focus:0 0 0 3px var(--p-blue-soft);--p-hairline:rgba(255,255,255,.10);--p-glow:0 10px 30px rgba(77,163,255,.10)}
 /* Every actionable element speaks the same visual language. */
 html[data-theme] :is(
   a[href],
-  button,
-  [role="button"]
-){
-  -webkit-tap-highlight-color:transparent;
-}
-
+button,
+[role="button"]
+){-webkit-tap-highlight-color:transparent}
 html[data-theme] :is(
   .nav-action,
-  .menu-panel-grid a,
-  .music-playlist-item,
-  .hero-pill,
-  .ghost-pill,
-  .media-links a,
-  .project-link,
-  .contact-topic-trigger,
-  .contact-topic-menu button,
-  .topic-options button,
-  .contact-submit button,
-  .music-controls button,
-  .music-play,
-  .back-to-top,
-  .site-footer-nav a
-){
-  -webkit-appearance:none;
-  appearance:none;
-}
-
-/* Shared tactile state: quiet at rest, precise on interaction. */
+.menu-panel-grid a,
+.music-playlist-item,
+.hero-pill,
+.ghost-pill,
+.media-links a,
+.project-link,
+.contact-topic-trigger,
+.contact-topic-menu button,
+.topic-options button,
+.contact-submit button,
+.music-controls button,
+.music-play,
+.back-to-top,
+.site-footer-nav a
+){-webkit-appearance:none;appearance:none}
+/* Shared tactile state: quiet at rest,
+precise on interaction. */
 html[data-theme] :is(
   .nav-action,
-  .menu-panel-grid a,
-  .music-playlist-item,
-  .hero-pill,
-  .ghost-pill,
-  .media-links a,
-  .project-link,
-  .contact-topic-trigger,
-  .contact-topic-menu button,
-  .topic-options button,
-  .contact-submit button,
-  .music-controls button,
-  .music-play,
-  .back-to-top,
-  .site-footer-nav a
-){
-  transition:
-    color 180ms var(--p-ease),
+.menu-panel-grid a,
+.music-playlist-item,
+.hero-pill,
+.ghost-pill,
+.media-links a,
+.project-link,
+.contact-topic-trigger,
+.contact-topic-menu button,
+.topic-options button,
+.contact-submit button,
+.music-controls button,
+.music-play,
+.back-to-top,
+.site-footer-nav a
+){transition:color 180ms var(--p-ease),
     background-color 180ms var(--p-ease),
     border-color 180ms var(--p-ease),
     box-shadow 180ms var(--p-ease),
     transform 180ms var(--p-ease),
-    opacity 180ms var(--p-ease) !important;
-}
-
+    opacity 180ms var(--p-ease) !important}
 /* Footer links join the same system without turning the footer into a card grid. */
-.site-footer-nav a{
-  border:1px solid transparent !important;
-  border-radius:10px !important;
-  padding:8px 10px !important;
-}
-
-.site-footer-nav a:hover,
-.site-footer-nav a:focus-visible{
-  background:rgba(255,255,255,.08) !important;
-  border-color:rgba(255,255,255,.10) !important;
-  transform:translateY(-1px) !important;
-}
-
+.site-footer-nav a{border:1px solid transparent !important;border-radius:10px !important;padding:8px 10px !important}
 /* Music transport controls are equal tactile controls. */
-.music-controls > button{
-  min-width:44px !important;
-  min-height:44px !important;
-  display:grid !important;
-  place-items:center !important;
-  border-radius:12px !important;
-}
-
-.music-controls > button:not(.music-play){
-  border:1px solid transparent !important;
-}
-
-.music-controls > button:not(.music-play):hover,
-.music-controls > button:not(.music-play):focus-visible{
-  border-color:var(--p-line) !important;
-  background:var(--p-surface-2) !important;
-  color:var(--p-ink) !important;
-  transform:translateY(-1px) !important;
-}
-
+.music-controls > button{min-width:44px !important;min-height:44px !important;display:grid !important;place-items:center !important;border-radius:12px !important}
 /* Primary blue actions are the single strongest interaction signal. */
 .hero-pill,
 .contact-submit button,
-.music-play{
-  background:var(--p-blue) !important;
-  color:#fff !important;
-  border-color:var(--p-blue) !important;
-}
-
+.music-play{background:var(--p-blue) !important;color:#fff !important;border-color:var(--p-blue) !important}
 .hero-pill:hover,
 .hero-pill:focus-visible,
 .contact-submit button:hover:not(:disabled),
 .contact-submit button:focus-visible:not(:disabled),
 .music-play:hover,
-.music-play:focus-visible{
-  background:#fff !important;
-  color:var(--p-bg) !important;
-  border-color:#fff !important;
-  box-shadow:var(--p-control-shadow-hover) !important;
-}
-
+.music-play:focus-visible{background:#fff !important;color:var(--p-bg) !important;border-color:#fff !important;box-shadow:var(--p-control-shadow-hover) !important}
 /* Secondary actions remain neutral until interaction. */
-.ghost-pill{
-  background:transparent !important;
-  color:var(--p-ink) !important;
-  border-color:var(--p-line) !important;
-}
-
-.ghost-pill:hover,
-.ghost-pill:focus-visible{
-  background:var(--p-surface-2) !important;
-  color:var(--p-blue) !important;
-  border-color:var(--p-blue-line) !important;
-}
-
+.ghost-pill{background:transparent !important;color:var(--p-ink) !important;border-color:var(--p-line) !important}
 /* Disabled actions cannot accidentally inherit active treatment. */
 .project-link.is-disabled,
-.contact-submit button:disabled{
-  opacity:.48 !important;
-  cursor:not-allowed !important;
-  transform:none !important;
-  box-shadow:none !important;
-}
-
-/* Inputs are part of the system, but intentionally flatter than buttons. */
+.contact-submit button:disabled{opacity:.48 !important;cursor:not-allowed !important;transform:none !important;box-shadow:none !important}
+/* Inputs are part of the system,
+but intentionally flatter than buttons. */
 .contact-field input,
 .contact-field textarea,
 .contact-field select,
-.contact-topic-trigger{
-  outline:none !important;
-}
-
-.contact-field:focus-within,
-.contact-topic:focus-within,
-.contact-topic:has(.contact-topic-trigger.is-open){
-  border-color:var(--p-blue-line) !important;
-  box-shadow:var(--p-focus) !important;
-}
-
+.contact-topic-trigger{outline:none !important}
 /* Selection and scrollbar use the same accent language. */
-html{
-  scrollbar-color:var(--p-surface-3) var(--p-bg);
-}
-
-::selection{
-  background:var(--p-blue) !important;
-  color:#fff !important;
-}
-
+html{scrollbar-color:var(--p-surface-3) var(--p-bg)}
 /* Surface consistency across major modules. */
 .record,
 .media-card,
@@ -1712,18 +711,12 @@ html{
 .testimonial,
 .contact-card,
 .thinking-quotes,
-.portrait-frame{
-  isolation:isolate;
-}
-
+.portrait-frame{isolation:isolate}
 .record::before,
 .media-card::before,
 .project-card::before,
 .testimonial::before,
-.contact-card::before{
-  opacity:.55 !important;
-}
-
+.contact-card::before{opacity:.55 !important}
 /* No accidental decorative gradients outside the controlled control surfaces. */
 .record,
 .media-card,
@@ -1732,496 +725,149 @@ html{
 .contact-card,
 .thinking-quotes,
 .contact-form,
-.portrait-frame{
-  background-image:none !important;
-}
-
+.portrait-frame{background-image:none !important}
 /* Responsive control sizing stays consistent with the supplied app-button direction. */
-@media (max-width:767px){
-  html[data-theme] :is(
+@media (max-width:767px){html[data-theme]:is(
     .hero-pill,
     .ghost-pill,
     .media-links a,
     .project-link,
     .contact-submit button
   ){
-    min-height:46px !important;
-    border-radius:13px !important;
-  }
+    min-height:46px !important;border-radius:13px !important;}
 
   .music-controls > button{
-    min-width:42px !important;
-    min-height:42px !important;
-  }
+    min-width:42px !important;min-height:42px !important;}
 
   .site-footer-nav a{
-    padding:7px 8px !important;
-  }
-}
-
-@media (prefers-reduced-motion:reduce){
-  html[data-theme] :is(
+    padding:7px 8px !important}
+@media (prefers-reduced-motion:reduce){html[data-theme] :is(
     .nav-action,
-    .menu-panel-grid a,
-    .music-playlist-item,
-    .hero-pill,
-    .ghost-pill,
-    .media-links a,
-    .project-link,
-    .contact-topic-trigger,
-    .contact-topic-menu button,
-    .topic-options button,
-    .contact-submit button,
-    .music-controls button,
-    .music-play,
-    .back-to-top,
-    .site-footer-nav a
-  ){
-    transition:none !important;
-  }
-}
-
-
+.menu-panel-grid a,
+.music-playlist-item,
+.hero-pill,
+.ghost-pill,
+.media-links a,
+.project-link,
+.contact-topic-trigger,
+.contact-topic-menu button,
+.topic-options button,
+.contact-submit button,
+.music-controls button,
+.music-play,
+.back-to-top,
+.site-footer-nav a
+  ){transition:none !important}}
 /* =========================
    16 / MENU + MUSIC — PERFECT SYNC
-   Shared panel geometry, hierarchy and interaction language.
+   Shared panel geometry,
+hierarchy and interaction language.
    ========================= */
 
-:root{
-  --p-panel-bg:#111419;
-  --p-panel-bg-2:#171b21;
-  --p-panel-border:rgba(255,255,255,.12);
-  --p-panel-radius:20px;
-  --p-panel-padding:18px;
-  --p-panel-shadow:0 24px 70px rgba(0,0,0,.46),0 1px 0 rgba(255,255,255,.045);
-}
-
+:root{--p-panel-bg:#111419;--p-panel-bg-2:#171b21;--p-panel-border:rgba(255,255,255,.12);--p-panel-radius:20px;--p-panel-padding:18px;--p-panel-shadow:0 24px 70px rgba(0,0,0,.46),0 1px 0 rgba(255,255,255,.045)}
 /* Both panels are siblings in one control family. */
 .nav-actions>nav,
-.music-panel{
-  background:var(--p-panel-bg) !important;
-  color:var(--p-ink) !important;
-  border:1px solid var(--p-panel-border) !important;
-  border-radius:var(--p-panel-radius) !important;
-  box-shadow:var(--p-panel-shadow) !important;
-  overflow:hidden !important;
-  padding:0 !important;
-}
-
+.music-panel{background:var(--p-panel-bg) !important;color:var(--p-ink) !important;border:1px solid var(--p-panel-border) !important;border-radius:var(--p-panel-radius) !important;box-shadow:var(--p-panel-shadow) !important;overflow:hidden !important;padding:0 !important}
 /* Remove visual differences caused by old pseudo surfaces. */
 .nav-actions>nav::before,
-.music-panel::before{
-  display:none !important;
-}
-
+.music-panel::before{display:none !important}
 /* Identical header rhythm. */
 .menu-panel-head,
-.music-panel-head{
-  min-height:72px !important;
-  padding:16px 18px !important;
-  display:flex !important;
-  align-items:center !important;
-  justify-content:space-between !important;
-  gap:14px !important;
-  border-bottom:1px solid var(--p-line) !important;
-}
-
+.music-panel-head{min-height:72px !important;padding:16px 18px !important;display:flex !important;align-items:center !important;justify-content:space-between !important;gap:14px !important;border-bottom:1px solid var(--p-line) !important}
 .menu-panel-head > div,
-.music-panel-head > div{
-  min-width:0;
-}
-
-.menu-panel-head strong,
-.music-panel-head strong{
-  display:block !important;
-  margin-top:4px !important;
-  font-size:18px !important;
-  line-height:1.05 !important;
-  letter-spacing:-.035em !important;
-}
-
+.music-panel-head > div{min-width:0}
 /* Header metadata is intentionally identical. */
 .menu-panel-head span,
 .music-eyebrow,
 .music-status,
-.menu-panel-count{
-  font-size:9px !important;
-  line-height:1 !important;
-  letter-spacing:.11em !important;
-  text-transform:uppercase !important;
-}
-
+.menu-panel-count{font-size:9px !important;line-height:1 !important;letter-spacing:.11em !important;text-transform:uppercase !important}
 /* Menu section count + music state use one status-chip geometry. */
 .menu-panel-count,
-.music-status{
-  min-height:26px !important;
-  padding:7px 9px !important;
-  display:inline-flex !important;
-  align-items:center !important;
-  justify-content:center !important;
-  border-radius:9px !important;
-  white-space:nowrap !important;
-}
-
+.music-status{min-height:26px !important;padding:7px 9px !important;display:inline-flex !important;align-items:center !important;justify-content:center !important;border-radius:9px !important;white-space:nowrap !important}
 /* Menu navigation cards. */
-.menu-panel-grid{
-  padding:12px !important;
-  gap:8px !important;
-}
-
-.menu-panel-grid a{
-  min-height:58px !important;
-  padding:10px 12px !important;
-  border-radius:13px !important;
-  display:grid !important;
-  grid-template-columns:32px minmax(0,1fr) 24px !important;
-  align-items:center !important;
-  gap:10px !important;
-  background:var(--p-panel-bg-2) !important;
-  border:1px solid var(--p-line-soft) !important;
-  box-shadow:0 5px 16px rgba(0,0,0,.16) !important;
-}
-
-.menu-panel-grid a:hover,
-.menu-panel-grid a:focus-visible,
-.menu-panel-grid a.is-active{
-  background:var(--p-blue-soft) !important;
-  border-color:var(--p-blue-line) !important;
-  box-shadow:var(--p-glow) !important;
-  transform:translateY(-1px) !important;
-}
-
-.menu-item-index{
-  width:28px !important;
-  height:28px !important;
-  display:grid !important;
-  place-items:center !important;
-  border-radius:8px !important;
-  background:rgba(255,255,255,.055) !important;
-  color:var(--p-muted) !important;
-}
-
-.menu-panel-grid a.is-active .menu-item-index{
-  background:var(--p-blue) !important;
-  color:#fff !important;
-}
-
-.menu-item-label{
-  min-width:0 !important;
-  font-size:14px !important;
-  font-weight:700 !important;
-  letter-spacing:-.01em !important;
-}
-
-.menu-item-arrow{
-  width:24px !important;
-  height:24px !important;
-  display:grid !important;
-  place-items:center !important;
-  border-radius:7px !important;
-  background:rgba(255,255,255,.045) !important;
-  color:var(--p-muted) !important;
-}
-
-.menu-panel-foot{
-  min-height:42px !important;
-  padding:10px 16px !important;
-  display:flex !important;
-  align-items:center !important;
-  justify-content:space-between !important;
-  gap:10px !important;
-  border-top:1px solid var(--p-line-soft) !important;
-  font-size:9px !important;
-}
-
+.menu-panel-grid{padding:12px !important;gap:8px !important}
+.menu-item-index{width:28px !important;height:28px !important;display:grid !important;place-items:center !important;border-radius:8px !important;background:rgba(255,255,255,.055) !important;color:var(--p-muted) !important}
+.menu-item-label{min-width:0 !important;font-size:14px !important;font-weight:700 !important;letter-spacing:-.01em !important}
+.menu-item-arrow{width:24px !important;height:24px !important;display:grid !important;place-items:center !important;border-radius:7px !important;background:rgba(255,255,255,.045) !important;color:var(--p-muted) !important}
+.menu-panel-foot{min-height:42px !important;padding:10px 16px !important;display:flex !important;align-items:center !important;justify-content:space-between !important;gap:10px !important;border-top:1px solid var(--p-line-soft) !important;font-size:9px !important}
 /* Music track card mirrors the Menu navigation cards. */
-.music-track{
-  margin:12px !important;
-  min-height:72px !important;
-  padding:10px !important;
-  display:flex !important;
-  align-items:center !important;
-  gap:12px !important;
-  background:var(--p-panel-bg-2) !important;
-  border:1px solid var(--p-line-soft) !important;
-  border-radius:13px !important;
-  box-shadow:0 5px 16px rgba(0,0,0,.16) !important;
-}
-
-.music-track-art{
-  width:48px !important;
-  height:48px !important;
-  flex:0 0 48px !important;
-  display:grid !important;
-  place-items:center !important;
-  border-radius:10px !important;
-  background:var(--p-blue) !important;
-  color:#fff !important;
-  font-size:21px !important;
-}
-
-.music-track-copy{
-  min-width:0 !important;
-}
-
-.music-track-copy strong{
-  display:block !important;
-  overflow:hidden !important;
-  text-overflow:ellipsis !important;
-  white-space:nowrap !important;
-  font-size:15px !important;
-  line-height:1.1 !important;
-  letter-spacing:-.02em !important;
-}
-
-.music-track-copy span{
-  display:block !important;
-  margin-top:5px !important;
-  font-size:11px !important;
-}
-
-/* Player progress is a panel divider, not a decorative element. */
-.music-progress{
-  margin:0 12px !important;
-  height:4px !important;
-  border-radius:99px !important;
-  overflow:hidden !important;
-}
-
-.music-progress span{
-  height:100% !important;
-  display:block !important;
-}
-
+.music-track{margin:12px !important;min-height:72px !important;padding:10px !important;display:flex !important;align-items:center !important;gap:12px !important;background:var(--p-panel-bg-2) !important;border:1px solid var(--p-line-soft) !important;border-radius:13px !important;box-shadow:0 5px 16px rgba(0,0,0,.16) !important}
+.music-track-copy{min-width:0 !important}
+.music-track-copy strong{display:block !important;overflow:hidden !important;text-overflow:ellipsis !important;white-space:nowrap !important;font-size:15px !important;line-height:1.1 !important;letter-spacing:-.02em !important}
+.music-track-copy span{display:block !important;margin-top:5px !important;font-size:11px !important}
+/* Player progress is a panel divider,
+not a decorative element. */
+.music-progress{margin:0 12px !important;height:4px !important;border-radius:99px !important;overflow:hidden !important}
 /* Transport controls share the same button family as Menu controls. */
-.music-controls{
-  padding:12px !important;
-  display:flex !important;
-  align-items:center !important;
-  justify-content:center !important;
-  gap:8px !important;
-}
-
-.music-controls > button{
-  width:44px !important;
-  height:44px !important;
-  min-width:44px !important;
-  min-height:44px !important;
-  border-radius:12px !important;
-}
-
-.music-controls > button:not(.music-play){
-  background:var(--p-panel-bg-2) !important;
-  border:1px solid var(--p-line-soft) !important;
-}
-
-.music-controls > button:not(.music-play):hover,
-.music-controls > button:not(.music-play):focus-visible{
-  background:var(--p-blue-soft) !important;
-  border-color:var(--p-blue-line) !important;
-  color:var(--p-blue) !important;
-}
-
-.music-play{
-  width:50px !important;
-  height:50px !important;
-  min-width:50px !important;
-  min-height:50px !important;
-  border-radius:14px !important;
-}
-
+.music-controls{padding:12px !important;display:flex !important;align-items:center !important;justify-content:center !important;gap:8px !important}
+.music-controls > button{width:44px !important;height:44px !important;min-width:44px !important;min-height:44px !important;border-radius:12px !important}
 /* Playlist header and rows use exactly the Menu list rhythm. */
-.music-playlist{
-  padding:0 12px 12px !important;
-}
-
-.music-playlist-head{
-  min-height:34px !important;
-  padding:0 2px 8px !important;
-  display:flex !important;
-  align-items:center !important;
-  justify-content:space-between !important;
-  border-bottom:1px solid var(--p-line-soft) !important;
-}
-
+.music-playlist{padding:0 12px 12px !important}
 .music-playlist-head span,
-.music-playlist-head strong{
-  font-size:9px !important;
-  letter-spacing:.1em !important;
-}
-
-.music-playlist-item{
-  min-height:52px !important;
-  margin-top:6px !important;
-  padding:8px 9px !important;
-  display:grid !important;
-  grid-template-columns:28px minmax(0,1fr) 24px !important;
-  align-items:center !important;
-  gap:9px !important;
-  border-radius:11px !important;
-  background:var(--p-panel-bg-2) !important;
-  border:1px solid var(--p-line-soft) !important;
-}
-
-.music-playlist-number{
-  font-size:9px !important;
-  text-align:center !important;
-}
-
-.music-playlist-copy{
-  min-width:0 !important;
-}
-
-.music-playlist-copy strong{
-  display:block !important;
-  overflow:hidden !important;
-  text-overflow:ellipsis !important;
-  white-space:nowrap !important;
-  font-size:12px !important;
-  line-height:1.15 !important;
-}
-
-.music-playlist-copy span{
-  display:block !important;
-  margin-top:3px !important;
-  overflow:hidden !important;
-  text-overflow:ellipsis !important;
-  white-space:nowrap !important;
-  color:var(--p-muted) !important;
-  font-size:10px !important;
-}
-
-.music-playlist-state{
-  width:24px !important;
-  height:24px !important;
-  display:grid !important;
-  place-items:center !important;
-  border-radius:7px !important;
-  background:rgba(255,255,255,.045) !important;
-}
-
-.music-playlist-item.is-active .music-playlist-state{
-  background:var(--p-blue) !important;
-  color:#fff !important;
-}
-
+.music-playlist-head strong{font-size:9px !important;letter-spacing:.1em !important}
+.music-playlist-item{min-height:52px !important;margin-top:6px !important;padding:8px 9px !important;display:grid !important;grid-template-columns:28px minmax(0,1fr) 24px !important;align-items:center !important;gap:9px !important;border-radius:11px !important;background:var(--p-panel-bg-2) !important;border:1px solid var(--p-line-soft) !important}
+.music-playlist-number{font-size:9px !important;text-align:center !important}
+.music-playlist-copy{min-width:0 !important}
+.music-playlist-copy strong{display:block !important;overflow:hidden !important;text-overflow:ellipsis !important;white-space:nowrap !important;font-size:12px !important;line-height:1.15 !important}
+.music-playlist-copy span{display:block !important;margin-top:3px !important;overflow:hidden !important;text-overflow:ellipsis !important;white-space:nowrap !important;color:var(--p-muted) !important;font-size:10px !important}
+.music-playlist-state{width:24px !important;height:24px !important;display:grid !important;place-items:center !important;border-radius:7px !important;background:rgba(255,255,255,.045) !important}
+.music-playlist-item.is-active .music-playlist-state{background:var(--p-blue) !important;color:#fff !important}
 /* Panel opening/closing remains subtle and identical. */
 .nav-actions>nav,
-.music-panel{
-  transform-origin:top right !important;
-}
-
-/* Mobile: panels become full-width, keeping identical internal rhythm. */
-@media (max-width:767px){
-  .nav-actions>nav,
+.music-panel{transform-origin:top right !important}
+/* Mobile: panels become full-width,
+keeping identical internal rhythm. */
+@media (max-width:767px){.nav-actions>nav,
   .music-panel{
-    border-radius:16px !important;
-  }
+    border-radius:16px !important;}
 
   .menu-panel-head,
   .music-panel-head{
-    min-height:64px !important;
-    padding:14px !important;
-  }
+    min-height:64px !important;padding:14px !important;}
 
   .menu-panel-grid{
-    padding:10px !important;
-  }
+    padding:10px !important;}
 
   .music-track{
-    margin:10px !important;
-  }
+    margin:10px !important;}
 
   .music-playlist{
-    padding:0 10px 10px !important;
-  }
-}
-
-
+    padding:0 10px 10px !important}
 /* =========================
    17 / PANEL VISIBILITY FIX
    Never clip Menu or Music on short/mobile viewports.
    ========================= */
 
 .nav-actions>nav,
-.music-panel{
-  box-sizing:border-box !important;
-  width:min(500px,calc(100vw - 32px)) !important;
-  max-height:calc(100dvh - 32px) !important;
-  overflow-y:auto !important;
-  overflow-x:hidden !important;
-  overscroll-behavior:contain !important;
-  scrollbar-width:thin !important;
-  scrollbar-color:var(--p-surface-3) transparent !important;
-}
-
+.music-panel{box-sizing:border-box !important;width:min(500px,calc(100vw - 32px)) !important;max-height:calc(100dvh - 32px) !important;overflow-y:auto !important;overflow-x:hidden !important;overscroll-behavior:contain !important;scrollbar-width:thin !important;scrollbar-color:var(--p-surface-3) transparent !important}
 .nav-actions>nav::-webkit-scrollbar,
-.music-panel::-webkit-scrollbar{
-  width:5px !important;
-}
-
+.music-panel::-webkit-scrollbar{width:5px !important}
 .nav-actions>nav::-webkit-scrollbar-track,
-.music-panel::-webkit-scrollbar-track{
-  background:transparent !important;
-}
-
+.music-panel::-webkit-scrollbar-track{background:transparent !important}
 .nav-actions>nav::-webkit-scrollbar-thumb,
-.music-panel::-webkit-scrollbar-thumb{
-  background:var(--p-surface-3) !important;
-  border-radius:99px !important;
-}
-
+.music-panel::-webkit-scrollbar-thumb{background:var(--p-surface-3) !important;border-radius:99px !important}
 /* Keep panel internals fully visible while scrolling the panel itself. */
 .menu-panel-grid,
-.music-playlist{
-  min-height:0 !important;
-}
-
-@media (max-width:767px){
-  .nav-actions>nav,
-  .music-panel{
-    width:calc(100vw - 24px) !important;
-    max-width:calc(100vw - 24px) !important;
-    max-height:calc(100dvh - 24px) !important;
-  }
-}
-
-@media (max-height:620px){
-  .nav-actions>nav,
-  .music-panel{
-    max-height:calc(100dvh - 16px) !important;
-  }
-
-  .menu-panel-head,
-  .music-panel-head{
-    min-height:58px !important;
-    padding:12px 14px !important;
-  }
-}
-
-
+.music-playlist{min-height:0 !important}
+@media (max-width:767px){.nav-actions>nav,
+.music-panel{width:calc(100vw - 24px) !important;max-width:calc(100vw - 24px) !important;max-height:calc(100dvh - 24px) !important}}
+@media (max-height:620px){.nav-actions>nav,
+.music-panel{max-height:calc(100dvh - 16px) !important}
+.menu-panel-head,
+.music-panel-head{min-height:58px !important;padding:12px 14px !important}}
 /* =========================
    18 / LIQUID GLASS 2100
    Reference-led glass surfaces: translucent depth,
-   soft spectral highlights, tactile tiles.
+soft spectral highlights,
+tactile tiles.
    Structure/content/logo remain untouched.
    ========================= */
 
-:root{
-  --glass-bg:rgba(22,26,34,.72);
-  --glass-bg-strong:rgba(27,32,42,.86);
-  --glass-line:rgba(255,255,255,.16);
-  --glass-line-soft:rgba(255,255,255,.09);
-  --glass-blue:#5aa8ff;
-  --glass-cyan:#55e6e0;
-  --glass-violet:#9d8cff;
-  --glass-shadow:
-    0 22px 60px rgba(0,0,0,.34),
+:root{--glass-bg:rgba(22,26,34,.72);--glass-bg-strong:rgba(27,32,42,.86);--glass-line:rgba(255,255,255,.16);--glass-line-soft:rgba(255,255,255,.09);--glass-blue:#5aa8ff;--glass-cyan:#55e6e0;--glass-violet:#9d8cff;--glass-shadow:0 22px 60px rgba(0,0,0,.34),
     0 8px 24px rgba(0,0,0,.18),
-    inset 0 1px 0 rgba(255,255,255,.14);
-}
-
-/* App tiles: rounded, luminous and dimensional like the references. */
+    inset 0 1px 0 rgba(255,255,255,.14)}
+/* App tiles: rounded,
+luminous and dimensional like the references. */
 .nav-actions > button,
 .nav-actions > nav a,
 .music-panel button,
@@ -2229,28 +875,16 @@ html{
 .cta,
 .media-card,
 .project-card,
-.education-card,
 .contact-topic,
-.contact-form button{
-  position:relative !important;
-  isolation:isolate !important;
-  border-radius:18px !important;
-  border-color:var(--glass-line) !important;
-  background:
-    linear-gradient(135deg,rgba(255,255,255,.105),rgba(255,255,255,.025) 52%,rgba(90,168,255,.055)) !important;
-  box-shadow:
-    0 10px 28px rgba(0,0,0,.20),
+.contact-form button{position:relative !important;isolation:isolate !important;border-radius:18px !important;border-color:var(--glass-line) !important;background:linear-gradient(135deg,rgba(255,255,255,.105),rgba(255,255,255,.025) 52%,rgba(90,168,255,.055)) !important;box-shadow:0 10px 28px rgba(0,0,0,.20),
     0 2px 8px rgba(0,0,0,.12),
     inset 0 1px 0 rgba(255,255,255,.13),
-    inset 0 -1px 0 rgba(0,0,0,.20) !important;
-  transition:
-    transform 220ms var(--p-ease),
+    inset 0 -1px 0 rgba(0,0,0,.20) !important;transition:transform 220ms var(--p-ease),
     border-color 220ms ease,
     box-shadow 220ms ease,
-    background 220ms ease !important;
-}
-
-/* Spectral edge: restrained, not neon-noise. */
+    background 220ms ease !important}
+/* Spectral edge: restrained,
+not neon-noise. */
 .nav-actions > button::before,
 .nav-actions > nav a::before,
 .music-panel button::before,
@@ -2260,20 +894,9 @@ html{
 .project-card::before,
 .education-card::before,
 .contact-topic::before,
-.contact-form button::before{
-  content:"" !important;
-  position:absolute !important;
-  inset:0 !important;
-  z-index:-1 !important;
-  border-radius:inherit !important;
-  pointer-events:none !important;
-  background:
-    radial-gradient(circle at 8% 8%,rgba(255,255,255,.16),transparent 28%),
+.contact-form button::before{content:"" !important;position:absolute !important;inset:0 !important;z-index:-1 !important;border-radius:inherit !important;pointer-events:none !important;background:radial-gradient(circle at 8% 8%,rgba(255,255,255,.16),transparent 28%),
     radial-gradient(circle at 92% 88%,rgba(85,230,224,.10),transparent 30%),
-    radial-gradient(circle at 72% 10%,rgba(157,140,255,.09),transparent 26%) !important;
-  opacity:.72 !important;
-}
-
+    radial-gradient(circle at 72% 10%,rgba(157,140,255,.09),transparent 26%) !important;opacity:.72 !important}
 /* Buttons become tactile glass tiles rather than flat pills. */
 .nav-actions > button:hover,
 .nav-actions > button:focus-visible,
@@ -2288,147 +911,65 @@ html{
 .project-card:hover,
 .education-card:hover,
 .contact-topic:hover,
-.contact-form button:hover{
-  transform:translateY(-2px) !important;
-  border-color:rgba(90,168,255,.42) !important;
-  background:
-    linear-gradient(135deg,rgba(255,255,255,.13),rgba(255,255,255,.035) 52%,rgba(90,168,255,.10)) !important;
-  box-shadow:
-    0 18px 38px rgba(0,0,0,.28),
+.contact-form button:hover{transform:translateY(-2px) !important;border-color:rgba(90,168,255,.42) !important;background:linear-gradient(135deg,rgba(255,255,255,.13),rgba(255,255,255,.035) 52%,rgba(90,168,255,.10)) !important;box-shadow:0 18px 38px rgba(0,0,0,.28),
     0 0 28px rgba(90,168,255,.07),
-    inset 0 1px 0 rgba(255,255,255,.18) !important;
-}
-
+    inset 0 1px 0 rgba(255,255,255,.18) !important}
 /* Primary action: the reference's saturated tile translated to dark Portal 2100. */
 .nav-actions > button.is-active,
 .nav-actions > nav a.is-active,
-.music-play,
-.btn-primary,
-.cta-primary{
-  background:
-    linear-gradient(135deg,#526bff 0%,#4c8cff 46%,#55dfe0 125%) !important;
-  color:#fff !important;
-  border-color:rgba(255,255,255,.28) !important;
-  box-shadow:
-    0 14px 34px rgba(63,113,255,.28),
+.music-play{background:linear-gradient(135deg,#526bff 0%,#4c8cff 46%,#55dfe0 125%) !important;color:#fff !important;border-color:rgba(255,255,255,.28) !important;box-shadow:0 14px 34px rgba(63,113,255,.28),
     0 0 26px rgba(85,230,224,.10),
     inset 0 1px 0 rgba(255,255,255,.30),
-    inset 0 -2px 0 rgba(0,0,0,.12) !important;
-}
-
-/* Panels use the same material, but remain legible and scroll-safe. */
+    inset 0 -2px 0 rgba(0,0,0,.12) !important}
+/* Panels use the same material,
+but remain legible and scroll-safe. */
 .nav-actions > nav,
-.music-panel{
-  background:
-    linear-gradient(135deg,rgba(28,33,43,.90),rgba(15,18,24,.90)) !important;
-  border-color:rgba(255,255,255,.17) !important;
-  box-shadow:
-    0 30px 90px rgba(0,0,0,.48),
+.music-panel{background:linear-gradient(135deg,rgba(28,33,43,.90),rgba(15,18,24,.90)) !important;border-color:rgba(255,255,255,.17) !important;box-shadow:0 30px 90px rgba(0,0,0,.48),
     0 8px 30px rgba(0,0,0,.24),
-    inset 0 1px 0 rgba(255,255,255,.13) !important;
-}
-
+    inset 0 1px 0 rgba(255,255,255,.13) !important}
 /* Menu/music rows echo the reference's modular weather-card language. */
 .menu-panel-grid a,
 .music-track,
-.music-playlist-item{
-  border-radius:16px !important;
-  background:
-    linear-gradient(135deg,rgba(255,255,255,.085),rgba(255,255,255,.025) 55%,rgba(85,230,224,.045)) !important;
-  box-shadow:
-    0 8px 22px rgba(0,0,0,.18),
-    inset 0 1px 0 rgba(255,255,255,.10) !important;
-}
-
-.menu-panel-grid a:hover,
-.menu-panel-grid a:focus-visible,
-.music-playlist-item:hover,
-.music-playlist-item:focus-visible{
-  transform:translateY(-2px) !important;
-  border-color:rgba(85,230,224,.30) !important;
-  box-shadow:
-    0 14px 28px rgba(0,0,0,.25),
-    0 0 24px rgba(85,230,224,.06),
-    inset 0 1px 0 rgba(255,255,255,.15) !important;
-}
-
+.music-playlist-item{border-radius:16px !important;background:linear-gradient(135deg,rgba(255,255,255,.085),rgba(255,255,255,.025) 55%,rgba(85,230,224,.045)) !important;box-shadow:0 8px 22px rgba(0,0,0,.18),
+    inset 0 1px 0 rgba(255,255,255,.10) !important}
 /* Small status/icon blocks get the same glass material. */
 .menu-item-index,
 .menu-item-arrow,
 .music-playlist-state,
-.music-track-art{
-  border:1px solid rgba(255,255,255,.13) !important;
-  box-shadow:inset 0 1px 0 rgba(255,255,255,.12) !important;
-}
-
+.music-track-art{border:1px solid rgba(255,255,255,.13) !important;box-shadow:inset 0 1px 0 rgba(255,255,255,.12) !important}
 .menu-item-index,
 .menu-item-arrow,
-.music-playlist-state{
-  background:rgba(255,255,255,.055) !important;
-}
-
-.music-track-art{
-  background:linear-gradient(135deg,#596bff,#50bfff 62%,#57e0d8) !important;
-}
-
-/* Search/input-like controls from the reference: glass capsule, not flat field. */
+.music-playlist-state{background:rgba(255,255,255,.055) !important}
+/* Search/input-like controls from the reference: glass capsule,
+not flat field. */
 input,
 textarea,
-select{
-  border-radius:16px !important;
-  border:1px solid rgba(255,255,255,.13) !important;
-  background:
-    linear-gradient(135deg,rgba(255,255,255,.075),rgba(255,255,255,.025)) !important;
-  box-shadow:
-    inset 0 1px 0 rgba(255,255,255,.07),
-    0 7px 20px rgba(0,0,0,.12) !important;
-}
-
+select{border-radius:16px !important;border:1px solid rgba(255,255,255,.13) !important;background:linear-gradient(135deg,rgba(255,255,255,.075),rgba(255,255,255,.025)) !important;box-shadow:inset 0 1px 0 rgba(255,255,255,.07),
+    0 7px 20px rgba(0,0,0,.12) !important}
 input:focus,
 textarea:focus,
-select:focus{
-  border-color:rgba(90,168,255,.55) !important;
-  box-shadow:
-    0 0 0 3px rgba(90,168,255,.10),
-    inset 0 1px 0 rgba(255,255,255,.10) !important;
-}
-
+select:focus{border-color:rgba(90,168,255,.55) !important;box-shadow:0 0 0 3px rgba(90,168,255,.10),
+    inset 0 1px 0 rgba(255,255,255,.10) !important}
 /* Keep the system elegant: no excessive blur or expensive backdrop filters. */
 .nav-actions > nav,
 .music-panel,
 .media-card,
+.project-card{backdrop-filter:none !important;-webkit-backdrop-filter:none !important}
+@media (max-width:767px){.nav-actions > button,
+.nav-actions > nav a,
+.music-panel button,
+.btn,
+.cta,
+.media-card,
 .project-card,
-.education-card{
-  backdrop-filter:none !important;
-  -webkit-backdrop-filter:none !important;
-}
-
-@media (max-width:767px){
-  .nav-actions > button,
-  .nav-actions > nav a,
-  .music-panel button,
-  .btn,
-  .cta,
-  .media-card,
-  .project-card,
-  .education-card,
-  .contact-topic,
-  .contact-form button{
-    border-radius:16px !important;
-  }
-}
-
-@media (prefers-reduced-motion:reduce){
-  .nav-actions > button,
-  .nav-actions > nav a,
-  .music-panel button,
-  .btn,
-  .cta,
-  .media-card,
-  .project-card,
-  .education-card,
-  .contact-topic,
-  .contact-form button{
-    transition:none !important;
-  }
-}
+.contact-topic,
+.contact-form button{border-radius:16px !important}}
+@media (prefers-reduced-motion:reduce){.nav-actions > button,
+.nav-actions > nav a,
+.music-panel button,
+.btn,
+.cta,
+.media-card,
+.project-card,
+.contact-topic,
+.contact-form button{transition:none !important}}
