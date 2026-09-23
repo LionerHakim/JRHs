@@ -4,7 +4,7 @@ export const sectionItems = [
   ['media', 'Media'],
   ['projects', 'Projects'],
   ['testimonials', 'Quotes'],
-  ['links', 'Contact'],
+  ['contact', 'Contact'],
 ] as const
 
 export const sectionIds = sectionItems.map(([id]) => id)
