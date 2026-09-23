@@ -245,7 +245,7 @@ ${name.trim()}`)
       <div className="scroll-progress" aria-hidden="true"><span ref={scrollProgressRef} /></div>
       <a className="skip-link" href="#identity">Lewati ke konten utama</a>
       <header className="nav">
-        <a className="wordmark" href="/" aria-label="JRH home" onClick={(event) => { event.preventDefault(); window.location.reload() }}>
+        <a className="wordmark" href="#identity" aria-label="JRH home">
           <img className="wordmark-logo" src="/assets/images/logo.png" alt="JRH" decoding="async" />
         </a>
         <div className="nav-actions" ref={navActionsRef}>
