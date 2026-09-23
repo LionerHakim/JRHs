@@ -1843,7 +1843,7 @@ img { display: block; max-width: 100%; }
   opacity:1;
   color:var(--ink);
   background:var(--paper);
-  border:1px solid var(--ui-border-strong);
+  border:1px solid var(--p-line);
 }
 .media-section .media-links a:hover,
 .media-section .media-links a:focus-visible{
@@ -1859,7 +1859,7 @@ img { display: block; max-width: 100%; }
 .contact-topic-trigger[aria-expanded="true"]{
   background:var(--paper) !important;
   color:var(--ink) !important;
-  border-color:var(--ui-border-strong) !important;
+  border-color:var(--p-line) !important;
   box-shadow:none !important;
 }
 .contact-topic-menu button{
