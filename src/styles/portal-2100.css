@@ -1147,3 +1147,259 @@ html[data-theme] .back-to-top{
 }
 
 /* LOGO LOCK — intentionally no changes in this synchronization layer. */
+
+
+/* =========================================================
+   2100 COHERENCE ENGINE
+   Final visual unification. No logo rules. No layout/data rules.
+   ========================================================= */
+
+html[data-theme]{
+  --p2100-radius-sm:12px;
+  --p2100-radius-md:16px;
+  --p2100-radius-lg:22px;
+  --p2100-radius-xl:28px;
+}
+
+/* Normalize component geometry without changing placement/order. */
+html[data-theme] .record,
+html[data-theme] .media-card,
+html[data-theme] .project-card,
+html[data-theme] .testimonial,
+html[data-theme] .contact-card{
+  border-radius:var(--p2100-radius-xl) !important;
+}
+
+html[data-theme] .nav{
+  border-radius:var(--p2100-radius-lg) !important;
+}
+
+html[data-theme] .nav-actions,
+html[data-theme] .contact-form,
+html[data-theme] .contact-field,
+html[data-theme] .contact-topic{
+  border-radius:var(--p2100-radius-md) !important;
+}
+
+html[data-theme] .menu-panel-grid a,
+html[data-theme] .music-track,
+html[data-theme] .music-playlist-item,
+html[data-theme] .terms-checkbox-popover{
+  border-radius:var(--p2100-radius-md) !important;
+}
+
+/* Every interactive surface speaks the same language. */
+html[data-theme] .nav-action,
+html[data-theme] .hero-pill,
+html[data-theme] .ghost-pill,
+html[data-theme] .media-links a,
+html[data-theme] .project-link,
+html[data-theme] .contact-submit button,
+html[data-theme] .music-play,
+html[data-theme] .theme-toggle-floating,
+html[data-theme] .back-to-top{
+  font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif !important;
+  -webkit-font-smoothing:antialiased;
+}
+
+html[data-theme] .hero-pill,
+html[data-theme] .ghost-pill,
+html[data-theme] .media-links a,
+html[data-theme] .project-link,
+html[data-theme] .contact-submit button{
+  min-height:46px;
+  border-radius:14px !important;
+  font-weight:650 !important;
+  letter-spacing:-.01em !important;
+}
+
+/* Make hierarchy intentional: primary = blue, secondary = quiet. */
+html[data-theme] .hero-pill,
+html[data-theme] .contact-submit button{
+  background:var(--p2100-blue) !important;
+  border-color:var(--p2100-blue) !important;
+  color:#fff !important;
+  box-shadow:0 10px 26px rgba(0,122,255,.15) !important;
+}
+
+html[data-theme] .hero-pill:hover,
+html[data-theme] .hero-pill:focus-visible,
+html[data-theme] .contact-submit button:hover:not(:disabled),
+html[data-theme] .contact-submit button:focus-visible:not(:disabled){
+  transform:translateY(-1px) !important;
+  box-shadow:0 14px 34px rgba(0,122,255,.21) !important;
+}
+
+html[data-theme] .ghost-pill{
+  background:var(--p2100-surface) !important;
+  border-color:var(--p2100-border) !important;
+  color:var(--p2100-text) !important;
+}
+
+html[data-theme] .ghost-pill:hover,
+html[data-theme] .ghost-pill:focus-visible{
+  color:var(--p2100-blue) !important;
+  border-color:var(--p2100-blue-line) !important;
+  background:var(--p2100-blue-soft) !important;
+}
+
+/* Cards have one elevation model, not five competing ones. */
+html[data-theme] .record,
+html[data-theme] .media-card,
+html[data-theme] .project-card,
+html[data-theme] .testimonial,
+html[data-theme] .contact-card{
+  box-shadow:var(--p2100-shadow) !important;
+}
+
+html[data-theme] .record:hover,
+html[data-theme] .media-card:hover,
+html[data-theme] .project-card:hover,
+html[data-theme] .testimonial:hover,
+html[data-theme] .contact-card:hover{
+  transform:translateY(-2px) !important;
+  box-shadow:var(--p2100-shadow-hover) !important;
+}
+
+/* Metadata: same chip language everywhere. */
+html[data-theme] .media-status,
+html[data-theme] .project-status,
+html[data-theme] .record-activities li{
+  border-radius:999px !important;
+  background:var(--p2100-blue-soft) !important;
+  border:1px solid var(--p2100-blue-line) !important;
+  color:var(--p2100-blue) !important;
+  box-shadow:none !important;
+}
+
+/* Numbers and labels become the 2100 navigation signal. */
+html[data-theme] .media-number,
+html[data-theme] .project-number,
+html[data-theme] .section-kicker,
+html[data-theme] .media-category,
+html[data-theme] .project-category,
+html[data-theme] .thinking-quote-kicker{
+  font-weight:750 !important;
+  letter-spacing:.12em !important;
+  text-transform:uppercase;
+}
+
+/* Remove legacy platform-color noise: Portal 2100 has one accent system. */
+html[data-theme] .media-status,
+html[data-theme] .project-status,
+html[data-theme] .media-category,
+html[data-theme] .project-category{
+  color:var(--p2100-blue) !important;
+}
+
+/* Content dividers: hairlines instead of decorative blocks. */
+html[data-theme] .record,
+html[data-theme] .media-card,
+html[data-theme] .project-card,
+html[data-theme] .testimonial,
+html[data-theme] .contact-card{
+  background-image:none !important;
+}
+
+html[data-theme] .section-head{
+  border-bottom:1px solid var(--p2100-border-soft);
+  padding-bottom:16px;
+}
+
+html[data-theme] .section-head h2{
+  margin-bottom:0 !important;
+}
+
+/* Contact inputs are one coherent control family. */
+html[data-theme] .contact-field,
+html[data-theme] .contact-topic{
+  min-height:56px;
+}
+
+html[data-theme] .contact-submit{
+  border-top:1px solid var(--p2100-border-soft) !important;
+  padding-top:16px !important;
+}
+
+/* Music controls are deliberately identical in weight to Menu controls. */
+html[data-theme] .music-controls{
+  gap:8px !important;
+}
+
+html[data-theme] .music-play{
+  width:46px !important;
+  height:46px !important;
+  min-width:46px !important;
+  border-radius:14px !important;
+}
+
+html[data-theme] .music-progress{
+  border-radius:999px !important;
+  overflow:hidden;
+}
+
+html[data-theme] .music-progress span{
+  border-radius:inherit !important;
+}
+
+/* One focus language across the product. */
+html[data-theme] :is(
+  .nav-action,
+  .menu-panel-grid a,
+  .music-playlist-item,
+  .hero-pill,
+  .ghost-pill,
+  .media-links a,
+  .project-link,
+  .contact-topic-trigger,
+  .contact-submit button,
+  .theme-toggle-floating,
+  .back-to-top
+):focus-visible{
+  outline:2px solid var(--p2100-blue) !important;
+  outline-offset:3px !important;
+}
+
+/* Responsive polish: visual only; no structural reflow. */
+@media (max-width:767px){
+  html[data-theme] .section-head{
+    padding-bottom:12px;
+  }
+
+  html[data-theme] .record,
+  html[data-theme] .media-card,
+  html[data-theme] .project-card,
+  html[data-theme] .testimonial,
+  html[data-theme] .contact-card{
+    border-radius:20px !important;
+  }
+
+  html[data-theme] .hero-pill,
+  html[data-theme] .ghost-pill,
+  html[data-theme] .media-links a,
+  html[data-theme] .project-link,
+  html[data-theme] .contact-submit button{
+    border-radius:12px !important;
+  }
+}
+
+/* 375px safety: preserve the baseline layout while preventing visual overflow. */
+@media (max-width:390px){
+  html[data-theme] .hero h1,
+  html[data-theme] .section h2,
+  html[data-theme] .record h3,
+  html[data-theme] .media-card h3,
+  html[data-theme] .project-card h3,
+  html[data-theme] .contact-question{
+    overflow-wrap:anywhere;
+  }
+}
+
+/* 2100 is deliberately quiet: no glow, no gradients, no ornamental noise. */
+html[data-theme] .hero::before,
+html[data-theme] .hero::after,
+html[data-theme] .section::before,
+html[data-theme] .section::after{
+  background-image:none !important;
+  box-shadow:none !important;
+}
