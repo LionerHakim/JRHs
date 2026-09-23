@@ -114,26 +114,6 @@ html[data-theme="dark"] .nav{
   box-shadow:var(--p-shadow),inset 0 1px 0 rgba(255,255,255,.05) !important;
 }
 
-/* Logo — restore the proven dark capsule treatment and keep it identical in both themes. */
-.wordmark,
-.wordmark:hover,
-.wordmark:focus-visible{
-  background:#08090b !important;
-  color:#fff !important;
-  border:1px solid rgba(0,122,255,.42) !important;
-  box-shadow:0 0 0 2px rgba(0,122,255,.08),0 8px 22px rgba(8,9,11,.12) !important;
-}
-
-.wordmark-logo{
-  display:block !important;
-  opacity:1 !important;
-  visibility:visible !important;
-  filter:brightness(0) invert(1) !important;
-  mix-blend-mode:normal !important;
-  object-fit:contain !important;
-  object-position:center !important;
-}
-
 .nav-actions{
   border:1px solid var(--p-line-soft) !important;
   background:var(--p-surface-2) !important;
@@ -1146,7 +1126,7 @@ html[data-theme] .back-to-top{
   }
 }
 
-/* LOGO LOCK — intentionally no changes in this synchronization layer. */
+/* LOGO LOCK — logo styling intentionally lives only in the protected baseline layer. */
 
 
 /* =========================================================
