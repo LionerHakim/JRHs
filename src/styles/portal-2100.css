@@ -1240,3 +1240,291 @@ html[data-theme] .nav-action.is-open{
     transform:none !important;
   }
 }
+
+
+/* =========================
+   14 / PORTAL 2100 — FULL SYSTEM SYNC
+   Final visual coherence layer.
+   Existing DOM, content, geometry and logo remain protected.
+   ========================= */
+
+:root{
+  --p-surface-elevated:#181c23;
+  --p-control-radius:14px;
+  --p-card-radius:18px;
+  --p-control-shadow:0 8px 24px rgba(0,0,0,.22),inset 0 1px 0 rgba(255,255,255,.045);
+  --p-card-shadow:0 1px 0 rgba(255,255,255,.035),0 16px 44px rgba(0,0,0,.28);
+  --p-card-shadow-hover:0 1px 0 rgba(255,255,255,.045),0 22px 54px rgba(0,0,0,.38);
+  --p-blue-glow:0 0 0 1px rgba(77,163,255,.08),0 10px 28px rgba(77,163,255,.10);
+}
+
+/* One surface hierarchy: shell → card → control. */
+.nav,
+.nav-actions>nav,
+.music-panel,
+.record,
+.media-card,
+.project-card,
+.testimonial,
+.contact-card{
+  background:var(--p-surface) !important;
+  border:1px solid var(--p-line) !important;
+  box-shadow:var(--p-card-shadow) !important;
+}
+
+.record,
+.media-card,
+.project-card,
+.testimonial,
+.contact-card{
+  border-radius:var(--p-card-radius) !important;
+  overflow:hidden;
+}
+
+.nav-actions>nav,
+.music-panel{
+  border-radius:20px !important;
+}
+
+/* Consistent card interaction language. */
+.record:hover,
+.media-card:hover,
+.project-card:hover,
+.testimonial:hover,
+.contact-card:hover{
+  border-color:var(--p-blue-line) !important;
+  box-shadow:var(--p-card-shadow-hover) !important;
+  transform:translateY(-2px) !important;
+}
+
+.record,
+.media-card,
+.project-card,
+.testimonial,
+.contact-card{
+  transition:
+    border-color 180ms var(--p-ease),
+    box-shadow 180ms var(--p-ease),
+    transform 180ms var(--p-ease) !important;
+}
+
+/* Numbers, labels and metadata form one system. */
+.record time,
+.media-number,
+.project-number,
+.section-kicker,
+.media-category,
+.project-category,
+.thinking-quote-kicker,
+.media-status,
+.project-status,
+.menu-item-index,
+.music-eyebrow,
+.music-status,
+.contact-counter{
+  font-variant-numeric:tabular-nums !important;
+}
+
+/* Badges become compact system chips rather than decorative pills. */
+.record-activities li,
+.media-status,
+.project-status,
+.menu-panel-count{
+  min-height:28px !important;
+  padding:5px 9px !important;
+  display:inline-flex !important;
+  align-items:center !important;
+  line-height:1 !important;
+}
+
+/* Menu and playlist become the same family as the main cards. */
+.menu-panel-grid a,
+.music-playlist-item{
+  min-height:58px !important;
+  border-radius:14px !important;
+  box-shadow:var(--p-control-shadow) !important;
+}
+
+.menu-panel-grid a:hover,
+.menu-panel-grid a:focus-visible,
+.music-playlist-item:hover,
+.music-playlist-item:focus-visible{
+  transform:translateY(-1px) !important;
+  box-shadow:var(--p-control-shadow-hover) !important;
+}
+
+.menu-panel-grid a.is-active,
+.music-playlist-item.is-active{
+  border-color:var(--p-blue-line) !important;
+  box-shadow:var(--p-blue-glow) !important;
+}
+
+/* Media/project links and primary actions share one physical button. */
+.hero-pill,
+.ghost-pill,
+.media-links a,
+.project-link,
+.contact-submit button,
+.music-play{
+  min-height:48px !important;
+  border-radius:14px !important;
+  font-weight:750 !important;
+  letter-spacing:-.01em !important;
+  transition:
+    background-color 180ms var(--p-ease),
+    border-color 180ms var(--p-ease),
+    color 180ms var(--p-ease),
+    box-shadow 180ms var(--p-ease),
+    transform 180ms var(--p-ease) !important;
+}
+
+.hero-pill:hover,
+.ghost-pill:hover,
+.media-links a:hover,
+.project-link:hover,
+.contact-submit button:hover:not(:disabled),
+.music-play:hover,
+.hero-pill:focus-visible,
+.ghost-pill:focus-visible,
+.media-links a:focus-visible,
+.project-link:focus-visible,
+.contact-submit button:focus-visible:not(:disabled),
+.music-play:focus-visible{
+  transform:translateY(-2px) !important;
+  box-shadow:var(--p-control-shadow-hover) !important;
+}
+
+/* Form controls: same system, quieter treatment. */
+.contact-field,
+.contact-topic{
+  border-radius:14px !important;
+  background:var(--p-surface) !important;
+  border-color:var(--p-line-soft) !important;
+}
+
+.contact-field input,
+.contact-field textarea,
+.contact-topic-trigger{
+  min-height:48px !important;
+}
+
+.contact-topic-menu,
+.topic-options,
+.terms-checkbox-popover{
+  border-radius:16px !important;
+  box-shadow:var(--p-card-shadow-hover) !important;
+}
+
+/* Hero portrait belongs to the same elevation system. */
+.portrait-frame{
+  border-radius:20px !important;
+  box-shadow:var(--p-card-shadow) !important;
+}
+
+.portrait-frame:hover{
+  border-color:var(--p-blue-line) !important;
+}
+
+/* Thinking module gets the same quiet elevated surface. */
+.thinking-quotes{
+  background:var(--p-surface) !important;
+  border:1px solid var(--p-line) !important;
+  box-shadow:var(--p-card-shadow) !important;
+  overflow:hidden;
+}
+
+.thinking-quote-card{
+  background:transparent !important;
+}
+
+/* Footer is intentionally inverted but uses the same geometry. */
+.site-footer-main{
+  border-radius:var(--p-card-radius) !important;
+  box-shadow:var(--p-card-shadow) !important;
+}
+
+/* Universal keyboard language. */
+html[data-theme] :is(
+  .nav-action,
+  .menu-panel-grid a,
+  .music-playlist-item,
+  .hero-pill,
+  .ghost-pill,
+  .media-links a,
+  .project-link,
+  .contact-topic-trigger,
+  .contact-topic-menu button,
+  .topic-options button,
+  .contact-submit button,
+  .music-play,
+  .back-to-top
+):focus-visible{
+  outline:2px solid var(--p-blue) !important;
+  outline-offset:3px !important;
+}
+
+/* Prevent accidental horizontal overflow from tactile controls. */
+.nav,
+.nav-actions,
+.nav-actions>nav,
+.music-panel,
+.contact-card,
+.contact-form{
+  max-width:100%;
+}
+
+/* Mobile: same design language, tighter physical scale. */
+@media (max-width:767px){
+  .record,
+  .media-card,
+  .project-card,
+  .testimonial,
+  .contact-card,
+  .thinking-quotes,
+  .site-footer-main{
+    border-radius:16px !important;
+  }
+
+  .nav-actions>nav,
+  .music-panel{
+    border-radius:16px !important;
+  }
+
+  .record:hover,
+  .media-card:hover,
+  .project-card:hover,
+  .testimonial:hover,
+  .contact-card:hover{
+    transform:none !important;
+  }
+}
+
+@media (prefers-reduced-motion:reduce){
+  .record,
+  .media-card,
+  .project-card,
+  .testimonial,
+  .contact-card,
+  .hero-pill,
+  .ghost-pill,
+  .media-links a,
+  .project-link,
+  .contact-submit button,
+  .music-play{
+    transition:none !important;
+  }
+
+  .record:hover,
+  .media-card:hover,
+  .project-card:hover,
+  .testimonial:hover,
+  .contact-card:hover,
+  .hero-pill:hover,
+  .ghost-pill:hover,
+  .media-links a:hover,
+  .project-link:hover,
+  .contact-submit button:hover:not(:disabled),
+  .music-play:hover{
+    transform:none !important;
+  }
+}
