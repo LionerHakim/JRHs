@@ -14,7 +14,7 @@ import { sectionItems, sectionIds, musicTracks, contactTopics } from './config/u
 
 export default function App() {
   const [activeSection, setActiveSection] = useState<(typeof sectionIds)[number]>('identity')
-  const [scrollProgress, setScrollProgress] = useState(0)
+  const scrollProgressRef = useRef<HTMLSpanElement>(null)
   const [menuOpen, setMenuOpen] = useState(false)
   const [musicOpen, setMusicOpen] = useState(false)
   useTheme()
@@ -58,7 +58,8 @@ export default function App() {
         frame = 0
         const maxScroll = document.documentElement.scrollHeight - window.innerHeight
         const progress = maxScroll > 0 ? Math.min(100, Math.max(0, (window.scrollY / maxScroll) * 100)) : 0
-        setScrollProgress(progress)
+        const progressBar = scrollProgressRef.current
+        if (progressBar) progressBar.style.transform = 'scaleX(' + (progress / 100) + ')'
       })
     }
 
@@ -226,7 +227,7 @@ ${name.trim()}`)
 
   return (
     <div className={`site-shell${menuOpen ? " menu-open" : ""}${musicOpen ? " music-open" : ""}`}>
-      <div className="scroll-progress" aria-hidden="true"><span style={{ width: `${scrollProgress}%` }} /></div>
+      <div className="scroll-progress" aria-hidden="true"><span ref={scrollProgressRef} /></div>
       <a className="skip-link" href="#identity">Lewati ke konten utama</a>
       <header className="nav">
         <a className="wordmark" href="/" aria-label="JRH home" onClick={(event) => { event.preventDefault(); window.location.reload() }}>
