@@ -10,21 +10,22 @@
    ========================================================= */
 
 :root{
-  --p-bg:#ffffff;
-  --p-surface:#ffffff;
-  --p-surface-2:#f5f6f8;
-  --p-surface-3:#eceef2;
-  --p-ink:#08090b;
-  --p-ink-2:#2f343b;
-  --p-muted:#69707b;
-  --p-faint:#9aa1ab;
-  --p-line:rgba(8,9,11,.12);
-  --p-line-soft:rgba(8,9,11,.07);
-  --p-blue:#007aff;
-  --p-blue-soft:rgba(0,122,255,.07);
-  --p-blue-line:rgba(0,122,255,.28);
-  --p-shadow:0 1px 0 rgba(8,9,11,.04),0 12px 34px rgba(8,9,11,.055);
-  --p-shadow-hover:0 1px 0 rgba(8,9,11,.06),0 18px 44px rgba(8,9,11,.095);
+  color-scheme:dark;
+  --p-bg:#08090b;
+  --p-surface:#101216;
+  --p-surface-2:#15181e;
+  --p-surface-3:#1c2027;
+  --p-ink:#ffffff;
+  --p-ink-2:#d9dee6;
+  --p-muted:#9ca4b0;
+  --p-faint:#727b88;
+  --p-line:rgba(255,255,255,.14);
+  --p-line-soft:rgba(255,255,255,.08);
+  --p-blue:#4da3ff;
+  --p-blue-soft:rgba(77,163,255,.095);
+  --p-blue-line:rgba(77,163,255,.34);
+  --p-shadow:0 1px 0 rgba(255,255,255,.035),0 14px 40px rgba(0,0,0,.30);
+  --p-shadow-hover:0 1px 0 rgba(255,255,255,.045),0 20px 52px rgba(0,0,0,.42);
   --p-ease:cubic-bezier(.16,1,.3,1);
   --p-radius-sm:8px;
   --p-radius-md:12px;
@@ -32,7 +33,7 @@
   --p-radius-xl:20px;
   --p-pill:999px;
 
-  /* legacy aliases — visual token bridge */
+  /* legacy aliases — dark Portal token bridge */
   --sky:var(--p-bg) !important;
   --paper:var(--p-surface) !important;
   --bone:var(--p-surface-2) !important;
@@ -52,40 +53,6 @@
   --font-aeonik:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif !important;
   --font-geist:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif !important;
   --font-editorial:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif !important;
-}
-
-html[data-theme="dark"]{
-  --p-bg:#08090b;
-  --p-surface:#101216;
-  --p-surface-2:#15181e;
-  --p-surface-3:#1c2027;
-  --p-ink:#ffffff;
-  --p-ink-2:#d9dee6;
-  --p-muted:#9ca4b0;
-  --p-faint:#727b88;
-  --p-line:rgba(255,255,255,.14);
-  --p-line-soft:rgba(255,255,255,.08);
-  --p-blue:#4da3ff;
-  --p-blue-soft:rgba(77,163,255,.095);
-  --p-blue-line:rgba(77,163,255,.34);
-  --p-shadow:0 1px 0 rgba(255,255,255,.035),0 14px 40px rgba(0,0,0,.30);
-  --p-shadow-hover:0 1px 0 rgba(255,255,255,.045),0 20px 52px rgba(0,0,0,.42);
-
-  --sky:var(--p-bg) !important;
-  --paper:#ffffff !important;
-  --bone:var(--p-surface-2) !important;
-  --mist:var(--p-surface-2) !important;
-  --ink:var(--p-ink) !important;
-  --charcoal:var(--p-ink) !important;
-  --graphite:var(--p-muted) !important;
-  --fog:var(--p-faint) !important;
-  --blue:var(--p-blue) !important;
-  --blue-strong:var(--p-blue) !important;
-  --blue-soft:var(--p-blue-soft) !important;
-  --lavender:var(--p-blue-soft) !important;
-  --mint:var(--p-surface-2) !important;
-  --peach:var(--p-surface-2) !important;
-  --line:var(--p-line) !important;
 }
 
 html,body,.site-shell{
@@ -942,7 +909,7 @@ html[data-theme] :is(
   }
 }
 
-/* 2100 rule: no decorative gradients, no frosted-glass dependence, no logo overrides. */
+/* 2100 rule: dark-only system, no decorative gradients, no frosted-glass dependence, no logo overrides. */
 .hero::before,
 .hero::after,
 .section::before,
