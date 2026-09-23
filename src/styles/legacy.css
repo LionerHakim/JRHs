@@ -3465,10 +3465,6 @@ html[data-theme] .wordmark:hover,
 html[data-theme] .wordmark:focus-visible {
   color: var(--theme-text) !important;
 }
-html[data-theme="light"] .wordmark {
-  background: #FFFFFF !important;
-  box-shadow: none !important;
-}
 html[data-theme="dark"] .wordmark {
   background: #FFFFFF !important;
   color: #0A0D12 !important;
@@ -3810,12 +3806,6 @@ html[data-theme="dark"] select,
 html[data-theme="dark"] button {
   color-scheme: dark;
 }
-html[data-theme="light"] input,
-html[data-theme="light"] textarea,
-html[data-theme="light"] select,
-html[data-theme="light"] button {
-  color-scheme: light;
-}
 /* FINAL AUDIT PATCH — semantic surfaces that must also follow the active theme.
    No layout/spacing/typography changes. */
 html[data-theme] .contact-topic {
@@ -3923,10 +3913,6 @@ html[data-theme="dark"] .music-toggle.is-open {
 }
 html[data-theme="dark"] .nav-action.is-open .nav-action-glyph {
   background: var(--theme-blue) !important;
-}
-html[data-theme="light"] .nav-menu-lines,
-html[data-theme="light"] .nav-action-glyph {
-  background: var(--theme-blue-soft) !important;
 }
 html[data-theme="dark"] .nav-menu-lines,
 html[data-theme="dark"] .nav-action-glyph {
@@ -4413,13 +4399,9 @@ img, svg, video, canvas { max-width:100%; }
   .nav-actions>nav, .music-panel { box-shadow:0 24px 70px rgba(0,0,0,.34), 0 0 0 1px rgba(255,255,255,.035), inset 0 1px 0 rgba(255,255,255,.08); }
   .menu-panel-head, .music-panel-head { align-items:center; }
 }
-html[data-theme="light"] .nav-actions>nav, html[data-theme="light"] .music-panel { background:#ffffff !important; color:#0a0d12 !important; border-color:rgba(10,13,18,.10) !important; box-shadow:0 24px 70px rgba(10,13,18,.14), 0 0 0 1px rgba(10,13,18,.035) !important; }
 html[data-theme="light"] .menu-panel-grid a, html[data-theme="light"] .music-track, html[data-theme="light"] .music-controls button, html[data-theme="light"] .music-playlist-item { background:#f7f9fc !important; border-color:rgba(10,13,18,.08) !important; color:#18202b !important; }
-html[data-theme="light"] .menu-panel-grid a:hover, html[data-theme="light"] .menu-panel-grid a:focus-visible, html[data-theme="light"] .music-playlist-item:hover, html[data-theme="light"] .music-playlist-item:focus-visible { background:#eef6ff !important; border-color:rgba(0,105,224,.20) !important; }
 html[data-theme="light"] .menu-panel-grid a.is-active, html[data-theme="light"] .music-playlist-item.is-active { background:#e8f3ff !important; border-color:rgba(0,105,224,.28) !important; box-shadow:inset 3px 0 0 #0069e0 !important; }
-html[data-theme="light"] .menu-panel-head strong, html[data-theme="light"] .music-panel-head strong, html[data-theme="light"] .music-track-copy strong, html[data-theme="light"] .music-playlist-copy strong { color:#0a0d12 !important; }
 html[data-theme="light"] .menu-panel-head span, html[data-theme="light"] .menu-panel-foot, html[data-theme="light"] .music-eyebrow, html[data-theme="light"] .music-track-copy span, html[data-theme="light"] .music-playlist-copy span { color:#687386 !important; }
-html[data-theme="light"] .music-status { background:#eef6ff !important; border-color:rgba(0,105,224,.18) !important; color:#0069e0 !important; }
 html[data-theme="dark"] .nav-actions>nav, html[data-theme="dark"] .music-panel { background:#0d1118 !important; border-color:rgba(255,255,255,.10) !important; }
 html[data-theme="dark"] .menu-panel-grid a, html[data-theme="dark"] .music-track, html[data-theme="dark"] .music-controls button, html[data-theme="dark"] .music-playlist-item { background:#151b24 !important; border-color:rgba(255,255,255,.075) !important; }
 html[data-theme="dark"] .menu-panel-grid a:hover, html[data-theme="dark"] .menu-panel-grid a:focus-visible, html[data-theme="dark"] .music-playlist-item:hover, html[data-theme="dark"] .music-playlist-item:focus-visible { background:#1a2533 !important; border-color:rgba(77,160,255,.25) !important; }
@@ -4462,7 +4444,6 @@ html[data-theme="dark"] .music-status { background:#10243a !important; border-co
 }
 .music-toggle.is-playing { box-shadow:inset 0 0 0 1px rgba(34,197,94,.35),0 0 12px rgba(34,197,94,.12); }
 @keyframes musicIndicatorPulse { 0%,100%{opacity:.65;transform:scale(.85)} 50%{opacity:1;transform:scale(1.2)} }
-html[data-theme="light"] .music-toggle.is-playing { box-shadow:inset 0 0 0 1px rgba(22,163,74,.35),0 0 12px rgba(22,163,74,.10); }
 
 /* MOBILE TOUCH PANELS — real phone viewport fallback */
 @media (max-width: 900px) and (pointer: coarse) {
@@ -4573,7 +4554,6 @@ html[data-theme="light"] .music-toggle.is-playing { box-shadow:inset 0 0 0 1px r
 @media (prefers-reduced-motion: reduce) {
   .music-toggle.is-playing .music-live-bars b { animation:none; height:8px; }
 }
-html[data-theme="light"] .music-toggle.is-playing { box-shadow:inset 0 0 0 1px rgba(22,163,74,.35),0 0 12px rgba(22,163,74,.12) !important; }
 html[data-theme="dark"] .music-toggle.is-playing { box-shadow:inset 0 0 0 1px rgba(34,197,94,.45),0 0 16px rgba(34,197,94,.18) !important; }
 
 /* MOBILE MUSIC STATUS — force visible indicator above theme/button overrides */
@@ -6075,10 +6055,6 @@ html[data-theme="light"] .wordmark:focus-visible {
   background: #11161e !important;
   border-color: #3b9cff !important;
   box-shadow: 0 0 0 3px #3b9cff !important;
-}
-
-html[data-theme="light"] .wordmark-logo {
-  filter: brightness(0) invert(1) !important;
 }
 
 /* Accessibility controls: keep the existing carousel geometry unchanged. */
