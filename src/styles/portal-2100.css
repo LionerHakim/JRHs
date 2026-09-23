@@ -2198,3 +2198,237 @@ html{
     padding:12px 14px !important;
   }
 }
+
+
+/* =========================
+   18 / LIQUID GLASS 2100
+   Reference-led glass surfaces: translucent depth,
+   soft spectral highlights, tactile tiles.
+   Structure/content/logo remain untouched.
+   ========================= */
+
+:root{
+  --glass-bg:rgba(22,26,34,.72);
+  --glass-bg-strong:rgba(27,32,42,.86);
+  --glass-line:rgba(255,255,255,.16);
+  --glass-line-soft:rgba(255,255,255,.09);
+  --glass-blue:#5aa8ff;
+  --glass-cyan:#55e6e0;
+  --glass-violet:#9d8cff;
+  --glass-shadow:
+    0 22px 60px rgba(0,0,0,.34),
+    0 8px 24px rgba(0,0,0,.18),
+    inset 0 1px 0 rgba(255,255,255,.14);
+}
+
+/* App tiles: rounded, luminous and dimensional like the references. */
+.nav-actions > button,
+.nav-actions > nav a,
+.music-panel button,
+.btn,
+.cta,
+.media-card,
+.project-card,
+.education-card,
+.contact-topic,
+.contact-form button{
+  position:relative !important;
+  isolation:isolate !important;
+  border-radius:18px !important;
+  border-color:var(--glass-line) !important;
+  background:
+    linear-gradient(135deg,rgba(255,255,255,.105),rgba(255,255,255,.025) 52%,rgba(90,168,255,.055)) !important;
+  box-shadow:
+    0 10px 28px rgba(0,0,0,.20),
+    0 2px 8px rgba(0,0,0,.12),
+    inset 0 1px 0 rgba(255,255,255,.13),
+    inset 0 -1px 0 rgba(0,0,0,.20) !important;
+  transition:
+    transform 220ms var(--p-ease),
+    border-color 220ms ease,
+    box-shadow 220ms ease,
+    background 220ms ease !important;
+}
+
+/* Spectral edge: restrained, not neon-noise. */
+.nav-actions > button::before,
+.nav-actions > nav a::before,
+.music-panel button::before,
+.btn::before,
+.cta::before,
+.media-card::before,
+.project-card::before,
+.education-card::before,
+.contact-topic::before,
+.contact-form button::before{
+  content:"" !important;
+  position:absolute !important;
+  inset:0 !important;
+  z-index:-1 !important;
+  border-radius:inherit !important;
+  pointer-events:none !important;
+  background:
+    radial-gradient(circle at 8% 8%,rgba(255,255,255,.16),transparent 28%),
+    radial-gradient(circle at 92% 88%,rgba(85,230,224,.10),transparent 30%),
+    radial-gradient(circle at 72% 10%,rgba(157,140,255,.09),transparent 26%) !important;
+  opacity:.72 !important;
+}
+
+/* Buttons become tactile glass tiles rather than flat pills. */
+.nav-actions > button:hover,
+.nav-actions > button:focus-visible,
+.nav-actions > nav a:hover,
+.nav-actions > nav a:focus-visible,
+.music-panel button:hover,
+.btn:hover,
+.btn:focus-visible,
+.cta:hover,
+.cta:focus-visible,
+.media-card:hover,
+.project-card:hover,
+.education-card:hover,
+.contact-topic:hover,
+.contact-form button:hover{
+  transform:translateY(-2px) !important;
+  border-color:rgba(90,168,255,.42) !important;
+  background:
+    linear-gradient(135deg,rgba(255,255,255,.13),rgba(255,255,255,.035) 52%,rgba(90,168,255,.10)) !important;
+  box-shadow:
+    0 18px 38px rgba(0,0,0,.28),
+    0 0 28px rgba(90,168,255,.07),
+    inset 0 1px 0 rgba(255,255,255,.18) !important;
+}
+
+/* Primary action: the reference's saturated tile translated to dark Portal 2100. */
+.nav-actions > button.is-active,
+.nav-actions > nav a.is-active,
+.music-play,
+.btn-primary,
+.cta-primary{
+  background:
+    linear-gradient(135deg,#526bff 0%,#4c8cff 46%,#55dfe0 125%) !important;
+  color:#fff !important;
+  border-color:rgba(255,255,255,.28) !important;
+  box-shadow:
+    0 14px 34px rgba(63,113,255,.28),
+    0 0 26px rgba(85,230,224,.10),
+    inset 0 1px 0 rgba(255,255,255,.30),
+    inset 0 -2px 0 rgba(0,0,0,.12) !important;
+}
+
+/* Panels use the same material, but remain legible and scroll-safe. */
+.nav-actions > nav,
+.music-panel{
+  background:
+    linear-gradient(135deg,rgba(28,33,43,.90),rgba(15,18,24,.90)) !important;
+  border-color:rgba(255,255,255,.17) !important;
+  box-shadow:
+    0 30px 90px rgba(0,0,0,.48),
+    0 8px 30px rgba(0,0,0,.24),
+    inset 0 1px 0 rgba(255,255,255,.13) !important;
+}
+
+/* Menu/music rows echo the reference's modular weather-card language. */
+.menu-panel-grid a,
+.music-track,
+.music-playlist-item{
+  border-radius:16px !important;
+  background:
+    linear-gradient(135deg,rgba(255,255,255,.085),rgba(255,255,255,.025) 55%,rgba(85,230,224,.045)) !important;
+  box-shadow:
+    0 8px 22px rgba(0,0,0,.18),
+    inset 0 1px 0 rgba(255,255,255,.10) !important;
+}
+
+.menu-panel-grid a:hover,
+.menu-panel-grid a:focus-visible,
+.music-playlist-item:hover,
+.music-playlist-item:focus-visible{
+  transform:translateY(-2px) !important;
+  border-color:rgba(85,230,224,.30) !important;
+  box-shadow:
+    0 14px 28px rgba(0,0,0,.25),
+    0 0 24px rgba(85,230,224,.06),
+    inset 0 1px 0 rgba(255,255,255,.15) !important;
+}
+
+/* Small status/icon blocks get the same glass material. */
+.menu-item-index,
+.menu-item-arrow,
+.music-playlist-state,
+.music-track-art{
+  border:1px solid rgba(255,255,255,.13) !important;
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.12) !important;
+}
+
+.menu-item-index,
+.menu-item-arrow,
+.music-playlist-state{
+  background:rgba(255,255,255,.055) !important;
+}
+
+.music-track-art{
+  background:linear-gradient(135deg,#596bff,#50bfff 62%,#57e0d8) !important;
+}
+
+/* Search/input-like controls from the reference: glass capsule, not flat field. */
+input,
+textarea,
+select{
+  border-radius:16px !important;
+  border:1px solid rgba(255,255,255,.13) !important;
+  background:
+    linear-gradient(135deg,rgba(255,255,255,.075),rgba(255,255,255,.025)) !important;
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.07),
+    0 7px 20px rgba(0,0,0,.12) !important;
+}
+
+input:focus,
+textarea:focus,
+select:focus{
+  border-color:rgba(90,168,255,.55) !important;
+  box-shadow:
+    0 0 0 3px rgba(90,168,255,.10),
+    inset 0 1px 0 rgba(255,255,255,.10) !important;
+}
+
+/* Keep the system elegant: no excessive blur or expensive backdrop filters. */
+.nav-actions > nav,
+.music-panel,
+.media-card,
+.project-card,
+.education-card{
+  backdrop-filter:none !important;
+  -webkit-backdrop-filter:none !important;
+}
+
+@media (max-width:767px){
+  .nav-actions > button,
+  .nav-actions > nav a,
+  .music-panel button,
+  .btn,
+  .cta,
+  .media-card,
+  .project-card,
+  .education-card,
+  .contact-topic,
+  .contact-form button{
+    border-radius:16px !important;
+  }
+}
+
+@media (prefers-reduced-motion:reduce){
+  .nav-actions > button,
+  .nav-actions > nav a,
+  .music-panel button,
+  .btn,
+  .cta,
+  .media-card,
+  .project-card,
+  .education-card,
+  .contact-topic,
+  .contact-form button{
+    transition:none !important;
+  }
+}
