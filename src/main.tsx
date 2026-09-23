@@ -740,4 +740,22 @@ Web app dan digital product yang sedang dibangun untuk memecahkan masalah nyata.
 
 const rootElement = document.getElementById('root')
 if (!rootElement) throw new Error('JRH root element not found')
-createRoot(rootElement).render(<App />)
+
+const renderBootFailure = () => {
+  rootElement.innerHTML = `
+    <div class="jrh-boot" role="alert">
+      <div>
+        JRH
+        <small>Halaman gagal dimuat. Silakan muat ulang halaman.</small>
+      </div>
+    </div>
+  `
+}
+
+try {
+  createRoot(rootElement).render(<App />)
+  rootElement.dataset.jrhMounted = 'true'
+} catch (error) {
+  console.error('[JRH] React boot failed:', error)
+  renderBootFailure()
+}
