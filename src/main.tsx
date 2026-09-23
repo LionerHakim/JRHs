@@ -17,7 +17,7 @@ export default function App() {
   const [scrollProgress, setScrollProgress] = useState(0)
   const [menuOpen, setMenuOpen] = useState(false)
   const [musicOpen, setMusicOpen] = useState(false)
-  const { darkMode, setDarkMode } = useTheme()
+  useTheme()
   const [name, setName] = useState('')
   const [purpose, setPurpose] = useState('')
   const [message, setMessage] = useState('')
@@ -667,9 +667,6 @@ Web app dan digital product yang sedang dibangun untuk memecahkan masalah nyata.
       </main>
 
       <div className="floating-utilities" aria-label="Pengaturan tampilan">
-        <button className="theme-toggle-floating" type="button" aria-label={darkMode ? 'Aktifkan light mode' : 'Aktifkan dark mode'} aria-pressed={darkMode} title={darkMode ? 'Light mode' : 'Dark mode'} onClick={() => setDarkMode((value) => !value)}>
-          <span aria-hidden="true">{darkMode ? '☀' : '☾'}</span>
-        </button>
         <a className="back-to-top" href="#identity" aria-label="Kembali ke atas" title="Kembali ke atas">↑<span>TOP</span></a>
       </div>
 
