@@ -246,7 +246,7 @@ ${name.trim()}`)
       <a className="skip-link" href="#identity">Lewati ke konten utama</a>
       <header className="nav">
         <a className="wordmark" href="#identity" aria-label="JRH home">
-          <img className="wordmark-logo" src="/assets/images/logo.png?v=20260924" alt="JRH" width="48" height="48" decoding="async" fetchPriority="high" sizes="48px" />
+          <span className="wordmark-mark" aria-hidden="true">JRH</span>
         </a>
         <div className="nav-actions" ref={navActionsRef}>
           <button
