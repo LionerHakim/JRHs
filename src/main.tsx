@@ -17,6 +17,8 @@ export default function App() {
   const scrollProgressRef = useRef<HTMLSpanElement>(null)
   const [menuOpen, setMenuOpen] = useState(false)
   const [musicOpen, setMusicOpen] = useState(false)
+  const [menuQuery, setMenuQuery] = useState('')
+  const [musicVolume, setMusicVolume] = useState(0.8)
   const [showBackToTop, setShowBackToTop] = useState(false)
   useTheme()
   const [name, setName] = useState('')
@@ -35,7 +37,16 @@ export default function App() {
   const contactTopicRef = useRef<HTMLDivElement>(null)
   const contactStartedAtRef = useRef(Date.now())
 
+  const filteredSectionItems = sectionItems.filter(([, label]) =>
+    label.toLowerCase().includes(menuQuery.trim().toLowerCase()),
+  )
 
+  const formatMusicTime = (seconds: number) => {
+    if (!Number.isFinite(seconds) || seconds < 0) return '00:00'
+    const minutes = Math.floor(seconds / 60)
+    const remainder = Math.floor(seconds % 60)
+    return `${String(minutes).padStart(2, '0')}:${String(remainder).padStart(2, '0')}`
+  }
 
   const {
     musicAudioRef,
@@ -49,7 +60,10 @@ export default function App() {
     changeMusicTrack,
   } = useMusicPlayer({ musicOpen })
 
-
+  useEffect(() => {
+    const audio = musicAudioRef.current
+    if (audio) audio.volume = musicVolume
+  }, [musicVolume, musicAudioRef])
 
   useEffect(() => {
     let frame = 0
@@ -255,7 +269,7 @@ ${name.trim()}`)
             aria-expanded={musicOpen}
             aria-controls="music-panel"
             aria-label={musicPlaying ? 'Music sedang diputar' : (musicOpen ? 'Tutup music player' : 'Buka music player')}
-            onClick={() => { setMusicOpen((open) => !open); setMenuOpen(false) }}
+            onClick={() => setMusicOpen((open) => !open)}
           >
             <span className="nav-action-glyph music-toggle-icon" aria-hidden="true">{musicPlaying ? <i className="music-icon-bars"><b /><b /><b /></i> : '♪'}</span>
             <span className="nav-action-label">Music</span>
@@ -268,7 +282,7 @@ ${name.trim()}`)
             aria-expanded={menuOpen}
             aria-controls="primary-navigation"
             aria-label={menuOpen ? 'Tutup menu' : 'Buka menu'}
-            onClick={() => { setMenuOpen((open) => !open); setMusicOpen(false) }}
+            onClick={() => setMenuOpen((open) => !open)}
           >
             <span className="nav-menu-lines" aria-hidden="true">
               <span></span>
@@ -282,13 +296,13 @@ ${name.trim()}`)
           <nav id="primary-navigation" className={menuOpen ? 'is-open' : undefined} aria-label="Primary navigation" aria-hidden={!menuOpen}>
             <div className="menu-panel-head">
               <div>
-                <span>JRH / NAVIGATION</span>
-                <strong>{sectionItems.find(([id]) => id === activeSection)?.[1] ?? 'Explore JRH'}</strong>
+                <span>Navigate through JRHs</span>
+                <strong>Menu</strong>
               </div>
               <span className="menu-panel-count">{String(sectionItems.length).padStart(2, '0')} SECTIONS</span>
             </div>
             <div className="menu-panel-grid">
-              {sectionItems.map(([id, label], index) => (
+              {filteredSectionItems.map(([id, label]) => (
               <a
                 key={id}
                 href={`#${id}`}
@@ -297,11 +311,16 @@ ${name.trim()}`)
                 className={activeSection === id ? 'is-active' : undefined}
                 onClick={() => setMenuOpen(false)}
               >
-                <span className="menu-item-index" aria-hidden="true">{String(index + 1).padStart(2, '0')}</span>
-                <span className="menu-item-label">{label}</span>
-                <span className="menu-item-arrow" aria-hidden="true">↗</span>
+                <span className="menu-item-icon" aria-hidden="true"><span /></span>
+                <span className="menu-item-index" aria-hidden="true">{String(sectionItems.findIndex(([sectionId]) => sectionId === id) + 1).padStart(2, '0')}</span>
+                <span className="menu-item-copy">
+                  <strong>{label}</strong>
+                  <small>{id === 'identity' ? 'Tentang saya' : id === 'projects' ? 'Karya dan proyek' : id === 'education' ? 'Pendidikan dan perjalanan belajar' : id === 'media' ? 'Konten dan publikasi' : id === 'testimonials' ? 'Gagasan dan perspektif' : 'Hubungi JRHs'}</small>
+                </span>
+                <span className="menu-item-arrow" aria-hidden="true">→</span>
               </a>
               ))}
+              {!filteredSectionItems.length ? <div className="menu-empty">Tidak ada section yang cocok.</div> : null}
             </div>
             <div className="menu-panel-foot">
               <span>JRH</span>
@@ -312,47 +331,71 @@ ${name.trim()}`)
           <aside id="music-panel" className={musicOpen ? 'music-panel is-open' : 'music-panel'} aria-label="Music player" aria-hidden={!musicOpen}>
             <div className="music-panel-head">
               <div>
-                <span className="music-eyebrow">JRH / SOUND</span>
-                <strong>Music Player</strong>
+                <span className="music-eyebrow">Playlist for your focus</span>
+                <strong>Music</strong>
               </div>
-              <span className="music-status" aria-live="polite" aria-atomic="true">{musicStatus}</span>
+              <div className="music-panel-head-actions">
+                <span className="music-status" aria-live="polite" aria-atomic="true">{musicStatus}</span>
+                <button className="panel-close" type="button" aria-label="Tutup music player" onClick={() => setMusicOpen(false)}>×</button>
+              </div>
             </div>
-            <div className="music-track">
-              <div className="music-track-art" aria-hidden="true">♪</div>
+
+            <div className="music-now-playing">
+              <div className="music-track-art" aria-hidden="true"><span>♪</span></div>
               <div className="music-track-copy">
+                <span className="music-now-badge"><i /> NOW PLAYING</span>
                 <strong>{musicTracks[musicIndex].title}</strong>
                 <span>{musicTracks[musicIndex].artist}</span>
+                <div className="music-time">
+                  <span>{formatMusicTime(musicProgress)}</span>
+                  <span>/ {formatMusicTime(musicDuration)}</span>
+                </div>
               </div>
             </div>
+
             <div
               className="music-progress"
-              role="progressbar"
+              role="slider"
+              tabIndex={musicOpen ? 0 : -1}
               aria-label="Track progress"
               aria-valuemin={0}
-              aria-valuemax={100}
-              aria-valuenow={musicDuration ? Math.min(100, (musicProgress / musicDuration) * 100) : 0}
+              aria-valuemax={musicDuration || 1}
+              aria-valuenow={musicDuration ? Math.min(musicDuration, musicProgress) : 0}
+              onClick={(event) => {
+                const audio = musicAudioRef.current
+                if (!audio || !musicDuration) return
+                const rect = event.currentTarget.getBoundingClientRect()
+                audio.currentTime = Math.min(1, Math.max(0, (event.clientX - rect.left) / rect.width)) * musicDuration
+              }}
+              onKeyDown={(event) => {
+                const audio = musicAudioRef.current
+                if (!audio || !musicDuration) return
+                if (event.key === 'ArrowRight') {
+                  event.preventDefault()
+                  audio.currentTime = Math.min(musicDuration, audio.currentTime + 5)
+                } else if (event.key === 'ArrowLeft') {
+                  event.preventDefault()
+                  audio.currentTime = Math.max(0, audio.currentTime - 5)
+                }
+              }}
             >
               <span style={{ width: musicDuration ? `${Math.min(100, (musicProgress / musicDuration) * 100)}%` : '0%' }} />
             </div>
+
             <div className="music-controls" aria-label="Music controls">
-              <button type="button" tabIndex={musicOpen ? 0 : -1} aria-label="Previous track" onClick={() => changeMusicTrack(-1)}>‹‹</button>
-              <button
-                className="music-play"
-                type="button"
-                tabIndex={musicOpen ? 0 : -1}
-                aria-label={musicPlaying ? 'Pause' : 'Play'}
-                aria-pressed={musicPlaying}
-                onClick={toggleMusicPlayback}
-              >
+              <button type="button" tabIndex={musicOpen ? 0 : -1} aria-label="Previous track" onClick={() => changeMusicTrack(-1)}>↞</button>
+              <button className="music-play" type="button" tabIndex={musicOpen ? 0 : -1} aria-label={musicPlaying ? 'Pause' : 'Play'} aria-pressed={musicPlaying} onClick={toggleMusicPlayback}>
                 {musicPlaying ? 'Ⅱ' : '▶'}
               </button>
-              <button type="button" tabIndex={musicOpen ? 0 : -1} aria-label="Next track" onClick={() => changeMusicTrack(1)}>››</button>
+              <button type="button" tabIndex={musicOpen ? 0 : -1} aria-label="Next track" onClick={() => changeMusicTrack(1)}>↠</button>
             </div>
 
             <div className="music-playlist" aria-label="Playlist">
               <div className="music-playlist-head">
-                <span>PLAYLIST</span>
-                <strong>9 TRACKS · 3 VISIBLE</strong>
+                <span><span className="playlist-glyph" aria-hidden="true">☷</span> PLAYLIST</span>
+                <select aria-label="Playlist filter" defaultValue="all" tabIndex={musicOpen ? 0 : -1}>
+                  <option value="all">All tracks</option>
+                </select>
               </div>
               <div className="music-playlist-list">
                 {musicTracks.map((track, index) => (
@@ -364,18 +407,23 @@ ${name.trim()}`)
                     aria-current={musicIndex === index ? 'true' : undefined}
                     onClick={() => loadAndPlayMusic(index)}
                   >
+                    <span className="music-playlist-art" aria-hidden="true"><span>{String(index + 1).padStart(2, '0')}</span></span>
                     <span className="music-playlist-number">{String(index + 1).padStart(2, '0')}</span>
                     <span className="music-playlist-copy">
                       <strong>{track.title}</strong>
                       <span>{track.artist}</span>
                     </span>
-                    <span className="music-playlist-state" aria-hidden="true">
-                      {musicIndex === index && musicPlaying ? '♪' : '▶'}
-                    </span>
+                    <span className="music-playlist-state" aria-hidden="true">{musicIndex === index && musicPlaying ? '♪' : '▶'}</span>
                   </button>
                 ))}
               </div>
             </div>
+
+            <label className="music-volume">
+              <span className="music-volume-icon" aria-hidden="true">◖</span>
+              <input type="range" min="0" max="1" step="0.01" value={musicVolume} onChange={(event) => setMusicVolume(Number(event.target.value))} aria-label="Volume" tabIndex={musicOpen ? 0 : -1} />
+              <span>{Math.round(musicVolume * 100)}%</span>
+            </label>
 
             <audio ref={musicAudioRef} preload="none" aria-hidden="true" />
           </aside>

@@ -2380,3 +2380,26 @@ body{
     transform:none !important;
   }
 }
+
+
+/* Slider thumb follows the real progress width. */
+.music-progress::after{
+  display:none !important;
+}
+.music-progress span{
+  position:relative !important;
+  overflow:visible !important;
+}
+.music-progress span::after{
+  content:"" !important;
+  position:absolute !important;
+  z-index:2 !important;
+  top:50% !important;
+  right:-9px !important;
+  width:18px !important;
+  height:18px !important;
+  transform:translateY(-50%) !important;
+  border-radius:50% !important;
+  background:#eef5ff !important;
+  box-shadow:0 0 0 4px rgba(88,147,255,.18),0 0 18px rgba(111,156,255,.52) !important;
+}
