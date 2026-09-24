@@ -396,7 +396,7 @@ html[data-theme] .nav-action{min-width:72px !important;min-height:58px !importan
 content and layout structure preserved.
    ========================= */
 
-:root{--p-control-surface:linear-gradient(180deg,rgba(255,255,255,.065),rgba(255,255,255,.022));--p-control-hover:linear-gradient(180deg,rgba(255,255,255,.105),rgba(255,255,255,.04));--p-control-border:rgba(255,255,255,.10);--p-control-active:linear-gradient(180deg,#4da3ff,#318fe9);--p-control-radius:14px;--p-control-shadow:0 7px 20px rgba(0,0,0,.20),inset 0 1px 0 rgba(255,255,255,.045);--p-control-shadow-hover:0 10px 26px rgba(0,0,0,.28),0 0 0 1px rgba(77,163,255,.08)}
+:root{--p-control-surface:var(--p-surface-2);--p-control-hover:var(--p-surface-3);--p-control-border:var(--p-line-soft);--p-control-active:var(--p-blue);--p-control-radius:var(--p-radius-md);--p-control-shadow:var(--p-shadow);--p-control-shadow-hover:var(--p-shadow-hover)}
 /* Menu,
 playlist and form triggers */
 .menu-panel-grid a,
@@ -484,7 +484,7 @@ content,
 geometry and logo remain protected.
    ========================= */
 
-:root{--p-surface-elevated:#181c23;--p-control-radius:14px;--p-card-radius:18px;--p-control-shadow:0 8px 24px rgba(0,0,0,.22),inset 0 1px 0 rgba(255,255,255,.045);--p-card-shadow:0 1px 0 rgba(255,255,255,.035),0 16px 44px rgba(0,0,0,.28);--p-card-shadow-hover:0 1px 0 rgba(255,255,255,.045),0 22px 54px rgba(0,0,0,.38);--p-blue-glow:0 0 0 1px rgba(77,163,255,.08),0 10px 28px rgba(77,163,255,.10)}
+:root{--p-surface-elevated:var(--p-surface-3);--p-card-radius:var(--p-radius-lg);--p-card-shadow:var(--p-shadow);--p-card-shadow-hover:var(--p-shadow-hover);--p-blue-glow:0 0 0 1px rgba(77,163,255,.08),0 10px 28px rgba(77,163,255,.10)}
 /* One surface hierarchy: shell → card → control. */
 .nav,
 .nav-actions>nav,
@@ -646,7 +646,7 @@ tighter physical scale. */
    Canonical interaction + surface language.
    ========================= */
 
-:root{--p-control-height:48px;--p-control-radius:14px;--p-control-gap:8px;--p-focus:0 0 0 3px var(--p-blue-soft);--p-hairline:rgba(255,255,255,.10);--p-glow:0 10px 30px rgba(77,163,255,.10)}
+:root{--p-control-height:48px;--p-control-gap:8px;--p-focus:0 0 0 3px var(--p-blue-soft);--p-hairline:rgba(255,255,255,.10);--p-glow:0 10px 30px rgba(77,163,255,.10);--device-card-pad:clamp(20px,3vw,40px)}
 /* Every actionable element speaks the same visual language. */
 html[data-theme] :is(
   a[href],
@@ -782,7 +782,7 @@ html{scrollbar-color:var(--p-surface-3) var(--p-bg)}
 hierarchy and interaction language.
    ========================= */
 
-:root{--p-panel-bg:#111419;--p-panel-bg-2:#171b21;--p-panel-border:rgba(255,255,255,.12);--p-panel-radius:20px;--p-panel-padding:18px;--p-panel-shadow:0 24px 70px rgba(0,0,0,.46),0 1px 0 rgba(255,255,255,.045)}
+:root{--p-panel-bg:var(--p-surface);--p-panel-bg-2:var(--p-surface-2);--p-panel-border:var(--p-line);--p-panel-radius:var(--p-radius-xl);--p-panel-padding:18px;--p-panel-shadow:var(--p-shadow-hover)}
 /* Both panels are siblings in one control family. */
 .nav-actions>nav,
 .music-panel{background:var(--p-panel-bg) !important;color:var(--p-ink) !important;border:1px solid var(--p-panel-border) !important;border-radius:var(--p-panel-radius) !important;box-shadow:var(--p-panel-shadow) !important;overflow:hidden !important;padding:0 !important}
@@ -874,43 +874,31 @@ keeping identical internal rhythm. */
 .menu-panel-head,
 .music-panel-head{min-height:58px !important;padding:12px 14px !important}}
 /* =========================
-   18 / LIQUID GLASS 2100
-   Reference-led glass surfaces: translucent depth,
-soft spectral highlights,
-tactile tiles.
-   Structure/content/logo remain untouched.
+   18 / RESTRAINED SURFACES
+   One visual material: opaque, quiet, consistent.
+   No blur, spectral gradients or decorative noise.
    ========================= */
 
-:root{--glass-bg:rgba(22,26,34,.72);--glass-bg-strong:rgba(27,32,42,.86);--glass-line:rgba(255,255,255,.16);--glass-line-soft:rgba(255,255,255,.09);--glass-blue:#5aa8ff;--glass-cyan:#55e6e0;--glass-violet:#9d8cff;--glass-shadow:0 22px 60px rgba(0,0,0,.34),
-    0 8px 24px rgba(0,0,0,.18),
-    inset 0 1px 0 rgba(255,255,255,.14)}
-/* App tiles: rounded,
-luminous and dimensional like the references. */
 .nav-actions > button,
 .nav-actions > nav a,
 .music-panel button,
 .media-card,
 .project-card,
 .contact-topic,
-.contact-form button{position:relative !important;isolation:isolate !important;border-radius:18px !important;border-color:var(--glass-line) !important;background:linear-gradient(135deg,rgba(255,255,255,.105),rgba(255,255,255,.025) 52%,rgba(90,168,255,.055)) !important;box-shadow:0 10px 28px rgba(0,0,0,.20),
-    0 2px 8px rgba(0,0,0,.12),
-    inset 0 1px 0 rgba(255,255,255,.13),
-    inset 0 -1px 0 rgba(0,0,0,.20) !important;transition:transform 220ms var(--p-ease),
-    border-color 220ms ease,
-    box-shadow 220ms ease,
-    background 220ms ease !important}
-/* Spectral edge: restrained,
-not neon-noise. */
-.nav-actions > button::before,
-.nav-actions > nav a::before,
-.music-panel button::before,
-.media-card::before,
-.project-card::before,
-.contact-topic::before,
-.contact-form button::before{content:"" !important;position:absolute !important;inset:0 !important;z-index:-1 !important;border-radius:inherit !important;pointer-events:none !important;background:radial-gradient(circle at 8% 8%,rgba(255,255,255,.16),transparent 28%),
-    radial-gradient(circle at 92% 88%,rgba(85,230,224,.10),transparent 30%),
-    radial-gradient(circle at 72% 10%,rgba(157,140,255,.09),transparent 26%) !important;opacity:.72 !important}
-/* Buttons become tactile glass tiles rather than flat pills. */
+.contact-form button{
+  position:relative !important;
+  isolation:isolate !important;
+  border-radius:var(--p-control-radius) !important;
+  border-color:var(--p-control-border) !important;
+  background:var(--p-control-surface) !important;
+  box-shadow:var(--p-control-shadow) !important;
+  transition:transform 180ms var(--p-ease),
+    color 180ms var(--p-ease),
+    background-color 180ms var(--p-ease),
+    border-color 180ms var(--p-ease),
+    box-shadow 180ms var(--p-ease) !important;
+}
+
 .nav-actions > button:hover,
 .nav-actions > button:focus-visible,
 .nav-actions > nav a:hover,
@@ -919,65 +907,110 @@ not neon-noise. */
 .media-card:hover,
 .project-card:hover,
 .contact-topic:hover,
-.contact-form button:hover{transform:translateY(-2px) !important;border-color:rgba(90,168,255,.42) !important;background:linear-gradient(135deg,rgba(255,255,255,.13),rgba(255,255,255,.035) 52%,rgba(90,168,255,.10)) !important;box-shadow:0 18px 38px rgba(0,0,0,.28),
-    0 0 28px rgba(90,168,255,.07),
-    inset 0 1px 0 rgba(255,255,255,.18) !important}
-/* Primary action: the reference's saturated tile translated to dark Portal 2100. */
-.nav-actions > button.is-active,
-.nav-actions > nav a.is-active,
-.music-play{background:linear-gradient(135deg,#526bff 0%,#4c8cff 46%,#55dfe0 125%) !important;color:#fff !important;border-color:rgba(255,255,255,.28) !important;box-shadow:0 14px 34px rgba(63,113,255,.28),
-    0 0 26px rgba(85,230,224,.10),
-    inset 0 1px 0 rgba(255,255,255,.30),
-    inset 0 -2px 0 rgba(0,0,0,.12) !important}
-/* Panels use the same material,
-but remain legible and scroll-safe. */
+.contact-form button:hover:not(:disabled){
+  border-color:var(--p-blue-line) !important;
+  background:var(--p-control-hover) !important;
+  box-shadow:var(--p-control-shadow-hover) !important;
+}
+
+.nav-actions > button.is-open,
+.nav-actions > nav a.is-active{
+  background:var(--p-control-active) !important;
+  border-color:var(--p-blue) !important;
+  color:#fff !important;
+}
+
+.music-play,
+.hero-pill,
+.contact-submit button{
+  background:var(--p-blue) !important;
+  color:#fff !important;
+  border-color:var(--p-blue) !important;
+}
+
+.music-play:hover,
+.music-play:focus-visible,
+.hero-pill:hover,
+.hero-pill:focus-visible,
+.contact-submit button:hover:not(:disabled),
+.contact-submit button:focus-visible:not(:disabled){
+  background:#fff !important;
+  color:var(--p-bg) !important;
+  border-color:#fff !important;
+  box-shadow:var(--p-control-shadow-hover) !important;
+}
+
 .nav-actions > nav,
-.music-panel{background:linear-gradient(135deg,rgba(28,33,43,.90),rgba(15,18,24,.90)) !important;border-color:rgba(255,255,255,.17) !important;box-shadow:0 30px 90px rgba(0,0,0,.48),
-    0 8px 30px rgba(0,0,0,.24),
-    inset 0 1px 0 rgba(255,255,255,.13) !important}
-/* Menu/music rows echo the reference's modular weather-card language. */
+.music-panel{
+  background:var(--p-surface) !important;
+  border-color:var(--p-line) !important;
+  box-shadow:var(--p-shadow-hover) !important;
+  backdrop-filter:none !important;
+  -webkit-backdrop-filter:none !important;
+}
+
 .menu-panel-grid a,
 .music-track,
-.music-playlist-item{border-radius:16px !important;background:linear-gradient(135deg,rgba(255,255,255,.085),rgba(255,255,255,.025) 55%,rgba(85,230,224,.045)) !important;box-shadow:0 8px 22px rgba(0,0,0,.18),
-    inset 0 1px 0 rgba(255,255,255,.10) !important}
-/* Small status/icon blocks get the same glass material. */
+.music-playlist-item{
+  background:var(--p-surface-2) !important;
+  border-color:var(--p-line-soft) !important;
+  box-shadow:none !important;
+}
+
 .menu-item-index,
 .menu-item-arrow,
-.music-playlist-state,
-.music-track-art{border:1px solid rgba(255,255,255,.13) !important;box-shadow:inset 0 1px 0 rgba(255,255,255,.12) !important}
-.menu-item-index,
-.menu-item-arrow,
-.music-playlist-state{background:rgba(255,255,255,.055) !important}
-/* Search/input-like controls from the reference: glass capsule,
-not flat field. */
+.music-playlist-state{
+  background:var(--p-surface-3) !important;
+  border:1px solid var(--p-line-soft) !important;
+  box-shadow:none !important;
+}
+
+.music-track-art{
+  background:var(--p-surface-3) !important;
+  color:var(--p-blue) !important;
+  border:1px solid var(--p-line-soft) !important;
+  box-shadow:none !important;
+}
+
 input,
 textarea,
-select{border-radius:16px !important;border:1px solid rgba(255,255,255,.13) !important;background:linear-gradient(135deg,rgba(255,255,255,.075),rgba(255,255,255,.025)) !important;box-shadow:inset 0 1px 0 rgba(255,255,255,.07),
-    0 7px 20px rgba(0,0,0,.12) !important}
+select{
+  border-radius:var(--p-radius-md) !important;
+  border:1px solid var(--p-line-soft) !important;
+  background:var(--p-surface) !important;
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.025) !important;
+}
+
 input:focus,
 textarea:focus,
-select:focus{border-color:rgba(90,168,255,.55) !important;box-shadow:0 0 0 3px rgba(90,168,255,.10),
-    inset 0 1px 0 rgba(255,255,255,.10) !important}
-/* Keep the system elegant: no excessive blur or expensive backdrop filters. */
-.nav-actions > nav,
-.music-panel,
-.media-card,
-.project-card{backdrop-filter:none !important;-webkit-backdrop-filter:none !important}
-@media (max-width:767px){.nav-actions > button,
-.nav-actions > nav a,
-.music-panel button,
-.media-card,
-.project-card,
-.contact-topic,
-.contact-form button{border-radius:16px !important}}
-@media (prefers-reduced-motion:reduce){.nav-actions > button,
-.nav-actions > nav a,
-.music-panel button,
-.media-card,
-.project-card,
-.contact-topic,
-.contact-form button{transition:none !important}}
+select:focus{
+  border-color:var(--p-blue-line) !important;
+  box-shadow:var(--p-focus) !important;
+}
 
+@media (max-width:767px){
+  .nav-actions > button,
+  .nav-actions > nav a,
+  .music-panel button,
+  .media-card,
+  .project-card,
+  .contact-topic,
+  .contact-form button{
+    border-radius:var(--p-control-radius) !important;
+  }
+}
+
+@media (prefers-reduced-motion:reduce){
+  .nav-actions > button,
+  .nav-actions > nav a,
+  .music-panel button,
+  .media-card,
+  .project-card,
+  .contact-topic,
+  .contact-form button{
+    transition:none !important;
+  }
+}
 
 /* =========================================================
    19 / UNIVERSAL DEVICE SYNC
