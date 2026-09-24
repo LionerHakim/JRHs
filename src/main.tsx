@@ -534,9 +534,6 @@ Web app dan digital product yang sedang dibangun untuk memecahkan masalah nyata.
               <p className="contact-question">Punya sesuatu yang ingin diwujudkan?</p>
               <p className="contact-answer">Ide baru? Project menarik? Mau kolaborasi? Atau cuma mau ngobrol?</p>
               <p className="contact-note">Terbuka untuk ide, kolaborasi, dan percakapan baru.</p>
-              <a className="contact-email-link" href={`mailto:${siteConfig.contactEmail}`} aria-label={`Kirim email langsung ke ${siteConfig.contactEmail}`}>
-                {siteConfig.contactEmail}
-              </a>
             </div>
 
             <form className="contact-form" onSubmit={handleContactSubmit} noValidate>
@@ -709,9 +706,6 @@ Web app dan digital product yang sedang dibangun untuk memecahkan masalah nyata.
               <img className="site-footer-logo" src="/assets/images/logo.png" alt="JRH" width="38" height="38" decoding="async" />
             </a>
             <strong>JRH</strong>
-            <a className="site-footer-email" href={`mailto:${siteConfig.contactEmail}`}>
-              {siteConfig.contactEmail}
-            </a>
           </div>
 
           <nav className="site-footer-nav" aria-label="Footer navigation">
@@ -729,12 +723,6 @@ Web app dan digital product yang sedang dibangun untuk memecahkan masalah nyata.
 
         <div className="site-footer-bottom">
           <span>© 2026 JRH</span>
-          <a
-            href={`mailto:${siteConfig.contactEmail}`}
-            aria-label={`Kirim email ke ${siteConfig.contactEmail}`}
-          >
-            {siteConfig.contactEmail}
-          </a>
         </div>
       </footer>
     </div>
