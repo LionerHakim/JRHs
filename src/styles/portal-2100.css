@@ -2121,3 +2121,299 @@ body{
     flex-basis:32px !important;
   }
 }
+
+
+/* =========================================================
+   24 / CONTACT — COMPLETE UI CONTRACT
+   Final pass: hierarchy, fields, dropdown, terms, feedback,
+   responsive spacing and touch targets. Email stays hidden.
+   ========================================================= */
+.contact-section{
+  position:relative !important;
+  isolation:isolate !important;
+}
+.contact-card{
+  box-sizing:border-box !important;
+}
+.contact-intro{
+  box-sizing:border-box !important;
+}
+.contact-question,
+.contact-answer,
+.contact-note{
+  overflow-wrap:anywhere !important;
+}
+.contact-form{
+  box-sizing:border-box !important;
+}
+.contact-fields{
+  box-sizing:border-box !important;
+}
+.contact-field{
+  box-sizing:border-box !important;
+  min-height:58px !important;
+  transition:border-color 160ms var(--p-ease),background-color 160ms var(--p-ease),box-shadow 160ms var(--p-ease) !important;
+}
+.contact-field:focus-within{
+  border-color:var(--p-blue-line) !important;
+  background:var(--p-surface-2) !important;
+  box-shadow:0 0 0 3px rgba(77,163,255,.08) !important;
+}
+.contact-icon{
+  color:var(--p-muted) !important;
+  flex:0 0 20px !important;
+}
+.contact-icon svg{
+  display:block !important;
+  width:18px !important;
+  height:18px !important;
+  stroke:currentColor !important;
+  fill:none !important;
+}
+.contact-field input,
+.contact-field textarea,
+.contact-topic-trigger{
+  font-family:inherit !important;
+  font-size:16px !important;
+  line-height:1.4 !important;
+}
+.contact-field input{
+  min-height:28px !important;
+}
+.contact-field textarea{
+  display:block !important;
+  width:100% !important;
+  min-height:132px !important;
+  padding:0 !important;
+}
+.contact-field input:focus,
+.contact-field textarea:focus{
+  outline:none !important;
+}
+.contact-field input::placeholder,
+.contact-field textarea::placeholder{
+  color:var(--p-faint) !important;
+}
+.contact-topic{
+  position:relative !important;
+}
+.contact-topic-trigger{
+  color:var(--p-ink) !important;
+  cursor:pointer !important;
+}
+.contact-topic-trigger > span:first-child{
+  color:var(--p-ink-2) !important;
+}
+.contact-topic-trigger:not(.is-open) > span:first-child:empty{
+  color:var(--p-faint) !important;
+}
+.contact-topic-chevron{
+  color:var(--p-muted) !important;
+  transition:transform 160ms var(--p-ease),color 160ms var(--p-ease) !important;
+}
+.contact-topic-trigger.is-open .contact-topic-chevron{
+  color:var(--p-blue) !important;
+}
+.contact-topic-menu{
+  position:absolute !important;
+  z-index:500 !important;
+  left:0 !important;
+  right:0 !important;
+  width:auto !important;
+  max-width:none !important;
+  margin:0 !important;
+  padding:6px !important;
+  border:1px solid var(--p-line) !important;
+  border-radius:var(--p-radius-md) !important;
+  background:var(--p-surface) !important;
+  box-shadow:0 18px 44px rgba(0,0,0,.42) !important;
+}
+.contact-topic-menu button{
+  min-height:44px !important;
+  border:1px solid transparent !important;
+  border-radius:9px !important;
+  color:var(--p-ink-2) !important;
+  background:transparent !important;
+  cursor:pointer !important;
+  transition:background 140ms ease,border-color 140ms ease,color 140ms ease,transform 140ms ease !important;
+}
+.contact-topic-menu button:hover,
+.contact-topic-menu button:focus-visible,
+.contact-topic-menu button.is-selected{
+  color:var(--p-ink) !important;
+  background:var(--p-blue-soft) !important;
+  border-color:var(--p-blue-line) !important;
+  transform:none !important;
+}
+.contact-topic-menu button span:first-child::before{
+  background:var(--p-faint) !important;
+  border-radius:50% !important;
+}
+.contact-message{
+  min-height:172px !important;
+}
+.contact-counter{
+  pointer-events:none !important;
+  user-select:none !important;
+}
+.contact-feedback{
+  margin-top:12px !important;
+  line-height:1.45 !important;
+  overflow-wrap:anywhere !important;
+}
+.contact-feedback.is-error{
+  color:#ffd6d6 !important;
+  background:rgba(255,92,92,.06) !important;
+}
+.contact-feedback.is-success{
+  color:var(--p-ink-2) !important;
+  background:var(--p-blue-soft) !important;
+}
+.contact-submit{
+  min-width:0 !important;
+}
+.contact-privacy{
+  min-width:0 !important;
+}
+.terms-checkbox{
+  position:relative !important;
+  min-width:0 !important;
+}
+.terms-checkbox-label{
+  color:var(--p-muted) !important;
+}
+.terms-checkbox-label:hover{
+  color:var(--p-ink-2) !important;
+}
+.terms-checkbox-text{
+  overflow-wrap:anywhere !important;
+}
+.terms-checkbox-box{
+  border:1px solid var(--p-line) !important;
+  border-radius:6px !important;
+  background:var(--p-surface) !important;
+  transition:border-color 160ms ease,background 160ms ease !important;
+}
+.terms-checkbox-input:focus-visible + .terms-checkbox-box{
+  outline:2px solid var(--p-blue) !important;
+  outline-offset:2px !important;
+}
+.terms-checkbox-input:checked + .terms-checkbox-box{
+  border-color:var(--p-blue) !important;
+  background:var(--p-blue) !important;
+}
+.terms-checkbox-box svg{
+  stroke:#fff !important;
+}
+.terms-checkbox-info{
+  border:1px solid var(--p-line) !important;
+  border-radius:50% !important;
+  color:var(--p-muted) !important;
+  background:var(--p-surface) !important;
+}
+.terms-checkbox-info:hover,
+.terms-checkbox-info:focus-visible{
+  color:var(--p-blue) !important;
+  border-color:var(--p-blue-line) !important;
+  background:var(--p-blue-soft) !important;
+}
+.terms-checkbox-popover{
+  box-sizing:border-box !important;
+  max-height:min(360px,55vh) !important;
+  overflow:auto !important;
+  border:1px solid var(--p-line) !important;
+  border-radius:var(--p-radius-md) !important;
+  background:var(--p-surface) !important;
+  color:var(--p-ink-2) !important;
+  box-shadow:0 18px 44px rgba(0,0,0,.42) !important;
+}
+.terms-checkbox-popover::after{
+  background:var(--p-surface) !important;
+  border-right:1px solid var(--p-line) !important;
+  border-bottom:1px solid var(--p-line) !important;
+}
+.terms-checkbox-close{
+  color:var(--p-muted) !important;
+  border:1px solid var(--p-line-soft) !important;
+  border-radius:8px !important;
+  background:transparent !important;
+}
+.terms-checkbox-close:hover,
+.terms-checkbox-close:focus-visible{
+  color:var(--p-ink) !important;
+  border-color:var(--p-blue-line) !important;
+  background:var(--p-blue-soft) !important;
+}
+.contact-submit > button{
+  min-height:52px !important;
+  font-weight:700 !important;
+  cursor:pointer !important;
+}
+.contact-submit > button:focus-visible{
+  outline:2px solid var(--p-blue) !important;
+  outline-offset:3px !important;
+}
+.contact-submit > button:disabled{
+  cursor:not-allowed !important;
+}
+.contact-benefits{
+  border-top:1px solid var(--p-line-soft) !important;
+}
+.contact-benefits > *{
+  color:var(--p-muted) !important;
+  border:1px solid var(--p-line-soft) !important;
+  border-radius:10px !important;
+  background:var(--p-surface) !important;
+}
+.contact-closing{
+  border-top:1px solid var(--p-line-soft) !important;
+  color:var(--p-faint) !important;
+}
+@media (max-width:820px){
+  .contact-submit{
+    grid-template-columns:1fr !important;
+  }
+}
+@media (max-width:600px){
+  .contact-card{
+    padding:14px !important;
+  }
+  .contact-form{
+    padding:12px !important;
+  }
+  .contact-fields{
+    gap:10px !important;
+  }
+  .contact-field{
+    min-height:54px !important;
+    padding:12px !important;
+  }
+  .contact-message{
+    min-height:160px !important;
+  }
+  .contact-field textarea{
+    min-height:120px !important;
+  }
+  .contact-topic-menu{
+    max-height:min(300px,44vh) !important;
+  }
+  .terms-checkbox-popover{
+    width:min(320px,calc(100vw - 40px)) !important;
+    max-width:calc(100vw - 40px) !important;
+    max-height:min(320px,50vh) !important;
+  }
+  .contact-submit > button{
+    min-height:50px !important;
+  }
+}
+@media (max-width:360px){
+  .contact-card{
+    padding:10px !important;
+  }
+  .contact-form{
+    padding:10px !important;
+  }
+  .contact-question{
+    font-size:28px !important;
+  }
+}
