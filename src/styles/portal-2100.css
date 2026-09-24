@@ -2290,3 +2290,37 @@ body{
     flex-basis:30px !important;
   }
 }
+
+/* =========================================================
+   25 / NAV FIXED — PERSISTENT HEADER
+   Keep the primary navigation visible while the page scrolls.
+   ========================================================= */
+.nav{
+  position:fixed !important;
+  top:14px !important;
+  left:50% !important;
+  right:auto !important;
+  z-index:340 !important;
+  transform:translateX(-50%) !important;
+  margin:0 !important;
+}
+.site-shell > main{
+  padding-top:96px !important;
+}
+.nav:hover{
+  transform:translateX(-50%) !important;
+}
+@media (max-width:767px){
+  .nav{
+    top:10px !important;
+    width:min(760px,calc(100% - 20px)) !important;
+  }
+  .site-shell > main{
+    padding-top:82px !important;
+  }
+}
+@media (max-width:390px){
+  .site-shell > main{
+    padding-top:78px !important;
+  }
+}
