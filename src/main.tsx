@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from 'react'
-import type { ChangeEvent, FormEvent } from 'react'
+import type { ChangeEvent, FormEvent, ReactNode } from 'react'
 import { createRoot } from 'react-dom/client'
 import { siteConfig } from './config/site'
 import { TermsCheckbox } from './components/contact/TermsCheckbox'
