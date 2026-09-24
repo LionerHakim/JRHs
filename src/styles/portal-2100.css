@@ -2367,9 +2367,15 @@ body{
     transition:none !important;
   }
 
-  .nav:hover,
-  .nav .wordmark:hover,
-  .terms-checkbox-info:hover{
+  .nav:hover{
     transform:translateX(-50%) !important;
+  }
+
+  .nav .wordmark:hover{
+    transform:none !important;
+  }
+
+  .terms-checkbox-info:hover{
+    transform:none !important;
   }
 }
