@@ -1945,3 +1945,127 @@ button:disabled{cursor:not-allowed;opacity:.5}
   *::after{animation-duration:.01ms !important;animation-iteration-count:1 !important;transition-duration:.01ms !important;scroll-behavior:auto !important}
   .jrh-reveal{opacity:1;transform:none}
 }
+
+
+/* =========================================================
+   FINAL MICRO-AUDIT
+   Fix uncovered live classes + lock reference proportions.
+   ========================================================= */
+
+.contact-honeypot{
+  position:absolute !important;
+  width:1px !important;
+  height:1px !important;
+  margin:-1px !important;
+  padding:0 !important;
+  overflow:hidden !important;
+  clip:rect(0 0 0 0) !important;
+  clip-path:inset(50%) !important;
+  white-space:nowrap !important;
+  border:0 !important;
+}
+
+.floating-utilities{
+  position:fixed !important;
+  right:18px !important;
+  bottom:18px !important;
+  z-index:420 !important;
+  pointer-events:none !important;
+}
+
+.back-to-top{
+  width:50px !important;
+  height:50px !important;
+  display:flex !important;
+  flex-direction:column !important;
+  align-items:center !important;
+  justify-content:center !important;
+  gap:1px !important;
+  border:1px solid var(--line) !important;
+  border-radius:50% !important;
+  background:#fff !important;
+  color:var(--ink) !important;
+  box-shadow:var(--shadow) !important;
+  opacity:0 !important;
+  visibility:hidden !important;
+  pointer-events:none !important;
+  transform:translateY(8px) !important;
+  transition:opacity 180ms var(--ease),transform 180ms var(--ease),visibility 180ms var(--ease) !important;
+}
+.back-to-top.is-visible{
+  opacity:1 !important;
+  visibility:visible !important;
+  pointer-events:auto !important;
+  transform:none !important;
+}
+.back-to-top>span:first-child{font-size:19px !important;line-height:1 !important}
+.back-to-top>span:last-child{
+  font:800 7px/1 ui-monospace,SFMono-Regular,Menlo,monospace !important;
+  letter-spacing:.08em !important;
+}
+
+.menu-empty{
+  min-height:100px !important;
+  display:grid !important;
+  place-items:center !important;
+  padding:16px !important;
+  border:1px dashed rgba(174,210,252,.18) !important;
+  border-radius:18px !important;
+  color:#aebdd4 !important;
+  font-size:13px !important;
+}
+
+.music-volume-icon{
+  width:26px !important;
+  height:26px !important;
+  display:grid !important;
+  place-items:center !important;
+}
+.music-volume-icon svg{
+  width:20px !important;
+  height:20px !important;
+  color:currentColor !important;
+}
+
+@media (min-width:721px){
+  .nav{
+    width:min(500px,calc(100% - 32px)) !important;
+    height:130px !important;
+    min-height:130px !important;
+    grid-template-columns:214px minmax(0,1fr) !important;
+  }
+
+  .nav .wordmark{
+    width:214px !important;
+    min-width:214px !important;
+    height:114px !important;
+    min-height:114px !important;
+  }
+
+  .nav-actions{
+    gap:7px !important;
+  }
+
+  html[data-theme] .nav-action{
+    width:0 !important;
+    min-width:0 !important;
+    flex:1 1 0 !important;
+    height:114px !important;
+    min-height:114px !important;
+  }
+
+  .nav-actions>nav,
+  .music-panel{
+    top:254px !important;
+    max-height:calc(100svh - 360px) !important;
+  }
+}
+
+@media (max-width:720px){
+  .floating-utilities{right:12px !important;bottom:12px !important}
+  .back-to-top{width:46px !important;height:46px !important}
+}
+
+@media (prefers-reduced-motion:reduce){
+  .back-to-top{transition:none !important}
+}

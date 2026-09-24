@@ -12,6 +12,36 @@ import './styles/portal-2100.css'
 
 import { sectionItems, sectionIds, musicTracks, contactTopics } from './config/ui'
 
+type MenuIconId = 'identity' | 'projects' | 'education' | 'media' | 'testimonials' | 'contact'
+
+const MenuIcon = ({ id }: { id: MenuIconId }) => {
+  const common = { viewBox: '0 0 24 24', fill: 'none', stroke: 'currentColor', strokeWidth: 1.8, strokeLinecap: 'round' as const, strokeLinejoin: 'round' as const, 'aria-hidden': true }
+  const shapes: Record<MenuIconId, ReactNode> = {
+    identity: <><circle cx="12" cy="8" r="3" /><path d="M5.5 20a6.5 6.5 0 0 1 13 0" /></>,
+    projects: <><path d="M4 7.5h16" /><path d="M5.5 7.5V6.2A2.2 2.2 0 0 1 7.7 4h8.6a2.2 2.2 0 0 1 2.2 2.2v1.3" /><rect x="3.5" y="7.5" width="17" height="12" rx="2.2" /></>,
+    education: <><rect x="5" y="6" width="14" height="14" rx="2.2" /><path d="M8 6V4h8v2M8.5 10h7M8.5 14h7M8.5 18h4" /></>,
+    media: <><rect x="4" y="5" width="16" height="14" rx="2.2" /><circle cx="9" cy="10" r="1.3" /><path d="m6.5 16 3.5-3 2.3 2 2.7-3 2.5 4" /></>,
+    testimonials: <><path d="M6 4.5h12A1.5 1.5 0 0 1 19.5 6v10A1.5 1.5 0 0 1 18 17.5h-7L7 20v-2.5H6A1.5 1.5 0 0 1 4.5 16V6A1.5 1.5 0 0 1 6 4.5Z" /><path d="M8 8h8M8 11.5h6M8 15h4" /></>,
+    contact: <><path d="M4 12h15" /><path d="m13 6 6 6-6 6" /><path d="M4 7V5.5A1.5 1.5 0 0 1 5.5 4H8M4 17v1.5A1.5 1.5 0 0 0 5.5 20H8" /></>,
+  }
+  return <svg {...common}>{shapes[id]}</svg>
+}
+
+type ControlIconName = 'shuffle' | 'previous' | 'next' | 'repeat' | 'volume'
+
+const ControlIcon = ({ name }: { name: ControlIconName }) => {
+  const common = { viewBox: '0 0 24 24', fill: 'none', stroke: 'currentColor', strokeWidth: 1.9, strokeLinecap: 'round' as const, strokeLinejoin: 'round' as const, 'aria-hidden': true }
+  const paths: Record<ControlIconName, ReactNode> = {
+    shuffle: <><path d="M16 3h4v4" /><path d="m20 3-5.5 5.5a4 4 0 0 1-5.7 0L6 5" /><path d="M4 19h4l10-10" /><path d="M16 17h4v4" /></>,
+    previous: <><path d="M6 5v14" /><path d="m18 6-8 6 8 6V6Z" /></>,
+    next: <><path d="M18 5v14" /><path d="m6 6 8 6-8 6V6Z" /></>,
+    repeat: <><path d="M17 2l3 3-3 3" /><path d="M4 12V9a3 3 0 0 1 3-3h13" /><path d="m7 22-3-3 3-3" /><path d="M20 12v3a3 3 0 0 1-3 3H4" /></>,
+    volume: <><path d="M4 10v4h4l5 4V6l-5 4H4Z" /><path d="M17 9a5 5 0 0 1 0 6" /><path d="M19.5 6.5a8.5 8.5 0 0 1 0 11" /></>,
+  }
+  return <svg {...common}>{paths[name]}</svg>
+}
+
+
 export default function App() {
   const [activeSection, setActiveSection] = useState<(typeof sectionIds)[number]>('identity')
   const scrollProgressRef = useRef<HTMLSpanElement>(null)
@@ -356,7 +386,7 @@ ${name.trim()}`)
                 className={activeSection === id ? 'is-active' : undefined}
                 onClick={() => setMenuOpen(false)}
               >
-                <span className="menu-item-icon" aria-hidden="true"><span /></span>
+                <span className="menu-item-icon"><MenuIcon id={id} /></span>
                 <span className="menu-item-index" aria-hidden="true">{String(sectionItems.findIndex(([sectionId]) => sectionId === id) + 1).padStart(2, '0')}</span>
                 <span className="menu-item-copy">
                   <strong>{label}</strong>
@@ -428,11 +458,11 @@ ${name.trim()}`)
             </div>
 
             <div className="music-controls" aria-label="Music controls">
-              <button type="button" tabIndex={musicOpen ? 0 : -1} aria-label="Previous track" onClick={() => changeMusicTrack(-1)}>↞</button>
+              <button type="button" tabIndex={musicOpen ? 0 : -1} aria-label="Previous track" onClick={() => changeMusicTrack(-1)}><ControlIcon name="previous" /></button>
               <button className="music-play" type="button" tabIndex={musicOpen ? 0 : -1} aria-label={musicPlaying ? 'Pause' : 'Play'} aria-pressed={musicPlaying} onClick={toggleMusicPlayback}>
                 {musicPlaying ? 'Ⅱ' : '▶'}
               </button>
-              <button type="button" tabIndex={musicOpen ? 0 : -1} aria-label="Next track" onClick={() => changeMusicTrack(1)}>↠</button>
+              <button type="button" tabIndex={musicOpen ? 0 : -1} aria-label="Next track" onClick={() => changeMusicTrack(1)}><ControlIcon name="next" /></button>
             </div>
 
             <div className="music-playlist" aria-label="Playlist">
@@ -465,7 +495,7 @@ ${name.trim()}`)
             </div>
 
             <label className="music-volume">
-              <span className="music-volume-icon" aria-hidden="true">◖</span>
+              <span className="music-volume-icon"><ControlIcon name="volume" /></span>
               <input type="range" min="0" max="1" step="0.01" value={musicVolume} onChange={(event) => setMusicVolume(Number(event.target.value))} aria-label="Volume" tabIndex={musicOpen ? 0 : -1} />
               <span>{Math.round(musicVolume * 100)}%</span>
             </label>
