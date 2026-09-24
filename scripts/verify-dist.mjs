@@ -6,7 +6,7 @@ const requiredFiles = [
   'index.html',
   'site.webmanifest',
   'robots.txt',
-  'assets/images/logo.png',
+  'favicon.svg',
   'assets/images/s.jpg',
   'assets/music/123456 Budi Doremi.mp3',
   'assets/music/Akad.mp3',
@@ -33,10 +33,12 @@ for (const relative of requiredFiles) {
 }
 
 const html = readFileSync(join(root, 'index.html'), 'utf8')
+const manifest = readFileSync(join(root, 'site.webmanifest'), 'utf8')
 const checks = [
   ['root mount', /<div id="root">/.test(html)],
   ['production JS bundle', /<script[^>]+type="module"[^>]+src="[^"]*\/assets\/[^"]+\.js"/.test(html)],
   ['production CSS bundle', /<link[^>]+rel="stylesheet"[^>]+href="[^"]*\/assets\/[^"]+\.css"/.test(html)],
+  ['no stale logo reference', !html.includes('/assets/images/logo.png') && !manifest.includes('/assets/images/logo.png')],
 ]
 
 for (const [label, passed] of checks) {
