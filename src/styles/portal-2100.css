@@ -2038,3 +2038,86 @@ body{
     font-size:13px !important;
   }
 }
+
+
+/* =========================================================
+   23 / NAVBAR LOGO — HARD LOCK
+   Protect the navbar logo from downstream responsive/contact rules.
+   ========================================================= */
+.nav .wordmark{
+  position:relative !important;
+  width:44px !important;
+  min-width:44px !important;
+  max-width:44px !important;
+  height:44px !important;
+  min-height:44px !important;
+  max-height:44px !important;
+  flex:0 0 44px !important;
+  display:inline-flex !important;
+  align-items:center !important;
+  justify-content:center !important;
+  box-sizing:border-box !important;
+  padding:0 !important;
+  margin:0 !important;
+  overflow:visible !important;
+  line-height:0 !important;
+}
+.nav .wordmark-logo{
+  display:block !important;
+  width:38px !important;
+  min-width:38px !important;
+  max-width:38px !important;
+  height:38px !important;
+  min-height:38px !important;
+  max-height:38px !important;
+  flex:0 0 38px !important;
+  box-sizing:border-box !important;
+  object-fit:contain !important;
+  object-position:center !important;
+  padding:0 !important;
+  margin:0 !important;
+  border:0 !important;
+  border-radius:0 !important;
+  opacity:1 !important;
+  visibility:visible !important;
+}
+@media (max-width:600px){
+  .nav .wordmark{
+    width:40px !important;
+    min-width:40px !important;
+    max-width:40px !important;
+    height:40px !important;
+    min-height:40px !important;
+    max-height:40px !important;
+    flex-basis:40px !important;
+  }
+  .nav .wordmark-logo{
+    width:34px !important;
+    min-width:34px !important;
+    max-width:34px !important;
+    height:34px !important;
+    min-height:34px !important;
+    max-height:34px !important;
+    flex-basis:34px !important;
+  }
+}
+@media (max-width:390px){
+  .nav .wordmark{
+    width:38px !important;
+    min-width:38px !important;
+    max-width:38px !important;
+    height:38px !important;
+    min-height:38px !important;
+    max-height:38px !important;
+    flex-basis:38px !important;
+  }
+  .nav .wordmark-logo{
+    width:32px !important;
+    min-width:32px !important;
+    max-width:32px !important;
+    height:32px !important;
+    min-height:32px !important;
+    max-height:32px !important;
+    flex-basis:32px !important;
+  }
+}
