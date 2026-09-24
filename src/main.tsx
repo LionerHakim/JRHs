@@ -391,12 +391,6 @@ ${name.trim()}`)
               <a className="hero-pill" href="#media">Explore media</a>
               <a className="ghost-pill" href="#contact">Contact</a>
             </div>
-            <div className="hero-meta" aria-label="JRH availability">
-              <span className="availability-dot" aria-hidden="true"></span>
-              <span>{siteConfig.identity.statusLabel}</span>
-              <span aria-hidden="true">·</span>
-              <span>{siteConfig.identity.locationLabel}</span>
-            </div>
           </div>
 
           <figure className="hero-portrait">
