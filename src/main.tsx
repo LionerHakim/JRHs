@@ -697,9 +697,6 @@ Web app dan digital product yang sedang dibangun untuk memecahkan masalah nyata.
       <footer className="site-footer" id="site-footer">
         <div className="site-footer-main">
           <div className="site-footer-brand">
-            <a className="site-footer-logo-link" href="#identity" aria-label="Kembali ke JRH home">
-              <img className="site-footer-logo" src="/assets/images/logo.png?v=20260924" alt="JRH" width="38" height="38" decoding="async" />
-            </a>
             <strong>JRH</strong>
           </div>
 
