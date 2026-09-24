@@ -1968,6 +1968,185 @@ body{
 
 
 /* =========================================================
+   24 / CONTACT TERMS — CLEAR INFO CONTROL
+   S&K remains compact, but the info trigger is unmistakable.
+   ========================================================= */
+
+.terms-checkbox{
+  position:relative !important;
+  min-width:0 !important;
+  display:flex !important;
+  align-items:center !important;
+  gap:8px !important;
+}
+
+.terms-checkbox-label{
+  min-width:0 !important;
+  display:inline-flex !important;
+  align-items:center !important;
+  gap:10px !important;
+  cursor:pointer !important;
+}
+
+.terms-checkbox-box{
+  width:22px !important;
+  height:22px !important;
+  min-width:22px !important;
+  flex:0 0 22px !important;
+  display:grid !important;
+  place-items:center !important;
+  border:1px solid var(--p-line) !important;
+  border-radius:6px !important;
+  background:var(--p-surface) !important;
+  color:#fff !important;
+}
+
+.terms-checkbox-input:focus-visible + .terms-checkbox-box{
+  outline:2px solid var(--p-blue) !important;
+  outline-offset:3px !important;
+}
+
+.terms-checkbox-info{
+  width:36px !important;
+  height:36px !important;
+  min-width:36px !important;
+  min-height:36px !important;
+  flex:0 0 36px !important;
+  margin:0 0 0 2px !important;
+  padding:0 !important;
+  display:inline-flex !important;
+  align-items:center !important;
+  justify-content:center !important;
+  border:1px solid var(--p-blue-line) !important;
+  border-radius:50% !important;
+  background:var(--p-blue-soft) !important;
+  color:var(--p-blue) !important;
+  font-family:Inter,ui-sans-serif,system-ui,sans-serif !important;
+  font-size:14px !important;
+  font-weight:800 !important;
+  line-height:1 !important;
+  box-shadow:none !important;
+  cursor:pointer !important;
+  transition:background-color 180ms var(--p-ease),border-color 180ms var(--p-ease),color 180ms var(--p-ease),transform 180ms var(--p-ease) !important;
+}
+
+.terms-checkbox-info:hover,
+.terms-checkbox-info:focus-visible,
+.terms-checkbox-info[aria-expanded="true"]{
+  background:var(--p-blue) !important;
+  border-color:var(--p-blue) !important;
+  color:#fff !important;
+  transform:translateY(-1px) !important;
+  outline:none !important;
+}
+
+.terms-checkbox-info:focus-visible{
+  outline:2px solid var(--p-blue) !important;
+  outline-offset:3px !important;
+}
+
+.terms-checkbox-info:disabled{
+  opacity:.45 !important;
+  cursor:not-allowed !important;
+  transform:none !important;
+}
+
+.terms-checkbox-popover{
+  position:absolute !important;
+  z-index:110 !important;
+  left:0 !important;
+  bottom:calc(100% + 12px) !important;
+  width:min(390px,calc(100vw - 32px)) !important;
+  max-width:calc(100vw - 32px) !important;
+  padding:18px !important;
+  background:var(--p-surface) !important;
+  color:var(--p-ink) !important;
+  border:1px solid var(--p-line) !important;
+  border-radius:var(--p-radius-lg) !important;
+  box-shadow:var(--p-shadow-hover) !important;
+}
+
+.terms-checkbox-popover-head{
+  min-height:30px !important;
+  display:flex !important;
+  align-items:center !important;
+  justify-content:space-between !important;
+  gap:12px !important;
+}
+
+.terms-checkbox-popover-head strong{
+  font-size:15px !important;
+  font-weight:750 !important;
+  letter-spacing:-.015em !important;
+}
+
+.terms-checkbox-close{
+  width:32px !important;
+  height:32px !important;
+  min-width:32px !important;
+  min-height:32px !important;
+  display:grid !important;
+  place-items:center !important;
+  padding:0 !important;
+  border:1px solid var(--p-line-soft) !important;
+  border-radius:50% !important;
+  background:var(--p-surface-2) !important;
+  color:var(--p-muted) !important;
+  font-size:18px !important;
+  line-height:1 !important;
+}
+
+.terms-checkbox-close:hover,
+.terms-checkbox-close:focus-visible{
+  background:var(--p-blue-soft) !important;
+  border-color:var(--p-blue-line) !important;
+  color:var(--p-blue) !important;
+}
+
+.terms-checkbox-popover p{
+  margin:12px 0 0 !important;
+  color:var(--p-muted) !important;
+  font-size:13px !important;
+  line-height:1.55 !important;
+}
+
+@media (max-width:600px){
+  .terms-checkbox{
+    align-items:flex-start !important;
+    gap:7px !important;
+  }
+
+  .terms-checkbox-label{
+    align-items:flex-start !important;
+    gap:9px !important;
+    font-size:14px !important;
+    line-height:1.35 !important;
+  }
+
+  .terms-checkbox-box{
+    margin-top:1px !important;
+  }
+
+  .terms-checkbox-info{
+    width:36px !important;
+    height:36px !important;
+    min-width:36px !important;
+    min-height:36px !important;
+    flex-basis:36px !important;
+    margin:0 0 0 1px !important;
+  }
+
+  .terms-checkbox-popover{
+    left:auto !important;
+    right:0 !important;
+    bottom:calc(100% + 10px) !important;
+    width:min(340px,calc(100vw - 32px)) !important;
+    max-width:calc(100vw - 32px) !important;
+    padding:16px !important;
+  }
+}
+
+/* =========================================================
    23 / JRH LOGO — PROFESSIONAL IDENTITY
    Logo is brand identity, not a utility control.
    Interactive styling stays on Music + Menu only.
