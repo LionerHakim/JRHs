@@ -562,6 +562,7 @@ Web app dan digital product yang sedang dibangun untuk memecahkan masalah nyata.
                     type="button"
                     aria-haspopup="listbox"
                     aria-expanded={topicOpen}
+                    aria-required="true"
                     aria-controls="contact-topic-options"
                     aria-label="Topik email (wajib)"
                     onClick={() => setTopicOpen((open) => !open)}
@@ -659,7 +660,7 @@ Web app dan digital product yang sedang dibangun untuk memecahkan masalah nyata.
                     inputRef={privacyInputRef}
                   />
                 </div>
-                <button type="submit">✈ <span>Buka Email Saya</span> <span aria-hidden="true">→</span></button>
+                <button type="submit" aria-label="Buka aplikasi email untuk mengirim pesan">✈ <span>Buka Email Saya</span> <span aria-hidden="true">→</span></button>
               </div>
 
               <div className="contact-benefits" aria-label="Contact benefits">
