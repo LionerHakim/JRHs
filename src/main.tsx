@@ -104,6 +104,20 @@ export default function App() {
   }, [])
 
   useEffect(() => {
+    if (!menuOpen) return
+
+    const handleMenuShortcut = (event: KeyboardEvent) => {
+      if ((event.metaKey || event.ctrlKey) && event.key.toLowerCase() === 'k') {
+        event.preventDefault()
+        document.getElementById('menu-section-search')?.focus()
+      }
+    }
+
+    document.addEventListener('keydown', handleMenuShortcut)
+    return () => document.removeEventListener('keydown', handleMenuShortcut)
+  }, [menuOpen])
+
+  useEffect(() => {
     const shouldLockScroll = menuOpen || musicOpen
     document.documentElement.dataset.overlayOpen = shouldLockScroll ? 'true' : 'false'
     document.body.style.overflow = shouldLockScroll ? 'hidden' : ''
@@ -299,8 +313,26 @@ ${name.trim()}`)
                 <span>Navigate through JRHs</span>
                 <strong>Menu</strong>
               </div>
-              <span className="menu-panel-count">{String(sectionItems.length).padStart(2, '0')} SECTIONS</span>
+              <div className="menu-panel-head-actions">
+                <span className="menu-panel-count">{String(sectionItems.length).padStart(2, '0')} SECTIONS</span>
+                <button className="panel-close" type="button" aria-label="Tutup menu" onClick={() => setMenuOpen(false)}>×</button>
+              </div>
             </div>
+
+            <label className="panel-search">
+              <span aria-hidden="true">⌕</span>
+              <input
+                id="menu-section-search"
+                type="search"
+                value={menuQuery}
+                onChange={(event) => setMenuQuery(event.target.value)}
+                placeholder="Search section…"
+                aria-label="Cari section"
+                tabIndex={menuOpen ? 0 : -1}
+              />
+              <kbd>⌘ K</kbd>
+            </label>
+
             <div className="menu-panel-grid">
               {filteredSectionItems.map(([id, label]) => (
               <a
