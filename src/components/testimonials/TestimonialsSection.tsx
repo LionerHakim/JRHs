@@ -51,9 +51,11 @@ export function TestimonialsSection() {
       }
     }
 
+    const reducedMotionQuery = window.matchMedia('(prefers-reduced-motion: reduce)')
+
     const scheduleAutoSlide = () => {
       clearAutoSlide()
-      if (!activeInViewRef.current || userInteractingRef.current || document.hidden) return
+      if (reducedMotionQuery.matches || !activeInViewRef.current || userInteractingRef.current || document.hidden) return
 
       autoSlideTimerRef.current = window.setTimeout(() => {
         autoSlideTimerRef.current = null
@@ -64,7 +66,7 @@ export function TestimonialsSection() {
         const nextIndex = currentIndex >= cards.length - 1 ? 0 : currentIndex + 1
         const targetCard = cards[nextIndex]
         if (targetCard) {
-          viewport.scrollTo({ left: getTargetLeft(targetCard), behavior: 'smooth' })
+          viewport.scrollTo({ left: getTargetLeft(targetCard), behavior: reducedMotionQuery.matches ? 'auto' : 'smooth' })
         }
         scheduleAutoSlide()
       }, 3500)
@@ -102,6 +104,11 @@ export function TestimonialsSection() {
       else scheduleAutoSlide()
     }
 
+    const handleReducedMotionChange = () => {
+      if (reducedMotionQuery.matches) clearAutoSlide()
+      else scheduleAutoSlide()
+    }
+
     const observer = new IntersectionObserver(([entry]) => {
       activeInViewRef.current = entry.isIntersecting
       if (entry.isIntersecting) scheduleAutoSlide()
@@ -116,6 +123,7 @@ export function TestimonialsSection() {
     viewport.addEventListener('focusin', handleFocusIn)
     viewport.addEventListener('scroll', updateActiveIndex, { passive: true })
     document.addEventListener('visibilitychange', handleVisibilityChange)
+    reducedMotionQuery.addEventListener('change', handleReducedMotionChange)
     updateActiveIndex()
 
     return () => {
@@ -131,6 +139,7 @@ export function TestimonialsSection() {
       viewport.removeEventListener('focusin', handleFocusIn)
       viewport.removeEventListener('scroll', updateActiveIndex)
       document.removeEventListener('visibilitychange', handleVisibilityChange)
+      reducedMotionQuery.removeEventListener('change', handleReducedMotionChange)
     }
   }, [testimonials.length])
 
@@ -161,7 +170,8 @@ export function TestimonialsSection() {
     })
 
     const nextIndex = (currentIndex + direction + cards.length) % cards.length
-    viewport.scrollTo({ left: getTargetLeft(cards[nextIndex]), behavior: 'smooth' })
+    const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches
+    viewport.scrollTo({ left: getTargetLeft(cards[nextIndex]), behavior: reducedMotion ? 'auto' : 'smooth' })
   }
   return (
     <section id="testimonials" className="section testimonials-section" aria-labelledby="testimonials-title">
