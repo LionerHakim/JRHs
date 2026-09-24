@@ -246,7 +246,7 @@ ${name.trim()}`)
       <a className="skip-link" href="#identity">Lewati ke konten utama</a>
       <header className="nav">
         <a className="wordmark" href="#identity" aria-label="JRH home">
-          <img className="wordmark-logo" src="/assets/images/logo.png" alt="JRH" width="48" height="48" decoding="async" fetchPriority="high" />
+          <img className="wordmark-logo" src="/assets/images/logo.png?v=20260924" alt="JRH" width="48" height="48" decoding="async" fetchPriority="high" />
         </a>
         <div className="nav-actions" ref={navActionsRef}>
           <button
@@ -704,7 +704,7 @@ Web app dan digital product yang sedang dibangun untuk memecahkan masalah nyata.
         <div className="site-footer-main">
           <div className="site-footer-brand">
             <a className="site-footer-logo-link" href="#identity" aria-label="Kembali ke JRH home">
-              <img className="site-footer-logo" src="/assets/images/logo.png" alt="JRH" width="38" height="38" decoding="async" />
+              <img className="site-footer-logo" src="/assets/images/logo.png?v=20260924" alt="JRH" width="38" height="38" decoding="async" />
             </a>
             <strong>JRH</strong>
           </div>
