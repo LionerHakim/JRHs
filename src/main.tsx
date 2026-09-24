@@ -246,7 +246,7 @@ ${name.trim()}`)
       <a className="skip-link" href="#identity">Lewati ke konten utama</a>
       <header className="nav">
         <a className="wordmark" href="#identity" aria-label="JRH home">
-          <img className="wordmark-logo" src="/assets/images/logo.png?v=20260924" alt="JRH" width="48" height="48" decoding="async" fetchPriority="high" />
+          <img className="wordmark-logo" src="/assets/images/logo.png?v=20260924" alt="JRH" width="48" height="48" decoding="async" fetchPriority="high" sizes="48px" />
         </a>
         <div className="nav-actions" ref={navActionsRef}>
           <button
@@ -402,6 +402,7 @@ ${name.trim()}`)
                 height="800"
                 fetchPriority="high"
                 decoding="async"
+                sizes="(max-width: 600px) 82vw, 410px"
               />
             </div>
           </figure>
