@@ -76,7 +76,7 @@ export default function App() {
     loadAndPlayMusic,
     toggleMusicPlayback,
     changeMusicTrack,
-  } = useMusicPlayer({ musicOpen })
+  } = useMusicPlayer({ musicOpen, repeat: musicRepeat, shuffle: musicShuffle })
 
   useEffect(() => {
     const audio = musicAudioRef.current

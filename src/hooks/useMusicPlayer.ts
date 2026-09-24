@@ -1,9 +1,13 @@
 import { useEffect, useRef, useState } from 'react'
 import { musicTracks } from '../config/ui'
 
-type UseMusicPlayerOptions = { musicOpen: boolean }
+type UseMusicPlayerOptions = {
+  musicOpen: boolean
+  repeat?: boolean
+  shuffle?: boolean
+}
 
-export function useMusicPlayer({ musicOpen }: UseMusicPlayerOptions) {
+export function useMusicPlayer({ musicOpen, repeat = false, shuffle = false }: UseMusicPlayerOptions) {
     const musicAudioRef = useRef<HTMLAudioElement>(null)
     const musicIndexRef = useRef(0)
     const musicRequestRef = useRef(0)
@@ -13,6 +17,8 @@ export function useMusicPlayer({ musicOpen }: UseMusicPlayerOptions) {
     const lastProgressUpdateRef = useRef(0)
     const [musicDuration, setMusicDuration] = useState(0)
     const [musicStatus, setMusicStatus] = useState('READY')
+    const repeatRef = useRef(repeat)
+    const shuffleRef = useRef(shuffle)
 
     const loadAndPlayMusic = (index: number) => {
       const audio = musicAudioRef.current
@@ -69,6 +75,11 @@ export function useMusicPlayer({ musicOpen }: UseMusicPlayerOptions) {
     }
   
     useEffect(() => {
+      repeatRef.current = repeat
+      shuffleRef.current = shuffle
+    }, [repeat, shuffle])
+
+    useEffect(() => {
       const audio = musicAudioRef.current
       if (!audio) return
   
@@ -113,6 +124,24 @@ export function useMusicPlayer({ musicOpen }: UseMusicPlayerOptions) {
       }
   
       const handleEnded = () => {
+        if (repeatRef.current) {
+          audio.currentTime = 0
+          void audio.play().catch(() => {
+            setMusicPlaying(false)
+            setMusicStatus('READY')
+          })
+          return
+        }
+
+        if (shuffleRef.current && musicTracks.length > 1) {
+          let nextIndex = musicIndexRef.current
+          while (nextIndex === musicIndexRef.current) {
+            nextIndex = Math.floor(Math.random() * musicTracks.length)
+          }
+          loadAndPlayMusic(nextIndex)
+          return
+        }
+
         const nextIndex = (musicIndexRef.current + 1) % musicTracks.length
         loadAndPlayMusic(nextIndex)
       }
