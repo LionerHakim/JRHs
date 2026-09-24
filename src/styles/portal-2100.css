@@ -1616,13 +1616,6 @@ body{
   max-width:620px !important;
 }
 
-.contact-email-link{
-  max-width:100% !important;
-  overflow:hidden !important;
-  text-overflow:ellipsis !important;
-  white-space:nowrap !important;
-}
-
 .contact-form{
   position:relative !important;
   width:100% !important;
@@ -1842,15 +1835,7 @@ body{
     font-size:13px !important;
   }
 
-  .contact-email-link{
-    display:flex !important;
-    width:100% !important;
-    justify-content:center !important;
-    margin-top:12px !important;
-    padding:10px 12px !important;
-  }
-
-  .contact-form{
+    .contact-form{
     margin-top:0 !important;
     padding:12px !important;
     border-radius:14px !important;
