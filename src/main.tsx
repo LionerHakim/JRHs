@@ -41,16 +41,7 @@ export default function App() {
   const contactTopicRef = useRef<HTMLDivElement>(null)
   const contactStartedAtRef = useRef(Date.now())
 
-  const menuItems = [
-    ['identity', 'About'],
-    ['projects', 'Projects'],
-    ['education', 'Experience'],
-    ['media', 'Media'],
-    ['testimonials', 'Thoughts'],
-    ['contact', 'Contact'],
-  ] as const
-
-  const menuSubtitles: Record<(typeof menuItems)[number][0], string> = {
+  const menuSubtitles: Record<(typeof sectionItems)[number][0], string> = {
     identity: 'Tentang saya',
     projects: 'Karya dan proyek',
     education: 'Rekam jejak dan pengalaman',
@@ -59,7 +50,7 @@ export default function App() {
     contact: 'Hubungi JRHs',
   }
 
-  const filteredSectionItems = menuItems.filter(([, label]) =>
+    const filteredSectionItems = sectionItems.filter(([, label]) =>
     label.toLowerCase().includes(menuQuery.trim().toLowerCase()),
   )
 
@@ -336,7 +327,7 @@ ${name.trim()}`)
                 <strong>Menu</strong>
               </div>
               <div className="menu-panel-head-actions">
-                <span className="menu-panel-count">{String(menuItems.length).padStart(2, '0')} SECTIONS</span>
+                <span className="menu-panel-count">{String(sectionItems.length).padStart(2, '0')} SECTIONS</span>
                 <button className="panel-close" type="button" aria-label="Tutup menu" onClick={() => setMenuOpen(false)}>×</button>
               </div>
             </div>
@@ -366,7 +357,7 @@ ${name.trim()}`)
                 onClick={() => setMenuOpen(false)}
               >
                 <span className="menu-item-icon" aria-hidden="true"><span /></span>
-                <span className="menu-item-index" aria-hidden="true">{String(menuItems.findIndex(([sectionId]) => sectionId === id) + 1).padStart(2, '0')}</span>
+                <span className="menu-item-index" aria-hidden="true">{String(sectionItems.findIndex(([sectionId]) => sectionId === id) + 1).padStart(2, '0')}</span>
                 <span className="menu-item-copy">
                   <strong>{label}</strong>
                   <small>{menuSubtitles[id]}</small>

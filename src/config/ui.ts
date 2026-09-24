@@ -1,9 +1,9 @@
 export const sectionItems = [
   ['identity', 'About'],
-  ['education', 'Education'],
-  ['media', 'Media'],
   ['projects', 'Projects'],
-  ['testimonials', 'Quotes'],
+  ['education', 'Experience'],
+  ['media', 'Media'],
+  ['testimonials', 'Thoughts'],
   ['contact', 'Contact'],
 ] as const
 
