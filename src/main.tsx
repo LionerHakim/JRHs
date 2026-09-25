@@ -8,7 +8,6 @@ import { useTheme } from './hooks/useTheme'
 import { useMusicPlayer } from './hooks/useMusicPlayer'
 
 import './index.css'
-import './styles/portal-2100.css'
 
 import { sectionItems, sectionIds, musicTracks, contactTopics } from './config/ui'
 
@@ -347,7 +346,7 @@ ${name.trim()}`)
   return (
     <div className={`site-shell${menuOpen ? " menu-open" : ""}${musicOpen ? " music-open" : ""}`}>
       <div className="scroll-progress" aria-hidden="true"><span ref={scrollProgressRef} /></div>
-      <a className="skip-link" href="#identity">Lewati ke konten utama</a>
+      <a className="skip-link" href="#identity" tabIndex={menuOpen || musicOpen ? -1 : 0}>Lewati ke konten utama</a>
       <header className="nav">
         <a className="wordmark" href="#identity" aria-label="JRH home">
           <span className="wordmark-mark" aria-hidden="true">JRH</span>
@@ -468,6 +467,7 @@ ${name.trim()}`)
               role="slider"
               tabIndex={musicOpen ? 0 : -1}
               aria-label="Track progress"
+              aria-orientation="horizontal"
               aria-valuemin={0}
               aria-valuemax={musicDuration || 1}
               aria-valuenow={musicDuration ? Math.min(musicDuration, musicProgress) : 0}
@@ -487,6 +487,12 @@ ${name.trim()}`)
                 } else if (event.key === 'ArrowLeft') {
                   event.preventDefault()
                   audio.currentTime = Math.max(0, audio.currentTime - 5)
+                } else if (event.key === 'Home') {
+                  event.preventDefault()
+                  audio.currentTime = 0
+                } else if (event.key === 'End') {
+                  event.preventDefault()
+                  audio.currentTime = musicDuration
                 }
               }}
             >
@@ -559,7 +565,7 @@ ${name.trim()}`)
       </header>
 
       <main>
-        <section id="identity" className="hero" data-experience="anchor" aria-labelledby="identity-title">
+        <section id="identity" className="hero" aria-labelledby="identity-title">
           <div className="hero-copy">
             <h1 id="identity-title">{siteConfig.identity.headline}</h1>
             <p className="hero-description">{siteConfig.identity.description}</p>
