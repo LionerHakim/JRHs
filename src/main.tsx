@@ -164,20 +164,20 @@ export default function App() {
   useEffect(() => {
     if (menuOpen) {
       requestAnimationFrame(() => document.getElementById('menu-section-search')?.focus())
-    } else if (previousMenuOpenRef.current) {
+    } else if (previousMenuOpenRef.current && !musicOpen) {
       menuToggleRef.current?.focus()
     }
     previousMenuOpenRef.current = menuOpen
-  }, [menuOpen])
+  }, [menuOpen, musicOpen])
 
   useEffect(() => {
     if (!musicOpen) {
-      if (previousMusicOpenRef.current) musicToggleRef.current?.focus()
+      if (previousMusicOpenRef.current && !menuOpen) musicToggleRef.current?.focus()
       previousMusicOpenRef.current = false
       return
     }
     previousMusicOpenRef.current = true
-  }, [musicOpen])
+  }, [musicOpen, menuOpen])
 
   useEffect(() => {
     const handleMenuShortcut = (event: KeyboardEvent) => {
@@ -387,7 +387,7 @@ ${name.trim()}`)
             <span className="nav-action-meta" aria-hidden="true">{menuOpen ? 'CLOSE' : 'OPEN'}</span>
           </button>
 
-          <nav id="primary-navigation" className={menuOpen ? 'is-open' : undefined} aria-label="Primary navigation" aria-hidden={!menuOpen}>
+          <nav id="primary-navigation" className={menuOpen ? 'is-open' : undefined} aria-label="Primary navigation" aria-hidden={!menuOpen} inert={!menuOpen}>
             <div className="menu-panel-head">
               <div>
                 <span>Navigate through JRH</span>
@@ -440,7 +440,7 @@ ${name.trim()}`)
             </div>
           </nav>
 
-          <aside id="music-panel" className={musicOpen ? 'music-panel is-open' : 'music-panel'} aria-label="Music player" aria-hidden={!musicOpen}>
+          <aside id="music-panel" className={musicOpen ? 'music-panel is-open' : 'music-panel'} aria-label="Music player" aria-hidden={!musicOpen} inert={!musicOpen}>
             <div className="music-panel-head">
               <div>
                 <span className="music-eyebrow">Playlist for your focus</span>
