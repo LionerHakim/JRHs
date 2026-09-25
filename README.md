@@ -11,9 +11,9 @@ Ruang personal JRH untuk karya, project, media, dan jejak yang sedang dibangun.
 
 ## Structure
 - About
-- Education
-- Media
 - Projects
+- Experience
+- Media
 - Thoughts
 - Contact
 - Music Player sebagai utility navigation
