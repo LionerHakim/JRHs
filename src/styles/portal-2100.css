@@ -1783,7 +1783,7 @@ html[data-theme] .nav-action.is-open{
   .music-controls .music-play{width:48px;height:48px;min-width:48px;min-height:48px}
 }
 
-/* Quotes: editorial cards stay in normal page flow on every viewport. */
+/* Quotes / Pikiran: normal document flow only; never capture horizontal scrolling. */
 .thinking-quotes{
   width:100%;
   max-width:var(--content-max,1200px);
