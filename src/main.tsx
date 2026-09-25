@@ -77,6 +77,8 @@ export default function App() {
   const privacyInputRef = useRef<HTMLInputElement>(null)
   const contactTopicRef = useRef<HTMLDivElement>(null)
   const contactStartedAtRef = useRef(Date.now())
+  const previousMenuOpenRef = useRef(false)
+  const previousMusicOpenRef = useRef(false)
 
   const menuSubtitles: Record<(typeof sectionItems)[number][0], string> = {
     identity: 'Tentang saya',
@@ -161,9 +163,20 @@ export default function App() {
   useEffect(() => {
     if (menuOpen) {
       requestAnimationFrame(() => document.getElementById('menu-section-search')?.focus())
+    } else if (previousMenuOpenRef.current) {
+      menuToggleRef.current?.focus()
+    }
+    previousMenuOpenRef.current = menuOpen
+  }, [menuOpen])
+
+  useEffect(() => {
+    if (!musicOpen) {
+      if (previousMusicOpenRef.current) musicToggleRef.current?.focus()
+      previousMusicOpenRef.current = false
       return
     }
-  }, [menuOpen])
+    previousMusicOpenRef.current = true
+  }, [musicOpen])
 
   useEffect(() => {
     const handleMenuShortcut = (event: KeyboardEvent) => {
@@ -725,6 +738,7 @@ Web app dan digital product yang sedang dibangun untuk memecahkan masalah nyata.
                     aria-label="Topik email (wajib)"
                     aria-invalid={touched.purpose && !purpose}
                     onClick={() => setTopicOpen((open) => !open)}
+                    onBlur={() => setTouched((current) => ({ ...current, purpose: true }))}
                     onKeyDown={(event) => {
                       if (event.key === 'ArrowDown') {
                         event.preventDefault()
