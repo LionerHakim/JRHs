@@ -39,6 +39,8 @@ const checks = [
   ['production JS bundle', /<script[^>]+type="module"[^>]+src="[^"]*\/assets\/[^"]+\.js"/.test(html)],
   ['production CSS bundle', /<link[^>]+rel="stylesheet"[^>]+href="[^"]*\/assets\/[^"]+\.css"/.test(html)],
   ['no stale logo reference', !html.includes('/assets/images/logo.png') && !manifest.includes('/assets/images/logo.png')],
+  ['light theme metadata', /<meta name="color-scheme" content="light"/.test(html) && !html.includes("dataset.theme = 'dark'")],
+  ['light PWA manifest', !manifest.includes('"background_color": "#08090B"') && !manifest.includes('"theme_color": "#08090B"')],
 ]
 
 for (const [label, passed] of checks) {

@@ -14,13 +14,13 @@ Ruang personal JRH untuk karya, project, media, dan jejak yang sedang dibangun.
 - Education
 - Media
 - Projects
-- Quotes
+- Thoughts
 - Contact
 - Music Player sebagai utility navigation
 - Contact email: `contact@jrhsee.my.id`
 
 ## Design
-The current UI is a restrained **3009 / post-digital editorial** system. Content and page geometry remain anchored to the `4e5b0be` baseline; the visual system is implemented in `src/styles/portal-2100.css` with structural rules in `src/styles/foundation.css`.
+The current UI is a restrained **3009 / post-digital editorial** system. Content and page geometry remain anchored to the `4e5b0be` baseline; the structural layer lives in `src/styles/foundation.css`, with the synchronized visual system in `src/styles/portal-2100.css` loaded afterward.
 
 ## Development
 `npm install`

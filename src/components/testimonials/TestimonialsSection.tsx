@@ -183,13 +183,13 @@ export function TestimonialsSection() {
       </p>
       <div className="testimonials-toolbar">
         <span className="testimonial-counter">{String(testimonialActiveIndex + 1).padStart(2, '0')} / {String(testimonials.length).padStart(2, '0')} PERSPEKTIF</span>
-        <div className="testimonial-controls" aria-label="Kontrol quotes">
+        <div className="testimonial-controls" aria-label="Kontrol perspektif">
           <button type="button" aria-label="Quote sebelumnya" onClick={() => moveTestimonial(-1)}>←</button>
           <button type="button" aria-label="Quote berikutnya" onClick={() => moveTestimonial(1)}>→</button>
         </div>
         <span className="testimonial-swipe-hint" aria-hidden="true">GESER ↔</span>
       </div>
-      <div ref={viewportRef} className="testimonials-viewport" role="region" aria-roledescription="carousel" aria-label="Koleksi quotes yang dapat digeser">
+      <div ref={viewportRef} className="testimonials-viewport" role="region" aria-roledescription="carousel" aria-label="Koleksi perspektif yang dapat digeser">
         <div className="testimonials-list">
           {testimonials.map((testimonial, index) => (
             <TestimonialCard

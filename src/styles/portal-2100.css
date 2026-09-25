@@ -1474,23 +1474,6 @@ html[data-theme] .nav-action.is-open{
   color:#b5c5de;
   font:500 12px/1 ui-monospace,SFMono-Regular,Menlo,monospace;
 }
-.music-favorite{
-  width:48px;height:48px;min-width:48px;min-height:48px;
-  display:grid;place-items:center;
-  border:1px solid rgba(178,210,250,.19);
-  border-radius:50%;
-  background:rgba(85,115,169,.18);
-  color:#edf5ff;
-  font-size:27px;
-}
-.music-favorite:hover,
-.music-favorite:focus-visible{
-  border-color:rgba(255,142,226,.56);
-  background:rgba(174,73,167,.26);
-  color:#ff9fe7;
-  outline:none;
-}
-.music-favorite.is-active{color:#ff9fe7;background:rgba(174,73,167,.26);border-color:rgba(255,142,226,.56)}
 .music-progress{
   position:relative;
   z-index:2;
@@ -1874,14 +1857,12 @@ html[data-theme] .nav-action.is-open{
   .music-track-art{width:90px;height:90px;border-radius:16px}
   .music-track-copy>strong{font-size:18px}
   .music-track-copy>span:not(.music-now-badge){font-size:11px}
-  .music-favorite{width:40px;height:40px;min-width:40px;min-height:40px;font-size:22px}
   .music-controls{gap:8px}
   .music-controls button{width:44px;height:44px;min-width:44px;min-height:44px;font-size:18px}
   .music-controls .music-play{width:62px;height:62px;min-width:62px;min-height:62px;font-size:25px}
   .music-playlist-list{max-height:230px}
   .music-playlist-head>span{font-size:15px}
   .playlist-glyph{width:30px;height:30px}
-  .music-playlist-head select{min-width:102px;height:38px}
 }
 
 /* Narrow phone: stack both consoles with internal scroll. */

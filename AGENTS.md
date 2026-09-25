@@ -4,7 +4,7 @@ JRHs is a personal editorial portfolio: “Saya sibuk bekerja, ini yang baru.”
 
 ## Source of truth
 - `4e5b0be` defines the protected content and page structure.
-- Visual redesign belongs in `src/index.css`.
+- Visual redesign belongs in `src/styles/portal-2100.css`, layered after the structural foundation in `src/styles/foundation.css`.
 - Do not invent, remove, reorder, or rewrite portfolio facts unless explicitly requested.
 - Keep the React + TypeScript + Vite stack.
 - Keep the existing section flow: About, Education, Media, Projects, Quotes, Contact.
@@ -22,5 +22,5 @@ JRHs is a personal editorial portfolio: “Saya sibuk bekerja, ini yang baru.”
 - Run `npm run typecheck`.
 - Run `npm run build`.
 - Check desktop, tablet, and Android/mobile.
-- Check keyboard navigation, reduced motion, theme switching, music player, contact form, and quote carousel.
+- Check keyboard navigation, reduced motion, light-theme consistency, music player, contact form, and perspective carousel.
 - Verify metadata and asset paths.

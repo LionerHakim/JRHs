@@ -49,10 +49,8 @@ export default function App() {
   const [musicOpen, setMusicOpen] = useState(false)
   const [menuQuery, setMenuQuery] = useState('')
   const [musicVolume, setMusicVolume] = useState(0.8)
-  const [musicFavorite, setMusicFavorite] = useState(false)
   const [musicShuffle, setMusicShuffle] = useState(false)
   const [musicRepeat, setMusicRepeat] = useState(false)
-  const [playlistMode, setPlaylistMode] = useState<'focus' | 'all'>('focus')
   const [showBackToTop, setShowBackToTop] = useState(false)
   useTheme()
   const [name, setName] = useState('')
@@ -458,19 +456,36 @@ ${name.trim()}`)
             </div>
 
             <div className="music-controls" aria-label="Music controls">
+              <button
+                className={musicShuffle ? 'is-mode-active' : undefined}
+                type="button"
+                tabIndex={musicOpen ? 0 : -1}
+                aria-label={musicShuffle ? 'Matikan shuffle' : 'Aktifkan shuffle'}
+                aria-pressed={musicShuffle}
+                onClick={() => setMusicShuffle((enabled) => !enabled)}
+              >
+                <ControlIcon name="shuffle" />
+              </button>
               <button type="button" tabIndex={musicOpen ? 0 : -1} aria-label="Previous track" onClick={() => changeMusicTrack(-1)}><ControlIcon name="previous" /></button>
               <button className="music-play" type="button" tabIndex={musicOpen ? 0 : -1} aria-label={musicPlaying ? 'Pause' : 'Play'} aria-pressed={musicPlaying} onClick={toggleMusicPlayback}>
                 {musicPlaying ? 'Ⅱ' : '▶'}
               </button>
               <button type="button" tabIndex={musicOpen ? 0 : -1} aria-label="Next track" onClick={() => changeMusicTrack(1)}><ControlIcon name="next" /></button>
+              <button
+                className={musicRepeat ? 'is-mode-active' : undefined}
+                type="button"
+                tabIndex={musicOpen ? 0 : -1}
+                aria-label={musicRepeat ? 'Matikan repeat' : 'Aktifkan repeat'}
+                aria-pressed={musicRepeat}
+                onClick={() => setMusicRepeat((enabled) => !enabled)}
+              >
+                <ControlIcon name="repeat" />
+              </button>
             </div>
 
             <div className="music-playlist" aria-label="Playlist">
               <div className="music-playlist-head">
-                <span><span className="playlist-glyph" aria-hidden="true">☷</span> PLAYLIST</span>
-                <select aria-label="Playlist filter" defaultValue="all" tabIndex={musicOpen ? 0 : -1}>
-                  <option value="all">All tracks</option>
-                </select>
+                <span><span className="playlist-glyph" aria-hidden="true">☷</span> PLAYLIST · {musicTracks.length} TRACKS</span>
               </div>
               <div className="music-playlist-list">
                 {musicTracks.map((track, index) => (
@@ -534,7 +549,7 @@ ${name.trim()}`)
 
         <section id="education" className="section experience-section" data-section="education" aria-labelledby="education-title">
           <div className="section-head">
-            <h2 id="education-title">Education</h2>
+            <h2 id="education-title">Experience</h2>
           </div>
 
           <div className="records">
