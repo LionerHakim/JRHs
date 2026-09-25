@@ -4,10 +4,10 @@ JRHs is a personal editorial portfolio: “Saya sibuk bekerja, ini yang baru.”
 
 ## Source of truth
 - `4e5b0be` defines the protected content and page structure.
-- Visual redesign belongs in `src/styles/portal-2100.css`, layered after the structural foundation in `src/styles/foundation.css`.
+- Visual redesign belongs in `src/styles/portal-2100.css`, loaded through the single CSS entrypoint `src/index.css`.
 - Do not invent, remove, reorder, or rewrite portfolio facts unless explicitly requested.
 - Keep the React + TypeScript + Vite stack.
-- Keep the existing section flow: About, Education, Media, Projects, Quotes, Contact.
+- Keep the existing section flow: About, Projects, Experience, Media, Thoughts, Contact.
 - Music Player remains an optional navigation utility.
 - Contact remains email-only via `contact@jrhsee.my.id`.
 
