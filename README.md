@@ -20,7 +20,7 @@ Ruang personal JRH untuk karya, project, media, dan jejak yang sedang dibangun.
 - Contact email: `contact@jrhsee.my.id`
 
 ## Design
-The current UI is a restrained **3009 / post-digital editorial** system. Content and page geometry remain anchored to the `4e5b0be` baseline; the structural layer lives in `src/styles/foundation.css`, with the synchronized visual system in `src/styles/portal-2100.css` loaded afterward.
+The current UI is a restrained **3009 / post-digital editorial** system. The single CSS entrypoint is `src/index.css`, which loads the synchronized visual system in `src/styles/portal-2100.css`.
 
 ## Development
 `npm install`
@@ -31,7 +31,7 @@ The current UI is a restrained **3009 / post-digital editorial** system. Content
 `npm run build`
 `npm run verify`
 
-The verification pipeline also checks that the production `dist/` output contains the generated HTML/CSS/JS bundle and required public assets.
+The verification pipeline checks the production `dist/` output, required public assets, navigation anchors, contact destination, light-theme metadata, and obsolete-path regressions.
 
 ## Deployment
 Framework: Vite
