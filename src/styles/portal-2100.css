@@ -1577,19 +1577,6 @@ html[data-theme] .nav-action.is-open{
   background:rgba(65,145,255,.22);
   font-size:18px;
 }
-.music-playlist-head select{
-  height:40px;
-  min-width:114px;
-  padding:0 12px;
-  border:1px solid rgba(168,202,248,.18);
-  border-radius:18px;
-  background:linear-gradient(180deg,rgba(92,121,174,.24),rgba(44,62,98,.34));
-  color:#eaf2ff;
-  font-size:12px;
-  font-weight:650;
-  outline:none;
-}
-.music-playlist-head select:focus-visible{outline:2px solid rgba(93,197,255,.84);outline-offset:3px}
 .music-playlist-list{
   display:grid;
   gap:7px;

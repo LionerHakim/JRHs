@@ -371,7 +371,7 @@ ${name.trim()}`)
                 aria-label="Cari section"
                 tabIndex={menuOpen ? 0 : -1}
               />
-              <kbd>⌘ K</kbd>
+              <kbd>Ctrl / ⌘ K</kbd>
             </label>
 
             <div className="menu-panel-grid">
