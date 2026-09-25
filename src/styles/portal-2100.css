@@ -1795,10 +1795,6 @@ html[data-theme] .nav-action.is-open{
   overflow:visible;
 }
 
-.thinking-quote-card{
-  min-width:0;
-  scroll-snap-align:none;
-}
 
 @media (max-width:980px){
   .thinking-quotes{
