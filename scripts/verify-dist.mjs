@@ -1,4 +1,4 @@
-import { existsSync, readFileSync, statSync } from 'node:fs'
+import { existsSync, readFileSync, readdirSync, statSync } from 'node:fs'
 import { join } from 'node:path'
 
 const root = new URL('../dist/', import.meta.url).pathname.replace(/\/$/, '')
@@ -6,6 +6,8 @@ const requiredFiles = [
   'index.html',
   'site.webmanifest',
   'robots.txt',
+  'sitemap.xml',
+  '_headers',
   'favicon.svg',
   'assets/images/s.jpg',
   'assets/music/123456 Budi Doremi.mp3',
@@ -34,6 +36,11 @@ for (const relative of requiredFiles) {
 
 const html = readFileSync(join(root, 'index.html'), 'utf8')
 const manifest = readFileSync(join(root, 'site.webmanifest'), 'utf8')
+const assetsDirectory = join(root, 'assets')
+const jsBundle = readdirSync(assetsDirectory)
+  .filter((file) => file.endsWith('.js'))
+  .map((file) => readFileSync(join(assetsDirectory, file), 'utf8'))
+  .join('\n')
 const checks = [
   ['root mount', /<div id="root">/.test(html)],
   ['production JS bundle', /<script[^>]+type="module"[^>]+src="[^"]*\/assets\/[^"]+\.js"/.test(html)],
