@@ -85,7 +85,7 @@ export default function App() {
     education: 'Rekam jejak dan pengalaman',
     media: 'Konten dan publikasi',
     testimonials: 'Pemikiran dan tulisan',
-    contact: 'Hubungi JRHs',
+    contact: 'Hubungi JRH',
   }
 
     const filteredSectionItems = sectionItems.filter(([, label]) =>
@@ -387,7 +387,7 @@ ${name.trim()}`)
           <nav id="primary-navigation" className={menuOpen ? 'is-open' : undefined} aria-label="Primary navigation" aria-hidden={!menuOpen}>
             <div className="menu-panel-head">
               <div>
-                <span>Navigate through JRHs</span>
+                <span>Navigate through JRH</span>
                 <strong>Menu</strong>
               </div>
               <div className="menu-panel-head-actions">
@@ -684,7 +684,7 @@ Web app dan digital product yang sedang dibangun untuk memecahkan masalah nyata.
           </div>
         </section>
 
-        <aside className="thinking-quotes" aria-label="Prinsip berpikir JRH">
+        <aside className="thinking-quotes" aria-label="Prinsip berpikir JRH" tabIndex={0}>
           <article className="thinking-quote-card">
             <span className="thinking-quote-kicker">01 / SYSTEMS THINKING</span>
             <strong>BERPIKIR SEPERTI MESIN EKONOMI</strong>
