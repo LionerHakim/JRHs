@@ -585,7 +585,7 @@ ${name.trim()}`)
 
         </section>
 
-        <section id="projects" className="section projects-section experience-section" data-section="projects" aria-labelledby="projects-title">
+        <section id="projects" className="section projects-section" data-section="projects" aria-labelledby="projects-title">
           <div className="section-head">
             <h2 id="projects-title">Projects</h2>
           </div>
@@ -695,7 +695,7 @@ Web app dan digital product yang sedang dibangun untuk memecahkan masalah nyata.
 
         <TestimonialsSection />
 
-        <section id="contact" className="section contact-section experience-section" data-section="contact" aria-labelledby="contact-title">
+        <section id="contact" className="section contact-section" data-section="contact" aria-labelledby="contact-title">
           <div className="section-head">
             <h2 id="contact-title">Contact</h2>
           </div>
