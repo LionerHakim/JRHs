@@ -62,8 +62,10 @@ export default function App() {
   const [contactStatus, setContactStatus] = useState<string | null>(null)
   const [contactHoneypot, setContactHoneypot] = useState('')
   const [contactError, setContactError] = useState<string | null>(null)
-  const [touched, setTouched] = useState({ name: false, message: false, privacy: false })
+  const [touched, setTouched] = useState({ name: false, message: false, privacy: false, purpose: false })
   const navActionsRef = useRef<HTMLDivElement>(null)
+  const menuToggleRef = useRef<HTMLButtonElement>(null)
+  const musicToggleRef = useRef<HTMLButtonElement>(null)
   const contactPrivacyRef = useRef<HTMLDivElement>(null)
   const privacyInputRef = useRef<HTMLInputElement>(null)
   const contactTopicRef = useRef<HTMLDivElement>(null)
@@ -145,30 +147,35 @@ export default function App() {
   }, [])
 
   useEffect(() => {
-    if (!menuOpen) return
+    if (menuOpen) {
+      requestAnimationFrame(() => document.getElementById('menu-section-search')?.focus())
+      return
+    }
+  }, [menuOpen])
 
+  useEffect(() => {
     const handleMenuShortcut = (event: KeyboardEvent) => {
       if ((event.metaKey || event.ctrlKey) && event.key.toLowerCase() === 'k') {
         event.preventDefault()
-        document.getElementById('menu-section-search')?.focus()
+        setMenuOpen(true)
       }
     }
 
     document.addEventListener('keydown', handleMenuShortcut)
     return () => document.removeEventListener('keydown', handleMenuShortcut)
-  }, [menuOpen])
+  }, [])
 
   useEffect(() => {
     const shouldLockScroll = menuOpen || musicOpen
+    const previousOverflow = document.body.style.overflow
     document.documentElement.dataset.overlayOpen = shouldLockScroll ? 'true' : 'false'
     document.body.style.overflow = shouldLockScroll ? 'hidden' : ''
 
-    if (!menuOpen && !musicOpen && !termsOpen && !topicOpen) {
-      return () => {
-        document.documentElement.dataset.overlayOpen = 'false'
-        document.body.style.overflow = ''
-      }
-    }
+    const page = document.querySelector('main')
+    const footer = document.getElementById('site-footer')
+    ;[page, footer].forEach((element) => {
+      if (element) element.inert = shouldLockScroll
+    })
 
     const handleKeyDown = (event: KeyboardEvent) => {
       if (event.key === 'Escape') {
@@ -202,7 +209,10 @@ export default function App() {
       document.removeEventListener('keydown', handleKeyDown)
       document.removeEventListener('pointerdown', handlePointerDown)
       document.documentElement.dataset.overlayOpen = 'false'
-      document.body.style.overflow = ''
+      document.body.style.overflow = previousOverflow
+      ;[page, footer].forEach((element) => {
+        if (element) element.inert = false
+      })
     }
   }, [menuOpen, musicOpen, termsOpen, topicOpen])
 
@@ -263,7 +273,7 @@ export default function App() {
       return
     }
     setContactStatus(null)
-    setTouched({ name: true, message: true, privacy: true })
+    setTouched({ name: true, message: true, privacy: true, purpose: true })
 
     if (!name.trim()) return setContactError('Nama belum diisi.')
     if (!purpose) {
@@ -306,7 +316,7 @@ ${name.trim()}`)
     setContactHoneypot('')
     contactStartedAtRef.current = Date.now()
     setTermsOpen(false)
-    setTouched((current) => ({ ...current, privacy: false }))
+    setTouched((current) => ({ ...current, privacy: false, purpose: false }))
   }
 
   return (
@@ -319,6 +329,7 @@ ${name.trim()}`)
         </a>
         <div className="nav-actions" ref={navActionsRef}>
           <button
+            ref={musicToggleRef}
             className={`nav-action music-toggle${musicOpen ? ' is-open' : ''}${musicPlaying ? ' is-playing' : ''}`}
             type="button"
             aria-expanded={musicOpen}
@@ -332,6 +343,7 @@ ${name.trim()}`)
           </button>
 
           <button
+            ref={menuToggleRef}
             className={`nav-action menu-toggle${menuOpen ? ' is-open' : ''}`}
             type="button"
             aria-expanded={menuOpen}
@@ -434,6 +446,7 @@ ${name.trim()}`)
               aria-valuemin={0}
               aria-valuemax={musicDuration || 1}
               aria-valuenow={musicDuration ? Math.min(musicDuration, musicProgress) : 0}
+              aria-valuetext={`${formatMusicTime(musicProgress)} / ${formatMusicTime(musicDuration)}`}
               onClick={(event) => {
                 const audio = musicAudioRef.current
                 if (!audio || !musicDuration) return
@@ -698,6 +711,7 @@ Web app dan digital product yang sedang dibangun untuk memecahkan masalah nyata.
                     aria-required="true"
                     aria-controls="contact-topic-options"
                     aria-label="Topik email (wajib)"
+                    aria-invalid={touched.purpose && !purpose}
                     onClick={() => setTopicOpen((open) => !open)}
                     onKeyDown={(event) => {
                       if (event.key === 'ArrowDown') {
@@ -726,7 +740,7 @@ Web app dan digital product yang sedang dibangun untuk memecahkan masalah nyata.
                           role="option"
                           aria-selected={purpose === item}
                           className={purpose === item ? 'is-selected' : undefined}
-                          onClick={() => { setPurpose(item); setTopicOpen(false) }}
+                          onClick={() => { setPurpose(item); setTouched((current) => ({ ...current, purpose: true })); setTopicOpen(false) }}
                           onKeyDown={(event) => {
                             const options = Array.from(
                               event.currentTarget.parentElement?.querySelectorAll<HTMLButtonElement>('[role="option"]') ?? [],
@@ -755,6 +769,7 @@ Web app dan digital product yang sedang dibangun untuk memecahkan masalah nyata.
                             } else if (event.key === 'Enter' || event.key === ' ') {
                               event.preventDefault()
                               setPurpose(item)
+                              setTouched((current) => ({ ...current, purpose: true }))
                               setTopicOpen(false)
                               contactTopicRef.current?.querySelector<HTMLButtonElement>('.contact-topic-trigger')?.focus()
                             }
@@ -826,7 +841,8 @@ Web app dan digital product yang sedang dibangun untuk memecahkan masalah nyata.
           aria-hidden={!showBackToTop}
           onClick={(event) => {
             event.preventDefault()
-            window.scrollTo({ top: 0, behavior: 'smooth' })
+            const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches
+            window.scrollTo({ top: 0, behavior: reducedMotion ? 'auto' : 'smooth' })
           }}
         >
           <span aria-hidden="true">↑</span><span>TOP</span>
