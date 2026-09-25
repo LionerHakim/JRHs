@@ -730,7 +730,7 @@ Web app dan digital product yang sedang dibangun untuk memecahkan masalah nyata.
           </div>
         </section>
 
-        <aside className="thinking-quotes" aria-label="Prinsip berpikir JRH" tabIndex={0}>
+        <section className="thinking-quotes" aria-label="Prinsip berpikir JRH" aria-labelledby="thinking-title">
           <article className="thinking-quote-card">
             <span className="thinking-quote-kicker">01 / SYSTEMS THINKING</span>
             <strong>BERPIKIR SEPERTI MESIN EKONOMI</strong>
