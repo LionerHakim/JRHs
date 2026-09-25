@@ -1881,3 +1881,78 @@ html[data-theme] .nav-action.is-open{
   .menu-item-icon{width:38px;height:38px}
   .music-controls .music-play{width:48px;height:48px;min-width:48px;min-height:48px}
 }
+
+
+/* =========================================================
+   FINAL NAV CAPSULE GEOMETRY — MOBILE / DESKTOP
+   One source of truth. Keeps the header compact and stable.
+   ========================================================= */
+@media (min-width:721px){
+  .nav{
+    width:min(480px,calc(100% - 32px));
+    height:84px;
+    padding:6px;
+    grid-template-columns:minmax(0,1fr) 144px;
+    gap:6px;
+  }
+  .nav .wordmark{
+    height:72px;
+    padding:0 22px;
+    gap:12px;
+  }
+  .nav .wordmark-mark{font-size:31px}
+  html[data-theme] .nav-action{
+    width:69px;
+    min-width:69px;
+    height:72px;
+    min-height:72px;
+    padding:6px 4px;
+    border-radius:25px;
+    gap:5px;
+  }
+  .nav-action-glyph{width:28px;height:28px;font-size:27px}
+  .nav-menu-lines{width:28px;height:28px;grid-template-columns:repeat(2,7px);grid-template-rows:repeat(2,7px);gap:5px}
+  .nav-menu-lines>span{width:7px;height:7px}
+  .nav-action-label{font-size:12px}
+}
+
+@media (max-width:720px){
+  .nav{
+    top:max(10px,env(safe-area-inset-top));
+    width:calc(100% - 16px);
+    height:70px;
+    padding:5px;
+    grid-template-columns:minmax(0,1fr) 136px;
+    gap:5px;
+    border-radius:24px;
+  }
+  .nav .wordmark{
+    height:58px;
+    padding:0 16px;
+    gap:9px;
+    border-radius:19px;
+  }
+  .nav .wordmark::before{width:8px;height:8px;min-width:8px}
+  .nav .wordmark-mark{font-size:25px}
+  .nav-actions{gap:5px}
+  html[data-theme] .nav-action{
+    width:65px;
+    min-width:65px;
+    height:58px;
+    min-height:58px;
+    padding:5px 3px;
+    border-radius:19px;
+    gap:4px;
+  }
+  .nav-action-glyph{width:25px;height:25px;font-size:24px}
+  .nav-menu-lines{width:25px;height:25px;grid-template-columns:repeat(2,6px);grid-template-rows:repeat(2,6px);gap:4px}
+  .nav-menu-lines>span{width:6px;height:6px}
+  .nav-action-label{font-size:11px}
+}
+
+@media (max-width:390px){
+  .nav{width:calc(100% - 12px);grid-template-columns:minmax(0,1fr) 126px}
+  .nav .wordmark{padding:0 12px}
+  .nav .wordmark-mark{font-size:22px}
+  html[data-theme] .nav-action{width:60px;min-width:60px;height:56px;min-height:56px}
+}
