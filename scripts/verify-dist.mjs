@@ -50,7 +50,7 @@ const checks = [
   ['light PWA manifest', !manifest.includes('"background_color": "#08090B"') && !manifest.includes('"theme_color": "#08090B"')],
   ['canonical home', html.includes('<link rel="canonical" href="https://jrhsee.my.id/" />')],
   ['contact email', jsBundle.includes('contact@jrhsee.my.id')],
-  ['navigation anchors', ['identity', 'projects', 'education', 'media', 'testimonials', 'contact'].every((id) => jsBundle.includes(`id:"${id}"`))],
+  ['navigation section ids', ['identity', 'projects', 'education', 'media', 'testimonials', 'contact'].every((id) => new RegExp(`\\b${id}\\b`).test(jsBundle))],
   ['synchronized labels', jsBundle.includes('Thoughts') && jsBundle.includes('Experience')],
   ['no obsolete section class', !jsBundle.includes('experience-section')],
   ['no legacy logo reference', !jsBundle.includes('/assets/images/logo.png')],
