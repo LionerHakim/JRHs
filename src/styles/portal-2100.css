@@ -896,14 +896,14 @@ img{display:block;max-width:100%}
   z-index:500;
   top:18px;
   left:50%;
-  width:min(520px,calc(100% - 24px));
-  height:130px;
+  width:min(480px,calc(100% - 32px));
+  height:84px;
   margin:0;
-  padding:7px;
+  padding:6px;
   transform:translateX(-50%);
   display:grid;
-  grid-template-columns:minmax(0,1fr) 128px;
-  gap:7px;
+  grid-template-columns:minmax(0,1fr) 144px;
+  gap:6px;
   align-items:center;
   border:1px solid rgba(166,207,255,.40);
   border-radius:999px;
@@ -922,14 +922,14 @@ img{display:block;max-width:100%}
   position:relative;
   z-index:2;
   width:100%;
-  height:114px;
+  height:72px;
   min-width:0;
   margin:0;
-  padding:0 27px;
+  padding:0 22px;
   display:flex;
   align-items:center;
   justify-content:flex-start;
-  gap:15px;
+  gap:12px;
   border:1px solid rgba(179,217,255,.10);
   border-radius:999px;
   background:rgba(66,96,158,.12);
@@ -949,7 +949,7 @@ img{display:block;max-width:100%}
   width:auto;
   height:auto;
   color:#f2f7ff;
-  font-size:37px;
+  font-size:31px;
   font-weight:850;
   letter-spacing:-.085em;
   line-height:1;
@@ -972,17 +972,17 @@ img{display:block;max-width:100%}
 html[data-theme] .nav-action{
   position:relative;
   z-index:2;
-  width:60px;
-  min-width:60px;
-  height:114px;
-  min-height:114px;
-  padding:8px 5px;
+  width:69px;
+  min-width:69px;
+  height:72px;
+  min-height:72px;
+  padding:6px 4px;
   flex:1 1 0;
   display:flex;
   flex-direction:column;
   align-items:center;
   justify-content:center;
-  gap:7px;
+  gap:5px;
   border:1px solid rgba(177,208,250,.18);
   border-radius:32px;
   background:linear-gradient(180deg,rgba(78,111,175,.34),rgba(25,41,72,.48));
@@ -1004,16 +1004,16 @@ html[data-theme] .nav-action.is-open{
   box-shadow:0 14px 32px rgba(63,128,255,.25),0 0 30px rgba(148,84,255,.20),inset 0 1px 0 rgba(255,255,255,.23);
 }
 .nav-action-glyph{
-  width:34px;
-  height:34px;
+  width:28px;
+  height:28px;
   display:grid;
   place-items:center;
-  font-size:31px;
+  font-size:27px;
   line-height:1;
   color:inherit;
 }
 .nav-action-label{
-  font-size:15px;
+  font-size:12px;
   font-weight:700;
   line-height:1;
   letter-spacing:-.01em;
@@ -1021,18 +1021,18 @@ html[data-theme] .nav-action.is-open{
 }
 .nav-action-meta{display:none}
 .nav-menu-lines{
-  width:32px;
-  height:32px;
+  width:28px;
+  height:28px;
   display:grid;
-  grid-template-columns:repeat(2,8px);
-  grid-template-rows:repeat(2,8px);
-  gap:6px;
+  grid-template-columns:repeat(2,7px);
+  grid-template-rows:repeat(2,7px);
+  gap:5px;
   justify-content:center;
   align-content:center;
 }
 .nav-menu-lines>span{
-  width:8px;
-  height:8px;
+  width:7px;
+  height:7px;
   border-radius:50%;
   background:currentColor;
 }
@@ -1085,10 +1085,10 @@ html[data-theme] .nav-action.is-open{
 .music-panel{
   position:fixed;
   z-index:700;
-  top:254px;
+  top:114px;
   left:50%;
-  width:min(540px,calc(100vw - 32px));
-  max-height:calc(100svh - 360px);
+  width:min(620px,calc(100vw - 32px));
+  max-height:min(680px,calc(100svh - 130px));
   margin:0;
   padding:24px;
   overflow:auto;
@@ -1649,52 +1649,6 @@ html[data-theme] .nav-action.is-open{
    Header geometry is fixed first; panels derive their position from it.
    ========================================================= */
 
-@media (min-width:721px){
-  .nav{
-    top:18px;
-    width:min(480px,calc(100% - 32px));
-    height:84px;
-    padding:6px;
-    grid-template-columns:minmax(0,1fr) 144px;
-    gap:6px;
-  }
-  .nav .wordmark{
-    height:72px;
-    padding:0 22px;
-    gap:12px;
-  }
-  .nav .wordmark-mark{font-size:31px}
-  html[data-theme] .nav-action{
-    width:69px;
-    min-width:69px;
-    height:72px;
-    min-height:72px;
-    padding:6px 4px;
-    border-radius:25px;
-    gap:5px;
-  }
-  .nav-action-glyph{width:28px;height:28px;font-size:27px}
-  .nav-menu-lines{
-    width:28px;
-    height:28px;
-    grid-template-columns:repeat(2,7px);
-    grid-template-rows:repeat(2,7px);
-    gap:5px;
-  }
-  .nav-menu-lines>span{width:7px;height:7px}
-  .nav-action-label{font-size:12px}
-
-  .menu-panel,
-  .music-panel{
-    top:114px;
-    width:min(620px,calc(100vw - 32px));
-    max-height:min(680px,calc(100svh - 130px));
-  }
-
-  .menu-panel-head strong,
-  .music-panel-head strong{font-size:28px}
-}
-
 @media (max-width:720px){
   .nav{
     top:max(10px,env(safe-area-inset-top));
@@ -1844,15 +1798,6 @@ html[data-theme] .nav-action.is-open{
   }
   .menu-item-icon{width:38px;height:38px}
   .music-controls .music-play{width:48px;height:48px;min-width:48px;min-height:48px}
-}
-
-@media (prefers-reduced-motion:reduce){
-  .nav-action,
-  .panel-close,
-  .menu-panel,
-  .music-panel,
-  .back-to-top{transition:none}
-  .thinking-quotes{scroll-behavior:auto}
 }
 
 /* Quotes: preserve two-column editorial layout on desktop; use horizontal snap-scroll below 980px. */
