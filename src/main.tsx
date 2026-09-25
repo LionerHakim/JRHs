@@ -48,7 +48,14 @@ export default function App() {
   const [menuOpen, setMenuOpen] = useState(false)
   const [musicOpen, setMusicOpen] = useState(false)
   const [menuQuery, setMenuQuery] = useState('')
-  const [musicVolume, setMusicVolume] = useState(0.8)
+  const [musicVolume, setMusicVolume] = useState(() => {
+    try {
+      const stored = Number(window.localStorage.getItem('jrhs:music-volume'))
+      return Number.isFinite(stored) ? Math.min(1, Math.max(0, stored)) : 0.8
+    } catch {
+      return 0.8
+    }
+  })
   const [musicShuffle, setMusicShuffle] = useState(false)
   const [musicRepeat, setMusicRepeat] = useState(false)
   const [showBackToTop, setShowBackToTop] = useState(false)
@@ -106,6 +113,11 @@ export default function App() {
   useEffect(() => {
     const audio = musicAudioRef.current
     if (audio) audio.volume = musicVolume
+    try {
+      window.localStorage.setItem('jrhs:music-volume', String(musicVolume))
+    } catch {
+      // Storage can be unavailable in restricted browsing contexts.
+    }
   }, [musicVolume, musicAudioRef])
 
   useEffect(() => {
