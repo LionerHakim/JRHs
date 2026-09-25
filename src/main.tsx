@@ -731,6 +731,9 @@ Web app dan digital product yang sedang dibangun untuk memecahkan masalah nyata.
         </section>
 
         <section id="thinking" className="thinking-quotes" aria-labelledby="thinking-title">
+          <div className="thinking-quotes-head">
+            <h2 id="thinking-title">Pikiran</h2>
+          </div>
           <article className="thinking-quote-card">
             <span className="thinking-quote-kicker">01 / SYSTEMS THINKING</span>
             <strong>BERPIKIR SEPERTI MESIN EKONOMI</strong>
@@ -741,9 +744,7 @@ Web app dan digital product yang sedang dibangun untuk memecahkan masalah nyata.
             <strong>GABUNGKAN DATA DAN INTUISI</strong>
             <p>gunakan data dan sistem algoritma, tapi jangan buang intuisi manusia. gabungkan keduanya untuk pengambilan keputusan terbaik.</p>
           </article>
-        </aside>
-
-
+        </section>
 
         <TestimonialsSection />
 
