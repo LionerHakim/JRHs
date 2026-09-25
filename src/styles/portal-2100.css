@@ -1765,7 +1765,7 @@ html[data-theme] .nav-action.is-open{
   
   .nav-actions>nav,
   .music-panel{
-    top:88px;
+    top:calc(max(10px,env(safe-area-inset-top)) + 78px);
     width:calc(100vw - 16px);
     max-height:calc(100svh - 100px);
     padding:15px;
@@ -1812,7 +1812,7 @@ html[data-theme] .nav-action.is-open{
 /* Narrow phone: stack both consoles with internal scroll. */
 @media (max-width:520px){
   .site-shell.menu-open.music-open .nav-actions>nav.is-open{
-    top:88px;
+    top:calc(max(10px,env(safe-area-inset-top)) + 78px);
     left:8px;
     right:auto;
     width:calc(100vw - 16px);
@@ -1823,7 +1823,7 @@ html[data-theme] .nav-action.is-open{
     top:auto;
     left:8px;
     right:auto;
-    bottom:8px;
+    bottom:max(8px,env(safe-area-inset-bottom));
     width:calc(100vw - 16px);
     max-height:calc(46svh - 46px);
     transform:translateY(0) scale(1);
@@ -2063,7 +2063,7 @@ body{
 /* Phone: compact top navigation and proportionate logo capsule. */
 @media (max-width:720px){
   .nav{
-    top:10px;
+    top:max(10px,env(safe-area-inset-top));
     width:calc(100% - 16px);
     height:70px;
     min-height:70px;
@@ -2194,7 +2194,10 @@ body{
 
 /* Restore responsive sizing for the floating utility. */
 @media (max-width:720px){
-  .floating-utilities{right:12px;bottom:12px}
+  .floating-utilities{
+    right:max(12px,env(safe-area-inset-right));
+    bottom:max(12px,env(safe-area-inset-bottom));
+  }
   .back-to-top{width:46px;height:46px}
 }
 
