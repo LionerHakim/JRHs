@@ -88,9 +88,11 @@ export default function App() {
     contact: 'Hubungi JRH',
   }
 
-    const filteredSectionItems = sectionItems.filter(([, label]) =>
-    label.toLowerCase().includes(menuQuery.trim().toLowerCase()),
-  )
+  const normalizedMenuQuery = menuQuery.trim().toLocaleLowerCase('id-ID')
+  const filteredSectionItems = sectionItems.filter(([id, label]) => {
+    if (!normalizedMenuQuery) return true
+    return `${label} ${menuSubtitles[id]}`.toLocaleLowerCase('id-ID').includes(normalizedMenuQuery)
+  })
 
   const formatMusicTime = (seconds: number) => {
     if (!Number.isFinite(seconds) || seconds < 0) return '00:00'
@@ -181,6 +183,7 @@ export default function App() {
     const handleMenuShortcut = (event: KeyboardEvent) => {
       if ((event.metaKey || event.ctrlKey) && event.key.toLowerCase() === 'k') {
         event.preventDefault()
+        setMusicOpen(false)
         setMenuOpen(true)
       }
     }
@@ -359,7 +362,7 @@ ${name.trim()}`)
             aria-expanded={musicOpen}
             aria-controls="music-panel"
             aria-label={musicPlaying ? 'Music sedang diputar' : (musicOpen ? 'Tutup music player' : 'Buka music player')}
-            onClick={() => setMusicOpen((open) => !open)}
+            onClick={() => { setMenuOpen(false); setMusicOpen((open) => !open) }}
           >
             <span className="nav-action-glyph music-toggle-icon" aria-hidden="true">{musicPlaying ? <i className="music-icon-bars"><b /><b /><b /></i> : '♪'}</span>
             <span className="nav-action-label">Music</span>
@@ -373,7 +376,7 @@ ${name.trim()}`)
             aria-expanded={menuOpen}
             aria-controls="primary-navigation"
             aria-label={menuOpen ? 'Tutup menu' : 'Buka menu'}
-            onClick={() => setMenuOpen((open) => !open)}
+            onClick={() => { setMusicOpen(false); setMenuOpen((open) => !open) }}
           >
             <span className="nav-menu-lines" aria-hidden="true">
               <span></span>
