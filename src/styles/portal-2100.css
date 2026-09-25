@@ -1346,7 +1346,7 @@ html[data-theme] .nav-action.is-open{
   margin-top:18px;
   padding:15px;
   display:grid;
-  grid-template-columns:138px minmax(0,1fr) 48px;
+  grid-template-columns:138px minmax(0,1fr);
   align-items:center;
   gap:16px;
   border:1px solid rgba(173,211,255,.22);
@@ -1642,51 +1642,120 @@ html[data-theme] .nav-action.is-open{
 .music-volume input{width:100%;accent-color:#8c7aff}
 .music-volume>span:last-child{color:#d5e1f2;font-size:13px;font-weight:650;font-variant-numeric:tabular-nums}
 
-/* ---------- FINAL OVERLAY GEOMETRY ---------- */
-/* Menu and Music are mutually exclusive in React state.
-   Keep one geometry source so stale dual-open rules cannot fight each other. */
+
+/* =========================================================
+   RESPONSIVE NAV / OVERLAY — SINGLE SOURCE OF TRUTH
+   Header geometry is fixed first; panels derive their position from it.
+   ========================================================= */
 
 @media (min-width:721px){
+  .nav{
+    top:18px;
+    width:min(480px,calc(100% - 32px));
+    height:84px;
+    padding:6px;
+    grid-template-columns:minmax(0,1fr) 144px;
+    gap:6px;
+  }
+  .nav .wordmark{
+    height:72px;
+    padding:0 22px;
+    gap:12px;
+  }
+  .nav .wordmark-mark{font-size:31px}
+  html[data-theme] .nav-action{
+    width:69px;
+    min-width:69px;
+    height:72px;
+    min-height:72px;
+    padding:6px 4px;
+    border-radius:25px;
+    gap:5px;
+  }
+  .nav-action-glyph{width:28px;height:28px;font-size:27px}
+  .nav-menu-lines{
+    width:28px;
+    height:28px;
+    grid-template-columns:repeat(2,7px);
+    grid-template-rows:repeat(2,7px);
+    gap:5px;
+  }
+  .nav-menu-lines>span{width:7px;height:7px}
+  .nav-action-label{font-size:12px}
+
   .nav-actions>nav,
   .music-panel{
-    top:116px;
-    max-height:min(680px,calc(100svh - 140px));
-  }
-}
-
-@media (min-width:1100px){
-  .nav-actions>nav.is-open,
-  .music-panel.is-open{
+    top:114px;
     width:min(620px,calc(100vw - 32px));
-    transform:translate(-50%,0) scale(1);
+    max-height:min(680px,calc(100svh - 130px));
   }
+
+  .menu-panel-head strong,
+  .music-panel-head strong{font-size:28px}
 }
 
 @media (max-width:720px){
+  .nav{
+    top:max(10px,env(safe-area-inset-top));
+    width:calc(100% - 16px);
+    height:70px;
+    padding:5px;
+    grid-template-columns:minmax(0,1fr) 136px;
+    gap:5px;
+    border-radius:24px;
+  }
+  .nav .wordmark{
+    height:58px;
+    padding:0 16px;
+    gap:9px;
+    border-radius:19px;
+  }
+  .nav .wordmark::before{width:8px;height:8px;min-width:8px}
+  .nav .wordmark-mark{font-size:25px}
+  .nav-actions{gap:5px}
+  html[data-theme] .nav-action{
+    width:65px;
+    min-width:65px;
+    height:58px;
+    min-height:58px;
+    padding:5px 3px;
+    border-radius:19px;
+    gap:4px;
+  }
+  .nav-action-glyph{width:25px;height:25px;font-size:24px}
+  .nav-menu-lines{
+    width:25px;
+    height:25px;
+    grid-template-columns:repeat(2,6px);
+    grid-template-rows:repeat(2,6px);
+    gap:4px;
+  }
+  .nav-menu-lines>span{width:6px;height:6px}
+  .nav-action-label{font-size:11px}
+
   .nav-actions>nav,
   .music-panel{
-    top:calc(max(10px,env(safe-area-inset-top)) + 78px);
+    top:calc(max(10px,env(safe-area-inset-top)) + 82px);
     left:50%;
     right:auto;
     width:calc(100vw - 16px);
-    max-height:min(44svh,520px);
+    max-height:min(520px,calc(100dvh - max(10px,env(safe-area-inset-top)) - 94px));
     padding:13px;
     border-radius:20px;
-    transform:translate(-50%,0) scale(.985);
-  }
-
-  .nav-actions>nav.is-open,
-  .music-panel.is-open{
-    transform:translate(-50%,0) scale(1);
   }
 
   .menu-panel-head,
   .music-panel-head{min-height:52px;padding-bottom:10px}
   .menu-panel-head strong,
   .music-panel-head strong{font-size:23px}
-  .panel-close{width:40px;height:40px;min-width:40px;min-height:40px;font-size:24px}
+  .panel-close{
+    width:40px;height:40px;min-width:40px;min-height:40px;
+    font-size:24px;
+  }
   .panel-search{min-height:48px;margin-top:10px;border-radius:16px}
   .panel-search input{height:42px;font-size:13px}
+  .panel-search kbd{display:none}
+
   .menu-panel-grid{gap:6px}
   .menu-panel-grid a{
     min-height:58px;
@@ -1699,8 +1768,10 @@ html[data-theme] .nav-action.is-open{
   .menu-item-icon svg{width:19px;height:19px}
   .menu-item-copy strong{font-size:14px}
   .menu-item-copy small{font-size:9px}
+  .menu-item-arrow{font-size:22px}
+
   .music-now-playing{
-    grid-template-columns:68px minmax(0,1fr) 36px;
+    grid-template-columns:68px minmax(0,1fr);
     gap:8px;
     padding:8px;
     border-radius:17px;
@@ -1708,9 +1779,22 @@ html[data-theme] .nav-action.is-open{
   .music-track-art{width:68px;height:68px;border-radius:13px}
   .music-track-copy>strong{font-size:16px}
   .music-track-copy>span:not(.music-now-badge){font-size:10px}
+  .music-time{margin-top:9px;font-size:10px}
+
+  .music-progress{margin:14px 3px 11px}
   .music-controls{gap:6px}
-  .music-controls button{width:38px;height:38px;min-width:38px;min-height:38px;font-size:16px}
-  .music-controls .music-play{width:52px;height:52px;min-width:52px;min-height:52px;font-size:21px}
+  .music-controls button{
+    width:38px;height:38px;min-width:38px;min-height:38px;
+    font-size:16px;
+  }
+  .music-controls .music-play{
+    width:52px;height:52px;min-width:52px;min-height:52px;
+    font-size:21px;
+  }
+  .music-playlist{margin-top:11px}
+  .music-playlist-head{min-height:36px;margin-bottom:6px;padding-bottom:6px}
+  .music-playlist-head>span{font-size:14px}
+  .playlist-glyph{width:30px;height:30px;font-size:15px}
   .music-playlist-list{max-height:140px}
   .music-playlist-item{
     min-height:52px;
@@ -1723,7 +1807,7 @@ html[data-theme] .nav-action.is-open{
   .music-playlist-copy strong{font-size:12px}
   .music-playlist-copy span{font-size:10px}
   .music-playlist-state{width:32px;height:32px;min-width:32px}
-  .music-volume{min-height:48px;margin-top:9px;border-radius:15px}
+  .music-volume{min-height:44px;margin-top:9px;border-radius:15px}
 }
 
 @media (max-width:390px){
@@ -1731,33 +1815,43 @@ html[data-theme] .nav-action.is-open{
     width:calc(100% - 12px);
     grid-template-columns:minmax(0,1fr) 126px;
   }
-  .nav .wordmark{padding:0 11px}
-  .nav .wordmark-mark{font-size:21px}
+  .nav .wordmark{padding:0 12px}
+  .nav .wordmark-mark{font-size:22px}
   html[data-theme] .nav-action{
     width:60px;
     min-width:60px;
     height:56px;
     min-height:56px;
   }
-
   .nav-actions>nav,
   .music-panel{
-    top:calc(max(10px,env(safe-area-inset-top)) + 76px);
-    left:50%;
+    top:calc(max(10px,env(safe-area-inset-top)) + 80px);
     width:calc(100vw - 12px);
-    max-height:42svh;
-    padding:11px;
+    max-height:min(500px,calc(100dvh - max(10px,env(safe-area-inset-top)) - 90px));
+    padding:10px;
     border-radius:18px;
   }
-
   .menu-panel-head strong,
   .music-panel-head strong{font-size:21px}
   .panel-close{width:38px;height:38px;min-width:38px;min-height:38px}
-  .music-now-playing{grid-template-columns:60px minmax(0,1fr) 32px}
+  .music-now-playing{grid-template-columns:60px minmax(0,1fr)}
   .music-track-art{width:60px;height:60px}
   .music-playlist-list{max-height:120px}
+  .menu-panel-grid a{
+    min-height:54px;
+    grid-template-columns:38px 16px minmax(0,1fr) 18px;
+  }
+  .menu-item-icon{width:38px;height:38px}
+  .music-controls .music-play{width:48px;height:48px;min-width:48px;min-height:48px}
 }
- 
+
+@media (prefers-reduced-motion:reduce){
+  .nav-action,
+  .panel-close,
+  .nav-actions>nav,
+  .music-panel{transition:none}
+}
+
 /* Quotes: preserve two-column editorial layout on desktop; use horizontal snap-scroll below 980px. */
 @media (max-width:980px){
   .thinking-quotes{
@@ -1880,79 +1974,4 @@ html[data-theme] .nav-action.is-open{
 
   .menu-item-icon{width:38px;height:38px}
   .music-controls .music-play{width:48px;height:48px;min-width:48px;min-height:48px}
-}
-
-
-/* =========================================================
-   FINAL NAV CAPSULE GEOMETRY — MOBILE / DESKTOP
-   One source of truth. Keeps the header compact and stable.
-   ========================================================= */
-@media (min-width:721px){
-  .nav{
-    width:min(480px,calc(100% - 32px));
-    height:84px;
-    padding:6px;
-    grid-template-columns:minmax(0,1fr) 144px;
-    gap:6px;
-  }
-  .nav .wordmark{
-    height:72px;
-    padding:0 22px;
-    gap:12px;
-  }
-  .nav .wordmark-mark{font-size:31px}
-  html[data-theme] .nav-action{
-    width:69px;
-    min-width:69px;
-    height:72px;
-    min-height:72px;
-    padding:6px 4px;
-    border-radius:25px;
-    gap:5px;
-  }
-  .nav-action-glyph{width:28px;height:28px;font-size:27px}
-  .nav-menu-lines{width:28px;height:28px;grid-template-columns:repeat(2,7px);grid-template-rows:repeat(2,7px);gap:5px}
-  .nav-menu-lines>span{width:7px;height:7px}
-  .nav-action-label{font-size:12px}
-}
-
-@media (max-width:720px){
-  .nav{
-    top:max(10px,env(safe-area-inset-top));
-    width:calc(100% - 16px);
-    height:70px;
-    padding:5px;
-    grid-template-columns:minmax(0,1fr) 136px;
-    gap:5px;
-    border-radius:24px;
-  }
-  .nav .wordmark{
-    height:58px;
-    padding:0 16px;
-    gap:9px;
-    border-radius:19px;
-  }
-  .nav .wordmark::before{width:8px;height:8px;min-width:8px}
-  .nav .wordmark-mark{font-size:25px}
-  .nav-actions{gap:5px}
-  html[data-theme] .nav-action{
-    width:65px;
-    min-width:65px;
-    height:58px;
-    min-height:58px;
-    padding:5px 3px;
-    border-radius:19px;
-    gap:4px;
-  }
-  .nav-action-glyph{width:25px;height:25px;font-size:24px}
-  .nav-menu-lines{width:25px;height:25px;grid-template-columns:repeat(2,6px);grid-template-rows:repeat(2,6px);gap:4px}
-  .nav-menu-lines>span{width:6px;height:6px}
-  .nav-action-label{font-size:11px}
-}
-
-@media (max-width:390px){
-  .nav{width:calc(100% - 12px);grid-template-columns:minmax(0,1fr) 126px}
-  .nav .wordmark{padding:0 12px}
-  .nav .wordmark-mark{font-size:22px}
-  html[data-theme] .nav-action{width:60px;min-width:60px;height:56px;min-height:56px}
 }
