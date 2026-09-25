@@ -2138,7 +2138,7 @@ body{
 /* Up to 520px: preserve safe bottom-stacked consoles for short phone screens. */
 @media (max-width:520px){
   .site-shell.menu-open.music-open .nav-actions>nav.is-open{
-    top:88px;
+    top:calc(max(10px,env(safe-area-inset-top)) + 78px);
     left:8px;
     right:auto;
     width:calc(100vw - 16px);
@@ -2150,7 +2150,7 @@ body{
     top:auto;
     left:8px;
     right:auto;
-    bottom:8px;
+    bottom:max(8px,env(safe-area-inset-bottom));
     width:calc(100vw - 16px);
     max-height:calc(46svh - 46px);
     transform:translateY(0) scale(1);
