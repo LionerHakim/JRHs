@@ -585,64 +585,6 @@ ${name.trim()}`)
 
         </section>
 
-        <section id="education" className="section experience-section" data-section="education" aria-labelledby="education-title">
-          <div className="section-head">
-            <h2 id="education-title">Experience</h2>
-          </div>
-
-          <div className="records">
-            {siteConfig.education.map((item) => (
-              <article className="record" key={item.period + item.institution}>
-                <time>{item.period}</time>
-                <div>
-                  <h3>{item.institution}</h3>
-                  {item.program !== 'SMA' && item.program !== 'SMP' || item.activities?.length ? (
-                    <ul className="record-activities" aria-label="Activities and roles">
-                      {item.program !== 'SMA' && item.program !== 'SMP' ? <li key={item.program}>{item.program}</li> : null}
-                      {item.activities?.map((activity) => (
-                        <li key={activity}>{activity}</li>
-                      ))}
-                    </ul>
-                  ) : null}
-                </div>
-              </article>
-            ))}
-          </div>
-        </section>
-
-        <section id="media" className="section media-section experience-section" data-section="media" aria-labelledby="media-title">
-          <div className="section-head">
-            <h2 id="media-title">Media</h2>
-          </div>
-
-          <p className="media-subtitle">
-            Kanal, platform, dan ruang digital JRH.
-          </p>
-
-          <div className="media-list">
-            {siteConfig.media.map((item) => (
-              <article className="media-card" key={item.number}>
-                <div className="media-card-top">
-                  <span className="media-number">{item.number}</span>
-                  <span className="media-status">{item.platform}</span>
-                </div>
-                <div className="media-card-body">
-                  <span className="media-category">{item.category}</span>
-                  <h3>{item.title}</h3>
-                  <div className="media-links">
-                    {item.links.map((link) => (
-                      <a key={link.label} href={link.url} target="_blank" rel="noopener noreferrer">
-                        <span>{link.label}</span>
-                        <span aria-hidden="true">↗</span>
-                      </a>
-                    ))}
-                  </div>
-                </div>
-              </article>
-            ))}
-          </div>
-        </section>
-
         <section id="projects" className="section projects-section experience-section" data-section="projects" aria-labelledby="projects-title">
           <div className="section-head">
             <h2 id="projects-title">Projects</h2>
@@ -673,6 +615,64 @@ Web app dan digital product yang sedang dibangun untuk memecahkan masalah nyata.
                     <span>Coming soon</span><span aria-hidden="true">→</span>
                   </span>
                 )}
+              </article>
+            ))}
+          </div>
+        </section>
+
+        <section id="education" className="section" data-section="education" aria-labelledby="education-title">
+          <div className="section-head">
+            <h2 id="education-title">Experience</h2>
+          </div>
+
+          <div className="records">
+            {siteConfig.education.map((item) => (
+              <article className="record" key={item.period + item.institution}>
+                <time>{item.period}</time>
+                <div>
+                  <h3>{item.institution}</h3>
+                  {item.program !== 'SMA' && item.program !== 'SMP' || item.activities?.length ? (
+                    <ul className="record-activities" aria-label="Activities and roles">
+                      {item.program !== 'SMA' && item.program !== 'SMP' ? <li key={item.program}>{item.program}</li> : null}
+                      {item.activities?.map((activity) => (
+                        <li key={activity}>{activity}</li>
+                      ))}
+                    </ul>
+                  ) : null}
+                </div>
+              </article>
+            ))}
+          </div>
+        </section>
+
+        <section id="media" className="section media-section" data-section="media" aria-labelledby="media-title">
+          <div className="section-head">
+            <h2 id="media-title">Media</h2>
+          </div>
+
+          <p className="media-subtitle">
+            Kanal, platform, dan ruang digital JRH.
+          </p>
+
+          <div className="media-list">
+            {siteConfig.media.map((item) => (
+              <article className="media-card" key={item.number}>
+                <div className="media-card-top">
+                  <span className="media-number">{item.number}</span>
+                  <span className="media-status">{item.platform}</span>
+                </div>
+                <div className="media-card-body">
+                  <span className="media-category">{item.category}</span>
+                  <h3>{item.title}</h3>
+                  <div className="media-links">
+                    {item.links.map((link) => (
+                      <a key={link.label} href={link.url} target="_blank" rel="noopener noreferrer">
+                        <span>{link.label}</span>
+                        <span aria-hidden="true">↗</span>
+                      </a>
+                    ))}
+                  </div>
+                </div>
               </article>
             ))}
           </div>
