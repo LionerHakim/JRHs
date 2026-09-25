@@ -70,6 +70,8 @@ export default function App() {
   const [contactError, setContactError] = useState<string | null>(null)
   const [touched, setTouched] = useState({ name: false, message: false, privacy: false, purpose: false })
   const navActionsRef = useRef<HTMLDivElement>(null)
+  const menuPanelRef = useRef<HTMLElement>(null)
+  const musicPanelRef = useRef<HTMLElement>(null)
   const menuToggleRef = useRef<HTMLButtonElement>(null)
   const musicToggleRef = useRef<HTMLButtonElement>(null)
   const contactPrivacyRef = useRef<HTMLDivElement>(null)
@@ -177,7 +179,41 @@ export default function App() {
       return
     }
     previousMusicOpenRef.current = true
+    requestAnimationFrame(() => {
+      musicPanelRef.current?.querySelector<HTMLButtonElement>('.panel-close')?.focus()
+    })
   }, [musicOpen, menuOpen])
+
+  useEffect(() => {
+    const activePanel = menuOpen ? menuPanelRef.current : musicOpen ? musicPanelRef.current : null
+    if (!activePanel) return
+
+    const handleTabKey = (event: KeyboardEvent) => {
+      if (event.key !== 'Tab') return
+
+      const focusable = Array.from(
+        activePanel.querySelectorAll<HTMLElement>(
+          'a[href],button:not([disabled]),input:not([disabled]),[tabindex]:not([tabindex="-1"])',
+        ),
+      ).filter((element) => !element.hidden && !element.hasAttribute('inert'))
+
+      if (!focusable.length) return
+
+      const first = focusable[0]
+      const last = focusable[focusable.length - 1]
+
+      if (event.shiftKey && document.activeElement === first) {
+        event.preventDefault()
+        last.focus()
+      } else if (!event.shiftKey && document.activeElement === last) {
+        event.preventDefault()
+        first.focus()
+      }
+    }
+
+    document.addEventListener('keydown', handleTabKey)
+    return () => document.removeEventListener('keydown', handleTabKey)
+  }, [menuOpen, musicOpen])
 
   useEffect(() => {
     const handleMenuShortcut = (event: KeyboardEvent) => {
@@ -216,7 +252,11 @@ export default function App() {
     const handlePointerDown = (event: PointerEvent) => {
       const target = event.target
       if (target instanceof Node) {
-        if (!navActionsRef.current?.contains(target)) {
+        if (
+          !navActionsRef.current?.contains(target) &&
+          !menuPanelRef.current?.contains(target) &&
+          !musicPanelRef.current?.contains(target)
+        ) {
           setMenuOpen(false)
           setMusicOpen(false)
         }
@@ -387,7 +427,10 @@ ${name.trim()}`)
             <span className="nav-action-meta" aria-hidden="true">{menuOpen ? 'CLOSE' : 'OPEN'}</span>
           </button>
 
-          <nav id="primary-navigation" className={menuOpen ? 'is-open' : undefined} aria-label="Primary navigation" aria-hidden={!menuOpen} inert={!menuOpen}>
+        </div>
+      </header>
+
+          <nav ref={menuPanelRef} id="primary-navigation" className={menuOpen ? 'menu-panel is-open' : 'menu-panel'} aria-label="Primary navigation" aria-hidden={!menuOpen} inert={!menuOpen}>
             <div className="menu-panel-head">
               <div>
                 <span>Navigate through JRH</span>
@@ -440,7 +483,7 @@ ${name.trim()}`)
             </div>
           </nav>
 
-          <aside id="music-panel" className={musicOpen ? 'music-panel is-open' : 'music-panel'} aria-label="Music player" aria-hidden={!musicOpen} inert={!musicOpen}>
+          <aside ref={musicPanelRef} id="music-panel" className={musicOpen ? 'music-panel is-open' : 'music-panel'} aria-label="Music player" aria-hidden={!musicOpen} inert={!musicOpen}>
             <div className="music-panel-head">
               <div>
                 <span className="music-eyebrow">Playlist for your focus</span>
@@ -564,8 +607,8 @@ ${name.trim()}`)
 
             <audio ref={musicAudioRef} preload="none" aria-hidden="true" />
           </aside>
-        </div>
-      </header>
+
+
 
       <main>
         <section id="identity" className="hero" aria-labelledby="identity-title">
