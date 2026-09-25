@@ -2177,3 +2177,73 @@ select{
     scroll-behavior:auto;
   }
 }
+
+
+/* =========================================================
+   LEVEL 2 FINAL — VERTICAL PAGE FLOW
+   Pikiran + Thoughts never become horizontal scroll containers.
+   ========================================================= */
+html{
+  overflow-x:hidden;
+  overflow-y:auto;
+}
+body{
+  overflow-x:hidden;
+  overflow-y:auto;
+  overscroll-behavior-y:auto;
+}
+.thinking-quotes,
+.testimonials-section,
+.testimonials-viewport,
+.testimonials-list{
+  overflow:visible;
+  touch-action:pan-y;
+  overscroll-behavior:auto;
+  scroll-snap-type:none;
+}
+.thinking-quotes{
+  width:var(--page-width);
+  max-width:100%;
+  margin-inline:auto;
+  display:grid;
+  grid-template-columns:repeat(2,minmax(0,1fr));
+  gap:18px;
+  padding:18px 0 24px;
+}
+.thinking-quotes-head{
+  grid-column:1 / -1;
+  margin:0 0 2px;
+}
+.thinking-quotes-head h2{
+  margin:0;
+  font-size:clamp(46px,6vw,72px);
+  font-weight:770;
+  line-height:.94;
+  letter-spacing:-.055em;
+}
+.thinking-quote-card{
+  min-width:0;
+  width:100%;
+  scroll-snap-align:none;
+  touch-action:pan-y;
+}
+.testimonials-list{
+  min-width:0;
+}
+@media (max-width:980px){
+  .thinking-quotes{
+    width:100%;
+    max-width:none;
+    grid-template-columns:1fr;
+    gap:14px;
+    padding:14px 0 24px;
+  }
+}
+@media (max-width:720px){
+  .thinking-quotes{
+    padding:8px 0 20px;
+  }
+  .thinking-quotes-head h2{
+    font-size:clamp(40px,12vw,58px);
+  }
+}
