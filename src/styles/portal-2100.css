@@ -1816,7 +1816,7 @@ html[data-theme] .nav-action.is-open{
     left:8px;
     right:auto;
     width:calc(100vw - 16px);
-    max-height:calc(46svh - 46px);
+    max-height:calc(39svh - 34px);
     transform:translateY(0) scale(1);
   }
   .site-shell.menu-open.music-open .music-panel.is-open{
@@ -1825,7 +1825,7 @@ html[data-theme] .nav-action.is-open{
     right:auto;
     bottom:max(8px,env(safe-area-inset-bottom));
     width:calc(100vw - 16px);
-    max-height:calc(46svh - 46px);
+    max-height:calc(39svh - 34px);
     transform:translateY(0) scale(1);
   }
 }
@@ -1846,8 +1846,15 @@ html[data-theme] .nav-action.is-open{
   .music-panel{
     left:6px;
     width:calc(100vw - 12px);
-    padding:12px;
+    max-height:50svh;
+    padding:11px;
+    border-radius:18px;
   }
+  .menu-panel-head strong,.music-panel-head strong{font-size:21px}
+  .panel-close{width:38px;height:38px;min-width:38px;min-height:38px}
+  .music-now-playing{grid-template-columns:60px minmax(0,1fr) 32px}
+  .music-track-art{width:60px;height:60px}
+  .music-playlist-list{max-height:140px}
 }
 
 /* Reveal system */
@@ -2110,10 +2117,35 @@ body{
   .music-panel{
     top:88px;
     width:calc(100vw - 16px);
-    max-height:calc(100svh - 100px);
-    padding:15px;
-    border-radius:23px;
+    max-height:52svh;
+    padding:13px;
+    border-radius:20px;
   }
+  .menu-panel-head,.music-panel-head{min-height:52px;padding-bottom:10px}
+  .menu-panel-head strong,.music-panel-head strong{font-size:23px}
+  .panel-close{width:40px;height:40px;min-width:40px;min-height:40px;font-size:24px}
+  .panel-search{min-height:48px;margin-top:10px;border-radius:16px}
+  .panel-search input{height:42px;font-size:13px}
+  .menu-panel-grid{gap:6px}
+  .menu-panel-grid a{min-height:58px;grid-template-columns:40px 18px minmax(0,1fr) 20px;gap:6px;padding:6px 8px;border-radius:15px}
+  .menu-item-icon{width:40px;height:40px;border-radius:12px}
+  .menu-item-icon svg{width:19px;height:19px}
+  .menu-item-copy strong{font-size:14px}
+  .menu-item-copy small{font-size:9px}
+  .music-now-playing{grid-template-columns:68px minmax(0,1fr) 36px;gap:8px;padding:8px;border-radius:17px}
+  .music-track-art{width:68px;height:68px;border-radius:13px}
+  .music-track-copy>strong{font-size:16px}
+  .music-track-copy>span:not(.music-now-badge){font-size:10px}
+  .music-controls{gap:6px}
+  .music-controls button{width:38px;height:38px;min-width:38px;min-height:38px;font-size:16px}
+  .music-controls .music-play{width:52px;height:52px;min-width:52px;min-height:52px;font-size:21px}
+  .music-playlist-list{max-height:160px}
+  .music-playlist-item{min-height:52px;grid-template-columns:40px minmax(0,1fr) 32px;gap:7px;padding:5px 7px 5px 5px;border-radius:14px}
+  .music-playlist-art{width:40px;height:40px;border-radius:11px}
+  .music-playlist-copy strong{font-size:12px}
+  .music-playlist-copy span{font-size:10px}
+  .music-playlist-state{width:32px;height:32px;min-width:32px}
+  .music-volume{min-height:48px;margin-top:9px;border-radius:15px}
 }
 
 /* 521–720px: both consoles stack in the visible viewport with a deliberate gap. */
@@ -2142,7 +2174,7 @@ body{
     left:8px;
     right:auto;
     width:calc(100vw - 16px);
-    max-height:calc(46svh - 46px);
+    max-height:calc(39svh - 34px);
     transform:translateY(0) scale(1);
   }
 
@@ -2152,7 +2184,7 @@ body{
     right:auto;
     bottom:max(8px,env(safe-area-inset-bottom));
     width:calc(100vw - 16px);
-    max-height:calc(46svh - 46px);
+    max-height:calc(39svh - 34px);
     transform:translateY(0) scale(1);
   }
 }
