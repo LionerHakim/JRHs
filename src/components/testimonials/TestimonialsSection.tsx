@@ -176,7 +176,7 @@ export function TestimonialsSection() {
   return (
     <section id="testimonials" className="section testimonials-section" aria-labelledby="testimonials-title">
       <div className="section-head">
-        <h2 id="testimonials-title">Quotes</h2>
+        <h2 id="testimonials-title">Thoughts</h2>
       </div>
       <p className="testimonials-subtitle">
         16 gagasan dari tokoh lintas bidang tentang karya, pembelajaran, teknologi, ekonomi, dan kehidupan.

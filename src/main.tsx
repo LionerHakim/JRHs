@@ -358,7 +358,7 @@ ${name.trim()}`)
               </div>
               <div className="menu-panel-head-actions">
                 <span className="menu-panel-count">{String(sectionItems.length).padStart(2, '0')} SECTIONS</span>
-                <button className="panel-close" type="button" aria-label="Tutup menu" onClick={() => setMenuOpen(false)}>×</button>
+                <button className="panel-close" type="button" tabIndex={menuOpen ? 0 : -1} aria-label="Tutup menu" onClick={() => setMenuOpen(false)}>×</button>
               </div>
             </div>
 
@@ -411,7 +411,7 @@ ${name.trim()}`)
               </div>
               <div className="music-panel-head-actions">
                 <span className="music-status" aria-live="polite" aria-atomic="true">{musicStatus}</span>
-                <button className="panel-close" type="button" aria-label="Tutup music player" onClick={() => setMusicOpen(false)}>×</button>
+                <button className="panel-close" type="button" tabIndex={musicOpen ? 0 : -1} aria-label="Tutup music player" onClick={() => setMusicOpen(false)}>×</button>
               </div>
             </div>
 
