@@ -1874,197 +1874,351 @@ button:disabled{cursor:not-allowed;opacity:.5}
 
 
 /* =========================================================
-   FINAL UI POLISH — NAV / MUSIC / QUOTES
-   Single authoritative override; keep compact and responsive.
+   FINAL RESPONSIVE AUDIT — ANDROID / IOS / DESKTOP
+   One authoritative responsive layer. No new dependencies.
    ========================================================= */
 
-/* Compact desktop navigation capsule */
+/* Restore non-content UI utilities that must never affect layout flow. */
+.contact-honeypot{
+  position:absolute;
+  width:1px;
+  height:1px;
+  margin:-1px;
+  padding:0;
+  overflow:hidden;
+  clip:rect(0 0 0 0);
+  clip-path:inset(50%);
+  white-space:nowrap;
+  border:0;
+}
+
+.floating-utilities{
+  position:fixed;
+  right:18px;
+  bottom:18px;
+  z-index:420;
+  pointer-events:none;
+}
+
+.back-to-top{
+  width:50px;
+  height:50px;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  gap:1px;
+  border:1px solid var(--line);
+  border-radius:50%;
+  background:#fff;
+  color:var(--ink);
+  box-shadow:var(--shadow);
+  opacity:0;
+  visibility:hidden;
+  pointer-events:none;
+  transform:translateY(8px);
+  transition:opacity 180ms var(--ease),transform 180ms var(--ease),visibility 180ms var(--ease);
+}
+.back-to-top.is-visible{
+  opacity:1;
+  visibility:visible;
+  pointer-events:auto;
+  transform:none;
+}
+.back-to-top>span:first-child{font-size:19px;line-height:1}
+.back-to-top>span:last-child{
+  font:800 7px/1 ui-monospace,SFMono-Regular,Menlo,monospace;
+  letter-spacing:.08em;
+}
+
+.menu-empty{
+  min-height:100px;
+  display:grid;
+  place-items:center;
+  padding:16px;
+  border:1px dashed rgba(174,210,252,.18);
+  border-radius:18px;
+  color:#aebdd4;
+  font-size:13px;
+}
+
+/* Safe scroll behavior for fixed overlays on mobile Safari and Android Chrome. */
+html[data-overlay-open="true"],
+body{
+  overscroll-behavior-y:none;
+}
+
+.nav-actions>nav,
+.music-panel{
+  scrollbar-width:thin;
+  scrollbar-color:rgba(160,201,255,.25) transparent;
+  -webkit-overflow-scrolling:touch;
+}
+
+/* Compact desktop/tablet navigation: proportional logo block, balanced controls. */
 @media (min-width:721px){
   .nav{
-    width:min(500px,calc(100% - 32px)) !important;
-    height:84px !important;
-    min-height:84px !important;
-    padding:6px !important;
-    grid-template-columns:166px minmax(0,1fr) !important;
-    gap:6px !important;
-    border-radius:999px !important;
+    width:min(480px,calc(100% - 32px));
+    height:84px;
+    min-height:84px;
+    padding:6px;
+    grid-template-columns:150px minmax(0,1fr);
+    gap:6px;
+    border-radius:999px;
   }
 
   .nav .wordmark{
-    width:166px !important;
-    min-width:166px !important;
-    height:72px !important;
-    min-height:72px !important;
-    padding:0 20px !important;
-    gap:11px !important;
-    border-radius:999px !important;
+    width:150px;
+    min-width:150px;
+    height:72px;
+    min-height:72px;
+    padding:0 17px;
+    gap:10px;
+    justify-self:start;
+    border-radius:999px;
   }
 
   .nav .wordmark::before{
-    width:9px !important;
-    height:9px !important;
-    min-width:9px !important;
+    width:9px;
+    height:9px;
+    min-width:9px;
   }
 
   .nav .wordmark-mark{
-    font-size:30px !important;
-    line-height:1 !important;
+    font-size:30px;
+    line-height:1;
   }
 
   .nav-actions{
-    height:72px !important;
-    gap:6px !important;
+    height:72px;
+    gap:6px;
   }
 
   html[data-theme] .nav-action{
-    width:auto !important;
-    min-width:0 !important;
-    flex:1 1 0 !important;
-    height:72px !important;
-    min-height:72px !important;
-    border-radius:23px !important;
-    padding:6px 5px !important;
-    gap:5px !important;
+    width:auto;
+    min-width:0;
+    flex:1 1 0;
+    height:72px;
+    min-height:72px;
+    border-radius:23px;
+    padding:6px 5px;
+    gap:5px;
   }
 
   .nav-action-glyph{
-    width:28px !important;
-    height:28px !important;
-    font-size:25px !important;
+    width:28px;
+    height:28px;
+    font-size:25px;
   }
 
-  .nav-action-label{
-    font-size:12px !important;
-  }
+  .nav-action-label{font-size:12px}
 
-  /* Panel geometry follows the compact capsule */
   .nav-actions>nav,
   .music-panel{
-    top:116px !important;
-    max-height:calc(100svh - 140px) !important;
+    top:116px;
+    max-height:min(720px,calc(100svh - 140px));
   }
 }
 
-/* True side-by-side synchronization on desktop */
+/* Desktop: two equal consoles, same top edge and same dimensions. */
 @media (min-width:1100px){
   .site-shell.menu-open.music-open .nav-actions>nav.is-open,
   .site-shell.menu-open.music-open .music-panel.is-open{
-    top:116px !important;
-    width:min(540px,calc(50vw - 36px)) !important;
-    max-height:calc(100svh - 140px) !important;
-    transform:translateY(0) scale(1) !important;
+    top:116px;
+    width:calc(50vw - 30px);
+    max-height:min(720px,calc(100svh - 140px));
+    transform:translateY(0) scale(1);
   }
 
   .site-shell.menu-open.music-open .nav-actions>nav.is-open{
-    left:24px !important;
-    right:auto !important;
+    left:12px;
+    right:auto;
   }
 
   .site-shell.menu-open.music-open .music-panel.is-open{
-    left:auto !important;
-    right:24px !important;
+    left:auto;
+    right:12px;
   }
 }
 
-/* Tablet: stack two consoles, but keep equal sizing and alignment */
+/* Tablet and large phones: two panels stack without overlap. */
 @media (min-width:721px) and (max-width:1099px){
   .site-shell.menu-open.music-open .nav-actions>nav.is-open,
   .site-shell.menu-open.music-open .music-panel.is-open{
-    left:50% !important;
-    width:min(620px,calc(100vw - 32px)) !important;
-    max-height:calc(50svh - 24px) !important;
+    left:50%;
+    width:min(620px,calc(100vw - 32px));
+    max-height:calc(50svh - 92px);
+    transform:translateX(-50%) scale(1);
   }
 
   .site-shell.menu-open.music-open .nav-actions>nav.is-open{
-    top:116px !important;
-    transform:translate(-50%,0) scale(1) !important;
+    top:116px;
   }
 
   .site-shell.menu-open.music-open .music-panel.is-open{
-    top:calc(50% + 8px) !important;
-    transform:translate(-50%,-50%) scale(1) !important;
+    top:calc(50% + 42px);
   }
 }
 
-/* Quotes: deliberate horizontal scroll area on smaller/medium screens */
-@media (max-width:980px){
-  .thinking-quotes{
-    width:100vw !important;
-    max-width:100vw !important;
-    margin-left:50% !important;
-    transform:translateX(-50%) !important;
-    display:flex !important;
-    gap:14px !important;
-    overflow-x:auto !important;
-    overflow-y:hidden !important;
-    padding:4px max(5vw,24px) 20px !important;
-    scroll-snap-type:x mandatory !important;
-    scroll-behavior:smooth !important;
-    overscroll-behavior-x:contain !important;
-    touch-action:pan-x !important;
-    scrollbar-width:none !important;
-    -webkit-overflow-scrolling:touch !important;
-    outline:none !important;
-  }
-
-  .thinking-quotes::-webkit-scrollbar{
-    display:none !important;
-  }
-
-  .thinking-quote-card{
-    flex:0 0 min(640px,84vw) !important;
-    min-height:220px !important;
-    scroll-snap-align:center !important;
-  }
-
-  .thinking-quotes:focus-visible{
-    outline:2px solid var(--blue) !important;
-    outline-offset:5px !important;
-    border-radius:var(--radius-lg) !important;
-  }
-}
-
-/* Mobile: compact navigation and safely scrollable consoles */
+/* Phone: compact top navigation and proportionate logo capsule. */
 @media (max-width:720px){
   .nav{
-    height:70px !important;
-    min-height:70px !important;
+    top:10px;
+    width:calc(100% - 16px);
+    height:70px;
+    min-height:70px;
+    padding:6px;
+    grid-template-columns:minmax(0,1fr) 136px;
+    gap:6px;
   }
 
   .nav .wordmark{
-    height:58px !important;
-    min-height:58px !important;
+    width:min(150px,100%);
+    max-width:150px;
+    height:58px;
+    min-height:58px;
+    padding:0 14px;
+    gap:10px;
+    justify-self:start;
   }
 
-  .nav .wordmark-mark{
-    font-size:24px !important;
+  .nav .wordmark::before{
+    width:9px;
+    height:9px;
+    min-width:9px;
+  }
+
+  .nav .wordmark-mark{font-size:24px}
+
+  html[data-theme] .nav-action{
+    width:65px;
+    min-width:65px;
+    height:58px;
+    min-height:58px;
+    border-radius:21px;
+  }
+
+  .nav-action-glyph{
+    width:27px;
+    height:27px;
+    font-size:25px;
+  }
+
+  .nav-action-label{font-size:11px}
+
+  .nav-actions>nav,
+  .music-panel{
+    top:88px;
+    width:calc(100vw - 16px);
+    max-height:calc(100svh - 100px);
+    padding:15px;
+    border-radius:23px;
   }
 }
 
-/* Very narrow phones: both panels remain inside the viewport */
-@media (max-width:520px){
+/* 521–720px: both consoles stack in the visible viewport with a deliberate gap. */
+@media (min-width:521px) and (max-width:720px){
+  .site-shell.menu-open.music-open .nav-actions>nav.is-open,
+  .site-shell.menu-open.music-open .music-panel.is-open{
+    left:50%;
+    width:calc(100vw - 16px);
+    max-height:calc(50svh - 92px);
+    transform:translateX(-50%) scale(1);
+  }
+
   .site-shell.menu-open.music-open .nav-actions>nav.is-open{
-    top:88px !important;
-    left:8px !important;
-    right:auto !important;
-    width:calc(100vw - 16px) !important;
-    max-height:calc(46svh - 46px) !important;
-    transform:translateY(0) scale(1) !important;
+    top:88px;
   }
 
   .site-shell.menu-open.music-open .music-panel.is-open{
-    top:auto !important;
-    left:8px !important;
-    right:auto !important;
-    bottom:8px !important;
-    width:calc(100vw - 16px) !important;
-    max-height:calc(46svh - 46px) !important;
-    transform:translateY(0) scale(1) !important;
+    top:calc(50% + 42px);
   }
 }
 
-/* No accidental brand suffix */
+/* Up to 520px: preserve safe bottom-stacked consoles for short phone screens. */
+@media (max-width:520px){
+  .site-shell.menu-open.music-open .nav-actions>nav.is-open{
+    top:88px;
+    left:8px;
+    right:auto;
+    width:calc(100vw - 16px);
+    max-height:calc(46svh - 46px);
+    transform:translateY(0) scale(1);
+  }
+
+  .site-shell.menu-open.music-open .music-panel.is-open{
+    top:auto;
+    left:8px;
+    right:auto;
+    bottom:8px;
+    width:calc(100vw - 16px);
+    max-height:calc(46svh - 46px);
+    transform:translateY(0) scale(1);
+  }
+}
+
+/* Quotes: preserve two-column editorial layout on desktop; use horizontal snap-scroll below 980px. */
+@media (max-width:980px){
+  .thinking-quotes{
+    width:100vw;
+    max-width:100vw;
+    margin-left:50%;
+    transform:translateX(-50%);
+    display:flex;
+    gap:14px;
+    overflow-x:auto;
+    overflow-y:hidden;
+    padding:4px max(5vw,24px) 20px;
+    scroll-snap-type:x mandatory;
+    scroll-behavior:smooth;
+    overscroll-behavior-x:contain;
+    touch-action:pan-x;
+    scrollbar-width:none;
+    -webkit-overflow-scrolling:touch;
+  }
+
+  .thinking-quotes::-webkit-scrollbar{display:none}
+
+  .thinking-quote-card{
+    flex:0 0 min(640px,84vw);
+    min-height:220px;
+    scroll-snap-align:center;
+  }
+
+  .thinking-quotes:focus-visible{
+    outline:2px solid var(--blue);
+    outline-offset:5px;
+    border-radius:var(--radius-lg);
+  }
+}
+
+/* Restore responsive sizing for the floating utility. */
+@media (max-width:720px){
+  .floating-utilities{right:12px;bottom:12px}
+  .back-to-top{width:46px;height:46px}
+}
+
+/* SVG volume icon stays centered rather than changing text geometry. */
+.music-volume-icon{
+  width:26px;
+  height:26px;
+  display:grid;
+  place-items:center;
+}
+.music-volume-icon svg{
+  width:20px;
+  height:20px;
+  color:currentColor;
+}
+
+/* Prevent any accidental logo suffix from reappearing through future CSS edits. */
 .nav .wordmark-mark::after{
-  content:none !important;
-  display:none !important;
+  content:none;
+  display:none;
+}
+
+/* Reduced-motion users should not receive carousel/overlay animation. */
+@media (prefers-reduced-motion:reduce){
+  .back-to-top{transition:none}
+  .thinking-quotes{scroll-behavior:auto}
 }
