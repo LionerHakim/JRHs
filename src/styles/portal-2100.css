@@ -954,15 +954,6 @@ img{display:block;max-width:100%}
   letter-spacing:-.085em;
   line-height:1;
 }
-.nav .wordmark-mark::after{
-  content:"s";
-  display:inline;
-  margin-left:2px;
-  font-size:.72em;
-  font-weight:700;
-  opacity:.94;
-  letter-spacing:-.06em;
-}
 .nav-actions{
   position:relative;
   z-index:501;
