@@ -1642,195 +1642,90 @@ html[data-theme] .nav-action.is-open{
 .music-volume input{width:100%;accent-color:#8c7aff}
 .music-volume>span:last-child{color:#d5e1f2;font-size:13px;font-weight:650;font-variant-numeric:tabular-nums}
 
-/* ---------- desktop pairing ---------- */
-@media (min-width:980px){
-  .site-shell.menu-open.music-open .nav-actions>nav.is-open{
-    left:28px;
-    right:auto;
-    width:calc(50vw - 36px);
-    transform:translateY(0) scale(1);
-  }
-  .site-shell.menu-open.music-open .music-panel.is-open{
-    left:auto;
-    right:28px;
-    width:calc(50vw - 36px);
-    transform:translateY(0) scale(1);
+/* ---------- FINAL OVERLAY GEOMETRY ---------- */
+/* Menu and Music are mutually exclusive in React state.
+   Keep one geometry source so stale dual-open rules cannot fight each other. */
+
+@media (min-width:721px){
+  .nav-actions>nav,
+  .music-panel{
+    top:116px;
+    max-height:min(680px,calc(100svh - 140px));
   }
 }
 
-/* ---------- medium pairing fallback ---------- */
-@media (min-width:721px) and (max-width:979px){
-  .site-shell.menu-open.music-open .nav-actions>nav.is-open{
-    left:50%;
-    top:calc(50% - 8px);
-    max-height:calc(50svh - 32px);
-    transform:translate(-50%,-50%) scale(1);
-  }
-  .site-shell.menu-open.music-open .music-panel.is-open{
-    left:50%;
-    top:calc(50% + 8px);
-    max-height:calc(50svh - 32px);
-    transform:translate(-50%,-50%) scale(1);
+@media (min-width:1100px){
+  .nav-actions>nav.is-open,
+  .music-panel.is-open{
+    width:min(620px,calc(100vw - 32px));
+    transform:translate(-50%,0) scale(1);
   }
 }
 
-/* ---------- mobile ---------- */
 @media (max-width:720px){
-  html{scroll-padding-top:100px}
-  .site-shell>main{padding-top:94px}
-  .hero{
-    min-height:auto;
-    padding:64px 0 86px;
-    grid-template-columns:1fr;
-    gap:42px;
-    text-align:center;
-  }
-  .hero-copy{display:flex;flex-direction:column;align-items:center}
-  .hero h1{font-size:clamp(48px,15vw,78px)}
-  .hero-description{font-size:16px}
-  .hero-actions{justify-content:center}
-  .hero-portrait{width:min(360px,84vw)}
-  .section{padding:70px 0}
-  .section-head{margin-bottom:28px}
-  .section h2{font-size:clamp(42px,13vw,58px)}
-  .media-subtitle,
-  .projects-subtitle,
-  .testimonials-subtitle{
-    margin:-10px auto 25px;
-    font-size:15px;
-  }
-  .record{
-    grid-template-columns:1fr;
-    gap:10px;
-    padding:22px;
-  }
-  .record h3{font-size:25px}
-  .media-list,
-  .projects-list{grid-template-columns:1fr}
-  .media-card,
-  .project-card{min-height:260px;padding:22px}
-  .media-card-body,
-  .project-card-body{padding-top:42px}
-  .thinking-quotes{grid-template-columns:1fr}
-  .thinking-quote-card{min-height:220px;padding:24px}
-  .testimonials-toolbar{grid-template-columns:1fr auto}
-  .testimonial-swipe-hint{display:none}
-  .testimonial{flex-basis:min(88vw,560px);min-height:320px;padding:24px}
-  .contact-card{padding:22px;border-radius:24px}
-  .contact-question{font-size:clamp(31px,9vw,44px)}
-  .contact-answer{font-size:16px}
-  .contact-form{padding:13px;border-radius:18px}
-  .contact-fields{grid-template-columns:1fr}
-  .contact-topic,
-  .contact-message{grid-column:1}
-  .contact-submit{grid-template-columns:1fr}
-  .contact-submit>button{width:100%;min-width:0}
-  .site-footer{padding-top:26px}
-  .site-footer-main{padding:32px 0;grid-template-columns:1fr;align-items:start}
-  .site-footer-nav{justify-content:flex-start}
-  .site-footer-brand strong{font-size:38px}
-  
-  .nav{
-    top:10px;
-    width:calc(100% - 16px);
-    height:70px;
-    min-height:70px;
-    padding:6px;
-    grid-template-columns:minmax(0,1fr) 136px;
-  }
-  .nav .wordmark{
-    height:58px;
-    min-height:58px;
-    padding:0 14px;
-    gap:10px;
-  }
-  .nav .wordmark::before{width:9px;height:9px;min-width:9px}
-  .nav .wordmark-mark{font-size:24px}
-  html[data-theme] .nav-action{
-    width:65px;
-    min-width:65px;
-    height:58px;
-    min-height:58px;
-    border-radius:21px;
-  }
-  .nav-action-glyph{width:27px;height:27px;font-size:25px}
-  .nav-action-label{font-size:11px}
-  .nav-menu-lines{
-    width:26px;height:26px;
-    grid-template-columns:repeat(2,6px);
-    grid-template-rows:repeat(2,6px);
-    gap:4px;
-  }
-  .nav-menu-lines>span{width:6px;height:6px}
-  
   .nav-actions>nav,
   .music-panel{
     top:calc(max(10px,env(safe-area-inset-top)) + 78px);
+    left:50%;
+    right:auto;
     width:calc(100vw - 16px);
-    max-height:calc(100svh - 100px);
-    padding:15px;
-    border-radius:23px;
+    max-height:min(44svh,520px);
+    padding:13px;
+    border-radius:20px;
+    transform:translate(-50%,0) scale(.985);
   }
+
+  .nav-actions>nav.is-open,
+  .music-panel.is-open{
+    transform:translate(-50%,0) scale(1);
+  }
+
   .menu-panel-head,
-  .music-panel-head{min-height:60px;padding-bottom:13px}
-  .menu-panel-head>div:first-child>span,
-  .music-eyebrow{font-size:13px}
+  .music-panel-head{min-height:52px;padding-bottom:10px}
   .menu-panel-head strong,
-  .music-panel-head strong{font-size:26px}
-  .panel-close{width:44px;height:44px;min-width:44px;min-height:44px;font-size:27px}
-  .panel-search{min-height:56px;margin-top:13px;border-radius:19px}
-  .panel-search input{height:48px;font-size:14px}
-  .menu-panel-grid{gap:8px}
+  .music-panel-head strong{font-size:23px}
+  .panel-close{width:40px;height:40px;min-width:40px;min-height:40px;font-size:24px}
+  .panel-search{min-height:48px;margin-top:10px;border-radius:16px}
+  .panel-search input{height:42px;font-size:13px}
+  .menu-panel-grid{gap:6px}
   .menu-panel-grid a{
-    min-height:70px;
-    grid-template-columns:46px 22px minmax(0,1fr) 23px;
-    gap:7px;
-    padding:8px 9px;
-    border-radius:18px;
+    min-height:58px;
+    grid-template-columns:40px 18px minmax(0,1fr) 20px;
+    gap:6px;
+    padding:6px 8px;
+    border-radius:15px;
   }
-  .menu-item-icon{width:46px;height:46px;border-radius:14px}
-  .menu-item-icon svg{width:22px;height:22px}
-  .menu-item-copy strong{font-size:15px}
-  .menu-item-copy small{font-size:10px}
+  .menu-item-icon{width:40px;height:40px;border-radius:12px}
+  .menu-item-icon svg{width:19px;height:19px}
+  .menu-item-copy strong{font-size:14px}
+  .menu-item-copy small{font-size:9px}
   .music-now-playing{
-    grid-template-columns:90px minmax(0,1fr) 40px;
-    gap:10px;
-    padding:11px;
-    border-radius:21px;
+    grid-template-columns:68px minmax(0,1fr) 36px;
+    gap:8px;
+    padding:8px;
+    border-radius:17px;
   }
-  .music-track-art{width:90px;height:90px;border-radius:16px}
-  .music-track-copy>strong{font-size:18px}
-  .music-track-copy>span:not(.music-now-badge){font-size:11px}
-  .music-controls{gap:8px}
-  .music-controls button{width:44px;height:44px;min-width:44px;min-height:44px;font-size:18px}
-  .music-controls .music-play{width:62px;height:62px;min-width:62px;min-height:62px;font-size:25px}
-  .music-playlist-list{max-height:230px}
-  .music-playlist-head>span{font-size:15px}
-  .playlist-glyph{width:30px;height:30px}
+  .music-track-art{width:68px;height:68px;border-radius:13px}
+  .music-track-copy>strong{font-size:16px}
+  .music-track-copy>span:not(.music-now-badge){font-size:10px}
+  .music-controls{gap:6px}
+  .music-controls button{width:38px;height:38px;min-width:38px;min-height:38px;font-size:16px}
+  .music-controls .music-play{width:52px;height:52px;min-width:52px;min-height:52px;font-size:21px}
+  .music-playlist-list{max-height:140px}
+  .music-playlist-item{
+    min-height:52px;
+    grid-template-columns:40px minmax(0,1fr) 32px;
+    gap:7px;
+    padding:5px 7px 5px 5px;
+    border-radius:14px;
+  }
+  .music-playlist-art{width:40px;height:40px;border-radius:11px}
+  .music-playlist-copy strong{font-size:12px}
+  .music-playlist-copy span{font-size:10px}
+  .music-playlist-state{width:32px;height:32px;min-width:32px}
+  .music-volume{min-height:48px;margin-top:9px;border-radius:15px}
 }
 
-/* Narrow phone: stack both consoles with internal scroll. */
-@media (max-width:520px){
-  .site-shell.menu-open.music-open .nav-actions>nav.is-open{
-    top:calc(max(10px,env(safe-area-inset-top)) + 78px);
-    left:8px;
-    right:auto;
-    width:calc(100vw - 16px);
-    max-height:calc(39svh - 34px);
-    transform:translateY(0) scale(1);
-  }
-  .site-shell.menu-open.music-open .music-panel.is-open{
-    top:auto;
-    left:8px;
-    right:auto;
-    bottom:max(8px,env(safe-area-inset-bottom));
-    width:calc(100vw - 16px);
-    max-height:calc(39svh - 34px);
-    transform:translateY(0) scale(1);
-  }
-}
-
-/* Very small phone */
 @media (max-width:390px){
   .nav{
     width:calc(100% - 12px);
@@ -1839,356 +1734,30 @@ html[data-theme] .nav-action.is-open{
   .nav .wordmark{padding:0 11px}
   .nav .wordmark-mark{font-size:21px}
   html[data-theme] .nav-action{
-    width:60px;min-width:60px;
-    height:56px;min-height:56px;
+    width:60px;
+    min-width:60px;
+    height:56px;
+    min-height:56px;
   }
+
   .nav-actions>nav,
   .music-panel{
-    left:6px;
+    top:calc(max(10px,env(safe-area-inset-top)) + 76px);
+    left:50%;
     width:calc(100vw - 12px);
-    max-height:50svh;
+    max-height:42svh;
     padding:11px;
     border-radius:18px;
   }
-  .menu-panel-head strong,.music-panel-head strong{font-size:21px}
+
+  .menu-panel-head strong,
+  .music-panel-head strong{font-size:21px}
   .panel-close{width:38px;height:38px;min-width:38px;min-height:38px}
   .music-now-playing{grid-template-columns:60px minmax(0,1fr) 32px}
   .music-track-art{width:60px;height:60px}
-  .music-playlist-list{max-height:140px}
+  .music-playlist-list{max-height:120px}
 }
-
-/* Reveal system */
-.jrh-reveal{
-  opacity:0;
-  transform:translateY(20px);
-  transition:opacity 600ms var(--ease),transform 600ms var(--ease);
-}
-.jrh-reveal.is-visible{opacity:1;transform:none}
-
-/* Disabled/invalid states */
-[aria-invalid="true"]{border-color:#e6a1a1 !important}
-button:disabled{cursor:not-allowed;opacity:.5}
-
-/* Motion/accessibility */
-@media (prefers-reduced-motion:reduce){
-  html{scroll-behavior:auto}
-  *,
-  *::before,
-  *::after{animation-duration:.01ms !important;animation-iteration-count:1 !important;transition-duration:.01ms !important;scroll-behavior:auto !important}
-  .jrh-reveal{opacity:1;transform:none}
-}
-
-
-
-/* =========================================================
-   FINAL RESPONSIVE AUDIT — ANDROID / IOS / DESKTOP
-   One authoritative responsive layer. No new dependencies.
-   ========================================================= */
-
-/* Restore non-content UI utilities that must never affect layout flow. */
-.contact-honeypot{
-  position:absolute;
-  width:1px;
-  height:1px;
-  margin:-1px;
-  padding:0;
-  overflow:hidden;
-  clip:rect(0 0 0 0);
-  clip-path:inset(50%);
-  white-space:nowrap;
-  border:0;
-}
-
-.floating-utilities{
-  position:fixed;
-  right:18px;
-  bottom:18px;
-  z-index:420;
-  pointer-events:none;
-}
-
-.back-to-top{
-  width:50px;
-  height:50px;
-  display:flex;
-  flex-direction:column;
-  align-items:center;
-  justify-content:center;
-  gap:1px;
-  border:1px solid var(--line);
-  border-radius:50%;
-  background:#fff;
-  color:var(--ink);
-  box-shadow:var(--shadow);
-  opacity:0;
-  visibility:hidden;
-  pointer-events:none;
-  transform:translateY(8px);
-  transition:opacity 180ms var(--ease),transform 180ms var(--ease),visibility 180ms var(--ease);
-}
-.back-to-top.is-visible{
-  opacity:1;
-  visibility:visible;
-  pointer-events:auto;
-  transform:none;
-}
-.back-to-top>span:first-child{font-size:19px;line-height:1}
-.back-to-top>span:last-child{
-  font:800 7px/1 ui-monospace,SFMono-Regular,Menlo,monospace;
-  letter-spacing:.08em;
-}
-
-.menu-empty{
-  min-height:100px;
-  display:grid;
-  place-items:center;
-  padding:16px;
-  border:1px dashed rgba(174,210,252,.18);
-  border-radius:18px;
-  color:#aebdd4;
-  font-size:13px;
-}
-
-/* Safe scroll behavior for fixed overlays on mobile Safari and Android Chrome. */
-html[data-overlay-open="true"],
-body{
-  overscroll-behavior-y:none;
-}
-
-.nav-actions>nav,
-.music-panel{
-  scrollbar-width:thin;
-  scrollbar-color:rgba(160,201,255,.25) transparent;
-  -webkit-overflow-scrolling:touch;
-}
-
-/* Compact desktop/tablet navigation: proportional logo block, balanced controls. */
-@media (min-width:721px){
-  .nav{
-    width:min(480px,calc(100% - 32px));
-    height:84px;
-    min-height:84px;
-    padding:6px;
-    grid-template-columns:150px minmax(0,1fr);
-    gap:6px;
-    border-radius:999px;
-  }
-
-  .nav .wordmark{
-    width:150px;
-    min-width:150px;
-    height:72px;
-    min-height:72px;
-    padding:0 17px;
-    gap:10px;
-    justify-self:start;
-    border-radius:999px;
-  }
-
-  .nav .wordmark::before{
-    width:9px;
-    height:9px;
-    min-width:9px;
-  }
-
-  .nav .wordmark-mark{
-    font-size:30px;
-    line-height:1;
-  }
-
-  .nav-actions{
-    height:72px;
-    gap:6px;
-  }
-
-  html[data-theme] .nav-action{
-    width:auto;
-    min-width:0;
-    flex:1 1 0;
-    height:72px;
-    min-height:72px;
-    border-radius:23px;
-    padding:6px 5px;
-    gap:5px;
-  }
-
-  .nav-action-glyph{
-    width:28px;
-    height:28px;
-    font-size:25px;
-  }
-
-  .nav-action-label{font-size:12px}
-
-  .nav-actions>nav,
-  .music-panel{
-    top:116px;
-    max-height:min(720px,calc(100svh - 140px));
-  }
-}
-
-/* Desktop: two equal consoles, same top edge and same dimensions. */
-@media (min-width:1100px){
-  .site-shell.menu-open.music-open .nav-actions>nav.is-open,
-  .site-shell.menu-open.music-open .music-panel.is-open{
-    top:116px;
-    width:calc(50vw - 30px);
-    max-height:min(720px,calc(100svh - 140px));
-    transform:translateY(0) scale(1);
-  }
-
-  .site-shell.menu-open.music-open .nav-actions>nav.is-open{
-    left:12px;
-    right:auto;
-  }
-
-  .site-shell.menu-open.music-open .music-panel.is-open{
-    left:auto;
-    right:12px;
-  }
-}
-
-/* Tablet and large phones: two panels stack without overlap. */
-@media (min-width:721px) and (max-width:1099px){
-  .site-shell.menu-open.music-open .nav-actions>nav.is-open,
-  .site-shell.menu-open.music-open .music-panel.is-open{
-    left:50%;
-    width:min(620px,calc(100vw - 32px));
-    max-height:calc(50svh - 92px);
-    transform:translateX(-50%) scale(1);
-  }
-
-  .site-shell.menu-open.music-open .nav-actions>nav.is-open{
-    top:116px;
-  }
-
-  .site-shell.menu-open.music-open .music-panel.is-open{
-    top:calc(50% + 42px);
-  }
-}
-
-/* Phone: compact top navigation and proportionate logo capsule. */
-@media (max-width:720px){
-  .nav{
-    top:max(10px,env(safe-area-inset-top));
-    width:calc(100% - 16px);
-    height:70px;
-    min-height:70px;
-    padding:6px;
-    grid-template-columns:minmax(0,1fr) 136px;
-    gap:6px;
-  }
-
-  .nav .wordmark{
-    width:min(150px,100%);
-    max-width:150px;
-    height:58px;
-    min-height:58px;
-    padding:0 14px;
-    gap:10px;
-    justify-self:start;
-  }
-
-  .nav .wordmark::before{
-    width:9px;
-    height:9px;
-    min-width:9px;
-  }
-
-  .nav .wordmark-mark{font-size:24px}
-
-  html[data-theme] .nav-action{
-    width:65px;
-    min-width:65px;
-    height:58px;
-    min-height:58px;
-    border-radius:21px;
-  }
-
-  .nav-action-glyph{
-    width:27px;
-    height:27px;
-    font-size:25px;
-  }
-
-  .nav-action-label{font-size:11px}
-
-  .nav-actions>nav,
-  .music-panel{
-    top:88px;
-    width:calc(100vw - 16px);
-    max-height:52svh;
-    padding:13px;
-    border-radius:20px;
-  }
-  .menu-panel-head,.music-panel-head{min-height:52px;padding-bottom:10px}
-  .menu-panel-head strong,.music-panel-head strong{font-size:23px}
-  .panel-close{width:40px;height:40px;min-width:40px;min-height:40px;font-size:24px}
-  .panel-search{min-height:48px;margin-top:10px;border-radius:16px}
-  .panel-search input{height:42px;font-size:13px}
-  .menu-panel-grid{gap:6px}
-  .menu-panel-grid a{min-height:58px;grid-template-columns:40px 18px minmax(0,1fr) 20px;gap:6px;padding:6px 8px;border-radius:15px}
-  .menu-item-icon{width:40px;height:40px;border-radius:12px}
-  .menu-item-icon svg{width:19px;height:19px}
-  .menu-item-copy strong{font-size:14px}
-  .menu-item-copy small{font-size:9px}
-  .music-now-playing{grid-template-columns:68px minmax(0,1fr) 36px;gap:8px;padding:8px;border-radius:17px}
-  .music-track-art{width:68px;height:68px;border-radius:13px}
-  .music-track-copy>strong{font-size:16px}
-  .music-track-copy>span:not(.music-now-badge){font-size:10px}
-  .music-controls{gap:6px}
-  .music-controls button{width:38px;height:38px;min-width:38px;min-height:38px;font-size:16px}
-  .music-controls .music-play{width:52px;height:52px;min-width:52px;min-height:52px;font-size:21px}
-  .music-playlist-list{max-height:160px}
-  .music-playlist-item{min-height:52px;grid-template-columns:40px minmax(0,1fr) 32px;gap:7px;padding:5px 7px 5px 5px;border-radius:14px}
-  .music-playlist-art{width:40px;height:40px;border-radius:11px}
-  .music-playlist-copy strong{font-size:12px}
-  .music-playlist-copy span{font-size:10px}
-  .music-playlist-state{width:32px;height:32px;min-width:32px}
-  .music-volume{min-height:48px;margin-top:9px;border-radius:15px}
-}
-
-/* 521–720px: both consoles stack in the visible viewport with a deliberate gap. */
-@media (min-width:521px) and (max-width:720px){
-  .site-shell.menu-open.music-open .nav-actions>nav.is-open,
-  .site-shell.menu-open.music-open .music-panel.is-open{
-    left:50%;
-    width:calc(100vw - 16px);
-    max-height:calc(50svh - 92px);
-    transform:translateX(-50%) scale(1);
-  }
-
-  .site-shell.menu-open.music-open .nav-actions>nav.is-open{
-    top:88px;
-  }
-
-  .site-shell.menu-open.music-open .music-panel.is-open{
-    top:calc(50% + 42px);
-  }
-}
-
-/* Up to 520px: preserve safe bottom-stacked consoles for short phone screens. */
-@media (max-width:520px){
-  .site-shell.menu-open.music-open .nav-actions>nav.is-open{
-    top:calc(max(10px,env(safe-area-inset-top)) + 78px);
-    left:8px;
-    right:auto;
-    width:calc(100vw - 16px);
-    max-height:calc(39svh - 34px);
-    transform:translateY(0) scale(1);
-  }
-
-  .site-shell.menu-open.music-open .music-panel.is-open{
-    top:auto;
-    left:8px;
-    right:auto;
-    bottom:max(8px,env(safe-area-inset-bottom));
-    width:calc(100vw - 16px);
-    max-height:calc(39svh - 34px);
-    transform:translateY(0) scale(1);
-  }
-}
-
+ 
 /* Quotes: preserve two-column editorial layout on desktop; use horizontal snap-scroll below 980px. */
 @media (max-width:980px){
   .thinking-quotes{
